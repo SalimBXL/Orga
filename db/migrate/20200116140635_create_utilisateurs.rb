@@ -3,6 +3,7 @@ class CreateUtilisateurs < ActiveRecord::Migration[5.1]
     create_table :utilisateurs do |t|
       t.string :prenom
       t.string :nom
+      t.date :date_de_naissance
       t.string :email
       t.string :phone
       t.string :gsm
