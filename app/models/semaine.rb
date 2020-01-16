@@ -1,0 +1,2 @@
+class Semaine < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class WorkingList < ApplicationRecord
+end

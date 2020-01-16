@@ -1,0 +1,2 @@
+class TypeAbsence < ApplicationRecord
+end
