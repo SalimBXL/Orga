@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :work do
-    nom { "MyString" }
-    description { "MyString" }
+    nom { Faker::Job.title }
+    description { Faker::Lorem.sentence }
   end
 end

@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :conge do
-    date { "2020-01-16" }
+    date { Faker::Date.between(from: 30.days.ago, to: 90.days.from.now) }
     accord { false }
-    remarque { "MyString" }
+    remarque { Faker::Boolean.boolean }
   end
 end

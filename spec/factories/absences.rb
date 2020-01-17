@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :absence do
-    date { "2020-01-16" }
-    remarque { "MyString" }
+    date { Faker::Date.between(from: 30.days.ago, to: 90.days.from.now) }
+    remarque { Faker::Boolean.boolean }
   end
 end
