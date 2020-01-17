@@ -8,4 +8,12 @@ Rails.application.routes.draw do
   get "cyclo", to: "home#index"
   get "nursing", to: "home#index"
 
+
+  #
+  # Groupes
+  #
+  #get "groupes", to: "groupe#index"
+  #get "groupes/:id", to: "groupe#show"
+  resources :groupes, only: :show
+
 end
