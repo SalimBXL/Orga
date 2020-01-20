@@ -1,0 +1,33 @@
+<h1>Nouvelle absence</h1>
+<%= form_with model: @absence, local: true do |form| %>
+
+    <% if @absence.errors.any? %>
+        <strong>WARNING</strong>
+        <ul>
+            <% @absence.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
+
+    <!-- Date -->
+    <p>
+        <%= form.label :date %><br>
+        <%= form.date_field :date %>
+    </p>
+
+    <!-- Type -->
+    <p>
+        <%= form.label :type_absence %>
+        <%= form.text_field :type_absence %>
+    </p>
+
+    <!-- Remarque -->
+    <p>
+        <%= form.label :remarque %><br>
+        <%= form.text_field :remarque %>
+    </p>
+    <p>
+        <%= form.submit %>
+    </p>
+<% end %>

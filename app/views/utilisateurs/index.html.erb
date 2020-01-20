@@ -1,0 +1,15 @@
+<h1>Utilisateurs</h1>
+<table>
+    <tr>
+        <th>Prenom</th>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>GSM</th>
+        <th>Groupe</th>
+        <th>Service</th>
+        <th></th>
+    </tr>
+    <% @utilisateurs.each do |utilisateur| %><%= render utilisateur %><% end %>
+</table>
+<p><%= link_to "[Nouvel utilisateur]", new_utilisateur_path %></p>

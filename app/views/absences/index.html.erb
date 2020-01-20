@@ -1,0 +1,6 @@
+<h1>ABSENCES</h1>
+<table>
+    <tr><th>Date</th><th>Type</th><th>Remarques</th><th></th></tr>
+    <% @absences.each do |absence| %><%= render absence %><% end %>
+</table>
+<p><%= link_to "[Nouvelle absence]", new_absence_path %></p>

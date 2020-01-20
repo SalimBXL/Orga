@@ -1,0 +1,72 @@
+<h1>Nouvel utilisateur</h1>
+<%= form_with model: @utilisateur, local: true do |form| %>
+
+    <% if @utilisateur.errors.any? %>
+        <strong>WARNING</strong>
+        <ul>
+            <% @utilisateur.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
+
+    <!-- Prenom -->
+    <p>
+        <%= form.label :prenom %><br>
+        <%= form.text_field :prenom %>
+    </p>
+
+    <!-- Nom -->
+    <p>
+        <%= form.label :Nom %><br>
+        <%= form.text_field :Nom %>
+    </p>
+
+    <!-- Email -->
+    <p>
+        <%= form.label :email %><br>
+        <%= form.text_field :email %>
+    </p>
+    <p>
+        <%= form.label :email_confirmation %><br>
+        <%= form.text_field :email_confirmation %>
+    </p>
+
+    <!-- Phone -->
+    <p>
+        <%= form.label :phone %><br>
+        <%= form.text_field :phone %>
+    </p>
+
+    <!-- Gsm -->
+    <p>
+        <%= form.label :gsm %><br>
+        <%= form.text_field :gsm %>
+    </p>
+
+    <!-- Groupe -->
+    <p>
+        <%= form.label :groupe %><br>
+        <%= form.text_field :groupe %>
+    </p>
+
+    <!-- Service -->
+    <p>
+        <%= form.label :service %><br>
+        <%= form.text_field :service %>
+    </p>
+
+    <!-- Password -->
+    <p>
+        <%= form.label :password %><br>
+        <%= form.text_field :password %>
+    </p>
+    <p>
+        <%= form.label :password %><br>
+        <%= form.text_field :password %>
+    </p>
+
+    <p>
+        <%= form.submit %>
+    </p>
+<% end %>

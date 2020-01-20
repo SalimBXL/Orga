@@ -1,0 +1,12 @@
+<h1>
+    <%= "#{@utilisateur.prenom} #{@utilisateur.nom}".titleize %>
+</h1>
+<p>
+    <%= @utilisateur.email %><br>
+    <%= @utilisateur.phone %><br>
+    <%= @utilisateur.gsm %>
+</p>
+<p>
+    <%= "#{@utilisateur.groupe.nom.capitalize}" %><br>
+    <%= "#{@utilisateur.service.nom.capitalize}" %>
+</p>

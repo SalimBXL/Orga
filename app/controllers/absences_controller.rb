@@ -1,10 +1,10 @@
-class GroupesController < ApplicationController
+class AbsencesController < ApplicationController
 
     #############
     #   INDEX   #
     #############
     def index
-        @groupes = Groupe.all
+        @absences = Absence.all
     end
 
 
@@ -12,7 +12,7 @@ class GroupesController < ApplicationController
     #   SHOW    #
     #############
     def show
-        @groupe = Groupe.find(params[:id])
+        @absence = Absence.find(params[:id])
     end
 
 
@@ -20,7 +20,7 @@ class GroupesController < ApplicationController
     #    NEW    #
     #############
     def new
-        @groupe = Groupe.new
+        @absence = Absence.new
     end
 
 
@@ -28,12 +28,11 @@ class GroupesController < ApplicationController
     #   CREATE   #
     ##############
     def create
-        @groupe = Groupe.create(params.require(:groupe).permit(:nom, :description))
-        if @groupe.save
-            redirect_to groupes_path
+        @absence = Absence.create(params.require(:absence).permit(:date, :type_absence, :remarque))
+        if @absence.save
+            redirect_to absences_path
         else
             render :new
         end
     end
-
 end
