@@ -14,6 +14,6 @@ Rails.application.routes.draw do
   ##############
   #get "groupes", to: "groupes#index"
   #get "groupes/:id", to: "groupes#show"
-  resources :groupes, only: [ :show, :index ]
+  resources :groupes, only: [ :show, :index, :new, :create ]
 
 end

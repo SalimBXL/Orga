@@ -3,3 +3,4 @@
     <tr><th>Nom</th><th>Description</th><th></th></tr>
     <% @groupes.each do |groupe| %><%= render groupe %><% end %>
 </table>
+<p><%= link_to "[Nouveau groupe]", new_groupe_path %></p>

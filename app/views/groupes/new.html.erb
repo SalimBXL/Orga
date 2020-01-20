@@ -1,0 +1,27 @@
+<h1>Nouveau groupe</h1>
+<%= form_with model: @groupe, local: true do |form| %>
+
+    <% if @groupe.errors.any? %>
+        <strong>WARNING</strong>
+        <ul>
+            <% @groupe.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
+
+    <!-- Nom -->
+    <p>
+        <%= form.label :nom %><br>
+        <%= form.text_field :nom %>
+    </p>
+
+    <!-- Description -->
+    <p>
+        <%= form.label :description %><br>
+        <%= form.text_field :description %>
+    </p>
+    <p>
+        <%= form.submit %>
+    </p>
+<% end %>

@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 4db41144492d1c92bbafdd4bae24dfbcac41d5bb
+  revision: b9e1e29df9b489a59743df892f03775142de37e7
   branch: master
   specs:
     faker (2.10.1)
@@ -51,7 +51,7 @@ GEM
     arel (8.0.0)
     bindex (0.8.1)
     builder (3.2.4)
-    byebug (11.0.1)
+    byebug (11.1.0)
     capybara (3.30.0)
       addressable
       mini_mime (>= 0.1.3)
