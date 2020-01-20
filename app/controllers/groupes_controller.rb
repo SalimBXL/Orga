@@ -1,10 +1,11 @@
 class GroupesController < ApplicationController
+    before_action :find_groupe, only: [:show, :edit, :update]
 
     #############
     #   INDEX   #
     #############
     def index
-        @groupes = Groupe.all
+        @groupes = Groupe.order(:nom)
     end
 
 
@@ -12,7 +13,6 @@ class GroupesController < ApplicationController
     #   SHOW    #
     #############
     def show
-        @groupe = Groupe.find(params[:id])
     end
 
 
@@ -28,7 +28,7 @@ class GroupesController < ApplicationController
     #   CREATE   #
     ##############
     def create
-        @groupe = Groupe.create(params.require(:groupe).permit(:nom, :description))
+        @groupe = Groupe.create(groupe_params)
         if @groupe.save
             redirect_to groupes_path
         else
@@ -40,12 +40,27 @@ class GroupesController < ApplicationController
     #   UPDATE  #
     #############
     def update
+        if @groupe.update(groupe_params)
+            redirect_to groupes_path
+        else 
+            render :edit
+        end
     end
 
     #############
     #   EDIT    #
     #############
     def edit
+    end
+
+
+    private 
+
+    def groupe_params
+        params.require(:groupe).permit(:nom, :description)
+    end
+
+    def find_groupe
         @groupe = Groupe.find(params[:id])
     end
     

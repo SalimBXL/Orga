@@ -1,10 +1,11 @@
 class ServicesController < ApplicationController
+    before_action :find_service, only: [:show, :edit, :update]
 
     #############
     #   INDEX   #
     #############
     def index
-        @services = Service.all
+        @services = Service.order(:nom)
     end
 
 
@@ -12,7 +13,6 @@ class ServicesController < ApplicationController
     #   SHOW    #
     #############
     def show
-        @service = Service.find(params[:id])
     end
 
 
@@ -28,7 +28,7 @@ class ServicesController < ApplicationController
     #   CREATE   #
     ##############
     def create
-        @service = Service.create(params.require(:service).permit(:nom, :description))
+        @service = Service.create(service_params)
         if @service.save
             redirect_to services_path
         else
@@ -40,6 +40,11 @@ class ServicesController < ApplicationController
     #   UPDATE  #
     #############
     def update
+        if @service.update(service_params)
+            redirect_to services_path
+        else
+            redirect_to :edit
+        end
     end
 
 
@@ -47,6 +52,16 @@ class ServicesController < ApplicationController
     #   EDIT    #
     #############
     def edit
+    end
+
+
+    private 
+
+    def service_params
+        params.require(:service).permit(:nom, :description)
+    end
+
+    def find_service
         @service = Service.find(params[:id])
     end
 
