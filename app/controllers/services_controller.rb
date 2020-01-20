@@ -1,10 +1,10 @@
-class GroupesController < ApplicationController
+class ServicesController < ApplicationController
 
     #############
     #   INDEX   #
     #############
     def index
-        @groupes = Groupe.all
+        @services = Service.all
     end
 
 
@@ -12,7 +12,7 @@ class GroupesController < ApplicationController
     #   SHOW    #
     #############
     def show
-        @groupe = Groupe.find(params[:id])
+        @service = Service.find(params[:id])
     end
 
 
@@ -20,7 +20,7 @@ class GroupesController < ApplicationController
     #    NEW    #
     #############
     def new
-        @groupe = Groupe.new
+        @service = Service.new
     end
 
 
@@ -28,9 +28,9 @@ class GroupesController < ApplicationController
     #   CREATE   #
     ##############
     def create
-        @groupe = Groupe.create(params.require(:groupe).permit(:nom, :description))
-        if @groupe.save
-            redirect_to groupes_path
+        @service = Service.create(params.require(:service).permit(:nom, :description))
+        if @service.save
+            redirect_to services_path
         else
             render :new
         end
@@ -42,11 +42,13 @@ class GroupesController < ApplicationController
     def update
     end
 
+
     #############
     #   EDIT    #
     #############
     def edit
-        @groupe = Groupe.find(params[:id])
+        @service = Service.find(params[:id])
     end
-    
+
+
 end

@@ -12,7 +12,13 @@ Rails.application.routes.draw do
   ##############
   #   Groupes  #
   ##############
-  resources :groupes, only: [ :show, :index, :new, :create ]
+  resources :groupes, only: [ :show, :index, :new, :edit, :create, :update ]
+
+
+  ###############
+  #   Services  #
+  ###############
+  resources :services, only: [ :show, :index, :new, :edit, :create, :update ]
 
 
   ###################

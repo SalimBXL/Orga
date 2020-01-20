@@ -1,0 +1,6 @@
+<h1>SERVICES</h1>
+<table>
+    <tr><th>Nom</th><th>Description</th><th></th></tr>
+    <% @services.each do |service| %><%= render service %><% end %>
+</table>
+<p><%= link_to "[Nouveau service]", new_service_path %></p>
