@@ -1,5 +1,5 @@
 class GroupesController < ApplicationController
-    before_action :find_groupe, only: [:show, :edit, :update]
+    before_action :find_groupe, only: [:show, :edit, :update, :destroy]
 
     #############
     #   INDEX   #
@@ -51,6 +51,14 @@ class GroupesController < ApplicationController
     #   EDIT    #
     #############
     def edit
+    end
+
+    ##############
+    #   DESTROY  #
+    ##############
+    def destroy
+        @groupe.destroy
+        redirect_to groupes_path
     end
 
 

@@ -1,5 +1,5 @@
 class ServicesController < ApplicationController
-    before_action :find_service, only: [:show, :edit, :update]
+    before_action :find_service, only: [:show, :edit, :update, :destroy]
 
     #############
     #   INDEX   #
@@ -52,6 +52,14 @@ class ServicesController < ApplicationController
     #   EDIT    #
     #############
     def edit
+    end
+
+    ##############
+    #   DESTROY  #
+    ##############
+    def destroy
+        @service.destroy
+        redirect_to services_path
     end
 
 

@@ -1,5 +1,5 @@
 class CongesController < ApplicationController
-    before_action :find_conge, only: [:show, :edit, :update]
+    before_action :find_conge, only: [:show, :edit, :update, :destroy]
 
     #############
     #   INDEX   #
@@ -53,6 +53,14 @@ class CongesController < ApplicationController
     #   EDIT    #
     #############
     def edit
+    end
+
+    ##############
+    #   DESTROY  #
+    ##############
+    def destroy
+        @conge.destroy
+        redirect_to conges_path
     end
 
 

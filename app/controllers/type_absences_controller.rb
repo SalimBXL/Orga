@@ -1,5 +1,5 @@
 class TypeAbsencesController < ApplicationController
-    before_action :find_groupe, only: [:show, :edit, :update]
+    before_action :find_type_absence, only: [:show, :edit, :update, :destroy]
 
     #############
     #   INDEX   #
@@ -53,6 +53,14 @@ class TypeAbsencesController < ApplicationController
     def edit
     end
 
+    ##############
+    #   DESTROY  #
+    ##############
+    def destroy
+        @type_absence.destroy
+        redirect_to type_absences_path
+    end
+
 
     private 
 
@@ -60,7 +68,7 @@ class TypeAbsencesController < ApplicationController
         params.require(:type_absence).permit(:nom, :description)
     end
 
-    def find_groupe
+    def find_type_absence
         @type_absence = TypeAbsence.find(params[:id])
     end
     

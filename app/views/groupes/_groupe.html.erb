@@ -4,5 +4,8 @@
     <td>
         <%= link_to " [Show] ", groupe_path(groupe) %>
         <%= link_to " [Edit] ", edit_groupe_path(groupe) %>
+        <%= link_to " [Delete] ", groupe_path(groupe), 
+            method: :delete,
+            data: { confirm: "Delete #{groupe.nom} ?" } %>
     </td>
 </tr>

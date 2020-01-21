@@ -5,5 +5,8 @@
     <td>
         <%= link_to " [Show] ", conge_path(conge) %>
         <%= link_to " [Edit] ", edit_conge_path(conge) %>
+        <%= link_to " [Delete] ", conge_path(conge), 
+            method: :delete,
+            data: { confirm: "Delete #{conge.date} ?" } %>
     </td>
 </tr>

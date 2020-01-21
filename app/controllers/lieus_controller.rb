@@ -1,5 +1,5 @@
 class LieusController < ApplicationController
-    before_action :find_groupe, only: [:show, :edit, :update]
+    before_action :find_lieu, only: [:show, :edit, :update, :destroy]
 
     #############
     #   INDEX   #
@@ -53,6 +53,14 @@ class LieusController < ApplicationController
     def edit
     end
 
+    ##############
+    #   DESTROY  #
+    ##############
+    def destroy
+        @lieu.destroy
+        redirect_to lieus_path
+    end
+
 
     private 
 
@@ -60,7 +68,7 @@ class LieusController < ApplicationController
         params.require(:lieu).permit(:nom, :adresse, :phone, :note)
     end
 
-    def find_groupe
+    def find_lieu
         @lieu = Lieu.find(params[:id])
     end
     

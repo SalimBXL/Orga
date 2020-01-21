@@ -36,4 +36,12 @@ class UtilisateursController < ApplicationController
         end
     end
 
+    ##############
+    #   DESTROY  #
+    ##############
+    def destroy
+        @utilisateur.destroy
+        redirect_to utilisateurs_path
+    end
+
 end

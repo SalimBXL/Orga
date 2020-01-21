@@ -1,5 +1,5 @@
 class AbsencesController < ApplicationController
-    before_action :find_absence, only: [:show, :edit, :update]
+    before_action :find_absence, only: [:show, :edit, :update, :destroy]
 
     #############
     #   INDEX   #
@@ -51,6 +51,14 @@ class AbsencesController < ApplicationController
     #   EDIT    #
     #############
     def edit
+    end
+
+    ##############
+    #   DESTROY  #
+    ##############
+    def destroy
+        @absence.destroy
+        redirect_to absences_path
     end
 
 

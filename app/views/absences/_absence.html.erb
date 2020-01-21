@@ -5,5 +5,8 @@
     <td>
         <%= link_to " [Show] ", absence_path(absence) %>
         <%= link_to " [Edit] ", edit_absence_path(absence) %>
+        <%= link_to " [Delete] ", absence_path(absence), 
+            method: :delete,
+            data: { confirm: "Delete #{absence.type_absence_id} #{absence.date} ?" } %>
     </td>
 </tr>
