@@ -73,7 +73,7 @@ class CongesController < ApplicationController
     end
 
     def conge_params
-        params.require(:conge).permit(:date, :accord, :remarque)
+        params.require(:conge).permit(:date, :utilisateur_id, :accord, :remarque)
     end
 
     def find_conge

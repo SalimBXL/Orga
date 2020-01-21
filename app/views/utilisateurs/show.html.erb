@@ -2,11 +2,20 @@
     <%= "#{@utilisateur.prenom} #{@utilisateur.nom}".titleize %>
 </h1>
 <p>
+    <%= @utilisateur.date_de_naissance %>
+</p>
+
+<p>
     <%= @utilisateur.email %><br>
     <%= @utilisateur.phone %><br>
     <%= @utilisateur.gsm %>
 </p>
+
 <p>
-    <%= "#{@utilisateur.groupe.nom.capitalize}" %><br>
-    <%= "#{@utilisateur.service.nom.capitalize}" %>
+    <%= @utilisateur.service.nom %><br>
+    <%= @utilisateur.groupe.nom %>
+</p>
+
+<p>
+    <%= link_to " [Edit] ", edit_utilisateur_path(@utilisateur) %>
 </p>

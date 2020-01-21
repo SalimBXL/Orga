@@ -10,6 +10,4 @@ class Utilisateur < ApplicationRecord
     validates :email, confirmation: { case_sensitive: false }
     validates :email, confirmation: true
     validates :email_confirmation, presence: true
-
-    
 end

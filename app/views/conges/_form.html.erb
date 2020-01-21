@@ -15,6 +15,16 @@
         <%= form.date_field :date %>
     </p>
 
+    <!-- Utilisateur -->
+    <p>
+        <%= form.label :utilisateur_id %><br>
+        <%= form.select(:utilisateur_id) do %>
+            <% Utilisateur.all.each do |l| %>
+                <%= content_tag(:option, "#{l.prenom} #{l.nom}".capitalize, value: l.id) %>
+            <% end %>
+        <% end %>
+    </p>
+
     <!-- Accordé ? -->
     <p>
         <%= form.label :accord %><br>

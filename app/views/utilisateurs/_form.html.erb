@@ -1,0 +1,76 @@
+<%= form_with model: @utilisateur, local: true do |form| %>
+
+    <% if @utilisateur.errors.any? %>
+        <strong>WARNING</strong>
+        <ul>
+            <% @utilisateur.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
+
+    <!-- Prenom -->
+    <p>
+        <%= form.label :prenom %><br>
+        <%= form.text_field :prenom %>
+    </p>
+    
+    <!-- Nom -->
+    <p>
+        <%= form.label :nom %><br>
+        <%= form.text_field :nom %>
+    </p>
+
+    <!-- Date de naissance -->
+    <p>
+        <%= form.label :date_de_naissance %><br>
+        <%= form.date_field :date_de_naissance %>
+    </p>
+
+    <!-- Email -->
+    <p>
+        <%= form.label :email %><br>
+        <%= form.text_field :email %>
+    </p>
+    <p>
+        <%= form.label :email_confirmation %><br>
+        <%= form.text_field :email_confirmation %>
+    </p>
+
+    <!-- Phone -->
+    <p>
+        <%= form.label :phone %><br>
+        <%= form.text_field :phone %>
+    </p>
+
+    <!-- Gsm -->
+    <p>
+        <%= form.label :gsm %><br>
+        <%= form.text_field :gsm %>
+    </p>
+
+    <!-- Service -->
+    <p>
+        <%= form.label :service_id %><br>
+        <%= form.select(:service_id) do %>
+            <% Service.all.each do |l| %>
+                <%= content_tag(:option, l.nom, value: l.id) %>
+            <% end %>
+        <% end %>
+    </p>
+
+    <!-- Groupe -->
+    <p>
+        <%= form.label :groupe_id %><br>
+        <%= form.select(:groupe_id) do %>
+            <% Groupe.all.each do |l| %>
+                <%= content_tag(:option, l.nom, value: l.id) %>
+            <% end %>
+        <% end %>
+    </p>
+
+    
+    <p>
+        <%= form.submit %>
+    </p>
+<% end %>

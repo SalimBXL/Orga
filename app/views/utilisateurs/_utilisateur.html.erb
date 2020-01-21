@@ -1,10 +1,13 @@
 <tr>
-    <td><%= utilisateur.prenom %></td>
-    <td><%= utilisateur.nom %></td>
-    <td><%= utilisateur.email %></td>
-    <td><%= utilisateur.phone %></td>
-    <td><%= utilisateur.gsm %></td>
-    <td><%= utilisateur.groupe.nom %></td>
+    <td><%= utilisateur.prenom.capitalize %></td>
+    <td><%= utilisateur.nom.capitalize %></td>
     <td><%= utilisateur.service.nom %></td>
-    <td><%= link_to " [Show] ", utilisateur_path(utilisateur) %></td>
+    <td><%= utilisateur.groupe.nom %></td>
+    <td>
+        <%= link_to " [Show] ", utilisateur_path(utilisateur) %>
+        <%= link_to " [Edit] ", edit_utilisateur_path(utilisateur) %>
+        <%= link_to " [Delete] ", utilisateur_path(utilisateur), 
+            method: :delete,
+            data: { confirm: "Delete #{utilisateur.nom} ?" } %>
+    </td>
 </tr>

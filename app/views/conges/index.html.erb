@@ -1,6 +1,11 @@
 <h1>CONGES</h1>
 <table>
-    <tr><th>Date</th><th>Accord</th><th>Remarque</th><th></th></tr>
+    <tr>
+        <th>Date</th>
+        <th>Utilisateur</th>
+        <th>Accord</th>
+        <th>Remarque</th>
+        <th></th></tr>
     <% @conges.each do |conge| %><%= render conge %><% end %>
 </table>
 <p><%= link_to "[Nouveau conge]", new_conge_path %></p>
