@@ -1,7 +1,10 @@
 <h1>
-    <%= @absence.date %>
+    <%= @absence.nom %>
 </h1>
 <p>
-    <%= @absence.type_absence.nom %><br>
-    <%= @absence.remarque %>
+    <%= @absence.description %>
+</p>
+
+<p>
+    <%= link_to " [Edit] ", edit_absence_path(@absence) %>
 </p>

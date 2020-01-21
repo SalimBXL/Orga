@@ -1,10 +1,11 @@
 class AbsencesController < ApplicationController
+    before_action :find_absence, only: [:show, :edit, :update]
 
     #############
     #   INDEX   #
     #############
     def index
-        @absences = Absence.all
+        @absences = Absence.order(:date).order(:type_absence_id)
     end
 
 
@@ -12,7 +13,6 @@ class AbsencesController < ApplicationController
     #   SHOW    #
     #############
     def show
-        @absence = Absence.find(params[:id])
     end
 
 
@@ -28,11 +28,40 @@ class AbsencesController < ApplicationController
     #   CREATE   #
     ##############
     def create
-        @absence = Absence.create(params.require(:absence).permit(:date, :type_absence, :remarque))
+        @absence = Absence.create(absence_params)
         if @absence.save
             redirect_to absences_path
         else
             render :new
         end
     end
+
+    #############
+    #   UPDATE  #
+    #############
+    def update
+        if @absence.update(absence_params)
+            redirect_to absences_path
+        else 
+            render :edit
+        end
+    end
+
+    #############
+    #   EDIT    #
+    #############
+    def edit
+    end
+
+
+    private 
+
+    def absence_params
+        params.require(:absence).permit(:date, :type_absence_id, :remarque)
+    end
+
+    def find_absence
+        @absence = Absence.find(params[:id])
+    end
+    
 end
