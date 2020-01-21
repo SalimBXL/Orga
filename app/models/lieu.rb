@@ -1,5 +1,5 @@
 class Lieu < ApplicationRecord
-    has_many :works
-    validates_associated :works
+    has_many :services
+    validates_associated :services
     validates :nom, presence: true
 end
