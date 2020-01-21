@@ -1,0 +1,42 @@
+<%= form_with model: @semaine, local: true do |form| %>
+
+    <% if @semaine.errors.any? %>
+        <strong>WARNING</strong>
+        <ul>
+            <% @semaine.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
+
+    <!-- Numéro de semaine -->
+    <p>
+        <%= form.label :numero_semaine %><br>
+        <%= form.text_field :numero_semaine %>
+    </p>
+
+    <!-- Date lundi -->
+    <p>
+        <%= form.label :date_lundi %><br>
+        <%= form.date_field :date_lundi %>
+    </p>
+
+    <!-- Utilisateur -->
+    <p>
+        <%= form.label :utilisateur_id %><br>
+        <%= form.select(:utilisateur_id) do %>
+            <% Utilisateur.all.each do |l| %>
+                <%= content_tag(:option, prenom_nom(l), value: l.id) %>
+            <% end %>
+        <% end %>
+    </p>
+
+    <!-- Note -->
+    <p>
+        <%= form.label :note %><br>
+        <%= form.text_field :note %>
+    </p>
+    <p>
+        <%= form.submit %>
+    </p>
+<% end %>

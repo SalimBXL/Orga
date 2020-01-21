@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 20200116141500) do
 
   create_table "semaines", force: :cascade do |t|
     t.bigint "utilisateur_id"
-    t.integer "numero_semaine"
+    t.string "numero_semaine"
     t.date "date_lundi"
     t.text "note"
     t.datetime "created_at", null: false

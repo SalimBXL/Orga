@@ -1,0 +1,13 @@
+<tr>
+    <td><%= semaine.numero_semaine %></td>
+    <td><%= semaine.date_lundi %></td>
+    <td><%= prenom_nom(semaine.utilisateur) %></td>
+    <td><%= semaine.note %></td>
+    <td>
+        <%= link_to " [Show] ", semaine_path(semaine) %>
+        <%= link_to " [Edit] ", edit_semaine_path(semaine) %>
+        <%= link_to " [Delete] ", semaine_path(semaine), 
+            method: :delete,
+            data: { confirm: "Delete #{semaine.numero_semaine} ?" } %>
+    </td>
+</tr>

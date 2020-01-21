@@ -1,0 +1,15 @@
+<h1>
+    <%= @semaine.numero_semaine %>
+</h1>
+<p>
+    <%= @semaine.date_lundi %>
+</p>
+<p>
+    <%= prenom_nom(@semaine.utilisateur) %>
+</p>
+<p>
+    <%= @semaine.note %>
+</p>
+<p>
+    <%= link_to " [Edit] ", edit_semaine_path(@semaine) %>
+</p>
