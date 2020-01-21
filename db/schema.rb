@@ -25,11 +25,13 @@ ActiveRecord::Schema.define(version: 20200116141500) do
   end
 
   create_table "conges", force: :cascade do |t|
+    t.bigint "utilisateur_id"
     t.date "date"
     t.boolean "accord"
     t.string "remarque"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["utilisateur_id"], name: "index_conges_on_utilisateur_id"
   end
 
   create_table "groupes", force: :cascade do |t|
@@ -69,10 +71,12 @@ ActiveRecord::Schema.define(version: 20200116141500) do
   end
 
   create_table "services", force: :cascade do |t|
+    t.bigint "lieu_id"
     t.string "nom"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["lieu_id"], name: "index_services_on_lieu_id"
   end
 
   create_table "type_absences", force: :cascade do |t|
@@ -107,18 +111,22 @@ ActiveRecord::Schema.define(version: 20200116141500) do
   end
 
   create_table "works", force: :cascade do |t|
-    t.bigint "lieu_id"
+    t.bigint "groupe_id"
     t.string "nom"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["lieu_id"], name: "index_works_on_lieu_id"
+    t.index ["groupe_id"], name: "index_works_on_groupe_id"
   end
 
   add_foreign_key "absences", "type_absences"
+  add_foreign_key "conges", "utilisateurs"
   add_foreign_key "jobs", "semaines"
   add_foreign_key "semaines", "utilisateurs"
+  add_foreign_key "services", "lieus"
+  add_foreign_key "utilisateurs", "groupes"
+  add_foreign_key "utilisateurs", "services"
   add_foreign_key "working_lists", "jobs"
   add_foreign_key "working_lists", "works"
-  add_foreign_key "works", "lieus"
+  add_foreign_key "works", "groupes"
 end
