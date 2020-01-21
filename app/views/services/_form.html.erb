@@ -15,6 +15,15 @@
         <%= form.text_field :nom %>
     </p>
 
+    <p>
+        <%= form.label :lieu_id %><br>
+        <%= form.select(:lieu_id) do %>
+            <% Lieu.all.each do |l| %>
+                <%= content_tag(:option, l.nom, value: l.id) %>
+            <% end %>
+        <% end %>
+    </p>
+
     <!-- Description -->
     <p>
         <%= form.label :description %><br>

@@ -66,7 +66,7 @@ class ServicesController < ApplicationController
     private 
 
     def service_params
-        params.require(:service).permit(:nom, :description)
+        params.require(:service).permit(:nom, :lieu_id, :description)
     end
 
     def find_service
