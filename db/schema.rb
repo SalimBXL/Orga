@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20200116141500) do
     t.string "nom"
     t.text "adresse"
     t.string "phone"
-    t.string "Note"
+    t.string "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
