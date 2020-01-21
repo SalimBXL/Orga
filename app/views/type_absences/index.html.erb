@@ -1,0 +1,6 @@
+<h1>TYPES D'ABSENCES</h1>
+<table>
+    <tr><th>Nom</th><th>Description</th><th></th></tr>
+    <% @type_absences.each do |type_absence| %><%= render type_absence %><% end %>
+</table>
+<p><%= link_to "[Nouveau type d'absence]", new_type_absence_path %></p>

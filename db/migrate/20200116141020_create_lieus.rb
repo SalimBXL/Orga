@@ -4,7 +4,7 @@ class CreateLieus < ActiveRecord::Migration[5.1]
       t.string :nom
       t.text :adresse
       t.string :phone
-      t.string :Note
+      t.string :note
 
       t.timestamps
     end

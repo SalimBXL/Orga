@@ -21,6 +21,18 @@ Rails.application.routes.draw do
   resources :services, only: [ :show, :index, :new, :edit, :create, :update ]
 
 
+  #####################
+  #   Types Absences  #
+  #####################
+  resources :type_absences, only: [ :show, :index, :new, :edit, :create, :update ]
+
+
+  ###########
+  #  Lieux  #
+  ###########
+  resources :lieus, only: [ :show, :index, :new, :edit, :create, :update ]
+
+
   ###################
   #   Utilisateurs  #
   ###################

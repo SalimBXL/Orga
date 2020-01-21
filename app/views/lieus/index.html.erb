@@ -1,0 +1,11 @@
+<h1>LIEUX</h1>
+<table>
+    <tr>
+        <th>Nom</th>
+        <th>Adresse</th>
+        <th>Téléphone</th>
+        <th>Note</th>
+        <th></th></tr>
+    <% @lieus.each do |lieu| %><%= render lieu %><% end %>
+</table>
+<p><%= link_to "[Nouveau lieu]", new_lieu_path %></p>
