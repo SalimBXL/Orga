@@ -18,7 +18,11 @@
     <!-- Type -->
     <p>
         <%= form.label :type_absence_id %><br>
-        <%= form.text_field :type_absence_id %>
+        <%= form.select(:type_absence_id) do %>
+            <% TypeAbsence.all.each do |l| %>
+                <%= content_tag(:option, l.nom, value: l.id) %>
+            <% end %>
+        <% end %>
     </p>
 
     <!-- Remarque -->
