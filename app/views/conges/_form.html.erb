@@ -1,0 +1,33 @@
+<%= form_with model: @conge, local: true do |form| %>
+
+    <% if @conge.errors.any? %>
+        <strong>WARNING</strong>
+        <ul>
+            <% @conge.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
+
+    <!-- Date -->
+    <p>
+        <%= form.label :date %><br>
+        <%= form.date_field :date %>
+    </p>
+
+    <!-- Accordé ? -->
+    <p>
+        <%= form.label :accord %><br>
+        <%= form.check_box :accord %>
+    </p>
+
+    <!-- Remarque -->
+    <p>
+        <%= form.label :remarque %><br>
+        <%= form.text_field :remarque %>
+    </p>
+
+    <p>
+        <%= form.submit %>
+    </p>
+<% end %>

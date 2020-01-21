@@ -33,6 +33,12 @@ Rails.application.routes.draw do
   resources :lieus, only: [ :show, :index, :new, :edit, :create, :update ]
 
 
+  ############
+  #  Congés  #
+  ############
+  resources :conges, only: [ :show, :index, :new, :edit, :create, :update ]
+
+
   ###################
   #   Utilisateurs  #
   ###################
