@@ -1,11 +1,12 @@
-<tr>
-    <td><%= type_absence.nom %></td>
-    <td><%= type_absence.description %></td>
+<tr id="type_absence_<%= type_absence.id %>">
+    <td><%= type_type_absence.nom %></td>
+    <td><%= type_type_absence.description %></td>
     <td>
-        <%= link_to " [Show] ", type_absence_path(type_absence) %>
-        <%= link_to " [Edit] ", edit_type_absence_path(type_absence) %>
-        <%= link_to " [Delete] ", type_absence_path(type_absence), 
+        <%= link_to " [Show] ", type_type_absence_path(type_type_absence) %>
+        <%= link_to " [Edit] ", edit_type_type_absence_path(type_type_absence) %>
+        <%= link_to " [Delete] ", type_type_absence_path(type_type_absence), 
             method: :delete,
-            data: { confirm: "Delete #{type_absence.nom} ?" } %>
+            remote: true,
+            data: { confirm: "Delete #{type_type_absence.nom} ?" } %>
     </td>
 </tr>

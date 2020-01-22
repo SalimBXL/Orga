@@ -1,4 +1,4 @@
-<tr>
+<tr id="conge<%= conge.id %>">
     <td><%= conge.date %></td>
     <td><%= "#{conge.utilisateur.prenom} #{conge.utilisateur.nom}".titleize %></td>
     <td><%= conge.accord %></td>
@@ -8,6 +8,7 @@
         <%= link_to " [Edit] ", edit_conge_path(conge) %>
         <%= link_to " [Delete] ", conge_path(conge), 
             method: :delete,
+            remote: true, 
             data: { confirm: "Delete #{conge.date} ?" } %>
     </td>
 </tr>

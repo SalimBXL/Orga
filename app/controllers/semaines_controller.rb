@@ -5,7 +5,7 @@ class SemainesController < ApplicationController
     #   INDEX   #
     #############
     def index
-        @semaines = Semaine.order(:numero_semaine).order(:date_lundi).order(:utilisateur_id)
+        @semaines = Semaine.order(:numero_semaine).order(:date_lundi).order(:utilisateur_id).page(params[:page])
     end
 
 
@@ -74,7 +74,7 @@ class SemainesController < ApplicationController
     ##############
     def destroy
         @semaine.destroy
-        redirect_to semaines_path
+        #redirect_to semaines_path
     end
 
 

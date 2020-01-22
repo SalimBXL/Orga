@@ -1,6 +1,5 @@
 <h1>ABSENCES</h1>
-<table>
-    <tr><th>Date</th><th>Type</th><th>Remarque</th><th></th></tr>
-    <% @absences.each do |absence| %><%= render absence %><% end %>
-</table>
+<div id="absences">
+    <%= render 'absences' %>
+</div>
 <p><%= link_to "[Nouvelle absence]", new_absence_path %></p>

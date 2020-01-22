@@ -5,7 +5,7 @@ class AbsencesController < ApplicationController
     #   INDEX   #
     #############
     def index
-        @absences = Absence.order(:date).order(:type_absence_id)
+        @absences = Absence.order(:date).order(:type_absence_id).page(params[:page])
     end
 
 
@@ -60,7 +60,7 @@ class AbsencesController < ApplicationController
     ##############
     def destroy
         @absence.destroy
-        redirect_to absences_path
+        #redirect_to absences_path
     end
 
 

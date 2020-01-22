@@ -1,0 +1,11 @@
+<p><%= paginate @conges, remote: true %></p>
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Utilisateur</th>
+        <th>Accord</th>
+        <th>Remarque</th>
+        <th></th></tr>
+    <%= render @conges %>
+</table>
+<p><%= paginate @conges, remote: true %></p>

@@ -1,4 +1,4 @@
-<tr>
+<tr id="utilisateur_<%= utilisateur.id %>">
     <td><%= utilisateur.prenom.capitalize %></td>
     <td><%= utilisateur.nom.capitalize %></td>
     <td><%= utilisateur.service.nom %></td>
@@ -8,6 +8,7 @@
         <%= link_to " [Edit] ", edit_utilisateur_path(utilisateur) %>
         <%= link_to " [Delete] ", utilisateur_path(utilisateur), 
             method: :delete,
+            remote: true,
             data: { confirm: "Delete #{utilisateur.nom} ?" } %>
     </td>
 </tr>

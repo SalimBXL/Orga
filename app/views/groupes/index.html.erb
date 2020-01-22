@@ -1,6 +1,5 @@
 <h1>GROUPES</h1>
-<table>
-    <tr><th>Nom</th><th>Description</th><th></th></tr>
-    <% @groupes.each do |groupe| %><%= render groupe %><% end %>
-</table>
+<div id="groupes">
+    <%= render 'groupes' %>
+</div>
 <p><%= link_to "[Nouveau groupe]", new_groupe_path %></p>

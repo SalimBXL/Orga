@@ -1,4 +1,4 @@
-<tr>
+<tr id="semaine_<%= semaine.id %>">
     <td><%= semaine.numero_semaine %></td>
     <td><%= semaine.date_lundi %></td>
     <td><%= prenom_nom(semaine.utilisateur) %></td>
@@ -8,6 +8,7 @@
         <%= link_to " [Edit] ", edit_semaine_path(semaine) %>
         <%= link_to " [Delete] ", semaine_path(semaine), 
             method: :delete,
+            remote: true,
             data: { confirm: "Delete #{semaine.numero_semaine} ?" } %>
     </td>
 </tr>

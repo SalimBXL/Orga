@@ -1,0 +1,13 @@
+<p><%= paginate @lieus, remote: true %></p>
+<table>
+    <tr>
+        <th>Nom</th>
+        <th>Adresse</th>
+        <th>Téléphone</th>
+        <th>Note</th>
+        <th></th>
+    </tr>
+    <%= render @lieus %>
+</table>
+
+<p><%= paginate @lieus, remote: true %></p>

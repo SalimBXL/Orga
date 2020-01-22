@@ -5,7 +5,7 @@ class UtilisateursController < ApplicationController
     #   INDEX   #
     #############
     def index
-        @utilisateurs = Utilisateur.order(:nom)
+        @utilisateurs = Utilisateur.order(:nom).page(params[:page])
     end
 
 
@@ -60,7 +60,7 @@ class UtilisateursController < ApplicationController
     ##############
     def destroy
         @utilisateur.destroy
-        redirect_to utilisateurs_path
+        #redirect_to utilisateurs_path
     end
 
 

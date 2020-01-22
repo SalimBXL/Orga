@@ -1,0 +1,11 @@
+<p><%= paginate @utilisateurs, remote: true %></p>
+<table>
+    <tr>
+        <th>Prenom</th>
+        <th>Nom</th>
+        <th>Service</th>
+        <th>Groupe</th>
+        <th></th></tr>
+    <%= render @utilisateurs %>
+</table>
+<p><%= paginate @utilisateurs, remote: true %></p>

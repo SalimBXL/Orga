@@ -1,11 +1,5 @@
 <h1>SEMAINES</h1>
-<table>
-    <tr>
-        <th>#</th>
-        <th>Date Lundi</th>
-        <th>Utilisateur</th>
-        <th>Note</th>
-        <th></th></tr>
-    <% @semaines.each do |semaine| %><%= render semaine %><% end %>
-</table>
+<div id="semaines">
+    <%= render 'semaines' %>
+</div>
 <p><%= link_to "[Nouvelle semaine]", new_semaine_path %></p>

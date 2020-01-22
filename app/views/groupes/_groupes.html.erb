@@ -1,0 +1,6 @@
+<p><%= paginate @groupes, remote: true %></p>
+<table>
+    <tr><th>Nom</th><th>Description</th><th></th></tr>
+    <%= render @groupes %>
+</table>
+<p><%= paginate @groupes, remote: true %></p>

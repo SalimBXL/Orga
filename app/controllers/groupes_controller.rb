@@ -5,7 +5,7 @@ class GroupesController < ApplicationController
     #   INDEX   #
     #############
     def index
-        @groupes = Groupe.order(:nom)
+        @groupes = Groupe.order(:nom).page(params[:page])
     end
 
 
@@ -60,7 +60,7 @@ class GroupesController < ApplicationController
     ##############
     def destroy
         @groupe.destroy
-        redirect_to groupes_path
+        #redirect_to groupes_path
     end
 
 

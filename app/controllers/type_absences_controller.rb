@@ -5,7 +5,7 @@ class TypeAbsencesController < ApplicationController
     #   INDEX   #
     #############
     def index
-        @type_absences = TypeAbsence.order(:nom)
+        @type_absences = TypeAbsence.order(:nom).page(params[:page])
     end
 
 
@@ -60,7 +60,7 @@ class TypeAbsencesController < ApplicationController
     ##############
     def destroy
         @type_absence.destroy
-        redirect_to type_absences_path
+        #redirect_to type_absences_path
     end
 
 

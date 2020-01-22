@@ -5,7 +5,7 @@ class LieusController < ApplicationController
     #   INDEX   #
     #############
     def index
-        @lieus = Lieu.order(:nom)
+        @lieus = Lieu.order(:nom).page(params[:page])
     end
 
 
@@ -60,7 +60,7 @@ class LieusController < ApplicationController
     ##############
     def destroy
         @lieu.destroy
-        redirect_to lieus_path
+        #redirect_to lieus_path
     end
 
 

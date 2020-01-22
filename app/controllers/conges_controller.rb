@@ -5,7 +5,7 @@ class CongesController < ApplicationController
     #   INDEX   #
     #############
     def index
-        @conges = Conge.order(:date).order(:accord)
+        @conges = Conge.order(:date).order(:accord).page(params[:page])
     end
 
 
@@ -62,7 +62,7 @@ class CongesController < ApplicationController
     ##############
     def destroy
         @conge.destroy
-        redirect_to conges_path
+        #redirect_to conges_path
     end
 
 

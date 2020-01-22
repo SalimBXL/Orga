@@ -1,4 +1,4 @@
-<tr>
+<tr id="absence_<%= absence.id %>">
     <td><%= absence.date %></td>
     <td><%= absence.type_absence.nom %></td>
     <td><%= absence.remarque %></td>
@@ -7,6 +7,7 @@
         <%= link_to " [Edit] ", edit_absence_path(absence) %>
         <%= link_to " [Delete] ", absence_path(absence), 
             method: :delete,
+            remote: true,
             data: { confirm: "Delete #{absence.type_absence_id} #{absence.date} ?" } %>
     </td>
 </tr>

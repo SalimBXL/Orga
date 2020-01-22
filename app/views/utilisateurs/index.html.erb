@@ -1,11 +1,5 @@
 <h1>UTILISATEURS</h1>
-<table>
-    <tr>
-        <th>Prenom</th>
-        <th>Nom</th>
-        <th>Service</th>
-        <th>Groupe</th>
-        <th></th></tr>
-    <% @utilisateurs.each do |utilisateur| %><%= render utilisateur %><% end %>
-</table>
+<div id="utilisateurs">
+    <%= render 'utilisateurs' %>
+</div>
 <p><%= link_to "[Nouvel utilisateur]", new_utilisateur_path %></p>

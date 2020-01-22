@@ -5,7 +5,7 @@ class ServicesController < ApplicationController
     #   INDEX   #
     #############
     def index
-        @services = Service.order(:nom)
+        @services = Service.order(:nom).page(params[:page])
     end
 
 
@@ -61,7 +61,7 @@ class ServicesController < ApplicationController
     ##############
     def destroy
         @service.destroy
-        redirect_to services_path
+        #redirect_to services_path
     end
 
 
