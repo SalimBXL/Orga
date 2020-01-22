@@ -30,6 +30,7 @@ class TypeAbsencesController < ApplicationController
     def create
         @type_absence = TypeAbsence.create(type_absence_params)
         if @type_absence.save
+            flash[:notice] = "Type d'absence créé avec succès"
             redirect_to type_absences_path
         else
             render :new
@@ -41,6 +42,7 @@ class TypeAbsencesController < ApplicationController
     #############
     def update
         if @type_absence.update(type_absence_params)
+            flash[:notice] = "Type d'absence modifié avec succès"
             redirect_to type_absences_path
         else 
             render :edit

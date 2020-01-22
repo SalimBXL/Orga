@@ -30,6 +30,7 @@ class AbsencesController < ApplicationController
     def create
         @absence = Absence.create(absence_params)
         if @absence.save
+            flash[:notice] = "Absence créée"
             redirect_to absences_path
         else
             render :new
@@ -41,6 +42,7 @@ class AbsencesController < ApplicationController
     #############
     def update
         if @absence.update(absence_params)
+            flash[:notice] = "Absence modifiée"
             redirect_to absences_path
         else 
             render :edit

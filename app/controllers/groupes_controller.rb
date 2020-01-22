@@ -30,6 +30,7 @@ class GroupesController < ApplicationController
     def create
         @groupe = Groupe.create(groupe_params)
         if @groupe.save
+            flash[:notice] = "Groupe créé avec succès"
             redirect_to groupes_path
         else
             render :new
@@ -41,6 +42,7 @@ class GroupesController < ApplicationController
     #############
     def update
         if @groupe.update(groupe_params)
+            flash[:notice] = "Groupe modifié avec succès"
             redirect_to groupes_path
         else 
             render :edit

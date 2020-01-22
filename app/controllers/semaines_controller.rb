@@ -40,6 +40,7 @@ class SemainesController < ApplicationController
         end
 
         if @semaine.save
+            flash[:notice] = "Semaine créée avec succès"
             redirect_to semaines_path
         else
             render :new
@@ -55,6 +56,7 @@ class SemainesController < ApplicationController
         format_numero_semaine
 
         if @semaine.update(semaine_params)
+            flash[:notice] = "Semaine modifiée avec succès"
             redirect_to semaines_path
         else 
             render :edit

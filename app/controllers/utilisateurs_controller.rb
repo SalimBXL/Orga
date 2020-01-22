@@ -30,6 +30,7 @@ class UtilisateursController < ApplicationController
     def create
         @utilisateur = Utilisateur.create(utilisateur_params)
         if @utilisateur.save
+            flash[:notice] = "Utilisateur créé avec succès"
             redirect_to utilisateurs_path
         else
             render :new
@@ -41,6 +42,7 @@ class UtilisateursController < ApplicationController
     #############
     def update
         if @utilisateur.update(utilisateur_params)
+            flash[:notice] = "Utilisateur modifié avec succès"
             redirect_to utilisateurs_path
         else 
             render :edit

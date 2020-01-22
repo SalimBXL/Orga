@@ -31,6 +31,7 @@ class CongesController < ApplicationController
         @conge = Conge.create(conge_params)
         verif_accord
         if @conge.save
+            flash[:notice] = "Congé créé avec succès"
             redirect_to conges_path
         else
             render :new
@@ -43,6 +44,7 @@ class CongesController < ApplicationController
     def update
         verif_accord
         if @conge.update(conge_params)
+            flash[:notice] = "Congé modifié avec succès"
             redirect_to conges_path
         else 
             render :edit

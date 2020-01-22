@@ -30,6 +30,7 @@ class ServicesController < ApplicationController
     def create
         @service = Service.create(service_params)
         if @service.save
+            flash[:notice] = "Service créé avec succès"
             redirect_to services_path
         else
             render :new
@@ -41,6 +42,7 @@ class ServicesController < ApplicationController
     #############
     def update
         if @service.update(service_params)
+            flash[:notice] = "Service modifié avec succès"
             redirect_to services_path
         else
             redirect_to :edit

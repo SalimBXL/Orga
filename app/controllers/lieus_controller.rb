@@ -30,6 +30,7 @@ class LieusController < ApplicationController
     def create
         @lieu = Lieu.create(lieu_params)
         if @lieu.save
+            flash[:notice] = "Lieu créé avec succès"
             redirect_to lieus_path
         else
             render :new
@@ -41,6 +42,7 @@ class LieusController < ApplicationController
     #############
     def update
         if @lieu.update(lieu_params)
+            flash[:notice] = "Lieu Modifié avec succès"
             redirect_to lieus_path
         else 
             render :edit
