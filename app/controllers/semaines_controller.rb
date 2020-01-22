@@ -29,8 +29,15 @@ class SemainesController < ApplicationController
     ##############
     def create
         @semaine = Semaine.create(semaine_params)
+        semaine_courrante_si_vide
         fait_un_lundi
         format_numero_semaine
+
+        if !duo_semaine_utilisateur_unique?
+            flash[:danger] = "Il existe déjà une semaine pour cet utilisateur."
+            redirect_to new_semaine_path
+            return
+        end
 
         if @semaine.save
             redirect_to semaines_path
@@ -43,6 +50,7 @@ class SemainesController < ApplicationController
     #   UPDATE  #
     #############
     def update
+        semaine_courrante_si_vide
         fait_un_lundi
         format_numero_semaine
 
@@ -76,6 +84,16 @@ class SemainesController < ApplicationController
 
     def find_semaine
         @semaine = Semaine.find(params[:id])
+    end
+
+    def duo_semaine_utilisateur_unique?
+        Semaine.where(utilisateur_id: @semaine.utilisateur_id).where(numero_semaine: @semaine.numero_semaine).count > 0 ? false : true
+    end
+
+    def semaine_courrante_si_vide
+        if @semaine.date_lundi.blank? || @semaine.date_lundi.nil?
+            @semaine.date_lundi = Date.today
+        end
     end
 
     def fait_un_lundi
