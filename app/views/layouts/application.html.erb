@@ -6,16 +6,23 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= favicon_link_tag 'icon.ico' %>
   </head>
-
   <body>
 
-    <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %>"><%= value %></div>
-    <% end %>
+    <!-- FLASH -->
+    <div class="container">
+      <% flash.each do |key, value| %>
+        <%= content_tag :div, value, class: key %>
+      <% end %>
+    </div>
 
-    <%= yield %>
+    <!-- YIELD -->
+    <div class="container">
+      <%= yield %>
+    </div>
 
+    <!-- FOOT -->
     <hr>
     <p><a href="/"><strong> [Home] </strong></a></p>
 
