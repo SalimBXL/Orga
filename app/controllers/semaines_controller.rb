@@ -29,21 +29,8 @@ class SemainesController < ApplicationController
     ##############
     def create
         @semaine = Semaine.create(semaine_params)
-
-        # ajuste la date pour qu'elle corresponde à un lundi
-        if @semaine.date_lundi.cwday != 1
-            @semaine.date_lundi = @semaine.date_lundi-@semaine.date_lundi.cwday+1
-        end
-
-        # vérifie et formatte le numéro de semaine
-        # sur base de la date du lundi
-        if @semaine.date_lundi != nil
-            num = "#{@semaine.date_lundi.cweek}"
-            if @semaine.date_lundi.cweek < 10
-                num = "0"+num
-            end
-            @semaine.numero_semaine = "#{@semaine.date_lundi.year}-W#{num}"
-        end
+        fait_un_lundi
+        format_numero_semaine
 
         if @semaine.save
             redirect_to semaines_path
@@ -56,6 +43,9 @@ class SemainesController < ApplicationController
     #   UPDATE  #
     #############
     def update
+        fait_un_lundi
+        format_numero_semaine
+
         if @semaine.update(semaine_params)
             redirect_to semaines_path
         else 
@@ -86,6 +76,25 @@ class SemainesController < ApplicationController
 
     def find_semaine
         @semaine = Semaine.find(params[:id])
+    end
+
+    def fait_un_lundi
+        # ajuste la date pour qu'elle corresponde à un lundi
+        if @semaine.date_lundi.cwday != 1
+            @semaine.date_lundi = @semaine.date_lundi-@semaine.date_lundi.cwday+1
+        end
+    end
+
+    def format_numero_semaine
+        # vérifie et formatte le numéro de semaine
+        # sur base de la date du lundi
+        if @semaine.date_lundi != nil
+            num = "#{@semaine.date_lundi.cweek}"
+            if @semaine.date_lundi.cweek < 10
+                num = "0"+num
+            end
+            @semaine.numero_semaine = "#{@semaine.date_lundi.year}-W#{num}"
+        end
     end
     
 end

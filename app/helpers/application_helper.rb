@@ -1,5 +1,5 @@
 module ApplicationHelper
     def prenom_nom(utilisateur)
-        "#{utilisateur.prenom} #{utilisateur.nom}".titleize
+        utilisateur !=nil ? "#{utilisateur.prenom} #{utilisateur.nom}".titleize : "???"
     end
 end
