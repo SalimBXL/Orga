@@ -1,7 +1,10 @@
 FactoryBot.define do
+  jour = Faker::Date.in_date_period
+  lundi =  jour - jour.cwday + 1
   factory :semaine do
-    numero_semaine { 1 }
-    date_lundi { Faker::Date.forward(days: 23) }
+    date_lundi { lundi }
+    numero_semaine { lundi.cweek }
     note { Faker::Lorem.sentence }
+    utilisateur
   end
 end
