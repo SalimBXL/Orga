@@ -1,0 +1,49 @@
+<%= form_with model: @job, local: true do |form| %>
+
+    <% if @job.errors.any? %>
+        <strong>WARNING</strong>
+        <ul>
+            <% @job.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
+
+    <!-- Semaine -->
+    <p>
+        <%= form.label :numero_semaine_id %><br>
+        <%= form.select(:numero_semaine_id) do %>
+            <% Semaine.order(slug: :desc).find_each do |l| %>
+                <%= content_tag(:option, "#{l.date_lundi} #{l.slug}".capitalize, value: l.id) %>
+            <% end %>
+        <% end %>
+    </p>
+
+    <!-- Jour -->
+    <p>
+        <%= form.label :numero_jour %><br>
+        <%= form.text_field :numero_jour %>
+    </p>
+
+    <!-- AM/PM -->
+    <p>
+        <%= form.label :am_pm %><br>
+        <%= form.text_field :am_pm %>
+    </p>
+
+    <!-- Note -->
+    <p>
+        <%= form.label :note %><br>
+        <%= form.text_field :note %>
+    </p>
+
+    <p>
+        <% if Semaine.all.empty? %>
+            <span data-toggle="tooltip" title="Semaine doit contenir au moins une entrée.">
+                <%= form.submit class: "btn btn-primary disabled" %>
+            </span>
+        <% else %>
+            <%= form.submit class: "btn btn-primary" %>
+        <% end %>
+    </p>
+<% end %>

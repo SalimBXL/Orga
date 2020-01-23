@@ -1,0 +1,14 @@
+<tr id="job_<%= job.id %>">
+    <td><%= job.semaine.numero_semaine %></td>
+    <td><%= job.numero_jour %></td>
+    <td><%= job.am_pm %></td>
+    <td><%= job.note %></td>
+    <td>
+        <%= link_to " [Show] ", job_path(job) %>
+        <%= link_to " [Edit] ", edit_job_path(job) %>
+        <%= link_to " [Delete] ", job_path(job), 
+            method: :delete,
+            remote: true,
+            data: { confirm: "Delete #{job.nom} ?" } %>
+    </td>
+</tr>
