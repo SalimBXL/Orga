@@ -5,3 +5,158 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+
+#
+# LIEUX
+#
+
+Lieu.create(
+    nom: "Erasme",
+    adresse: "Route de Lennik 808, 1070 Bruxelles",
+    phone: "+325554711"
+)
+Lieu.create(
+    nom: "UZ"
+)
+
+
+#
+# SERVICES
+#
+
+Service.create(
+    lieu: Lieu.all.first,
+    nom: "Cyclotron"
+)
+Service.create(
+    lieu: Lieu.all.first,
+    nom: "Isotopes"
+)
+Service.create(
+    lieu: Lieu.all.last,
+    nom: "Cyclo UZ"
+)
+
+
+#
+# GROUPES
+#
+
+Groupe.create(
+    nom: "Operateur"
+)
+Groupe.create(
+    nom: "Responsable"
+)
+Groupe.create(
+    nom: "Student"
+)
+Groupe.create(
+    nom: "Divers"
+)
+Groupe.create(
+    nom: "I.T."
+)
+
+
+#
+# UTILISATEURS
+#
+
+Utilisateur.create(
+    prenom: "John",
+    nom: "Van Naemen",
+    email: "john.vannaemen@erasme.ulb.ac.be",
+    groupe: Groupe.where(nom: "Responsable"),
+    service: Service.where(nom: "Cyclotron")
+)
+Utilisateur.create(
+    prenom: "Simon",
+    nom: "Lacroix",
+    email: "simon.lacroix@erasme.ulb.ac.be",
+    groupe: Groupe.where(nom: "Responsable"),
+    service: Service.where(nom: "Cyclotron")
+)
+Utilisateur.create(
+    prenom: "Michel",
+    nom: "Monclus",
+    email: "michel.monclus@erasme.ulb.ac.be",
+    groupe: Groupe.where(nom: "Responsable"),
+    service: Service.where(nom: "Cyclotron")
+)
+Utilisateur.create(
+    prenom: "Etienne",
+    nom: "Luciani",
+    email: "etienne.luciani@erasme.ulb.ac.be",
+    groupe: Groupe.where(nom: "Operateur"),
+    service: Service.where(nom: "Cyclotron")
+)
+Utilisateur.create(
+    prenom: "Kévin",
+    nom: "Thibaut",
+    email: "kevin.thibaut@erasme.ulb.ac.be",
+    groupe: Groupe.where(nom: "Operateur"),
+    service: Service.where(nom: "Cyclotron")
+)
+Utilisateur.create(
+    prenom: "Khalid",
+    nom: "Milloudi",
+    email: "khalid.milloudi@erasme.ulb.ac.be",
+    groupe: Groupe.where(nom: "Operateur"),
+    service: Service.where(nom: "Cyclotron")
+)
+Utilisateur.create(
+    prenom: "Salim",
+    nom: "Joly",
+    email: "anthony.joly@erasme.ulb.ac.be",
+    groupe: Groupe.where(nom: "I.T."),
+    service: Service.where(nom: "Cyclotron")
+)
+Utilisateur.create(
+    prenom: "Nicola",
+    nom: "Trotta",
+    email: "nicola.trotta@erasme.ulb.ac.be",
+    groupe: Groupe.where(nom: "I.T."),
+    service: Service.where(nom: "Cyclotron")
+)
+Utilisateur.create(
+    prenom: "Eric",
+    nom: "Mulleneers",
+    email: "eric.mulleneers@erasme.ulb.ac.be",
+    groupe: Groupe.where(nom: "Operateur"),
+    service: Service.where(nom: "Cyclotron")
+)
+
+
+#
+# TYPE ABSENCES
+#
+
+TypeAbsence.create(
+    code: "Ma",
+    nom: "Certificat médical",
+)
+
+
+#
+# WORKS
+#
+
+Work.create(
+    nom: "FDG 5h",
+    code: "5"
+)
+Work.create(
+    nom: "Contrôle qualité",
+    code: "QC"
+)
+Work.create(
+    nom: "Livraison",
+    code: "L"
+)
+Work.create(
+    nom: "Methionine",
+    code: "M"
+)

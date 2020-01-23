@@ -1,6 +1,11 @@
 <p><%= paginate @type_absences, remote: true %></p>
 <table>
-    <tr><th>Nom</th><th>Description</th><th></th></tr>
+    <tr>
+        <th>Code</th>
+        <th>Nom</th>
+        <th>Description</th>
+        <th></th>
+    </tr>
     <%= render @type_absences %>
 </table>
 <p><%= paginate @type_absences, remote: true %></p>
