@@ -69,64 +69,64 @@ Utilisateur.create(
     prenom: "John",
     nom: "Van Naemen",
     email: "john.vannaemen@erasme.ulb.ac.be",
-    groupe: Groupe.where(nom: "Responsable"),
-    service: Service.where(nom: "Cyclotron")
+    groupe: Groupe.where(nom: "Responsable").first,
+    service: Service.where(nom: "Cyclotron").first
 )
 Utilisateur.create(
     prenom: "Simon",
     nom: "Lacroix",
     email: "simon.lacroix@erasme.ulb.ac.be",
-    groupe: Groupe.where(nom: "Responsable"),
-    service: Service.where(nom: "Cyclotron")
+    groupe: Groupe.where(nom: "Responsable").first,
+    service: Service.where(nom: "Cyclotron").first
 )
 Utilisateur.create(
     prenom: "Michel",
     nom: "Monclus",
     email: "michel.monclus@erasme.ulb.ac.be",
-    groupe: Groupe.where(nom: "Responsable"),
-    service: Service.where(nom: "Cyclotron")
+    groupe: Groupe.where(nom: "Responsable").first,
+    service: Service.where(nom: "Cyclotron").first
 )
 Utilisateur.create(
     prenom: "Etienne",
     nom: "Luciani",
     email: "etienne.luciani@erasme.ulb.ac.be",
-    groupe: Groupe.where(nom: "Operateur"),
-    service: Service.where(nom: "Cyclotron")
+    groupe: Groupe.where(nom: "Operateur").first,
+    service: Service.where(nom: "Cyclotron").first
 )
 Utilisateur.create(
     prenom: "Kévin",
     nom: "Thibaut",
     email: "kevin.thibaut@erasme.ulb.ac.be",
-    groupe: Groupe.where(nom: "Operateur"),
-    service: Service.where(nom: "Cyclotron")
+    groupe: Groupe.where(nom: "Operateur").first,
+    service: Service.where(nom: "Cyclotron").first
 )
 Utilisateur.create(
     prenom: "Khalid",
     nom: "Milloudi",
     email: "khalid.milloudi@erasme.ulb.ac.be",
-    groupe: Groupe.where(nom: "Operateur"),
-    service: Service.where(nom: "Cyclotron")
+    groupe: Groupe.where(nom: "Operateur").first,
+    service: Service.where(nom: "Cyclotron").first
 )
 Utilisateur.create(
     prenom: "Salim",
     nom: "Joly",
     email: "anthony.joly@erasme.ulb.ac.be",
-    groupe: Groupe.where(nom: "I.T."),
-    service: Service.where(nom: "Cyclotron")
+    groupe: Groupe.where(nom: "I.T.").first,
+    service: Service.where(nom: "Cyclotron").first
 )
 Utilisateur.create(
     prenom: "Nicola",
     nom: "Trotta",
     email: "nicola.trotta@erasme.ulb.ac.be",
-    groupe: Groupe.where(nom: "I.T."),
-    service: Service.where(nom: "Cyclotron")
+    groupe: Groupe.where(nom: "I.T.").first,
+    service: Service.where(nom: "Cyclotron").first
 )
 Utilisateur.create(
     prenom: "Eric",
     nom: "Mulleneers",
     email: "eric.mulleneers@erasme.ulb.ac.be",
-    groupe: Groupe.where(nom: "Operateur"),
-    service: Service.where(nom: "Cyclotron")
+    groupe: Groupe.where(nom: "Operateur").first,
+    service: Service.where(nom: "Cyclotron").first
 )
 
 
