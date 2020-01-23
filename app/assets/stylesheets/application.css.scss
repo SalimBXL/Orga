@@ -17,7 +17,7 @@
  $body-bg: white;
 
  @import "bootstrap";
- //@import "**/*";
+ @import "**/*";
 
  .field_with_errors {
      color: red;
@@ -31,11 +31,4 @@
  .alert {
      color: orange;
      font-style: italic;
- }
-
- .jumbotron {
-     background-image: url('logo.png');
-     background-size: cover;
-     background-position: center center;
-     color: white;
  }

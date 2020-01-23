@@ -1,0 +1,43 @@
+<div class="row grille">
+    <table class="table-condensed table table-bordered table-striped table-responsive">
+        <tr>
+            <th>Mois</th>
+            <% 31.times do |n_jour| %>
+                <th><%= n_jour+1 %></th>
+            <% end %>
+        </tr>
+
+        <% date_depart = Date.today-3.months %>
+        <% 12.times do |n_mois| %>
+            <tr>
+                <% annee = (date_depart + n_mois.months).year %>
+                <% mois = (date_depart + n_mois.months).month %>
+                <% numero_mois = "#{mois<10 ? '0' : ''}#{mois}" %>
+                <td><%= "#{numero_mois}/#{annee}" %></td>
+                <% nombre_jours = Time.days_in_month(mois, annee).to_i %>
+                <% nombre_jours.times do |n_jour| %>
+                    <% records = @current_conges.where(date: "#{annee}-#{numero_mois}-#{n_jour+1}") %>
+                    <% if records.empty? %>
+                        <td></td>
+                    <% else %>
+                        <td class="success">
+                            <% records.each do |record| %>
+                                <% if record.accord? %>
+                                    <span   class="conge_accord_ok" 
+                                            data-toggle="tooltip"
+                                            title="<%= prenom_nom(record.utilisateur) %>">
+                                <% else %>
+                                    <span   class="conge_accord_wait"
+                                            data-toggle="tooltip" 
+                                            title="<%= prenom_nom(record.utilisateur) %>">
+                                <% end %>
+                                    <%= initiales(record.utilisateur) %>
+                                </span>
+                            <% end %>
+                        </td>
+                    <% end %>
+                <% end %>
+            </tr>
+        <% end %>
+    </table>
+</div>

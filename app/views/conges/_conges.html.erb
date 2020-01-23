@@ -1,3 +1,8 @@
+
+<!-- Grille des congés -->
+<%= render 'grille', local: @conges %>
+
+<!-- Table paginée -->
 <p><%= paginate @conges, remote: true %></p>
 <table>
     <tr>
