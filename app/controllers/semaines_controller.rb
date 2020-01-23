@@ -85,7 +85,9 @@ class SemainesController < ApplicationController
     end
 
     def find_semaine
-        @semaine = Semaine.find(params[:id])
+        @semaine = Semaine.find_by_id(params[:identifier])
+        @semaine ||= Semaine.find_by_slug(params[:identifier])
+        raise ActionController::RoutingError.new("Not found") unless @semaine
     end
 
     def duo_semaine_utilisateur_unique?

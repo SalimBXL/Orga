@@ -2,6 +2,7 @@
     <td><%= semaine.numero_semaine %></td>
     <td><%= semaine.date_lundi %></td>
     <td><%= prenom_nom(semaine.utilisateur) %></td>
+    <td><%= semaine.slug %></td>
     <td><%= semaine.note %></td>
     <td>
         <%= link_to " [Show] ", semaine_path(semaine) %>

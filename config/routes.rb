@@ -54,7 +54,7 @@ Rails.application.routes.draw do
   ###################
   #   Semaines  #
   ###################
-  resources :semaines, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
+  resources :semaines, only: [ :show, :index, :new, :edit, :create, :update, :destroy ], param: :identifier
 
 
   ###################
