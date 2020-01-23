@@ -1,5 +1,6 @@
 <tr id="absence_<%= absence.id %>">
     <td><%= absence.date %></td>
+    <td><%= prenom_nom(absence.utilisateur) %></td>
     <td><%= absence.type_absence.nom %></td>
     <td><%= absence.remarque %></td>
     <td>

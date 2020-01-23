@@ -19,7 +19,7 @@
     <p>
         <%= form.label :lieu_id %><br>
         <%= form.select(:lieu_id) do %>
-            <% Lieu.all.each do |l| %>
+            <% Lieu.all.find_each do |l| %>
                 <%= content_tag(:option, l.nom, value: l.id) %>
             <% end %>
         <% end %>
@@ -31,6 +31,12 @@
         <%= form.text_field :description %>
     </p>
     <p>
-        <%= form.submit %>
+        <% if Lieu.all.empty? %>
+            <span data-toggle="tooltip" title="Lieu doit contenir au moins une entrée.">
+                <%= form.submit class: "btn btn-primary disabled" %>
+            </span>
+        <% else %>
+            <%= form.submit class: "btn btn-primary" %>
+        <% end %>
     </p>
 <% end %>

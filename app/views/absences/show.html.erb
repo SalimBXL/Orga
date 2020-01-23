@@ -1,8 +1,15 @@
 <h1>
-    <%= @absence.nom %>
+    <%= @absence.date %>
 </h1>
 <p>
-    <%= @absence.description %>
+    <%= prenom_nom(@absence.utilisateur) %>
+</p>
+<p>
+    <%= @absence.type_absence.nom %><br>
+    <%= @absence.type_absence.description %>
+</p>
+<p>
+    <%= @absence.remarque %>
 </p>
 
 <p>

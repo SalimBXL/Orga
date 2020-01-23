@@ -22,7 +22,7 @@
     <p>
         <%= form.label :utilisateur_id %><br>
         <%= form.select(:utilisateur_id) do %>
-            <% Utilisateur.all.each do |l| %>
+            <% Utilisateur.all.find_each do |l| %>
                 <%= content_tag(:option, prenom_nom(l), value: l.id) %>
             <% end %>
         <% end %>
@@ -34,6 +34,12 @@
         <%= form.text_field :note %>
     </p>
     <p>
-        <%= form.submit %>
+        <% if Utilisateur.all.empty? %>
+            <span data-toggle="tooltip" title="Utilisateur doit contenir au moins une entrée.">
+                <%= form.submit class: "btn btn-primary disabled" %>
+            </span>
+        <% else %>
+            <%= form.submit class: "btn btn-primary" %>
+        <% end %>
     </p>
 <% end %>

@@ -10,4 +10,5 @@ RSpec.describe Utilisateur, type: :model do
   it "can be saved" do
     expect(utilisateur.save).to be true
   end
+  
 end

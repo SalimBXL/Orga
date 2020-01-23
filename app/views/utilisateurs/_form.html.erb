@@ -49,7 +49,7 @@
     <p>
         <%= form.label :service_id %><br>
         <%= form.select(:service_id) do %>
-            <% Service.all.each do |l| %>
+            <% Service.all.find_each do |l| %>
                 <%= content_tag(:option, l.nom, value: l.id) %>
             <% end %>
         <% end %>
@@ -59,7 +59,7 @@
     <p>
         <%= form.label :groupe_id %><br>
         <%= form.select(:groupe_id) do %>
-            <% Groupe.all.each do |l| %>
+            <% Groupe.all.find_each do |l| %>
                 <%= content_tag(:option, l.nom, value: l.id) %>
             <% end %>
         <% end %>
@@ -67,6 +67,12 @@
 
     
     <p>
-        <%= form.submit %>
+        <% if Service.all.empty? || Groupe.all.empty? %>
+            <span data-toggle="tooltip" title="Service et Groupe doivent contenir au moins une entrée.">
+                <%= form.submit class: "btn btn-primary disabled" %>
+            </span>
+        <% else %>
+            <%= form.submit class: "btn btn-primary" %>
+        <% end %>
     </p>
 <% end %>

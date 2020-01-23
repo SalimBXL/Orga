@@ -19,8 +19,18 @@
     <p>
         <%= form.label :type_absence_id %><br>
         <%= form.select(:type_absence_id) do %>
-            <% TypeAbsence.all.each do |l| %>
+            <% TypeAbsence.all.find_each do |l| %>
                 <%= content_tag(:option, l.nom, value: l.id) %>
+            <% end %>
+        <% end %>
+    </p>
+
+    <!-- Utilisateur -->
+    <p>
+        <%= form.label :utilisateur_id %><br>
+        <%= form.select(:utilisateur_id) do %>
+            <% Utilisateur.all.find_each do |l| %>
+                <%= content_tag(:option, prenom_nom(l), value: l.id) %>
             <% end %>
         <% end %>
     </p>
@@ -31,6 +41,12 @@
         <%= form.text_field :remarque %>
     </p>
     <p>
-        <%= form.submit %>
+        <% if TypeAbsence.all.empty? || Utilisateur.all.empty? %>
+            <span data-toggle="tooltip" title="Type d'absence et utilisateur doivent contenir au moins une entrée.">
+                <%= form.submit class: "btn btn-primary disabled" %>
+            </span>
+        <% else %>
+            <%= form.submit class: "btn btn-primary" %>
+        <% end %>
     </p>
 <% end %>
