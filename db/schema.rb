@@ -17,11 +17,13 @@ ActiveRecord::Schema.define(version: 20200116141500) do
 
   create_table "absences", force: :cascade do |t|
     t.bigint "type_absence_id"
+    t.bigint "utilisateur_id"
     t.date "date"
     t.string "remarque"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["type_absence_id"], name: "index_absences_on_type_absence_id"
+    t.index ["utilisateur_id"], name: "index_absences_on_utilisateur_id"
   end
 
   create_table "conges", force: :cascade do |t|
@@ -120,6 +122,7 @@ ActiveRecord::Schema.define(version: 20200116141500) do
   end
 
   add_foreign_key "absences", "type_absences"
+  add_foreign_key "absences", "utilisateurs"
   add_foreign_key "conges", "utilisateurs"
   add_foreign_key "jobs", "semaines"
   add_foreign_key "semaines", "utilisateurs"
