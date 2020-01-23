@@ -71,9 +71,7 @@ class JobsController < ApplicationController
     end
 
     def find_job
-        @job = Job.find_by_id(params[:identifier])
-        @job ||= Job.find_by_slug(params[:identifier])
-        raise ActionController::RoutingError.new("Not found") unless @job
+        @job = Job.find(params[:id])
     end    
 
 end

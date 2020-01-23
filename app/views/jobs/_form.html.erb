@@ -11,9 +11,9 @@
 
     <!-- Semaine -->
     <p>
-        <%= form.label :numero_semaine_id %><br>
-        <%= form.select(:numero_semaine_id) do %>
-            <% Semaine.order(slug: :desc).find_each do |l| %>
+        <%= form.label :semaine_id %><br>
+        <%= form.select(:semaine_id) do %>
+            <% Semaine.order(date_lundi: :desc).find_each do |l| %>
                 <%= content_tag(:option, "#{l.date_lundi} #{l.slug}".capitalize, value: l.id) %>
             <% end %>
         <% end %>
@@ -22,13 +22,19 @@
     <!-- Jour -->
     <p>
         <%= form.label :numero_jour %><br>
-        <%= form.text_field :numero_jour %>
+        <%= form.select(:numero_jour) do %>
+            <% 5.times do |l| %>
+                <%= content_tag(:option, "#{l+1}", value: "#{l+1}") %>
+            <% end %>
+        <% end %>
     </p>
 
     <!-- AM/PM -->
     <p>
         <%= form.label :am_pm %><br>
-        <%= form.text_field :am_pm %>
+        <span data-toggle="tooltip" title="Cochez pour indiquer l'après-midi.">
+            <%= form.check_box :am_pm %>
+        </span>
     </p>
 
     <!-- Note -->

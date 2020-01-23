@@ -9,6 +9,6 @@
         <%= link_to " [Delete] ", job_path(job), 
             method: :delete,
             remote: true,
-            data: { confirm: "Delete #{job.nom} ?" } %>
+            data: { confirm: "Delete #{job.semaine.slug} / Day #{job.numero_jour} (#{job.am_pm ? "AM" : "PM"}) ?" } %>
     </td>
 </tr>
