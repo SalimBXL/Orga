@@ -1,0 +1,27 @@
+<h3>Jobs</h3>
+<div class="row grille">
+
+    <% 5.times do |nl| %>
+        <% if @semaine.jobs.where(numero_jour: (nl+1), am_pm: false).count>0 %>
+            <div class="col-sm-2 panel panel-primary">
+        <% else %>
+            <div class="col-sm-2 panel panel-info">
+        <% end %>
+            <div class="panel-heading"><%= "#{(nl+1)}" %></div>
+            <div class="panel-body">
+                <% @semaine.jobs.where(numero_jour: (nl+1), am_pm: false).find_each do |job| %>
+                    <%= job.working_lists.find_each do |wl| %>
+                        <%= "#{wl.work.nom}" %>
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
+    <% end %>
+
+    <div class="col-sm-2 panel panel-info">
+        <div class="panel-heading">NOTES</div>
+        <div class="panel-body"><%= "#{@semaine.note}" %></div>
+    </div>
+
+    
+</div>

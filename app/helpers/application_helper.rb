@@ -7,4 +7,8 @@ module ApplicationHelper
     def initiales(utilisateur)
         utilisateur !=nil ? "#{utilisateur.prenom[0]}#{utilisateur.nom[0]}".upcase : "???"
     end
+
+    def am_pm(valeur)
+        valeur ? "PM" : "AM"
+    end
 end

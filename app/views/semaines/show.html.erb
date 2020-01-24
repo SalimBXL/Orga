@@ -16,3 +16,9 @@
 <p>
     <%= link_to " [Edit] ", edit_semaine_path(@semaine) %>
 </p>
+
+<hr>
+
+<!-- Grille des congés -->
+<%= render 'grille', local: @semaine %>
+

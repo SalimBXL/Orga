@@ -40,6 +40,7 @@ gem 'kaminari'
 gem 'jquery-rails'
 
 # Bootstrap
+gem "bootstrap-sass"
 gem 'bootstrap'
 
 group :development, :test do

@@ -7,9 +7,13 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= favicon_link_tag 'icon.ico' %>
-    <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Roboto','application.css' %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap&subset=latin-ext" rel="stylesheet">
   </head>
   <body>
+
+    <!-- HEADER -->
+    <%= render'layouts/header'%>
 
     <!-- FLASH -->
     <div class="container">
@@ -24,8 +28,7 @@
     </div>
 
     <!-- FOOT -->
-    <hr>
-    <p><a href="/"><strong> [Home] </strong></a></p>
+    <%= render'layouts/footer'%>
 
   </body>
 </html>
