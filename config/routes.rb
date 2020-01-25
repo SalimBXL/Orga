@@ -61,6 +61,7 @@ Rails.application.routes.draw do
   #   Jobs  #
   ###################
   resources :jobs, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
+  get "jobs_this_week", to: "jobs#this_week"
 
 
   ###################

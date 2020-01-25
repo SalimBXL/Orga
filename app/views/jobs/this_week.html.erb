@@ -1,0 +1,17 @@
+<h1>JOBS THIS WEEK</h1>
+<div id="jobs">
+    
+    
+    <table>
+        <tr>
+            <th>Semaine</th>
+            <th>Jour</th>
+            <th>AM/PM</th>
+            <th>Note</th>
+            <th></th></tr>
+        <%= render @jobs %>
+    </table>
+
+
+</div>
+<p><%= link_to "[Nouveau job]", new_job_path %></p>
