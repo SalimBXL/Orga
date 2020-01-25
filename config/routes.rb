@@ -55,7 +55,7 @@ Rails.application.routes.draw do
   #   Semaines  #
   ###################
   resources :semaines, only: [ :show, :index, :new, :edit, :create, :update, :destroy ], param: :identifier
-
+  get "semaines_this_week", to: "semaines#this_week"
 
   ###################
   #   Jobs  #

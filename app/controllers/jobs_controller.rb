@@ -8,6 +8,10 @@ class JobsController < ApplicationController
         @jobs = Job.order(semaine_id: :desc).order(:numero_jour, :am_pm).page(params[:page])
     end
 
+
+    #################
+    #   THIS WEEK   #
+    #################
     def this_week
         @jobs = Job.where(id: 0)
         semaines = semaines_at(Date.today)

@@ -1,0 +1,15 @@
+<h1>SEMAINES THIS WEEK</h1>
+<div id="semaines">
+    <table>
+    <tr>
+        <th>#</th>
+        <th>Date Lundi</th>
+        <th>Utilisateur</th>
+        <th>Slug</th>
+        <th>Note</th>
+        <th></th>
+    </tr>
+    <%= render @semaines %>
+</table>
+</div>
+<p><%= link_to "[Nouvelle semaine]", new_semaine_path %></p>

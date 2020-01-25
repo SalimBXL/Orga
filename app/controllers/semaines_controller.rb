@@ -9,6 +9,14 @@ class SemainesController < ApplicationController
     end
 
 
+    #################
+    #   THIS WEEK   #
+    #################
+    def this_week
+        @semaines = semaines_at(Date.today)
+    end
+
+
     #############
     #   SHOW    #
     #############
