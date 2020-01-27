@@ -24,7 +24,7 @@
     <p>
         <%= form.label :numero_jour %><br>
         <%= form.select(:numero_jour) do %>
-            <%= select_option_tag("", nil, @job.semaine_id) %>
+            <%= select_option_tag("Toute la semaine", 0, @job.semaine_id) %>
             <% 5.times do |l| %>
                 <%= select_option_tag("#{l+1}", (l+1), @job.numero_jour) %>
             <% end %>
@@ -33,7 +33,7 @@
 
     <!-- AM/PM -->
     <p>
-        <%= form.label :am_pm %><br>
+        <%= form.label :am_pm %>
         <span data-toggle="tooltip" title="Cochez pour indiquer l'après-midi.">
             <%= form.check_box :am_pm %>
         </span>

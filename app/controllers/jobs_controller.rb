@@ -40,12 +40,38 @@ class JobsController < ApplicationController
     #   CREATE   #
     ##############
     def create
-        @job = Job.create(job_params)
-        if @job.save
-            flash[:notice] = "Job créé avec succès"
-            redirect_to jobs_path
+        if params[:job][:numero_jour] != "0"
+            @job = Job.create(job_params)
+            if Job.exists?(semaine_id: @job.semaine_id, numero_jour: @job.numero_jour)
+                # JOB EXISTE...
+            else
+                if @job.save
+                    flash[:notice] = "Job créé avec succès"
+                    redirect_to jobs_path
+                    return
+                else
+                    render :new
+                    return
+                end
+            end
         else
-            render :new
+            5.times do |n|
+                @job = Job.create(job_params)
+                @job.numero_jour = (n+1)
+                if Job.exists?(semaine_id: @job.semaine_id, numero_jour: @job.numero_jour)
+                    # JOB EXISTE...
+                else
+                    if @job.save
+                        # ok
+                    else
+                        render :new
+                        return
+                    end
+                end
+            end
+            flash[:notice] = "Jobs créés avec succès"
+            redirect_to jobs_path
+            return
         end
     end
 
