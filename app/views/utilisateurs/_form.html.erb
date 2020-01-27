@@ -49,8 +49,9 @@
     <p>
         <%= form.label :service_id %><br>
         <%= form.select(:service_id) do %>
+            <%= select_option_tag("", nil, @utilisateur.service_id) %>
             <% Service.all.find_each do |l| %>
-                <%= content_tag(:option, l.nom, value: l.id) %>
+                <%= select_option_tag(l.nom.capitalize, l.id, @utilisateur.service_id) %>
             <% end %>
         <% end %>
     </p>
@@ -59,8 +60,9 @@
     <p>
         <%= form.label :groupe_id %><br>
         <%= form.select(:groupe_id) do %>
+            <%= select_option_tag("", nil, @utilisateur.groupe_id) %>
             <% Groupe.all.find_each do |l| %>
-                <%= content_tag(:option, l.nom, value: l.id) %>
+                <%= select_option_tag(l.nom.capitalize, l.id, @utilisateur.groupe_id) %>
             <% end %>
         <% end %>
     </p>

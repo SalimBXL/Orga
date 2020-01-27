@@ -22,8 +22,9 @@
     <p>
         <%= form.label :utilisateur_id %><br>
         <%= form.select(:utilisateur_id) do %>
+            <%= select_option_tag("", nil, @semaine.utilisateur_id) %>
             <% Utilisateur.all.find_each do |l| %>
-                <%= content_tag(:option, prenom_nom(l), value: l.id) %>
+                <%= select_option_tag(prenom_nom(l), l.id, @semaine.utilisateur_id) %>
             <% end %>
         <% end %>
     </p>

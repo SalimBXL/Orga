@@ -19,8 +19,9 @@
     <p>
         <%= form.label :lieu_id %><br>
         <%= form.select(:lieu_id) do %>
+            <%= select_option_tag("", nil, @service.lieu_id) %>
             <% Lieu.all.find_each do |l| %>
-                <%= content_tag(:option, l.nom, value: l.id) %>
+                <%= select_option_tag(l.nom.capitalize, l.id, @service.lieu_id) %>
             <% end %>
         <% end %>
     </p>

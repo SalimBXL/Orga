@@ -19,8 +19,9 @@
     <p>
         <%= form.label :type_absence_id %><br>
         <%= form.select(:type_absence_id) do %>
+            <%= select_option_tag("", nil, @absence.type_absence_id) %>
             <% TypeAbsence.all.find_each do |l| %>
-                <%= content_tag(:option, l.nom, value: l.id) %>
+                <%= select_option_tag(l.nom, l.id, @absence.type_absence_id) %>
             <% end %>
         <% end %>
     </p>
@@ -29,8 +30,9 @@
     <p>
         <%= form.label :utilisateur_id %><br>
         <%= form.select(:utilisateur_id) do %>
+            <%= select_option_tag("", nil, @absence.utilisateur_id) %>
             <% Utilisateur.all.find_each do |l| %>
-                <%= content_tag(:option, prenom_nom(l), value: l.id) %>
+                <%= select_option_tag(prenom_nom(l), l.id, @absence.utilisateur_id) %>                
             <% end %>
         <% end %>
     </p>

@@ -23,17 +23,18 @@
                         <td>
                             <% records.each do |record| %>
                                 <% if record.accord? %>
-                                    <span   
-                                            class="badge conge_accord_ok"
+                                    <span   class="badge conge_accord_ok"
                                             data-toggle="tooltip"
                                             title="<%= prenom_nom(record.utilisateur) %>">
+                                        <%= initiales(record.utilisateur) %>
+                                    </span>
                                 <% else %>
                                     <span   class="badge conge_accord_wait"
                                             data-toggle="tooltip" 
                                             title="<%= prenom_nom(record.utilisateur) %>">
+                                        <%= initiales(record.utilisateur) %>
+                                    </span>
                                 <% end %>
-                                    <%= initiales(record.utilisateur) %>
-                                </span>
                             <% end %>
                         </td>
                     <% end %>

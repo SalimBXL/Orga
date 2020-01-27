@@ -13,8 +13,9 @@
     <p>
         <%= form.label :semaine_id %><br>
         <%= form.select(:semaine_id) do %>
+            <%= select_option_tag("", nil, @job.semaine_id) %>
             <% Semaine.order(date_lundi: :desc).find_each do |l| %>
-                <%= content_tag(:option, "#{l.date_lundi} #{l.slug}".capitalize, value: l.id) %>
+                <%= select_option_tag("#{l.date_lundi} #{l.slug}", l.id, @job.semaine_id) %>
             <% end %>
         <% end %>
     </p>
@@ -23,8 +24,9 @@
     <p>
         <%= form.label :numero_jour %><br>
         <%= form.select(:numero_jour) do %>
+            <%= select_option_tag("", nil, @job.semaine_id) %>
             <% 5.times do |l| %>
-                <%= content_tag(:option, "#{l+1}", value: "#{l+1}") %>
+                <%= select_option_tag("#{l+1}", (l+1), @job.numero_jour) %>
             <% end %>
         <% end %>
     </p>
