@@ -1,0 +1,45 @@
+<%= form_with model: @work, local: true do |form| %>
+
+    <% if @work.errors.any? %>
+        <strong>WARNING</strong>
+        <ul>
+            <% @work.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
+
+    <!-- Nom -->
+    <p>
+        <%= form.label :nom %><br>
+        <%= form.text_field :nom %>
+    </p>
+
+    <!-- Code -->
+    <p>
+        <%= form.label :code %><br>
+        <%= form.text_field :code %>
+    </p>
+
+    <!-- Groupe -->
+    <p>
+        <%= form.label :groupe_id %><br>
+        <%= form.select(:groupe_id) do %>
+            <%= select_option_tag("", nil, @work.groupe_id) %>
+            <% Groupe.all.find_each do |l| %>
+                <%= select_option_tag(l.nom.capitalize, l.id, @work.groupe_id) %>
+            <% end %>
+        <% end %>
+    </p>
+
+    <!-- Description -->
+    <p>
+        <%= form.label :description %><br>
+        <%= form.text_field :description %>
+    </p>
+
+    <p>
+        <%= form.submit class: "btn btn-primary" %>
+    </p>
+
+<% end %>

@@ -1,0 +1,13 @@
+<tr id="work_<%= work.id %>">
+    <td><%= work.nom %></td>
+    <td><%= work.description %></td>
+    <td>
+        <%= link_to " [Show] ", work_path(work) %>
+        <%= link_to " [Edit] ", edit_work_path(work) %>
+        <%= link_to " [Delete] ", work_path(work), 
+            method: :delete,
+            remote: true,
+            data: { confirm: "Delete #{work.nom} ?" } 
+        %>
+    </td>
+</tr>
