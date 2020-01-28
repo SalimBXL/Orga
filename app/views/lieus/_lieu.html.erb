@@ -9,6 +9,8 @@
         <%= link_to " [Delete] ", lieu_path(lieu), 
             method: :delete,
             remote: true,
-            data: { confirm: "Delete #{lieu.nom} ?" } %>
+            data: { confirm: "Delete #{lieu.nom} ?" } 
+        %>
+        <%= link_to " [Services] ", "/services_lieu/#{lieu.id}" %>
     </td>
 </tr>

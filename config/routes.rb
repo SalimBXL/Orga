@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   #   Services  #
   ###############
   resources :services, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
+  get "services_lieu/:id", to: "services#services_lieu"
 
 
   #####################
@@ -45,7 +46,6 @@ Rails.application.routes.draw do
   resources :utilisateurs, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
 
 
-
   ##############
   #  Absences  #
   ##############
@@ -58,6 +58,7 @@ Rails.application.routes.draw do
   resources :semaines, only: [ :show, :index, :new, :edit, :create, :update, :destroy ], param: :identifier
   get "semaines_this_week", to: "semaines#this_week"
   get "semaines_utilisateur/:id", to: "semaines#semaines_utilisateur"
+
 
   ###################
   #   Jobs  #
