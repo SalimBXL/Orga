@@ -9,6 +9,8 @@
         <%= link_to " [Delete] ", utilisateur_path(utilisateur), 
             method: :delete,
             remote: true,
-            data: { confirm: "Delete #{utilisateur.nom} ?" } %>
+            data: { confirm: "Delete #{utilisateur.nom} ?" } 
+        %>
+        <%= link_to " [Semaines] ", "/semaines_utilisateur/#{utilisateur.id}" %>
     </td>
 </tr>

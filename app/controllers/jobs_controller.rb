@@ -21,6 +21,15 @@ class JobsController < ApplicationController
     end
 
 
+    ################
+    # JOBS SEMAINE #
+    ################
+    def jobs_semaine
+        @semaine = Semaine.find_by_id(params[:id])
+        @jobs = @semaine.jobs.order(:numero_jour).page(params[:page])
+    end
+
+
     #############
     #   SHOW    #
     #############

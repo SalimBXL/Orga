@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: ce76b8da1dc0187335b533cf68c7519621468693
+  revision: 4a0d6c54a8bf9929f6d816631cf749cc019cb13f
   branch: master
   specs:
     faker (2.10.1)
@@ -130,7 +130,7 @@ GEM
     popper_js (1.16.0)
     public_suffix (4.0.3)
     puma (3.12.2)
-    rack (2.1.1)
+    rack (2.1.2)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     railroady (1.5.3)

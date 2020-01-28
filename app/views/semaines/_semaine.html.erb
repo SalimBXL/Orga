@@ -10,6 +10,8 @@
         <%= link_to " [Delete] ", semaine_path(semaine), 
             method: :delete,
             remote: true,
-            data: { confirm: "Delete #{semaine.numero_semaine} ?" } %>
+            data: { confirm: "Delete #{semaine.numero_semaine} ?" } 
+        %>
+        <%= link_to " [Jobs] ", "/jobs_semaine/#{semaine.id}" %>
     </td>
 </tr>
