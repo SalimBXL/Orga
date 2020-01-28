@@ -44,6 +44,8 @@ Rails.application.routes.draw do
   #   Utilisateurs  #
   ###################
   resources :utilisateurs, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
+  get "utilisateurs_service/:id", to: "utilisateurs#utilisateurs_service"
+  get "utilisateurs_groupe/:id", to: "utilisateurs#utilisateurs_groupe"
 
 
   ##############
@@ -78,4 +80,5 @@ Rails.application.routes.draw do
   #   Works  #
   ###################
   resources :works, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
+  get "works_groupe/:id", to: "works#works_groupe"
 end

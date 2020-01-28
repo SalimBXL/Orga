@@ -9,6 +9,22 @@ class UtilisateursController < ApplicationController
     end
 
 
+    ########################
+    # UTILISATEURS SERVICE #
+    ########################
+    def utilisateurs_service
+        @service = Service.find_by_id(params[:id])
+        @utilisateurs = @service.utilisateurs.order(:groupe_id, :prenom, :nom).page(params[:page])
+    end
+    #######################
+    # UTILISATEURS GROUPE #
+    #######################
+    def utilisateurs_groupe
+        @groupe = Groupe.find_by_id(params[:id])
+        @utilisateurs = @groupe.utilisateurs.order(:service_id, :prenom, :nom).page(params[:page])
+    end
+
+
     #############
     #   SHOW    #
     #############

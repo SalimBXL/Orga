@@ -1,0 +1,6 @@
+<h1>UTILISATEURS PAR SERVICE</h1>
+<h2><%= @service.nom %> (<%= @service.lieu.nom %>)</h2>
+<div id="utilisateurs">
+    <%= render 'utilisateurs' %>
+</div>
+<p><%= link_to "[Nouvel utilisateur]", new_utilisateur_path %></p>

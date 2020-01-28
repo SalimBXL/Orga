@@ -7,6 +7,8 @@
         <%= link_to " [Delete] ", groupe_path(groupe), 
             method: :delete,
             remote: true,
-            data: { confirm: "Delete #{groupe.nom} ?" } %>
+            data: { confirm: "Delete #{groupe.nom} ?" } 
+        %>
+        <%= link_to " [Utilisateurs] ", "/utilisateurs_groupe/#{groupe.id}" %>
     </td>
 </tr>
