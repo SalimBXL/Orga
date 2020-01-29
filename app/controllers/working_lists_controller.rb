@@ -12,7 +12,7 @@ class WorkingListsController < ApplicationController
     #####################
     # WORKING LISTS JOB #
     #####################
-    def services_lieu
+    def working_lists_job
         @job = Job.find_by_id(params[:id])
         @working_lists = @job.working_lists.order(:job_id, :work_id).page(params[:page])
     end
