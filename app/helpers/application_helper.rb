@@ -19,4 +19,21 @@ module ApplicationHelper
             content_tag(:option, label, value: id)
         end
     end
+
+    def nom_jour(numero)
+        case numero
+        when 1
+            nom_jour = "Lundi"
+        when 2
+            nom_jour = "Mardi"
+        when 3
+            nom_jour = "Mercredi"
+        when 4
+            nom_jour = "Jeudi"
+        when 5
+            nom_jour = "Vendredi"
+        else
+            nom_jour = nil
+        end
+    end
 end

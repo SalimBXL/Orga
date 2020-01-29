@@ -11,11 +11,17 @@
 
     <!-- Semaine -->
     <p>
+        <% @semaines = Semaine.order(date_lundi: :asc, slug: :asc) %>
         <%= form.label :semaine_id %><br>
         <%= form.select(:semaine_id) do %>
             <%= select_option_tag("", nil, @job.semaine_id) %>
-            <% Semaine.order(date_lundi: :desc).find_each do |l| %>
-                <%= select_option_tag("#{l.date_lundi} #{l.slug}", l.id, @job.semaine_id) %>
+            <% tampon = "" %>
+            <% @semaines.each do |l| %>
+                <% if l.date_lundi != tampon %>
+                    <%= select_option_tag("", nil, @job.semaine_id) %>
+                <% end %>
+                <%= select_option_tag("[#{l.date_lundi}] #{l.slug}", l.id, @job.semaine_id) %>
+                <% tampon = l.date_lundi %>
             <% end %>
         <% end %>
     </p>
@@ -26,7 +32,7 @@
         <%= form.select(:numero_jour) do %>
             <%= select_option_tag("Toute la semaine", 0, @job.semaine_id) %>
             <% 5.times do |l| %>
-                <%= select_option_tag("#{l+1}", (l+1), @job.numero_jour) %>
+                <%= select_option_tag("#{l+1} - #{nom_jour(l+1)}", (l+1), @job.numero_jour) %>
             <% end %>
         <% end %>
     </p>
@@ -46,7 +52,7 @@
     </p>
 
     <p>
-        <% if Semaine.all.empty? %>
+        <% if @semaines.empty? %>
             <span data-toggle="tooltip" title="Semaine doit contenir au moins une entrée.">
                 <%= form.submit class: "btn btn-primary disabled" %>
             </span>
