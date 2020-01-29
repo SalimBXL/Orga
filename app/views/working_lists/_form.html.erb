@@ -14,9 +14,16 @@
         <%= form.label :job_id %><br>
         <%= form.select(:job_id) do %>
             <%= select_option_tag("", nil, @working_list.job_id) %>
-            <% Job.order(:semaine_id).find_each do |l| %>
-                <%= select_option_tag("#{l.semaine.slug} - #{l.numero_jour} (#{am_pm(l.am_pm)})", l.id, @working_list.job_id) %>
+            <% Groupe.order(:nom).find_each do |g| %>
+                <% g.utilisateurs.order(:prenom, :nom).find_each do |u| %>
+                    <% u.semaines.order(:date_lundi).find_each do |s| %>
+                        <% s.jobs.order(:numero_jour, :am_pm).find_each do |j| %>
+                            <%= select_option_tag("#{prenom_nom(u)} - #{s.date_lundi+j.numero_jour-1} - #{j.numero_jour} (#{am_pm(j.am_pm)})", j.id, @working_list.job_id) %>
+                        <% end %>
+                    <% end %>
+                <% end %>
             <% end %>
+
         <% end %>
     </p>
 
@@ -26,7 +33,7 @@
         <%= form.select(:work_id) do %>
             <%= select_option_tag("", nil, @working_list.work_id) %>
             <% Work.order(:groupe_id).find_each do |l| %>
-                <%= select_option_tag("[#{l.groupe.nom}] #{l.nom}", l.id, @working_list.work_id) %>
+                <%= select_option_tag("#{l.groupe.nom} - [ #{l.code} ] - #{l.nom}", l.id, @working_list.work_id) %>
             <% end %>
         <% end %>
     </p>
