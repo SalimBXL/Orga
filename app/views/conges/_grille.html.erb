@@ -1,26 +1,30 @@
 <div class="row grille">
     <table class="table-condensed table table-bordered table-striped table-responsive">
+        <thead>
         <tr>
             <th>Mois</th>
             <% 31.times do |n_jour| %>
                 <th><%= n_jour+1 %></th>
             <% end %>
         </tr>
-
+        </thead>
         <% date_depart = Date.today-3.months %>
+        <tbody>
         <% 12.times do |n_mois| %>
-            <tr>
-                <% annee = (date_depart + n_mois.months).year %>
-                <% mois = (date_depart + n_mois.months).month %>
+            <% date_parcourue = (date_depart + n_mois.months) %>
+            <% couleur_ligne_mois = (Date.today.month==date_parcourue.month) ? "warning" : "default" %>
+            <tr class=<%= "#{couleur_ligne_mois}" %>>
+                <% annee = date_parcourue.year %>
+                <% mois = date_parcourue.month %>
                 <% numero_mois = "#{mois<10 ? '0' : ''}#{mois}" %>
                 <td><%= "#{numero_mois}/#{annee}" %></td>
                 <% nombre_jours = Time.days_in_month(mois, annee).to_i %>
                 <% nombre_jours.times do |n_jour| %>
                     <% records = @current_conges.where(date: "#{annee}-#{numero_mois}-#{n_jour+1}") %>
                     <% if records.empty? %>
-                        <td></td>
+                        <td><% 3.times do %><br><% end %></td>
                     <% else %>
-                        <td>
+                        <td align=center>
                             <% records.each do |record| %>
                                 <% if record.accord? %>
                                     <span   class="badge conge_accord_ok"
@@ -35,11 +39,13 @@
                                         <%= initiales(record.utilisateur) %>
                                     </span>
                                 <% end %>
+                                <br>
                             <% end %>
                         </td>
                     <% end %>
                 <% end %>
             </tr>
         <% end %>
+        </tbody>
     </table>
 </div>
