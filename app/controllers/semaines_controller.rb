@@ -5,7 +5,7 @@ class SemainesController < ApplicationController
     #   INDEX   #
     #############
     def index
-        @semaines = Semaine.order(:slug).page(params[:page])
+        @semaines = Semaine.order(numero_semaine: :desc, slug: :asc).page(params[:page])
     end
 
 
@@ -38,6 +38,7 @@ class SemainesController < ApplicationController
     #############
     def new
         @semaine = Semaine.new
+        @utilisateurs = Utilisateur.order(groupe_id: :asc, prenom: :asc, nom: :asc)
     end
 
 

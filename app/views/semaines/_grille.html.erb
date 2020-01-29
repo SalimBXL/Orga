@@ -1,27 +1,33 @@
-<h3>Jobs</h3>
+<% semaine_en_arriere = 6 %>
+<% semaine_en_avant = 4 %>
+<% date_depart = Date.today - semaine_en_arriere.weeks %>
+<% nombre_semaines_a_lire = 52 + semaine_en_arriere + semaine_en_avant %>
 <div class="row grille">
-
-    <% 5.times do |nl| %>
-        <% if @semaine.jobs.where(numero_jour: (nl+1), am_pm: false).count>0 %>
-            <div class="col-sm-2 panel panel-primary">
-        <% else %>
-            <div class="col-sm-2 panel panel-info">
-        <% end %>
-            <div class="panel-heading"><%= "#{(nl+1)}" %></div>
-            <div class="panel-body">
-                <% @semaine.jobs.where(numero_jour: (nl+1), am_pm: false).find_each do |job| %>
-                    <%= job.working_lists.find_each do |wl| %>
-                        <%= "#{wl.work.nom}" %>
+    <table class="table-condensed table table-bordered table-striped table-responsive">
+        <thead>
+        <tr>
+            <th><%= Date.today.year %></th>
+            <th></th>
+        </tr>
+        </thead>
+        
+        <tbody>
+        <% nombre_semaines_a_lire.times do |n_semaine| %>
+            <% semaine_parcourue = (date_depart+n_semaine.weeks) %>
+            <% couleur_ligne_semaine = ("#{Date.today.cweek}-#{Date.today.year}"=="#{semaine_parcourue.cweek}-#{semaine_parcourue.year}") ? "warning" : "default" %>
+            <tr class=<%= "#{couleur_ligne_semaine}" %>>
+                <% numero_semaine = "#{semaine_parcourue.cweek<10 ? '0' : ''}#{semaine_parcourue.cweek}" %>
+                <td><%= "#{numero_semaine}" %></td>
+                <td>
+                    <!-- Liste des semaines utilisateurs attribués -->
+                    <% @semaines.where(numero_semaine: "#{semaine_parcourue.year}-W#{numero_semaine}").each do |s| %>
+                        <span class="label label-default tab-cell">
+                            <%= prenom_nom(s.utilisateur) %>
+                        </span>                       
                     <% end %>
-                <% end %>
-            </div>
-        </div>
-    <% end %>
-
-    <div class="col-sm-2 panel panel-info">
-        <div class="panel-heading">NOTES</div>
-        <div class="panel-body"><%= "#{@semaine.note}" %></div>
-    </div>
-
-    
+                </td>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
 </div>

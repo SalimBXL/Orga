@@ -1,9 +1,9 @@
 <tr id="semaine_<%= semaine.id %>">
-    <td><%= semaine.numero_semaine %></td>
-    <td><%= semaine.date_lundi %></td>
-    <td><%= prenom_nom(semaine.utilisateur) %></td>
-    <td><%= semaine.slug %></td>
-    <td><%= semaine.note %></td>
+    <td align=left><%= semaine.numero_semaine %> | </td>
+    <td align=center><%= semaine.date_lundi %> | </td>
+    <td align=left><%= prenom_nom(semaine.utilisateur) %></td>
+    <td align=center><%= semaine.slug %></td>
+    <td align=left><%= semaine.note %></td>
     <td>
         <%= link_to " [Show] ", semaine_path(semaine) %>
         <%= link_to " [Edit] ", edit_semaine_path(semaine) %>
