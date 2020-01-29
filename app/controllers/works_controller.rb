@@ -9,6 +9,15 @@ class WorksController < ApplicationController
     end
 
 
+    ################
+    # WORKS GROUPE #
+    ################
+    def works_groupe
+        @groupe = Groupe.find_by_id(params[:id])
+        @works = @groupe.works.order(:groupe_id, :nom).page(params[:page])
+    end
+
+
     #############
     #   SHOW    #
     #############
