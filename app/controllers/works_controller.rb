@@ -18,6 +18,15 @@ class WorksController < ApplicationController
     end
 
 
+    #####################
+    # WORKS UTILISATEUR #
+    #####################
+    def works_job
+        @job = Job.find_by_id(params[:id])
+        @works = @job.working_lists.order(:groupe_id, :nom).page(params[:page])
+    end
+
+
     #############
     #   SHOW    #
     #############

@@ -12,5 +12,6 @@
             remote: true,
             data: { confirm: "Delete #{job.semaine.slug} / Day #{job.numero_jour} (#{job.am_pm ? "AM" : "PM"}) ?" } 
         %>
+        <%= link_to " [Works] ", "/works_job/#{job.id}" %>
     </td>
 </tr>

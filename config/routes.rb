@@ -81,4 +81,5 @@ Rails.application.routes.draw do
   ###################
   resources :works, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
   get "works_groupe/:id", to: "works#works_groupe"
+  get "works_job/:id", to: "works#works_job"
 end

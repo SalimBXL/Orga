@@ -1,0 +1,11 @@
+<p><%= paginate @working_lists, remote: true %></p>
+<table>
+    <tr>
+        <th>#ID</th>
+        <th>Semaine</th>
+        <th>Jour (AM/PM)</th>
+        <th>Work</th>
+        <th></th></tr>
+    <%= render @working_lists %>
+</table>
+<p><%= paginate @working_lists, remote: true %></p>

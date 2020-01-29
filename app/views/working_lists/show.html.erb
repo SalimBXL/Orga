@@ -1,0 +1,20 @@
+<h1>
+    #<%= @working_list.id %>
+</h1>
+<p>
+    Semaine : <%= @working_list.job.semaine.slug %><br>
+    Jour : <%= @working_list.job.numero_jour %><br>
+    AM/PM : <%= am_pm(@working_list.job.am_pm) %>
+</p>
+<p>
+    Work : <%= @working_list.work.nom %>
+</p>
+<p>
+    Utilisateur : <%= prenom_nom(@working_list.job.semaine.utilisateur) %><br>
+    Groupe : <%= @working_list.job.semaine.utilisateur.groupe.nom %><br>
+    Service : <%= "#{@working_list.job.semaine.utilisateur.service.nom} (#{@working_list.job.semaine.utilisateur.service.lieu.nom})" %>
+</p>
+
+<p>
+    <%= link_to " [Edit] ", edit_working_list_path(@working_list) %>
+</p>
