@@ -75,6 +75,7 @@ Rails.application.routes.draw do
   ###################
   resources :working_lists, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
   get "working_lists_job/:id", to: "working_lists#working_lists_job"
+  get "working_lists_work/:id", to: "working_lists#working_lists_work"
 
   ###################
   #   Works  #

@@ -17,6 +17,14 @@ class WorkingListsController < ApplicationController
         @working_lists = @job.working_lists.order(:job_id, :work_id).page(params[:page])
     end
 
+    ######################
+    # WORKING LISTS WORK #
+    ######################
+    def working_lists_work
+        @work = Work.find_by_id(params[:id])
+        @working_lists = @work.working_lists.order(:job_id, :work_id).page(params[:page])
+    end
+
 
     #############
     #   SHOW    #
