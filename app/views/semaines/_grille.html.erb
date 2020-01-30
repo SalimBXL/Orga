@@ -15,13 +15,19 @@
         <% nombre_semaines_a_lire.times do |n_semaine| %>
             <% semaine_parcourue = (date_depart+n_semaine.weeks) %>
             <% couleur_ligne_semaine = ("#{Date.today.cweek}-#{Date.today.year}"=="#{semaine_parcourue.cweek}-#{semaine_parcourue.year}") ? "warning" : "default" %>
-            <tr class=<%= "#{couleur_ligne_semaine}" %>>
-                <% numero_semaine = "#{semaine_parcourue.cweek<10 ? '0' : ''}#{semaine_parcourue.cweek}" %>
+            <% numero_semaine = "#{semaine_parcourue.cweek<10 ? '0' : ''}#{semaine_parcourue.cweek}" %>
+            <tr id=<%= "#{semaine_parcourue.year}-W#{numero_semaine}" %> class=<%= "#{couleur_ligne_semaine}" %>>
                 <td><%= "#{numero_semaine}" %></td>
                 <td>
                     <!-- Liste des semaines utilisateurs attribués -->
                     <% @semaines.where(numero_semaine: "#{semaine_parcourue.year}-W#{numero_semaine}").each do |s| %>
-                        <span class="label label-default tab-cell">
+                        <% if semaine_parcourue.cweek<Date.today.cweek %>
+                            <span class="label label-default tab-cell">
+                        <% elsif semaine_parcourue.cweek>Date.today.cweek %>
+                            <span class="label label-info tab-cell">
+                        <% else %>
+                            <span class="label label-primary tab-cell">
+                        <% end %>
                             <%= prenom_nom(s.utilisateur) %>
                         </span>                       
                     <% end %>
