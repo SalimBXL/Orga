@@ -3,6 +3,7 @@
     <table class="table-condensed table table-bordered table-striped table-responsive">
         <thead>
         <tr align=center>
+            <th>Utilisateurs</th>
             <% 5.times do |n| %>
                 <th><%= nom_jour(n+1) %></th>
             <% end %>
@@ -12,19 +13,20 @@
         <tbody>
             <% @semaines.each do |semaine| %>
                 <tr align=center>
+                    <td>
+                        <%= prenom_nom(semaine.utilisateur) %>
+                    </td>
                     <% 5.times do |n| %>
                         <% couleur_cellule = (Date.today.cwday==(n+1)) ? "warning" : "default" %>
                         <td class=<%= "#{couleur_cellule}" %>>
-                            <% semaine.jobs.where(numero_jour: "#{n+1}").each do |j| %>
-                                <% if (n+1)<Date.today.cwday %>
-                                    <span class="label label-default tab-cell">
-                                <% elsif (n+1)>Date.today.cwday %>
-                                    <span class="label label-info tab-cell">
-                                <% else %>
-                                    <span class="label label-primary tab-cell">
+                            <% semaine.jobs.where(numero_jour: "#{n+1}").each do |job| %>
+                                <% job.working_lists.each do |working_list| %>
+                                    <span class="label label-primary tab-cell"
+                                            data-toggle="tooltip" 
+                                            title="<%= working_list.work.nom %>">
+                                        <%= "#{working_list.work.code}" %>
+                                    </span>
                                 <% end %>
-                                <%= prenom_nom(j.semaine.utilisateur) %>
-                                </span>
                             <% end %>
                         </td>
                     <% end %>

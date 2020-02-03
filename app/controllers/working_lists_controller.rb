@@ -9,6 +9,18 @@ class WorkingListsController < ApplicationController
     end
 
 
+    #################
+    #   THIS WEEK   #
+    #################
+    def this_week
+        @jobs = Job.where(id: 0)
+        @semaines = semaines_at(Date.today)
+        @semaines.find_each do |semaine|
+            @jobs = @jobs + semaine.jobs
+        end
+    end
+
+
     #####################
     # WORKING LISTS JOB #
     #####################
