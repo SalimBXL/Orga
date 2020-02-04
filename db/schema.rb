@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200123140609) do
+ActiveRecord::Schema.define(version: 20200123140612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(version: 20200123140609) do
     t.datetime "updated_at", null: false
     t.index ["type_absence_id"], name: "index_absences_on_type_absence_id"
     t.index ["utilisateur_id"], name: "index_absences_on_utilisateur_id"
+  end
+
+  create_table "classes", force: :cascade do |t|
+    t.string "nom"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "work_id"
+    t.index ["work_id"], name: "index_classes_on_work_id"
   end
 
   create_table "conges", force: :cascade do |t|
@@ -122,6 +131,8 @@ ActiveRecord::Schema.define(version: 20200123140609) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "classe_id"
+    t.index ["classe_id"], name: "index_works_on_classe_id"
     t.index ["groupe_id"], name: "index_works_on_groupe_id"
   end
 

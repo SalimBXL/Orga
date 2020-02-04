@@ -1,0 +1,14 @@
+<tr id="classe_<%= classe.id %>">
+    <td><%= classe.nom %></td>
+    <td><%= classe.description %></td>
+    <td>
+        <%= link_to " [Show] ", class_path(classe) %>
+        <%= link_to " [Edit] ", edit_class_path(classe) %>
+        <%= link_to " [Delete] ", class_path(classe), 
+            method: :delete,
+            remote: true,
+            data: { confirm: "Delete #{classe.nom} ?" } 
+        %>
+        <%= link_to " [Works] ", "/works_classe/#{classe.id}" %>
+    </td>
+</tr>

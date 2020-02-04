@@ -32,6 +32,17 @@
         <% end %>
     </p>
 
+    <!-- Classe -->
+    <p>
+        <%= form.label :classe_id %><br>
+        <%= form.select(:classe_id) do %>
+            <%= select_option_tag("", nil, @work.classe_id) %>
+            <% Classe.all.find_each do |l| %>
+                <%= select_option_tag(l.nom.capitalize, l.id, @work.classe_id) %>
+            <% end %>
+        <% end %>
+    </p>
+
     <!-- Description -->
     <p>
         <%= form.label :description %><br>

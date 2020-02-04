@@ -15,6 +15,12 @@ Rails.application.routes.draw do
   resources :groupes, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
 
 
+  ##############
+  #   Classes  #
+  ##############
+  resources :classes, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
+
+
   ###############
   #   Services  #
   ###############
@@ -78,10 +84,11 @@ Rails.application.routes.draw do
   get "working_lists_work/:id", to: "working_lists#working_lists_work"
   get "working_lists_this_week", to: "working_lists#this_week"
 
-  ###################
+  ############
   #   Works  #
-  ###################
+  ############
   resources :works, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
   get "works_groupe/:id", to: "works#works_groupe"
+  get "works_classe/:id", to: "works#works_classe"
   
 end

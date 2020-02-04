@@ -18,6 +18,15 @@ class WorksController < ApplicationController
     end
 
 
+    ################
+    # WORKS CLASSE #
+    ################
+    def works_classe
+        @classe = Classe.find_by_id(params[:id])
+        @works = @classe.works.order(:classe_id, :nom).page(params[:page])
+    end
+
+    
     #####################
     # WORKS UTILISATEUR #
     #####################
@@ -84,7 +93,7 @@ class WorksController < ApplicationController
     private 
 
     def work_params
-        params.require(:work).permit(:nom, :description, :groupe_id, :code)
+        params.require(:work).permit(:nom, :description, :groupe_id, :classe_id, :code)
     end
 
     def find_work

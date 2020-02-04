@@ -1,6 +1,11 @@
 <p><%= paginate @works, remote: true %></p>
 <table>
-    <tr><th>Nom</th><th>Description</th><th></th></tr>
+    <tr>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Groupe</th>
+        <th>Classe</th>
+        <th></th></tr>
     <%= render @works %>
 </table>
 <p><%= paginate @works, remote: true %></p>
