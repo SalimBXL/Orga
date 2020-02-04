@@ -10,8 +10,9 @@ class AgendasController < ApplicationController
     
     # ABSENCES
     def absences
-        @absences = Absence.order(:date).order(:type_absence_id).page(params[:page])
-        @current_absences = Absence.where(date: (Date.today-3.months)..(Date.today+9.month))
+        @date_depart = Date.today.beginning_of_year - 3.months
+        date_fin = Date.today.end_of_year + 3.months
+        @absences = Absence.where(date: @date_depart..date_fin)
     end
 
     # CONGES
@@ -23,6 +24,11 @@ class AgendasController < ApplicationController
     # SEMAINES
     def semaines
         @semaines = Semaine.order(numero_semaine: :desc, slug: :asc).page(params[:page])
+    end
+
+    # JOBS
+    def jobs
+        @jobs = Job.where().order(semaine_id: :desc).order(:numero_jour, :am_pm).page(params[:page])
     end
 
 end
