@@ -9,6 +9,16 @@ Rails.application.routes.draw do
   get "nursing", to: "home#index"
 
 
+  ###############
+  #   Agendas   #
+  ###############
+  get "agenda", to: "agendas#all"
+  get "agendas", to: "agendas#index"
+  get "agendas/absences", to: "agendas#absences"
+  get "agendas/conges", to: "agendas#conges"
+  get "agendas/semaines", to: "agendas#semaines"
+
+
   ##############
   #   Groupes  #
   ##############
@@ -58,7 +68,7 @@ Rails.application.routes.draw do
   #  Absences  #
   ##############
   resources :absences, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
-
+  
 
   ###################
   #   Semaines  #

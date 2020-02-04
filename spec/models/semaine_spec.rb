@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Semaine, type: :model do
   let(:semaine) { FactoryBot.build(:semaine) }
-  
+
   describe "validations" do
     it "can be instanciated" do
       expect(semaine).not_to be nil
@@ -19,7 +19,8 @@ RSpec.describe Semaine, type: :model do
       expect((semaine.numero_semaine!=semaine2.numero_semaine) && (semaine.utilisateur_id!=semaine2.utilisateur_id)).to be false
     end
   end
-  
+
+
   describe "Slug" do
     it "sets the slug on validation" do
       nom_u = "#{semaine.utilisateur.prenom} #{semaine.utilisateur.nom}"
@@ -31,6 +32,5 @@ RSpec.describe Semaine, type: :model do
       expect(Semaine.where(slug: semaine.slug).count<2).to be true
     end
   end
-
-
+  
 end

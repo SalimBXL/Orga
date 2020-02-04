@@ -6,7 +6,7 @@ class CongesController < ApplicationController
     #############
     def index
         @conges = Conge.order(date: :desc).order(:accord).page(params[:page])
-        @current_conges = Conge.where(date: (Date.today-3.months)..(Date.today+9.month))
+        #@current_conges = Conge.where(date: (Date.today-3.months)..(Date.today+9.month))
     end
 
 
