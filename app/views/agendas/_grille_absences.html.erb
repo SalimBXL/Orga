@@ -1,5 +1,6 @@
 <div class="row grille">
-    <table class="table-condensed table table-bordered table-striped table-responsive">
+
+ <table class="table-condensed table table-bordered table-striped table-responsive">
         <thead>
             <tr>
                 <th>Mois</th>
@@ -11,37 +12,46 @@
         <tbody>
             <% 18.times do |n_mois| %>
                 <% date_parcourue = (@date_depart + n_mois.months) %>
+
                 <% annee = date_parcourue.year %>
                 <% mois = date_parcourue.month %>
                 <% numero_mois = "#{mois<10 ? '0' : ''}#{mois}" %>
                 <% nombre_jours = Time.days_in_month(mois, annee).to_i %>
-                <% couleur_ligne_mois = (Date.today.month==date_parcourue.month) ? "warning" : "default" %>
+                
+                <!-- Chanhe la couleur de la ligne si mois parcouru est le mois actuel -->
+                <% couleur_ligne_mois = ("#{Date.today.month}/#{Date.today.year}"=="#{date_parcourue.month}/#{date_parcourue.year}") ? "warning" : "default" %>
+
                 <tr class=<%= "#{couleur_ligne_mois}" %>>
                     <td>
                         <%= "#{numero_mois}/#{annee}" %>
                     </td>
+                    
                     <% nombre_jours.times do |n_jour| %>
-                        <% records = @absences.where(date: "#{annee}-#{numero_mois}-#{n_jour+1}") %>
-                            <td align="center">
-                                <% if records.empty? %>
-                                    <% 3.times do %>
-                                        <br>
-                                    <% end %>
-                                <% else %>
-                                    <% records.each do |record| %>
-                                        <span class="label label-warning tab-cell"
-                                                data-toggle="tooltip" 
-                                                title="<%= prenom_nom(record.utilisateur) %> - <%= record.type_absence.nom %>">
-                                            <%= initiales(record.utilisateur) %>
-                                        </span>
-                                        <br>
-                                    <% end %>
+                        <td align="center">
+
+                            <!-- Récupère les enregistrements à la date parcourue -->
+                            <% records = @absences.where(date: "#{annee}-#{numero_mois}-#{n_jour+1}") %>
+
+                            <!-- Si aucun enregistrement, on affiche une cellule vide -->
+                            <% if records.empty? %>
+                                <% 3.times do %><br><% end %>
+                            <% else %>
+                                <!-- sinon... -->
+                                <% records.each do |record| %>
+                                    <span class="label label-warning tab-cell"
+                                        data-toggle="tooltip"
+                                        title="
+                                        <%= prenom_nom(record.utilisateur) %> - <%= record.type_absence.nom %>
+                                        ">
+                                        <%= initiales(record.utilisateur) %>
+                                    </span>
+                                    <br>
                                 <% end %>
-                            </td>
-                        <% end %>
+                            <% end %>
+                        </td>
                     <% end %>
                 </tr>
             <% end %>
         </tbody>
-    </table>
+    </table> 
 </div>
