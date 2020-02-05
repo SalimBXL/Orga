@@ -1,39 +1,45 @@
-<% semaine_en_arriere = 6 %>
-<% semaine_en_avant = 4 %>
-<% date_depart = Date.today - semaine_en_arriere.weeks %>
-<% nombre_semaines_a_lire = 52 + semaine_en_arriere + semaine_en_avant %>
 <div class="row grille">
-    <table class="table-condensed table table-bordered table-striped table-responsive">
+
+ <table class="table-condensed table table-bordered table-striped table-responsive">
         <thead>
-        <tr>
-            <th><%= Date.today.year %></th>
-            <th></th>
-        </tr>
-        </thead>
-        
-        <tbody>
-        <% nombre_semaines_a_lire.times do |n_semaine| %>
-            <% semaine_parcourue = (date_depart+n_semaine.weeks) %>
-            <% couleur_ligne_semaine = ("#{Date.today.cweek}-#{Date.today.year}"=="#{semaine_parcourue.cweek}-#{semaine_parcourue.year}") ? "warning" : "default" %>
-            <% numero_semaine = "#{semaine_parcourue.cweek<10 ? '0' : ''}#{semaine_parcourue.cweek}" %>
-            <tr id=<%= "#{semaine_parcourue.year}-W#{numero_semaine}" %> class=<%= "#{couleur_ligne_semaine}" %>>
-                <td><%= "#{numero_semaine}" %></td>
-                <td>
-                    <!-- Liste des semaines utilisateurs attribués -->
-                    <% @semaines.where(numero_semaine: "#{semaine_parcourue.year}-W#{numero_semaine}").each do |s| %>
-                        <% if semaine_parcourue.cweek<Date.today.cweek %>
-                            <span class="label label-default tab-cell">
-                        <% elsif semaine_parcourue.cweek>Date.today.cweek %>
-                            <span class="label label-info tab-cell">
-                        <% else %>
-                            <span class="label label-primary tab-cell">
-                        <% end %>
-                            <%= prenom_nom(s.utilisateur) %>
-                        </span>                       
-                    <% end %>
-                </td>
+            <tr>
+                <th>Semaines</th>
+                <th></th>
             </tr>
-        <% end %>
+        </thead>
+        <tbody>
+            <% 76.times do |n_mois| %>
+                <% date_parcourue = (@date_depart + n_mois.weeks) %>
+
+                <% annee = date_parcourue.year %>
+                <% semaine = date_parcourue.cweek %>
+                <% numero_semaine = "#{annee}-W#{semaine<10 ? '0' : ''}#{semaine}" %>
+                
+                <!-- Change la couleur de la ligne si semaine parcourue est la semaine actuelle -->
+                <% couleur_ligne_semaine = ("#{Date.today.cweek}/#{Date.today.year}"=="#{date_parcourue.cweek}/#{date_parcourue.year}") ? "warning" : "default" %>
+
+                <tr class=<%= "#{couleur_ligne_semaine}" %>>
+                    <td>
+                        <%= "#{numero_semaine}" %>
+                    </td>
+                    <td align="center">
+
+                        <!-- Récupère les enregistrements à la date parcourue -->
+                        <% records = @semaines.where(numero_semaine: "#{numero_semaine}") %>
+                        <% records.each do |record| %>
+                            <% if ("#{Date.today.cweek}/#{Date.today.year}"=="#{date_parcourue.cweek}/#{date_parcourue.year}") %>
+                                <span class="label label-primary tab-cell">
+                            <% elsif (date_parcourue<Date.today) %>
+                                <span class="label label-default tab-cell">
+                            <% else %>
+                                <span class="label label-info tab-cell">
+                            <% end %>
+                                <%= prenom_nom(record.utilisateur) %>
+                            </span>
+                        <% end %>
+                    </td>
+                </tr>
+            <% end %>
         </tbody>
-    </table>
+    </table> 
 </div>

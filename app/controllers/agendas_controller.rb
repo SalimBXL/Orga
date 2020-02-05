@@ -24,7 +24,9 @@ class AgendasController < ApplicationController
 
     # SEMAINES
     def semaines
-        @semaines = Semaine.order(numero_semaine: :desc, slug: :asc).page(params[:page])
+        @date_depart = Date.today.beginning_of_year - 3.months
+        date_fin = Date.today.end_of_year + 3.months
+        @semaines = Semaine.where(date_lundi: @date_depart..date_fin)
     end
 
     # JOBS
