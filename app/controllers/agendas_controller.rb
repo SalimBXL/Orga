@@ -17,8 +17,9 @@ class AgendasController < ApplicationController
 
     # CONGES
     def conges
-        @conges = Conge.order(date: :desc).order(:accord).page(params[:page])
-        @current_conges = Conge.where(date: (Date.today-3.months)..(Date.today+9.month))
+        @date_depart = Date.today.beginning_of_year - 3.months
+        date_fin = Date.today.end_of_year + 3.months
+        @conges = Conge.where(date: @date_depart..date_fin)
     end
 
     # SEMAINES
