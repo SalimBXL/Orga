@@ -1,40 +1,38 @@
-<% semaine_en_arriere = 6 %>
-<% semaine_en_avant = 4 %>
-<% date_depart = Date.today - semaine_en_arriere.weeks %>
-<% nombre_semaines_a_lire = 52 + semaine_en_arriere + semaine_en_avant %>
-
 <div class="row grille">
-    <table class="table-condensed table table-bordered table-striped table-responsive">
+
+ <table class="table-condensed table table-bordered table-striped table-responsive">
         <thead>
-        <tr>
-            <th><%= Date.today.year %></th>
-            <% 5.times do |n| %>
-                <th><%= nom_jour(n+1) %></th>
-            <% end %>
-        </tr>
-        </thead>
-        
-        <tbody>
-        <% nombre_semaines_a_lire.times do |n_semaine| %>
-            <% semaine_parcourue = (date_depart+n_semaine.weeks) %>
-            <% couleur_ligne_semaine = ("#{Date.today.cweek}-#{Date.today.year}"=="#{semaine_parcourue.cweek}-#{semaine_parcourue.year}") ? "warning" : "default" %>
-            <tr class=<%= "#{couleur_ligne_semaine}" %>>
-                <% numero_semaine = "#{semaine_parcourue.cweek<10 ? '0' : ''}#{semaine_parcourue.cweek}" %>
-                <td><%= "#{numero_semaine}" %></td>
-                <% 5.times do |n| %>
-                    <td>
-                        <!-- Liste des semaines utilisateurs attribués -->
-                        <% @jobs.where(numero_jour: "#{n+1}").each do |j| %>
-                            <% if j.semaine.numero_semaine == "#{semaine_parcourue.year}-W#{numero_semaine}" %>
-                                <span class="label label-default tab-cell">
-                                    <%= prenom_nom(j.semaine.utilisateur) %>
-                                </span>
-                            <% end %>
-                        <% end %>
-                    </td>
+            <tr>
+                <th>Mois</th>
+                <% 31.times do |n_jour| %>
+                    <th><%= n_jour+1 %></th>
                 <% end %>
             </tr>
-        <% end %>
+        </thead>
+        <tbody>
+            <% 18.times do |n_mois| %>
+
+                <% date_parcourue = (@date_depart + n_mois.months) %>
+                <% annee = date_parcourue.year %>
+                <% mois = date_parcourue.month %>
+                <% numero_mois = "#{mois<10 ? '0' : ''}#{mois}" %>
+                <% nombre_jours = Time.days_in_month(mois, annee).to_i %>
+
+                <% 2.times do |bat| %>
+                    <%= render 'grille_jobs_ligne', 
+                        date_parcourue: date_parcourue, 
+                        numero_mois: numero_mois,
+                        annee: annee,
+                        mois: mois,
+                        numero_mois: numero_mois,
+                        nombre_jours: nombre_jours,
+                        AmPm: bat
+                    %>
+                <% end %>
+
+                
+
+            <% end %>
         </tbody>
-    </table>
+    </table> 
 </div>

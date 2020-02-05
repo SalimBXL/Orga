@@ -51,7 +51,7 @@ class JobsController < ApplicationController
     def create
         if params[:job][:numero_jour] != "0"
             
-            if Job.exists?(semaine_id: params[:job][:semaine_id], numero_jour: params[:job][:numero_jour])
+            if Job.exists?(semaine_id: params[:job][:semaine_id], numero_jour: params[:job][:numero_jour], am_pm: params[:job][:am_pm])
                 # JOB EXISTE...
                 flash[:alert] = "Job existe déjà..."
                 redirect_to jobs_path

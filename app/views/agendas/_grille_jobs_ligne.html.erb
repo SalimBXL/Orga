@@ -1,0 +1,28 @@
+
+<!-- Change la couleur de la ligne si mois parcouru est le mois actuel -->
+<% couleur_ligne_mois = ("#{Date.today.month}/#{Date.today.year}"=="#{date_parcourue.month}/#{date_parcourue.year}") ? "warning" : "default" %>
+
+<tr class=<%= "#{couleur_ligne_mois}" %>>
+    <td><%= "#{numero_mois}/#{annee}" %></td>
+    <% nombre_jours.times do |n_jour| %>
+        <% numero_jour = (date_parcourue+n_jour).cwday %>
+        <% numero_semaine = "#{annee}-W#{(date_parcourue+n_jour).cweek<10 ? "0" : ""}#{(date_parcourue+n_jour).cweek}" %>
+        <% couleur_ligne_jour = ("#{Date.today.day}"=="#{n_jour+1}") ? "warning" : "default" %>
+        <% key = "#{numero_semaine}_#{numero_jour}" %>
+        <td align="center" class="<%= "#{couleur_ligne_jour}" %>">                            
+            <% if @jobs.key?(key) %>
+                <% @jobs[key].each do |items| %>
+                    <% items.where(am_pm: AmPm).each do |job| %>
+                        <span class="label label-<%= job.am_pm? ? "info" : "primary" %> tab-cell"
+                            data-toggle="tooltip"
+                            title="
+                                <%= prenom_nom(job.semaine.utilisateur) %> <%= job.note.blank? ? "": " - #{job.note}" %>
+                            ">
+                            <%= initiales(job.semaine.utilisateur) %>
+                        </span>
+                    <% end %>
+                <% end %>
+            <% end %>
+        </td>
+    <% end %>
+</tr>
