@@ -1,0 +1,77 @@
+
+<!-- Change la couleur de la ligne si mois parcouru est le mois actuel -->
+<% couleur_ligne_mois = ("#{Date.today.month}/#{Date.today.year}"=="#{date_parcourue.month}/#{date_parcourue.year}") ? "warning" : "default" %>
+
+<tr class=<%= "#{couleur_ligne_mois}" %>>
+    <td>
+
+        <!-- Affiche le numéro du mois si matin -->
+        <% if bat==0 %>
+            <%= "#{numero_mois}/#{annee}" %>
+            <% else %>
+                <br>
+            <% end %>
+    </td>
+
+
+    <% nombre_jours.times do |n_jour| %>
+
+        <!-- Initialisations de variables -->
+        <% date_jour = (date_parcourue+n_jour) %>
+        <% numero_jour = date_jour.cwday %>
+        <% numero_semaine = "#{annee}-W#{date_jour.cweek<10 ? "0" : ""}#{date_jour.cweek}" %>
+        <% couleur_ligne_jour = ("#{Date.today.day}"=="#{n_jour+1}") ? "warning" : "default" %>
+        <% key = "#{numero_semaine}_#{numero_jour}" %>
+
+        <!-- Affiche la cellule -->
+        <td align="center" class="<%= "#{couleur_ligne_jour}" %>">   
+
+
+            <!-- Si utilisateur est absent... -->
+            <% if @absences.exists?(date: date_jour) %>
+                <% labelle = "warning" %>
+                <% objet_utilisateur = @absences.where(date: date_jour) %>
+                <% objet_utilisateur.each do |absence| %>
+                    <% infobulle = "#{prenom_nom(absence.utilisateur)} - #{absence.type_absence.nom}" %>
+                    <span class="label label-<%= labelle %> tab-cell"
+                        data-toggle="tooltip"
+                        title="<%= infobulle %>">
+                        <%= initiales(absence.utilisateur) %>
+                    </span>
+                <% end %>
+            
+            <!-- Si utilisateur est en congé... -->
+            <% elsif @conges.exists?(date: date_jour) %>
+                <% labelle = "success" %>
+                <% objet_utilisateur = @conges.where(date: date_jour) %>
+                <% objet_utilisateur.each do |conge| %>
+                    <% infobulle = "#{prenom_nom(conge.utilisateur)}" %>
+                    <span class="label label-<%= labelle %> tab-cell"
+                        data-toggle="tooltip"
+                        title="<%= infobulle %>">
+                        <%= initiales(conge.utilisateur) %>
+                    </span>
+                <% end %>
+
+            <% end %>
+
+
+
+            <% if @jobs.key?(key) %>
+                <% @jobs[key].each do |items| %>
+                    <% items.where(am_pm: bat).each do |job| %>
+                        <% infobulle = "#{prenom_nom(job.semaine.utilisateur)}#{formatWorkListe(job.working_lists)}" %>
+                        <% labelle = job.am_pm? ? "info" : "primary" %>
+                        <% objet_utilisateur = job.semaine.utilisateur %>
+                        <span class="label label-<%= labelle %> tab-cell"
+                            data-toggle="tooltip"
+                            title="<%= infobulle %>">
+                            <%= initiales(objet_utilisateur) %>
+                        </span>
+
+                    <% end %>
+                <% end %>
+            <% end %>
+        </td>
+    <% end %>
+</tr>

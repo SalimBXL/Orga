@@ -36,4 +36,12 @@ module ApplicationHelper
             nom_jour = nil
         end
     end
+
+    def formatWorkListe(liste)
+        etiquette = ""
+        liste.each do |item|
+            etiquette += ", #{item.work.code}"
+        end
+        return etiquette
+    end
 end

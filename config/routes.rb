@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get "agendas/conges", to: "agendas#conges"
   get "agendas/semaines", to: "agendas#semaines"
   get "agendas/jobs", to: "agendas#jobs"
-  #get "agendas/working_lists", to: "agendas#working_lists"
+  get "agendas/jours", to: "agendas#jours"
 
 
   ##############
