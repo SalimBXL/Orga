@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get "agendas/conges", to: "agendas#conges"
   get "agendas/semaines", to: "agendas#semaines"
   get "agendas/jobs", to: "agendas#jobs"
-  get "agendas/working_lists", to: "agendas#working_lists"
+  #get "agendas/working_lists", to: "agendas#working_lists"
 
 
   ##############
@@ -72,19 +72,17 @@ Rails.application.routes.draw do
   resources :absences, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
   
 
-  ###################
+  ###############
   #   Semaines  #
-  ###################
+  ###############
   resources :semaines, only: [ :show, :index, :new, :edit, :create, :update, :destroy ], param: :identifier
-  get "semaines_this_week", to: "semaines#this_week"
   get "semaines_utilisateur/:id", to: "semaines#semaines_utilisateur"
 
 
-  ###################
+  ###########
   #   Jobs  #
-  ###################
+  ###########
   resources :jobs, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
-  get "jobs_this_week", to: "jobs#this_week"
   get "jobs_semaine/:id", to: "jobs#jobs_semaine"
 
 
@@ -94,7 +92,6 @@ Rails.application.routes.draw do
   resources :working_lists, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
   get "working_lists_job/:id", to: "working_lists#working_lists_job"
   get "working_lists_work/:id", to: "working_lists#working_lists_work"
-  get "working_lists_this_week", to: "working_lists#this_week"
 
   ############
   #   Works  #
