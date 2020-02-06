@@ -2,8 +2,8 @@
 
  <table class="table-condensed table table-bordered table-striped table-responsive">
         <thead>
-            <tr>
-                <th>Mois</th>
+            <tr align="center">
+                <th align="center">Mois</th>
                 <% 31.times do |n_jour| %>
                     <th><%= n_jour+1 %></th>
                 <% end %>
@@ -26,7 +26,7 @@
                         mois: mois,
                         numero_mois: numero_mois,
                         nombre_jours: nombre_jours,
-                        AmPm: bat
+                        bat: bat
                     %>
                 <% end %>
 
