@@ -2,22 +2,35 @@
 
  <table class="table-condensed table table-bordered table-striped table-responsive">
         <thead>
-            <tr align="center">
-                <th align="center">Mois</th>
-                <% 31.times do |n_jour| %>
-                    <th><%= n_jour+1 %></th>
-                <% end %>
-            </tr>
+
+            <% unless @vue_semaine %>
+                <tr>
+                    <th>Mois</th>
+                    <% 31.times do |n_jour| %>
+                        <th><%= n_jour+1 %></th>
+                    <% end %>
+                </tr>
+            <% else %>
+                <tr>
+                    <th>Mois: <%= @date_depart.month %></th>
+                    <% 5.times do |n_jour| %>
+                        <th><%= (@date_depart+n_jour).day %></th>
+                    <% end %>
+                </tr>
+            <% end %>
+
         </thead>
         <tbody>
-            <% 18.times do |n_mois| %>
+
+            <% nombre = @vue_semaine ? 1 : 18 %>
+            <% nombre.times do |n_mois| %>
 
                 <!-- Initialisations de variables -->
                 <% date_parcourue = (@date_depart + n_mois.months) %>
                 <% annee = date_parcourue.year %>
                 <% mois = date_parcourue.month %>
                 <% numero_mois = "#{mois<10 ? '0' : ''}#{mois}" %>
-                <% nombre_jours = Time.days_in_month(mois, annee).to_i %>
+                <% nombre_jours = @vue_semaine ? 5 : Time.days_in_month(mois, annee).to_i %>
 
                 <!-- Affichage de ligne -->
                 <% 2.times do |bat| %>

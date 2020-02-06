@@ -3,12 +3,17 @@
  <table class="table-condensed table table-bordered table-striped table-responsive">
         <thead>
             <tr>
-                <th>Semaines</th>
+                <% unless @vue_semaine %>
+                    <th>Semaines</th>
+                <% else %>
+                    <th><%= "#{@date_depart} / #{@date_fin}" %></th>
+                <% end %>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            <% 76.times do |n_mois| %>
+            <% nombre = @vue_semaine ? 1 : 76 %>
+            <% nombre.times do |n_mois| %>
                 <% date_parcourue = (@date_depart + n_mois.weeks) %>
 
                 <% annee = date_parcourue.year %>

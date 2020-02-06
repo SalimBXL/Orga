@@ -44,4 +44,8 @@ module ApplicationHelper
         end
         return etiquette
     end
+
+    def numeroSemaineAujourdhui
+        "#{Date.today.year}-W#{Date.today.cweek<10 ? "0" : ""}#{Date.today.cweek}" 
+    end
 end
