@@ -7,9 +7,12 @@ Rails.application.routes.draw do
   ###########
   namespace :api do
     get 'ping' => 'table_tennis#ping'
-    get 'utilisateurs/:id' => 'utilisateurs#show'
+    
+    resources :semaines, only: [ :show, :index ]
+    get "semaines/:id/utilisateurs", to: "semaines#utilisateurs"
 
-    #resources :utilisateurs, only: [ :show ]
+    resources :utilisateurs, only: [ :show, :index ]
+    
   end
 
 
