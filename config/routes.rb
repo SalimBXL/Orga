@@ -1,4 +1,28 @@
 Rails.application.routes.draw do
+  
+  ###########
+  ###########
+  ##  API  ##
+  ###########
+  ###########
+  namespace :api do
+    get 'ping' => 'table_tennis#ping'
+    get 'utilisateurs/:id' => 'utilisateurs#show'
+
+    #resources :utilisateurs, only: [ :show ]
+  end
+
+
+##############################################################################
+
+
+
+  #####################
+  #####################
+  ##   APPLICATION   ##
+  #####################
+  #####################
+
 
   ################
   #   Accueils   #
