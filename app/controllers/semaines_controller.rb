@@ -30,7 +30,7 @@ class SemainesController < ApplicationController
     #############
     def new
         @semaine = Semaine.new
-        @utilisateurs = Utilisateur.order(groupe_id: :asc, prenom: :asc, nom: :asc)
+        @utilisateurs = getUtilisateurs
     end
 
 
@@ -77,6 +77,7 @@ class SemainesController < ApplicationController
     #   EDIT    #
     #############
     def edit
+        @utilisateurs = getUtilisateurs
     end
 
     ##############
@@ -89,6 +90,10 @@ class SemainesController < ApplicationController
 
 
     private 
+
+    def getUtilisateurs
+        Utilisateur.order(groupe_id: :asc, prenom: :asc, nom: :asc)
+    end
 
     def semaine_params
         params.require(:semaine).permit(:numero_semaine, :date_lundi, :note, :utilisateur_id)
