@@ -1,6 +1,11 @@
 <h1>AGENDAS</h1>
 <p>Liste des différents agendas disponibles</p>
 
+<h2>Aujourd'hui</h2>
+<ul>
+    <li><%= link_to "Agenda complet du jour", agendas_jour_path %></li>
+</ul>
+
 <h2>Cette semaine</h2>
 <ul>
     <li><%= link_to "Absences", agendas_absences_path(:semaine => "#{@numero_semaine_today}") %></li>

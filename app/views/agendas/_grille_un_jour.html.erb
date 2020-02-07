@@ -1,0 +1,25 @@
+<div class="row grille">
+
+ <table class="table-condensed table table-bordered table-striped table-responsive">
+        <thead>
+            <tr>
+                <th>Utilisateurs</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @jobs.each do |job| %>
+                <tr>
+                    <td>
+                        <%= prenom_nom(job.semaine.utilisateur) %>
+                    </td>
+                    <td>
+                        <% job.working_lists.each do |wl| %>
+                            <%= wl.work.nom %><br>
+                        <% end %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table> 
+</div>

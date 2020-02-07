@@ -42,6 +42,18 @@ class AgendasController < ApplicationController
         end
     end
 
+    # JOUR (pour un seul jour...)
+    def un_jour
+        @jobs = Array.new
+        numero_jour_aujourdhui = Date.today.cwday
+        numero_semaine = format_numero_semaine(Date.today.year, Date.today.cweek)
+        Semaine.where(numero_semaine: numero_semaine).each do |semaine|
+            semaine.jobs.where(numero_jour: numero_jour_aujourdhui).each do |job|
+                @jobs << job
+            end
+        end
+    end
+
     # JOURS
     def jours
         @jobs = Hash.new
@@ -75,6 +87,11 @@ class AgendasController < ApplicationController
             @date_depart = Date.today.beginning_of_year - 3.months
             @date_fin = Date.today.end_of_year + 3.months
         end
+    end
+
+
+    def format_numero_semaine(annee, numero_semaine)
+        numero_semaine<10 ? "#{annee}-W0#{numero_semaine}" : "#{annee}-W#{numero_semaine}"
     end
 
 end
