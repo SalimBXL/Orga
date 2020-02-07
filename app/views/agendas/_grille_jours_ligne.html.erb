@@ -60,7 +60,7 @@
             <% if @jobs.key?(key) %>
                 <% @jobs[key].each do |items| %>
                     <% items.where(am_pm: bat).each do |job| %>
-                        <% infobulle = "#{prenom_nom(job.semaine.utilisateur)}#{formatWorkListe(job.working_lists)}" %>
+                        <% infobulle = "#{prenom_nom(job.semaine.utilisateur)}#{formatWorkListe(job.working_lists)} #{(job.note.blank?||job.note.empty?) ? "" : " ** #{job.note}"}" %>
                         <% labelle = job.am_pm? ? "info" : "primary" %>
                         <% objet_utilisateur = job.semaine.utilisateur %>
                         <span class="label label-<%= labelle %> tab-cell"
