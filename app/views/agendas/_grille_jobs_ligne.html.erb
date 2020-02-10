@@ -24,7 +24,10 @@
                             title="
                                 <%= prenom_nom(job.semaine.utilisateur) %> <%= job.note.blank? ? "": " - #{job.note}" %>
                             ">
-                            <%= initiales(job.semaine.utilisateur) %>
+                            <%= 
+                                #initiales(job.semaine.utilisateur)
+                                prenom_nom(job.semaine.utilisateur)
+                            %>
                         </span>
                     <% end %>
                 <% end %>

@@ -36,12 +36,16 @@
                     <span class="label label-<%= labelle %> tab-cell"
                         data-toggle="tooltip"
                         title="<%= infobulle %>">
-                        <%= initiales(absence.utilisateur) %>
+                        <%= 
+                            prenom_nom(absence.utilisateur)
+                        %>
                     </span>
+                    <br>
                 <% end %>
+            <% end %>
             
             <!-- Si utilisateur est en congé... -->
-            <% elsif @conges.exists?(date: date_jour) %>
+            <% if @conges.exists?(date: date_jour) %>
                 <% labelle = "success" %>
                 <% objet_utilisateur = @conges.where(date: date_jour) %>
                 <% objet_utilisateur.each do |conge| %>
@@ -49,14 +53,14 @@
                     <span class="label label-<%= labelle %> tab-cell"
                         data-toggle="tooltip"
                         title="<%= infobulle %>">
-                        <%= initiales(conge.utilisateur) %>
+                        <%= 
+                            prenom_nom(conge.utilisateur)
+                        %>
                     </span>
+                    <br>
                 <% end %>
-
             <% end %>
-
-
-
+            
             <% if @jobs.key?(key) %>
                 <% @jobs[key].each do |items| %>
                     <% items.where(am_pm: bat).each do |job| %>
@@ -66,9 +70,11 @@
                         <span class="label label-<%= labelle %> tab-cell"
                             data-toggle="tooltip"
                             title="<%= infobulle %>">
-                            <%= initiales(objet_utilisateur) %>
+                            <%= 
+                                prenom_nom(objet_utilisateur)
+                            %>
                         </span>
-
+                        <br>
                     <% end %>
                 <% end %>
             <% end %>
