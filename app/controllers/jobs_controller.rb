@@ -40,41 +40,45 @@ class JobsController < ApplicationController
     #   CREATE   #
     ##############
     def create
-        if params[:job][:numero_jour] != "0"
-            
-            if Job.exists?(semaine_id: params[:job][:semaine_id], numero_jour: params[:job][:numero_jour], am_pm: params[:job][:am_pm])
-                # JOB EXISTE...
-                flash[:alert] = "Job existe déjà..."
-                redirect_to jobs_path
-            else
-                @job = Job.create(job_params)
-                if @job.save
-                    flash[:notice] = "Job créé avec succès"
-                    redirect_to jobs_path
-                    return
-                else
-                    render :new
-                    return
+        jours = Array.new
+        unless (params[:job][:numeros].blank? || params[:job][:numeros].nil? || params[:job][:numeros].count<2)
+            params[:job][:numeros].each do |n|
+                if (n.length>0)
+                    jours << (n.to_i)
                 end
             end
         else
-            5.times do |n|
-                @job = Job.create(job_params)
-                @job.numero_jour = (n+1)
-                if Job.exists?(semaine_id: @job.semaine_id, numero_jour: @job.numero_jour)
-                    # JOB EXISTE...
-                else
-                    if @job.save
-                        # ok
-                    else
-                        render :new
-                        return
-                    end
+            5.times do |j|
+                jours << (j+1)
+            end
+        end
+        type_erreur = 0
+        message = ""
+        jours.each do |numero|
+            @job = Job.create(job_params)
+            if Job.exists?(semaine_id: params[:job][:semaine_id], numero_jour: numero, am_pm: params[:job][:am_pm])
+                message += "Jour #{numero} - Job pour jour #{numero} existe déjà... \n"
+                type_erreur = 1
+                #redirect_to jobs_path
+            else
+                @job.numero_jour = numero.to_i
+                if !@job.save
+                    message = "Problème lors de l'enregistrement du job pour le jour #{numero}..."
+                    type_erreur = 2
+                    #render :new
+                    #return
                 end
             end
-            flash[:notice] = "Jobs créés avec succès"
+        end
+        if type_erreur == 1
+            flash[:alert] = message
+            render :new
+        elsif type_erreur == 2
+            flash[:alert] = message
             redirect_to jobs_path
-            return
+        else
+            flash[:notice] = "Job(s) créé(s) avec succès"
+            redirect_to jobs_path
         end
     end
 
@@ -108,7 +112,7 @@ class JobsController < ApplicationController
     private 
 
     def job_params
-        params.require(:job).permit(:numero_jour, :am_pm, :note, :semaine_id)
+        params.require(:job).permit(:numero_jour, :am_pm, :note, :semaine_id, :numeros)
     end
 
     def find_job

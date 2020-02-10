@@ -27,22 +27,14 @@
     </p>
 
     <!-- Jour -->
-    <% jours = {1 => "Lundi",
-                2 => "Mardi",
-                3 => "Mercredi",
-                4 => "Jeudi",
-                5 => "Vendredi"
-        }
-    %>
     <p>
         <%= form.label :numero_jour %><br>
-        <% @job.numero_jour = 0 %>
-        <%= form.select(:numeros, 
-                jours.collect {|key, value| [value , key]}, 
-                { }, 
-                { :multiple => true, :size => 5 }
-            ) 
-        %>
+        <%= form.select(:numero_jour) do %>
+            <%= select_option_tag("Toute la semaine", 0, @job.semaine_id) %>
+            <% 5.times do |l| %>
+                <%= select_option_tag("#{l+1} - #{nom_jour(l+1)}", (l+1), @job.numero_jour) %>
+            <% end %>
+        <% end %>
     </p>
 
     <!-- AM/PM -->
