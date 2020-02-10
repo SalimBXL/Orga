@@ -1,5 +1,5 @@
-<h1>JOBS SEMAINE</h1>
+<h1>JOBS SEMAINE <%= @semaine.slug %></h1>
 <div id="jobs">
     <%= render 'jobs' %>
 </div>
-<p><%= link_to "[Nouveau job]", new_job_path %></p>
+<p><%= link_to "[Nouveau job pour semaine #{@semaine.slug}]", "#{new_job_path}/#{@semaine.id}" %></p>

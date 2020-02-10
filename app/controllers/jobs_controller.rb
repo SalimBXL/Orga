@@ -29,14 +29,8 @@ class JobsController < ApplicationController
     #    NEW    #
     #############
     def new
-        puts "**********"
-        puts "**********"
-        puts "********** PARAMS : #{params} **********"
-        puts "**********"
-        puts "**********"
         @job = Job.new
         unless params[:id].blank? || params[:id].nil?
-            puts "********** NOT BLANK NOR NIL **********"
             @job.semaine_id = params[:id].to_i
         end
     end
