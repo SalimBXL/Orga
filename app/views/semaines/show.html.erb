@@ -1,20 +1,15 @@
 <h1>
-    <%= @semaine.numero_semaine %>
+    <%= @semaine.slug %>
 </h1>
 <p>
-    <%= @semaine.date_lundi %>
+    Date du lundi : <%= @semaine.date_lundi %>
 </p>
 <p>
-    <%= prenom_nom(@semaine.utilisateur) %>
-</p>
-<p>
-    <%= @semaine.slug %>
-</p>
-<p>
-    <%= @semaine.note %>
+    Notes : <%= @semaine.note %>
 </p>
 <p>
     <%= link_to " [Edit] ", edit_semaine_path(@semaine) %>
+    <%= link_to " [Jobs] ", "/jobs_semaine/#{@semaine.id}" %>
 </p>
 
 <hr>
