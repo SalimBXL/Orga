@@ -30,7 +30,6 @@ class SemainesController < ApplicationController
     #    NEW    #
     #############
     def new
-puts "********** ENTER NEW **********"
         @semaine = Semaine.new
         @utilisateurs = getUtilisateurs
         @groupes = Groupe.order(:nom)

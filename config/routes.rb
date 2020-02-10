@@ -113,6 +113,7 @@ Rails.application.routes.draw do
   ###########
   resources :jobs, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
   get "jobs_semaine/:id", to: "jobs#jobs_semaine"
+  get "jobs/new/:id", to: "jobs#new"
 
 
   ###################
