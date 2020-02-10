@@ -1,3 +1,6 @@
+<% if semaine.numero_semaine != @numero_semaine_precedente %>
+    <tr><td colspan="7"><hr></td></tr>
+<% end %>
 <tr id="semaine_<%= semaine.id %>">
     <td align=left><%= semaine.numero_semaine %> | </td>
     <td align=center><%= semaine.date_lundi %> | </td>
@@ -14,4 +17,5 @@
         %>
         <%= link_to " [Jobs] ", "/jobs_semaine/#{semaine.id}" %>
     </td>
+    <% @numero_semaine_precedente = semaine.numero_semaine %>
 </tr>

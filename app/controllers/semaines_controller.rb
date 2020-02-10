@@ -6,6 +6,7 @@ class SemainesController < ApplicationController
     #############
     def index
         @semaines = Semaine.order(numero_semaine: :desc, slug: :asc).page(params[:page])
+        @numero_semaine_precedente = -1
     end
 
 
