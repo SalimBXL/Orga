@@ -29,8 +29,10 @@ class SemainesController < ApplicationController
     #    NEW    #
     #############
     def new
+puts "********** ENTER NEW **********"
         @semaine = Semaine.new
         @utilisateurs = getUtilisateurs
+        @groupes = Groupe.order(:nom)
     end
 
 
@@ -38,22 +40,44 @@ class SemainesController < ApplicationController
     #   CREATE   #
     ##############
     def create
-        @semaine = Semaine.create(semaine_params)
-        semaine_courrante_si_vide
-        fait_un_lundi
-        format_numero_semaine
-
-        if !duo_semaine_utilisateur_unique?
-            flash[:danger] = "Il existe déjà une semaine pour cet utilisateur."
-            redirect_to new_semaine_path
-            return
-        end
-
-        if @semaine.save
-            flash[:notice] = "Semaine créée avec succès"
-            redirect_to semaines_path
+        utilisateurs = Array.new
+        unless params[:semaine][:utilisateurs]
+            utilisateurs << params[:semaine][:utilisateur_id]
         else
+            params[:semaine][:utilisateurs].each do |u|
+                unless u.blank?
+                    utilisateurs << u
+                end
+            end
+        end
+        type_erreur = 0
+        message_erreur = ""
+        utilisateurs.each do |utilisateur_id|
+            @semaine = Semaine.create(semaine_params)
+            @semaine.utilisateur_id = utilisateur_id
+            semaine_courrante_si_vide
+            fait_un_lundi
+            format_numero_semaine
+            if !duo_semaine_utilisateur_unique?
+                type_erreur = 1
+                message_erreur += "Il existe déjà une semaine pour l'utilisateur ID #{@semaine.utilisateur_id} \n"
+            else 
+                if !@semaine.save
+                    type_erreur = 2
+                    message_erreur += "Problème lors de la sauvegarde en base pour l'utilisateur ID #{@semaine.utilisateur_id} \n"
+                end
+            end
+        end
+        if type_erreur!=0
+            flash[:alert] = message_erreur
+        end
+        if type_erreur == 1
+            redirect_to new_semaine_path
+        elsif type_erreur == 2
             render :new
+        else
+            flash[:notice] = "Semaine(s) créée(s) avec succès"
+            redirect_to semaines_path
         end
     end
 
@@ -96,7 +120,7 @@ class SemainesController < ApplicationController
     end
 
     def semaine_params
-        params.require(:semaine).permit(:numero_semaine, :date_lundi, :note, :utilisateur_id)
+        params.require(:semaine).permit(:numero_semaine, :date_lundi, :note, :utilisateur_id, :utilisateurs)
     end
 
     def find_semaine

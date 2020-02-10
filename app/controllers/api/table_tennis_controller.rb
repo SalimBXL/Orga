@@ -1,5 +1,5 @@
 class Api::TableTennisController < ApiController
-    def ping
-        render json: {response: 'pong'}
+    def ping(texte = 'Into API Pong !')
+        render json: {response: texte}
     end
 end

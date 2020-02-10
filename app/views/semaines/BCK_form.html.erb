@@ -21,9 +21,12 @@
     <!-- Utilisateur -->
     <p>
         <%= form.label :utilisateur_id %><br>
-        <%= form.select(:utilisateurs, @utilisateurs.collect {|p| [ "[#{@groupes.where(id: p.groupe_id).first.nom}] #{prenom_nom(p)}", p.id ] }, 
-                                           { }, 
-                                           { :multiple => true, :size => 10 }) %>
+        <%= form.select(:utilisateur_id) do %>
+            <%= select_option_tag("", nil, @semaine.utilisateur_id) %>
+            <% @utilisateurs.each do |l| %>
+                <%= select_option_tag("[#{l.groupe.nom}] #{prenom_nom(l)}", l.id, @semaine.utilisateur_id) %>
+            <% end %>
+        <% end %>
     </p>
 
     <!-- Note -->

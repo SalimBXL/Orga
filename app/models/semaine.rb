@@ -6,6 +6,7 @@ class Semaine < ApplicationRecord
     has_many :jobs, dependent: :destroy
     validates_associated :jobs
     
+    
     private
 
     def should_set_slug?
