@@ -1,13 +1,11 @@
-<p><%= paginate @lieus, remote: true %></p>
-<table>
-    <tr>
-        <th>Nom</th>
-        <th>Adresse</th>
-        <th>Téléphone</th>
-        <th>Note</th>
-        <th></th>
-    </tr>
-    <%= render @lieus %>
-</table>
-
-<p><%= paginate @lieus, remote: true %></p>
+ <div clas="container">
+    <div class="row">
+        <%= paginate @lieus, remote: true %>
+    </div>
+    <div class="row">
+        <%= render @lieus %>
+    </div>
+    <div class="row">
+        <%= paginate @lieus, remote: true %>
+    </div>
+</div>

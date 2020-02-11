@@ -1,5 +1,12 @@
 <h1>LIEUX</h1>
-<div id="lieus">
-    <%= render 'lieus' %>
+<div class="container">
+    <div class="row">
+        <%= link_to "[Nouveau lieu]", new_lieu_path %>
+    </div>
+    <div class="row" id="lieus">
+        <%= render 'lieus' %>
+    </div>
+    <div class="row">
+        <p><%= link_to "[Nouveau lieu]", new_lieu_path %></p>
+    </div>
 </div>
-<p><%= link_to "[Nouveau lieu]", new_lieu_path %></p>

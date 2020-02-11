@@ -1,16 +1,20 @@
-<tr id="lieu_<%= lieu.id %>">
-    <td><%= lieu.nom %></td>
-    <td><%= lieu.adresse %></td>
-    <td><%= lieu.phone %></td>
-    <td><%= lieu.note %></td>
-    <td>
-        <%= link_to " [Show] ", lieu_path(lieu) %>
-        <%= link_to " [Edit] ", edit_lieu_path(lieu) %>
-        <%= link_to " [Delete] ", lieu_path(lieu), 
-            method: :delete,
-            remote: true,
-            data: { confirm: "Delete #{lieu.nom} ?" } 
-        %>
-        <%= link_to " [Services] ", "/services_lieu/#{lieu.id}" %>
-    </td>
-</tr>
+<div class="col-sm-4" id="lieu_<%= lieu.id %>">
+        <h3><%= lieu.nom %></h3>
+        <div class="well well-sm">
+            <p>
+                <%= lieu.adresse %><br>
+                <%= lieu.phone %><br>
+                <%= lieu.note %>
+            </p>
+            <p>
+                <%= link_to " [Show] ", lieu_path(lieu) %>
+                <%= link_to " [Edit] ", edit_lieu_path(lieu) %>
+                <%= link_to " [Delete] ", lieu_path(lieu), 
+                    method: :delete,
+                    remote: true,
+                    data: { confirm: "Delete #{lieu.nom} ?" } 
+                %>
+                <%= link_to " [Services] ", "/services_lieu/#{lieu.id}" %>
+            </p>
+        </div>
+</div>
