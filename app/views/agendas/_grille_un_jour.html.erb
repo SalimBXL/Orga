@@ -8,18 +8,28 @@
             </tr>
         </thead>
         <tbody>
-            <% @jobs.each do |job| %>
+            
+            <% @jobs.keys.each do |key| %>
                 <tr>
+                    <td><%= prenom_nom(key) %></td>
                     <td>
-                        <%= prenom_nom(job.semaine.utilisateur) %>
+                        <% @jobs[key].each do |job| %>
+                            <% wls = job.working_lists %>
+                            <% if wls.count<1 %>
+                                <em>Aucune attribution pour ce job.</em>
+                            <% else %>
+                                <% wls.each do |wl| %>
+                                    <%= wl.work.code %>
+                                <% end %>
+                            <% end %>
+                        <% end %>
                     </td>
                     <td>
-                        <% job.working_lists.each do |wl| %>
-                            <%= wl.work.nom %><br>
-                        <% end %>
+
                     </td>
                 </tr>
             <% end %>
+                
         </tbody>
     </table> 
 </div>

@@ -49,7 +49,7 @@
                 <% labelle = "success" %>
                 <% objet_utilisateur = @conges.where(date: date_jour) %>
                 <% objet_utilisateur.each do |conge| %>
-                    <% infobulle = "#{prenom_nom(conge.utilisateur)}" %>
+                    <% infobulle = "#{prenom_nom(conge.utilisateur)} - #{conge.remarque}" %>
                     <span class="label label-<%= labelle %> tab-cell"
                         data-toggle="tooltip"
                         title="<%= infobulle %>">

@@ -44,17 +44,23 @@ class AgendasController < ApplicationController
 
     # JOUR (pour un seul jour...)
     def un_jour
-        @jobs = Array.new
+        @jobs = Hash.new
         numero_jour_aujourdhui = Date.today.cwday
         numero_semaine = format_numero_semaine(Date.today.year, Date.today.cweek)
-        Semaine.where(numero_semaine: numero_semaine).each do |semaine|
-            semaine.jobs.where(numero_jour: numero_jour_aujourdhui).each do |job|
-                @jobs << job
+        semaines = Semaine.where(numero_semaine: numero_semaine)
+        semaines.each do |semaine|
+            jobs = Job.where(semaine: semaine, numero_jour: numero_jour_aujourdhui).order(:am_pm)
+            jobs.each do |job|
+                key = semaine.utilisateur
+                unless @jobs.key?(key)
+                    @jobs[key] = []
+                end
+                @jobs[key] << job
             end
         end
     end
 
-    # JOURS
+    # JOURS (pour PLUSIEURS jours...)
     def jours
         @jobs = Hash.new
         @absences = Absence.where(date: @date_depart..@date_fin)
