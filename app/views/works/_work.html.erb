@@ -1,5 +1,6 @@
 <tr id="work_<%= work.id %>">
-    <td><%= work.nom %></td>
+    <td colspan="2"><strong><%= work.code %></strong> </td>
+    <td> <%= work.nom %></td>
     <td><%= work.description %></td>
     <td><%= work.groupe.nom unless work.groupe.nil? %></td>
     <td><%= work.classe.nom unless work.classe.nil? %></td>

@@ -3,4 +3,4 @@
 <div id="working_lists">
     <%= render 'working_lists' %>
 </div>
-<p><%= link_to "[Nouveau working_list]", new_working_list_path %></p>
+<p><%= link_to "[Nouveau working_list]", "#{new_working_list_path}/#{@job.id}" %></p>

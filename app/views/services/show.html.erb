@@ -2,11 +2,13 @@
     <%= @service.nom %>
 </h1>
 <p>
-    <%= @service.lieu.nom %><br>
-    <%= @service.lieu.phone %>
+    <strong>Lieu :</strong> <%= @service.lieu.nom %>
 </p>
 <p>
-    <%= @service.description %>
+    <strong>Téléphone :</strong> <%= @service.lieu.phone %>
+</p>
+<p>
+    <strong>Note(s) :</strong> <%= @service.description %>
 </p>
 
 <p>

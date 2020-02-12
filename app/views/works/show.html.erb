@@ -1,8 +1,21 @@
 <h1>
     <%= @work.nom %>
 </h1>
+
 <p>
-    <%= @work.description %>
+    <strong>Code : </strong> <%= @work.code %>
+</p>
+
+<p>
+    <strong>Classe : </strong> <%= @work.classe.nom %>
+</p>
+
+<p>
+    <strong>Groupe : </strong> <%= @work.groupe.nom %>
+</p>
+
+<p>
+    <strong>Description : </strong> <%= @work.description %> 
 </p>
 
 <p>

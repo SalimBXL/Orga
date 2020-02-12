@@ -1,18 +1,21 @@
 <h1>
-    #<%= @working_list.id %>
+    Working Liste #<%= @working_list.id %>
 </h1>
 <p>
-    Semaine : <%= @working_list.job.semaine.slug %><br>
-    Jour : <%= @working_list.job.numero_jour %><br>
-    AM/PM : <%= am_pm(@working_list.job.am_pm) %>
+    <strong>Job #<%= @working_list.job.id %></strong>
+</p>
+
+<p>
+    <strong>Semaine :</strong> <%= @working_list.job.semaine.slug %><br>
+    <strong>Jour :</strong> <%= nom_jour(@working_list.job.numero_jour) %> (<%= @working_list.job.semaine.date_lundi+@working_list.job.numero_jour-1 %>)<br>
+    <strong>AM/PM :</strong> <%= am_pm(@working_list.job.am_pm) %>
 </p>
 <p>
-    Work : <%= @working_list.work.nom %>
+    <strong>Work :</strong> [ <%= @working_list.work.code %> ]  <%= @working_list.work.nom %>
 </p>
 <p>
-    Utilisateur : <%= prenom_nom(@working_list.job.semaine.utilisateur) %><br>
-    Groupe : <%= @working_list.job.semaine.utilisateur.groupe.nom %><br>
-    Service : <%= "#{@working_list.job.semaine.utilisateur.service.nom} (#{@working_list.job.semaine.utilisateur.service.lieu.nom})" %>
+    <strong>Utilisateur :</strong> <%= prenom_nom(@working_list.job.semaine.utilisateur) %> (<%= @working_list.job.semaine.utilisateur.groupe.nom %>)<br>
+    <strong>Service :</strong> <%= "#{@working_list.job.semaine.utilisateur.service.nom} (#{@working_list.job.semaine.utilisateur.service.lieu.nom})" %>
 </p>
 
 <p>

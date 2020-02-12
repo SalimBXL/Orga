@@ -1,15 +1,19 @@
-<tr id="service_<%= service.id %>">
-    <td><%= service.nom %></td>
-    <td><%= service.lieu.nom %></td>
-    <td><%= service.description %></td>
-    <td>
-        <%= link_to " [Show] ", service_path(service) %>
-        <%= link_to " [Edit] ", edit_service_path(service) %>
-        <%= link_to " [Delete] ", service_path(service), 
-            method: :delete,
-            remote: true,
-            data: { confirm: "Delete #{service.nom} ?" } 
-        %>
-        <%= link_to " [Utilisateurs] ", "/utilisateurs_service/#{service.id}" %>
-    </td>
-</tr>
+<div class="col-sm-4" id="service_<%= service.id %>">
+    <h3><%= service.nom %></h3>
+    <div class="well well-sm">
+        <p>
+            <%= service.lieu.nom %><br>
+            <%= service.description %>
+        </p>        
+        <p>
+            <%= link_to " [Show] ", service_path(service) %>
+            <%= link_to " [Edit] ", edit_service_path(service) %>
+            <%= link_to " [Delete] ", service_path(service), 
+                method: :delete,
+                remote: true,
+                data: { confirm: "Delete #{service.nom} ?" } 
+            %>
+            <%= link_to " [Utilisateurs] ", "/utilisateurs_service/#{service.id}" %>
+        </p>
+    </div>
+</div>

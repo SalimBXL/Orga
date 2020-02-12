@@ -1,11 +1,9 @@
 <h1>
-    
+    <%= @job.semaine.slug %>
 </h1>
-
-<p><%= @job.semaine.numero_semaine %></p>
-<p><%= @job.numero_jour %></p>
-<p><%= @job.am_pm %></p>
-<p><%= @job.note %></p>
+<p><strong>Semaine :</strong> <%= @job.semaine.numero_semaine %></p>
+<p><strong>Jour :</strong> <%= @job.numero_jour %> (<%= am_pm(@job.am_pm) %>)</p>
+<p><strong>Note(s) :</strong> <%= @job.note %></p>
 
 <p>
     <%= link_to " [Edit] ", edit_job_path(@job) %>

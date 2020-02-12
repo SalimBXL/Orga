@@ -5,7 +5,7 @@ class WorkingListsController < ApplicationController
     #   INDEX   #
     #############
     def index
-        @working_lists = WorkingList.order(:job_id, :work_id).page(params[:page])
+        @working_lists = WorkingList.order(job_id: :desc).order(:work_id).page(params[:page])
     end
 
 
@@ -38,6 +38,9 @@ class WorkingListsController < ApplicationController
     #############
     def new
         @working_list = WorkingList.new
+        unless (params[:id].blank? || params[:id].nil?)
+            @working_list.job_id = params[:id]
+        end
     end
 
 

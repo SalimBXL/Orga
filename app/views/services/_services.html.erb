@@ -1,10 +1,11 @@
-<p><%= paginate @services, remote: true %></p>
-<table>
-    <tr>
-        <th>Nom</th>
-        <th>Lieu</th>
-        <th>Description</th>
-        <th></th></tr>
-    <%= render @services %>
-</table>
-<p><%= paginate @services, remote: true %></p>
+<div clas="container">
+    <div class="row">
+        <%= paginate @services, remote: true %>
+    </div>
+    <div class="row">
+        <%= render @services %>
+    </div>
+    <div class="row">
+        <%= paginate @services, remote: true %>
+    </div>
+</div>
