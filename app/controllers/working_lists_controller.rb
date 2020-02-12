@@ -37,6 +37,7 @@ class WorkingListsController < ApplicationController
     #    NEW    #
     #############
     def new
+        @works = Work.order(:groupe_id)
         @working_list = WorkingList.new
         unless (params[:id].blank? || params[:id].nil?)
             @working_list.job_id = params[:id]
@@ -48,13 +49,26 @@ class WorkingListsController < ApplicationController
     #   CREATE   #
     ##############
     def create
-        @working_list = WorkingList.create(working_list_params)
-        if @working_list.save
-            flash[:notice] = "Working List créé avec succès"
-            redirect_to working_lists_path
-        else
-            render :new
+        unless params[:working_list][:travaux].count>1
+            flash[:alert] = "Il faut sélectionner au moins un travail de la lsite..."
+            redirect_to "#{new_working_lists_path}/#{params[:working_list][:job_id]}"
         end
+        message = ""
+        params[:working_list][:travaux].each do |travail|
+            params[:working_list][:work_id] = travail
+            @working_list = WorkingList.create(working_list_params)
+            if !@working_list.save
+                message += "Problème lors de la sauvegarde de la working liste pour le travail ID ##{travail}"
+            end
+        end
+        if message.length>0
+            flash[:alert] = message
+            redirect_to working_lists_path
+            return 
+        else 
+            flash[:notice] = "Working Liste(s) créée(s) avec succèes"
+        end
+        redirect_to working_lists_path
     end
 
     #############
@@ -87,7 +101,7 @@ class WorkingListsController < ApplicationController
     private 
 
     def working_list_params
-        params.require(:working_list).permit(:job_id, :work_id)
+        params.require(:working_list).permit(:job_id, :work_id, :travaux)
     end
 
     def find_working_list
