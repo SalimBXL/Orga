@@ -33,14 +33,17 @@
                         <% records = @semaines.where(numero_semaine: "#{numero_semaine}") %>
                         <% records.each do |record| %>
                             <% if ("#{Date.today.cweek}/#{Date.today.year}"=="#{date_parcourue.cweek}/#{date_parcourue.year}") %>
-                                <span class="label label-primary tab-cell">
+                                <a href="<%= "/jobs_semaine/#{record.id}" %>" class="label label-primary tab-cell btn-primary" role="button">
                             <% elsif (date_parcourue<Date.today) %>
-                                <span class="label label-default tab-cell">
+                                <a href="" class="label label-default tab-cell btn-default">
                             <% else %>
-                                <span class="label label-info tab-cell">
+                                <a href="" class="label label-info tab-cell btn-info">
                             <% end %>
+                                
                                 <%= prenom_nom(record.utilisateur) %>
-                            </span>
+                                
+                            </a>
+
                         <% end %>
                     </td>
                 </tr>

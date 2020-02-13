@@ -44,6 +44,14 @@ class AgendasController < ApplicationController
 
     # JOUR (pour un seul jour...)
     def un_jour
+        @absences = []
+        @conges = []
+        Absence.where(date: Date.today).each do |absence|
+            @absences << absence.utilisateur
+        end
+        Conge.where(date: Date.today).each do |conge|
+            @conges << conge.utilisateur
+        end
         @jobs = Hash.new
         numero_jour_aujourdhui = Date.today.cwday
         numero_semaine = format_numero_semaine(Date.today.year, Date.today.cweek)
