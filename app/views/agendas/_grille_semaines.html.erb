@@ -19,32 +19,64 @@
                 <% annee = date_parcourue.year %>
                 <% semaine = date_parcourue.cweek %>
                 <% numero_semaine = "#{annee}-W#{semaine<10 ? '0' : ''}#{semaine}" %>
-                
+                <% semaine_courante = ("#{Date.today.cweek}/#{Date.today.year}"=="#{date_parcourue.cweek}/#{date_parcourue.year}") %>
                 <!-- Change la couleur de la ligne si semaine parcourue est la semaine actuelle -->
-                <% couleur_ligne_semaine = ("#{Date.today.cweek}/#{Date.today.year}"=="#{date_parcourue.cweek}/#{date_parcourue.year}") ? "warning" : "default" %>
+                <% couleur_ligne_semaine = semaine_courante ? "warning" : "default" %>
 
                 <tr class=<%= "#{couleur_ligne_semaine}" %>>
                     <td>
                         <%= "#{numero_semaine}" %>
                     </td>
                     <td align="center">
-
                         <!-- Récupère les enregistrements à la date parcourue -->
-                        <% records = @semaines.where(numero_semaine: "#{numero_semaine}") %>
-                        <% records.each do |record| %>
-                            <% if ("#{Date.today.cweek}/#{Date.today.year}"=="#{date_parcourue.cweek}/#{date_parcourue.year}") %>
-                                <a href="<%= "/jobs_semaine/#{record.id}" %>" class="label label-primary tab-cell btn-primary" role="button">
+                        <% jobs = @semaines.where(numero_semaine: "#{numero_semaine}") %>
+                        <% jobs.each do |job| %>
+                            <% if semaine_courante %>
+                                <% bouton = "label-primary" %>
                             <% elsif (date_parcourue<Date.today) %>
-                                <a href="" class="label label-default tab-cell btn-default">
+                                <% bouton = "label-default" %>
                             <% else %>
-                                <a href="" class="label label-info tab-cell btn-info">
+                                <% bouton = "label-info" %>
                             <% end %>
-                                
-                                <%= prenom_nom(record.utilisateur) %>
-                                
-                            </a>
+                            <a href="<%= "/jobs_semaine/#{job.id}" %>" role="button" class="label <%= bouton %> tab-cell ">
+                                <% utilisateur = job.utilisateur %>
+                                <%= prenom_nom(utilisateur) %>
 
+                                <!-- Absences -->
+                                <% if @absences.has_key?(numero_semaine) %>
+                                    <% if @absences[numero_semaine].key?(utilisateur.id) %>
+                                        <span class="label label-warning">
+                                            <%= @absences[numero_semaine][utilisateur.id].count %>
+                                            <% @absences[numero_semaine][utilisateur.id].each do |a| %>
+                                                <% @absences[numero_semaine][utilisateur.id].delete(a) %>
+                                            <% end %>
+                                        </span>
+                                    <% end %>
+                                <% end %>
+
+                                <!-- Conges -->
+                                <% if @conges.has_key?(numero_semaine) %>
+                                    <% if @conges[numero_semaine].key?(utilisateur.id) %>
+                                        <span class="label label-success">
+                                            <%= @conges[numero_semaine][utilisateur.id].count %>
+                                            <% @conges[numero_semaine][utilisateur.id].each do |a| %>
+                                                <% @conges[numero_semaine][utilisateur.id].delete(a) %>
+                                            <% end %>
+                                        </span>
+                                    <% end %>
+                                <% end %>
+                            </a>
                         <% end %>
+
+                        <!-- Affiche les absences et les conges restant -->
+                        <% if @absences.has_key?(numero_semaine) %>
+                            <% @absences[numero_semaine].keys.each do |id_u| %>
+                                <% @absences[numero_semaine][id_u].each do |a| %>
+                                    <%= prenom_nom(a.utilisateur) %>
+                                <% end %>
+                            <% end %>
+                        <% end %>
+
                     </td>
                 </tr>
             <% end %>

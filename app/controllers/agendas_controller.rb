@@ -23,6 +23,30 @@ class AgendasController < ApplicationController
     # SEMAINES
     def semaines
         @semaines = Semaine.where(date_lundi: @date_depart..@date_fin)
+
+        @conges = Hash.new
+        Conge.where(date: @date_depart..@date_fin).each do |conge|
+            key = format_numero_semaine(conge.date.year, conge.date.cweek)
+            unless @conges.has_key?(key)
+                @conges[key] = Hash.new
+            end
+            unless @conges[key].has_key?(conge.utilisateur.id)
+                @conges[key][conge.utilisateur.id] = []
+            end
+            @conges[key][conge.utilisateur.id] << conge
+        end
+
+        @absences = Hash.new
+        Absence.where(date: @date_depart..@date_fin).each do |absence|
+            key = format_numero_semaine(absence.date.year, absence.date.cweek)
+            unless @absences.has_key?(key)
+                @absences[key] = Hash.new
+            end
+            unless @absences[key].has_key?(absence.utilisateur.id)
+                @absences[key][absence.utilisateur.id] = []
+            end
+            @absences[key][absence.utilisateur.id] << absence
+        end
     end
 
     # JOBS
