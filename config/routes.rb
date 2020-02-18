@@ -8,10 +8,11 @@ Rails.application.routes.draw do
   namespace :api do
     get 'ping' => 'table_tennis#ping'
     
-    resources :semaines, only: [ :show, :index ]
-    get "semaines/:id/utilisateurs", to: "semaines#utilisateurs"
-
+    resources :semaines, only: [ :show, :index ], param: :identifier
+    get "utilisateurs/:id/semaine", to: "utilisateurs#semaine"
+    
     resources :utilisateurs, only: [ :show, :index ]
+    get "semaines/:id/utilisateurs", to: "semaines#utilisateurs"
     
   end
 

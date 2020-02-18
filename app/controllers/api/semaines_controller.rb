@@ -1,4 +1,5 @@
 class Api::SemainesController < ApiController
+    before_action :find_semaine, only: :show
 
     #########
     # INDEX #    Renvoi la liste des objets SEMAINE de la semaine courante
@@ -12,7 +13,7 @@ class Api::SemainesController < ApiController
     # SHOW #    Renvoi les infos d'une semaine
     ########
     def show
-        render json: Semaine.find(params[:id])
+        render json: @semaine
     end
 
     ###############
@@ -26,8 +27,9 @@ class Api::SemainesController < ApiController
 
     private
 
-    def format_numero_semaine(annee, numero_semaine)
-        numero_semaine<10 ? "#{annee}-W0#{numero_semaine}" : "#{annee}-W#{numero_semaine}"
+    def find_semaine
+        @semaine = Semaine.find_by_id(params[:identifier])
+        @semaine ||= Semaine.find_by_slug(params[:identifier])
     end
 
 end
