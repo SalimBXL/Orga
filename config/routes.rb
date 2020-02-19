@@ -9,10 +9,18 @@ Rails.application.routes.draw do
     get 'ping' => 'table_tennis#ping'
     
     resources :semaines, only: [ :show, :index ], param: :identifier
-    #get "utilisateurs/:id/semaine", to: "utilisateurs#semaine"
-    
     resources :utilisateurs, only: :index
+
+    # Détails pour un jour en particulier
+    get "jour", to: "semaines#jour" # Aujourd'hui
+    get "jour/:date", to: "semaines#jour" # Jour spécifié
+
+    # Planning de la semaine (sans détails)
+    get "semaine", to:"semaines#semaine"  # Semaine courante
+    get "semaine/:numero_semaine", to:"semaines#semaine"  # Semaine spécifiée
+
     #get "semaines/:id/utilisateurs", to: "semaines#utilisateurs"
+    #get "utilisateurs/:id/semaine", to: "utilisateurs#semaine"
     
   end
 
