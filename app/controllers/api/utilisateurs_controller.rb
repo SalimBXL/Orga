@@ -22,22 +22,4 @@ class Api::UtilisateursController < ApiController
         render json: utilisateurs
     end
 
-    ########
-    # SHOW #    Renvoi les infos d'un utilisateur
-    ########
-    def show
-        render json: Utilisateur.find(params[:id]).first
-    end
-
-
-    ###########
-    # SEMAINE #     Renvoi la semaine courante d'un utilisateur
-    ###########
-    def semaine
-        utilisateur = Utilisateur.find(params[:id])
-        numero_semaine = format_numero_semaine(Date.today.year, Date.today.cweek)
-        render json: Semaine.where(numero_semaine: numero_semaine, utilisateur: utilisateur).first
-    end
-
-
 end

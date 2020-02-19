@@ -9,10 +9,10 @@ Rails.application.routes.draw do
     get 'ping' => 'table_tennis#ping'
     
     resources :semaines, only: [ :show, :index ], param: :identifier
-    get "utilisateurs/:id/semaine", to: "utilisateurs#semaine"
+    #get "utilisateurs/:id/semaine", to: "utilisateurs#semaine"
     
-    resources :utilisateurs, only: [ :show, :index ]
-    get "semaines/:id/utilisateurs", to: "semaines#utilisateurs"
+    resources :utilisateurs, only: :index
+    #get "semaines/:id/utilisateurs", to: "semaines#utilisateurs"
     
   end
 
