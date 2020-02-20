@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   #####################
 
   get 'ping' => 'table_tennis#ping'
+  get 'ping_api' => 'table_tennis#ping_api'
 
   ################
   #   Accueils   #

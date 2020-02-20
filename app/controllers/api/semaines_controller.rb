@@ -60,14 +60,14 @@ class Api::SemainesController < ApiController
                 semaine_temp = Hash.new
                 semaine_temp[:id] = semaine.id
                 semaine_temp[:note] = semaine.note
-                semaine_temp[:utilisateur] = semaine.utilisateur_id
+                semaine_temp[:utilisateur] = prenom_nom(semaine.utilisateur)
                 paquet[:semaines] = Hash.new
                 jobs_temp = Hash.new
                 semaine.jobs.each do |job|
+                    job_temp = Hash.new
+                    job_temp[:numero_jour] = job.numero_jour
                     if (num_jour==job.numero_jour)
-                        job_temp = Hash.new
                         job_temp[:id] = job.id
-                        job_temp[:numero_jour] = job.numero_jour
                         job_temp[:am_pm] = job.am_pm
                         job_temp[:note] = job.note
 
@@ -83,8 +83,8 @@ class Api::SemainesController < ApiController
                         end
                         job_temp[:working_list] = wls_temp
 
-                        jobs_temp[job.numero_jour] = job_temp
                     end
+                    jobs_temp[job.numero_jour] = job_temp
                 end
                 semaine_temp[:jobs] = jobs_temp
                 semaines_temp[semaine.id] = semaine_temp
