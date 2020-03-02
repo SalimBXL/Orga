@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: ed7eed8aa47432015303a65a28441155d22904ef
+  revision: d13a99ffe924936b061bef638885fa2d4e6dedfe
   branch: master
   specs:
     faker (2.10.2)
@@ -124,12 +124,12 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.14.0)
     nio4r (2.5.2)
-    nokogiri (1.10.8)
+    nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
     pg (1.2.2)
     popper_js (1.16.0)
     public_suffix (4.0.3)
-    puma (3.12.2)
+    puma (3.12.4)
     rack (2.2.2)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -161,7 +161,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    regexp_parser (1.6.0)
+    regexp_parser (1.7.0)
     rspec-core (3.9.1)
       rspec-support (~> 3.9.1)
     rspec-expectations (3.9.0)

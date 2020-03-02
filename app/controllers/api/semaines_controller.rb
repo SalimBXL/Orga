@@ -90,7 +90,7 @@ class Api::SemainesController < ApiController
                 semaines_temp[semaine.id] = semaine_temp
             end
             paquet[:semaines] = semaines_temp
-            return paquet
         end
+        return paquet
     end
 end
