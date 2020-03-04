@@ -1,3 +1,0 @@
-class NouvelAjout < ApplicationRecord
-
-end

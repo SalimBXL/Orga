@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   get 'ping_api' => 'table_tennis#ping_api'
 
   #get 'new' => 'home#new'
-  resources :nouvel_ajout, only: [ :new ]
+  resources :ajouts
 
 
   ################
