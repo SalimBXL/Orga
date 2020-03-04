@@ -1,9 +1,4 @@
-class HomeController < ApplicationController
-
-    # ACCUEIL
-    def index
-    end
-
+class NouvelAjoutController < ApplicationController
 
     def new
         @nouvelAjout = nil
@@ -12,5 +7,6 @@ class HomeController < ApplicationController
         @works = Work.order(:classe_id, :nom)
         @classes = Classe.all
     end
-
+    
+    
 end
