@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200123140612) do
+ActiveRecord::Schema.define(version: 20200123140613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,19 @@ ActiveRecord::Schema.define(version: 20200123140612) do
     t.datetime "updated_at", null: false
     t.index ["type_absence_id"], name: "index_absences_on_type_absence_id"
     t.index ["utilisateur_id"], name: "index_absences_on_utilisateur_id"
+  end
+
+  create_table "ajouts", force: :cascade do |t|
+    t.integer "utilisateur"
+    t.integer "numero_jour"
+    t.date "date_lundi"
+    t.integer "work1"
+    t.integer "work2"
+    t.integer "work3"
+    t.integer "work4"
+    t.integer "work5"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "classes", force: :cascade do |t|

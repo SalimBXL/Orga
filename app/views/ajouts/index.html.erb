@@ -1,0 +1,21 @@
+<h1>Dernier ajout</h1>
+
+<% unless @ajout.nil? %>
+    <h3>Utilisateur</h3>
+    <p><%= prenom_nom(@utilisateur) %></p>
+
+    <h3>Date Lundi</h3>
+    <p><%= @ajout.date_lundi %></p>
+
+    <h3>Numéro du jour</h3>
+    <p><%= @ajout.numero_jour %></p>
+
+    <h3>Works</h3>
+    <ul>
+        <li><%= @ajout.work1 %></li>
+        <li><%= @ajout.work2 %></li>
+        <li><%= @ajout.work3 %></li>
+        <li><%= @ajout.work4 %></li>
+        <li><%= @ajout.work5 %></li>
+    </ul>
+<% end %>
