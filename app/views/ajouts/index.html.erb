@@ -12,10 +12,20 @@
 
     <h3>Works</h3>
     <ul>
-        <li><%= @ajout.work1 %></li>
-        <li><%= @ajout.work2 %></li>
-        <li><%= @ajout.work3 %></li>
-        <li><%= @ajout.work4 %></li>
-        <li><%= @ajout.work5 %></li>
+        <% if @ajout.work1 %>
+            <li><%= @works.where(id: @ajout.work1).first.code %></li>
+        <% end %>
+        <% if @ajout.work2 %>
+            <li><%= @works.where(id: @ajout.work2).first.code %></li>
+        <% end %>
+        <% if @ajout.work3 %>
+            <li><%= @works.where(id: @ajout.work3).first.code %></li>
+        <% end %>
+        <% if @ajout.work4 %>
+            <li><%= @works.where(id: @ajout.work4).first.code %></li>
+        <% end %>
+        <% if @ajout.work5 %>
+            <li><%= @works.where(id: @ajout.work5).first.code %></li>
+        <% end %>
     </ul>
 <% end %>

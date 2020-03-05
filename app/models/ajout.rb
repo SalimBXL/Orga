@@ -1,5 +1,6 @@
 class Ajout < ApplicationRecord
-    validates :utilisateur, :date_lundi, :works, presence: true
+    validates :utilisateur, :date_lundi, presence: true
+    
     
     
 end
