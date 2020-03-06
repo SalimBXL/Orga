@@ -1,31 +1,72 @@
+<table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Utilisateur</th>
+        <th>Lundi</th><th>Mardi</th><th>Mercredi</th>
+        <th>jeudi</th><th>Vendredi</th>
+    </tr>
+    </thead>
+    <tbody>
+        <% @semaines.each do |semaine| %>
+        <tr>
+            <td>
+                <%= prenom_nom(semaine.utilisateur) %>
+            </td>
+            <% 5.times do |n| %>
+                <% n += 1 %>
+                <td>
+                    <% semaine.jobs.where(numero_jour: n).each do |job| %>
+                        <% job.working_lists.each do |wl| %>
+                            <%= wl.work.code %>
+                        <% end %>
+                    <% end %>
+                </td>
+            <% end %>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+
 <h1>Dernier ajout</h1>
-
-<% unless @ajout.nil? %>
-    <h3>Utilisateur</h3>
-    <p><%= prenom_nom(@utilisateur) %></p>
-
-    <h3>Date Lundi</h3>
-    <p><%= @ajout.date_lundi %></p>
-
-    <h3>Numéro du jour</h3>
-    <p><%= @ajout.numero_jour %></p>
-
-    <h3>Works</h3>
-    <ul>
-        <% if @ajout.work1 %>
-            <li><%= @works.where(id: @ajout.work1).first.code %></li>
-        <% end %>
-        <% if @ajout.work2 %>
-            <li><%= @works.where(id: @ajout.work2).first.code %></li>
-        <% end %>
-        <% if @ajout.work3 %>
-            <li><%= @works.where(id: @ajout.work3).first.code %></li>
-        <% end %>
-        <% if @ajout.work4 %>
-            <li><%= @works.where(id: @ajout.work4).first.code %></li>
-        <% end %>
-        <% if @ajout.work5 %>
-            <li><%= @works.where(id: @ajout.work5).first.code %></li>
-        <% end %>
-    </ul>
+<% @ajouts.each do |ajout| %>
+    <div class="row">
+        <div class="col-sm-2">
+            <% utilisateur = Utilisateur.find(ajout.utilisateur) %>
+            <strong>Utilisateur</strong>
+            <p><%= prenom_nom(utilisateur) %></p>
+        </div>
+        <div class="col-sm-2">
+            <strong>Date Lundi</strong>
+            <p><%= ajout.date_lundi %></p>
+            <strong>Numéro du jour</strong>
+            <p><%= ajout.numero_jour %></p>
+        </div>
+        <div class="col-sm-2">
+            <strong>Works</strong>
+            <ul>
+                <% if ajout.work1 %>
+                    <li><%= @works.where(id: ajout.work1).first.code %></li>
+                <% end %>
+                <% if ajout.work2 %>
+                    <li><%= @works.where(id: ajout.work2).first.code %></li>
+                <% end %>
+                <% if ajout.work3 %>
+                    <li><%= @works.where(id: ajout.work3).first.code %></li>
+                <% end %>
+                <% if ajout.work4 %>
+                    <li><%= @works.where(id: ajout.work4).first.code %></li>
+                <% end %>
+                <% if ajout.work5 %>
+                    <li><%= @works.where(id: ajout.work5).first.code %></li>
+                <% end %>
+            </ul>
+        </div>
+        <div class="col-sm-3">
+            <div class="btn-group">
+                <button type="button" class="btn btn-danger">Annuler</button>
+                <button type="button" class="btn btn-primary">Recommencer</button>
+                <button type="button" class="btn btn-success">Valider</button>
+</div>
+        </div>
+    </div>
 <% end %>
