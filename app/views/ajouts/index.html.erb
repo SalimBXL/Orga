@@ -17,7 +17,9 @@
                 <td>
                     <% semaine.jobs.where(numero_jour: n).each do |job| %>
                         <% job.working_lists.each do |wl| %>
-                            <%= wl.work.code %>
+                            <span class="badge">
+                                <%= wl.work.code %>
+                            </span>
                         <% end %>
                     <% end %>
                 </td>
@@ -63,10 +65,10 @@
         </div>
         <div class="col-sm-3">
             <div class="btn-group">
-                <button type="button" class="btn btn-danger">Annuler</button>
-                <button type="button" class="btn btn-primary">Recommencer</button>
-                <button type="button" class="btn btn-success">Valider</button>
-</div>
+            <%= link_to "Annuler", home_path, class: "btn btn-danger" %>
+            <%= link_to "Recommencer", new_ajout_path, class: "btn btn-primary" %>
+            <%= link_to "Valider", home_path, class: "btn btn-success" %>
+        </div>
         </div>
     </div>
 <% end %>
