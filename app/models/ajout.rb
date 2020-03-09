@@ -2,22 +2,23 @@ class Ajout < ApplicationRecord
     validates :utilisateur, :date_lundi, presence: true
     
     def works
-        works = Array.new
+        w = Array.new
         unless work1.nil?
-            works << work1
+            w << work1
         end
         unless work2.nil?
-            works << work2
+            w << work2
         end
         unless work3.nil?
-            works << work3
+            w << work3
         end
         unless work4.nil?
-            works << work4
+            w << work4
         end
         unless work5.nil?
-            works << work5
+            w << work5
         end
+        works = w
     end
     
 end

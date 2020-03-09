@@ -48,6 +48,23 @@ class AjoutsController < ApplicationController
         end
     end
 
+
+    #############
+    #   EDIT    #
+    #############
+    def edit
+    end
+    
+
+    ##############
+    #   DESTROY  #
+    ##############
+    def destroy
+        puts "***** AJOUT est NIL ****" if @ajout.nil?
+        @ajout.destroy
+    end
+
+
     private
 
     def ajout_params
