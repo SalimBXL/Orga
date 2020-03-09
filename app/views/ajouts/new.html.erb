@@ -76,39 +76,39 @@
           <div class="col-sm-2">
             <p>
             <%= form.label :work1 %><br>
-            <%= form.select(:work1, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] #{p.nom}", p.id ] }, 
+            <%= form.select(:work1, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
                                             { }, 
                                             { :multiple => false, :size => 20 }) %>
             </p>
           </div>
           <div class="col-sm-2">
             <p>
-            <%= form.label :work1 %><br>
-            <%= form.select(:work2, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] #{p.nom}", p.id ] }, 
+            <%= form.label :work2 %><br>
+            <%= form.select(:work2, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
                                             { }, 
                                             { :multiple => false, :size => 20 }) %>
             </p>
           </div>
           <div class="col-sm-2">
             <p>
-            <%= form.label :work1 %><br>
-            <%= form.select(:work3, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] #{p.nom}", p.id ] }, 
+            <%= form.label :work3 %><br>
+            <%= form.select(:work3, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
                                             { }, 
                                             { :multiple => false, :size => 20 }) %>
             </p>
           </div>
           <div class="col-sm-2">
             <p>
-            <%= form.label :work1 %><br>
-            <%= form.select(:work4, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] #{p.nom}", p.id ] }, 
+            <%= form.label :work4 %><br>
+            <%= form.select(:work4, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
                                             { }, 
                                             { :multiple => false, :size => 20 }) %>
             </p>
           </div>
           <div class="col-sm-2">
             <p>
-            <%= form.label :work1 %><br>
-            <%= form.select(:work5, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] #{p.nom}", p.id ] }, 
+            <%= form.label :work5 %><br>
+            <%= form.select(:work5, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
                                             { }, 
                                             { :multiple => false, :size => 20 }) %>
             </p>

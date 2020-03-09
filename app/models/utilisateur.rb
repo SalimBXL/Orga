@@ -13,4 +13,8 @@ class Utilisateur < ApplicationRecord
     def prenom_nom
         "#{prenom} #{nom}".titleize
     end
+
+    def initiales
+        "#{prenom[0]}#{nom[0]}".upcase
+    end
 end

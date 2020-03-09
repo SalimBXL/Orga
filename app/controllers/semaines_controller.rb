@@ -150,11 +150,7 @@ class SemainesController < ApplicationController
         # vérifie et formatte le numéro de semaine
         # sur base de la date du lundi
         if @semaine.date_lundi != nil
-            num = "#{@semaine.date_lundi.cweek}"
-            if @semaine.date_lundi.cweek < 10
-                num = "0"+num
-            end
-            @semaine.numero_semaine = "#{@semaine.date_lundi.year}-W#{num}"
+            @semaine.set_numero_semaine
         end
     end
     

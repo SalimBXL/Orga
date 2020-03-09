@@ -55,7 +55,7 @@
                                         title="
                                         <%= record.utilisateur.prenom_nom %> <%= record.remarque.blank? ? "": " - #{record.remarque}" %>
                                         ">
-                                        <%= initiales(record.utilisateur) %>
+                                        <%= record.utilisateur.initiales %>
                                     </span>
                                     <br>
                                 <% end %>
