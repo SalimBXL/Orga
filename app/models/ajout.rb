@@ -1,7 +1,7 @@
 class Ajout < ApplicationRecord
     validates :utilisateur, :date_lundi, presence: true
     
-    def set_works_to_array
+    def works
         works = Array.new
         unless work1.nil?
             works << work1

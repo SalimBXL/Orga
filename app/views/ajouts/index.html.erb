@@ -29,7 +29,7 @@
     </tbody>
 </table>
 
-<h1>Dernier ajout</h1>
+<h1>Dernier(s) ajout(s)</h1>
 <% @ajouts.each do |ajout| %>
     <div class="row">
         <div class="col-sm-2">
@@ -40,6 +40,8 @@
         <div class="col-sm-2">
             <strong>Date Lundi</strong>
             <p><%= ajout.date_lundi %></p>
+        </div>
+        <div class="col-sm-2">
             <strong>Numéro du jour</strong>
             <p><%= ajout.numero_jour %></p>
         </div>

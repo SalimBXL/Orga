@@ -4,18 +4,24 @@ class AjoutsController < ApplicationController
     #   INDEX   #
     #############
     def index
-        @ajouts = Ajout.all
-        if @ajouts.count > 1
-            dernier = @ajouts.last
-            @ajouts.each do |ajout|
-                unless ajout == dernier
-                    ajout.destroy
-                    @ajouts.delete(ajout)
+        liste = Ajout.all
+        liste.each do |item|
+            utilisateur = Utilisateur.find(item.utilisateur)
+            slug = "#{utilisateur.prenom_nom} #{item.date_lundi.year}-W#{item.date_lundi.cweek<10 ? "0" : ""}#{item.date_lundi.cweek}".parameterize
+            semaines = Semaine.where(slug: slug)
+            semaines.each do |semaine|
+                semaine.jobs.where(numero_jour: item.numero_jour).find_each do |job|
+                    job.working_lists.each do |work|
+                        if item.works.include?(work.work_id)
+                            item.destroy
+                        end
+                    end
                 end
             end
         end
+        @ajouts = Ajout.all
         @works = Work.all
-        @semaines = Semaine.where(date_lundi: Ajout.last.date_lundi).order(:utilisateur_id)
+        @semaines = Semaine.where(date_lundi: @ajouts.last.date_lundi).order(:utilisateur_id)
     end
 
 
