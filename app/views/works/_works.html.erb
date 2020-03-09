@@ -1,5 +1,5 @@
 <p><%= paginate @works, remote: true %></p>
-<table>
+<table class="table table-striped">
     <tr>
         <th>Code</th>
         <th> . </th>
@@ -7,6 +7,7 @@
         <th>Description</th>
         <th>Groupe</th>
         <th>Classe</th>
+        <th>Service</th>
         <th></th></tr>
     <%= render @works %>
 </table>

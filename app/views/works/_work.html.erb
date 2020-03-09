@@ -4,6 +4,7 @@
     <td><%= work.description %></td>
     <td><%= work.groupe.nom unless work.groupe.nil? %></td>
     <td><%= work.classe.nom unless work.classe.nil? %></td>
+    <td><%= work.service.nom unless work.service.nil? %></td>
     <td>
         <%= link_to " [Show] ", work_path(work) %>
         <%= link_to " [Edit] ", edit_work_path(work) %>

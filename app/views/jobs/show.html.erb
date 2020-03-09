@@ -3,6 +3,13 @@
 </h1>
 <p><strong>Semaine :</strong> <%= @job.semaine.numero_semaine %></p>
 <p><strong>Jour :</strong> <%= @job.numero_jour %> (<%= am_pm(@job.am_pm) %>)</p>
+
+<p>
+    <% @job.works.each do |w| %>
+        <%= w %><br>
+    <% end %>
+</p>
+
 <p><strong>Note(s) :</strong> <%= @job.note %></p>
 
 <p>

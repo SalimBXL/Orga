@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200123140613) do
+ActiveRecord::Schema.define(version: 20200309124739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -145,8 +145,10 @@ ActiveRecord::Schema.define(version: 20200123140613) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "classe_id"
+    t.bigint "service_id"
     t.index ["classe_id"], name: "index_works_on_classe_id"
     t.index ["groupe_id"], name: "index_works_on_groupe_id"
+    t.index ["service_id"], name: "index_works_on_service_id"
   end
 
   add_foreign_key "absences", "type_absences"
@@ -160,4 +162,5 @@ ActiveRecord::Schema.define(version: 20200123140613) do
   add_foreign_key "working_lists", "jobs"
   add_foreign_key "working_lists", "works"
   add_foreign_key "works", "groupes"
+  add_foreign_key "works", "services"
 end
