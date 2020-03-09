@@ -22,11 +22,11 @@
                         <span class="label label-<%= job.am_pm? ? "info" : "primary" %> tab-cell"
                             data-toggle="tooltip"
                             title="
-                                <%= prenom_nom(job.semaine.utilisateur) %> <%= job.note.blank? ? "": " - #{job.note}" %>
+                                <%= job.semaine.utilisateur.prenom_nom %> <%= job.note.blank? ? "": " - #{job.note}" %>
                             ">
                             <%= 
                                 #initiales(job.semaine.utilisateur)
-                                prenom_nom(job.semaine.utilisateur)
+                                job.semaine.utilisateur.prenom_nom
                             %>
                         </span>
                     <% end %>

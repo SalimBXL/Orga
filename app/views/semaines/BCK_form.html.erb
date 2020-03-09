@@ -24,7 +24,7 @@
         <%= form.select(:utilisateur_id) do %>
             <%= select_option_tag("", nil, @semaine.utilisateur_id) %>
             <% @utilisateurs.each do |l| %>
-                <%= select_option_tag("[#{l.groupe.nom}] #{prenom_nom(l)}", l.id, @semaine.utilisateur_id) %>
+                <%= select_option_tag("[#{l.groupe.nom}] #{l.prenom_nom}", l.id, @semaine.utilisateur_id) %>
             <% end %>
         <% end %>
     </p>

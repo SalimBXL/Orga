@@ -21,7 +21,7 @@
         <%= form.select(:utilisateur_id) do %>
             <%= select_option_tag("", nil, @conge.utilisateur_id) %>
             <% Utilisateur.all.find_each do |l| %>
-                <%= select_option_tag("#{prenom_nom(l)}".capitalize, l.id, @conge.utilisateur_id) %>
+                <%= select_option_tag("#{l.prenom_nom}".capitalize, l.id, @conge.utilisateur_id) %>
             <% end %>
         <% end %>
     </p>

@@ -40,7 +40,7 @@
                             <% end %>
                             <a href="<%= "/jobs_semaine/#{job.id}" %>" role="button" class="label <%= bouton %> tab-cell ">
                                 <% utilisateur = job.utilisateur %>
-                                <%= prenom_nom(utilisateur) %>
+                                <%= utilisateur.prenom_nom %>
 
                                 <!-- Absences -->
                                 <% if @absences.has_key?(numero_semaine) %>
@@ -72,7 +72,7 @@
                         <% if @absences.has_key?(numero_semaine) %>
                             <% @absences[numero_semaine].keys.each do |id_u| %>
                                 <% @absences[numero_semaine][id_u].each do |a| %>
-                                    <%= prenom_nom(a.utilisateur) %>
+                                    <%= a.utilisateur.prenom_nom %>
                                 <% end %>
                             <% end %>
                         <% end %>

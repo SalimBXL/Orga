@@ -2,7 +2,7 @@
     <td><%= job.semaine.numero_semaine %></td>
     <td align="center"><%= job.numero_jour %></td>
     <td><%= am_pm(job.am_pm) %></td>
-    <td><%= prenom_nom(job.semaine.utilisateur) %></td>
+    <td><%= job.semaine.utilisateur.prenom_nom %></td>
     <td><%= job.note %></td>
     <td>
         <%= link_to " [Show] ", job_path(job) %>

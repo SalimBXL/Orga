@@ -57,7 +57,7 @@
         <!-- Utilisateur -->
         <p>
           <%= form.label :utilisateur %><br>
-          <%= form.select(:utilisateur, @utilisateurs.collect {|p| [ "[#{@groupes.where(id: p.groupe_id).first.nom}] #{prenom_nom(p)}", p.id ] }, 
+          <%= form.select(:utilisateur, @utilisateurs.collect {|p| [ "[#{@groupes.where(id: p.groupe_id).first.nom}] #{p.prenom_nom}", p.id ] }, 
                                             { }, 
                                             { :multiple => false, :size => 10 }) %>
         </p>

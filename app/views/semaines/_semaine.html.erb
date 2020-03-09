@@ -4,7 +4,7 @@
 <tr id="semaine_<%= semaine.id %>">
     <td align=left><%= semaine.numero_semaine %> | </td>
     <td align=center><%= semaine.date_lundi %> | </td>
-    <td align=left><%= prenom_nom(semaine.utilisateur) %></td>
+    <td align=left><%= semaine.utilisateur.prenom_nom %></td>
     <td align=center><%= semaine.slug %></td>
     <td align=left><%= semaine.note %></td>
     <td>

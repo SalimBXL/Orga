@@ -32,12 +32,12 @@
                 <% labelle = "warning" %>
                 <% objet_utilisateur = @absences.where(date: date_jour) %>
                 <% objet_utilisateur.each do |absence| %>
-                    <% infobulle = "#{prenom_nom(absence.utilisateur)} - #{absence.type_absence.nom}" %>
+                    <% infobulle = "#{absence.utilisateur.prenom_nom} - #{absence.type_absence.nom}" %>
                     <span class="label label-<%= labelle %> tab-cell"
                         data-toggle="tooltip"
                         title="<%= infobulle %>">
                         <%= 
-                            prenom_nom(absence.utilisateur)
+                            absence.utilisateur.prenom_nom
                         %>
                     </span>
                     <br>
@@ -49,12 +49,12 @@
                 <% labelle = "success" %>
                 <% objet_utilisateur = @conges.where(date: date_jour) %>
                 <% objet_utilisateur.each do |conge| %>
-                    <% infobulle = "#{prenom_nom(conge.utilisateur)} - #{conge.remarque}" %>
+                    <% infobulle = "#{conge.utilisateur.prenom_nom} - #{conge.remarque}" %>
                     <span class="label label-<%= labelle %> tab-cell"
                         data-toggle="tooltip"
                         title="<%= infobulle %>">
                         <%= 
-                            prenom_nom(conge.utilisateur)
+                            conge.utilisateur.prenom_nom
                         %>
                     </span>
                     <br>
@@ -64,14 +64,14 @@
             <% if @jobs.key?(key) %>
                 <% @jobs[key].each do |items| %>
                     <% items.where(am_pm: bat).each do |job| %>
-                        <% infobulle = "#{prenom_nom(job.semaine.utilisateur)}#{formatWorkListe(job.working_lists)} #{(job.note.blank?||job.note.empty?) ? "" : " ** #{job.note}"}" %>
+                        <% infobulle = "#{job.semaine.utilisateur.prenom_nom}#{formatWorkListe(job.working_lists)} #{(job.note.blank?||job.note.empty?) ? "" : " ** #{job.note}"}" %>
                         <% labelle = job.am_pm? ? "info" : "primary" %>
                         <% objet_utilisateur = job.semaine.utilisateur %>
                         <span class="label label-<%= labelle %> tab-cell"
                             data-toggle="tooltip"
                             title="<%= infobulle %>">
                             <%= 
-                                prenom_nom(objet_utilisateur)
+                                objet_utilisateur.prenom_nom
                             %>
                         </span>
                         <br>

@@ -9,4 +9,8 @@ class Utilisateur < ApplicationRecord
     validates_associated :conges
     validates :nom, :prenom, :email, presence: true
     validates :email, uniqueness: true
+
+    def prenom_nom
+        "#{prenom} #{nom}".titleize
+    end
 end

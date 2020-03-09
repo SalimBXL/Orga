@@ -32,7 +32,7 @@
         <%= form.select(:utilisateur_id) do %>
             <%= select_option_tag("", nil, @absence.utilisateur_id) %>
             <% Utilisateur.all.find_each do |l| %>
-                <%= select_option_tag(prenom_nom(l), l.id, @absence.utilisateur_id) %>                
+                <%= select_option_tag(l.prenom_nom, l.id, @absence.utilisateur_id) %>                
             <% end %>
         <% end %>
     </p>

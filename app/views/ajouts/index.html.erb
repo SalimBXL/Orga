@@ -10,7 +10,7 @@
         <% @semaines.each do |semaine| %>
         <tr>
             <td>
-                <%= prenom_nom(semaine.utilisateur) %>
+                <%= semaine.utilisateur.prenom_nom %>
             </td>
             <% 5.times do |n| %>
                 <% n += 1 %>
@@ -35,7 +35,7 @@
         <div class="col-sm-2">
             <% utilisateur = Utilisateur.find(ajout.utilisateur) %>
             <strong>Utilisateur</strong>
-            <p><%= prenom_nom(utilisateur) %></p>
+            <p><%= utilisateur.prenom_nom %></p>
         </div>
         <div class="col-sm-2">
             <strong>Date Lundi</strong>

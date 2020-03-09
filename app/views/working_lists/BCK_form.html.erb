@@ -18,7 +18,7 @@
                 <% g.utilisateurs.order(:prenom, :nom).find_each do |u| %>
                     <% u.semaines.order(:date_lundi).find_each do |s| %>
                         <% s.jobs.order(:numero_jour, :am_pm).find_each do |j| %>
-                            <%= select_option_tag("#{prenom_nom(u)} - #{s.date_lundi+j.numero_jour-1} - #{j.numero_jour} (#{am_pm(j.am_pm)})", j.id, @working_list.job_id) %>
+                            <%= select_option_tag("#{u.prenom_nom} - #{s.date_lundi+j.numero_jour-1} - #{j.numero_jour} (#{am_pm(j.am_pm)})", j.id, @working_list.job_id) %>
                         <% end %>
                     <% end %>
                 <% end %>

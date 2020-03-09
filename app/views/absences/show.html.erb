@@ -2,7 +2,7 @@
     <%= @absence.date %>
 </h1>
 <p>
-    <%= prenom_nom(@absence.utilisateur) %>
+    <%= @absence.utilisateur.prenom_nom %>
 </p>
 <p>
     <%= @absence.type_absence.nom %><br>

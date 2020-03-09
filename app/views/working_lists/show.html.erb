@@ -14,7 +14,7 @@
     <strong>Work :</strong> [ <%= @working_list.work.code %> ]  <%= @working_list.work.nom %>
 </p>
 <p>
-    <strong>Utilisateur :</strong> <%= prenom_nom(@working_list.job.semaine.utilisateur) %> (<%= @working_list.job.semaine.utilisateur.groupe.nom %>)<br>
+    <strong>Utilisateur :</strong> <%= @working_list.job.semaine.utilisateur.prenom_nom %> (<%= @working_list.job.semaine.utilisateur.groupe.nom %>)<br>
     <strong>Service :</strong> <%= "#{@working_list.job.semaine.utilisateur.service.nom} (#{@working_list.job.semaine.utilisateur.service.lieu.nom})" %>
 </p>
 

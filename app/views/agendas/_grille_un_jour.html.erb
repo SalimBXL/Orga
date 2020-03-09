@@ -13,7 +13,7 @@
                 <% box = "warning" %>
             <% end %>
             <div class="panel panel-<%= box %>">
-                <div class="panel-heading"><%= prenom_nom(key) %></div>
+                <div class="panel-heading"><%= key.prenom_nom %></div>
                 <div class="panel-body">
                     <% @jobs[key].each do |job| %>
                         <% wls = job.working_lists %>
@@ -42,7 +42,7 @@
         <div class="col-sm-4">
             <% unless @jobs.has_key?(utilisateur) %>
                 <div class="panel panel-warning">
-                    <div class="panel-heading"><%= prenom_nom(utilisateur) %></div>
+                    <div class="panel-heading"><%= utilisateur.prenom_nom %></div>
                     <div class="panel-body"></div>
                 </div>
             <% end %>
@@ -58,7 +58,7 @@
                 <% accord = conge.accord ? "" : " - [ en attente d'accord ] " %>
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        <%= prenom_nom(utilisateur) %>
+                        <%= utilisateur.prenom_nom %>
                         <% if accord.length>0 %>
                             <em><%= accord %></em>
                         <% end %>
