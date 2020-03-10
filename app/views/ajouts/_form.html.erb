@@ -76,6 +76,19 @@
       <h3>Quoi ?</h3>
       <p>Veuillez indiquer ci-dessous le ou les travaux à affacter à la date choisie dans l'onglet précédent.</p>
       <div class="form-group">
+
+        <div class="container">
+          <% @works.each do |w| %>
+            <div class="checkbox">
+              <label><input type="checkbox" value="<%= w.id %>%">
+                <%= "[#{@classes.where(id: w.classe_id).first.nom}] - (#{w.code}) - #{w.nom}" %>
+              </label>
+            </div>
+          <% end %>
+        </div>
+
+
+
         <div class="row">
           <div class="col-sm-2">
             <p>
