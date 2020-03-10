@@ -1,4 +1,5 @@
 class AjoutsController < ApplicationController
+    before_action :find_ajout, only: [:show, :edit, :update, :destroy]
 
     #############
     #   INDEX   #
@@ -20,8 +21,8 @@ class AjoutsController < ApplicationController
             end
         end
         @ajouts = Ajout.all
-        @works = Work.all
-        @semaines = Semaine.where(date_lundi: @ajouts.last.date_lundi).order(:utilisateur_id)
+        @works = @ajouts.count>0 ? Work.all : Array.new
+        @semaines = @ajouts.count>0 ? Semaine.where(date_lundi: @ajouts.last.date_lundi).order(:utilisateur_id) : Array.new
     end
 
 
@@ -60,7 +61,6 @@ class AjoutsController < ApplicationController
     #   DESTROY  #
     ##############
     def destroy
-        puts "***** AJOUT est NIL ****" if @ajout.nil?
         @ajout.destroy
     end
 
@@ -71,5 +71,7 @@ class AjoutsController < ApplicationController
         params.require(:ajout).permit(:utilisateur, :work1, :work2, :work3, :work4, :work5, :date_lundi)
     end
 
-    
+    def find_ajout
+        @ajout = Ajout.find(params[:id])
+    end
 end

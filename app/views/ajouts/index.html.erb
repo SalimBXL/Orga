@@ -2,6 +2,9 @@
 <%= render 'grille' %>
 
 <h1>Dernier(s) ajout(s)</h1>
-<div id="ajouts">
-    <%= render 'ajouts' %>    
+<div class="container">
+    <%= render 'ajouts' %>
 </div>
+
+<p><%= link_to "[Nouvel ajout]", new_ajout_path %></p>
+

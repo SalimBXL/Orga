@@ -1,43 +1,25 @@
-<div class="row" id="ajout<%= ajout.id %>">
-    <div class="col-sm-2">
-        <% utilisateur = Utilisateur.find(ajout.utilisateur) %>
-        <strong>Utilisateur</strong>
-        <p><%= utilisateur.prenom_nom %></p>
-    </div>
-    <div class="col-sm-2">
-        <strong>Date Lundi</strong>
-        <p><%= ajout.date_lundi %></p>
-    </div>
-    <div class="col-sm-2">
-        <strong>Numéro du jour</strong>
-        <p><%= ajout.numero_jour %></p>
-    </div>
-    <div class="col-sm-2">
-        <strong>Works</strong>
-        <%= ajout.works %>
+<tr id="ajout_<%= ajout.id %>">
+    <% utilisateur = Utilisateur.find(ajout.utilisateur) %>
+    <td><%= utilisateur.prenom_nom %></td>
+    <td><%= ajout.date_lundi %></td>
+    <td><%= ajout.numero_jour %></td>
+    <td>
         <ul>
             <% ajout.works.each do |wid| %>
                 <li><%= @works.find(wid).code %></li>
             <% end %>
         </ul>
-    </div>
-    <div class="col-sm-3">
+    </td>
+    <td>
         <div class="btn-group">
-
-        
-            <% unless ajout.nil? %>
-
             <%= link_to "Annuler", ajout_path(ajout), 
                 class: "btn btn-danger",
                 method: :delete,
                 remote: true, 
                 data: { confirm: "Delete #{utilisateur.prenom_nom}\n
                     (#{ajout.date_lundi}) Jour ##{ajout.numero_jour} ?" } %>
-
-            <% end %>
-        
             <%= link_to "Recommencer", edit_ajout_path(ajout), class: "btn btn-primary" %>
             <%= link_to "Valider", home_path, class: "btn btn-success" %>
         </div>
-    </div>
-</div>
+    </td>
+</tr>
