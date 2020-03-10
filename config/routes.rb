@@ -38,10 +38,7 @@ Rails.application.routes.draw do
   get 'ping' => 'table_tennis#ping'
   get 'ping_api' => 'table_tennis#ping_api'
 
-  #get 'new' => 'home#new'
-  resources :ajouts, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
-
-
+  
   ################
   #   Accueils   #
   ################
@@ -62,6 +59,13 @@ Rails.application.routes.draw do
   get "agendas/jobs", to: "agendas#jobs"
   get "agendas/jours", to: "agendas#jours"
   get "agendas/jour", to: "agendas#un_jour"
+
+
+  ##############
+  #   Ajouts   #
+  ##############
+  resources :ajouts, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
+  get "ajouts/:id/valider", to: "ajouts#valider"
 
 
   ##############

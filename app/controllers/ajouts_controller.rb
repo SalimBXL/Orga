@@ -20,11 +20,9 @@ class AjoutsController < ApplicationController
                 end
             end
         end
-        
         @ajouts = Ajout.all
         @works = Work.all
         @semaines = Semaine.where(date_lundi: @ajouts.last.date_lundi).order(:utilisateur_id)
-        
     end
 
 
@@ -59,7 +57,6 @@ class AjoutsController < ApplicationController
     end
 
 
-
     #############
     #   UPDATE  #
     #############
@@ -71,8 +68,6 @@ class AjoutsController < ApplicationController
             render :edit
         end
     end
-
-
     
 
     ##############
@@ -80,6 +75,21 @@ class AjoutsController < ApplicationController
     ##############
     def destroy
         @ajout.destroy
+    end
+
+
+    ##############
+    #   VALIDER  #
+    ##############
+    def valider
+
+        # Semaine
+
+        # Job
+
+        # Working_list
+        
+        render json: {action: "VALIDER"}
     end
 
 
