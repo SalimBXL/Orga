@@ -10,12 +10,16 @@
   </ul>
 
 <% @utilisateurs = Utilisateur.order(:groupe_id) %>
+
 <% @groupes = Groupe.all %>
 <% @works = Work.order(:classe_id, :nom) %>
 <% @classes = Classe.all %>
+
 <% if @ajout.date_lundi.nil? %>
-    <% @ajout.date_lundi = Date.today %>
-  <% end %>
+  <% @ajout.date_lundi = Date.today %>
+<% else %>
+  <% @ajout.date_lundi = @ajout.date_lundi.beginning_of_week + @ajout.numero_jour - 1 %>
+<% end %>
 
 <%= form_with model: @ajout, local: true do |form| %>
 
@@ -41,7 +45,7 @@
       <p>Veuillez indiquer ci-dessous la période pour laquelle vous voulez affecter une attribution.</p>
 
       <p>
-        <%= form.label :date_lundi %><br>
+        <%= form.label "Date" %><br>
         <%= form.date_field :date_lundi %>
       </p>
     </div>

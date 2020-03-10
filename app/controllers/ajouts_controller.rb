@@ -20,9 +20,11 @@ class AjoutsController < ApplicationController
                 end
             end
         end
+        
         @ajouts = Ajout.all
-        @works = @ajouts.count>0 ? Work.all : Array.new
-        @semaines = @ajouts.count>0 ? Semaine.where(date_lundi: @ajouts.last.date_lundi).order(:utilisateur_id) : Array.new
+        @works = Work.all
+        @semaines = Semaine.where(date_lundi: @ajouts.last.date_lundi).order(:utilisateur_id)
+        
     end
 
 
@@ -55,6 +57,22 @@ class AjoutsController < ApplicationController
     #############
     def edit
     end
+
+
+
+    #############
+    #   UPDATE  #
+    #############
+    def update
+        if @ajout.update(ajout_params)
+            flash[:notice] = "Ajout modifiée avec succès"
+            redirect_to ajouts_path
+        else 
+            render :edit
+        end
+    end
+
+
     
 
     ##############

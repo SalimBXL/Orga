@@ -1,6 +1,9 @@
 class Ajout < ApplicationRecord
     validates :utilisateur, :date_lundi, presence: true
+    before_validation :set_numero_jour
+    before_validation :set_date_lundi
     
+
     def works
         w = Array.new
         unless work1.nil?
@@ -19,6 +22,16 @@ class Ajout < ApplicationRecord
             w << work5
         end
         works = w
+    end
+
+    private
+
+    def set_date_lundi
+        self.date_lundi = date_lundi.beginning_of_week
+    end
+
+    def set_numero_jour
+        self.numero_jour = date_lundi.cwday
     end
     
 end
