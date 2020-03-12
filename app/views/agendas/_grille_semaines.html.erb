@@ -72,11 +72,10 @@
                         <% if @absences.has_key?(numero_semaine) %>
                             <% @absences[numero_semaine].keys.each do |id_u| %>
                                 <% @absences[numero_semaine][id_u].each do |a| %>
-                                    <%= a.utilisateur.prenom_nom %>
+                                        <%= a.utilisateur.prenom_nom %>
                                 <% end %>
                             <% end %>
                         <% end %>
-
                     </td>
                 </tr>
             <% end %>

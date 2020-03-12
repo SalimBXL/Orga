@@ -13,15 +13,14 @@
                 <% box = "warning" %>
             <% end %>
             <% @jobs[key].each do |job| %>
-            <% if job.am_pm %>
-                <% box = "info" %>
-            <% else %>
-                <% box = "primary" %>
-            <% end %>
-            <div class="panel panel-<%= box %>">
-                <div class="panel-heading"><%= key.prenom_nom %></div>
-                <div class="panel-body">
-    
+                <% if job.am_pm %>
+                    <% box = "info" %>
+                <% else %>
+                    <% box = "primary" %>
+                <% end %>
+                <div class="panel panel-<%= box %>">
+                    <div class="panel-heading"><%= key.prenom_nom %></div>
+                    <div class="panel-body">
                         <% wls = job.working_lists %>
                         <% if wls.count<1 %>
                             <em>Aucune attribution pour ce job.</em>
@@ -36,9 +35,13 @@
                             <% end %>
                             </table>
                         <% end %>
-    
+                        <% if job.note %>
+                        <div class="label label-default">
+                            Note : <em><%= job.note %></em>
+                        </div>
+                        <% end %>
+                    </div>
                 </div>
-            </div>
             <% end %>
         </div>
     <% end %>
@@ -50,7 +53,8 @@
             <% unless @jobs.has_key?(utilisateur) %>
                 <div class="panel panel-warning">
                     <div class="panel-heading"><%= utilisateur.prenom_nom %></div>
-                    <div class="panel-body"></div>
+                    <div class="panel-body">
+                    </div>
                 </div>
             <% end %>
         </div>
