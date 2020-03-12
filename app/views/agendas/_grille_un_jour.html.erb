@@ -12,10 +12,16 @@
             <% if @absences.include?(key) %>
                 <% box = "warning" %>
             <% end %>
+            <% @jobs[key].each do |job| %>
+            <% if job.am_pm %>
+                <% box = "info" %>
+            <% else %>
+                <% box = "primary" %>
+            <% end %>
             <div class="panel panel-<%= box %>">
                 <div class="panel-heading"><%= key.prenom_nom %></div>
                 <div class="panel-body">
-                    <% @jobs[key].each do |job| %>
+    
                         <% wls = job.working_lists %>
                         <% if wls.count<1 %>
                             <em>Aucune attribution pour ce job.</em>
@@ -30,9 +36,10 @@
                             <% end %>
                             </table>
                         <% end %>
-                    <% end %>
+    
                 </div>
             </div>
+            <% end %>
         </div>
     <% end %>
 </div>
