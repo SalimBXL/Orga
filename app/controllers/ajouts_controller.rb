@@ -1,25 +1,10 @@
 class AjoutsController < ApplicationController
-    before_action :find_ajout, only: [:show, :edit, :update, :destroy]
+    before_action :find_ajout, only: [:show, :edit, :update, :destroy, :valider]
 
     #############
     #   INDEX   #
     #############
     def index
-        liste = Ajout.all
-        liste.each do |item|
-            utilisateur = Utilisateur.find(item.utilisateur)
-            slug = "#{utilisateur.prenom_nom} #{item.date_lundi.year}-W#{item.date_lundi.cweek<10 ? "0" : ""}#{item.date_lundi.cweek}".parameterize
-            semaines = Semaine.where(slug: slug)
-            semaines.each do |semaine|
-                semaine.jobs.where(numero_jour: item.numero_jour).find_each do |job|
-                    job.working_lists.each do |work|
-                        if item.works.include?(work.work_id)
-                            item.destroy
-                        end
-                    end
-                end
-            end
-        end
         @ajouts = Ajout.all
         @works = Work.all
         @semaines = Semaine.where(date_lundi: @ajouts.last.date_lundi).order(:utilisateur_id)
@@ -39,8 +24,6 @@ class AjoutsController < ApplicationController
     ##############
     def create
         @ajout = Ajout.create(ajout_params)
-        @ajout.numero_jour = @ajout.date_lundi.cwday
-        @ajout.date_lundi = @ajout.date_lundi.beginning_of_week
         if @ajout.save
             flash[:notice] = "ajout créé avec succès"
             redirect_to ajouts_path
@@ -83,13 +66,49 @@ class AjoutsController < ApplicationController
     ##############
     def valider
 
+        utilisateur = Utilisateur.find(@ajout.utilisateur)
+
+        puts "===================="
+        puts " * Utilisateur    : #{@ajout.utilisateur}"
+        puts " * Date Lundi     : #{@ajout.date_lundi}"
+        puts " * Numero Jour    : #{@ajout.numero_jour}"
+        puts " * Works          : #{@ajout.works}"
+        numero_semaine = format_numero_semaine(@ajout.date_lundi.year, @ajout.date_lundi.cweek)
+        slug = "#{utilisateur.prenom_nom} #{numero_semaine}".parameterize
+        puts " * Numero Semaine : #{numero_semaine}"
+        puts " * Slug           : #{slug}"
+
+
         # Semaine
+        # Check si semaine existe. Sinon, on la crée.
+        unless Semaine.exists?(slug: slug)
+            semaine = Semaine.create(numero_semaine: numero_semaine, utilisateur: utilisateur, date_lundi: @ajout.date_lundi)
+            unless semaine.save
+                flash[:danger] = "Impossible de créer la semaine..."
+                redirect_to ajouts_path
+            end
+        else
+            semaine = Semaine.find_by_slug(slug)
+        end
 
         # Job
+        # Check si job existe. Sinon, on le crée.
+        jobs = semaine.jobs.where(numero_jour: @ajout.numero_jour)
+        if jobs.count<1
+            # aucun job pour cette semaine au jour donné
+            # on doit créer le job
+            
+        end
+
+        
 
         # Working_list
+
         
-        render json: {action: "VALIDER"}
+        
+        puts "===================="
+
+        render json: {action: "VALIDER id : #{@ajout.id}"}
     end
 
 

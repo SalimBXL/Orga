@@ -31,7 +31,9 @@ class Ajout < ApplicationRecord
     end
 
     def set_numero_jour
-        self.numero_jour = date_lundi.cwday
+        if numero_jour.nil? || numero_jour<1 || numero_jour>7
+            self.numero_jour = date_lundi.cwday
+        end
     end
     
 end

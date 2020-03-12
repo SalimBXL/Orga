@@ -19,7 +19,7 @@
                 data: { confirm: "Delete #{utilisateur.prenom_nom}\n
                     (#{ajout.date_lundi}) Jour ##{ajout.numero_jour} ?" } %>
             <%= link_to "Recommencer", edit_ajout_path(ajout), class: "btn btn-primary" %>
-            <%= link_to "Valider", home_path, class: "btn btn-success" %>
+            <%= link_to "Valider", "ajouts/#{ajout.id}/valider", class: "btn btn-success" %>
         </div>
     </td>
 </tr>
