@@ -7,7 +7,7 @@ class AjoutsController < ApplicationController
     def index
         @ajouts = Ajout.all
         @works = Work.all
-        @semaines = Semaine.where(date_lundi: @ajouts.last.date_lundi).order(:utilisateur_id)
+        @semaines = Semaine.where(date_lundi: @ajouts.last.date_lundi).order(:utilisateur_id) unless @ajouts.count<1
     end
 
 
@@ -66,18 +66,10 @@ class AjoutsController < ApplicationController
     ##############
     def valider
 
+        ajout_created = false
         utilisateur = Utilisateur.find(@ajout.utilisateur)
-
-        puts "===================="
-        puts " * Utilisateur    : #{@ajout.utilisateur}"
-        puts " * Date Lundi     : #{@ajout.date_lundi}"
-        puts " * Numero Jour    : #{@ajout.numero_jour}"
-        puts " * Works          : #{@ajout.works}"
         numero_semaine = format_numero_semaine(@ajout.date_lundi.year, @ajout.date_lundi.cweek)
         slug = "#{utilisateur.prenom_nom} #{numero_semaine}".parameterize
-        puts " * Numero Semaine : #{numero_semaine}"
-        puts " * Slug           : #{slug}"
-
 
         # Semaine
         # Check si semaine existe. Sinon, on la crée.
@@ -93,29 +85,40 @@ class AjoutsController < ApplicationController
 
         # Job
         # Check si job existe. Sinon, on le crée.
-        jobs = semaine.jobs.where(numero_jour: @ajout.numero_jour)
-        if jobs.count<1
-            # aucun job pour cette semaine au jour donné
-            # on doit créer le job
-            
+        unless Job.exists?(numero_jour: @ajout.numero_jour, am_pm: @ajout.am_pm, semaine: semaine.id)
+            job = Job.create(numero_jour: @ajout.numero_jour, am_pm: @ajout.am_pm, semaine_id: semaine.id)
+            unless job.save
+                flash[:danger] = "Impossible de créer le job..."
+                redirect_to ajouts_path
+            end
+        else
+            job = Job.find_by_semaine_id(semaine)
+        end
+        
+        # Working_list
+        # Check si working_list existe. Sinon, on la crée.
+        @ajout.works.each do |w|
+            unless WorkingList.exists?(job: job.id, work: w) && Work.exists?(w)
+                work = Work.find(w)
+                working_list = WorkingList.create(job: job, work: work)
+                unless working_list.save
+                    flash[:danger] = "Impossible de créer la working liste suivante : JOB ID:#{job.id} WORK ID:#{w}"
+                    redirect_to ajouts_path
+                end
+            end
         end
 
-        
+        # Nettoyage de la liste des ajouts
+        @ajout.destroy
 
-        # Working_list
-
-        
-        
-        puts "===================="
-
-        render json: {action: "VALIDER id : #{@ajout.id}"}
+        redirect_to ajouts_path
     end
 
 
     private
 
     def ajout_params
-        params.require(:ajout).permit(:utilisateur, :work1, :work2, :work3, :work4, :work5, :date_lundi)
+        params.require(:ajout).permit(:utilisateur, :work1, :work2, :work3, :work4, :work5, :date_lundi, :am_pm)
     end
 
     def find_ajout

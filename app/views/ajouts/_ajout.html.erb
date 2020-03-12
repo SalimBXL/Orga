@@ -2,7 +2,7 @@
     <% utilisateur = Utilisateur.find(ajout.utilisateur) %>
     <td><%= utilisateur.prenom_nom %></td>
     <td><%= ajout.date_lundi %></td>
-    <td><%= ajout.numero_jour %></td>
+    <td><%= ajout.numero_jour %> (<%= am_pm(ajout.am_pm) %>)</td>
     <td>
         <ul>
             <% ajout.works.each do |wid| %>

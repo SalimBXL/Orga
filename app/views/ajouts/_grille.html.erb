@@ -7,6 +7,7 @@
     </tr>
     </thead>
     <tbody>
+        <% if @semaines %>
         <% @semaines.each do |semaine| %>
         <tr>
             <td>
@@ -16,15 +17,19 @@
                 <% n += 1 %>
                 <td>
                     <% semaine.jobs.where(numero_jour: n).each do |job| %>
-                        <% job.working_lists.each do |wl| %>
-                            <span class="badge">
-                                <%= wl.work.code %>
-                            </span>
-                        <% end %>
+                        
+                            <%= am_pm(job.am_pm) %> : 
+                            <% job.working_lists.each do |wl| %>
+                                <span class="badge">
+                                    <%= wl.work.code %>
+                                </span>
+                            <% end %>
+                        
                     <% end %>
                 </td>
             <% end %>
         </tr>
+        <% end %>
         <% end %>
     </tbody>
 </table>

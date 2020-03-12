@@ -2,6 +2,7 @@ class Ajout < ApplicationRecord
     validates :utilisateur, :date_lundi, presence: true
     before_validation :set_numero_jour
     before_validation :set_date_lundi
+    before_validation :set_am_pm
     
 
     def works
@@ -25,6 +26,14 @@ class Ajout < ApplicationRecord
     end
 
     private
+
+    def set_am_pm
+        if am_pm.nil? || (am_pm!=false && am_pm!=true)
+            self.am_pm = false
+        else 
+            self.am_pm = am_pm.to_s.downcase == 'true' ? true : false
+        end
+    end
 
     def set_date_lundi
         self.date_lundi = date_lundi.beginning_of_week

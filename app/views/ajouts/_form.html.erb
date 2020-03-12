@@ -21,6 +21,8 @@
   <% @ajout.date_lundi = @ajout.date_lundi.beginning_of_week + @ajout.numero_jour - 1 %>
 <% end %>
 
+
+
 <%= form_with model: @ajout, local: true do |form| %>
 
   <% if @ajout.errors.any? %>
@@ -47,6 +49,11 @@
       <p>
         <%= form.label "Date" %><br>
         <%= form.date_field :date_lundi %>
+      </p>
+
+      <p>
+        <%= form.radio_button :am_pm, false %> AM 
+        <%= form.radio_button :am_pm, true %> PM 
       </p>
     </div>
 
