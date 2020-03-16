@@ -1,5 +1,6 @@
 class AgendasController < ApplicationController
     before_action :find_debut_fin, only: [:absences, :conges, :semaines, :jobs, :jours]
+    before_action :find_numero_semaine, only: :une_semaine
 
     # ACCUEIL
     def index
@@ -66,6 +67,14 @@ class AgendasController < ApplicationController
         end
     end
 
+    # SEMAINE (pour une seule semaine...)
+    def une_semaine
+        @semaines = Semaine.where(numero_semaine: @numero_semaine)
+        @conges = Conge.where(date: @date_depart..@date_fin)
+        @works = Work.all
+        @semaines = Semaine.where(numero_semaine: @numero_semaine)
+    end
+
     # JOUR (pour un seul jour...)
     def un_jour
         @absences = []
@@ -112,6 +121,20 @@ class AgendasController < ApplicationController
     end
 
     private
+
+    def find_numero_semaine
+        unless params[:semaine].nil?
+            @numero_semaine = params[:semaine]
+            annee = params[:semaine][0..3].to_i
+            semaine = params[:semaine][-2..-1].to_i
+            @date_depart = Date.commercial(annee, semaine, 1)
+            @date_fin = Date.commercial(annee, semaine, 5)
+        else
+            @numero_semaine = format_numero_semaine(Date.today.year, Date.today.cweek)
+            @date_depart = Date.today.beginning_of_week
+            @date_fin = @date_depart + 5.days
+        end
+    end
     
     def find_debut_fin
         unless params[:semaine].nil?

@@ -23,12 +23,44 @@ class AjoutsController < ApplicationController
     #   CREATE   #
     ##############
     def create
-        @ajout = Ajout.create(ajout_params)
-        if @ajout.save
-            flash[:notice] = "ajout créé avec succès"
-            redirect_to ajouts_path
+        puts "*********************************************"
+        puts "*********************************************"
+        puts ajout_params
+        puts "*********************************************"
+        puts "*********************************************"
+        to_add = Array.new
+        if ajout_params[:etendre].to_i == 1
+            date_du_lundi = ajout_params[:date_lundi].to_date.beginning_of_week
+            puts "OOOOOOOOO ====  Date du lundi = #{date_du_lundi}"
+            5.times do |n|
+                puts ">>>>>>> n = #{n} / date_lundi : #{ajout_params[:date_lundi]}"
+                ajout_params[:date_lundi] = date_du_lundi.next_day(n).to_s
+                puts "...... >>>>>>> date_lundi : #{ajout_params[:date_lundi]}"
+                to_add << ajout_params
+            end
         else
+            to_add << ajout_params
+        end
+
+        err = false
+        to_add.each do |a|
+            a.delete(:etendre)
+
+            puts "xxxxxxxxxx"
+            puts "=== A = #{a} ==="
+            puts "xxxxxxxxxx"
+
+            @ajout = Ajout.create(a)
+            if @ajout.save
+            else
+                err = true
+            end
+        end
+        if err 
             render :new
+        else
+            flash[:notice] = "ajout(s) créé(s) avec succès"
+            redirect_to ajouts_path
         end
     end
 
@@ -118,7 +150,7 @@ class AjoutsController < ApplicationController
     private
 
     def ajout_params
-        params.require(:ajout).permit(:utilisateur, :work1, :work2, :work3, :work4, :work5, :date_lundi, :am_pm)
+        params.require(:ajout).permit(:utilisateur, :work1, :work2, :work3, :work4, :work5, :date_lundi, :am_pm, :etendre)
     end
 
     def find_ajout

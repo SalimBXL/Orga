@@ -58,7 +58,9 @@ Rails.application.routes.draw do
   get "agendas/semaines", to: "agendas#semaines"
   get "agendas/jobs", to: "agendas#jobs"
   get "agendas/jours", to: "agendas#jours"
+
   get "agendas/jour", to: "agendas#un_jour"
+  get "agendas/semaine", to: "agendas#une_semaine"
 
 
   ##############
