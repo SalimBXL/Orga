@@ -1,2 +1,15 @@
-<h1>Nouveau lieu</h1>
-<%= render "form" %>
+<h1>
+    <span class="label label-primary">
+        <i class="material-icons">location_city</i>
+        <%= "Lieux".upcase %>
+    </span>
+</h1>
+<div class="container">
+    <h3>
+        <span class="label label-info">
+            <i class="material-icons">add_location</i>
+            <%= "Nouveau Lieu".capitalize %>
+        </span>
+    </h3>
+    <%= render "form" %>
+</div>
