@@ -9,7 +9,36 @@
 <h1>ORGA</h1>
 <p>gestion des équipes</p>
 
+<!-- MENU STANDARD -->
+<div class="btn-group">
+    <%= link_to '<i class="material-icons">today</i><br>
+        Aujourd\'hui'.html_safe, 
+        agendas_jour_path,
+        class: "btn btn-primary btn-xs" %>
+    <%= link_to '<i class="material-icons">date_range</i><br>
+        Cette Semaine'.html_safe, 
+        agendas_semaine_path,
+        class: "btn btn-primary btn-xs" %>
+</div>
+
+<!-- MENU ADMIN -->
+<div class="btn-group">
+    <%= link_to '<i class="material-icons">playlist_add</i><br>
+        Ajouter'.html_safe, 
+        ajouts_path,
+        class: "btn btn-primary btn-xs" %>
+    <%= link_to '<i class="material-icons">playlist_add</i><br>
+        Ajouter'.html_safe, 
+        agendas_semaine_path,
+        class: "btn btn-primary btn-xs" %>
+</div>
+
+
+
+
+
 <!-- MENU -->
+<h3>MENU</h3>
 <ul>
     <li><%= link_to "Lieux", lieus_path %></li>
     <li><%= link_to "Services", services_path %></li>

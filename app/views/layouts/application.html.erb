@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>ORGA</title>
     <%= csrf_meta_tags %>
 
@@ -9,32 +10,34 @@
     <%= favicon_link_tag 'icon.ico' %>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap&subset=latin-ext" rel="stylesheet">
-  </head>
-  <body>
+</head>
+
+<body>
 
     <!-- HEADER -->
     <%= render'layouts/header'%>
 
     <!-- FLASH -->
     <div class="container">
-      <% flash.each do |key, value| %>
+        <% flash.each do |key, value| %>
         <%= content_tag :div, value, class: key %>
-      <% end %>
+        <% end %>
     </div>
 
     <!-- YIELD -->
     <div class="container">
-      <%= yield %>
+        <%= yield %>
     </div>
 
     <!-- FOOT -->
     <%= render'layouts/footer'%>
 
-  </body>
+</body>
+
 </html>
 
 <script>
-$(document).ready(function(){
-  $('[data-toggle="tooltip"]').tooltip();
-});
+    $(document).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
 </script>
