@@ -23,44 +23,34 @@ class AjoutsController < ApplicationController
     #   CREATE   #
     ##############
     def create
-        puts "*********************************************"
-        puts "*********************************************"
-        puts ajout_params
-        puts "*********************************************"
-        puts "*********************************************"
-        to_add = Array.new
-        if ajout_params[:etendre].to_i == 1
-            date_du_lundi = ajout_params[:date_lundi].to_date.beginning_of_week
-            puts "OOOOOOOOO ====  Date du lundi = #{date_du_lundi}"
+        if params[:ajout].include? 'etendre'
+            err = false
+            message = ""
             5.times do |n|
-                puts ">>>>>>> n = #{n} / date_lundi : #{ajout_params[:date_lundi]}"
-                ajout_params[:date_lundi] = date_du_lundi.next_day(n).to_s
-                puts "...... >>>>>>> date_lundi : #{ajout_params[:date_lundi]}"
-                to_add << ajout_params
+                params[:ajout][:date_lundi] = params[:ajout][:date_lundi].to_date.beginning_of_week + n.days
+                @ajout = Ajout.create(ajout_params)
+                if @ajout.save
+                    message += "#{@ajout.date_lundi} : ajout créé avec succès ** "
+                else
+                    message =+ " ERROR: #{@ajout.date_lundi} : problème lors de l'ajout ** "
+                    err = true
+                end
             end
-        else
-            to_add << ajout_params
-        end
-
-        err = false
-        to_add.each do |a|
-            a.delete(:etendre)
-
-            puts "xxxxxxxxxx"
-            puts "=== A = #{a} ==="
-            puts "xxxxxxxxxx"
-
-            @ajout = Ajout.create(a)
-            if @ajout.save
+            if err
+                flash[:danger] = message
+                render :new
             else
-                err = true
+                flash[:notice] = message
+                redirect_to ajouts_path
             end
-        end
-        if err 
-            render :new
-        else
-            flash[:notice] = "ajout(s) créé(s) avec succès"
-            redirect_to ajouts_path
+        else 
+            @ajout = Ajout.create(ajout_params)
+            if @ajout.save
+                flash[:notice] = "ajout créé avec succès"
+                redirect_to ajouts_path
+            else
+                render :new
+            end
         end
     end
 
@@ -150,10 +140,11 @@ class AjoutsController < ApplicationController
     private
 
     def ajout_params
-        params.require(:ajout).permit(:utilisateur, :work1, :work2, :work3, :work4, :work5, :date_lundi, :am_pm, :etendre)
+        params.require(:ajout).permit(:utilisateur, :work1, :work2, :work3, :work4, :work5, :date_lundi, :am_pm)
     end
 
     def find_ajout
         @ajout = Ajout.find(params[:id])
     end
+
 end
