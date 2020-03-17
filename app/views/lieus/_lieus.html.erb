@@ -1,11 +1,11 @@
- <div clas="container">
-    <div class="row">
-        <%= paginate @lieus, remote: true %>
-    </div>
-    <div class="row">
-        <%= render @lieus %>
-    </div>
-    <div class="row">
-        <%= paginate @lieus, remote: true %>
-    </div>
-</div>
+ <div class="container">
+     <p>
+         <%= paginate @lieus, remote: true %>
+     </p>
+     <div class="row">
+         <%= render @lieus %>
+     </div>
+     <p>
+         <%= paginate @lieus, remote: true %>
+     </p>
+ </div>

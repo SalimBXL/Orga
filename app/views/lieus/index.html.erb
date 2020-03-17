@@ -1,12 +1,22 @@
-<h1>LIEUX</h1>
+<h1>
+    <span class="label label-primary">
+        <i class="material-icons">location_city</i>
+        <%= "Lieux".upcase %>
+    </span>
+</h1>
+
 <div class="container">
-    <div class="row">
-        <%= link_to "[Nouveau lieu]", new_lieu_path %>
-    </div>
+    <p>
+        <%= link_to '<i class="material-icons">add_location</i> Ajouter'.html_safe, 
+            new_lieu_path,
+            class: "btn btn-success btn-xs" %>
+    </p>
     <div class="row" id="lieus">
         <%= render 'lieus' %>
     </div>
-    <div class="row">
-        <p><%= link_to "[Nouveau lieu]", new_lieu_path %></p>
-    </div>
+    <p>
+        <%= link_to '<i class="material-icons">add_location</i> Ajouter'.html_safe, 
+            new_lieu_path,
+            class: "btn btn-success btn-xs" %>
+    </p>
 </div>
