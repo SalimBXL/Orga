@@ -1,10 +1,10 @@
 <div class="col-sm-4" id="service_<%= service.id %>">
-    <h3><%= service.nom %></h3>
+    <h3><i class="material-icons">business</i> <%= service.nom %></h3>
     <div class="well well-sm">
         <p>
             <%= service.lieu.nom %><br>
             <%= service.description %>
-        </p>        
+        </p>
         <p>
             <%= link_to " [Show] ", service_path(service) %>
             <%= link_to " [Edit] ", edit_service_path(service) %>

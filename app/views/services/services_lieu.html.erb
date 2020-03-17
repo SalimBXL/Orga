@@ -1,6 +1,26 @@
-<h1>SERVICES PAR LIEU</h1>
-<h2><%= @lieu.nom %></h2>
-<div id="services">
-    <%= render 'services' %>
+<h1>
+    <span class="label label-primary">
+        <i class="material-icons">business</i>
+        <%= "Services".upcase %>
+    </span>
+</h1>
+<div class="container">
+    <h3>
+        <span class="label label-info">
+            <%= @lieu.nom.capitalize %>
+        </span>
+    </h3>
+    <p>
+        <%= link_to '<i class="material-icons">add</i>'.html_safe, 
+            new_service_path,
+            class: "btn btn-success btn-xs" %>
+    </p>
+    <div id="services">
+        <%= render 'services' %>
+    </div>
+    <p>
+        <%= link_to '<i class="material-icons">add</i>'.html_safe, 
+            new_service_path,
+            class: "btn btn-success btn-xs" %>
+    </p>
 </div>
-<p><%= link_to "[Nouveau service]", new_service_path %></p>
