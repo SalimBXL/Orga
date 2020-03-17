@@ -23,26 +23,27 @@ class AjoutsController < ApplicationController
     #   CREATE   #
     ##############
     def create
-        if params[:ajout].include? 'etendre'
-            err = false
-            message = ""
-            5.times do |n|
-                params[:ajout][:date_lundi] = params[:ajout][:date_lundi].to_date.beginning_of_week + n.days
-                @ajout = Ajout.create(ajout_params)
-                if @ajout.save
-                    message += "#{@ajout.date_lundi} : ajout créé avec succès ** "
-                else
-                    message =+ " ERROR: #{@ajout.date_lundi} : problème lors de l'ajout ** "
-                    err = true
+        if params[:ajout].include? 'etendre' && params[:ajout][:etendre] == 1
+                err = false
+                message = ""
+                5.times do |n|
+                    params[:ajout][:date_lundi] = params[:ajout][:date_lundi].to_date.beginning_of_week + n.days
+                    @ajout = Ajout.create(ajout_params)
+                    if @ajout.save
+                        message += "#{@ajout.date_lundi} : ajout créé avec succès ** "
+                    else
+                        message =+ " ERROR: #{@ajout.date_lundi} : problème lors de l'ajout ** "
+                        err = true
+                    end
                 end
-            end
-            if err
-                flash[:danger] = message
-                render :new
-            else
-                flash[:notice] = message
-                redirect_to ajouts_path
-            end
+                if err
+                    flash[:danger] = message
+                    render :new
+                else
+                    flash[:notice] = message
+                    redirect_to ajouts_path
+                end
+            
         else 
             @ajout = Ajout.create(ajout_params)
             if @ajout.save
@@ -88,10 +89,16 @@ class AjoutsController < ApplicationController
     ##############
     def valider
 
+        semaine = nil
+        job = nil
+
         ajout_created = false
         utilisateur = Utilisateur.find(@ajout.utilisateur)
         numero_semaine = format_numero_semaine(@ajout.date_lundi.year, @ajout.date_lundi.cweek)
+        numero_jour = @ajout.numero_jour
         slug = "#{utilisateur.prenom_nom} #{numero_semaine}".parameterize
+
+        
 
         # Semaine
         # Check si semaine existe. Sinon, on la crée.
@@ -107,20 +114,20 @@ class AjoutsController < ApplicationController
 
         # Job
         # Check si job existe. Sinon, on le crée.
-        unless Job.exists?(numero_jour: @ajout.numero_jour, am_pm: @ajout.am_pm, semaine: semaine.id)
-            job = Job.create(numero_jour: @ajout.numero_jour, am_pm: @ajout.am_pm, semaine_id: semaine.id)
+        unless Job.exists?(numero_jour: numero_jour, am_pm: @ajout.am_pm, semaine: semaine)
+            job = Job.create(numero_jour: numero_jour, am_pm: @ajout.am_pm, semaine_id: semaine.id)
             unless job.save
                 flash[:danger] = "Impossible de créer le job..."
                 redirect_to ajouts_path
             end
         else
-            job = Job.find_by_semaine_id(semaine)
+            job = Job.where(numero_jour: numero_jour, am_pm: @ajout.am_pm, semaine: semaine).first
         end
         
         # Working_list
         # Check si working_list existe. Sinon, on la crée.
         @ajout.works.each do |w|
-            unless WorkingList.exists?(job: job.id, work: w) && Work.exists?(w)
+            unless WorkingList.exists?(job: job, work: w) && Work.exists?(w)
                 work = Work.find(w)
                 working_list = WorkingList.create(job: job, work: work)
                 unless working_list.save
@@ -132,7 +139,6 @@ class AjoutsController < ApplicationController
 
         # Nettoyage de la liste des ajouts
         @ajout.destroy
-
         redirect_to ajouts_path
     end
 

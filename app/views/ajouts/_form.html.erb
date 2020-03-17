@@ -1,176 +1,182 @@
+<h1>
+    <span class="label label-primary">
+        <i class="material-icons">today</i>
+        <%= "Attributions".upcase %>
+    </span>
+</h1>
 <div class="container">
-  <h2>Nouvelle Attribution :</h2>
-  <p>Veuillez remplir les différents champs dans les onglets ci-dessous, puis terminer par "<em>Confirmer</em>".</p>
+    <h2><%= "Nouvelle Attribution".capitalize %></h2>
+    <p>Veuillez remplir les différents champs dans les onglets ci-dessous, puis terminer par "<em>Confirmer</em>".</p>
 
-  <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#home"><strong>Quand ?</strong></a></li>
-    <li><a data-toggle="tab" href="#menu2"><strong>Qui ?</strong></a></li>
-    <li><a data-toggle="tab" href="#menu1"><strong>Quoi ?</strong></a></li>
-    <li><a data-toggle="tab" href="#menu3"><strong>Confirmer</strong></a></li>
-  </ul>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home"><strong>Quand ?</strong></a></li>
+        <li><a data-toggle="tab" href="#menu2"><strong>Qui ?</strong></a></li>
+        <li><a data-toggle="tab" href="#menu1"><strong>Quoi ?</strong></a></li>
+        <li><a data-toggle="tab" href="#menu3"><strong>Confirmer</strong></a></li>
+    </ul>
 
-<% @utilisateurs = Utilisateur.order(:groupe_id) %>
+    <% @utilisateurs = Utilisateur.order(:groupe_id) %>
 
-<% @groupes = Groupe.all %>
-<% @works = Work.order(:classe_id, :nom) %>
-<% @classes = Classe.all %>
+    <% @groupes = Groupe.all %>
+    <% @works = Work.order(:classe_id, :nom) %>
+    <% @classes = Classe.all %>
 
-<% if @ajout.date_lundi.nil? %>
-  <% @ajout.date_lundi = Date.today %>
-<% else %>
-  <% @ajout.date_lundi = @ajout.date_lundi.beginning_of_week + @ajout.numero_jour - 1 %>
-<% end %>
+    <% if @ajout.date_lundi.nil? %>
+    <% @ajout.date_lundi = Date.today %>
+    <% else %>
+    <% @ajout.date_lundi = @ajout.date_lundi.beginning_of_week + @ajout.numero_jour - 1 %>
+    <% end %>
 
 
 
-<%= form_with model: @ajout, local: true do |form| %>
+    <%= form_with model: @ajout, local: true do |form| %>
 
-  <% if @ajout.errors.any? %>
+    <% if @ajout.errors.any? %>
     <strong>WARNING</strong>
     <ul>
         <% @ajout.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
+        <li><%= message %></li>
         <% end %>
     </ul>
-  <% end %>
+    <% end %>
 
 
 
 
-  <div class="tab-content">
-  
-
-<!-- ===== QUAND ? ===== -->
-
-    <div id="home" class="tab-pane fade in active">
-      <h3>Quand ?</h3>
-      <p>Veuillez indiquer ci-dessous la période pour laquelle vous voulez affecter une attribution.</p>
-
-      <p>
-        <%= form.label "Date" %><br>
-        <%= form.date_field :date_lundi %>
-      </p>
-
-      <p>
-        <%= form.radio_button :am_pm, false %> AM 
-        <%= form.radio_button :am_pm, true %> PM 
-      </p>
-
-      <p>
-        <%= form.check_box :etendre %> Etendre à la semaine
-      </p>
-
-    </div>
+    <div class="tab-content">
 
 
+        <!-- ===== QUAND ? ===== -->
 
-<!-- ===== QUI ? ===== -->
+        <div id="home" class="tab-pane fade in active">
+            <h3>Quand ?</h3>
+            <p>Veuillez indiquer ci-dessous la période pour laquelle vous voulez affecter une attribution.</p>
 
-    <div id="menu2" class="tab-pane fade">
-      <h3>Qui ?</h3>
-      <p>Veuillez indiquer l'utilisateur auquel vous voulez affecter le ou les travaux précédement séléctionné(s).</p>
-      <div class="form-group">
-        <!-- Utilisateur -->
-        <p>
-          <%= form.label :utilisateur %><br>
-          <%= form.select(:utilisateur, @utilisateurs.collect {|p| [ "[#{@groupes.where(id: p.groupe_id).first.nom}] #{p.prenom_nom}", p.id ] }, 
+            <p>
+                <%= form.label "Date" %><br>
+                <%= form.date_field :date_lundi %>
+            </p>
+
+            <p>
+                <%= form.radio_button :am_pm, false %> AM
+                <%= form.radio_button :am_pm, true %> PM
+            </p>
+
+            <p>
+                <%= form.check_box :etendre %> Etendre à la semaine
+            </p>
+
+        </div>
+
+
+
+        <!-- ===== QUI ? ===== -->
+
+        <div id="menu2" class="tab-pane fade">
+            <h3>Qui ?</h3>
+            <p>Veuillez indiquer l'utilisateur auquel vous voulez affecter le ou les travaux précédement séléctionné(s).</p>
+            <div class="form-group">
+                <!-- Utilisateur -->
+                <p>
+                    <%= form.label :utilisateur %><br>
+                    <%= form.select(:utilisateur, @utilisateurs.collect {|p| [ "[#{@groupes.where(id: p.groupe_id).first.nom}] #{p.prenom_nom}", p.id ] }, 
                                             { }, 
                                             { :multiple => false, :size => 10 }) %>
-        </p>
-      </div>
-    </div>
-
-
-
-<!-- ===== QUOI ? ===== -->    
-    
-    <div id="menu1" class="tab-pane fade">
-      <h3>Quoi ?</h3>
-      <p>Veuillez indiquer ci-dessous le ou les travaux à affacter à la date choisie dans l'onglet précédent.</p>
-      <div class="form-group">
-
-        <div class="container">
-          <% @works.each do |w| %>
-            <div class="checkbox">
-              <label><input type="checkbox" value="<%= w.id %>%">
-                <%= "[#{@classes.where(id: w.classe_id).first.nom}] - (#{w.code}) - #{w.nom}" %>
-              </label>
+                </p>
             </div>
-          <% end %>
         </div>
 
 
 
-        <div class="row">
-          <div class="col-sm-2">
-            <p>
-            <%= form.label :work1 %><br>
-            <%= form.select(:work1, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
+        <!-- ===== QUOI ? ===== -->
+
+        <div id="menu1" class="tab-pane fade">
+            <h3>Quoi ?</h3>
+            <p>Veuillez indiquer ci-dessous le ou les travaux à affacter à la date choisie dans l'onglet précédent.</p>
+            <div class="form-group">
+
+                <div class="container">
+                    <% @works.each do |w| %>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="<%= w.id %>%">
+                            <%= "[#{@classes.where(id: w.classe_id).first.nom}] - (#{w.code}) - #{w.nom}" %>
+                        </label>
+                    </div>
+                    <% end %>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-sm-2">
+                        <p>
+                            <%= form.label :work1 %><br>
+                            <%= form.select(:work1, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
                                             { }, 
                                             { :multiple => false, :size => 20 }) %>
-            </p>
-          </div>
-          <div class="col-sm-2">
-            <p>
-            <%= form.label :work2 %><br>
-            <%= form.select(:work2, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
+                        </p>
+                    </div>
+                    <div class="col-sm-2">
+                        <p>
+                            <%= form.label :work2 %><br>
+                            <%= form.select(:work2, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
                                             { }, 
                                             { :multiple => false, :size => 20 }) %>
-            </p>
-          </div>
-          <div class="col-sm-2">
-            <p>
-            <%= form.label :work3 %><br>
-            <%= form.select(:work3, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
+                        </p>
+                    </div>
+                    <div class="col-sm-2">
+                        <p>
+                            <%= form.label :work3 %><br>
+                            <%= form.select(:work3, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
                                             { }, 
                                             { :multiple => false, :size => 20 }) %>
-            </p>
-          </div>
-          <div class="col-sm-2">
-            <p>
-            <%= form.label :work4 %><br>
-            <%= form.select(:work4, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
+                        </p>
+                    </div>
+                    <div class="col-sm-2">
+                        <p>
+                            <%= form.label :work4 %><br>
+                            <%= form.select(:work4, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
                                             { }, 
                                             { :multiple => false, :size => 20 }) %>
-            </p>
-          </div>
-          <div class="col-sm-2">
-            <p>
-            <%= form.label :work5 %><br>
-            <%= form.select(:work5, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
+                        </p>
+                    </div>
+                    <div class="col-sm-2">
+                        <p>
+                            <%= form.label :work5 %><br>
+                            <%= form.select(:work5, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
                                             { }, 
                                             { :multiple => false, :size => 20 }) %>
-            </p>
-          </div>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
         </div>
-        
-      </div>
+
+
+
+        <!-- ===== CONFIRMER ? ===== -->
+
+        <div id="menu3" class="tab-pane fade">
+            <h3>Confirmer</h3>
+            <p>Veuillez vérifier les données ci-dessous et confirmer le cas échéant.</p>
+            <p>Date(s) : <%=  %></p>
+            <p>Utilisateur : <%=  %></p>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+
+            <p>
+                <%= form.submit class: "btn btn-primary" %>
+            </p>
+
+        </div>
+
+
     </div>
 
-    
+    <% end %>
 
-<!-- ===== CONFIRMER ? ===== -->    
-    
-    <div id="menu3" class="tab-pane fade">
-      <h3>Confirmer</h3>
-      <p>Veuillez vérifier les données ci-dessous et confirmer le cas échéant.</p>
-      <p>Date(s) : <%=  %></p>
-      <p>Utilisateur : <%=  %></p>
-      <ul>
-      	<li></li>
-        <li></li>
-        <li></li>
-      </ul>
-      
-      <p>
-        <%= form.submit class: "btn btn-primary" %>
-      </p>
-      
-    </div>
-    
-    
-  </div>
-  
-  <% end %>
-  
 </div>

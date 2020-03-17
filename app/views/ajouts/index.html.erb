@@ -1,13 +1,22 @@
-<!-- GRILLE -->
-<%= render 'grille' %>
+<h1>
+    <span class="label label-primary">
+        <i class="material-icons">today</i>
+        <%= "Attributions".upcase %>
+    </span>
+</h1>
 
-<h1>Dernier(s) ajout(s)</h1>
-
-<p><%= link_to "[Nouvel ajout]", new_ajout_path %></p>
+<p>
+    <%= link_to '<i class="material-icons">playlist_add</i> Ajouter'.html_safe, 
+        new_ajout_path,
+        class: "btn btn-success btn-xs" %>
+</p>
 
 <div class="container">
     <%= render 'ajouts' %>
 </div>
 
-<p><%= link_to "[Nouvel ajout]", new_ajout_path %></p>
-
+<p>
+    <%= link_to '<i class="material-icons">playlist_add</i> Ajouter'.html_safe, 
+        new_ajout_path,
+        class: "btn btn-success btn-xs" %>
+</p>
