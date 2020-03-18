@@ -10,12 +10,18 @@
     <%= favicon_link_tag 'icon.ico' %>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap&subset=latin-ext" rel="stylesheet">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
 <body>
 
+    <!-- NAVBAR -->
+    <%= render 'layouts/navbar' %>
+
     <!-- HEADER -->
-    <%= render'layouts/header'%>
+    <%= render 'layouts/header'%>
 
     <!-- FLASH -->
     <div class="container">
@@ -30,7 +36,7 @@
     </div>
 
     <!-- FOOT -->
-    <%= render'layouts/footer'%>
+    <%= render 'layouts/footer'%>
 
 </body>
 
