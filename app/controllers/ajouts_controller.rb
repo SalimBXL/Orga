@@ -23,10 +23,11 @@ class AjoutsController < ApplicationController
     #   CREATE   #
     ##############
     def create
-        if params[:ajout].include? 'etendre' && params[:ajout][:etendre] == 1
+        if params[:ajout][:etendre] == "1"
                 err = false
                 message = ""
                 5.times do |n|
+                    puts("JOUR #{n} : ")
                     params[:ajout][:date_lundi] = params[:ajout][:date_lundi].to_date.beginning_of_week + n.days
                     @ajout = Ajout.create(ajout_params)
                     if @ajout.save
