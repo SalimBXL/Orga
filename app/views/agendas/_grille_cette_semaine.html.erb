@@ -1,41 +1,48 @@
-<table class="table table-condensed">
-    <thead>
-      <tr>
-        <th>Utilisateur</th>
-        <th>Lundi</th><th>Mardi</th><th>Mercredi</th>
-        <th>jeudi</th><th>Vendredi</th>
-    </tr>
-    </thead>
-    <tbody>
-        <% if @semaines %>
-            <% @semaines.each do |semaine| %>
-                <tr>
-                    <td>
-                        <%= semaine.utilisateur.prenom_nom %>
-                    </td>
-                    <% 5.times do |n| %>
-                        <% n += 1 %>
-                        <td class="<%= @conges.exists?(utilisateur: semaine.utilisateur, date: semaine.date_lundi+n.days-1) ? "conge_ok" : "" %>">
-                            <% semaine.jobs.where(numero_jour: n).each do |job| %>
-                                    <%= am_pm(job.am_pm) %> : 
-                                    <% job.working_lists.each do |wl| %>
-                                        <% if n < Date.today.cwday %>
-                                            <% type = "default" %>
-                                        <% elsif job.am_pm %>
-                                            <% type = "info" %>
-                                        <% else %>
-                                            <% type = "primary" %>
-                                        <% end %>
-                                        <span class="label label-<%= type %>">
-                                            <%= wl.work.code %>
-                                        </span>
-                                        &nbsp;
-                                    <% end %>
+
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="panel panel-default col-sm-2"><strong>Lundi</strong></div>
+  <div class="panel panel-default col-sm-2"><strong>Mardi</strong></div>
+  <div class="panel panel-default col-sm-2"><strong>Mercredi</strong></div>
+  <div class="panel panel-default col-sm-2"><strong>Jeudi</strong></div>
+  <div class="panel panel-default col-sm-2"><strong>Vendredi</strong></div>
+</div>
+<% if @semaines %>
+    <% @semaines.each do |semaine| %>
+        <div class="row">
+            <div class="col-sm-2">
+                <strong><%= semaine.utilisateur.prenom_nom %></strong>
+            </div>
+            <% 5.times do |n| %>
+                <% n += 1 %>
+                <div class="panel panel-primary col-sm-2 <%= @conges.exists?(utilisateur: semaine.utilisateur, date: semaine.date_lundi+n.days-1) ? "conge_ok" : "" %>">
+                    <% jobs_ampm = Array.new %>
+                    <!-- Jobs partie 1 (AM) -->
+                    <% jobs_ampm << semaine.jobs.where(numero_jour: n, am_pm: 0) %>
+                    <!-- Jobs partie 2 (PM) -->
+                    <% jobs_ampm << semaine.jobs.where(numero_jour: n, am_pm: 1) %>
+                    <% jobs_ampm.each do |job_ampm| %>
+                        <% job_ampm.each do |job| %>
+                            <%= am_pm(job.am_pm) %> : 
+                            <% job.working_lists.each do |wl| %>
+                                <% if n < Date.today.cwday %>
+                                    <% type = "default" %>
+                                <% elsif job.am_pm %>
+                                    <% type = "info" %>
+                                <% else %>
+                                    <% type = "primary" %>
+                                <% end %>
+                                <span class="label label-<%= type %>">
+                                    <%= wl.work.code %>
+                                </span>
+                                &nbsp;
                             <% end %>
-                        </td>
+                        <% end %>
+                        <br>
                     <% end %>
-                </tr>
+                    &nbsp;
+                </div>
             <% end %>
-        <% end %>
-    </tbody>
-</table>
+        </div>
+    <% end %>
+<% end %>
