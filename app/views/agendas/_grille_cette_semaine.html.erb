@@ -1,16 +1,16 @@
 
 <div class="row">
   <div class="col-sm-2"></div>
-  <div class="panel panel-default col-sm-2"><strong>Lundi</strong></div>
-  <div class="panel panel-default col-sm-2"><strong>Mardi</strong></div>
-  <div class="panel panel-default col-sm-2"><strong>Mercredi</strong></div>
-  <div class="panel panel-default col-sm-2"><strong>Jeudi</strong></div>
-  <div class="panel panel-default col-sm-2"><strong>Vendredi</strong></div>
+  <div class="panel panel-default col-xs-2"><strong>Lundi</strong></div>
+  <div class="panel panel-default col-xs-2"><strong>Mardi</strong></div>
+  <div class="panel panel-default col-xs-2"><strong>Mercredi</strong></div>
+  <div class="panel panel-default col-xs-2"><strong>Jeudi</strong></div>
+  <div class="panel panel-default col-xs-2"><strong>Vendredi</strong></div>
 </div>
 <% if @semaines %>
     <% @semaines.each do |semaine| %>
         <div class="row">
-            <div class="col-sm-2">
+            <div class="col-xs-2">
                 <p>
                     <strong><%= semaine.utilisateur.prenom_nom %></strong>
                 </p>
