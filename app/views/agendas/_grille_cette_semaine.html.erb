@@ -11,7 +11,14 @@
     <% @semaines.each do |semaine| %>
         <div class="row">
             <div class="col-sm-2">
-                <strong><%= semaine.utilisateur.prenom_nom %></strong>
+                <p>
+                    <strong><%= semaine.utilisateur.prenom_nom %></strong>
+                </p>
+                <% if semaine.note %>
+                    <span class="label label-default">
+                        <em><%= semaine.note %></em>
+                    </span>
+                <% end %>
             </div>
             <% 5.times do |n| %>
                 <% n += 1 %>
@@ -23,20 +30,43 @@
                     <% jobs_ampm << semaine.jobs.where(numero_jour: n, am_pm: 1) %>
                     <% jobs_ampm.each do |job_ampm| %>
                         <% job_ampm.each do |job| %>
-                            <%= am_pm(job.am_pm) %> : 
-                            <% job.working_lists.each do |wl| %>
+                            <span data-toggle="tooltip", title="<%= job.note %>">
+
+                                
+
                                 <% if n < Date.today.cwday %>
-                                    <% type = "default" %>
-                                <% elsif job.am_pm %>
-                                    <% type = "info" %>
+                                    <small><em>
+                                <% elsif n == Date.today.cwday%>
+                                    <!-- -->
                                 <% else %>
-                                    <% type = "primary" %>
+                                    <small>
                                 <% end %>
-                                <span class="label label-<%= type %>">
-                                    <%= wl.work.code %>
-                                </span>
-                                &nbsp;
-                            <% end %>
+
+                                 <%= am_pm(job.am_pm) %> :
+                                <% job.working_lists.each do |wl| %>
+                                    <% if n < Date.today.cwday %>
+                                        <% type = "default" %>
+                                    <% elsif job.am_pm %>
+                                        <% type = "info" %>
+                                    <% else %>
+                                        <% type = "primary" %>
+                                    <% end %>
+
+                                    <span class="label label-<%= type %>">
+                                        <%= wl.work.code %>
+                                        </span>
+                                    &nbsp;
+                                <% end %>
+
+                                <% if n < Date.today.cwday %>
+                                    </em></small>
+                                <% elsif n == Date.today.cwday%>
+                                    <!-- -->
+                                <% else %>
+                                    </small>
+                                <% end %>
+
+                            </span>
                         <% end %>
                         <br>
                     <% end %>

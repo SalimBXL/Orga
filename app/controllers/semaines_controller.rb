@@ -102,6 +102,7 @@ class SemainesController < ApplicationController
     #############
     def edit
         @utilisateurs = getUtilisateurs
+        @groupes = Groupe.order(:nom)
     end
 
     ##############

@@ -36,8 +36,7 @@
     %>
     <p>
         <%= form.label :numero_jour %><br>
-        <% @job.numero_jour = 0 %>
-        <%= form.select(:numeros, 
+        <%= form.select(:numero_jour, 
                 jours.collect {|key, value| [value , key]}, 
                 { }, 
                 { :multiple => true, :size => 5 }

@@ -1,5 +1,6 @@
 <%= form_with model: @semaine, local: true do |form| %>
 
+
     <% if @semaine.errors.any? %>
         <strong>WARNING</strong>
         <ul>
@@ -20,10 +21,14 @@
 
     <!-- Utilisateur -->
     <p>
-        <%= form.label :utilisateur_id %><br>
-        <%= form.select(:utilisateurs, @utilisateurs.collect {|p| [ "[#{@groupes.where(id: p.groupe_id).first.nom}] #{p.prenom_nom}", p.id ] }, 
-                                           { }, 
-                                           { :multiple => true, :size => 10 }) %>
+    <%= @semaine.utilisateur.nom %>
+        <!-- Utilisateur -->
+               <p>
+                    <%= form.label :utilisateur %><br>
+                    <%= form.select(:utilisateur_id, @utilisateurs.collect {|p| [ "[#{@groupes.where(id: p.groupe_id).first.nom}] #{p.prenom_nom}", p.id ] }, 
+                                            { }, 
+                                            { :multiple => false, :size => 10 }) %>
+                </p>
     </p>
 
     <!-- Note -->
