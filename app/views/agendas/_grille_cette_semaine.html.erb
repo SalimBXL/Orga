@@ -12,7 +12,8 @@
         <div class="row">
             <div class="col-xs-2">
                 <p>
-                    <strong><%= semaine.utilisateur.prenom_nom %></strong>
+                    <strong><%= semaine.utilisateur.prenom_nom %></strong><br>
+                    <em>(<%= semaine.utilisateur.phone %>)</em>
                 </p>
                 <% if semaine.note %>
                     <span class="label label-default">

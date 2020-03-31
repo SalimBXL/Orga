@@ -19,7 +19,19 @@
                     <% box = "primary" %>
                 <% end %>
                 <div class="panel panel-<%= box %>">
-                    <div class="panel-heading"><%= key.prenom_nom %></div>
+                    <div class="panel-heading">
+                    <h4>
+                        <span class="badge">
+                            <span class="material-icons">person</span>
+                        </span>
+                        <%= key.prenom_nom %>
+                        <% unless key.phone.blank? %>
+                            <span class="label label-<%= box %>">
+                                 (<%= key.phone %>)
+                            </span>
+                        <% end %>
+                    </h4>
+                    </div>
                     <div class="panel-body">
                         <% wls = job.working_lists %>
                         <% if wls.count<1 %>
