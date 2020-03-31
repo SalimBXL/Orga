@@ -11,7 +11,6 @@
 #
 # LIEUX
 #
-
 Lieu.create(
     nom: "Erasme",
     adresse: "Route de Lennik 808, 1070 Bruxelles",
@@ -25,7 +24,6 @@ Lieu.create(
 #
 # SERVICES
 #
-
 Service.create(
     lieu: Lieu.all.first,
     nom: "Cyclotron"
@@ -43,7 +41,6 @@ Service.create(
 #
 # GROUPES
 #
-
 Groupe.create(
     nom: "Operateur"
 )
@@ -64,7 +61,6 @@ Groupe.create(
 #
 # UTILISATEURS
 #
-
 Utilisateur.create(
     prenom: "John",
     nom: "Van Naemen",
@@ -133,7 +129,6 @@ Utilisateur.create(
 #
 # TYPE ABSENCES
 #
-
 TypeAbsence.create(
     code: "Ma",
     nom: "Certificat médical",
@@ -143,20 +138,27 @@ TypeAbsence.create(
 #
 # WORKS
 #
-
 Work.create(
     nom: "FDG 5h",
-    code: "5"
+    code: "5",
+    groupe: Groupe.where(nom: "Operateur").first,
+    service: Service.where(nom: "Cyclotron").first
 )
 Work.create(
     nom: "Contrôle qualité",
-    code: "QC"
+    code: "QC",
+    groupe: Groupe.where(nom: "Operateur").first,
+    service: Service.where(nom: "Cyclotron").first
 )
 Work.create(
     nom: "Livraison",
-    code: "L"
+    code: "L",
+    groupe: Groupe.where(nom: "Operateur").first,
+    service: Service.where(nom: "Cyclotron").first
 )
 Work.create(
     nom: "Methionine",
-    code: "M"
+    code: "M",
+    groupe: Groupe.where(nom: "Operateur").first,
+    service: Service.where(nom: "Cyclotron").first
 )
