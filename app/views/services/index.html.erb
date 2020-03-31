@@ -1,12 +1,26 @@
-<h1>SERVICES</h1>
+<div class="page-header">
+    <h1>
+        <span class="label label-primary">
+            <i class="material-icons">business</i>
+            <%= "Services".upcase %>
+        </span>
+    </h1>
+</div>
+
 <div class="container">
-    <div class="row">
-        <%= link_to "[Nouveau service]", new_service_path %>    
-    </div>
+    <p>
+        <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+            new_service_path,
+            class: "btn btn-success btn-xs" %>
+    </p>
+    
     <div class="row" id="services">
         <%= render 'services' %>
     </div>
-    <div class="row">
-        <p><%= link_to "[Nouveau service]", new_service_path %></p>
-    </div>
+
+    <p>
+        <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+            new_service_path,
+            class: "btn btn-success btn-xs" %>
+    </p>
 </div>

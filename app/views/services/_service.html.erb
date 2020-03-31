@@ -1,19 +1,35 @@
 <div class="col-sm-4" id="service_<%= service.id %>">
-    <h3><i class="material-icons">business</i> <%= service.nom %></h3>
-    <div class="well well-sm">
-        <p>
-            <%= service.lieu.nom %><br>
-            <%= service.description %>
-        </p>
-        <p>
-            <%= link_to " [Show] ", service_path(service) %>
-            <%= link_to " [Edit] ", edit_service_path(service) %>
-            <%= link_to " [Delete] ", service_path(service), 
-                method: :delete,
-                remote: true,
-                data: { confirm: "Delete #{service.nom} ?" } 
-            %>
-            <%= link_to " [Utilisateurs] ", "/utilisateurs_service/#{service.id}" %>
-        </p>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3><i class="material-icons">business</i> <%= service.nom %></h3>
+        </div>
+        <div class="panel-body">
+            <p>
+                <i class="material-icons">location_city</i> <%= service.lieu.nom %><br>
+            </p>
+            <p>
+                <%= service.description %>
+            </p>
+        </div>
+        <div class="panel-footer">
+            <div class="btn-group">
+                <%= link_to '<span data-toggle="tooltip" title="Editer">
+                    <i class="material-icons">edit</i></span>'.html_safe, 
+                    edit_service_path(service),
+                    class: "btn btn-warning btn-xs" %>
+                <%= link_to '<span data-toggle="tooltip" title="Supprimer le service">
+                    <i class="material-icons">close</i>'.html_safe, 
+                    service_path(service),
+                    method: :delete,
+                    remote: true,
+                    data: { confirm: "Delete #{service.nom} ?" },
+                    class: "btn btn-danger btn-xs" %>
+                <%= link_to '<span data-toggle="tooltip" title="Lieu associé">
+                    <i class="material-icons">location_city</i>'.html_safe, 
+                    lieu_path(service.lieu),
+                    class: "btn btn-info btn-xs" %>
+                </span>
+            </div>
+        </div>
     </div>
 </div>

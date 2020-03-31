@@ -44,8 +44,8 @@ Rails.application.routes.draw do
   ################
   root "home#index"
   get "home", to: "home#index"
-  get "cyclo", to: "home#index"
-  get "nursing", to: "home#index"
+  get "admin", to: "home#admin"
+
 
 
   ###############

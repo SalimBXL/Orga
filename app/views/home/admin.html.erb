@@ -1,7 +1,11 @@
 <div class="jumbotron">
     <div class="container">
         <h1 class="display-4">ORGA</h1>
-        <p class="lead"><%= "Welcome" %></p>
+        <p class="lead">
+            <span class="label label-danger">
+                <%= "ADMIN" %>
+            </span>
+        </p>
     </div>
 </div>
 
@@ -22,13 +26,12 @@
 </div>
 
 <!-- MENU ADMIN -->
-<!--
 <div class="btn-group">
     <%= link_to '<i class="material-icons">playlist_add</i><br>
         Ajouter'.html_safe, 
         ajouts_path,
         class: "btn btn-primary btn-xs" %>
-    
+    <!--
     <%= link_to '<i class="material-icons">playlist_add</i><br>
         Ajouter'.html_safe, 
         agendas_semaine_path,
@@ -37,10 +40,7 @@
 </div>
 
 
-
-
 <!-- MENU DETAILS-->
-<!--
 <h3>CONFIG</h3>
 <div class="btn-group">
     <%= link_to '<i class="material-icons">location_city</i><br>
@@ -53,7 +53,7 @@
         class: "btn btn-primary btn-xs" %>
 </div>
 
-
+<!--
 <ul>
     <li><%= link_to "Lieux", lieus_path %></li>
     <li><%= link_to "Services", services_path %></li>
