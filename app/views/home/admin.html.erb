@@ -40,8 +40,9 @@
 </div>
 
 
-<!-- MENU DETAILS-->
+
 <h3>CONFIG</h3>
+<!-- Lieux et services -->
 <div class="btn-group">
     <%= link_to '<i class="material-icons">location_city</i><br>
         Lieux'.html_safe, 
@@ -50,6 +51,18 @@
     <%= link_to '<i class="material-icons">business</i><br>
         Services'.html_safe, 
         services_path,
+        class: "btn btn-primary btn-xs" %>
+</div>
+
+<!-- Absences et types d'absences -->
+<div class="btn-group">
+    <%= link_to '<i class="material-icons">healing</i><br>
+        Absences'.html_safe, 
+        absences_path,
+        class: "btn btn-primary btn-xs" %>
+    <%= link_to '<i class="material-icons">assignment</i><br>
+        Types'.html_safe, 
+        type_absences_path,
         class: "btn btn-primary btn-xs" %>
 </div>
 

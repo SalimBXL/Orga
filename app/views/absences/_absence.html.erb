@@ -4,11 +4,19 @@
     <td><%= absence.type_absence.nom %></td>
     <td><%= absence.remarque %></td>
     <td>
-        <%= link_to " [Show] ", absence_path(absence) %>
-        <%= link_to " [Edit] ", edit_absence_path(absence) %>
-        <%= link_to " [Delete] ", absence_path(absence), 
-            method: :delete,
-            remote: true,
-            data: { confirm: "Delete #{absence.type_absence_id} #{absence.date} ?" } %>
+        <%= link_to '<span data-toggle="tooltip" title="Editer">
+                    <i class="material-icons">edit</i></span>'.html_safe, 
+                    edit_absence_path(absence),
+                    class: "btn btn-warning btn-xs" %>
+
+        <%= link_to '<span data-toggle="tooltip" title="Supprimer">
+                    <i class="material-icons">close</i>'.html_safe, 
+                    absence_path(absence),
+                    method: :delete,
+                    remote: true,
+                    data: { confirm: "Delete #{absence.date} - #{absence.utilisateur.prenom_nom} - #{absence.type_absence.code} ?" },
+                    class: "btn btn-danger btn-xs" %>
+        
+        
     </td>
 </tr>

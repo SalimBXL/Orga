@@ -1,5 +1,21 @@
-<h1>ABSENCES</h1>
+<div class="page-header">
+    <h1>
+        <span class="label label-primary">
+            <i class="material-icons">healing</i>
+            <%= "Absences".upcase %>
+        </span>
+    </h1>
+</div>
+<p>
+    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+        new_absence_path,
+        class: "btn btn-success btn-xs" %>
+</p>
 <div id="absences">
     <%= render 'absences' %>
 </div>
-<p><%= link_to "[Nouvelle absence]", new_absence_path %></p>
+<p>
+    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+        new_absence_path,
+        class: "btn btn-success btn-xs" %>
+</p>
