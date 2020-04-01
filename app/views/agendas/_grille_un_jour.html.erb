@@ -1,86 +1,78 @@
-<div>
-    <% @jobs.keys.each do |key| %>
-        <div class="col-xs-4">
-            <!-- Détermine la couleur de la box -->
-            <% box = "default" %>
-            <% if @jobs[key].count > 0 %>
-                <% box = "primary" %>
-            <% end %>
-            <% if @conges.include?(key) %>
-                <% box = "success" %>
-            <% end %>
-            <% if @absences.include?(key) %>
-                <% box = "warning" %>
-            <% end %>
-            <% @jobs[key].each do |job| %>
-                <% if job.am_pm %>
-                    <% box = "info" %>
-                <% else %>
+
+
+<% [false, true].each do |ap| %>
+    <div class="row">
+        <% @jobs[ap].keys.each do |key| %>
+        <% puts "%%%%%%%%%%%% AP: #{ap} KEY: #{key} " %>
+            <div class="col-xs-6 col-sm-4">
+                <!-- Détermine la couleur de la box -->
+                <% box = "default" %>
+                <% if @jobs[ap][key].count > 0 %>
                     <% box = "primary" %>
                 <% end %>
-                <div class="panel panel-<%= box %>">
-                    <div class="panel-heading">
-                    <h4>
-                        <span class="badge">
-                            <span class="material-icons">person</span>
-                        </span>
-                        <%= key.prenom_nom %>
-                        <% unless key.phone.blank? %>
-                            <span class="label label-<%= box %>">
-                                 (<%= key.phone %>)
+                <% if @conges.include?(key) %>
+                    <% box = "success" %>
+                <% end %>
+                <% if @absences.include?(key) %>
+                    <% box = "warning" %>
+                <% end %>
+                <% @jobs[ap][key].each do |job| %>
+                    <% if job.am_pm %>
+                        <% box = "info" %>
+                    <% else %>
+                        <% box = "primary" %>
+                    <% end %>
+                    <div class="panel panel-<%= box %>">
+                        <div class="panel-heading">
+                        <h4>
+                            <span class="badge">
+                                <span class="material-icons">person</span>
                             </span>
-                        <% end %>
-                    </h4>
-                    </div>
-                    <div class="panel-body">
-                        <% wls = job.working_lists %>
-                        <% if wls.count<1 %>
-                            <em>Aucune attribution pour ce job.</em>
-                        <% else %>
-                            <table>
-                            <% wls.each do |wl| %>
-                                <tr>
-                                    <td>
-                                        <span class="label label-<%= box %>">
-                                        <!-- <span class="badge"> -->
-                                        <%= wl.work.code %>
-                                        </span>
-                                        <!-- </span> -->
-                                    </td>
-                                    <td> &nbsp; </td>
-                                    <td> <%= wl.work.nom %></td>
-                                </tr>
+                            <%= key.prenom_nom %>
+                            <% unless key.phone.blank? %>
+                                <span class="label label-<%= box %>">
+                                    (<%= key.phone %>)
+                                </span>
                             <% end %>
-                            </table>
-                        <% end %>
-                        <% if job.note %>
-                        <div class="label label-default">
-                            Note : <em><%= job.note %></em>
+                        </h4>
                         </div>
-                        <% end %>
+                        <div class="panel-body">
+                            <% wls = job.working_lists %>
+                            <% if wls.count<1 %>
+                                <em>Aucune attribution pour ce job.</em>
+                            <% else %>
+                                <table>
+                                <% wls.each do |wl| %>
+                                    <tr>
+                                        <td>
+                                            <span class="label label-<%= box %>">
+                                            <!-- <span class="badge"> -->
+                                            <%= wl.work.code %>
+                                            </span>
+                                            <!-- </span> -->
+                                        </td>
+                                        <td> &nbsp; </td>
+                                        <td> <%= wl.work.nom %></td>
+                                    </tr>
+                                <% end %>
+                                </table>
+                            <% end %>
+                            <% if job.note %>
+                            <div class="label label-default">
+                                Note : <em><%= job.note %></em>
+                            </div>
+                            <% end %>
+                        </div>
                     </div>
-                </div>
-            <% end %>
-        </div>
-    <% end %>
-</div>
+                <% end %>
+            </div>
+        <% end %>
+    </div>
+<% end %>
 
-<div>
-    <% @absences.each do |utilisateur| %>
-        <div class="col-sm-4">
-            <% unless @jobs.has_key?(utilisateur) %>
-                <div class="panel panel-warning">
-                    <div class="panel-heading"><%= utilisateur.prenom_nom %></div>
-                    <div class="panel-body">
-                    </div>
-                </div>
-            <% end %>
-        </div>
-    <% end %>
-</div>
-<div>
+<div class="row">
     <% @conges.each do |utilisateur| %>
-        <div class="col-sm-4">
+        <div class="col-xs-6 col-sm-4">
             <% unless @jobs.has_key?(utilisateur) %>
                 <% conge = Conge.where(date: Date.today).first %>
                 <% remarque = conge.remarque %>
@@ -93,6 +85,20 @@
                         <% end %>
                     </div>
                     <div class="panel-body"><%= remarque %></div>
+                </div>
+            <% end %>
+        </div>
+    <% end %>
+</div>
+
+<div class="row">
+    <% @absences.each do |utilisateur| %>
+        <div class="col-xs-6 col-sm-4">
+            <% unless @jobs.has_key?(utilisateur) %>
+                <div class="panel panel-warning">
+                    <div class="panel-heading"><%= utilisateur.prenom_nom %></div>
+                    <div class="panel-body">
+                    </div>
                 </div>
             <% end %>
         </div>
