@@ -40,4 +40,9 @@ module ApplicationHelper
     def numeroSemaineAujourdhui
         "#{Date.today.year}-W#{Date.today.cweek<10 ? "0" : ""}#{Date.today.cweek}" 
     end
+
+    def numeroSemainePourDate(date)
+        "#{date.year}-W#{date.cweek<10 ? "0" : ""}#{date.cweek}" 
+    end
+
 end

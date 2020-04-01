@@ -11,13 +11,11 @@
     <% @semaines.each do |semaine| %>
         <div class="row">
             <div class="col-xs-2">
-                <p>
-                    <strong><%= semaine.utilisateur.prenom_nom %></strong><br>
-                    <% if !semaine.utilisateur.phone.blank? || !semaine.utilisateur.phone.nil? %>
-                        <em>(<%= semaine.utilisateur.phone %>)</em>
-                    <% end %>
-                </p>
-                <% if semaine.note %>
+                <strong><%= semaine.utilisateur.prenom_nom %></strong><br>
+                <% if !semaine.utilisateur.phone.blank? && !semaine.utilisateur.phone.nil?  %>
+                    <em>(<%= semaine.utilisateur.phone %>)</em>
+                <% end %>
+                <% if !semaine.note.blank? && !semaine.note.nil? %>
                     <span class="label label-default">
                         <em><%= semaine.note %></em>
                     </span>

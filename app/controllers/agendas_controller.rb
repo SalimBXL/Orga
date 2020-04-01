@@ -69,9 +69,9 @@ class AgendasController < ApplicationController
 
     # SEMAINE (pour une seule semaine...)
     def une_semaine
+
         @semaines = Semaine.where(numero_semaine: @numero_semaine)
         @works = Work.all
-
         @conges = Hash.new
         (@date_depart..@date_fin).each do |d|
             a = Conge.where(date: d)
@@ -84,7 +84,6 @@ class AgendasController < ApplicationController
                 end
             end
         end
-
         @absences = Hash.new
         (@date_depart..@date_fin).each do |d|
             a = Absence.where("date <= ? AND date_fin >= ?", d, d)
@@ -149,10 +148,11 @@ class AgendasController < ApplicationController
         end
     end
 
+
     private
 
     def find_numero_semaine
-        unless params[:semaine].nil?
+        if !params[:semaine].nil? && params[:semaine].length==8 && params[:semaine][-2..-1]!="00"
             @numero_semaine = params[:semaine]
             annee = params[:semaine][0..3].to_i
             semaine = params[:semaine][-2..-1].to_i
@@ -179,9 +179,9 @@ class AgendasController < ApplicationController
         end
     end
 
-
     def format_numero_semaine(annee, numero_semaine)
         numero_semaine<10 ? "#{annee}-W0#{numero_semaine}" : "#{annee}-W#{numero_semaine}"
     end
+    
 
 end
