@@ -70,7 +70,21 @@ class AgendasController < ApplicationController
     # SEMAINE (pour une seule semaine...)
     def une_semaine
         @semaines = Semaine.where(numero_semaine: @numero_semaine)
-        @conges = Conge.where(date: @date_depart..@date_fin)
+        @works = Work.all
+
+        @conges = Hash.new
+        (@date_depart..@date_fin).each do |d|
+            a = Conge.where(date: d)
+            a.each do |item|
+                if !@conges.key?(item.utilisateur)
+                    @conges[item.utilisateur] = Array.new
+                end
+                if !@conges[item.utilisateur].include?(d)
+                    @conges[item.utilisateur] << d.to_s
+                end
+            end
+        end
+
         @absences = Hash.new
         (@date_depart..@date_fin).each do |d|
             a = Absence.where("date <= ? AND date_fin >= ?", d, d)
@@ -83,7 +97,6 @@ class AgendasController < ApplicationController
                 end
             end
         end
-        @works = Work.all
     end
 
     # JOUR (pour un seul jour...)

@@ -25,12 +25,21 @@
             </div>
             <% 5.times do |n| %>
                 <% n += 1 %>
-                <div class="panel panel-primary col-xs-2 
-                    <%= @conges.exists?(utilisateur: semaine.utilisateur, date: semaine.date_lundi+n.days-1) ? "conge_ok" 
-                    : (!@absences[semaine.utilisateur].nil?) ? @absences[semaine.utilisateur].include?((semaine.date_lundi+n.days-1).to_s) ? "absence" : "" : "" %>">
 
-                    
-                    
+                <% style = "" %>
+                <% dateJour = @date_depart+n.days-1 %>
+                <% if !@conges[semaine.utilisateur].nil? %>
+                    <% if @conges[semaine.utilisateur].include?(dateJour.to_s) %>
+                        <% style = "conge_ok" %>
+                    <% end %>
+                <% end %>
+                <% if !@absences[semaine.utilisateur].nil? %>
+                    <% if @absences[semaine.utilisateur].include?(dateJour.to_s) %>
+                        <% style = "absence" %>
+                    <% end %>
+                <% end %>
+                <div class="panel panel-primary col-xs-2 <%= style %>">
+
                     <% jobs_ampm = Array.new %>
                     <!-- Jobs partie 1 (AM) -->
                     <% jobs_ampm << semaine.jobs.where(numero_jour: n, am_pm: 0) %>
@@ -39,8 +48,6 @@
                     <% jobs_ampm.each do |job_ampm| %>
                         <% job_ampm.each do |job| %>
                             <span data-toggle="tooltip", title="<%= job.note %>">
-
-                                
 
                                 <% if n < Date.today.cwday %>
                                     <small><em>
@@ -85,27 +92,50 @@
     <% end %>
 <% end %>
 
+<!-- // Est-ce qu'il y a des congés non repris ? -->
+<% @conges.keys.each do |utilisateur| %>
+    <% conges = @conges[utilisateur]%>
+    <% unless @semaines.where(utilisateur: utilisateur).exists? %>
+        <div class="row">
+            <div class="col-xs-2">
+                <p><strong><%= utilisateur.prenom_nom %></strong></p>
+            </div>
+            <% 5.times do |n| %>
+                <% n += 1 %>
+                <% dateJour = @date_depart+n.days-1 %>
+                <% if conges.include?(dateJour.to_s) %>
+                    <div class="panel panel-primary col-xs-2 conge_ok">
+                <% else %>
+                    <div class="panel panel-primary col-xs-2">
+                <% end %>
+                &nbsp;
+                </div>
+            <% end %>
+        </div>
+    <% end %>
+<% end %>
+
+
 
 <!-- // Est-ce qu'il y a des malades non repris ? -->
 <% @absences.keys.each do |utilisateur| %>
     <% absences = @absences[utilisateur]%>
-
     <% unless @semaines.where(utilisateur: utilisateur).exists? %>
-    <div class="row">
-        <div class="col-xs-2">
-            <p><strong><%= utilisateur.prenom_nom %></strong></p>
-        </div>
-        <% 5.times do |n| %>
-            <% n += 1 %>
-            <% dateJour = @date_depart+n.days-1 %>
-            <% if absences.include?(dateJour.to_s) %>
-                <div class="panel panel-primary col-xs-2 absence">
-            <% else %>
-                <div class="panel panel-primary col-xs-2">
-            <% end %>
-            &nbsp;
+        <div class="row">
+            <div class="col-xs-2">
+                <p><strong><%= utilisateur.prenom_nom %></strong></p>
             </div>
-        <% end %>
-    </div>
+            <% 5.times do |n| %>
+                <% n += 1 %>
+                <% dateJour = @date_depart+n.days-1 %>
+                <% if absences.include?(dateJour.to_s) %>
+                    <div class="panel panel-primary col-xs-2 absence">
+                <% else %>
+                    <div class="panel panel-primary col-xs-2">
+                <% end %>
+                &nbsp;
+                </div>
+            <% end %>
+        </div>
     <% end %>
 <% end %>
