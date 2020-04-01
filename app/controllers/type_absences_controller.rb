@@ -67,7 +67,7 @@ class TypeAbsencesController < ApplicationController
     private 
 
     def type_absence_params
-        params.require(:type_absence).permit(:nom, :description)
+        params.require(:type_absence).permit(:nom, :description, :code)
     end
 
     def find_type_absence
