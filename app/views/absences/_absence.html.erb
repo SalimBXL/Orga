@@ -1,5 +1,13 @@
 <tr id="absence_<%= absence.id %>">
     <td><%= absence.date %></td>
+    <td><% if !absence.date_fin.blank? || !absence.date_fin.nil? %>
+        <%= absence.date_fin %>
+    <% end %>
+    </td>
+    <td><% if !absence.date_fin.blank? || !absence.date_fin.nil? %>
+        (<%= (absence.date_fin - absence.date + 1).to_i %> j)
+        <% end %>
+    </td>
     <td><%= absence.utilisateur.prenom_nom %></td>
     <td><%= absence.type_absence.nom %></td>
     <td><%= absence.remarque %></td>

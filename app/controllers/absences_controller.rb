@@ -22,6 +22,8 @@ class AbsencesController < ApplicationController
     #############
     def new
         @absence = Absence.new
+        @absence.date = Date.today
+        @absence.date_fin = @absence.date
     end
 
 
@@ -31,9 +33,10 @@ class AbsencesController < ApplicationController
     def create
         @absence = Absence.create(absence_params)
         if @absence.save
-            flash[:notice] = "Absence créée"
+            flash[:notice] = "Absence(s) créée(s)"
             redirect_to absences_path
         else
+            flash[:danger] = "Erreur(s)"
             render :new
         end
     end
@@ -42,6 +45,9 @@ class AbsencesController < ApplicationController
     #   UPDATE  #
     #############
     def update
+        if @absence.date_fin.blank? || @absence.date_fin.nil?
+            @absence.date_fin = @absence.date
+        end
         if @absence.update(absence_params)
             flash[:notice] = "Absence modifiée"
             redirect_to absences_path
@@ -68,7 +74,7 @@ class AbsencesController < ApplicationController
     private 
 
     def absence_params
-        params.require(:absence).permit(:date, :type_absence_id, :utilisateur_id, :remarque)
+        params.require(:absence).permit(:date, :date_fin, :type_absence_id, :utilisateur_id, :remarque)
     end
 
     def find_absence

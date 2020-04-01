@@ -1,5 +1,10 @@
 <%= form_with model: @absence, local: true do |form| %>
 
+    <% if @absence.date.blank? %>
+        <% @absence.date = Date.today %>
+    <% end %>
+    
+
     <% if @absence.errors.any? %>
         <strong>WARNING</strong>
         <ul>
@@ -9,10 +14,14 @@
         </ul>
     <% end %>
 
-    <!-- Date -->
+    <!-- Dates -->
     <p>
         <%= form.label :date %><br>
         <%= form.date_field :date %>
+    </p>
+    <p>
+        <%= form.label :date_fin %><br>
+        <%= form.date_field :date_fin %>
     </p>
 
     <!-- Type -->
