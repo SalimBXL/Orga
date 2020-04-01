@@ -71,8 +71,19 @@ class AgendasController < ApplicationController
     def une_semaine
         @semaines = Semaine.where(numero_semaine: @numero_semaine)
         @conges = Conge.where(date: @date_depart..@date_fin)
+        @absences = Hash.new
+        (@date_depart..@date_fin).each do |d|
+            a = Absence.where("date <= ? AND date_fin >= ?", d, d)
+            a.each do |item|
+                if !@absences.key?(item.utilisateur)
+                    @absences[item.utilisateur] = Array.new
+                end
+                if !@absences[item.utilisateur].include?(d)
+                    @absences[item.utilisateur] << d.to_s
+                end
+            end
+        end
         @works = Work.all
-        @semaines = Semaine.where(numero_semaine: @numero_semaine)
     end
 
     # JOUR (pour un seul jour...)
@@ -81,10 +92,10 @@ class AgendasController < ApplicationController
         @conges = []
         @jobs = Hash.new
         Absence.where("date <= ? AND date_fin >= ?", Date.today, Date.today).each do |absence|
-            @absences << absence.utilisateur
+            @absences << absence
         end
         Conge.where(date: Date.today).each do |conge|
-            @conges << conge.utilisateur
+            @conges << conge
         end
         numero_jour_aujourdhui = Date.today.cwday
         numero_semaine = format_numero_semaine(Date.today.year, Date.today.cweek)
@@ -100,7 +111,6 @@ class AgendasController < ApplicationController
                     unless @jobs[ap].key?(key)
                         @jobs[ap][key] = Array.new
                     end
-                    puts "XXXXXXXXXXXX  AP: #{ap}  KEY: #{key} - Ajoute USER #{job.semaine.utilisateur.prenom_nom} *****"
                     @jobs[ap][key] << job
                 end
             end

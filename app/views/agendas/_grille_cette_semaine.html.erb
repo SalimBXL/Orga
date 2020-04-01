@@ -13,7 +13,9 @@
             <div class="col-xs-2">
                 <p>
                     <strong><%= semaine.utilisateur.prenom_nom %></strong><br>
-                    <em>(<%= semaine.utilisateur.phone %>)</em>
+                    <% if !semaine.utilisateur.phone.blank? || !semaine.utilisateur.phone.nil? %>
+                        <em>(<%= semaine.utilisateur.phone %>)</em>
+                    <% end %>
                 </p>
                 <% if semaine.note %>
                     <span class="label label-default">
@@ -23,7 +25,12 @@
             </div>
             <% 5.times do |n| %>
                 <% n += 1 %>
-                <div class="panel panel-primary col-sm-2 <%= @conges.exists?(utilisateur: semaine.utilisateur, date: semaine.date_lundi+n.days-1) ? "conge_ok" : "" %>">
+                <div class="panel panel-primary col-xs-2 
+                    <%= @conges.exists?(utilisateur: semaine.utilisateur, date: semaine.date_lundi+n.days-1) ? "conge_ok" 
+                    : (!@absences[semaine.utilisateur].nil?) ? @absences[semaine.utilisateur].include?((semaine.date_lundi+n.days-1).to_s) ? "absence" : "" : "" %>">
+
+                    
+                    
                     <% jobs_ampm = Array.new %>
                     <!-- Jobs partie 1 (AM) -->
                     <% jobs_ampm << semaine.jobs.where(numero_jour: n, am_pm: 0) %>
@@ -75,5 +82,30 @@
                 </div>
             <% end %>
         </div>
+    <% end %>
+<% end %>
+
+
+<!-- // Est-ce qu'il y a des malades non repris ? -->
+<% @absences.keys.each do |utilisateur| %>
+    <% absences = @absences[utilisateur]%>
+
+    <% unless @semaines.where(utilisateur: utilisateur).exists? %>
+    <div class="row">
+        <div class="col-xs-2">
+            <p><strong><%= utilisateur.prenom_nom %></strong></p>
+        </div>
+        <% 5.times do |n| %>
+            <% n += 1 %>
+            <% dateJour = @date_depart+n.days-1 %>
+            <% if absences.include?(dateJour.to_s) %>
+                <div class="panel panel-primary col-xs-2 absence">
+            <% else %>
+                <div class="panel panel-primary col-xs-2">
+            <% end %>
+            &nbsp;
+            </div>
+        <% end %>
+    </div>
     <% end %>
 <% end %>
