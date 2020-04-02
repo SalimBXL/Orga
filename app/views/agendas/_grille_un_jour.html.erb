@@ -1,132 +1,126 @@
-
-
+<div class="row">
 <% [false, true].each do |ap| %>
-    <div class="row">
-        <% @jobs[ap].keys.each do |key| %>
-            <div class="col-xs-6 col-sm-4">
-                <!-- Détermine la couleur de la box -->
-                <% box = "default" %>
-                <% if @jobs[ap][key].count > 0 %>
+    <% @jobs[ap].keys.each do |key| %>
+        <div class="col-xs-6 col-sm-4">
+            <!-- Détermine la couleur de la box -->
+            <% box = "default" %>
+            <% if @jobs[ap][key].count > 0 %>
+                <% box = "primary" %>
+            <% end %>
+            <% if @conges.include?(key) %>
+                <% box = "success" %>
+            <% end %>
+            <% if @absences.include?(key) %>
+                <% box = "warning" %>
+            <% end %>
+            <% @jobs[ap][key].each do |job| %>
+                <% if job.am_pm %>
+                    <% box = "info" %>
+                <% else %>
                     <% box = "primary" %>
                 <% end %>
-                <% if @conges.include?(key) %>
-                    <% box = "success" %>
-                <% end %>
-                <% if @absences.include?(key) %>
-                    <% box = "warning" %>
-                <% end %>
-                <% @jobs[ap][key].each do |job| %>
-                    <% if job.am_pm %>
-                        <% box = "info" %>
-                    <% else %>
-                        <% box = "primary" %>
-                    <% end %>
-                    <div class="panel panel-<%= box %>">
-                        <div class="panel-heading">
-                        <h4>
-                            <span class="badge">
-                                <span class="material-icons">person</span>
+                <div class="panel panel-<%= box %>">
+                    <div class="panel-heading">
+                    <h4>
+                        <span class="badge">
+                            <span class="material-icons">person</span>
+                        </span>
+                        <strong><%= key.prenom_nom %></strong>
+                        <% unless key.phone.blank? %>
+                            <span class="label label-<%= box %>">
+                                (<%= key.phone %>)
                             </span>
-                            <strong><%= key.prenom_nom %></strong>
-                            <% unless key.phone.blank? %>
-                                <span class="label label-<%= box %>">
-                                    (<%= key.phone %>)
-                                </span>
-                            <% end %>
-                        </h4>
-                        </div>
-                        <div class="panel-body">
-                            <% wls = job.working_lists %>
-                            <% if wls.count<1 %>
-                                <em>Aucune attribution pour ce job.</em>
-                            <% else %>
-                                <table>
-                                <% wls.each do |wl| %>
-                                    <tr>
-                                        <td>
-                                            <span class="label label-<%= box %>">
-                                            <!-- <span class="badge"> -->
-                                            <%= wl.work.code %>
-                                            </span>
-                                            <!-- </span> -->
-                                        </td>
-                                        <td> &nbsp; </td>
-                                        <td> <%= wl.work.nom %></td>
-                                    </tr>
-                                <% end %>
-                                </table>
-                            <% end %>
-                            <% if job.note %>
-                            <div class="label label-default">
-                                Note : <em><%= job.note %></em>
-                            </div>
-                            <% end %>
-                        </div>
+                        <% end %>
+                    </h4>
                     </div>
-                <% end %>
+                    <div class="panel-body">
+                        <% wls = job.working_lists %>
+                        <% if wls.count<1 %>
+                            <em>Aucune attribution pour ce job.</em>
+                        <% else %>
+                            <table>
+                            <% wls.each do |wl| %>
+                                <tr>
+                                    <td>
+                                        <span class="label label-<%= box %>">
+                                        <!-- <span class="badge"> -->
+                                        <%= wl.work.code %>
+                                        </span>
+                                        <!-- </span> -->
+                                    </td>
+                                    <td> &nbsp; </td>
+                                    <td> <%= wl.work.nom %></td>
+                                </tr>
+                            <% end %>
+                            </table>
+                        <% end %>
+                        <% if job.note %>
+                        <div class="label label-default">
+                            Note : <em><%= job.note %></em>
+                        </div>
+                        <% end %>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    <% end %>
+<% end %>
+
+<% @conges.each do |conge| %>
+    <div class="col-xs-6 col-sm-4">
+        <% unless @jobs.has_key?(conge.utilisateur) %>
+            <% remarque = conge.remarque %>
+            <% accord = conge.accord ? "" : " - [ en attente d'accord ] " %>
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <span class="badge">
+                        <span class="material-icons">person_outline</span>
+                    </span>
+                    <%= conge.utilisateur.prenom_nom %>
+                    <% if accord.length>0 %>
+                        <em><%= accord %></em>
+                    <% end %>
+                </div>
+                <div class="panel-body">
+                    <% if !remarque.blank? && !remarque.nil? %>
+                        <em>
+                            <span class="label label-success">
+                                <%= remarque %>
+                            </span>
+                        </em>
+                    <% else %>
+                        &nbsp;
+                    <% end %>
+                </div>
             </div>
         <% end %>
     </div>
 <% end %>
 
-<div class="row">
-    <% @conges.each do |conge| %>
-        <div class="col-xs-6 col-sm-4">
-            <% unless @jobs.has_key?(conge.utilisateur) %>
-                <% remarque = conge.remarque %>
-                <% accord = conge.accord ? "" : " - [ en attente d'accord ] " %>
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <span class="badge">
-                            <span class="material-icons">person_outline</span>
-                        </span>
-                        <%= conge.utilisateur.prenom_nom %>
-                        <% if accord.length>0 %>
-                            <em><%= accord %></em>
-                        <% end %>
-                    </div>
-                    <div class="panel-body">
-                        <% if !remarque.blank? && !remarque.nil? %>
-                            <em>
-                                <span class="label label-success">
-                                    <%= remarque %>
-                                </span>
-                            </em>
-                        <% else %>
-                            &nbsp;
-                        <% end %>
-                    </div>
+<% @absences.each do |absence| %>
+    <% utilisateur = absence.utilisateur %>
+    <div class="col-xs-6 col-sm-4">
+        <% unless @jobs.has_key?(utilisateur) %>
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <span class="badge">
+                        <span class="material-icons">person_outline</span>
+                    </span>
+                    <%= utilisateur.prenom_nom %>
                 </div>
-            <% end %>
-        </div>
-    <% end %>
-</div>
-
-<div class="row">
-    <% @absences.each do |absence| %>
-        <% utilisateur = absence.utilisateur %>
-        <div class="col-xs-6 col-sm-4">
-            <% unless @jobs.has_key?(utilisateur) %>
-                <div class="panel panel-warning">
-                    <div class="panel-heading">
-                        <span class="badge">
-                            <span class="material-icons">person_outline</span>
-                        </span>
-                        <%= utilisateur.prenom_nom %>
-                    </div>
-                    <div class="panel-body">
-                        <% if !absence.remarque.blank? && !absence.remarque.nil? %>
-                            <em>
-                                <span class="label label-warning">
-                                    <%= absence.remarque%>
-                                </span>
-                            </em>
-                        <% else %>
-                            &nbsp;
-                        <% end %>
-                    </div>
+                <div class="panel-body">
+                    <% if !absence.remarque.blank? && !absence.remarque.nil? %>
+                        <em>
+                            <span class="label label-warning">
+                                <%= absence.remarque%>
+                            </span>
+                        </em>
+                    <% else %>
+                        &nbsp;
+                    <% end %>
                 </div>
-            <% end %>
-        </div>
-    <% end %>
+            </div>
+        <% end %>
+    </div>
+<% end %>
 </div>

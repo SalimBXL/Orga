@@ -1,6 +1,7 @@
 class AgendasController < ApplicationController
     before_action :find_debut_fin, only: [:absences, :conges, :semaines, :jobs, :jours]
     before_action :find_numero_semaine, only: :une_semaine
+    before_action :find_date_jour, only: :un_jour
 
     # ACCUEIL
     def index
@@ -69,7 +70,6 @@ class AgendasController < ApplicationController
 
     # SEMAINE (pour une seule semaine...)
     def une_semaine
-
         @semaines = Semaine.where(numero_semaine: @numero_semaine)
         @works = Work.all
         @conges = Hash.new
@@ -103,20 +103,22 @@ class AgendasController < ApplicationController
         @absences = []
         @conges = []
         @jobs = Hash.new
-        Absence.where("date <= ? AND date_fin >= ?", Date.today, Date.today).each do |absence|
+        [false, true].each do |ap|
+            unless @jobs.key?(ap)
+                @jobs[ap] = Hash.new
+            end
+        end
+        Absence.where("date <= ? AND date_fin >= ?", @date_jour, @date_jour).each do |absence|
             @absences << absence
         end
-        Conge.where(date: Date.today).each do |conge|
+        Conge.where(date: @date_jour).each do |conge|
             @conges << conge
         end
-        numero_jour_aujourdhui = Date.today.cwday
-        numero_semaine = format_numero_semaine(Date.today.year, Date.today.cweek)
+        numero_jour_aujourdhui = @date_jour.cwday
+        numero_semaine = format_numero_semaine(@date_jour.year, @date_jour.cweek)
         semaines = Semaine.where(numero_semaine: numero_semaine)
         semaines.each do |semaine|
             [false, true].each do |ap|
-                unless @jobs.key?(ap)
-                    @jobs[ap] = Hash.new
-                end
                 jobs = Job.where(semaine: semaine, numero_jour: numero_jour_aujourdhui, am_pm: ap)
                 jobs.each do |job|
                     key = semaine.utilisateur
@@ -162,6 +164,14 @@ class AgendasController < ApplicationController
             @numero_semaine = format_numero_semaine(Date.today.year, Date.today.cweek)
             @date_depart = Date.today.beginning_of_week
             @date_fin = @date_depart + 5.days
+        end
+    end
+
+    def find_date_jour
+        if !params[:jour].nil? && params[:jour].length==10 && params[:jour][-3]=="-"
+            @date_jour = Date.parse(params[:jour])
+        else
+            @date_jour = Date.today
         end
     end
     

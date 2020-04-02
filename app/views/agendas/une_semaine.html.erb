@@ -13,8 +13,6 @@
         <%= "#{@date_depart} >> #{@date_fin}" %>
         </span>
     </div>
-
-
     <div class="col-xs-4 col-sm-3 col-md-2">
         <%= link_to '<i class="material-icons">chevron_left</i>'.html_safe,
         agendas_semaine_path(semaine: numeroSemainePourDate(@date_depart.prev_week)),
