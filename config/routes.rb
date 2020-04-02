@@ -89,22 +89,13 @@ Rails.application.routes.draw do
   get "services_lieu/:id", to: "services#services_lieu"
 
 
-  #####################
-  #   Types Absences  #
-  #####################
-  resources :type_absences, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
+
 
 
   ###########
   #  Lieux  #
   ###########
   resources :lieus, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
-
-
-  ############
-  #  Congés  #
-  ############
-  resources :conges, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
 
 
   ###################
@@ -115,10 +106,18 @@ Rails.application.routes.draw do
   get "utilisateurs_groupe/:id", to: "utilisateurs#utilisateurs_groupe"
 
 
-  ##############
-  #  Absences  #
-  ##############
+  #######################
+  #  Absences & Congés  #
+  #######################
   resources :absences, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
+  resources :conges, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
+  get "agendas/conges_absences", to: "agendas#conges_absences"
+
+
+  #####################
+  #   Types Absences  #
+  #####################
+  resources :type_absences, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
   
 
   ###############

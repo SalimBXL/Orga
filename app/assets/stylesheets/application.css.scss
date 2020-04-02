@@ -56,6 +56,24 @@
     background-color: rgb(166, 255, 50);
    color: white;
 }
+.conge_accord_ok {
+    background-color: greenyellow;
+    color: green;
+}
+.conge_accord_wait {
+    background-color: red;
+   color: white;
+}
+
+.grille {
+    font-size: 75%;
+    margin: 0;
+    padding: 0;
+    .table {
+        margin: 0;
+        padding: 0;
+    }
+}
 
 .center {
     display: flex;
@@ -66,3 +84,6 @@
     background-color: rgb(255,183,77);
     color: white;
 }
+
+
+

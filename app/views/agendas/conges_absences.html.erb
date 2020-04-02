@@ -1,0 +1,59 @@
+<h1>
+    <span class="label label-primary">
+        <i class="material-icons">today</i>
+        <%= "Congés et absences".upcase %>
+    </span>
+</h1>
+
+<h2>Panels with Contextual Classes</h2>
+
+<% date_jour = Date.parse("#{Date.today.year}-01-01").beginning_of_week %>
+<% 12.times do |n| %>
+    <% n = n + 1%>
+    <% premier = Date.parse("#{Date.today.year}-#{n<10 ? "0#{n}" : n}-01") %>
+    <% date_jour = premier.beginning_of_week %>
+    <% if premier.cwday == 0 %>
+        <% date_jour = premier + 1 %>
+    <% end %>
+    <% if premier.cwday == 6 %>
+        <% date_jour = premier + 2 %>
+    <% end %>
+    
+    <div class="col-xs-12 col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading"><%= Date::ABBR_MONTHNAMES[n] %></div>
+            <div class="panel-body">
+                <table class="table table-condensed table-bordered">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <% 5.times do |j| %>
+                                <% j = j+1 %>
+                                <th><%= j %></th>
+                            <% end %>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% 5.times do %>
+                                <% n_semaine = date_jour.cweek %>
+                                <tr>
+                                    <td>W-<%= n_semaine<10 ? "0#{n_semaine}" : n_semaine %></td>
+                                    <% 7.times do |j| %>
+                                        <% if date_jour.cwday < 6 %>
+                                            <td>
+                                                <% if date_jour.month == n %>
+                                                    <%= date_jour %>
+                                                <% end %>
+                                            </td>
+                                        <% end %>
+                                        <% date_jour = date_jour + 1 %>
+                                    <% end %>
+                                </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+<% end %>
+

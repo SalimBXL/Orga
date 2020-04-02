@@ -1,5 +1,5 @@
 class AgendasController < ApplicationController
-    before_action :find_debut_fin, only: [:absences, :conges, :semaines, :jobs, :jours]
+    before_action :find_debut_fin, only: [:absences, :conges, :conges_absences, :semaines, :jobs, :jours]
     before_action :find_numero_semaine, only: :une_semaine
     before_action :find_date_jour, only: :un_jour
 
@@ -22,10 +22,15 @@ class AgendasController < ApplicationController
         @conges = Conge.where(date: @date_depart..@date_fin)
     end
 
+    # CONGES & ABSENCES
+    def conges_absences
+        @absences = Absence.where(date: @date_depart..@date_fin)
+        @conges = Conge.where(date: @date_depart..@date_fin)
+    end
+
     # SEMAINES
     def semaines
         @semaines = Semaine.where(date_lundi: @date_depart..@date_fin)
-
         @conges = Hash.new
         Conge.where(date: @date_depart..@date_fin).each do |conge|
             key = format_numero_semaine(conge.date.year, conge.date.cweek)
@@ -37,7 +42,6 @@ class AgendasController < ApplicationController
             end
             @conges[key][conge.utilisateur.id] << conge
         end
-
         @absences = Hash.new
         Absence.where(date: @date_depart..@date_fin).each do |absence|
             key = format_numero_semaine(absence.date.year, absence.date.cweek)

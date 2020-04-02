@@ -23,7 +23,7 @@
                     home
                     </i>'.html_safe, 
                     root_path
-                    %>
+                %>
             </li>
 
             <!-- TODAY -->
@@ -35,7 +35,7 @@
                     today
                     </i>'.html_safe,
                     agendas_jour_path
-                    %>
+                %>
             </li>
 
             <!-- THIS WEEK -->
@@ -47,9 +47,30 @@
                     date_range
                     </i>'.html_safe,
                     agendas_semaine_path
-                    %>
+                %>
             </li>
 
+            <!-- CONGES et ABSENCES -->
+            <li>
+                <%= link_to '<i class="material-icons" 
+                    data-toggle="tooltip" 
+                    title="Congés et absences" 
+                    data-placement="bottom">
+                    voice_over_off
+                    </i>'.html_safe,
+                    agendas_conges_absences_path(:semaine => "#{numeroSemainePourDate(Date.today)}")
+                %>
+            </li>
+            
+            
+            
+
+
+
+
+
+
+            <!-- AJOUTER ATTRIB -->
             <li>
                 <%= link_to '<i class="material-icons" 
                     data-toggle="tooltip" 
@@ -60,8 +81,6 @@
                     ajouts_path
                     %>
             </li>
-
-
             
             <!-- PROFILE -->
             <!--
