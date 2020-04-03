@@ -55,9 +55,12 @@
                                     <small>
                                 <% end %>
 
+
+                                <% nJour = (job.semaine.date_lundi + job.numero_jour - 1) %>
+
                                  <%= am_pm(job.am_pm) %> :
                                 <% job.working_lists.each do |wl| %>
-                                    <% if n < Date.today.cwday %>
+                                    <% if nJour < Date.today %>
                                         <% type = "default" %>
                                     <% elsif job.am_pm %>
                                         <% type = "info" %>
