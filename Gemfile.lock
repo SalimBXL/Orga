@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 185dbd9d171bc01e7509e1536d9b58290d7d5efc
+  revision: 7c3956fc3e6441d3b043f4b4a06fb4f6ebcbfc5f
   branch: master
   specs:
     faker (2.11.0)
@@ -228,7 +228,7 @@ GEM
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
-    tzinfo (1.2.6)
+    tzinfo (1.2.7)
       thread_safe (~> 0.1)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
