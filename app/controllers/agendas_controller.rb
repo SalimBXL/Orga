@@ -177,6 +177,12 @@ class AgendasController < ApplicationController
         else
             @date_jour = Date.today
         end
+        if @date_jour.cwday==6
+            @date_jour = @date_jour + 2
+        end
+        if @date_jour.cwday==7
+            @date_jour = @date_jour - 2
+        end
     end
     
     def find_debut_fin
