@@ -19,7 +19,7 @@
         <% date_jour = premier + 2 %>
     <% end %>
     
-    <div class="col-xs-12 col-lg-6">
+    <div class="col-xs-12 col-lg-6" id="month_<%= n<10 ? "0#{n}" : n %>">
         <div class="panel panel-default">
             <div class="panel-heading"><%= Date::ABBR_MONTHNAMES[n] %></div>
             <div class="panel-body">
