@@ -1,5 +1,22 @@
-<h1>CONGES</h1>
+<h1>
+    <span class="label label-primary">
+        <i class="material-icons">work_off</i>
+        <%= "Congés".upcase %>
+    </span>
+</h1>
+
+<p>
+    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+        new_conge_path,
+        class: "btn btn-success btn-xs" %>
+</p>
+
 <div id="conges">
     <%= render 'conges' %>
 </div>
-<p><%= link_to "[Nouveau conge]", new_conge_path %></p>
+
+<p>
+    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+        new_conge_path,
+        class: "btn btn-success btn-xs" %>
+</p>

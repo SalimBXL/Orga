@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200401084057) do
+ActiveRecord::Schema.define(version: 20200406084633) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20200401084057) do
     t.string "remarque"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "date_fin"
     t.index ["utilisateur_id"], name: "index_conges_on_utilisateur_id"
   end
 

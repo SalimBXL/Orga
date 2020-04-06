@@ -1,12 +1,12 @@
 class CongesController < ApplicationController
     before_action :find_conge, only: [:show, :edit, :update, :destroy]
+    before_action :conge_params_semaine, only: [:plage]
 
     #############
     #   INDEX   #
     #############
     def index
         @conges = Conge.order(date: :desc).order(:accord).page(params[:page])
-        #@current_conges = Conge.where(date: (Date.today-3.months)..(Date.today+9.month))
     end
 
 
@@ -14,6 +14,11 @@ class CongesController < ApplicationController
     #   SHOW    #
     #############
     def show
+    end
+
+    #   PLAGE   #
+    def plage
+        @conges = Conge.where("date <= ? AND date_fin >= ?", @dateDepart, @dateFin).order(:date, :accord)
     end
 
 
@@ -76,11 +81,15 @@ class CongesController < ApplicationController
     end
 
     def conge_params
-        params.require(:conge).permit(:date, :utilisateur_id, :accord, :remarque)
+        params.require(:conge).permit(:date, :date_fin, :utilisateur_id, :accord, :remarque)
     end
 
     def find_conge
         @conge = Conge.find(params[:id])
+    end
+
+    def conge_params_semaine
+        params.require(:conge).permit(:dateDepart, :dateFin)
     end
     
 end

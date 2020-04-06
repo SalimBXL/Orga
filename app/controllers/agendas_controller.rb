@@ -78,7 +78,7 @@ class AgendasController < ApplicationController
         @works = Work.all
         @conges = Hash.new
         (@date_depart..@date_fin).each do |d|
-            a = Conge.where(date: d)
+            a = Conge.where("date <= ? AND date_fin >= ?", d, d)
             a.each do |item|
                 if !@conges.key?(item.utilisateur)
                     @conges[item.utilisateur] = Array.new
@@ -115,7 +115,7 @@ class AgendasController < ApplicationController
         Absence.where("date <= ? AND date_fin >= ?", @date_jour, @date_jour).each do |absence|
             @absences << absence
         end
-        Conge.where(date: @date_jour).each do |conge|
+        Conge.where("date <= ? AND date_fin >= ?", @date_jour, @date_jour).each do |conge|
             @conges << conge
         end
         numero_jour_aujourdhui = @date_jour.cwday
@@ -167,7 +167,7 @@ class AgendasController < ApplicationController
         else
             @numero_semaine = format_numero_semaine(Date.today.year, Date.today.cweek)
             @date_depart = Date.today.beginning_of_week
-            @date_fin = @date_depart + 5.days
+            @date_fin = @date_depart + 4.days
         end
     end
 
