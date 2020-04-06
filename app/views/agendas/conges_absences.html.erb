@@ -1,6 +1,6 @@
 <h1>
     <span class="label label-primary">
-        <i class="material-icons">today</i>
+        <i class="material-icons">work_off</i>
         <%= "Congés et absences".upcase %>
     </span>
 </h1>
@@ -8,15 +8,19 @@
 <h2>Panels with Contextual Classes</h2>
 
 <% date_jour = Date.parse("#{Date.today.year}-01-01").beginning_of_week %>
+<% last_n_semaine = 99 %>
+
 <% 12.times do |n| %>
     <% n = n + 1%>
+
     <% premier = Date.parse("#{Date.today.year}-#{n<10 ? "0#{n}" : n}-01") %>
-    <% date_jour = premier.beginning_of_week %>
-    <% if premier.cwday == 0 %>
-        <% date_jour = premier + 1 %>
-    <% end %>
-    <% if premier.cwday == 6 %>
-        <% date_jour = premier + 2 %>
+    <% case premier.cwday %>
+    <% when 7 %>
+        <% date_jour = premier + 1.day %>
+    <% when 6 %>
+        <% date_jour = premier + 2.day %>
+    <% else %>
+        <% date_jour = premier.beginning_of_week %>
     <% end %>
     
     <div class="col-xs-12 col-lg-6" id="month_<%= n<10 ? "0#{n}" : n %>">
@@ -34,22 +38,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% 5.times do %>
-                                <% n_semaine = date_jour.cweek %>
+
+                        
+                        <% 5.times do |repetition| %>
+                            <% if (date_jour.cwday == 1 && date_jour.month > n) && date_jour.month!=12 %>
+                                <tr><td colspan="6">&nbsp;</td></tr>
+                            <% else %>
                                 <tr>
-                                    <td>W-<%= n_semaine<10 ? "0#{n_semaine}" : n_semaine %></td>
-                                    <% 7.times do |j| %>
-                                        <% if date_jour.cwday < 6 %>
-                                            <td>
-                                                <% if date_jour.month == n %>
-                                                    <%= date_jour %>
-                                                <% end %>
-                                            </td>
-                                        <% end %>
-                                        <% date_jour = date_jour + 1 %>
+                                    <!-- Semaine -->
+                                    <td>W-<%= date_jour.cweek<10 ? "0#{date_jour.cweek}" : date_jour.cweek %></td>
+                                    <% 5.times do |index_jour| %>
+                                        <td> <%= date_jour %> </td>
+                                        <% date_jour = date_jour + 1.day %>
                                     <% end %>
+                                    <!-- Weekend -->
+                                    <% date_jour = date_jour + 2.days %>
                                 </tr>
+                            <% end %>
                         <% end %>
+
+                        
+
+                        
+
                     </tbody>
                 </table>
             </div>
