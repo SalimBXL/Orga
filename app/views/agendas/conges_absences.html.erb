@@ -5,61 +5,76 @@
     </span>
 </h1>
 
-<h2>Panels with Contextual Classes</h2>
+<h2><span class="label label-default"><%= @annee %></span></h2>
 
-<% date_jour = Date.parse("#{Date.today.year}-01-01").beginning_of_week %>
+<% date_jour = Date.parse("#{@annee}-01-01").beginning_of_week %>
 <% last_n_semaine = 99 %>
 
 <% 12.times do |n| %>
     <% n = n + 1%>
 
-    <% premier = Date.parse("#{Date.today.year}-#{n<10 ? "0#{n}" : n}-01") %>
-    <% case premier.cwday %>
-    <% when 7 %>
-        <% date_jour = premier + 1.day %>
-    <% when 6 %>
-        <% date_jour = premier + 2.day %>
-    <% else %>
-        <% date_jour = premier.beginning_of_week %>
-    <% end %>
+    <% premier = Date.parse("#{@annee}-#{n<10 ? "0#{n}" : n}-01") %>
     
-    <div class="col-xs-12 col-lg-6" id="month_<%= n<10 ? "0#{n}" : n %>">
+    <div class="col-xs-12" id="month_<%= n<10 ? "0#{n}" : n %>">
         <div class="panel panel-default">
-            <div class="panel-heading"><%= Date::ABBR_MONTHNAMES[n] %></div>
+            <div class="panel-heading">
+                <H3>
+                <%= Date::ABBR_MONTHNAMES[n] %>
+                </H3>
+            </div>
             <div class="panel-body">
                 <table class="table table-condensed table-bordered">
                     <thead>
                         <tr>
                             <th></th>
-                            <% 5.times do |j| %>
+                            <% nombre_jours = premier.end_of_month.day.to_i %>
+                            <% nombre_jours.times do |j| %>
                                 <% j = j+1 %>
-                                <th><%= j %></th>
+                                <th><%= j<10 ? "0#{j}" : j %></th>
                             <% end %>
                         </tr>
                     </thead>
                     <tbody>
-
                         
-                        <% 5.times do |repetition| %>
-                            <% if (date_jour.cwday == 1 && date_jour.month > n) && date_jour.month!=12 %>
-                                <tr><td colspan="6">&nbsp;</td></tr>
-                            <% else %>
-                                <tr>
-                                    <!-- Semaine -->
-                                    <td>W-<%= date_jour.cweek<10 ? "0#{date_jour.cweek}" : date_jour.cweek %></td>
-                                    <% 5.times do |index_jour| %>
-                                        <td> <%= date_jour %> </td>
-                                        <% date_jour = date_jour + 1.day %>
+                        <% @utilisateurs.each do |id, utilisateur| %>
+                            <tr>
+                                <td>
+                                    <%= utilisateur.prenom_nom %>
+                                </td>
+                                <% nombre_jours.times do |j| %>
+                                    <% j = j+1 %>
+                                    <% dt = "#{@annee}-#{n<10 ? "0" : ""}#{n}-#{j<10 ? "0": ""}#{j}" %>
+                                    <% date_jour = Date.parse(dt) %>
+
+                                    <% style = "" %>
+                                    <% contenu = "" %>
+
+                                    <% unless @conges_ok[id].nil? %>
+                                        <% if @conges_ok[id].include?(date_jour.to_s) %>
+                                            <% style = "conge_ok" %>
+                                        <% end %>
                                     <% end %>
-                                    <!-- Weekend -->
-                                    <% date_jour = date_jour + 2.days %>
-                                </tr>
-                            <% end %>
+
+                                    <% unless @conges_wait[id].nil? %>
+                                        <% if @conges_wait[id].include?(date_jour.to_s) %>
+                                            <% style = "conge_wait" %>
+                                            <% contenu = "?" %>
+                                        <% end %>
+                                    <% end %>
+
+                                    <% unless @absences[id].nil? %>
+                                        <% if @absences[id].include?(date_jour.to_s) %>
+                                            <% style = "absence" %>
+                                        <% end %>
+                                    <% end %>
+
+
+                                    <td class="<%= style %>">
+                                        <%= contenu %>
+                                    </td>
+                                <% end %>
+                            </tr>
                         <% end %>
-
-                        
-
-                        
 
                     </tbody>
                 </table>

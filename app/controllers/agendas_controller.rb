@@ -1,7 +1,8 @@
 class AgendasController < ApplicationController
-    before_action :find_debut_fin, only: [:absences, :conges, :conges_absences, :semaines, :jobs, :jours]
+    before_action :find_debut_fin, only: [:absences, :conges, :semaines, :jobs, :jours]
     before_action :find_numero_semaine, only: :une_semaine
     before_action :find_date_jour, only: :un_jour
+    before_action :find_annee, only: :conges_absences
 
     # ACCUEIL
     def index
@@ -24,9 +25,56 @@ class AgendasController < ApplicationController
 
     # CONGES & ABSENCES
     def conges_absences
-        @absences = Absence.where(date: @date_depart..@date_fin)
-        @conges = Conge.where(date: @date_depart..@date_fin)
+        @absences = Hash.new
+        @conges_ok = Hash.new
+        @conges_wait = Hash.new
+        @utilisateurs = Hash.new
+
+        premier = Date.parse("#{@annee}-01-01")
+
+        Utilisateur.order(:service_id, :groupe_id, :prenom, :nom).each do |utilisateur|
+            @utilisateurs[utilisateur.id] = utilisateur
+        end
+        absences = Absence.where("date >= ? OR date_fin <= ?", premier.beginning_of_year, premier.end_of_year).order(:utilisateur_id, :date)
+        conges = Conge.where("date >= ? OR date_fin <= ?", premier.beginning_of_year, premier.end_of_year).order(:utilisateur_id, :date)
+
+        
+        absences.each do |absence|
+            unless @absences.has_key?(absence.utilisateur_id)
+                @absences[absence.utilisateur_id] = Array.new
+            end
+            (((absence.date_fin - absence.date).to_i) + 1).times do |tour|
+                jour = absence.date + tour
+                @absences[absence.utilisateur_id] << jour.to_s
+            end
+        end
+
+
+        conges_ok = conges.where(accord: true)
+        conges_wait = conges.where(accord: false)
+        
+        conges_ok.each do |conge|
+                unless @conges_ok.has_key?(conge.utilisateur_id)
+                    @conges_ok[conge.utilisateur_id] = Array.new
+                end
+                (((conge.date_fin - conge.date).to_i) + 1).times do |tour|
+                    jour = conge.date + tour
+                    @conges_ok[conge.utilisateur_id] << jour.to_s
+                end
+        end
+        conges_wait.each do |conge|
+            unless @conges_wait.has_key?(conge.utilisateur_id)
+                @conges_wait[conge.utilisateur_id] = Array.new
+            end
+            (((conge.date_fin - conge.date).to_i) + 1).times do |tour|
+                jour = conge.date + tour
+                @conges_wait[conge.utilisateur_id] << jour.to_s
+            end
+        end
     end
+        
+
+
 
     # SEMAINES
     def semaines
@@ -197,6 +245,16 @@ class AgendasController < ApplicationController
             @date_depart = Date.today.beginning_of_year - 3.months
             @date_fin = Date.today.end_of_year + 3.months
         end
+    end
+
+    def find_annee
+        unless params[:annee].nil?
+            @annee = params[:annee].to_i
+        else
+            @annee = Date.today.year
+        end
+        @date_depart = Date.parse("#{@annee}-01-01")
+        @date_fin = Date.parse("#{@annee}-12-31")
     end
 
     def format_numero_semaine(annee, numero_semaine)
