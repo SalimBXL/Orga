@@ -4,13 +4,30 @@
     <td><%= utilisateur.service.nom %></td>
     <td><%= utilisateur.groupe.nom %></td>
     <td>
-        <%= link_to " [Show] ", utilisateur_path(utilisateur) %>
-        <%= link_to " [Edit] ", edit_utilisateur_path(utilisateur) %>
-        <%= link_to " [Delete] ", utilisateur_path(utilisateur), 
+        <%= link_to '<span data-toggle="tooltip" title="Editer">
+            <i class="material-icons">edit</i></span>'.html_safe, 
+            edit_utilisateur_path(utilisateur),
+            class: "btn btn-warning btn-xs" %>
+        <%= link_to '<span data-toggle="tooltip" title="Supprimer le service">
+            <i class="material-icons">close</i>'.html_safe, 
+            utilisateur_path(utilisateur),
             method: :delete,
             remote: true,
-            data: { confirm: "Delete #{utilisateur.nom} ?" } 
-        %>
-        <%= link_to " [Semaines] ", "/semaines_utilisateur/#{utilisateur.id}" %>
+            data: { confirm: "Delete #{utilisateur.prenom_nom} ?" },
+            class: "btn btn-danger btn-xs" %>
+        
+
+        &nbsp;
+
+        <%= link_to '<span data-toggle="tooltip" title="Afficher">
+            <i class="material-icons">portrait</i></span>'.html_safe, 
+            utilisateur_path(utilisateur),
+            class: "btn btn-info btn-xs" %>
+
+        <%= link_to '<span data-toggle="tooltip" title="Semaines">
+            <i class="material-icons">view_day</i></span>'.html_safe, 
+            "/semaines_utilisateur/#{utilisateur.id}",
+            class: "btn btn-primary btn-xs" %>
+        
     </td>
 </tr>

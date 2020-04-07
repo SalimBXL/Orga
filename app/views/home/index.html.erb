@@ -50,6 +50,24 @@
                     <h4>Congés</h4>
                 </p>
             </td>
+            <td style="text-align:center">
+                <p>
+                    <!-- FERMETURES -->
+                    <%= link_to '<i class="material-icons">event_busy</i>'.html_safe, 
+                        absences_path,
+                        class: "btn btn-success btn-xs" 
+                    %>
+                    <h4>Fermetures</h4>
+                </p>
+                <p>
+                    <!-- EVENEMENTS -->
+                    <%= link_to '<i class="material-icons">event_available</i>'.html_safe, 
+                        conges_path,
+                        class: "btn btn-success btn-xs" 
+                    %>
+                    <h4>Evénements</h4>
+                </p>
+            </td>
         </tr>
     </table>
     </div>
@@ -120,7 +138,7 @@
             <td style="text-align:center">
                 <p>
                     <!-- SEMAINES -->
-                    <%= link_to '<i class="material-icons">category</i>'.html_safe, 
+                    <%= link_to '<i class="material-icons">view_day</i>'.html_safe, 
                         semaines_path,
                         class: "btn btn-danger btn-xs" 
                     %>
@@ -128,7 +146,7 @@
                 </p>
                 <p>
                     <!-- JOBS -->
-                    <%= link_to '<i class="material-icons">category</i>'.html_safe, 
+                    <%= link_to '<i class="material-icons">view_week</i>'.html_safe, 
                         jobs_path,
                         class: "btn btn-danger btn-xs" 
                     %>
@@ -138,7 +156,7 @@
             <td style="text-align:center">
                 <p>
                     <!-- WORKING_LISTS -->
-                    <%= link_to '<i class="material-icons">category</i>'.html_safe, 
+                    <%= link_to '<i class="material-icons">list_alt</i>'.html_safe, 
                         working_lists_path,
                         class: "btn btn-danger btn-xs" 
                     %>

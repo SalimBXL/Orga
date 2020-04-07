@@ -5,7 +5,7 @@ class WorksController < ApplicationController
     #   INDEX   #
     #############
     def index
-        @works = Work.order(:classe_id, :groupe_id, :nom).page(params[:page])
+        @works = Work.order(:service_id, :classe_id, :groupe_id, :nom).page(params[:page])
     end
 
 

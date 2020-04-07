@@ -1,5 +1,22 @@
-<h1>UTILISATEURS</h1>
+<h1>
+    <span class="label label-primary">
+        <i class="material-icons">group</i>
+        <%= "Utilisateurs".upcase %>
+    </span>
+</h1>
+
+<p>
+    <%= link_to '<i class="material-icons">person_add</i> '.html_safe, 
+        new_utilisateur_path,
+        class: "btn btn-success btn-xs" %>
+</p>
+
 <div id="utilisateurs">
     <%= render 'utilisateurs' %>
 </div>
-<p><%= link_to "[Nouvel utilisateur]", new_utilisateur_path %></p>
+
+<p>
+    <%= link_to '<i class="material-icons">person_add</i> '.html_safe, 
+        new_utilisateur_path,
+        class: "btn btn-success btn-xs" %>
+</p>

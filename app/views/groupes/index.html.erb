@@ -1,5 +1,23 @@
-<h1>GROUPES</h1>
+<h1>
+    <span class="label label-primary">
+        <i class="material-icons">group_work</i>
+        <%= "Groupes".upcase %>
+    </span>
+</h1>
+
+<p>
+    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+        new_groupe_path,
+        class: "btn btn-success btn-xs" %>
+</p>
+
+
 <div id="groupes">
     <%= render 'groupes' %>
 </div>
-<p><%= link_to "[Nouveau groupe]", new_groupe_path %></p>
+
+<p>
+    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+        new_groupe_path,
+        class: "btn btn-success btn-xs" %>
+</p>

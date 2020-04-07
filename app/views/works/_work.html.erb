@@ -6,13 +6,24 @@
     <td><%= work.classe.nom unless work.classe.nil? %></td>
     <td><%= work.service.nom unless work.service.nil? %></td>
     <td>
-        <%= link_to " [Show] ", work_path(work) %>
-        <%= link_to " [Edit] ", edit_work_path(work) %>
-        <%= link_to " [Delete] ", work_path(work), 
+        <%= link_to '<span data-toggle="tooltip" title="Editer">
+            <i class="material-icons">edit</i></span>'.html_safe, 
+            edit_work_path(work),
+            class: "btn btn-warning btn-xs" %>
+        <%= link_to '<span data-toggle="tooltip" title="Supprimer le service">
+            <i class="material-icons">close</i>'.html_safe, 
+            work_path(work),
             method: :delete,
             remote: true,
-            data: { confirm: "Delete #{work.nom} ?" } 
-        %>
-        <%= link_to " [Working Lists] ", "/working_lists_work/#{work.id}" %>
+            data: { confirm: "Delete #{work.nom} ?" },
+            class: "btn btn-danger btn-xs" %>
+
+        &nbsp;
+
+        <%= link_to '<span data-toggle="tooltip" title="Working Lists">
+            <i class="material-icons">list_alt</i></span>'.html_safe, 
+            "/working_lists_work/#{work.id}",
+            class: "btn btn-info btn-xs" %>
+
     </td>
 </tr>

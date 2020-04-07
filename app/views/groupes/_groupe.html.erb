@@ -2,14 +2,32 @@
     <td><%= groupe.nom %></td>
     <td><%= groupe.description %></td>
     <td>
-        <%= link_to " [Show] ", groupe_path(groupe) %>
-        <%= link_to " [Edit] ", edit_groupe_path(groupe) %>
-        <%= link_to " [Delete] ", groupe_path(groupe), 
+        <%= link_to '<span data-toggle="tooltip" title="Editer">
+            <i class="material-icons">edit</i></span>'.html_safe, 
+            edit_groupe_path(groupe),
+            class: "btn btn-warning btn-xs" 
+        %>
+
+        <%= link_to '<span data-toggle="tooltip" title="Supprimer">
+            <i class="material-icons">close</i>'.html_safe, 
+            groupe_path(groupe),
             method: :delete,
             remote: true,
-            data: { confirm: "Delete #{groupe.nom} ?" } 
+            data: { confirm: "Delete #{groupe.nom}  ?" },
+            class: "btn btn-danger btn-xs" 
         %>
-        <%= link_to " [Utilisateurs] ", "/utilisateurs_groupe/#{groupe.id}" %>
-        <%= link_to " [Works] ", "/works_groupe/#{groupe.id}" %>
+
+        &nbsp;
+
+        <%= link_to '<span data-toggle="tooltip" title="Utilisateurs">
+            <i class="material-icons">group</i></span>'.html_safe, 
+            "/utilisateurs_groupe/#{groupe.id}",
+            class: "btn btn-info btn-xs" 
+        %>
+        <%= link_to '<span data-toggle="tooltip" title="Works">
+            <i class="material-icons">build</i></span>'.html_safe, 
+            "/works_groupe/#{groupe.id}",
+            class: "btn btn-primary btn-xs" 
+        %>
     </td>
 </tr>

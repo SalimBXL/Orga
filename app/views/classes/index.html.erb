@@ -1,5 +1,22 @@
-<h1>CLASSES</h1>
+<h1>
+    <span class="label label-primary">
+        <i class="material-icons">category</i>
+        <%= "Classes".upcase %>
+    </span>
+</h1>
+
+<p>
+    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+        new_class_path,
+        class: "btn btn-success btn-xs" %>
+</p>
+
 <div id="classes">
     <%= render 'classes' %>
 </div>
-<p><%= link_to "[Nouvelle classe]", new_class_path %></p>
+
+<p>
+    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+        new_class_path,
+        class: "btn btn-success btn-xs" %>
+</p>

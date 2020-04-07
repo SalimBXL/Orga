@@ -21,14 +21,10 @@
 
     <!-- Utilisateur -->
     <p>
-    <%= @semaine.utilisateur.nom %>
-        <!-- Utilisateur -->
-               <p>
-                    <%= form.label :utilisateur %><br>
-                    <%= form.select(:utilisateur_id, @utilisateurs.collect {|p| [ "[#{@groupes.where(id: p.groupe_id).first.nom}] #{p.prenom_nom}", p.id ] }, 
-                                            { }, 
-                                            { :multiple => false, :size => 10 }) %>
-                </p>
+        <%= form.label :utilisateur %><br>
+        <%= form.select(:utilisateur_id, @utilisateurs.collect {|p| [ "[#{@groupes.where(id: p.groupe_id).first.nom}] #{p.prenom_nom}", p.id ] }, 
+                                { }, 
+                                { :multiple => false, :size => 10 }) %>
     </p>
 
     <!-- Note -->

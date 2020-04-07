@@ -1,6 +1,22 @@
-<h1>SEMAINES</h1>
-<p><%= link_to "[Nouvelle semaine]", new_semaine_path %></p>
+<h1>
+    <span class="label label-danger">
+        <i class="material-icons">view_day</i>
+        <%= "Semaines".upcase %>
+    </span>
+</h1>
+
+<p>
+    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+        new_semaine_path,
+        class: "btn btn-success btn-xs" %>
+</p>
+
 <div id="semaines">
     <%= render 'semaines' %>
 </div>
-<p><%= link_to "[Nouvelle semaine]", new_semaine_path %></p>
+
+<p>
+    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+        new_semaine_path,
+        class: "btn btn-suscess btn-xs" %>
+</p>
