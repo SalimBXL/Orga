@@ -1,0 +1,19 @@
+<h1>
+    <%= @fermeture.nom %>
+</h1>
+
+<p>
+    <%= @fermeture.date %> - <%= @fermeture.dae_fin %>
+</p>
+
+<p>
+    <%= @fermeture.service.nom %>
+</p>
+
+<p>
+    <%= @fermeture.note %>
+</p>
+
+<p>
+    <%= link_to " [Edit] ", edit_fermeture_path(@fermeture) %>
+</p>

@@ -1,0 +1,23 @@
+<tr id="fermeture_<%= fermeture.id %>">
+    <td><%= fermeture.nom %></td>
+    <td><%= fermeture.date %></td>
+    <td><%= fermeture.date_fin %></td>
+    <td><%= fermeture.service.nom %></td>
+    <td><%= fermeture.note %></td>
+    <td>
+        <%= link_to '<span data-toggle="tooltip" title="Editer">
+            <i class="material-icons">edit</i></span>'.html_safe, 
+            edit_fermeture_path(fermeture),
+            class: "btn btn-warning btn-xs" 
+        %>
+
+        <%= link_to '<span data-toggle="tooltip" title="Supprimer">
+            <i class="material-icons">close</i>'.html_safe, 
+            fermeture_path(fermeture),
+            method: :delete,
+            remote: true,
+            data: { confirm: "Delete #{fermeture.nom} (#{fermeture.date})  ?" },
+            class: "btn btn-danger btn-xs" 
+        %>
+    </td>
+</tr>

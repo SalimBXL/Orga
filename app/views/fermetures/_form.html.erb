@@ -1,0 +1,47 @@
+<%= form_with model: @fermeture, local: true do |form| %>
+
+    <% if @fermeture.errors.any? %>
+        <strong>WARNING</strong>
+        <ul>
+            <% @fermeture.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
+
+    <!-- Nom -->
+    <p>
+        <%= form.label :nom %><br>
+        <%= form.text_field :nom %>
+    </p>
+
+    <!-- Dates -->
+    <p>
+        <%= form.label :date %><br>
+        <%= form.date_field :date %> <%= form.date_field :date_fin %>
+    </p>
+
+    <!-- Service -->
+    <p>
+        <%= form.label :service_id %><br>
+        <%= form.select(:service_id) do %>
+            <%= select_option_tag("", nil, @fermeture.service_id) %>
+            <% Service.all.find_each do |l| %>
+                <%= select_option_tag(l.nom.capitalize, l.id, @fermeture.service_id) %>
+            <% end %>
+        <% end %>
+    </p>
+
+
+    <!-- Note -->
+    <p>
+        <%= form.label :note %><br>
+        <%= form.text_field :note %>
+    </p>
+
+
+
+    <p>
+        <%= form.submit class: "btn btn-primary" %>
+    </p>
+<% end %>

@@ -1,0 +1,12 @@
+<p><%= paginate @fermetures, remote: true %></p>
+<table class="table table-striped">
+    <tr>
+        <th>Nom</th>
+        <th>Date</th>
+        <th>Date Fin</th>
+        <th>Service</th>
+        <th>Note</th>
+    </tr>
+    <%= render @fermetures %>
+</table>
+<p><%= paginate @fermetures, remote: true %></p>

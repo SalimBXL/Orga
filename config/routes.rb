@@ -89,9 +89,6 @@ Rails.application.routes.draw do
   get "services_lieu/:id", to: "services#services_lieu"
 
 
-
-
-
   ###########
   #  Lieux  #
   ###########
@@ -114,6 +111,12 @@ Rails.application.routes.draw do
   get "agendas/conges_absences", to: "agendas#conges_absences"
 
 
+  ################
+  #  Fermetures  #
+  ################
+  resources :fermetures, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
+
+  
   #####################
   #   Types Absences  #
   #####################
