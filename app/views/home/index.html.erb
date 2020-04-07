@@ -7,134 +7,160 @@
 
 
 <h1>ORGA</h1>
-<p>gestion des équipes</p>
+<h3><%= "Gestion des équipes".capitalize %></h3>
 
 <!-- MENU STANDARD -->
-<div class="btn-group">
-    <%= link_to '<i class="material-icons">today</i><br>
-        Aujourd\'hui'.html_safe, 
-        agendas_jour_path,
-        class: "btn btn-primary btn-xs" %>
+<div class="row">
+    <div class="col-sm-4 table-responsive">
+    <table class="table">
+        <tr class="success">
+            <td style="text-align:center">
+                <p>
+                    <!-- TODAY -->
+                    <%= link_to '<i class="material-icons">today</i>'.html_safe, 
+                        agendas_jour_path,
+                        class: "btn btn-success btn-xs"
+                    %>
+                    <h4>Aujourd'hui</h4>
+                </p>
+                <p>
+                    <!-- THIS WEEK -->
+                    <%= link_to '<i class="material-icons">date_range</i>'.html_safe, 
+                        agendas_semaine_path,
+                        class: "btn btn-success btn-xs" 
+                    %>
+                    <h4>Cette semaine</h4>
+                </p>
+            </td>
+            <td style="text-align:center">
+                <p>
+                    <!-- ABSENCES -->
+                    <%= link_to '<i class="material-icons">healing</i>'.html_safe, 
+                        absences_path,
+                        class: "btn btn-success btn-xs" 
+                    %>
+                    <h4>Absences</h4>
+                </p>
+                <p>
+                    <!-- CONGES -->
+                    <%= link_to '<i class="material-icons">beach_access</i>'.html_safe, 
+                        conges_path,
+                        class: "btn btn-success btn-xs" 
+                    %>
+                    <h4>Congés</h4>
+                </p>
+            </td>
+        </tr>
+    </table>
+    </div>
+    <div class="col-sm-4 table-responsive">
+    <table class="table">
+        <tr class="info">
+            <td style="text-align:center" >
+                <p>
+                    <!-- LIEUX -->
+                    <%= link_to '<i class="material-icons">location_city</i>'.html_safe, 
+                        lieus_path,
+                        class: "btn btn-primary btn-xs" 
+                    %>
+                    <h4>Lieux</h4>
+                </p>
+                <p>
+                    <!-- SERVICES -->
+                    <%= link_to '<i class="material-icons">business</i>'.html_safe, 
+                        services_path,
+                        class: "btn btn-primary btn-xs" 
+                    %>
+                    <h4>Services</h4>
+                </p>
+            </td>
+            <td style="text-align:center">
+                <p>
+                    <!-- GROUPES -->
+                    <%= link_to '<i class="material-icons">group_work</i>'.html_safe, 
+                        groupes_path,
+                        class: "btn btn-primary btn-xs" 
+                    %>
+                    <h4>Groupes</h4>
+                </p>
+                <p>
+                    <!-- UTILISATEURS -->
+                    <%= link_to '<i class="material-icons">group</i>'.html_safe, 
+                        utilisateurs_path,
+                        class: "btn btn-primary btn-xs" 
+                    %>
+                    <h4>Utilisateurs</h4>
+                </p>
+            </td>
+            <td style="text-align:center">
+                <p>
+                    <!-- CLASSES -->
+                    <%= link_to '<i class="material-icons">category</i>'.html_safe, 
+                        classes_path,
+                        class: "btn btn-primary btn-xs" 
+                    %>
+                    <h4>Classes</h4>
+                </p>
+                <p>
+                    <!-- WORKS -->
+                    <%= link_to '<i class="material-icons">build</i>'.html_safe, 
+                        works_path,
+                        class: "btn btn-primary btn-xs" 
+                    %>
+                    <h4>Works</h4>
+                </p>
+            </td>
+        </tr>
+    </table>
+    </div>
+
+    <div class="col-sm-4 table-responsive">
+    <table class="table">
+        <tr class="warning">
+            <td style="text-align:center">
+                <p>
+                    <!-- SEMAINES -->
+                    <%= link_to '<i class="material-icons">category</i>'.html_safe, 
+                        semaines_path,
+                        class: "btn btn-danger btn-xs" 
+                    %>
+                    <h4>Semaines</h4>
+                </p>
+                <p>
+                    <!-- JOBS -->
+                    <%= link_to '<i class="material-icons">category</i>'.html_safe, 
+                        jobs_path,
+                        class: "btn btn-danger btn-xs" 
+                    %>
+                    <h4>Jobs</h4>
+                </p>
+            </td>
+            <td style="text-align:center">
+                <p>
+                    <!-- WORKING_LISTS -->
+                    <%= link_to '<i class="material-icons">category</i>'.html_safe, 
+                        working_lists_path,
+                        class: "btn btn-danger btn-xs" 
+                    %>
+                    <h4>Working Lists</h4>
+                </p>
+                
+            </td>
+        </tr>
+    </table>
+    </div>
 </div>
 
-<div class="btn-group">
-    <%= link_to '<i class="material-icons">date_range</i><br>
-        Cette Semaine'.html_safe, 
-        agendas_semaine_path,
-        class: "btn btn-primary btn-xs" %>
-</div>
-
-<%= link_to "Agendas", agendas_path %>
 
 
-<!-- LIEUX -->
-            <li>
-                <%= link_to '<i class="material-icons" 
-                    data-toggle="tooltip" 
-                    title="Lieux" 
-                    data-placement="bottom">
-                    location_city
-                    </i>'.html_safe,
-                    lieus_path 
-                %>
-            </li>
 
-
-            <!-- UTILISATEURS -->
-            <li>
-                <%= link_to '<i class="material-icons" 
-                    data-toggle="tooltip" 
-                    title="Utilisateurs" 
-                    data-placement="bottom">
-                    group
-                    </i>'.html_safe,
-                    utilisateurs_path 
-                %>
-            </li>
-
-
-            <!-- TRAVAUX -->
-            <li>
-                <%= link_to '<i class="material-icons" 
-                    data-toggle="tooltip" 
-                    title="Works" 
-                    data-placement="bottom">
-                    group_work
-                    </i>'.html_safe,
-                    works_path 
-                %>
-            </li>
-
-
-            <li>
-                <%= link_to '<i class="material-icons" 
-                    data-toggle="tooltip" 
-                    title="Absences" 
-                    data-placement="bottom">
-                    healing
-                    </i>'.html_safe,
-                    absences_path 
-                %>
-            </li>
 
 
 
 <!-- MENU ADMIN -->
-<!--
-<div class="btn-group">
-    <%= link_to '<i class="material-icons">playlist_add</i><br>
-        Ajouter'.html_safe, 
-        ajouts_path,
-        class: "btn btn-primary btn-xs" %>
-    
-    <%= link_to '<i class="material-icons">playlist_add</i><br>
-        Ajouter'.html_safe, 
-        agendas_semaine_path,
-        class: "btn btn-primary btn-xs" %>
-    -->
-</div>
-
-
-
-
-<!-- MENU DETAILS-->
-<!--
-<h3>CONFIG</h3>
-<div class="btn-group">
-    <%= link_to '<i class="material-icons">location_city</i><br>
-        Lieux'.html_safe, 
-        lieus_path,
-        class: "btn btn-primary btn-xs" %>
-    <%= link_to '<i class="material-icons">business</i><br>
-        Services'.html_safe, 
-        services_path,
-        class: "btn btn-primary btn-xs" %>
-</div>
 
 
 <ul>
-    <li>
-        <%= link_to '<i class="material-icons" 
-            data-toggle="tooltip" 
-            title="Services" 
-            data-placement="bottom">
-            business
-            </i>'.html_safe,
-            services_path
-        %>
-    </li>
-
-    <li>
-        <%= link_to '<i class="material-icons" 
-            data-toggle="tooltip" 
-            title="Groupes" 
-            data-placement="bottom">
-            group
-            </i>'.html_safe,
-            groupes_path 
-        %>
-    </li>
-
     <li><%= link_to "Lieux", lieus_path %></li>
     <li><%= link_to "Services", services_path %></li>
     <li><%= link_to "Groupes", groupes_path %></li>
@@ -150,4 +176,3 @@
     <li><%= link_to "Agendas", agendas_path %></li>
     <li><%= link_to "Ajouter une nouvelle attribution", ajouts_path %></li>
 </ul>
--->
