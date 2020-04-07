@@ -1,11 +1,16 @@
 <h1>
     <span class="label label-primary">
-        <i class="material-icons">work_off</i>
+        <i class="material-icons">event_busy</i>
         <%= "Congés et absences".upcase %>
     </span>
 </h1>
 
 <h2><span class="label label-default"><%= @annee %></span></h2>
+
+<p>
+    <span class="label label-success">Congés</span>
+    <span class="label label-warning">Absences</span>
+</p>
 
 <% date_jour = Date.parse("#{@annee}-01-01").beginning_of_week %>
 <% last_n_semaine = 99 %>
