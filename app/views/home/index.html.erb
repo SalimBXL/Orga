@@ -12,164 +12,160 @@
 
     <!-- MENU STANDARD -->
     <div class="row">
-        <div class="col-sm-4 table-responsive">
-        <table class="table">
-            <tr class="success">
-                <td style="text-align:center">
-                    <p>
-                        <!-- TODAY -->
-                        <%= link_to '<i class="material-icons">today</i>'.html_safe, 
-                            agendas_jour_path,
-                            class: "btn btn-success btn-xs"
-                        %>
-                        <h4>Aujourd'hui</h4>
-                    </p>
-                    <p>
-                        <!-- THIS WEEK -->
-                        <%= link_to '<i class="material-icons">date_range</i>'.html_safe, 
-                            agendas_semaine_path,
-                            class: "btn btn-success btn-xs" 
-                        %>
-                        <h4>Cette semaine</h4>
-                    </p>
-                </td>
-                <td style="text-align:center">
-                    <p>
-                        <!-- ABSENCES -->
-                        <%= link_to '<i class="material-icons">healing</i>'.html_safe, 
-                            absences_path,
-                            class: "btn btn-success btn-xs" 
-                        %>
-                        <h4>Absences</h4>
-                    </p>
-                    <p>
-                        <!-- CONGES -->
-                        <%= link_to '<i class="material-icons">beach_access</i>'.html_safe, 
-                            conges_path,
-                            class: "btn btn-success btn-xs" 
-                        %>
-                        <h4>Congés</h4>
-                    </p>
-                </td>
-                <td style="text-align:center">
-                    <p>
-                        <!-- FERMETURES -->
-                        <%= link_to '<i class="material-icons">event_busy</i>'.html_safe, 
-                            fermetures_path,
-                            class: "btn btn-success btn-xs" 
-                        %>
-                        <h4>Fermetures</h4>
-                    </p>
-                    <p>
-                        <!-- EVENEMENTS -->
-                        <%= link_to '<i class="material-icons">event_available</i>'.html_safe, 
-                            conges_path,
-                            class: "btn btn-success btn-xs" 
-                        %>
-                        <h4>Evénements</h4>
-                    </p>
-                </td>
-            </tr>
-        </table>
-        </div>
-        <div class="col-sm-4 table-responsive">
-        <table class="table">
-            <tr class="info">
-                <td style="text-align:center" >
-                    <p>
-                        <!-- LIEUX -->
-                        <%= link_to '<i class="material-icons">location_city</i>'.html_safe, 
-                            lieus_path,
-                            class: "btn btn-primary btn-xs" 
-                        %>
-                        <h4>Lieux</h4>
-                    </p>
-                    <p>
-                        <!-- SERVICES -->
-                        <%= link_to '<i class="material-icons">business</i>'.html_safe, 
-                            services_path,
-                            class: "btn btn-primary btn-xs" 
-                        %>
-                        <h4>Services</h4>
-                    </p>
-                </td>
-                <td style="text-align:center">
-                    <p>
-                        <!-- GROUPES -->
-                        <%= link_to '<i class="material-icons">group_work</i>'.html_safe, 
-                            groupes_path,
-                            class: "btn btn-primary btn-xs" 
-                        %>
-                        <h4>Groupes</h4>
-                    </p>
-                    <p>
-                        <!-- UTILISATEURS -->
-                        <%= link_to '<i class="material-icons">group</i>'.html_safe, 
-                            utilisateurs_path,
-                            class: "btn btn-primary btn-xs" 
-                        %>
-                        <h4>Utilisateurs</h4>
-                    </p>
-                </td>
-                <td style="text-align:center">
-                    <p>
-                        <!-- CLASSES -->
-                        <%= link_to '<i class="material-icons">category</i>'.html_safe, 
-                            classes_path,
-                            class: "btn btn-primary btn-xs" 
-                        %>
-                        <h4>Classes</h4>
-                    </p>
-                    <p>
-                        <!-- WORKS -->
-                        <%= link_to '<i class="material-icons">build</i>'.html_safe, 
-                            works_path,
-                            class: "btn btn-primary btn-xs" 
-                        %>
-                        <h4>Works</h4>
-                    </p>
-                </td>
-            </tr>
-        </table>
+        <div class="col-xs-12 col-sm-6 col-md-4" id="conteneur1">
+            <div class="row">
+            <p>
+                <!-- TODAY -->
+                <%= link_to '<i class="material-icons">today</i>'.html_safe, 
+                    agendas_jour_path,
+                    class: "btn btn-success btn-xs"
+                %>
+                <h4>Aujourd'hui</h4>
+            </p>
+            <p>
+                <!-- THIS WEEK -->
+                <%= link_to '<i class="material-icons">date_range</i>'.html_safe, 
+                    agendas_semaine_path,
+                    class: "btn btn-success btn-xs" 
+                %>
+                <h4>Cette semaine</h4>
+            </p>
+
+            </div>
+            <div class="row">
+            <p >
+                <!-- ABSENCES -->
+                <%= link_to '<i class="material-icons">healing</i>'.html_safe, 
+                    absences_path,
+                    class: "btn btn-success btn-xs" 
+                %>
+                <h4>Absences</h4>
+            </p>
+            <p >
+                <!-- CONGES -->
+                <%= link_to '<i class="material-icons">beach_access</i>'.html_safe, 
+                    conges_path,
+                    class: "btn btn-success btn-xs" 
+                %>
+                <h4>Congés</h4>
+            </p>
+            </div>
+
+            <div class="row">
+            <p >
+                <!-- FERMETURES -->
+                <%= link_to '<i class="material-icons">event_busy</i>'.html_safe, 
+                    fermetures_path,
+                    class: "btn btn-success btn-xs" 
+                %>
+                <h4>Fermetures</h4>
+            </p>
+            <p >
+                <!-- EVENEMENTS -->
+                <%= link_to '<i class="material-icons">event_available</i>'.html_safe, 
+                    conges_path,
+                    class: "btn btn-success btn-xs" 
+                %>
+                <h4>Evénements</h4>
+            </p>
+            </div>
         </div>
 
-        <div class="col-sm-4 table-responsive">
-        <table class="table">
-            <tr class="warning">
-                <td style="text-align:center">
-                    <p>
-                        <!-- SEMAINES -->
-                        <%= link_to '<i class="material-icons">view_day</i>'.html_safe, 
-                            semaines_path,
-                            class: "btn btn-danger btn-xs" 
-                        %>
-                        <h4>Semaines</h4>
-                    </p>
-                    <p>
-                        <!-- JOBS -->
-                        <%= link_to '<i class="material-icons">view_week</i>'.html_safe, 
-                            jobs_path,
-                            class: "btn btn-danger btn-xs" 
-                        %>
-                        <h4>Jobs</h4>
-                    </p>
-                </td>
-                <td style="text-align:center">
-                    <p>
-                        <!-- WORKING_LISTS -->
-                        <%= link_to '<i class="material-icons">list_alt</i>'.html_safe, 
-                            working_lists_path,
-                            class: "btn btn-danger btn-xs" 
-                        %>
-                        <h4>Working Lists</h4>
-                    </p>
-                    
-                </td>
-            </tr>
-        </table>
+        <div class="col-xs-12 col-sm-6 col-md-4" id="conteneur2">
+            <div class="row">
+            <p>
+                <!-- LIEUX -->
+                <%= link_to '<i class="material-icons">location_city</i>'.html_safe, 
+                    lieus_path,
+                    class: "btn btn-primary btn-xs" 
+                %>
+                <h4>Lieux</h4>
+            </p>
+            <p>
+                <!-- SERVICES -->
+                <%= link_to '<i class="material-icons">business</i>'.html_safe, 
+                    services_path,
+                    class: "btn btn-primary btn-xs" 
+                %>
+                <h4>Services</h4>
+            </p>
+            </div>
+            <div class="row">
+            <p>
+                <!-- GROUPES -->
+                <%= link_to '<i class="material-icons">group_work</i>'.html_safe, 
+                    groupes_path,
+                    class: "btn btn-primary btn-xs" 
+                %>
+                <h4>Groupes</h4>
+            </p>
+            <p>
+                <!-- UTILISATEURS -->
+                <%= link_to '<i class="material-icons">group</i>'.html_safe, 
+                    utilisateurs_path,
+                    class: "btn btn-primary btn-xs" 
+                %>
+                <h4>Utilisateurs</h4>
+            </p>
+            </div>
+            <div class="row">
+            <p>
+                <!-- CLASSES -->
+                <%= link_to '<i class="material-icons">category</i>'.html_safe, 
+                    classes_path,
+                    class: "btn btn-primary btn-xs" 
+                %>
+                <h4>Classes</h4>
+            </p>
+            <p>
+                <!-- WORKS -->
+                <%= link_to '<i class="material-icons">build</i>'.html_safe, 
+                    works_path,
+                    class: "btn btn-primary btn-xs" 
+                %>
+                <h4>Works</h4>
+            </p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4" id="conteneur3">
+            <div class="row">
+            <p>
+                <!-- SEMAINES -->
+                <%= link_to '<i class="material-icons">view_day</i>'.html_safe, 
+                    semaines_path,
+                    class: "btn btn-danger btn-xs" 
+                %>
+                <h4>Semaines</h4>
+            </p>
+            <p>
+                <!-- JOBS -->
+                <%= link_to '<i class="material-icons">view_week</i>'.html_safe, 
+                    jobs_path,
+                    class: "btn btn-danger btn-xs" 
+                %>
+                <h4>Jobs</h4>
+            </p>
+            </div>
+            <div class="row">
+            <p>
+                <!-- WORKING_LISTS -->
+                <%= link_to '<i class="material-icons">list_alt</i>'.html_safe, 
+                    working_lists_path,
+                    class: "btn btn-danger btn-xs" 
+                %>
+                <h4>Working Lists</h4>
+            </p>
+            <p>
+                <!-- ADD ATTRIBS -->
+                <%= link_to '<i class="material-icons">playlist_add</i>'.html_safe, 
+                    ajouts_path,
+                    class: "btn btn-danger btn-xs" 
+                %>
+                <h4>Ajouter</h4>
+            </p>
+            <div class="row">
         </div>
     </div>
-
 </div>
 
 

@@ -7,3 +7,34 @@
         color: grey;
     }
 }
+
+#conteneur1 {
+    margin: auto;
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(205, 255, 129);
+}
+#conteneur2 {
+    margin: auto;
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(202, 216, 255);
+}
+#conteneur3 {
+    margin: auto;
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(255, 198, 175);
+}
