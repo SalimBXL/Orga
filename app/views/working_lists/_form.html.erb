@@ -29,16 +29,8 @@
 
     <!-- WORK -->
     <p>
-        <%= form.label :work_id %><br>
-        <%= form.select(:work_id) do %>
-            <%= select_option_tag("", nil, @working_list.work_id) %>
-            <% Work.order(:groupe_id).find_each do |l| %>
-                <%= select_option_tag("#{l.groupe.nom} - #{l.classe.nom} - [ #{l.code} ] - #{l.nom}", l.id, @working_list.work_id) %>
-            <% end %>
-        <% end %>
-
         <%= form.select(:travaux, 
-                @works.collect {|w| ["#{w.groupe.nom} - #{w.classe.nom} - [ #{w.code} ] - #{w.nom}", w.id]}, 
+                Work.order(:classe_id, :service_id, :nom).collect {|w| ["#{w.groupe.nom} - #{w.classe.nom} - [ #{w.code} ] - #{w.nom}", w.id]}, 
                 { }, 
                 { :multiple => true, :size => 10 }
             ) 

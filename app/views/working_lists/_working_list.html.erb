@@ -8,12 +8,18 @@
         [ <%= working_list.work.code %> ]
     </td>
     <td>
-        <%= link_to " [Show] ", working_list_path(working_list) %>
-        <%= link_to " [Edit] ", edit_working_list_path(working_list) %>
-        <%= link_to " [Delete] ", working_list_path(working_list), 
+    
+        <%= link_to '<span data-toggle="tooltip" title="Editer">
+            <i class="material-icons">edit</i></span>'.html_safe, 
+            edit_working_list_path(working_list),
+            class: "btn btn-warning btn-xs" %>
+        <%= link_to '<span data-toggle="tooltip" title="Supprimer le service">
+            <i class="material-icons">close</i>'.html_safe, 
+            working_list_path(working_list),
             method: :delete,
             remote: true,
-            data: { confirm: "Delete ##{working_list.id} ?" } 
-        %>
+            data: { confirm: "Delete ##{working_list.id} ?" },
+            class: "btn btn-danger btn-xs" %>
+
     </td>
 </tr>
