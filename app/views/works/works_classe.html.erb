@@ -1,5 +1,12 @@
-<h1>WORKS PAR CLASSE</h1>
-<h2><%= @classe.nom %></h2>
+<h1>
+    <span class="label label-primary">
+        <i class="material-icons">build</i>
+        <%= "Works".upcase %>
+    </span>
+</h1>
+
+<h3><span class="label label-info"><%= @classe.nom %></span></h3>
+
 <div id="works">
     <%= render 'works' %>
 </div>
