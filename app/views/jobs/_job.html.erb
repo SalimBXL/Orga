@@ -5,13 +5,29 @@
     <td><%= job.semaine.utilisateur.prenom_nom %></td>
     <td><%= job.note %></td>
     <td>
-        <%= link_to " [Show] ", job_path(job) %>
-        <%= link_to " [Edit] ", edit_job_path(job) %>
-        <%= link_to " [Delete] ", job_path(job), 
+         &nbsp;
+
+        <%= link_to '<span data-toggle="tooltip" title="Editer">
+            <i class="material-icons">edit</i></span>'.html_safe, 
+            edit_job_path(job),
+            class: "btn btn-warning btn-xs" 
+        %>
+
+        <%= link_to '<span data-toggle="tooltip" title="Supprimer">
+            <i class="material-icons">close</i>'.html_safe, 
+            job_path(job),
             method: :delete,
             remote: true,
-            data: { confirm: "Delete #{job.semaine.slug} / Day #{job.numero_jour} (#{job.am_pm ? "AM" : "PM"}) ?" } 
+            data: { confirm: "Delete #{job.semaine} #{job.numero_jour}  ?" },
+            class: "btn btn-danger btn-xs" 
         %>
-        <%= link_to " [Working Lists] ", "/working_lists_job/#{job.id}" %>
+
+        &nbsp;
+
+        <%= link_to '<span data-toggle="tooltip" title="Jobs">
+            <i class="material-icons">list_alt</i></span>'.html_safe, 
+            "/working_lists_job/#{job.id}",
+            class: "btn btn-info btn-xs" 
+        %>
     </td>
 </tr>
