@@ -152,6 +152,11 @@ class AgendasController < ApplicationController
 
     # JOUR (pour un seul jour...)
     def un_jour
+        @services = Hash.new
+        srvs = Service.order(:nom)
+        @services[-1] = "---"
+        
+
         @absences = []
         @conges = []
         @jobs = Hash.new
@@ -176,6 +181,10 @@ class AgendasController < ApplicationController
                     key = semaine.utilisateur
                     unless @jobs[ap].key?(key)
                         @jobs[ap][key] = Array.new
+                    end
+                    job.working_lists.each do |wl|
+                        service = wl.work.service
+                        @services[service.id] = service.nom
                     end
                     @jobs[ap][key] << job
                 end

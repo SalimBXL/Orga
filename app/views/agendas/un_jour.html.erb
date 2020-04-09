@@ -7,8 +7,26 @@
 
 <div class="row">
 
-    <div class="col-xs-8 col-sm-9 col-md-10">
+    <div class="col-xs-8 col-sm-9 col-md-8">
         <span class="badge"><em><%= @date_jour %></em></span>
+    </div>
+
+    <div class="col-xs-8 col-sm-9 col-md-2">
+         
+        <div class="dropdown">
+            <button class="btn btn-info btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
+            <% if @service_id.nil? %>
+                <% @service_id = @services.first[0] %>
+            <% end %>
+            <%= "Service: #{@services[@service_id]}" %>
+            <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <% @services.each do |key, value| %>
+                    <li><a href="#"><%= value %></a></li>
+                <% end %>
+            </ul>
+        </div>
     </div>
 
     <div class="col-xs-4 col-sm-3 col-md-2">
@@ -24,7 +42,6 @@
         agendas_jour_path(jour: @date_jour+1), 
         class: "btn btn-info btn-xs" %>
     </div>
-
 </div>
 
 <div class="container">
