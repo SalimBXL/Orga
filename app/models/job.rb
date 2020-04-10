@@ -13,6 +13,12 @@ class Job < ApplicationRecord
         end
     end
 
+
+    def numero_semaine
+        semaine.numero_semaine
+    end
+    
+
     def works_code
         w = Array.new
         working_lists.each do |work|

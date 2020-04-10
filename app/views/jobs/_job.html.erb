@@ -1,6 +1,39 @@
+
+<% if job.numero_semaine != @semaine_last %>
+    <% @semaine_last = job.numero_semaine %>
+    <tr>
+        <td>
+            <h4>
+            <span class="label label-primary">
+                <%= job.numero_semaine %>
+            </span>
+            &nbsp;
+            <span class="label label-info">
+                <%= job.semaine.date_lundi %>
+            </span>
+            </h4>
+        </td>
+        <td colspan="6">&nbsp;</td>
+    </tr>
+<% end %>
+
+<% if job.service_id != @service_last %>
+    <% @service_last = job.service_id %>
+    <tr>
+        <td>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="label label-success">
+                <%= job.service.nom %>
+            </span>
+            &nbsp;
+        </td>
+        <td colspan="6">&nbsp;</td>
+    </tr>
+<% end %>
+
+
 <tr id="job_<%= job.id %>">
-    <td><%= job.semaine.numero_semaine %></td>
-    <td><%= job.service.nom %></td>
+    <td>&nbsp;</td>
     <td align="center"><%= job.numero_jour %></td>
     <td><%= am_pm(job.am_pm) %></td>
     <td><%= job.semaine.utilisateur.prenom_nom %></td>

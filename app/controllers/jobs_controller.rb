@@ -5,7 +5,11 @@ class JobsController < ApplicationController
     #   INDEX   #
     #############
     def index
-        @jobs = Job.order(semaine_id: :desc).order(:numero_jour, :am_pm).page(params[:page])
+        @jobs = Job.joins(:semaine).merge(Semaine.order(numero_semaine: :desc)).order(:service_id, :numero_jour, :am_pm).page(params[:page])
+
+        #@jobs = Job.order(semaine_id: :desc).order(:numero_jour, :am_pm).page(params[:page])
+        @semaine_last = nil 
+        @service_last = nil
     end
 
 
