@@ -1,6 +1,8 @@
 
 <% if job.numero_semaine != @semaine_last %>
     <% @semaine_last = job.numero_semaine %>
+    <% @jour_last = nil %>
+    <% @service_last = nil %>
     <tr>
         <td>
             <h4>
@@ -31,10 +33,25 @@
     </tr>
 <% end %>
 
+<% if job.numero_jour != @jour_last %>
+    <% @jour_last = job.numero_jour %>
+    <tr>
+        <td>&nbsp;</td>
+        <td>
+            <span class="label label-default">
+                <%= nom_jour(job.numero_jour) %> 
+                &nbsp;<em>(<%= job.semaine.date_lundi + job.numero_jour - 1 %>)</em>
+            </span>
+        </td>
+        <td colspan="5">&nbsp;</td>
+    </tr>
+<% end %>
+
+
 
 <tr id="job_<%= job.id %>">
     <td>&nbsp;</td>
-    <td align="center"><%= job.numero_jour %></td>
+    <td align="center">&nbsp;</td>
     <td><%= am_pm(job.am_pm) %></td>
     <td><%= job.semaine.utilisateur.prenom_nom %></td>
     <td><%= job.note %></td>

@@ -10,6 +10,7 @@ class JobsController < ApplicationController
         #@jobs = Job.order(semaine_id: :desc).order(:numero_jour, :am_pm).page(params[:page])
         @semaine_last = nil 
         @service_last = nil
+        @jour_last = nil
     end
 
 
