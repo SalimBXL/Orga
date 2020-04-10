@@ -168,12 +168,13 @@ class AgendasController < ApplicationController
             @services[srv.id] = "#{srv.nom} - (#{srv.lieu.nom})"
         end
 
-        if Fermeture.where("date <= ? AND date_fin >= ?", @date_jour, @date_jour).count > 0
+        if Fermeture.where("date <= ? AND date_fin >= ?", @date_jour, @date_jour).where(service_id: @service_courant).count > 0
             @fermeture = true
         else
             @fermeture = false
+        end
             
-            if @service_courant != -1
+            if @service_courant == -1 || @service_courant.nil?
                 Absence.where("date <= ? AND date_fin >= ?", @date_jour, @date_jour).each do |absence|
                     @absences << absence
                 end
@@ -181,12 +182,19 @@ class AgendasController < ApplicationController
                     @conges << conge
                 end
             end
+
             numero_jour_aujourdhui = @date_jour.cwday
             numero_semaine = format_numero_semaine(@date_jour.year, @date_jour.cweek)
             semaines = Semaine.where(numero_semaine: numero_semaine)
             semaines.each do |semaine|
                 [false, true].each do |ap|
-                    jobs = Job.where(semaine: semaine, numero_jour: numero_jour_aujourdhui, am_pm: ap)
+
+                    if @service_courant == -1
+                        jobs = Job.where(semaine: semaine, numero_jour: numero_jour_aujourdhui, am_pm: ap)
+                    else
+                        jobs = Job.where(service_id: @service_courant, semaine: semaine, numero_jour: numero_jour_aujourdhui, am_pm: ap)
+                    end
+                    
                     jobs.each do |job|
                         key = semaine.utilisateur
                         unless @jobs[ap].key?(key)
@@ -194,9 +202,11 @@ class AgendasController < ApplicationController
                         end
                         @jobs[ap][key] << job
                     end
+
+
                 end
             end
-        end
+        
     end
 
     # JOURS (pour PLUSIEURS jours...)
