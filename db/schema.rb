@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200407131637) do
+ActiveRecord::Schema.define(version: 20200407131638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,7 +86,9 @@ ActiveRecord::Schema.define(version: 20200407131637) do
     t.string "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "service_id"
     t.index ["semaine_id"], name: "index_jobs_on_semaine_id"
+    t.index ["service_id"], name: "index_jobs_on_service_id"
   end
 
   create_table "lieus", force: :cascade do |t|
@@ -170,6 +172,7 @@ ActiveRecord::Schema.define(version: 20200407131637) do
   add_foreign_key "conges", "utilisateurs"
   add_foreign_key "fermetures", "services"
   add_foreign_key "jobs", "semaines"
+  add_foreign_key "jobs", "services"
   add_foreign_key "semaines", "utilisateurs"
   add_foreign_key "services", "lieus"
   add_foreign_key "utilisateurs", "groupes"

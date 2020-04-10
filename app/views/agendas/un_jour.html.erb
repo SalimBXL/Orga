@@ -52,5 +52,11 @@
         <span class="label label-success">Congés</span>
         <span class="label label-warning">Absences</span>
     </p>
-    <%= render 'grille_un_jour' %>
+    <% unless @fermeture %>
+        <%= render 'grille_un_jour' %>
+    <% else %>
+        <p>
+            Fermeture
+        </p>
+    <% end %>
 </div>
