@@ -1,8 +1,9 @@
 <tr id="ajout_<%= ajout.id %>">
     <% utilisateur = Utilisateur.find(ajout.utilisateur) %>
     <td><%= utilisateur.prenom_nom %></td>
-    <td><%= ajout.date_lundi %></td>
-    <td><%= ajout.numero_jour %> (<%= am_pm(ajout.am_pm) %>)</td>
+    <td>
+        <%= "#{nom_jour(ajout.numero_jour)} #{ajout.date_lundi + ajout.numero_jour - 1}" %> (<%= am_pm(ajout.am_pm) %>)
+    </td>
     <td>
         <ul>
             <% ajout.works.each do |wid| %>
