@@ -15,19 +15,20 @@
          
         <div class="dropdown">
             <button class="btn btn-info btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
-            <% if @service_id.nil? %>
-                <% @service_id = @services.first[0] %>
+            <% if @service_courant.nil? %>
+                <% @service_courant = @services.first[0] %>
             <% end %>
-            <%= "Service: #{@services[@service_id]}" %>
+            <%= "Service: #{@services[@service_courant.to_i]}" %>
             <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
                 <% @services.each do |key, value| %>
-                    <li><a href="#"><%= value %></a></li>
+                    <li><a href="<%= agendas_jour_path %>?jour=<%= @date_jour %>&service_courant=<%= key %>"><%= value %></a></li>
                 <% end %>
             </ul>
         </div>
     </div>
+
 
     <div class="col-xs-4 col-sm-3 col-md-2">
         <%= link_to '<i class="material-icons">chevron_left</i>'.html_safe,

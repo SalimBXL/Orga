@@ -153,10 +153,6 @@ class AgendasController < ApplicationController
     # JOUR (pour un seul jour...)
     def un_jour
         @services = Hash.new
-        srvs = Service.order(:nom)
-        @services[-1] = "---"
-        
-
         @absences = []
         @conges = []
         @jobs = Hash.new
@@ -165,28 +161,39 @@ class AgendasController < ApplicationController
                 @jobs[ap] = Hash.new
             end
         end
-        Absence.where("date <= ? AND date_fin >= ?", @date_jour, @date_jour).each do |absence|
-            @absences << absence
+
+        @services[-1] = "---"
+        srvs = Service.order(:lieu_id, :nom)
+        srvs.each do |srv|
+            @services[srv.id] = "#{srv.nom} - (#{srv.lieu.nom})"
         end
-        Conge.where("date <= ? AND date_fin >= ?", @date_jour, @date_jour).each do |conge|
-            @conges << conge
-        end
-        numero_jour_aujourdhui = @date_jour.cwday
-        numero_semaine = format_numero_semaine(@date_jour.year, @date_jour.cweek)
-        semaines = Semaine.where(numero_semaine: numero_semaine)
-        semaines.each do |semaine|
-            [false, true].each do |ap|
-                jobs = Job.where(semaine: semaine, numero_jour: numero_jour_aujourdhui, am_pm: ap)
-                jobs.each do |job|
-                    key = semaine.utilisateur
-                    unless @jobs[ap].key?(key)
-                        @jobs[ap][key] = Array.new
+
+        if Fermeture.where("date <= ? AND date_fin >= ?", @date_jour, @date_jour).count > 0
+            @fermeture = true
+        else
+            @fermeture = false
+            
+            if @service_courant != -1
+                Absence.where("date <= ? AND date_fin >= ?", @date_jour, @date_jour).each do |absence|
+                    @absences << absence
+                end
+                Conge.where("date <= ? AND date_fin >= ?", @date_jour, @date_jour).each do |conge|
+                    @conges << conge
+                end
+            end
+            numero_jour_aujourdhui = @date_jour.cwday
+            numero_semaine = format_numero_semaine(@date_jour.year, @date_jour.cweek)
+            semaines = Semaine.where(numero_semaine: numero_semaine)
+            semaines.each do |semaine|
+                [false, true].each do |ap|
+                    jobs = Job.where(semaine: semaine, numero_jour: numero_jour_aujourdhui, am_pm: ap)
+                    jobs.each do |job|
+                        key = semaine.utilisateur
+                        unless @jobs[ap].key?(key)
+                            @jobs[ap][key] = Array.new
+                        end
+                        @jobs[ap][key] << job
                     end
-                    job.working_lists.each do |wl|
-                        service = wl.work.service
-                        @services[service.id] = service.nom
-                    end
-                    @jobs[ap][key] << job
                 end
             end
         end
@@ -239,6 +246,11 @@ class AgendasController < ApplicationController
         end
         if @date_jour.cwday==7
             @date_jour = @date_jour - 2
+        end
+        if !params[:service_courant].nil?
+            @service_courant = params[:service_courant].to_i
+        else
+            @service_courant = -1
         end
     end
     
