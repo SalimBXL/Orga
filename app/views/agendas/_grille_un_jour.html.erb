@@ -74,7 +74,9 @@
             </div>
         <% end %>
     <% end %>
+</div>
 
+<div class="row">
     <% @conges.each do |conge| %>
         <div class="col-xs-6 col-sm-4">
             <% unless @jobs.has_key?(conge.utilisateur) %>
@@ -105,7 +107,9 @@
             <% end %>
         </div>
     <% end %>
+</div>
 
+<div class="row">
     <% @absences.each do |absence| %>
         <% utilisateur = absence.utilisateur %>
         <div class="col-xs-6 col-sm-4">
