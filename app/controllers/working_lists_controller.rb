@@ -1,5 +1,9 @@
 class WorkingListsController < ApplicationController
     before_action :find_working_list, only: [:show, :edit, :update, :destroy]
+    before_action :find_service, only: [:new]
+    before_action :find_works_by_service, only: [:new, :edit]
+    before_action :find_jobs, only: [:new, :edit]
+    #before_action :find_groupes, only: [:new, :edit]
 
     #############
     #   INDEX   #
@@ -37,7 +41,6 @@ class WorkingListsController < ApplicationController
     #    NEW    #
     #############
     def new
-        @works = Work.order(:groupe_id)
         @working_list = WorkingList.new
         unless (params[:id].blank? || params[:id].nil?)
             @working_list.job_id = params[:id]
@@ -106,6 +109,34 @@ class WorkingListsController < ApplicationController
 
     def find_working_list
         @working_list = WorkingList.find(params[:id])
+    end
+
+    def find_service
+        @service = nil
+        unless params[:working_list].nil?
+            unless params[:working_list][:job_id].nil?
+                job = Job.find_by_id(params[:working_list][:job_id])
+                unless job.nil?
+                    @service = job.service
+                end
+            end
+        end
+    end
+
+    def find_works_by_service
+        unless @service.nil?
+            @works = Work.where(service_id: @service.id).order(:service_id, :groupe_id, :classe_id, :nom)
+        else
+            @works = Work.order(:service_id, :groupe_id, :classe_id, :nom)
+        end
+    end
+
+    def find_groupes
+        @groupes = Groupe.order(:nom)
+    end
+
+    def find_jobs
+        @jobs = Job.order(:service_id, :semaine_id, :numero_jour, :am_pm)
     end
 
 

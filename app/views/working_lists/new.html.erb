@@ -6,4 +6,11 @@
 </h1>
 
 <h3><span class="label label-warning">Nouveau</span></h3>
+
+<p id="<%= (!@service.nil?) ? @service.nom : "" %>">
+    SERVICE : <%= @service %><br>
+    SERVICE : <%= @service.nom unless @service.nil? %><br>
+    JOB ID : 
+</p>
+
 <%= render "form" %>

@@ -11,45 +11,32 @@
 
     <!-- JOB -->
     <p>
-        <%= form.label :job_id %><br>
-        <%= form.select(:job_id) do %>
-            <%= select_option_tag("", nil, @working_list.job_id) %>
-            <% Groupe.order(:nom).find_each do |g| %>
-                <% g.utilisateurs.order(:prenom, :nom).find_each do |u| %>
-                    <% u.semaines.order(:date_lundi).find_each do |s| %>
-                        <% s.jobs.order(:numero_jour, :am_pm).find_each do |j| %>
-                            <%= select_option_tag("#{u.prenom_nom} - #{s.date_lundi+j.numero_jour-1} - #{j.numero_jour} (#{am_pm(j.am_pm)})", j.id, @working_list.job_id) %>
-                        <% end %>
-                    <% end %>
-                <% end %>
-            <% end %>
-
-        <% end %>
+        <div class='form-group'>
+        <%= form.select(:job_id, 
+                @jobs.collect {|w| ["<#{w.service.nom}> - #{w.semaine.utilisateur.prenom_nom} - #{w.semaine.date_lundi} - [ #{w.numero_jour} ] - #{am_pm(w.am_pm)}", w.id]}, 
+                {}, 
+                data: {
+                    remote: true,
+                    url: "#{new_working_list_path}",
+                    method: 'get'
+                }
+            ) 
+        %>
+        </div>
     </p>
 
     <!-- WORK -->
     <p>
         <%= form.select(:travaux, 
-                Work.order(:classe_id, :service_id, :nom).collect {|w| ["#{w.groupe.nom} - #{w.classe.nom} - [ #{w.code} ] - #{w.nom}", w.id]}, 
+                @works.collect {|w| ["<#{w.service.nom}> - #{w.groupe.nom} - #{w.classe.nom} - [ #{w.code} ] - #{w.nom}", w.id]}, 
                 { }, 
-                { :multiple => true, :size => 10 }
+                { :multiple => true, :size => 20 }
             ) 
         %>
     </p>
 
-
-
     <p>
-        <% if Job.all.empty? %>
-            <span data-toggle="tooltip" title="Job doit contenir au moins une entrée.">
-                <%= form.submit class: "btn btn-primary disabled" %>
-            </span>
-        <% elsif Work.all.empty? %>
-            <span data-toggle="tooltip" title="Work doit contenir au moins une entrée.">
-                <%= form.submit class: "btn btn-primary disabled" %>
-            </span>
-        <% else %>
             <%= form.submit class: "btn btn-primary" %>
-        <% end %>
     </p>
 <% end %>
+
