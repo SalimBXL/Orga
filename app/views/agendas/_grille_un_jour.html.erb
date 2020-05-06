@@ -51,7 +51,11 @@
                             <% wls.each do |wl| %>
                                 <tr>
                                     <td>
-                                        <span class="label label-<%= box %>">
+                                        <% if wl.work.code.downcase == "qc" && @date_jour.cwday == 5 %>
+                                            <span class="label label-danger">
+                                        <% else %>
+                                            <span class="label label-<%= box %>">
+                                        <% end %>
                                         <!-- <span class="badge"> -->
                                         <%= wl.work.code %>
                                         </span>

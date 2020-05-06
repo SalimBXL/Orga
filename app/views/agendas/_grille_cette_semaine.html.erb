@@ -62,11 +62,18 @@
                                 <% job.working_lists.each do |wl| %>
                                     <% if nJour < Date.today %>
                                         <% type = "default" %>
-                                    <% elsif job.am_pm %>
-                                        <% type = "info" %>
                                     <% else %>
-                                        <% type = "primary" %>
+                                        <% if wl.work.code.downcase == "qc" && nJour.cwday == 5 %>
+                                            <% type = "danger" %>
+                                        <% else %>
+                                            <% if job.am_pm %>
+                                                <% type = "info" %>
+                                            <% else %>
+                                                <% type = "primary" %>
+                                            <% end %>
+                                        <% end %>
                                     <% end %>
+
 
                                     <span class="label label-<%= type %>">
                                         <%= wl.work.code %>
