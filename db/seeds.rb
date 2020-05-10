@@ -134,6 +134,11 @@ TypeAbsence.create(
     nom: "Certificat médical",
 )
 
+TypeAbsence.create(
+    code: "Co",
+    nom: "Congé",
+)
+
 
 #
 # WORKS
