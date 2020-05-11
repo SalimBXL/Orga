@@ -8,19 +8,8 @@ Rails.application.routes.draw do
   namespace :api do
     get 'ping' => 'table_tennis#ping'
     
-    resources :semaines, only: [ :show, :index ], param: :identifier
     resources :utilisateurs, only: :index
 
-    # Détails pour un jour en particulier
-    get "jour", to: "semaines#jour" # Aujourd'hui
-    get "jour/:date", to: "semaines#jour" # Jour spécifié
-
-    # Planning de la semaine (sans détails)
-    get "semaine", to:"semaines#semaine"  # Semaine courante
-    get "semaine/:numero_semaine", to:"semaines#semaine"  # Semaine spécifiée
-
-    #get "semaines/:id/utilisateurs", to: "semaines#utilisateurs"
-    #get "utilisateurs/:id/semaine", to: "utilisateurs#semaine"
     
   end
 
@@ -86,7 +75,6 @@ Rails.application.routes.draw do
   #   Services  #
   ###############
   resources :services, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
-  get "services_lieu/:id", to: "services#services_lieu"
 
 
   ###########
@@ -99,16 +87,12 @@ Rails.application.routes.draw do
   #   Utilisateurs  #
   ###################
   resources :utilisateurs, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
-  get "utilisateurs_service/:id", to: "utilisateurs#utilisateurs_service"
-  get "utilisateurs_groupe/:id", to: "utilisateurs#utilisateurs_groupe"
 
 
   #######################
   #  Absences & Congés  #
   #######################
   resources :absences, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
-  resources :conges, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
-  get "agendas/conges_absences", to: "agendas#conges_absences"
 
 
   ################
@@ -123,34 +107,22 @@ Rails.application.routes.draw do
   resources :type_absences, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
   
 
-  ###############
-  #   Semaines  #
-  ###############
-  resources :semaines, only: [ :show, :index, :new, :edit, :create, :update, :destroy ], param: :identifier
-  get "semaines_utilisateur/:id", to: "semaines#semaines_utilisateur"
-
-
-  ###########
-  #   Jobs  #
-  ###########
-  resources :jobs, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
-  get "jobs_semaine/:id", to: "jobs#jobs_semaine"
-  get "jobs/new/:id", to: "jobs#new"
+  ############
+  #   Jours  #
+  ############
+  resources :jours, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
 
 
   ###################
   #   WorkingLists  #
   ###################
   resources :working_lists, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
-  get "working_lists_job/:id", to: "working_lists#working_lists_job"
-  get "working_lists_work/:id", to: "working_lists#working_lists_work"
-  get "working_lists/new/:id", to: "working_lists#new"
+  
 
   ############
   #   Works  #
   ############
   resources :works, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
-  get "works_groupe/:id", to: "works#works_groupe"
-  get "works_classe/:id", to: "works#works_classe"
+  
   
 end

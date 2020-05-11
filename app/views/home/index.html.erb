@@ -25,7 +25,7 @@
             <p>
                 <!-- THIS WEEK -->
                 <%= link_to '<i class="material-icons">date_range</i>'.html_safe, 
-                    agendas_semaine_path,
+                    "",
                     class: "btn btn-success btn-xs" 
                 %>
                 <h4>Cette semaine</h4>
@@ -42,13 +42,14 @@
                 <h4>Absences</h4>
             </p>
             <p >
-                <!-- CONGES -->
-                <%= link_to '<i class="material-icons">beach_access</i>'.html_safe, 
-                    conges_path,
+                <!-- TYPES ABSENCES -->
+                <%= link_to '<i class="material-icons">healing</i>'.html_safe, 
+                    type_absences_path,
                     class: "btn btn-success btn-xs" 
                 %>
-                <h4>Congés</h4>
+                <h4>Types</h4>
             </p>
+            
             </div>
 
             <div class="row">
@@ -63,7 +64,7 @@
             <p >
                 <!-- EVENEMENTS -->
                 <%= link_to '<i class="material-icons">event_available</i>'.html_safe, 
-                    conges_path,
+                    fermetures_path,
                     class: "btn btn-success btn-xs" 
                 %>
                 <h4>Evénements</h4>
@@ -130,20 +131,12 @@
         <div class="col-xs-12 col-sm-12 col-md-4" id="conteneur3">
             <div class="row">
             <p>
-                <!-- SEMAINES -->
+                <!-- JOURS -->
                 <%= link_to '<i class="material-icons">view_day</i>'.html_safe, 
-                    semaines_path,
+                    jours_path,
                     class: "btn btn-danger btn-xs" 
                 %>
-                <h4>Semaines</h4>
-            </p>
-            <p>
-                <!-- JOBS -->
-                <%= link_to '<i class="material-icons">view_week</i>'.html_safe, 
-                    jobs_path,
-                    class: "btn btn-danger btn-xs" 
-                %>
-                <h4>Jobs</h4>
+                <h4>Jours</h4>
             </p>
             </div>
             <div class="row">
@@ -182,11 +175,8 @@
     <li><%= link_to "Services", services_path %></li>
     <li><%= link_to "Groupes", groupes_path %></li>
     <li><%= link_to "Utilisateurs", utilisateurs_path %></li>
-    <li><%= link_to "Congés", conges_path %></li>
     <li><%= link_to "Types d'absences", type_absences_path %></li>
     <li><%= link_to "Absences", absences_path %></li>
-    <li><%= link_to "Semaines", semaines_path %></li>
-    <li><%= link_to "Jobs", jobs_path %></li>
     <li><%= link_to "Classes", classes_path %></li>
     <li><%= link_to "Works", works_path %></li>
     <li><%= link_to "WorkingLists", working_lists_path %></li>
