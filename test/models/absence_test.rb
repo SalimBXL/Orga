@@ -19,6 +19,34 @@ class AbsenceTest < ActiveSupport::TestCase
     assert_not absence.save, "Saved without a date"
   end
 
+  test "should set same as date if date_fin is empty" do
+    absence = Absence.new
+    absence.date = Date.today
+    #absence.date_fin = absence.date + 5.days
+    absence.type_absence = TypeAbsence.new(nom: "test")
+    groupe = Groupe.new(nom: "nom")
+    service = Service.new(nom: "nom")
+    utilisateur = Utilisateur.new(nom: "nom", prenom: "prenom", email: "test@test.com", groupe: groupe, service: service)
+    absence.utilisateur = utilisateur
+    #assert_not absence.save, "Saved without a date"
+    assert_equal absence.date, absence.date_fin, "When not specified, Date_Fin must be equal to Date"
+  end
+
+  test "should have date_fin later than date" do
+    absence = Absence.new
+    absence.date = Date.today
+    absence.date_fin = absence.date + 5.days
+    absence.type_absence = TypeAbsence.new(nom: "test")
+    groupe = Groupe.new(nom: "nom")
+    service = Service.new(nom: "nom")
+    utilisateur = Utilisateur.new(nom: "nom", prenom: "prenom", email: "test@test.com", groupe: groupe, service: service)
+    absence.utilisateur = utilisateur
+    #assert_not absence.save, "Saved without a date"
+    #assert_equal absence.date, absence.date_fin, "When not specified, Date_Fin is equal to Date"
+    #assert_difference absence.date_fin-absence.date, difference >= 0, message = "Date_fin must be later than Date"
+    assert (absence.date_fin-absence.date)>=0, "Date_fin must be later than Date"
+  end
+
   test "should not correctly validate without type_absence" do
     absence = Absence.new
     absence.date = Date.today

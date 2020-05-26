@@ -67,7 +67,6 @@ class AbsencesController < ApplicationController
     ##############
     def destroy
         @absence.destroy
-        #redirect_to absences_path
     end
 
 

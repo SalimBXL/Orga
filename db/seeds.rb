@@ -227,6 +227,17 @@ Fermeture.create(
     date: "2020-08-15", 
     service: Service.last
 )
+Fermeture.create(
+    nom: "1er mai",
+    date: "2020-05-01", 
+    service: Service.first
+)
+Fermeture.create(
+    nom: "ascension",
+    date: "2020-05-21",
+    date_fin: "2020-05-22",
+    service: Service.first
+)
 
 
 #
