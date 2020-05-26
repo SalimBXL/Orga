@@ -141,29 +141,94 @@ TypeAbsence.create(
 
 
 #
+# CLASSES
+#
+Classe.create(
+    nom: "Production"
+)
+Classe.create(
+    nom: "Control Qualité"
+)
+
+
+#
 # WORKS
 #
 Work.create(
     nom: "FDG 5h",
     code: "5",
     groupe: Groupe.where(nom: "Operateur").first,
-    service: Service.where(nom: "Cyclotron").first
+    service: Service.where(nom: "Cyclotron").first,
+    classe: Classe.first
 )
 Work.create(
     nom: "Contrôle qualité",
     code: "QC",
     groupe: Groupe.where(nom: "Operateur").first,
-    service: Service.where(nom: "Cyclotron").first
+    service: Service.where(nom: "Cyclotron").first,
+    classe: Classe.last
 )
 Work.create(
     nom: "Livraison",
     code: "L",
     groupe: Groupe.where(nom: "Operateur").first,
-    service: Service.where(nom: "Cyclotron").first
+    service: Service.where(nom: "Cyclotron").first,
+    classe: Classe.first
 )
 Work.create(
     nom: "Methionine",
     code: "M",
     groupe: Groupe.where(nom: "Operateur").first,
-    service: Service.where(nom: "Cyclotron").first
+    service: Service.where(nom: "Cyclotron").first,
+    classe: Classe.first
 )
+
+
+#
+# FERMETURES
+#
+Fermeture.create(
+    nom: "Nouvel An",
+    date: "2020-01-01", 
+    service: Service.first
+)
+Fermeture.create(
+    nom: "Nouvel An",
+    date: "2020-01-01", 
+    service: Service.last
+)
+Fermeture.create(
+    nom: "Noel",
+    date: "2020-12-25", 
+    service: Service.first
+)
+Fermeture.create(
+    nom: "Noel",
+    date: "2020-12-25", 
+    service: Service.last
+)
+Fermeture.create(
+    nom: "Fete Nationale",
+    date: "2020-07-21", 
+    service: Service.first
+)
+Fermeture.create(
+    nom: "Fete Nationale",
+    date: "2020-07-21", 
+    service: Service.last
+)
+Fermeture.create(
+    nom: "15 aout",
+    date: "2020-08-15", 
+    service: Service.first
+)
+Fermeture.create(
+    nom: "15 aout",
+    date: "2020-08-15", 
+    service: Service.last
+)
+
+
+#
+# 
+#

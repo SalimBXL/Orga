@@ -1,20 +1,44 @@
 class Jour < ApplicationRecord
-    before_validation :set_set_numero_semaine
-    validates :numero_semaine, :date, presence: true
-    validates_associated :working_lists
-    validates :service_id, presence: true
     belongs_to :utilisateur
+    belongs_to :service
     has_many :working_lists, dependent: :destroy
+    before_validation :set_am_pm
+    before_validation :set_numero_semaine
+    before_validation :set_numero_jour
+    validates :date, :am_pm, presence: true
+    validates_associated :working_lists
     
 
-    def set_numero_semaine
-        "#{date_lundi.year}-W#{date_lundi.cweek<10 ? "0" : ""}#{date_lundi.cweek}" 
+    def numero_semaine
+        "#{date.year}-W#{date.cweek<10 ? "0" : ""}#{date.cweek}"
+    end
+
+    def numero_jour
+        date.cwday
     end
     
     private
 
-    def set_set_numero_semaine
-        self.numero_semaine = "#{date_lundi.year}-W#{date_lundi.cweek<10 ? "0" : ""}#{date_lundi.cweek}" 
+    def set_numero_semaine
+        if date.nil?
+            nil
+        else
+            "#{date.year}-W#{date.cweek<10 ? "0" : ""}#{date.cweek}"
+        end
+    end
+
+    def set_numero_jour
+        if date.nil?
+            nil
+        else
+            self.numero_jour = date.cwday
+        end
+    end
+
+    def set_am_pm
+        if (am_pm.nil? || !am_pm.present?)
+            self.am_pm = 0
+        end
     end
 
     

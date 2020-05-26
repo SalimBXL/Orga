@@ -1,9 +1,8 @@
 class Ajout < ApplicationRecord
-    validates :utilisateur, :date_lundi, presence: true
-    before_validation :set_numero_jour
-    before_validation :set_date_lundi
-    before_validation :set_am_pm
-    
+    belongs_to :utilisateur
+    validates :date, presence: true
+    after_validation :set_am_pm
+
 
     def works
         w = Array.new
@@ -32,16 +31,6 @@ class Ajout < ApplicationRecord
             self.am_pm = false
         else 
             self.am_pm = am_pm.to_s.downcase == 'true' ? true : false
-        end
-    end
-
-    def set_date_lundi
-        self.date_lundi = date_lundi.beginning_of_week
-    end
-
-    def set_numero_jour
-        if numero_jour.nil? || numero_jour<1 || numero_jour>7
-            self.numero_jour = date_lundi.cwday
         end
     end
     

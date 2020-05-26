@@ -1,7 +1,7 @@
 class Fermeture < ApplicationRecord
     belongs_to :service
     before_validation :set_date_fin
-    validates :nom, :date, presence: true
+    validates :nom, :date, :date_fin, presence: true
 
 
     after_find do |fermeture|

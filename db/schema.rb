@@ -28,9 +28,9 @@ ActiveRecord::Schema.define(version: 20200407131637) do
   end
 
   create_table "ajouts", force: :cascade do |t|
-    t.integer "utilisateur"
-    t.integer "numero_jour"
-    t.date "date_lundi"
+    t.bigint "utilisateur_id"
+    t.date "date"
+    t.boolean "am_pm"
     t.integer "work1"
     t.integer "work2"
     t.integer "work3"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20200407131637) do
     t.integer "work5"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "am_pm"
+    t.index ["utilisateur_id"], name: "index_ajouts_on_utilisateur_id"
   end
 
   create_table "classes", force: :cascade do |t|
@@ -145,6 +145,7 @@ ActiveRecord::Schema.define(version: 20200407131637) do
 
   add_foreign_key "absences", "type_absences"
   add_foreign_key "absences", "utilisateurs"
+  add_foreign_key "ajouts", "utilisateurs"
   add_foreign_key "fermetures", "services"
   add_foreign_key "jours", "services"
   add_foreign_key "jours", "utilisateurs"
