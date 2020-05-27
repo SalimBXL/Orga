@@ -6,7 +6,6 @@ class AbsencesController < ApplicationController
     #############
     def index
         @absences = Absence.order(date: :desc).order(:type_absence_id).page(params[:page])
-        #@current_absences = Absence.where(date: (Date.today-3.months)..(Date.today+9.month))
     end
 
 

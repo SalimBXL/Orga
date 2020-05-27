@@ -5,7 +5,8 @@ class AbsencesControllerTest < ActionDispatch::IntegrationTest
     groupe = Groupe.new(nom: "nom")
     service = Service.new(nom: "nom")
     utilisateur = Utilisateur.new(nom: "nom", prenom: "prenom", email: "test@test.com", groupe: groupe, service: service)
-    @absence = Absence.create(date: Date.today, date_fin: date + 5.days, type_absence: TypeAbsence.new(nom: "test"), utilisateur: utilisateur)
+    typeAbsence = TypeAbsence.new(nom: "test")
+    @absence = Absence.create(date: Date.today, date_fin: Date.today + 5.days, type_absence: typeAbsence, utilisateur: utilisateur)
   end
 
   teardown do
@@ -13,7 +14,7 @@ class AbsencesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get absences_url
+    get absences_path
     assert_response :success
   end
 
@@ -24,14 +25,14 @@ class AbsencesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create absence" do
     assert_difference('Absence.count') do
-      post absences_url, @absence 
+      post :create, post: @absence 
     end
 
     assert_redirected_to absences_path
   end
 
   test "should show absence" do
-    get absence_url(@absence)
+    get absence_path(@absence)
     assert_response :success
   end
 
