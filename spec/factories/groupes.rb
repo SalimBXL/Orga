@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :groupe do
-    nom { Faker::Job.field }
+    nom { Faker::Team.name }
     description { Faker::Lorem.sentence }
   end
 end

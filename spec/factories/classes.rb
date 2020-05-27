@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :classe do
-    nom { Faker::Team.creature }
+    nom { Faker::Job.field }
     description { Faker::Lorem.sentence }
   end
 end

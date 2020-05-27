@@ -5,7 +5,7 @@ class Jour < ApplicationRecord
     before_validation :set_am_pm
     before_validation :set_numero_semaine
     before_validation :set_numero_jour
-    validates :date, :am_pm, presence: true
+    validates :date, presence: true
     validates_associated :working_lists
     
 

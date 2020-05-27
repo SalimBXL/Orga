@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :working_list do
-    job
+    jour
     work
   end
 end

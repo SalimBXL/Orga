@@ -1,6 +1,6 @@
 class Ajout < ApplicationRecord
     belongs_to :utilisateur
-    validates :date, presence: true
+    validates :date, :work1, presence: true
     after_validation :set_am_pm
 
 

@@ -5,5 +5,6 @@ FactoryBot.define do
     code { Faker::CryptoCoin.acronym }
     groupe
     classe
+    service
   end
 end
