@@ -14,7 +14,7 @@ class AbsencesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get absences_path
+    get absences_url
     assert_response :success
   end
 

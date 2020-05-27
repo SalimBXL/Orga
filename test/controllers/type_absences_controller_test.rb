@@ -38,7 +38,7 @@ class TypeAbsencesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update type_absence" do
-    patch type_absence_path(@type_absence), params: { type_absence: { nom: "Nouveau" } }
+    patch type_absence_url @type_absence, params: { type_absence: { nom: "Nouveau" } }
     assert_redirected_to type_absences_path
     @type_absence.reload
     assert_equal "Nouveau", @type_absence.nom
