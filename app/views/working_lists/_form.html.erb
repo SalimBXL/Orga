@@ -13,7 +13,7 @@
     <p>
         <div class='form-group'>
         <%= form.select(:jour_id, 
-                @jours.collect {|w| ["<#{w.numero_semaine}> - [#{w.service.nom}] - #{nom_jour(w.numero_jour)} #{w.date} - #{w.utilisateur} - #{am_pm(w.am_pm)}", w.id]}, 
+                @jours.collect {|w| ["<#{w.numero_semaine}> - [#{w.service.nom}] - #{nom_jour(w.numero_jour)} #{w.date} - #{w.utilisateur.prenom_nom} - #{am_pm(w.am_pm)}", w.id]}, 
                 {}, 
                 data: {
                     remote: true,
@@ -26,14 +26,19 @@
     </p>
 
     <!-- WORK -->
-    <p>
-        <%= form.select(:travaux, 
+
+    <%
+=begin%>
+ <p>
+        <%= form.select(:work_id, 
                 @works.collect {|w| ["<#{w.service.nom}> - #{w.groupe.nom} - #{w.classe.nom} - [ #{w.code} ] - #{w.nom}", w.id]}, 
                 { }, 
                 { :multiple => true, :size => 20 }
             ) 
         %>
-    </p>
+    </p> 
+<%
+=end%>
 
     <p>
             <%= form.submit class: "btn btn-primary" %>

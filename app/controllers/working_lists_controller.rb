@@ -81,7 +81,7 @@ class WorkingListsController < ApplicationController
     end
 
     def find_jours
-        @jours = Jour.all
+        @jours = Jour.order(:numero_semaine, :numero_jour)
     end
 
 end
