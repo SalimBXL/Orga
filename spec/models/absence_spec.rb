@@ -10,4 +10,8 @@ RSpec.describe Absence, type: :model do
   it "can be saved" do
     expect(absence.save).to be true
   end
+
+  
+  
+
 end

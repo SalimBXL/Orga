@@ -5,7 +5,7 @@ class UtilisateursController < ApplicationController
     #   INDEX   #
     #############
     def index
-        @utilisateurs = Utilisateur.order(:service, :groupe, :nom, :prenom).page(params[:page])
+        @utilisateurs = Utilisateur.order(:service_id, :groupe_id, :prenom, :nom).page(params[:page])
     end
 
 

@@ -10,6 +10,7 @@
             <i class="material-icons">edit</i></span>'.html_safe, 
             edit_work_path(work),
             class: "btn btn-warning btn-xs" %>
+
         <%= link_to '<span data-toggle="tooltip" title="Supprimer le service">
             <i class="material-icons">close</i>'.html_safe, 
             work_path(work),
@@ -19,7 +20,7 @@
             class: "btn btn-danger btn-xs" %>
 
         &nbsp;
-
+        
         <%= link_to '<span data-toggle="tooltip" title="Working Lists">
             <i class="material-icons">list_alt</i></span>'.html_safe, 
             "/working_lists_work/#{work.id}",

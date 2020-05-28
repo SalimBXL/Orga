@@ -9,6 +9,9 @@ class Absence < ApplicationRecord
             if date_fin.nil? || date_fin.blank? 
                 self.date_fin = date
             end
+            if date_fin<date
+                self.date_fin = date
+            end
         end
     end
     

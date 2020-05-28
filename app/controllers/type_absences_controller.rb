@@ -5,7 +5,7 @@ class TypeAbsencesController < ApplicationController
     #   INDEX   #
     #############
     def index
-        @type_absences = TypeAbsence.order(:nom).page(params[:page])
+        @type_absences = TypeAbsence.order(:code, :nom).page(params[:page])
     end
 
 

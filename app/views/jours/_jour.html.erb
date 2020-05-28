@@ -1,34 +1,28 @@
-<div class="col-sm-4" id="lieu_<%= lieu.id %>">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3><i class="material-icons">location_city</i> <%= lieu.nom %></h3>
-        </div>
-        <div class="panel-body">
-            <p>
-                <i class="material-icons">location_on</i> <%= lieu.adresse %><br>
-                <i class="material-icons">phone</i> <%= lieu.phone %><br>
-                <i class="material-icons">note</i> <%= lieu.note %>
-            </p>
-        </div>
-        <div class="panel-footer">
-            <div class="btn-group">
-                <%= link_to '<span data-toggle="tooltip" title="Editer">
-                    <i class="material-icons">edit</i></span>'.html_safe, 
-                    edit_lieu_path(lieu),
-                    class: "btn btn-warning btn-xs" %>
-                <%= link_to '<span data-toggle="tooltip" title="Supprimer le lieu">
-                    <i class="material-icons">location_off</i>'.html_safe, 
-                    lieu_path(lieu),
-                    method: :delete,
-                    remote: true,
-                    data: { confirm: "Delete #{lieu.nom} ?" },
-                    class: "btn btn-danger btn-xs" %>
-                <%= link_to '<span data-toggle="tooltip" title="Services associés">
-                    <i class="material-icons">business</i>'.html_safe, 
-                    "/services_lieu/#{lieu.id}",
-                    class: "btn btn-info btn-xs" %>
-                </span>
-            </div>
-        </div>
-    </div>
-</div>
+<tr id="jour_<%= jour.id %>">
+    <td><%= jour.numero_semaine %></td>
+    <td><%= nom_jour(jour.numero_jour) %></td>
+    <td><%= jour.date %></td>
+    <td><%= jour.service.nom %></td>
+    <td><%= jour.utilisateur.prenom_nom %></td>
+    <td><%= am_pm(jour.am_pm) %></td>
+    <td>
+        <%= link_to '<span data-toggle="tooltip" title="Editer">
+            <i class="material-icons">edit</i></span>'.html_safe, 
+            edit_jour_path(jour),
+            class: "btn btn-warning btn-xs" 
+        %>
+
+        <%= link_to '<span data-toggle="tooltip" title="Supprimer">
+            <i class="material-icons">close</i>'.html_safe, 
+            jour_path(jour),
+            method: :delete,
+            remote: true,
+            data: { confirm: "Delete #{jour.date}  ?" },
+            class: "btn btn-danger btn-xs" 
+        %>
+
+        &nbsp;
+
+        
+    </td>
+</tr>

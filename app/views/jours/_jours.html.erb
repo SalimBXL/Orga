@@ -1,11 +1,14 @@
- <div class="container">
-     <p>
-         <%= paginate @lieus, remote: true %>
-     </p>
-     <div class="row">
-         <%= render @lieus %>
-     </div>
-     <p>
-         <%= paginate @lieus, remote: true %>
-     </p>
- </div>
+<p><%= paginate @jours, remote: true %></p>
+<table class="table table-striped">
+    <tr>
+        <th>Semaines</th>
+        <th>Jour</th>
+        <th>Date</th>
+        <th>Service</th>
+        <th>Utilisateur</th>
+        <th>Am/Pm</th>
+        <th></th>
+    </tr>
+    <%= render @jours %>
+</table>
+<p><%= paginate @jours, remote: true %></p>

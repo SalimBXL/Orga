@@ -16,6 +16,8 @@ class Jour < ApplicationRecord
     def numero_jour
         date.cwday
     end
+
+    
     
     private
 
@@ -36,7 +38,7 @@ class Jour < ApplicationRecord
     end
 
     def set_am_pm
-        if (am_pm.nil? || !am_pm.present?)
+        if (am_pm.nil? || !am_pm.present? || am_pm.blank?)
             self.am_pm = 0
         end
     end

@@ -9,11 +9,11 @@
         </ul>
     <% end %>
 
-    <!-- JOB -->
+    <!-- JOUR -->
     <p>
         <div class='form-group'>
-        <%= form.select(:job_id, 
-                @jobs.collect {|w| ["<#{w.service.nom}> - #{w.semaine.utilisateur.prenom_nom} - #{w.semaine.date_lundi} - [ #{w.numero_jour} ] - #{am_pm(w.am_pm)}", w.id]}, 
+        <%= form.select(:jour_id, 
+                @jours.collect {|w| ["<#{w.numero_semaine}> - [#{w.service.nom}] - #{nom_jour(w.numero_jour)} #{w.date} - #{w.utilisateur} - #{am_pm(w.am_pm)}", w.id]}, 
                 {}, 
                 data: {
                     remote: true,

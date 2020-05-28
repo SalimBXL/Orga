@@ -1,9 +1,7 @@
 class WorkingListsController < ApplicationController
     before_action :find_working_list, only: [:show, :edit, :update, :destroy]
-    before_action :find_service, only: [:new]
-    before_action :find_works_by_service, only: [:new, :edit]
-    before_action :find_jobs, only: [:new, :edit]
-    #before_action :find_groupes, only: [:new, :edit]
+    before_action :find_services, only: [:new, :edit]
+    before_action :find_jours, only: [:new, :edit]
 
     #############
     #   INDEX   #
@@ -76,6 +74,14 @@ class WorkingListsController < ApplicationController
 
     def find_working_list
         @working_list = WorkingList.find(params[:id])
+    end
+
+    def find_services
+        @services = Service.all
+    end
+
+    def find_jours
+        @jours = Jour.all
     end
 
 end

@@ -14,7 +14,10 @@ class Fermeture < ApplicationRecord
     private
 
     def set_date_fin
-        if date_fin.nil?
+        if date_fin.nil? || date_fin.blank?
+            self.date_fin = date
+        end
+        if date_fin<date
             self.date_fin = date
         end
     end

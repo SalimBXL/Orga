@@ -60,7 +60,6 @@ class LieusController < ApplicationController
     ##############
     def destroy
         @lieu.destroy
-        #redirect_to lieus_path
     end
 
 
