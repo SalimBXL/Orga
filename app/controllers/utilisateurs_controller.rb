@@ -5,23 +5,7 @@ class UtilisateursController < ApplicationController
     #   INDEX   #
     #############
     def index
-        @utilisateurs = Utilisateur.order(:nom).page(params[:page])
-    end
-
-
-    ########################
-    # UTILISATEURS SERVICE #
-    ########################
-    def utilisateurs_service
-        @service = Service.find_by_id(params[:id])
-        @utilisateurs = @service.utilisateurs.order(:groupe_id, :prenom, :nom).page(params[:page])
-    end
-    #######################
-    # UTILISATEURS GROUPE #
-    #######################
-    def utilisateurs_groupe
-        @groupe = Groupe.find_by_id(params[:id])
-        @utilisateurs = @groupe.utilisateurs.order(:service_id, :prenom, :nom).page(params[:page])
+        @utilisateurs = Utilisateur.order(:service, :groupe, :nom, :prenom).page(params[:page])
     end
 
 
@@ -83,7 +67,7 @@ class UtilisateursController < ApplicationController
     private 
 
     def utilisateur_params
-        params.require(:utilisateur).permit(:prenom, :nom, :date_de_naissance, :email, :phone, :gsm, :groupe_id, :service_id)
+        params.require(:utilisateur).permit(:prenom, :nom, :email, :phone, :gsm, :groupe_id, :service_id)
     end
 
     def find_utilisateur

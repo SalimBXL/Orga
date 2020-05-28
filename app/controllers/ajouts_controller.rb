@@ -7,7 +7,7 @@ class AjoutsController < ApplicationController
     def index
         @ajouts = Ajout.all
         @works = Work.all
-        @semaines = Semaine.where(date_lundi: @ajouts.last.date_lundi).order(:utilisateur_id) unless @ajouts.count<1
+        
     end
 
 
@@ -147,7 +147,7 @@ class AjoutsController < ApplicationController
     private
 
     def ajout_params
-        params.require(:ajout).permit(:utilisateur, :work1, :work2, :work3, :work4, :work5, :date_lundi, :am_pm)
+        params.require(:ajout).permit(:utilisateur, :work1, :work2, :work3, :work4, :work5, :date, :am_pm)
     end
 
     def find_ajout

@@ -9,15 +9,6 @@ class ServicesController < ApplicationController
     end
 
 
-    ##################
-    # SERVICES LIEUX #
-    ##################
-    def services_lieu
-        @lieu = Lieu.find_by_id(params[:id])
-        @services = @lieu.services.order(:nom).page(params[:page])
-    end
-
-
     #############
     #   SHOW    #
     #############

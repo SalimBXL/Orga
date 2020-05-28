@@ -9,33 +9,6 @@ class WorksController < ApplicationController
     end
 
 
-    ################
-    # WORKS GROUPE #
-    ################
-    def works_groupe
-        @groupe = Groupe.find_by_id(params[:id])
-        @works = @groupe.works.order(:groupe_id, :nom).page(params[:page])
-    end
-
-
-    ################
-    # WORKS CLASSE #
-    ################
-    def works_classe
-        @classe = Classe.find_by_id(params[:id])
-        @works = @classe.works.order(:classe_id, :nom).page(params[:page])
-    end
-
-    
-    #####################
-    # WORKS UTILISATEUR #
-    #####################
-    def works_job
-        @job = Job.find_by_id(params[:id])
-        @works = @job.working_lists.order(:groupe_id, :nom).page(params[:page])
-    end
-
-
     #############
     #   SHOW    #
     #############

@@ -44,9 +44,7 @@ class AbsencesController < ApplicationController
     #   UPDATE  #
     #############
     def update
-        if @absence.date_fin.blank? || @absence.date_fin.nil?
-            @absence.date_fin = @absence.date
-        end
+        @absence.check_date_fin
         if @absence.update(absence_params)
             flash[:notice] = "Absence modifiée"
             redirect_to absences_path

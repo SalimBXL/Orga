@@ -60,7 +60,6 @@ class TypeAbsencesController < ApplicationController
     ##############
     def destroy
         @type_absence.destroy
-        #redirect_to type_absences_path
     end
 
 

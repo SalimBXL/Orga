@@ -5,7 +5,7 @@ class JoursController < ApplicationController
     #   INDEX   #
     #############
     def index
-        @jours = Jour.all.page(params[:page])
+        @jours = Jour.order(date: :desc).order(:service, :am_pm, :utilisateur).page(params[:page])
     end
 
 
@@ -66,7 +66,7 @@ class JoursController < ApplicationController
     private 
 
     def jour_params
-        params.require(:jour).permit()
+        params.require(:jour).permit(:date, :utilisateur_id, :am_pm, :service_id)
     end
 
     def find_jour
