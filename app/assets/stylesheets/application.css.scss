@@ -19,8 +19,15 @@
  @import "bootstrap";
  @import "**/*";
 
+ * {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
  body {
      background-color: white;
+     font-family: "Montserrat";
  }
 
  .field_with_errors {
@@ -93,3 +100,5 @@
 
 
 
+.cacher { visibility: hidden; display: none; }
+.afficher { visibility: visible; }

@@ -77,7 +77,7 @@ class WorkingListsController < ApplicationController
     end
 
     def find_services
-        @services = Service.all
+        @services = Service.order(:lieu_id, :nom)
     end
 
     def find_jours
