@@ -1,12 +1,11 @@
 <tr id="working_list_<%= working_list.id %>">
     <td><%= working_list.id %></td>
-    <td><%= working_list.job.semaine.slug %></td>
-    <td align=center>
-        <%= working_list.job.numero_jour %> (<%= am_pm(working_list.job.am_pm) %>)
-    </td>
-    <td>
-        [ <%= working_list.work.code %> ]
-    </td>
+    <td><%= working_list.jour.numero_semaine %></td>
+    <td><%= working_list.jour.service.nom %></td>
+    <td><%= working_list.jour.utilisateur.prenom_nom %></td>
+    <td><%= nom_jour(working_list.jour.numero_jour) %> <%= working_list.jour.date %> (<%= am_pm(working_list.jour.am_pm) %>)</td>
+    <td>[ <%= working_list.work.code %> ]</td>
+
     <td>
     
         <%= link_to '<span data-toggle="tooltip" title="Editer">

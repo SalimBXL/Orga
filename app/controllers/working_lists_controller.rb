@@ -2,6 +2,7 @@ class WorkingListsController < ApplicationController
     before_action :find_working_list, only: [:show, :edit, :update, :destroy]
     before_action :find_services, only: [:new, :edit]
     before_action :find_jours, only: [:new, :edit]
+    before_action :find_works, only: [:new, :edit]
 
     #############
     #   INDEX   #
@@ -82,6 +83,10 @@ class WorkingListsController < ApplicationController
 
     def find_jours
         @jours = Jour.order(:numero_semaine, :numero_jour)
+    end
+
+    def find_works
+        @works = Work.order(:service_id, :classe_id, :groupe_id, :code, :nom)
     end
 
 end
