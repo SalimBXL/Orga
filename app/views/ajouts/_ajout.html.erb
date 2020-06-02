@@ -1,9 +1,10 @@
 <tr id="ajout_<%= ajout.id %>">
-    <% utilisateur = Utilisateur.find(ajout.utilisateur) %>
-    <td><%= utilisateur.prenom_nom %></td>
+    <% ajout.utilisateur %>
     <td>
-        <%= "#{nom_jour(ajout.numero_jour)} #{ajout.date_lundi + ajout.numero_jour - 1}" %> (<%= am_pm(ajout.am_pm) %>)
+        <%= "#{nom_jour(ajout.date.cwday)} #{ajout.date} (#{am_pm(ajout.am_pm)})" %>
     </td>
+    <td></td>
+    <td><%= ajout.utilisateur.prenom_nom %></td>
     <td>
         <ul>
             <% ajout.works.each do |wid| %>
@@ -19,8 +20,8 @@
                 title: "Annuler l'attribution",
                 method: :delete,
                 remote: true, 
-                data: { confirm: "Delete #{utilisateur.prenom_nom}\n
-                    (#{ajout.date_lundi}) Jour ##{ajout.numero_jour} ?" } %>
+                data: { confirm: "Delete #{ajout.utilisateur.prenom_nom}\n
+                    (#{ajout.date}) ?" } %>
             <%= link_to '<i class="material-icons">undo</i><br>
                 Revoir/Editer'.html_safe, 
                 edit_ajout_path(ajout), 

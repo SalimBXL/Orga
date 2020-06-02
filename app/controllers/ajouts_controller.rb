@@ -1,12 +1,17 @@
 class AjoutsController < ApplicationController
     before_action :find_ajout, only: [:show, :edit, :update, :destroy, :valider]
+    before_action :find_utilisateurs, only: [:new, :create, :edit]
+    before_action :find_groupes, only: [:new, :create, :edit]
+    before_action :find_works, only: [:index, :new, :create, :edit]
+    before_action :find_classes, only: [:new, :create, :edit]
+    before_action :find_etendre, only: [:create, :edit]
 
     #############
     #   INDEX   #
     #############
     def index
-        @ajouts = Ajout.all
-        @works = Work.all
+        @ajouts = Ajout.order(:date, :am_pm, :utilisateur_id)
+        #@works = Work.all
         
     end
 
@@ -23,37 +28,32 @@ class AjoutsController < ApplicationController
     #   CREATE   #
     ##############
     def create
-        if params[:ajout][:etendre] == "1"
-                err = false
-                message = ""
-                5.times do |n|
-                    puts("JOUR #{n} : ")
-                    params[:ajout][:date_lundi] = params[:ajout][:date_lundi].to_date.beginning_of_week + n.days
-                    @ajout = Ajout.create(ajout_params)
-                    if @ajout.save
-                        message += "#{@ajout.date_lundi} : ajout créé avec succès ** "
-                    else
-                        message =+ " ERROR: #{@ajout.date_lundi} : problème lors de l'ajout ** "
-                        err = true
-                    end
-                end
-                if err
-                    flash[:danger] = message
-                    render :new
-                else
-                    flash[:notice] = message
-                    redirect_to ajouts_path
-                end
-            
-        else 
-            @ajout = Ajout.create(ajout_params)
-            if @ajout.save
-                flash[:notice] = "ajout créé avec succès"
-                redirect_to ajouts_path
+        err = false
+        @ajouts = Array.new
+
+        # Si etendre à la semaine, 
+        # on crée 5 jobs pour chacun des jours
+        if (@etendre)
+            5.times do |i|
+                @ajouts[i] = Ajout.create(ajout_params)
+                @ajouts[i].date = @ajouts[i].date.beginning_of_week + i.days
+            end
+        else
+            @ajouts[0] = Ajout.create(ajout_params)
+        end
+
+        # on sauve les ajouts
+        @ajouts.each do |a|
+            if a.save
+                flash[:notice] = "Ajout (#{a.date}:#{a.utilisateur.prenom_nom}) créé avec succès"
             else
-                render :new
+                err = true
             end
         end
+        if (err)
+            render :new
+        end
+        redirect_to ajouts_path
     end
 
 
@@ -147,11 +147,39 @@ class AjoutsController < ApplicationController
     private
 
     def ajout_params
-        params.require(:ajout).permit(:utilisateur, :work1, :work2, :work3, :work4, :work5, :date, :am_pm)
+        params.require(:ajout).permit(:utilisateur_id, :work1, :work2, :work3, :work4, :work5, :date, :am_pm)
+    end
+
+    def find_etendre
+        @etendre = false
+        if (!params[:ajout].nil?)
+            if (!params[:ajout][:etendre].nil? && !params[:ajout][:etendre].blank?)
+                if (params[:ajout][:etendre] == "1")
+                    @etendre = true
+                end
+            end
+        end
     end
 
     def find_ajout
         @ajout = Ajout.find(params[:id])
     end
+
+    def find_utilisateurs
+        @utilisateurs = Utilisateur.order(:service_id, :groupe_id, :prenom, :nom)
+    end
+
+    def find_groupes
+        @groupes = Groupe.order(:nom)
+    end
+
+    def find_works
+        @works = Work.order(:service_id, :classe_id, :groupe_id, :nom)
+    end
+
+    def find_classes
+        @classes = Classe.order(:nom)
+    end
+
 
 end

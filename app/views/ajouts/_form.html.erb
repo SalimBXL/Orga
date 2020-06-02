@@ -15,20 +15,6 @@
         <li><a data-toggle="tab" href="#menu3"><strong>Confirmer</strong></a></li>
     </ul>
 
-    <% @utilisateurs = Utilisateur.order(:groupe_id) %>
-
-    <% @groupes = Groupe.all %>
-    <% @works = Work.order(:classe_id, :nom) %>
-    <% @classes = Classe.all %>
-
-    <% if @ajout.date_lundi.nil? %>
-    <% @ajout.date_lundi = Date.today %>
-    <% else %>
-    <% @ajout.date_lundi = @ajout.date_lundi.beginning_of_week + @ajout.numero_jour - 1 %>
-    <% end %>
-
-
-
     <%= form_with model: @ajout, local: true do |form| %>
 
     <% if @ajout.errors.any? %>
@@ -54,7 +40,7 @@
 
             <p>
                 <%= form.label "Date" %><br>
-                <%= form.date_field :date_lundi %>
+                <%= form.date_field :date %>
             </p>
 
             <p>
@@ -79,7 +65,7 @@
                 <!-- Utilisateur -->
                 <p>
                     <%= form.label :utilisateur %><br>
-                    <%= form.select(:utilisateur, @utilisateurs.collect {|p| [ "[#{@groupes.where(id: p.groupe_id).first.nom}] #{p.prenom_nom}", p.id ] }, 
+                    <%= form.select(:utilisateur_id, @utilisateurs.collect {|p| [ "[#{p.service.nom}] - (#{p.groupe.nom}) - #{p.prenom_nom}", p.id ] }, 
                                             { }, 
                                             { :multiple => false, :size => 10 }) %>
                 </p>
@@ -96,58 +82,44 @@
             <p>Veuillez indiquer ci-dessous le ou les travaux à affacter à la date choisie dans l'onglet précédent.</p>
             <div class="form-group">
 
-                <!--
-                <div class="container">
-                    <% @works.each do |w| %>
-                    <div class="checkbox">
-                        <label><input type="checkbox" value="<%= w.id %>%">
-                            <%= "[#{@classes.where(id: w.classe_id).first.nom}] - (#{w.code}) - #{w.nom}" %>
-                        </label>
-                    </div>
-                    <% end %>
-                </div>
-                -->
-
-
-
                 <div class="row">
-                    <div class="col-sm-2">
+                    <div class="col-sm-4">
                         <p>
                             <%= form.label :work1 %><br>
                             <%= form.select(:work1, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
-                                            { }, 
+                                            { include_blank: true },
                                             { :multiple => false, :size => 20 }) %>
                         </p>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-4">
                         <p>
                             <%= form.label :work2 %><br>
                             <%= form.select(:work2, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
-                                            { }, 
+                                           { include_blank: true },
                                             { :multiple => false, :size => 20 }) %>
                         </p>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-4">
                         <p>
                             <%= form.label :work3 %><br>
                             <%= form.select(:work3, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
-                                            { }, 
+                                            { include_blank: true },
                                             { :multiple => false, :size => 20 }) %>
                         </p>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-4">
                         <p>
                             <%= form.label :work4 %><br>
                             <%= form.select(:work4, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
-                                            { }, 
+                                            { include_blank: true },
                                             { :multiple => false, :size => 20 }) %>
                         </p>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-4">
                         <p>
                             <%= form.label :work5 %><br>
                             <%= form.select(:work5, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
-                                            { }, 
+                                            { include_blank: true },
                                             { :multiple => false, :size => 20 }) %>
                         </p>
                     </div>
