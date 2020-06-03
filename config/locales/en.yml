@@ -30,4 +30,33 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  helpers:
+    submit:
+      create: Create
+      update: Confirm changes
+  absences:
+    index:
+      titre: Absences
+      dates: Dates
+      utilisateurs: Users
+      types: Types
+      remarques: Notes
+      mises_a_jour: Updates
+    new:
+      titre: New absence
+      date: Date
+      date_fin: End Date
+      type_absence: Type of absence
+      utilisateur: User
+      remarque: Note
+      create: Create Absence
+  type_absences:
+    index: 
+      titre: Absences
+      sous_titre: Absences Types
+      description: The types allow to sort the absences as categories.
+      codes: Codes
+      noms: Names
+      descriptions: Descriptions
+
+

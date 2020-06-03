@@ -4,12 +4,12 @@
     <td><%= type_absence.description %></td>
     <td>
 
-        <%= link_to '<span data-toggle="tooltip" title="Editer">
+        <%= link_to '<span data-toggle="tooltip">
                     <i class="material-icons">edit</i></span>'.html_safe, 
                     edit_type_absence_path(type_absence),
                     class: "btn btn-warning btn-xs" %>
 
-        <%= link_to '<span data-toggle="tooltip" title="Supprimer">
+        <%= link_to '<span data-toggle="tooltip">
                     <i class="material-icons">close</i>'.html_safe, 
                     type_absence_path(type_absence),
                     method: :delete,

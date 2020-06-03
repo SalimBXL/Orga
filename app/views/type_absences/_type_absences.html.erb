@@ -1,9 +1,9 @@
 <p><%= paginate @type_absences, remote: true %></p>
 <table class="table table-striped">
     <tr>
-        <th>Code</th>
-        <th>Nom</th>
-        <th>Description</th>
+        <th><%= I18n.t("type_absences.index.codes") %></th>
+        <th><%= I18n.t("type_absences.index.noms") %></th>
+        <th><%= I18n.t("type_absences.index.descriptions") %></th>
         <th></th>
     </tr>
     <%= render @type_absences %>

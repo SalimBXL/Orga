@@ -2,19 +2,19 @@
     <h1>
         <span class="label label-primary">
             <i class="material-icons">healing</i>
-            <%= "Absences".upcase %>
+            <%= I18n.t("type_absences.index.titre").upcase %>
         </span>
     </h1>
 </div>
 <div class="container">
     <h2>
         <span class="label label-info">
-            <%= "Type d'absence".capitalize %>
+            <%= I18n.t("type_absences.index.sous_titre").capitalize %>
         </span>
     </h2>
 
     <p>
-        Les <em>types d'absence</em> permettent de trier les <em>absences</em> en catégories.
+        <%= I18n.t("type_absences.index.description") %>
     </p>
 
     <p>

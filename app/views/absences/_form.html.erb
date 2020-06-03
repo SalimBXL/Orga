@@ -16,17 +16,17 @@
 
     <!-- Dates -->
     <p>
-        <%= form.label :date %><br>
+        <%= form.label I18n.t("absences.new.date") %><br>
         <%= form.date_field :date %>
     </p>
     <p>
-        <%= form.label :date_fin %><br>
+        <%= form.label I18n.t("absences.new.date_fin") %><br>
         <%= form.date_field :date_fin %>
     </p>
 
     <!-- Type -->
     <p>
-        <%= form.label :type_absence_id %><br>
+        <%= form.label I18n.t("absences.new.type_absence") %><br>
         <%= form.select(:type_absence_id) do %>
             <%= select_option_tag("", nil, @absence.type_absence_id) %>
             <% TypeAbsence.all.find_each do |l| %>
@@ -37,7 +37,7 @@
 
     <!-- Utilisateur -->
     <p>
-        <%= form.label :utilisateur_id %><br>
+        <%= form.label I18n.t("absences.new.utilisateur") %><br>
         <%= form.select(:utilisateur_id) do %>
             <%= select_option_tag("", nil, @absence.utilisateur_id) %>
             <% Utilisateur.all.find_each do |l| %>
@@ -48,16 +48,10 @@
 
     <!-- Remarque -->
     <p>
-        <%= form.label :remarque %><br>
+        <%= form.label I18n.t("absences.new.remarque") %><br>
         <%= form.text_field :remarque %>
     </p>
     <p>
-        <% if TypeAbsence.all.empty? || Utilisateur.all.empty? %>
-            <span data-toggle="tooltip" title="Type d'absence et utilisateur doivent contenir au moins une entrée.">
-                <%= form.submit class: "btn btn-primary disabled" %>
-            </span>
-        <% else %>
-            <%= form.submit class: "btn btn-primary" %>
-        <% end %>
+        <%= form.submit class: "btn btn-primary" %>
     </p>
 <% end %>

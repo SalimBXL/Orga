@@ -12,12 +12,12 @@
     <td><%= absence.type_absence.nom %></td>
     <td><%= absence.remarque %></td>
     <td>
-        <%= link_to '<span data-toggle="tooltip" title="Editer">
+        <%= link_to '<span data-toggle="tooltip">
                     <i class="material-icons">edit</i></span>'.html_safe, 
                     edit_absence_path(absence),
                     class: "btn btn-warning btn-xs" %>
 
-        <%= link_to '<span data-toggle="tooltip" title="Supprimer">
+        <%= link_to '<span data-toggle="tooltip">
                     <i class="material-icons">close</i>'.html_safe, 
                     absence_path(absence),
                     method: :delete,

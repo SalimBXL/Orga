@@ -3,12 +3,12 @@
 <p><%= paginate @absences, remote: true %></p>
 <table class="table table-striped">
     <tr>
-        <th colspan=3>Dates</th>
-        <th>Utilisateur</th>
-        <th>Type</th>
-        <th>Remarque</th>
+        <th colspan=3><%= I18n.t("absences.index.dates") %></th>
+        <th><%= I18n.t("absences.index.utilisateurs") %></th>
+        <th><%= I18n.t("absences.index.types") %></th>
+        <th><%= I18n.t("absences.index.remarques") %></th>
         <th></th>
-        <th>Updated</th>
+        <th><%= I18n.t("absences.index.mises_a_jour") %></th>
     </tr>
     <%= render @absences %>
 </table>
