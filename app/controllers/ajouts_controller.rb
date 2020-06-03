@@ -1,5 +1,5 @@
 class AjoutsController < ApplicationController
-    before_action :find_ajout, only: [:show, :edit, :update, :destroy, :valider]
+    before_action :find_ajout, only: [:show, :edit, :update, :destroy, :valider, :dupliquer]
     before_action :find_utilisateurs, only: [:new, :create, :edit]
     before_action :find_groupes, only: [:new, :create, :edit]
     before_action :find_works, only: [:index, :new, :create, :edit]
@@ -82,6 +82,22 @@ class AjoutsController < ApplicationController
     ##############
     def destroy
         @ajout.destroy
+    end
+
+
+    ################
+    #   DUPLIQUER  #
+    ################
+    def dupliquer
+        copie = @ajout.dup
+        copie.date = @ajout.date + 1.day
+
+        if copie.save
+            flash[:notice] = "Ajout (#{copie.date}:#{copie.utilisateur.prenom_nom}) créé avec succès"
+        else
+            render :new
+        end
+        redirect_to ajouts_path
     end
 
 
