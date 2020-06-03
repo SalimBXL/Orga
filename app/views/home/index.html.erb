@@ -1,12 +1,12 @@
 <div class="jumbotron">
     <div class="container">
         <h1 class="display-4">ORGA</h1>
-        <p class="lead"><%= "Gestion des équipes".capitalize %></p>
+        <p class="lead"><%= I18n.t("home.index.sous_titre").capitalize %></p>
     </div>
 </div>
 
 
-<h3>Welcome <%= "[User-Name]".capitalize %></h3>
+<h3><%= "#{I18n.t("home.index.welcome")} [User-Name]".upcase %></h3>
 
 <div class="container">
 
@@ -20,7 +20,7 @@
                         agendas_jour_path,
                         class: "btn btn-success btn-xs"
                     %>
-                    <h4>Aujourd'hui</h4>
+                    <h4><%= I18n.t("home.index.aujourdhui") %></h4>
                 </p>
                 <p>
                     <!-- THIS WEEK -->
@@ -28,7 +28,7 @@
                         "",
                         class: "btn btn-success btn-xs" 
                     %>
-                    <h4>Cette semaine</h4>
+                    <h4><%= I18n.t("home.index.cette_semaine") %></h4>
                 </p>
             </div>
             <div class="row">
@@ -38,7 +38,7 @@
                         absences_path,
                         class: "btn btn-success btn-xs" 
                     %>
-                    <h4>Absences</h4>
+                    <h4><%= I18n.t("home.index.absences") %></h4>
                 </p>
                 <p>
                     <!-- TYPES ABSENCES -->
@@ -46,7 +46,7 @@
                         type_absences_path,
                         class: "btn btn-success btn-xs" 
                     %>
-                    <h4>Types</h4>
+                    <h4><%= I18n.t("home.index.types") %></h4>
                 </p>
             </div>
 
@@ -57,7 +57,7 @@
                         fermetures_path,
                         class: "btn btn-success btn-xs" 
                     %>
-                    <h4>Fermetures</h4>
+                    <h4><%= I18n.t("home.index.fermetures") %></h4>
                 </p>
                 <p>
                     <!-- EVENEMENTS -->
@@ -65,7 +65,7 @@
                         fermetures_path,
                         class: "btn btn-success btn-xs" 
                     %>
-                    <h4>Evénements</h4>
+                    <h4><%= I18n.t("home.index.evenements") %></h4>
                 </p>
             </div>
 
@@ -79,7 +79,7 @@
                         lieus_path,
                         class: "btn btn-primary btn-xs" 
                     %>
-                    <h4>Lieux</h4>
+                    <h4><%= I18n.t("home.index.lieux") %></h4>
                 </p>
                 <p>
                     <!-- SERVICES -->
@@ -87,7 +87,7 @@
                         services_path,
                         class: "btn btn-primary btn-xs" 
                     %>
-                    <h4>Services</h4>
+                    <h4><%= I18n.t("home.index.services") %></h4>
                 </p>
             </div>
             <div class="row">
@@ -97,7 +97,7 @@
                         groupes_path,
                         class: "btn btn-primary btn-xs" 
                     %>
-                    <h4>Groupes</h4>
+                    <h4><%= I18n.t("home.index.groupes") %></h4>
                 </p>
                 <p>
                     <!-- UTILISATEURS -->
@@ -105,7 +105,7 @@
                         utilisateurs_path,
                         class: "btn btn-primary btn-xs" 
                     %>
-                    <h4>Utilisateurs</h4>
+                    <h4><%= I18n.t("home.index.utilisateurs") %></h4>
                 </p>
             </div>
             <div class="row">
@@ -115,7 +115,7 @@
                         classes_path,
                         class: "btn btn-primary btn-xs" 
                     %>
-                    <h4>Classes</h4>
+                    <h4><%= I18n.t("home.index.classes") %></h4>
                 </p>
                 <p>
                     <!-- WORKS -->
@@ -123,7 +123,7 @@
                         works_path,
                         class: "btn btn-primary btn-xs" 
                     %>
-                    <h4>Works</h4>
+                    <h4><%= I18n.t("home.index.works") %></h4>
                 </p>
             </div>
         </div>
@@ -135,7 +135,7 @@
                         jours_path,
                         class: "btn btn-danger btn-xs" 
                     %>
-                    <h4>Jours</h4>
+                    <h4><%= I18n.t("home.index.jours") %></h4>
                 </p>
             </div>
             <div class="row">
@@ -145,7 +145,7 @@
                         working_lists_path,
                         class: "btn btn-danger btn-xs" 
                     %>
-                    <h4>Working Lists</h4>
+                    <h4><%= I18n.t("home.index.working_lists") %></h4>
                 </p>
                 <p>
                     <!-- ADD ATTRIBS -->
@@ -153,7 +153,7 @@
                         ajouts_path,
                         class: "btn btn-danger btn-xs" 
                     %>
-                    <h4>Ajouter</h4>
+                    <h4><%= I18n.t("home.index.ajouter") %></h4>
                 </p>
             </div>
             

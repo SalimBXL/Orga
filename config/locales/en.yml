@@ -34,6 +34,27 @@ en:
     submit:
       create: Create
       update: Confirm changes
+
+  home:
+    index:
+      sous_titre: Team Manager
+      welcome: Welcome
+      aujourdhui: Today
+      cette_semaine: This week
+      absences: Absences
+      types: Types
+      fermetures: Days Off
+      evenements: Events
+      lieux: Locations
+      services: Services
+      groupes: Groups
+      utilisateurs: Users
+      classes: Classes
+      works: Works
+      jours: Days
+      working_lists: Working Lists
+      ajouter: Add Attributions
+
   absences:
     index:
       titre: Absences
@@ -50,6 +71,7 @@ en:
       utilisateur: User
       remarque: Note
       create: Create Absence
+
   type_absences:
     index: 
       titre: Absences
