@@ -1,84 +1,44 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
+---
 en:
-  helpers:
-    submit:
-      create: Create
-      update: Confirm changes
-
-  home:
-    index:
-      sous_titre: Team Manager
-      welcome: Welcome
-      aujourdhui: Today
-      cette_semaine: This week
-      absences: Absences
-      types: Types
-      fermetures: Days Off
-      evenements: Events
-      lieux: Locations
-      services: Services
-      groupes: Groups
-      utilisateurs: Users
-      classes: Classes
-      works: Works
-      jours: Days
-      working_lists: Working Lists
-      ajouter: Add Attributions
-
   absences:
     index:
-      titre: Absences
       dates: Dates
-      utilisateurs: Users
-      types: Types
-      remarques: Notes
       mises_a_jour: Updates
+      remarques: Notes
+      titre: Absences
+      types: Types
+      utilisateurs: Users
     new:
-      titre: New absence
       date: Date
       date_fin: End Date
+      remarque: Note
+      titre: New absence
       type_absence: Type of absence
       utilisateur: User
-      remarque: Note
-      create: Create Absence
-
+  home:
+    index:
+      absences: Absences
+      ajouter: Add Attributions
+      aujourdhui: Today
+      cette_semaine: This week
+      classes: Classes
+      evenements: Events
+      fermetures: Days Off
+      groupes: Groups
+      jours: Days
+      lieux: Locations
+      services: Services
+      sous_titre: Team Manager
+      types: Types
+      utilisateurs: Users
+      welcome: Welcome
+      working_lists: Working Lists
+      works: Works
   type_absences:
-    index: 
-      titre: Absences
-      sous_titre: Absences Types
-      description: The types allow to sort the absences as categories.
+    index:
       codes: Codes
-      noms: Names
+      description: The types allow to sort the absences as categories.
       descriptions: Descriptions
-
-
+      noms: Names
+      sous_titre: Absences Types
+      titre: Absences
