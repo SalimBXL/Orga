@@ -16,7 +16,7 @@
             <p>
                 <b>Jour</b><br>
                 <%= form.select(:jour_id, 
-                        @jours.collect {|w| ["<#{w.numero_semaine}> - [#{w.service.nom}] - #{nom_jour(w.numero_jour)} #{w.date} - #{w.utilisateur.prenom_nom} - #{am_pm(w.am_pm)}", w.id]}, 
+                        @jours.collect {|w| ["(#{w.numero_semaine}) - <#{w.service.lieu.nom}/#{w.service.nom}> - #{nom_jour(w.numero_jour)} #{w.date} - #{w.utilisateur.prenom_nom} - #{am_pm(w.am_pm)}", w.id]}, 
                         {
                         }, 
                         { :size => 20 }

@@ -82,7 +82,7 @@ class WorkingListsController < ApplicationController
     end
 
     def find_jours
-        @jours = Jour.order(:numero_semaine, :numero_jour)
+        @jours = Jour.order(numero_semaine: :desc).order(:numero_jour)
     end
 
     def find_works
