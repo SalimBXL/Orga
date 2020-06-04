@@ -16,53 +16,38 @@
 
             <!-- HOME -->
             <li>
-                <%= link_to '<i class="material-icons" 
-                    data-toggle="tooltip" 
-                    title="Accueil" 
-                    data-placement="bottom">
+                <%= link_to "<i class='material-icons' 
+                    data-toggle='tooltip'
+                    title='#{I18n.t("home.navbar.home")}'
+                    data-placement='bottom'>
                     home
-                    </i>'.html_safe, 
+                    </i>".html_safe, 
                     root_path
                 %>
             </li>
 
             <!-- TODAY -->
             <li>
-                <%= link_to '<i class="material-icons" 
-                    data-toggle="tooltip" 
-                    title="Aujourd\'hui" 
-                    data-placement="bottom">
+                <%= link_to "<i class='material-icons' 
+                    data-toggle='tooltip' 
+                    title='#{I18n.t("home.navbar.aujourdhui")}'
+                    data-placement='bottom'>
                     today
-                    </i>'.html_safe,
+                    </i>".html_safe,
                     agendas_jour_path
                 %>
             </li>
 
             <!-- THIS WEEK -->
             <li>
-                <%= link_to '<i class="material-icons" 
-                    data-toggle="tooltip" 
-                    title="Cette semaine" 
-                    data-placement="bottom">
+                <%= link_to "<i class='material-icons'
+                    data-toggle='tooltip'
+                    title='#{I18n.t("home.navbar.cette_semaine")}'
+                    data-placement='bottom'>
                     date_range
-                    </i>'.html_safe,
+                    </i>".html_safe,
                     ""
                 %>
-            </li>
-
-            
-            
- 
-            <!-- AJOUTER ATTRIB -->
-            <li>
-                <%= link_to '<i class="material-icons" 
-                    data-toggle="tooltip" 
-                    title="Ajouter" 
-                    data-placement="bottom">
-                    playlist_add
-                    </i>'.html_safe,
-                    ajouts_path
-                    %>
             </li>
             
             <!-- PROFILE -->

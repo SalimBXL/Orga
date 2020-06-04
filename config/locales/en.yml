@@ -29,7 +29,7 @@ en:
     new:
       am: AM
       confirmer: Confirm
-      confirmer_texte: ""
+      confirmer_texte: ''
       date: Date
       description: Please fill the fields in each tab then press Confirm to finish.
       etendre: Fill the whole week
@@ -96,6 +96,10 @@ en:
       welcome: Welcome
       working_lists: Working Lists
       works: Works
+    navbar:
+      aujourdhui: Today
+      cette_semaine: This Week
+      home: Home
   jours:
     form:
       am: AM
