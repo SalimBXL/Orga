@@ -15,13 +15,13 @@
 
     <!-- Dates -->
     <p>
-        <%= form.label :date %><br>
+        <%= form.label I18n.t("jours.form.date") %><br>
         <%= form.date_field :date %>
     </p>
 
     <!-- Service -->
     <p>
-        <%= form.label :service_id %><br>
+        <%= form.label I18n.t("jours.form.service") %><br>
         <%= form.select(:service_id) do %>
             <%= select_option_tag("", nil, @jour.service_id) %>
             <% Service.all.find_each do |l| %>
@@ -32,7 +32,7 @@
 
     <!-- Utilisateur -->
     <p>
-        <%= form.label :utilisateur_id %><br>
+        <%= form.label I18n.t("jours.form.utilisateur") %><br>
         <%= form.select(:utilisateur_id) do %>
             <%= select_option_tag("", nil, @jour.utilisateur_id) %>
             <% Utilisateur.all.find_each do |l| %>
@@ -42,8 +42,8 @@
     </p>
 
     <p>
-        <%= form.radio_button :am_pm, false %> AM
-        <%= form.radio_button :am_pm, true %> PM
+        <%= form.radio_button :am_pm, false %> <%= I18n.t("jours.form.am") %>
+        <%= form.radio_button :am_pm, true %> <%= I18n.t("jours.form.pm") %>
     </p>
 
 

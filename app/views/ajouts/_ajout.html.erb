@@ -17,7 +17,7 @@
             <%= link_to '<i class="material-icons">cancel</i><br>
                 Annuler'.html_safe, ajout_path(ajout), 
                 class: "btn btn-danger",
-                title: "Annuler l'attribution",
+                title: I18n.t("ajouts.index.annuler"),
                 method: :delete,
                 remote: true, 
                 data: { confirm: "Delete #{ajout.utilisateur.prenom_nom}\n
@@ -26,20 +26,20 @@
                 Revoir/Editer'.html_safe, 
                 edit_ajout_path(ajout), 
                 class: "btn btn-primary",
-                title: "Editer l'attribution" %>
+                title: I18n.t("ajouts.index.editer") %>
             
             <%= link_to '<i class="material-icons">file_copy</i><br>
                 Dupliquer'.html_safe,
                 "ajouts/#{ajout.id}/dupliquer", 
                 class: "btn btn-info",
-                title: "Dupliquer au jour suivant" %>
+                title: I18n.t("ajouts.index.dupliquer") %>
         </div>
         <div class="btn-group">
             <%= link_to '<i class="material-icons">playlist_add_check</i><br>
                 Valider'.html_safe, 
                 "ajouts/#{ajout.id}/valider", 
                 class: "btn btn-success",
-                title: "Valider l'attribution" %>
+                title: I18n.t("ajouts.index.valider") %>
         </div>
     </td>
 </tr>

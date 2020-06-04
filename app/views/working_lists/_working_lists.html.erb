@@ -2,11 +2,11 @@
 <table class="table">
     <tr>
         <th>#ID</th>
-        <th>Semaine</th>
-        <th>Service</th>
-        <th>Utilisateur</th>
-        <th>Jour (AM/PM)</th>
-        <th>Work</th>
+        <th><%= I18n.t("working_list.index.semaine") %></th>
+        <th><%= I18n.t("working_list.index.service") %></th>
+        <th><%= I18n.t("working_list.index.utilisateur") %></th>
+        <th><%= "#{I18n.t("working_list.index.jour")} (#{I18n.t("working_list.index.am_pm")})" %></th>
+        <th><%= I18n.t("working_list.index.work") %></th>
         <th></th></tr>
     <%= render @working_lists %>
 </table>

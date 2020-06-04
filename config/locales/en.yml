@@ -15,6 +15,32 @@ en:
       titre: New absence
       type_absence: Type of absence
       utilisateur: User
+  ajouts:
+    index:
+      annuler: Cancel
+      date: Date
+      dupliquer: Copy
+      editer: Edit
+      service: Service
+      titre: Attributions
+      utilisateur: User
+      valider: Validate
+      work: Work
+    new:
+      am: AM
+      confirmer: Confirm
+      confirmer_texte: ""
+      date: Date
+      description: Please fill the fields in each tab then press Confirm to finish.
+      etendre: Fill the whole week
+      pm: PM
+      quand: When
+      quand_texte: Please fill the field with the date when you want to create a new attribution.
+      qui: Who
+      qui_texte: Please specify the works you want attribuate to this new attribution.
+      quoi: What
+      titre: New attributions(s)
+      utilisateur: User
   classes:
     form:
       description: Description
@@ -70,6 +96,24 @@ en:
       welcome: Welcome
       working_lists: Working Lists
       works: Works
+  jours:
+    form:
+      am: AM
+      date: Date
+      pm: PM
+      service: Service
+      utilisateur: User
+    index:
+      am_pm: Am/Pm
+      date: Date
+      edition: Edition
+      jour: Day
+      semaine: Week
+      service: Service
+      titre: Days
+      utilisateur: User
+    new:
+      titre: New Day
   lieux:
     edit:
       nom: Edition
@@ -100,7 +144,6 @@ en:
       titre: Absences
   utilisateurs:
     index:
-      description: Description
       groupe: Group
       nom: Name
       prenom: Firstname
@@ -114,6 +157,21 @@ en:
       phone: Phone
       prenom: Firstname
       service: Service
+  working_list:
+    edit:
+      titre: Edition
+    form:
+      jour: Day
+      work: Work
+    index:
+      am_pm: Am/Pm
+      jour: Day
+      semaine: Week
+      service: Service
+      utilisateur: User
+      work: Work
+    new:
+      titre: New Working List
   works:
     form:
       classe: Class

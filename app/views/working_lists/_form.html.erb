@@ -14,7 +14,7 @@
         <!-- JOUR -->
         <div class="col-sm-6">
             <p>
-                <b>Jour</b><br>
+                <b><%= I18n.t("working_list.form.jour") %></b><br>
                 <%= form.select(:jour_id, 
                         @jours.collect {|w| ["(#{w.numero_semaine}) - <#{w.service.lieu.nom}/#{w.service.nom}> - #{nom_jour(w.numero_jour)} #{w.date} - #{w.utilisateur.prenom_nom} - #{am_pm(w.am_pm)}", w.id]}, 
                         {
@@ -28,7 +28,7 @@
         <!-- WORKS -->
         <div class="col-sm-6">
             <p>
-                <b>Works</b><br>
+                <b><%= I18n.t("working_list.form.work") %></b><br>
                 <%= form.select(:work_id, 
                         @works.collect {|w| ["<#{w.service.lieu.nom}/#{w.service.nom}> - #{w.groupe.nom} - #{w.classe.nom} - [ #{w.code} ] - #{w.nom}", w.id]}, 
                         {

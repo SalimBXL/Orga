@@ -2,14 +2,14 @@
 <h1>
     <span class="label label-primary">
         <i class="material-icons">location_city</i>
-        <%= "Jours".upcase %>
+        <%= I18n.t("jours.index.semaine").upcase %>
     </span>
 </h1>
 </div>
 <div class="container">
     <h3>
         <span class="label label-info">
-            <%= "Nouveau Jour".capitalize %>
+            <%= I18n.t("jours.new.titre").capitalize %>
         </span>
     </h3>
     <%= render "form" %>

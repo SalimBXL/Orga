@@ -1,12 +1,12 @@
 <p><%= paginate @jours, remote: true %></p>
 <table class="table table-striped">
     <tr>
-        <th>Semaines</th>
-        <th>Jour</th>
-        <th>Date</th>
-        <th>Service</th>
-        <th>Utilisateur</th>
-        <th>Am/Pm</th>
+        <th><%= I18n.t("jours.index.semaine") %></th>
+        <th><%= I18n.t("jours.index.jour") %></th>
+        <th><%= I18n.t("jours.index.date") %></th>
+        <th><%= I18n.t("jours.index.service") %></th>
+        <th><%= I18n.t("jours.index.utilisateur") %></th>
+        <th><%= I18n.t("jours.index.am_pm") %></th>
         <th></th>
     </tr>
     <%= render @jours %>
