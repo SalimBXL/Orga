@@ -5,13 +5,13 @@
     <td><%= fermeture.service.nom %></td>
     <td><%= fermeture.note %></td>
     <td>
-        <%= link_to '<span data-toggle="tooltip" title="Editer">
+        <%= link_to '<span data-toggle="tooltip" >
             <i class="material-icons">edit</i></span>'.html_safe, 
             edit_fermeture_path(fermeture),
             class: "btn btn-warning btn-xs" 
         %>
 
-        <%= link_to '<span data-toggle="tooltip" title="Supprimer">
+        <%= link_to '<span data-toggle="tooltip" >
             <i class="material-icons">close</i>'.html_safe, 
             fermeture_path(fermeture),
             method: :delete,

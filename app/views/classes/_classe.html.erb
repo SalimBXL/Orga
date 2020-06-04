@@ -2,13 +2,13 @@
     <td><%= classe.nom %></td>
     <td><%= classe.description %></td>
     <td>
-        <%= link_to '<span data-toggle="tooltip" title="Editer">
+        <%= link_to '<span data-toggle="tooltip" >
             <i class="material-icons">edit</i></span>'.html_safe, 
             edit_class_path(classe),
             class: "btn btn-warning btn-xs" 
         %>
 
-        <%= link_to '<span data-toggle="tooltip" title="Supprimer">
+        <%= link_to '<span data-toggle="tooltip" >
             <i class="material-icons">close</i>'.html_safe, 
             class_path(classe),
             method: :delete,
@@ -19,7 +19,7 @@
 
         &nbsp;
 
-        <%= link_to '<span data-toggle="tooltip" title="Works">
+        <%= link_to '<span data-toggle="tooltip" >
             <i class="material-icons">build</i></span>'.html_safe, 
             "/works_classe/#{classe.id}",
             class: "btn btn-info btn-xs" 

@@ -2,14 +2,14 @@
     <h1>
         <span class="label label-primary">
             <i class="material-icons">category</i>
-            <%= "Classes".upcase %>
+            <%= I18n.t("classes.index.titre").upcase %>
         </span>
     </h1>
 </div>
 <div class="container">
     <h3>
         <span class="label label-info">
-            <%= "Nouvelle classe".capitalize %>
+            <%= I18n.t("classes.new.description").capitalize %>
         </span>
     </h3>
     <%= render "form" %>

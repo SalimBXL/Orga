@@ -2,13 +2,13 @@
     <td><%= groupe.nom %></td>
     <td><%= groupe.description %></td>
     <td>
-        <%= link_to '<span data-toggle="tooltip" title="Editer">
+        <%= link_to '<span data-toggle="tooltip" >
             <i class="material-icons">edit</i></span>'.html_safe, 
             edit_groupe_path(groupe),
             class: "btn btn-warning btn-xs" 
         %>
 
-        <%= link_to '<span data-toggle="tooltip" title="Supprimer">
+        <%= link_to '<span data-toggle="tooltip" >
             <i class="material-icons">close</i>'.html_safe, 
             groupe_path(groupe),
             method: :delete,
@@ -19,12 +19,12 @@
 
         &nbsp;
 
-        <%= link_to '<span data-toggle="tooltip" title="Utilisateurs">
+        <%= link_to '<span data-toggle="tooltip" >
             <i class="material-icons">group</i></span>'.html_safe, 
             "/utilisateurs_groupe/#{groupe.id}",
             class: "btn btn-info btn-xs" 
         %>
-        <%= link_to '<span data-toggle="tooltip" title="Works">
+        <%= link_to '<span data-toggle="tooltip" >
             <i class="material-icons">build</i></span>'.html_safe, 
             "/works_groupe/#{groupe.id}",
             class: "btn btn-primary btn-xs" 

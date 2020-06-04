@@ -1,11 +1,12 @@
 <p><%= paginate @fermetures, remote: true %></p>
 <table class="table table-striped">
     <tr>
-        <th>Nom</th>
-        <th>Date</th>
-        <th>Date Fin</th>
-        <th>Service</th>
-        <th>Note</th>
+        <th><%= I18n.t("fermetures.index.noms") %></th>
+        <th><%= I18n.t("fermetures.index.dates") %></th>
+        <th><%= I18n.t("fermetures.index.dates_fin") %></th>
+        <th><%= I18n.t("fermetures.index.services") %></th>
+        <th><%= I18n.t("fermetures.index.notes") %></th>
+        <th></th>
     </tr>
     <%= render @fermetures %>
 </table>

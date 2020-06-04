@@ -11,19 +11,19 @@
 
     <!-- Nom -->
     <p>
-        <%= form.label :nom %><br>
+        <%= form.label I18n.t("works.form.nom") %><br>
         <%= form.text_field :nom %>
     </p>
 
     <!-- Code -->
     <p>
-        <%= form.label :code %><br>
+        <%= form.label I18n.t("works.form.code") %><br>
         <%= form.text_field :code %>
     </p>
 
     <!-- Groupe -->
     <p>
-        <%= form.label :groupe_id %><br>
+        <%= form.label I18n.t("works.form.groupe") %><br>
         <%= form.select(:groupe_id) do %>
             <%= select_option_tag("", nil, @work.groupe_id) %>
             <% Groupe.all.find_each do |l| %>
@@ -34,7 +34,7 @@
 
     <!-- Classe -->
     <p>
-        <%= form.label :classe_id %><br>
+        <%= form.label I18n.t("works.form.classe") %><br>
         <%= form.select(:classe_id) do %>
             <%= select_option_tag("", nil, @work.classe_id) %>
             <% Classe.all.find_each do |l| %>
@@ -46,7 +46,7 @@
 
     <!-- SERVICE -->
     <p>
-        <%= form.label :service_id %><br>
+        <%= form.label I18n.t("works.form.service") %><br>
         <%= form.select(:service_id) do %>
             <%= select_option_tag("", nil, @work.service_id) %>
             <% Service.all.find_each do |l| %>
@@ -58,7 +58,7 @@
 
     <!-- Description -->
     <p>
-        <%= form.label :description %><br>
+        <%= form.label I18n.t("works.form.description") %><br>
         <%= form.text_field :description %>
     </p>
 

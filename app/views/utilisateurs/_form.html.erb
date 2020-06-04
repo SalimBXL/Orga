@@ -11,38 +11,38 @@
 
     <!-- Prenom -->
     <p>
-        <%= form.label :prenom %><br>
+        <%= form.label I18n.t("utilisateurs.new.prenom") %><br>
         <%= form.text_field :prenom %>
     </p>
     
     <!-- Nom -->
     <p>
-        <%= form.label :nom %><br>
+        <%= form.label I18n.t("utilisateurs.new.nom") %><br>
         <%= form.text_field :nom %>
     </p>
 
     
     <!-- Email -->
     <p>
-        <%= form.label :email %><br>
+        <%= form.label I18n.t("utilisateurs.new.email") %><br>
         <%= form.text_field :email %>
     </p>
 
     <!-- Phone -->
     <p>
-        <%= form.label :phone %><br>
+        <%= form.label I18n.t("utilisateurs.new.phone") %><br>
         <%= form.text_field :phone %>
     </p>
 
     <!-- Gsm -->
     <p>
-        <%= form.label :gsm %><br>
+        <%= form.label I18n.t("utilisateurs.new.gsm") %><br>
         <%= form.text_field :gsm %>
     </p>
 
     <!-- Service -->
     <p>
-        <%= form.label :service_id %><br>
+        <%= form.label I18n.t("utilisateurs.new.service") %><br>
         <%= form.select(:service_id) do %>
             <%= select_option_tag("", nil, @utilisateur.service_id) %>
             <% Service.all.find_each do |l| %>
@@ -53,7 +53,7 @@
 
     <!-- Groupe -->
     <p>
-        <%= form.label :groupe_id %><br>
+        <%= form.label I18n.t("utilisateurs.new.groupe") %><br>
         <%= form.select(:groupe_id) do %>
             <%= select_option_tag("", nil, @utilisateur.groupe_id) %>
             <% Groupe.all.find_each do |l| %>

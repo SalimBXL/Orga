@@ -1,10 +1,10 @@
 <p><%= paginate @utilisateurs, remote: true %></p>
 <table class="table table-striped">
     <tr>
-        <th>Prenom</th>
-        <th>Nom</th>
-        <th>Service</th>
-        <th>Groupe</th>
+        <th><%= I18n.t("utilisateurs.index.prenom") %></th>
+        <th><%= I18n.t("utilisateurs.index.nom") %></th>
+        <th><%= I18n.t("utilisateurs.index.service") %></th>
+        <th><%= I18n.t("utilisateurs.index.groupe") %></th>
         <th></th></tr>
     <%= render @utilisateurs %>
 </table>

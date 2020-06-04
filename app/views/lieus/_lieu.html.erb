@@ -12,18 +12,18 @@
         </div>
         <div class="panel-footer">
             <div class="btn-group">
-                <%= link_to '<span data-toggle="tooltip" title="Editer">
+                <%= link_to '<span data-toggle="tooltip" >
                     <i class="material-icons">edit</i></span>'.html_safe, 
                     edit_lieu_path(lieu),
                     class: "btn btn-warning btn-xs" %>
-                <%= link_to '<span data-toggle="tooltip" title="Supprimer le lieu">
+                <%= link_to '<span data-toggle="tooltip" >
                     <i class="material-icons">location_off</i>'.html_safe, 
                     lieu_path(lieu),
                     method: :delete,
                     remote: true,
                     data: { confirm: "Delete #{lieu.nom} ?" },
                     class: "btn btn-danger btn-xs" %>
-                <%= link_to '<span data-toggle="tooltip" title="Services associés">
+                <%= link_to '<span data-toggle="tooltip" >
                     <i class="material-icons">business</i>'.html_safe, 
                     "/services_lieu/#{lieu.id}",
                     class: "btn btn-info btn-xs" %>

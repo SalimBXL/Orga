@@ -4,11 +4,11 @@
     <td><%= utilisateur.service.nom %></td>
     <td><%= utilisateur.groupe.nom %></td>
     <td>
-        <%= link_to '<span data-toggle="tooltip" title="Editer">
+        <%= link_to '<span data-toggle="tooltip" >
             <i class="material-icons">edit</i></span>'.html_safe, 
             edit_utilisateur_path(utilisateur),
             class: "btn btn-warning btn-xs" %>
-        <%= link_to '<span data-toggle="tooltip" title="Supprimer le service">
+        <%= link_to '<span data-toggle="tooltip" >
             <i class="material-icons">close</i>'.html_safe, 
             utilisateur_path(utilisateur),
             method: :delete,
@@ -19,7 +19,7 @@
 
         &nbsp;
 
-        <%= link_to '<span data-toggle="tooltip" title="Afficher">
+        <%= link_to '<span data-toggle="tooltip" >
             <i class="material-icons">portrait</i></span>'.html_safe, 
             utilisateur_path(utilisateur),
             class: "btn btn-info btn-xs" %>

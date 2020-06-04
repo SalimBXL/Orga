@@ -13,18 +13,18 @@
         </div>
         <div class="panel-footer">
             <div class="btn-group">
-                <%= link_to '<span data-toggle="tooltip" title="Editer">
+                <%= link_to '<span data-toggle="tooltip">
                     <i class="material-icons">edit</i></span>'.html_safe, 
                     edit_service_path(service),
                     class: "btn btn-warning btn-xs" %>
-                <%= link_to '<span data-toggle="tooltip" title="Supprimer le service">
+                <%= link_to '<span data-toggle="tooltip" >
                     <i class="material-icons">close</i>'.html_safe, 
                     service_path(service),
                     method: :delete,
                     remote: true,
                     data: { confirm: "Delete #{service.nom} ?" },
                     class: "btn btn-danger btn-xs" %>
-                <%= link_to '<span data-toggle="tooltip" title="Lieu associé">
+                <%= link_to '<span data-toggle="tooltip" >
                     <i class="material-icons">location_city</i>'.html_safe, 
                     lieu_path(service.lieu),
                     class: "btn btn-info btn-xs" %>

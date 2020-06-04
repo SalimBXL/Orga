@@ -2,13 +2,13 @@
     <h1>
         <span class="label label-primary">
             <i class="material-icons">location_city</i>
-            <%= "Lieux".upcase %>
+            <%= I18n.t("lieux.index.titre").upcase %>
         </span>
     </h1>
 </div>
 
 <p>
-    Les <em>lieux</em> localisent géographiquement les <em>services</em>.
+    <%= I18n.t("lieux.index.description") %>
 </p>
 
 <div class="container">

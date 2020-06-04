@@ -1,6 +1,9 @@
 <p><%= paginate @classes, remote: true %></p>
 <table class="table table-striped">
-    <tr><th>Nom</th><th>Description</th><th></th></tr>
+    <tr>
+    <th><%= I18n.t("classes.index.noms") %></th>
+    <th><%= I18n.t("classes.index.descriptions") %></th>
+    <th></th></tr>
     <%= render @classes %>
 </table>
 <p><%= paginate @classes, remote: true %></p>

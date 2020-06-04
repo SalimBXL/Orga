@@ -2,14 +2,14 @@
     <h1>
         <span class="label label-primary">
             <i class="material-icons">event_busy</i>
-            <%= "Fermetures".upcase %>
+            <%= I18n.t("fermetures.index.titre").upcase %>
         </span>
     </h1>
 </div>
 <div class="container">
     <h3>
         <span class="label label-info">
-            <%= "Nouvelle fermeture".capitalize %>
+            <%= I18n.t("fermetures.new.titre").capitalize %>
         </span>
     </h3>
     <%= render "form" %>

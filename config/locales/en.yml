@@ -15,6 +15,42 @@ en:
       titre: New absence
       type_absence: Type of absence
       utilisateur: User
+  classes:
+    form:
+      description: Description
+      nom: Name
+    index:
+      description: Classes allow to sort works into categories.
+      descriptions: Descriptions
+      noms: Names
+      titre: Classes
+    new:
+      description: New class
+  fermetures:
+    index:
+      dates: Dates
+      dates_fin: End Dates
+      noms: Names
+      notes: Notes
+      services: Services
+      titre: Days Off
+    new:
+      dates: Dates
+      nom: Name
+      note: Note
+      service: Service
+      titre: New Day Off
+  groupes:
+    edit:
+      desrciption: Description
+      nom: Name
+    index:
+      description: The groups allow to sort users into categories.
+      titre: Groups
+    new:
+      description: Description
+      nom: Name
+      titre: New group
   home:
     index:
       absences: Absences
@@ -34,6 +70,26 @@ en:
       welcome: Welcome
       working_lists: Working Lists
       works: Works
+  lieux:
+    edit:
+      nom: Edition
+    index:
+      description: Locations hosts the services.
+      titre: Locations
+    new:
+      adresse: Address
+      nom: Name
+      note: Note
+      phone: Phone
+      titre: New location
+  services:
+    index:
+      titre: Services
+    new:
+      description: Description
+      lieu: Location
+      nom: Name
+      titre: New Service
   type_absences:
     index:
       codes: Codes
@@ -42,3 +98,29 @@ en:
       noms: Names
       sous_titre: Absences Types
       titre: Absences
+  utilisateurs:
+    index:
+      description: Description
+      groupe: Group
+      nom: Name
+      prenom: Firstname
+      service: Service
+      titre: Users
+    new:
+      email: Email
+      groupe: Group
+      gsm: Cellphone
+      nom: Name
+      phone: Phone
+      prenom: Firstname
+      service: Service
+  works:
+    form:
+      classe: Class
+      code: Code
+      description: Description
+      groupe: Group
+      nom: Name
+      service: Service
+    index:
+      titre: Works

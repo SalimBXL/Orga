@@ -1,13 +1,13 @@
 <p><%= paginate @works, remote: true %></p>
 <table class="table table-striped">
     <tr>
-        <th>Code</th>
-        <th> . </th>
-        <th>Nom</th>
-        <th>Description</th>
-        <th>Groupe</th>
-        <th>Classe</th>
-        <th>Service</th>
+        <th><%= I18n.t("works.form.code") %></th>
+        <th>.</th>
+        <th><%= I18n.t("works.form.nom") %></th>
+        <th><%= I18n.t("works.form.description") %></th>
+        <th><%= I18n.t("works.form.groupe") %></th>
+        <th><%= I18n.t("works.form.classe") %></th>
+        <th><%= I18n.t("works.form.service") %></th>
         <th></th></tr>
     <%= render @works %>
 </table>

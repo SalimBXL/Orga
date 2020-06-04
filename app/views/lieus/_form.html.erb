@@ -11,25 +11,25 @@
 
 <!-- Nom -->
 <p>
-    <%= form.label :nom %><br>
+    <%= form.label I18n.t("lieux.new.nom") %><br>
     <i class="material-icons">location_city</i> <%= form.text_field :nom %>
 </p>
 
 <!-- Adresse -->
 <p>
-    <%= form.label :adresse %><br>
+    <%= form.label I18n.t("lieux.new.adresse") %><br>
     <i class="material-icons">location_on</i> <%= form.text_field :adresse %>
 </p>
 
 <!-- Téléphone -->
 <p>
-    <%= form.label :phone %><br>
+    <%= form.label I18n.t("lieux.new.phone") %><br>
     <i class="material-icons">phone</i> <%= form.text_field :phone %>
 </p>
 
 <!-- Note -->
 <p>
-    <%= form.label :note %><br>
+    <%= form.label I18n.t("lieux.new.note") %><br>
     <i class="material-icons">note</i> <%= form.text_field :note %>
 </p>
 
