@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200605092558) do
+ActiveRecord::Schema.define(version: 20200605120748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,8 +128,10 @@ ActiveRecord::Schema.define(version: 20200605092558) do
     t.string "gsm"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["groupe_id"], name: "index_utilisateurs_on_groupe_id"
     t.index ["service_id"], name: "index_utilisateurs_on_service_id"
+    t.index ["user_id"], name: "index_utilisateurs_on_user_id"
   end
 
   create_table "working_lists", force: :cascade do |t|
@@ -164,6 +166,7 @@ ActiveRecord::Schema.define(version: 20200605092558) do
   add_foreign_key "services", "lieus"
   add_foreign_key "utilisateurs", "groupes"
   add_foreign_key "utilisateurs", "services"
+  add_foreign_key "utilisateurs", "users"
   add_foreign_key "working_lists", "jours"
   add_foreign_key "working_lists", "works"
   add_foreign_key "works", "classes", column: "classe_id"

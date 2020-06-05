@@ -154,6 +154,7 @@ en:
       groupe: Group
       nom: Name
       prenom: Firstname
+      profile: Profile
       service: Service
       titre: Users
     new:

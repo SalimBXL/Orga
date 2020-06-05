@@ -1,12 +1,25 @@
 <div class="row">
+    <div class="col-sm-8">
+        <div class="well well-lg">
+            <h1>
+                <span class="label label-default">
+                <i class="material-icons">person</i> <%= @utilisateur.prenom_nom %>
+                </span>
+            </h1>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- PROFILE UTILISATEUR -->
     <div class="col-sm-4">
         <div class="panel panel-default ">
             <div class="panel-heading">
-                <h1>
+                <h2>
                     <span class="label label-default">
-                    <i class="material-icons">person</i> <%= @utilisateur.prenom_nom %>
+                    <i class="material-icons">account_box</i> <%= @utilisateur.prenom_nom %>
                     </span>
-                </h1>
+                </h2>
             </div>
             <div class="panel-body">
                 <p>
@@ -30,6 +43,36 @@
                     <span class="material-icons">business</span>
                     <%= @utilisateur.service.nom %>
                 </p>
+            </div>
+            <div class="panel-footer">
+                <%= link_to " [Edit] ", 
+                    edit_utilisateur_path(@utilisateur),
+                    class: "btn btn-info"
+                %>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROFILE CONNEXION (User) -->
+    <div class="col-sm-4">
+        <div class="panel panel-default ">
+            <div class="panel-heading">
+                <h2>
+                    <span class="label label-default">
+                        <i class="material-icons">login</i> <%= @utilisateur.prenom_nom %>
+                    </span>
+                </h2>
+            </div>
+            <div class="panel-body">
+                <p>
+                    <span class="material-icons">email</span>
+                    <%= @utilisateur.user.email %>
+                </p>
+                <p>
+                    <span class="material-icons">vpn_key</span>
+                    <%= @utilisateur.user.password %>
+                </p>
+
             </div>
             <div class="panel-footer">
                 <%= link_to " [Edit] ", 
