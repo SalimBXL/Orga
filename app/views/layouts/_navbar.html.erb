@@ -49,23 +49,8 @@
                     ""
                 %>
             </li>
-            
-            <!-- PROFILE -->
-            <!--
-            <li>
-                <a href="#">
-                    <i class="material-icons" 
-                        data-toggle="tooltip" 
-                        title="Profile" 
-                        data-placement="bottom">
-                        person
-                    </i>
-                </a>
-            </li>
-            -->
 
             <!-- LANGUE -->
-            
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="material-icons" 
@@ -76,28 +61,75 @@
                     </i>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><%= link_to "EN", url_for(only_path: true, locale: "en") %></li>
-                    <li><%= link_to "FR", url_for(only_path: true, locale: "fr") %></li>
-                    <li><%= link_to "NL", url_for(only_path: true, locale: "nl") %></li>
+                    <li>
+                        <span data-toggle="tooltip" 
+                        title="EN"
+                        data-placement="bottom">
+                        &nbsp;&nbsp;
+                        <%= link_to image_tag("flag_en.png", alt: "EN", class: "locale-flag"),
+                        url_for(only_path: true, locale: "en") %>
+                        </span>
+                    </li>
+                    <li>
+                        <span data-toggle="tooltip" 
+                        title="FR"
+                        data-placement="bottom">
+                        &nbsp;&nbsp;
+                        <%= link_to image_tag("flag_fr.png", alt: "FR", class: "locale-flag"),
+                        url_for(only_path: true, locale: "fr") %>
+                    </li>
+                    <li>
+                        <span data-toggle="tooltip" 
+                        title="NL"
+                        data-placement="bottom">
+                        &nbsp;&nbsp;
+                        <%= link_to image_tag("flag_nl.png", alt: "NL", class: "locale-flag"),
+                        url_for(only_path: true, locale: "nl") %>
+                    </li>
                 </ul>
             </li>
-            
 
-            <!-- CONNEXION -->
-            <!--
-            <li>
-                <a href="#" data-toggle="tooltip" title="Hooray!">
-                    <span class="btn btn-success btn-xs">
+            <!-- PROFILE -->
+            <% if user_signed_in? %>
+                <li>
+                    <a href="#">
                         <i class="material-icons" 
                             data-toggle="tooltip" 
-                            title="Connexion" 
+                            title=<%= I18n.t("home.navbar.profile") %> 
                             data-placement="bottom">
-                            power_settings_new
+                            person
                         </i>
-                    </span>
-                </a>
+                    </a>
+                </li>
+            <% end %>
+
+            <!-- CONNEXION -->
+            <li>
+                <% if user_signed_in? %>
+                    <%= link_to "<span class='btn btn-danger btn-xs'>
+                                <i class='material-icons'
+                                    data-toggle='tooltip'
+                                    title=#{I18n.t('home.navbar.logout') } 
+                                    data-placement='bottom'>
+                                    power_settings_new
+                                </i>
+                                </span>".html_safe, 
+                                destroy_user_session_path, 
+                                method: :delete 
+                    %>
+                <% else %>
+                    <%= link_to "<span class='btn btn-success btn-xs'>
+                                <i class='material-icons'
+                                    data-toggle='tooltip'
+                                    title=#{I18n.t('home.navbar.login') } 
+                                    data-placement='bottom'>
+                                    power_settings_new
+                                </i>
+                                </span>".html_safe, 
+                                new_user_session_path
+                    %>
+                <% end %>
             </li>
-            -->
 
         </ul>
     </div>

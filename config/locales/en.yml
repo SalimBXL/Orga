@@ -100,6 +100,9 @@ en:
       aujourdhui: Today
       cette_semaine: This Week
       home: Home
+      login: Login
+      logout: Logout
+      profile: Profile
   jours:
     form:
       am: AM
