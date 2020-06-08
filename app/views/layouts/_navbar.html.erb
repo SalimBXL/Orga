@@ -92,14 +92,14 @@
             <!-- PROFILE -->
             <% if user_signed_in? %>
                 <li>
-                    <a href="#">
-                        <i class="material-icons" 
-                            data-toggle="tooltip" 
-                            title=<%= I18n.t("home.navbar.profile") %> 
-                            data-placement="bottom">
+                    <%= link_to "<i class='material-icons'
+                            data-toggle='tooltip'
+                            title=#{I18n.t('home.navbar.profile')}
+                            data-placement='bottom'>
                             person
-                        </i>
-                    </a>
+                        </i>".html_safe,
+                        utilisateur_path(current_user)
+                    %>
                 </li>
             <% end %>
 

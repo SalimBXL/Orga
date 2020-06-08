@@ -3,11 +3,23 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  has_one :utilisateurs, dependent: :destroy
+  has_one :utilisateur, dependent: :destroy
 
-  def utilisateur
-    Utilisateur.find_by_email(email)
+  before_validation :set_utilisateur, if: :should_set_utilisateur?
+
+  
+
+  private
+
+  def should_set_utilisateur?
+    self.utilisateur.nil?
   end
 
+  def set_utilisateur
+    u = Utilisateur.find_by_email(email)
+    u.user = self
+    u.save
+  end
+  
 
 end
