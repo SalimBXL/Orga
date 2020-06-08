@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 77108d0af4a2461331459a4cfc6f119eda99173b
+  revision: be4c3b5f1a7ccfa082f684580d6c2dc8938145c2
   branch: master
   specs:
     faker (2.12.0)
@@ -195,7 +195,7 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    regexp_parser (1.7.0)
+    regexp_parser (1.7.1)
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)

@@ -4,4 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_one :utilisateurs, dependent: :destroy
+
+  def utilisateur
+    Utilisateur.find_by_email(email)
+  end
+
+
 end
