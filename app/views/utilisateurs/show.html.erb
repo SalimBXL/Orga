@@ -3,7 +3,7 @@
         <div class="well well-lg">
             <h1>
                 <span class="label label-default">
-                <i class="material-icons">person</i> <%= @utilisateur.prenom_nom %>
+                <i class="material-icons">person</i> <%= @utilisateur.prenom_nom.upcase %>
                 </span>
             </h1>
         </div>
@@ -17,7 +17,7 @@
             <div class="panel-heading">
                 <h2>
                     <span class="label label-default">
-                    <i class="material-icons">account_box</i> <%= @utilisateur.prenom_nom %>
+                    <i class="material-icons">account_box</i> <%= I18n.t("utilisateurs.show.fiche").capitalize %>
                     </span>
                 </h2>
             </div>
@@ -45,7 +45,7 @@
                 </p>
             </div>
             <div class="panel-footer">
-                <%= link_to " [Edit] ", 
+                <%= link_to " [#{I18n.t('utilisateurs.show.edit_informations')}] ", 
                     edit_utilisateur_path(@utilisateur),
                     class: "btn btn-info"
                 %>
@@ -59,26 +59,36 @@
             <div class="panel-heading">
                 <h2>
                     <span class="label label-default">
-                        <i class="material-icons">login</i> <%= @utilisateur.prenom_nom %>
+                        <i class="material-icons">login</i> <%= I18n.t("utilisateurs.show.login").capitalize %>
                     </span>
                 </h2>
             </div>
             <div class="panel-body">
-                <p>
-                    <span class="material-icons">email</span>
-                    <%= @utilisateur.user.email %>
-                </p>
-                <p>
-                    <span class="material-icons">vpn_key</span>
-                    <%= @utilisateur.user.password %>
-                </p>
+
+                <% if @utilisateur.user %>
+                    <p>
+                        <span class="material-icons">email</span>
+                        <%= @utilisateur.user.email %>
+                    </p>
+                    <p>
+                        <span class="material-icons">vpn_key</span>
+                        <%= @utilisateur.user.password %>
+                    </p>
+                <% else %>
+                    
+
+                <% end %>
 
             </div>
             <div class="panel-footer">
-                <%= link_to " [Edit] ", 
-                    edit_utilisateur_path(@utilisateur),
-                    class: "btn btn-info"
-                %>
+                <% if @utilisateur.user %>
+                    <% if @utilisateur.user == current_user %>
+                        <%= link_to " [#{I18n.t('utilisateurs.show.edit_login')}] ", 
+                            edit_user_registration_path,
+                            class: "btn btn-info"
+                        %>
+                    <% end %>
+                <% end %>
             </div>
         </div>
     </div>

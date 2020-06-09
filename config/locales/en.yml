@@ -82,7 +82,6 @@ en:
       titre: New group
   home:
     index:
-      titre: Home
       absences: Absences
       ajouter: Add Attributions
       aujourdhui: Today
@@ -168,6 +167,12 @@ en:
       phone: Phone
       prenom: Firstname
       service: Service
+    show:
+      create_login: Create login profile
+      edit_informations: Edit user informations
+      edit_login: Edit login profile
+      fiche: User informations
+      login: Login Data
   working_list:
     edit:
       titre: Edition

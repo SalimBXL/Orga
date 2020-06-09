@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_one :utilisateur, dependent: :destroy
 
-  before_validation :set_utilisateur, if: :should_set_utilisateur?
+  #before_validation :set_utilisateur, if: :should_set_utilisateur?
 
   
 
