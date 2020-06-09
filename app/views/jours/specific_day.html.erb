@@ -1,0 +1,16 @@
+<div class="page-header">
+    <h1>
+        <span class="label label-info">
+            <i class="material-icons">today</i>
+            <%= "#{nom_jour(@date.cwday)} #{I18n.localize @date, format: :long}" %>
+        </span>
+    </h1>
+</div>
+
+<div class="container">
+    
+    <div class="row" id="specific_day_jours">
+        <%= render 'specific_day_jours' %>
+    </div>
+    
+</div>

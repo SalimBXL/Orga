@@ -1,5 +1,10 @@
 ---
 en:
+  Jeudi: Thursday
+  Lundi: Monday
+  Mardi: Tuesday
+  Mercredi: Wednesday
+  Vendredi: Friday
   absences:
     index:
       dates: Dates
@@ -168,7 +173,6 @@ en:
       prenom: Firstname
       service: Service
     show:
-      create_login: Create login profile
       edit_informations: Edit user informations
       edit_login: Edit login profile
       fiche: User informations

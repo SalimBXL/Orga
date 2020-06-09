@@ -54,7 +54,7 @@
                 <p>
                     <!-- TODAY -->
                     <%= link_to '<i class="material-icons">today</i>'.html_safe, 
-                        agendas_jour_path,
+                        today_path,
                         class: "btn btn-success btn-xs"
                     %>
                     <h4><%= I18n.t("home.index.aujourdhui") %></h4>
@@ -226,32 +226,3 @@
 
     </div>
 </div>
-
-
-
-
-
-
-
-<!-- MENU ADMIN -->
-<!--
-
-<ul>
-    <li><%= link_to "Lieux", lieus_path %></li>
-    <li><%= link_to "Services", services_path %></li>
-    <li><%= link_to "Groupes", groupes_path %></li>
-    <li><%= link_to "Utilisateurs", utilisateurs_path %></li>
-    <li><%= link_to "Types d'absences", type_absences_path %></li>
-    <li><%= link_to "Absences", absences_path %></li>
-    <li><%= link_to "Classes", classes_path %></li>
-    <li><%= link_to "Works", works_path %></li>
-    <li><%= link_to "WorkingLists", working_lists_path %></li>
-    <li><%= link_to "Agendas", agendas_path %></li>
-    <li><%= link_to "Ajouter une nouvelle attribution", ajouts_path %></li>
-</ul>
-
--->
-
-
-
-

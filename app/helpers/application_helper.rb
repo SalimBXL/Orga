@@ -15,15 +15,15 @@ module ApplicationHelper
     def nom_jour(numero)
         case numero
         when 1
-            nom_jour = "Lundi"
+            nom_jour = I18n.t("Lundi")
         when 2
-            nom_jour = "Mardi"
+            nom_jour = I18n.t("Mardi")
         when 3
-            nom_jour = "Mercredi"
+            nom_jour = I18n.t("Mercredi")
         when 4
-            nom_jour = "Jeudi"
+            nom_jour = I18n.t("Jeudi")
         when 5
-            nom_jour = "Vendredi"
+            nom_jour = I18n.t("Vendredi")
         else
             nom_jour = nil
         end

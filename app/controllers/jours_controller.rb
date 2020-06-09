@@ -63,6 +63,19 @@ class JoursController < ApplicationController
     end
 
 
+    #############
+    #   TODAY    #
+    #############
+    def specific_day
+        @date = Date.today
+        @specific_day_jours = Jour.today
+
+        
+
+
+    end
+
+
     private 
 
     def jour_params

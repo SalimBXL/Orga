@@ -38,20 +38,6 @@ Rails.application.routes.draw do
 
 
 
-  ###############
-  #   Agendas   #
-  ###############
-  get "agenda", to: "agendas#all"
-  get "agendas", to: "agendas#index"
-  get "agendas/absences", to: "agendas#absences"
-  get "agendas/conges", to: "agendas#conges"
-  get "agendas/semaines", to: "agendas#semaines"
-  get "agendas/jobs", to: "agendas#jobs"
-  get "agendas/jours", to: "agendas#jours"
-
-  get "agendas/jour", to: "agendas#un_jour"
-  get "agendas/semaine", to: "agendas#une_semaine"
-
 
   ##############
   #   Ajouts   #
@@ -113,6 +99,7 @@ Rails.application.routes.draw do
   #   Jours  #
   ############
   resources :jours, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
+  get "today", to: "jours#specific_day"
 
 
   ###################

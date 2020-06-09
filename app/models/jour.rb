@@ -8,6 +8,7 @@ class Jour < ApplicationRecord
     validates :date, presence: true
     validates_associated :working_lists
     
+    scope :today, -> { where(date: Date.today).order(:utilisateur_id, :am_pm) }
 
     def numero_semaine
         "#{date.year}-W#{date.cweek<10 ? "0" : ""}#{date.cweek}"
