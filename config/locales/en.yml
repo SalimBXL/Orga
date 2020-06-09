@@ -52,6 +52,9 @@ en:
       titre: Classes
     new:
       description: New class
+  errors:
+    messages:
+      not_saved: Not saved
   fermetures:
     index:
       dates: Dates
@@ -79,6 +82,7 @@ en:
       titre: New group
   home:
     index:
+      titre: Home
       absences: Absences
       ajouter: Add Attributions
       aujourdhui: Today
@@ -121,7 +125,7 @@ en:
       utilisateur: User
     new:
       titre: New Day
-  lieux:
+  lieus:
     edit:
       nom: Edition
     index:

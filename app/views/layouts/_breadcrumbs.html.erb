@@ -1,0 +1,22 @@
+<% unless controller_name=="home" %>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+
+            <li class="breadcrumb-item btn btn-primary btn-xs">
+                    <strong>
+                        <%= I18n.t(controller_name+'.index.titre').upcase %>
+                    </strong>
+            </li>
+
+                
+            <% unless action_name=="index" %>
+                <li class="breadcrumb-item" aria-current="page">
+                    <%= link_to action_name.capitalize, 
+                        root_path,
+                        class: "btn btn-info btn-xs" 
+                    %>
+                </li>
+            <% end %>
+        </ol>
+    </nav>
+<% end %>
