@@ -9,7 +9,7 @@
 <div class="row">
     <div class="col-xs-4">
         <h3>
-            <%= "#{I18n.t("home.index.welcome")} #{current_user if user_signed_in? }".upcase %>
+            <%= "#{I18n.t("home.index.welcome")} #{current_user.utilisateur.prenom if (user_signed_in? && current_user.utilisateur) }".upcase %>
         </h3>
         <br>
     </div>
