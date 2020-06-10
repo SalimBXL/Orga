@@ -129,6 +129,10 @@ en:
       utilisateur: User
     new:
       titre: New Day
+    today:
+      next: Next
+      previous: Previous
+      today: Today
   lieus:
     edit:
       nom: Edition

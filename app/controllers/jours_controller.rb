@@ -85,8 +85,12 @@ class JoursController < ApplicationController
     #   Week   #
     ############
     def specific_week
+        unless params[:date]
+            @date = Date.today
+        else
+            @date = params[:date].to_date
+        end
         @specific_day_works = Hash.new
-        @date = Date.today
         @jours = Hash.new
         utilisateurs_jours = Jour.where(numero_semaine: numeroSemainePourDate(@date)).order(:service_id).select([:utilisateur_id, :service_id]).distinct.includes(:utilisateur, :service)
         utilisateurs_jours.each do |utilisateur_jour|

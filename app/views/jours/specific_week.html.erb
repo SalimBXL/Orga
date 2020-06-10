@@ -5,6 +5,21 @@
     </span>
 </h1>
 
+<div class="btn-group">
+    <%= link_to '<span data-toggle="tooltip"  >
+                    <i class="material-icons">chevron_left</i></span>'.html_safe, 
+                    week_path(date: @date-1.week), 
+                    class: "btn btn-success btn-xs" %>
+    <%= link_to '<span data-toggle="tooltip" >
+                    <i class="material-icons">adjust</i></span>'.html_safe, 
+                    week_path(date: Date.today), 
+                    class: "btn btn-success btn-xs" %>
+    <%= link_to '<span data-toggle="tooltip" >
+                    <i class="material-icons">chevron_right</i></span>'.html_safe, 
+                    week_path(date: @date+1.week), 
+                    class: "btn btn-success btn-xs" %>
+</div>
+
 <% @jours.each do |service, contenu| %>
     <div class="row">
         <div class="well"><%= service.nom %></div>
