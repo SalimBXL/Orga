@@ -18,19 +18,6 @@
     <% end %>
     
 
-    <% if specific_day_jour.utilisateur.groupe.nom != last_groupe %>
-        <% last_groupe = specific_day_jour.utilisateur.groupe.nom %>
-        <div class="row">
-        <div class="col-sm-12">
-            <h4>
-            <span class="label label-success">
-                <%= specific_day_jour.utilisateur.groupe.nom %>
-            </span>
-            </h4>
-        </div>
-        </div>
-    <% end %>    
-
 
     <% if specific_day_jour.utilisateur.prenom_nom != last_utilisateur %>
         <% last_utilisateur = specific_day_jour.utilisateur.prenom_nom %>
@@ -38,6 +25,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <strong><i class="material-icons">account_circle</i>  <%= specific_day_jour.utilisateur.prenom_nom %></strong>
+                 (<%= specific_day_jour.utilisateur.phone %>)
             </div>
             <div class="panel-body">
                 <p>
@@ -60,11 +48,18 @@
                     &nbsp;&nbsp;&nbsp;
                     <% if specific_day_jour.am_pm %>
                         <% @specific_day_works[specific_day_jour].each do |wl| %>
-                            <span class="badge"><%= wl.work.code %></span>
+                            <% cl = "" %>
+                            <% if wl.work.code.downcase=="qc" && @date.cwday==5 %>
+                                <% cl = "keep_attention" %>
+                            <% end %>
+                            <span class="badge <%= cl %>"><%= wl.work.code %></span>
                         <% end %>
                     <% else %>
                         ---
                     <% end %>
+                </p>
+                <p>
+                    <%= specific_day_jour.note %>
                 </p>
             </div>
         </div>
