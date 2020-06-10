@@ -54,23 +54,19 @@
             <% 5.times do |i| %>
                 <% i+= 1 %>
 
-                <% if @off[service] %>
-                    <% if @off[service].include?(i)%>
-                        <div class="col-sm-2 ferie">
-                    <% end %>
-
-                <% else %>
-                    <% if @absences[utilisateur] %>
-                        <% if @absences[utilisateur].include?(i) %>
-                            <div class="col-sm-2 conge_ok">
-                        <% else %>
-                            <div class="col-sm-2">
-                        <% end %>
-                    <% else %>
-                        <div class="col-sm-2">
+                <% bg = "" %>
+                
+                <% if @absences[utilisateur] %>
+                    <% if @absences[utilisateur].include?(i) %>
+                        <% bg = "conge_ok" %>
                     <% end %>
                 <% end %>
+
                 
+                
+                
+                <div class="col-sm-2 <%= bg %>">
+                    <% bg = "" %>
                     <p>
                     AM : 
                     <% @jours[service][utilisateur][i][false].each do |item| %>

@@ -4,8 +4,8 @@ class Fermeture < ApplicationRecord
     validates :nom, :date, :date_fin, presence: true
 
     scope :at, -> (d) { where("date <= ? AND date_fin >= ?", d, d) }
-    scope :at_for_service, -> (d,u) { self.at(d).where(service: u) }
-    
+    scope :at_for_service, -> (d,u) { self.at(d).where(service_id: u) }
+    scope :at_for_service?, -> (d,u) { self.at_for_service(d, u).count>0 }
 
     after_find do |fermeture|
         if fermeture.date_fin.nil?

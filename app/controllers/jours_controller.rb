@@ -122,10 +122,9 @@ class JoursController < ApplicationController
                     @absences[utilisateur_jour.utilisateur] << i+1
                 end
 
-                off = Fermeture.at_for_service(@date.beginning_of_week+i.days, utilisateur_jour.service)
-                if off.count > 0
+                if Fermeture.at_for_service?(@date.beginning_of_week+i.days, utilisateur_jour.service)
                     @off[utilisateur_jour.service] ||= Array.new
-                    @off[utilisateur_jour.service] << i+1
+                    @off[utilisateur_jour.service] << i
                 end
             end
         end
