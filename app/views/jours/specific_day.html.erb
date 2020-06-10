@@ -52,7 +52,7 @@
             </div>
             <div class="panel-body">
                 <p>
-                    <span class="label label-primary">AM</span>
+                    AM : 
                     &nbsp;&nbsp;&nbsp;
                     <% unless specific_day_jour.am_pm %>
                         <% @specific_day_works[specific_day_jour].each do |wl| %>
@@ -60,7 +60,7 @@
                             <% if wl.work.code.downcase=="qc" && @date.cwday==5 %>
                                 <% cl = "keep_attention" %>
                             <% end %>
-                            <span class="badge <%= cl %>"
+                            <span class="label label-primary <%= cl %>"
                                 data-toggle="tooltip" 
                                 title='<%= "#{wl.work.nom}" %>'
                             >
@@ -71,7 +71,7 @@
                         ---
                     <% end %>
                     <br>
-                    <span class="label label-info">PM</span>
+                    PM : 
                     &nbsp;&nbsp;&nbsp;
                     <% if specific_day_jour.am_pm %>
                         <% @specific_day_works[specific_day_jour].each do |wl| %>
@@ -79,7 +79,7 @@
                             <% if wl.work.code.downcase=="qc" && @date.cwday==5 %>
                                 <% cl = "keep_attention" %>
                             <% end %>
-                            <span class="badge <%= cl %>"
+                            <span class="label label-info <%= cl %>"
                                 data-toggle="tooltip" 
                                 title='<%= "#{wl.work.nom}" %>'
                             ><%= wl.work.code %></span>

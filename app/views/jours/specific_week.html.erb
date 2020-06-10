@@ -44,22 +44,26 @@
                 <% i+= 1 %>
                 <div class="col-sm-2">
                     <p>
-                    <span class="label label-primary">AM</span>
+                    AM : 
                     <% @jours[service][utilisateur][i][false].each do |item| %>
                         <% @specific_day_works[item].each do |wl| %>
                             <% cl = "" %>
                             <% if wl.work.code.downcase == "qc" && i==5 %>
                                 <% cl = "keep_attention" %>
                             <% end %>
-                            <span class="badge <%= cl %>"><%= wl.work.code %></span>
+                            <span class="label label-primary <%= cl %>"><%= wl.work.code %></span>
                         <% end %>
                     <% end %>
                     </p>
                     <p>
-                    <span class="label label-info">PM</span>
+                    PM : 
                     <% @jours[service][utilisateur][i][true].each do |item| %>
                         <% @specific_day_works[item].each do |wl| %>
-                            <span class="badge"><%= wl.work.code %></span>
+                            <% cl = "" %>
+                            <% if wl.work.code.downcase == "qc" && i==5 %>
+                                <% cl = "keep_attention" %>
+                            <% end %>
+                            <span class="label label-info <%= cl %>"><%= wl.work.code %></span>
                         <% end %>
                     <% end %>
                     </p>
