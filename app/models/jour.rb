@@ -28,7 +28,7 @@ class Jour < ApplicationRecord
         if date.nil?
             nil
         else
-            "#{date.year}-W#{date.cweek<10 ? "0" : ""}#{date.cweek}"
+            self.numero_semaine = "#{date.year}-W#{date.cweek<10 ? "0" : ""}#{date.cweek}"
         end
     end
 

@@ -16,6 +16,10 @@ class ApplicationController < ActionController::Base
     @semaines = Semaine.where(numero_semaine: numero_semaine)
   end
 
+  def numeroSemainePourDate(date)
+    "#{date.year}-W#{date.cweek<10 ? "0" : ""}#{date.cweek}" 
+  end
+
   def format_numero_semaine(annee, numero_semaine)
     numero_semaine<10 ? "#{annee}-W0#{numero_semaine}" : "#{annee}-W#{numero_semaine}"
   end

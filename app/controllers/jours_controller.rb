@@ -29,6 +29,7 @@ class JoursController < ApplicationController
     ##############
     def create
         @jour = Jour.create(jour_params)
+        
         if @jour.save
             flash[:notice] = "Jour créé avec succès"
             redirect_to jours_path
@@ -64,7 +65,7 @@ class JoursController < ApplicationController
 
 
     #############
-    #   TODAY    #
+    #   TODAY   #
     #############
     def specific_day
         @specific_day_works = Hash.new
@@ -78,9 +79,33 @@ class JoursController < ApplicationController
         @specific_day_jours.each do |jour|
             @specific_day_works[jour] = WorkingList.for(jour).includes(:work)
         end
-        
+    end
 
+    ############
+    #   Week   #
+    ############
+    def specific_week
+        @specific_day_works = Hash.new
+        @date = Date.today
+        @jours = Hash.new
+        utilisateurs_jours = Jour.where(numero_semaine: numeroSemainePourDate(@date)).order(:service_id).select([:utilisateur_id, :service_id]).distinct.includes(:utilisateur, :service)
+        utilisateurs_jours.each do |utilisateur_jour|
+            @jours[utilisateur_jour.service] ||= Hash.new
+            @jours[utilisateur_jour.service][utilisateur_jour.utilisateur] ||= Hash.new
+            5.times do |i|
+                i += 1
+                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][i] ||= Hash.new
+                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][i][false] = Jour.where(numero_semaine: numeroSemainePourDate(@date), numero_jour: i, utilisateur_id: utilisateur_jour.utilisateur_id, service_id: utilisateur_jour.service, am_pm: false).order(:service_id, :utilisateur_id, :numero_jour, :am_pm)
+                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][i][true] = Jour.where(numero_semaine: numeroSemainePourDate(@date), numero_jour: i, utilisateur_id: utilisateur_jour.utilisateur_id, service_id: utilisateur_jour.service, am_pm: true).order(:service_id, :utilisateur_id, :numero_jour, :am_pm)
 
+                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][i][false].each do |jour|
+                    @specific_day_works[jour] = WorkingList.for(jour).includes(:work)
+                end
+                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][i][true].each do |jour|
+                    @specific_day_works[jour] = WorkingList.for(jour).includes(:work)
+                end
+            end
+        end
     end
 
 

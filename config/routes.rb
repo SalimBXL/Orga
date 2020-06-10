@@ -100,6 +100,7 @@ Rails.application.routes.draw do
   ############
   resources :jours, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
   get "today", to: "jours#specific_day"
+  get "week", to: "jours#specific_week"
 
 
   ###################
