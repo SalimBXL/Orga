@@ -67,7 +67,13 @@ Utilisateur.create(
     email: "john.vannaemen@erasme.ulb.ac.be",
     groupe: Groupe.where(nom: "Responsable").first,
     service: Service.where(nom: "Cyclotron").first
+    admin: true
 )
+User.create(
+    email: Utilisateur.last.email,
+    password: "password"
+)
+
 Utilisateur.create(
     prenom: "Simon",
     nom: "Lacroix",
@@ -75,6 +81,11 @@ Utilisateur.create(
     groupe: Groupe.where(nom: "Responsable").first,
     service: Service.where(nom: "Cyclotron").first
 )
+User.create(
+    email: Utilisateur.last.email,
+    password: "password"
+)
+
 Utilisateur.create(
     prenom: "Michel",
     nom: "Monclus",
@@ -82,6 +93,11 @@ Utilisateur.create(
     groupe: Groupe.where(nom: "Responsable").first,
     service: Service.where(nom: "Cyclotron").first
 )
+User.create(
+    email: Utilisateur.last.email,
+    password: "password"
+)
+
 Utilisateur.create(
     prenom: "Etienne",
     nom: "Luciani",
@@ -89,6 +105,11 @@ Utilisateur.create(
     groupe: Groupe.where(nom: "Operateur").first,
     service: Service.where(nom: "Cyclotron").first
 )
+User.create(
+    email: Utilisateur.last.email,
+    password: "password"
+)
+
 Utilisateur.create(
     prenom: "Kévin",
     nom: "Thibaut",
@@ -96,6 +117,11 @@ Utilisateur.create(
     groupe: Groupe.where(nom: "Operateur").first,
     service: Service.where(nom: "Cyclotron").first
 )
+User.create(
+    email: Utilisateur.last.email,
+    password: "password"
+)
+
 Utilisateur.create(
     prenom: "Khalid",
     nom: "Milloudi",
@@ -103,13 +129,24 @@ Utilisateur.create(
     groupe: Groupe.where(nom: "Operateur").first,
     service: Service.where(nom: "Cyclotron").first
 )
+User.create(
+    email: Utilisateur.last.email,
+    password: "password"
+)
+
 Utilisateur.create(
     prenom: "Salim",
     nom: "Joly",
     email: "anthony.joly@erasme.ulb.ac.be",
     groupe: Groupe.where(nom: "I.T.").first,
     service: Service.where(nom: "Cyclotron").first
+    admin: true
 )
+User.create(
+    email: Utilisateur.last.email,
+    password: "password"
+)
+
 Utilisateur.create(
     prenom: "Nicola",
     nom: "Trotta",
@@ -117,12 +154,21 @@ Utilisateur.create(
     groupe: Groupe.where(nom: "I.T.").first,
     service: Service.where(nom: "Cyclotron").first
 )
+User.create(
+    email: Utilisateur.last.email,
+    password: "password"
+)
+
 Utilisateur.create(
     prenom: "Eric",
     nom: "Mulleneers",
     email: "eric.mulleneers@erasme.ulb.ac.be",
     groupe: Groupe.where(nom: "Operateur").first,
     service: Service.where(nom: "Cyclotron").first
+)
+User.create(
+    email: Utilisateur.last.email,
+    password: "password"
 )
 
 
