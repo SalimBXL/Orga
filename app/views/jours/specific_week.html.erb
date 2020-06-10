@@ -22,14 +22,14 @@
 
 <% @jours.each do |service, contenu| %>
     <div class="row">
-        <div class="well"><%= service.nom %></div>
+        <div class="well"><H4><%= service.nom %></H4></div>
     </div>
     <div class="row">
         <div class="col-sm-2">
         </div>
         <% 5.times do |i| %>
             <% i+= 1 %>
-            <div class="col-sm-2">
+            <div class="col-sm-2 label label-default">
                 <%= nom_jour(i) %>
             </div>
         <% end %>
@@ -38,11 +38,23 @@
     <% contenu.each do |utilisateur, jours| %>
         <div class="row">
             <div class="col-sm-2">
-                <%= utilisateur.prenom_nom %>
+                <strong><%= utilisateur.prenom_nom %></strong>
             </div>
             <% 5.times do |i| %>
                 <% i+= 1 %>
-                <div class="col-sm-2">
+
+                <% bg = "" %>
+                <% if @absences[utilisateur] %>
+                    <% if @absences[utilisateur].include?(i) %>
+                        <div class="col-sm-2 conge_ok">
+                    <% else %>
+                        <div class="col-sm-2">
+                    <% end %>
+                <% else %>
+                    <div class="col-sm-2">
+                <% end %>
+                
+                    <% bg = "" %>
                     <p>
                     AM : 
                     <% @jours[service][utilisateur][i][false].each do |item| %>

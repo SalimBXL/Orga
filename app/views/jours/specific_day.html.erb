@@ -45,7 +45,14 @@
     <% if specific_day_jour.utilisateur.prenom_nom != last_utilisateur %>
         <% last_utilisateur = specific_day_jour.utilisateur.prenom_nom %>
         <div class="col-sm-4">
-        <div class="panel panel-default">
+
+            <% if @absence[specific_day_jour.utilisateur] %>
+                <div class="panel panel-success">
+            <% else %>
+                <div class="panel panel-default">
+            <% end %>
+
+
             <div class="panel-heading">
                 <strong><i class="material-icons">account_circle</i>  <%= specific_day_jour.utilisateur.prenom_nom %></strong>
                  (<%= specific_day_jour.utilisateur.phone %>)

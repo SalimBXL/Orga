@@ -4,6 +4,11 @@ class Absence < ApplicationRecord
     before_validation :check_date_fin
     validates :date, presence: true
 
+    scope :at, -> (d) { where("date <= ? AND date_fin >= ?", d, d) }
+    scope :today, -> { self.at(Date.today) }
+    scope :at_for_user, -> (d,u) { self.at(d).where(utilisateur: u) }
+    scope :today_for_user, -> (u) { self.at_for_user(Date.today, u) }
+
     def check_date_fin
         if date
             if date_fin.nil? || date_fin.blank? 

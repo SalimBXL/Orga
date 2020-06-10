@@ -61,115 +61,125 @@ Groupe.create(
 #
 # UTILISATEURS
 #
+User.create(
+    email: "john.vannaemen@erasme.ulb.ac.be",
+    password: "password"
+)
 Utilisateur.create(
     prenom: "John",
     nom: "Van Naemen",
     email: "john.vannaemen@erasme.ulb.ac.be",
     groupe: Groupe.where(nom: "Responsable").first,
-    service: Service.where(nom: "Cyclotron").first
+    service: Service.where(nom: "Cyclotron").first,
+    user: User.where(email: "john.vannaemen@erasme.ulb.ac.be").first,
     admin: true
 )
+
 User.create(
-    email: Utilisateur.last.email,
+    email: "simon.lacroix@erasme.ulb.ac.be",
     password: "password"
 )
-
 Utilisateur.create(
     prenom: "Simon",
     nom: "Lacroix",
     email: "simon.lacroix@erasme.ulb.ac.be",
     groupe: Groupe.where(nom: "Responsable").first,
-    service: Service.where(nom: "Cyclotron").first
-)
-User.create(
-    email: Utilisateur.last.email,
-    password: "password"
+    service: Service.where(nom: "Cyclotron").first,
+    user: User.where(email: "simon.lacroix@erasme.ulb.ac.be").first
 )
 
+User.create(
+    email: "michel.monclus@erasme.ulb.ac.be",
+    password: "password"
+)
 Utilisateur.create(
     prenom: "Michel",
     nom: "Monclus",
     email: "michel.monclus@erasme.ulb.ac.be",
     groupe: Groupe.where(nom: "Responsable").first,
-    service: Service.where(nom: "Cyclotron").first
-)
-User.create(
-    email: Utilisateur.last.email,
-    password: "password"
+    service: Service.where(nom: "Cyclotron").first,
+    user: User.where(email: "michel.monclus@erasme.ulb.ac.be").first
 )
 
+User.create(
+    email: "etienne.luciani@erasme.ulb.ac.be",
+    password: "password"
+)
 Utilisateur.create(
     prenom: "Etienne",
     nom: "Luciani",
     email: "etienne.luciani@erasme.ulb.ac.be",
     groupe: Groupe.where(nom: "Operateur").first,
-    service: Service.where(nom: "Cyclotron").first
-)
-User.create(
-    email: Utilisateur.last.email,
-    password: "password"
+    service: Service.where(nom: "Cyclotron").first,
+    user: User.where(email: "etienne.luciani@erasme.ulb.ac.be").first
 )
 
+User.create(
+    email: "kevin.thibaut@erasme.ulb.ac.be",
+    password: "password"
+)
 Utilisateur.create(
     prenom: "Kévin",
     nom: "Thibaut",
     email: "kevin.thibaut@erasme.ulb.ac.be",
     groupe: Groupe.where(nom: "Operateur").first,
-    service: Service.where(nom: "Cyclotron").first
-)
-User.create(
-    email: Utilisateur.last.email,
-    password: "password"
+    service: Service.where(nom: "Cyclotron").first,
+    user: User.where(email: "kevin.thibaut@erasme.ulb.ac.be").first
 )
 
+User.create(
+    email: "khalid.milloudi@erasme.ulb.ac.be",
+    password: "password"
+)
 Utilisateur.create(
     prenom: "Khalid",
     nom: "Milloudi",
     email: "khalid.milloudi@erasme.ulb.ac.be",
     groupe: Groupe.where(nom: "Operateur").first,
-    service: Service.where(nom: "Cyclotron").first
-)
-User.create(
-    email: Utilisateur.last.email,
-    password: "password"
+    service: Service.where(nom: "Cyclotron").first,
+    user: User.where(email: "khalid.milloudi@erasme.ulb.ac.be").first
 )
 
+User.create(
+    email: "anthony.joly@erasme.ulb.ac.be",
+    password: "password"
+)
 Utilisateur.create(
     prenom: "Salim",
     nom: "Joly",
     email: "anthony.joly@erasme.ulb.ac.be",
     groupe: Groupe.where(nom: "I.T.").first,
-    service: Service.where(nom: "Cyclotron").first
+    service: Service.where(nom: "Cyclotron").first,
+    user: User.where(email: "anthony.joly@erasme.ulb.ac.be").first,
     admin: true
 )
+
 User.create(
-    email: Utilisateur.last.email,
+    email: "nicola.trotta@erasme.ulb.ac.be",
     password: "password"
 )
-
 Utilisateur.create(
     prenom: "Nicola",
     nom: "Trotta",
     email: "nicola.trotta@erasme.ulb.ac.be",
     groupe: Groupe.where(nom: "I.T.").first,
-    service: Service.where(nom: "Cyclotron").first
-)
-User.create(
-    email: Utilisateur.last.email,
-    password: "password"
+    service: Service.where(nom: "Cyclotron").first,
+    user: User.where(email: "nicola.trotta@erasme.ulb.ac.be").first
 )
 
+User.create(
+    email: "eric.mulleneers@erasme.ulb.ac.be",
+    password: "password"
+)
 Utilisateur.create(
     prenom: "Eric",
     nom: "Mulleneers",
     email: "eric.mulleneers@erasme.ulb.ac.be",
     groupe: Groupe.where(nom: "Operateur").first,
-    service: Service.where(nom: "Cyclotron").first
+    service: Service.where(nom: "Cyclotron").first,
+    user: User.where(email: "eric.mulleneers@erasme.ulb.ac.be").first
 )
-User.create(
-    email: Utilisateur.last.email,
-    password: "password"
-)
+
 
 
 #

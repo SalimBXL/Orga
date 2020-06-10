@@ -69,6 +69,7 @@ class JoursController < ApplicationController
     #############
     def specific_day
         @specific_day_works = Hash.new
+        @absence = Hash.new
         unless params[:date]
             @date = Date.today
             @specific_day_jours = Jour.today.select([:id, :utilisateur_id, :service_id, :am_pm, :note]).includes(utilisateur: :groupe)
@@ -78,6 +79,10 @@ class JoursController < ApplicationController
         end
         @specific_day_jours.each do |jour|
             @specific_day_works[jour] = WorkingList.for(jour).includes(:work)
+            @absence[jour.utilisateur] ||= false
+            if Absence.today_for_user(jour.utilisateur).count > 0
+                @absence[jour.utilisateur] = true
+            end
         end
     end
 
@@ -90,6 +95,7 @@ class JoursController < ApplicationController
         else
             @date = params[:date].to_date
         end
+        @absences = Hash.new
         @specific_day_works = Hash.new
         @jours = Hash.new
         utilisateurs_jours = Jour.where(numero_semaine: numeroSemainePourDate(@date)).order(:service_id).select([:utilisateur_id, :service_id]).distinct.includes(:utilisateur, :service)
@@ -108,8 +114,18 @@ class JoursController < ApplicationController
                 @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][i][true].each do |jour|
                     @specific_day_works[jour] = WorkingList.for(jour).includes(:work)
                 end
+
+                abs = Absence.at_for_user(@date.beginning_of_week+i.days, utilisateur_jour.utilisateur)
+                if abs.count > 0
+                    @absences[utilisateur_jour.utilisateur] ||= Array.new
+                    @absences[utilisateur_jour.utilisateur] << i+1
+                end
             end
         end
+
+        
+             #absences = Absence.where("date <= ? AND date_fin >= ?", Date.today.beginning_of_week+5.day, Date.today.beginning_of_week).where(utilisateur: u.utilisateur)
+        
     end
 
 
