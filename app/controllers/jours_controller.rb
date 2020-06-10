@@ -96,9 +96,10 @@ class JoursController < ApplicationController
             @date = params[:date].to_date
         end
         @absences = Hash.new
+        @off = Hash.new
         @specific_day_works = Hash.new
         @jours = Hash.new
-        utilisateurs_jours = Jour.where(numero_semaine: numeroSemainePourDate(@date)).order(:service_id).select([:utilisateur_id, :service_id]).distinct.includes(:utilisateur, :service)
+        utilisateurs_jours = Jour.where(numero_semaine: numeroSemainePourDate(@date)).order(:service_id, :utilisateur_id).select([:utilisateur_id, :service_id]).distinct.includes(:utilisateur, :service)
         utilisateurs_jours.each do |utilisateur_jour|
             @jours[utilisateur_jour.service] ||= Hash.new
             @jours[utilisateur_jour.service][utilisateur_jour.utilisateur] ||= Hash.new
@@ -120,12 +121,14 @@ class JoursController < ApplicationController
                     @absences[utilisateur_jour.utilisateur] ||= Array.new
                     @absences[utilisateur_jour.utilisateur] << i+1
                 end
+
+                off = Fermeture.at_for_service(@date.beginning_of_week+i.days, utilisateur_jour.service)
+                if off.count > 0
+                    @off[utilisateur_jour.service] ||= Array.new
+                    @off[utilisateur_jour.service] << i+1
+                end
             end
         end
-
-        
-             #absences = Absence.where("date <= ? AND date_fin >= ?", Date.today.beginning_of_week+5.day, Date.today.beginning_of_week).where(utilisateur: u.utilisateur)
-        
     end
 
 

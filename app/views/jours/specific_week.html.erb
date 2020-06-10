@@ -5,20 +5,31 @@
     </span>
 </h1>
 
-<div class="btn-group">
-    <%= link_to '<span data-toggle="tooltip"  >
-                    <i class="material-icons">chevron_left</i></span>'.html_safe, 
-                    week_path(date: @date-1.week), 
-                    class: "btn btn-success btn-xs" %>
-    <%= link_to '<span data-toggle="tooltip" >
-                    <i class="material-icons">adjust</i></span>'.html_safe, 
-                    week_path(date: Date.today), 
-                    class: "btn btn-success btn-xs" %>
-    <%= link_to '<span data-toggle="tooltip" >
-                    <i class="material-icons">chevron_right</i></span>'.html_safe, 
-                    week_path(date: @date+1.week), 
-                    class: "btn btn-success btn-xs" %>
+<div class="row">
+    <div class="col-sm-2">
+        <div class="badge"><%= I18n.localize @date.beginning_of_week, format: :long %> -- <%= I18n.localize @date.beginning_of_week+5.days, format: :long %></div>
+    </div>
+    <div class="col-sm-8"></div>
+    <div class="col-sm-2">
+        <div class="btn-group">
+            <%= link_to '<span data-toggle="tooltip"  >
+                            <i class="material-icons">chevron_left</i></span>'.html_safe, 
+                            week_path(date: @date-1.week), 
+                            class: "btn btn-success btn-xs" %>
+            <%= link_to '<span data-toggle="tooltip" >
+                            <i class="material-icons">adjust</i></span>'.html_safe, 
+                            week_path(date: Date.today), 
+                            class: "btn btn-success btn-xs" %>
+            <%= link_to '<span data-toggle="tooltip" >
+                            <i class="material-icons">chevron_right</i></span>'.html_safe, 
+                            week_path(date: @date+1.week), 
+                            class: "btn btn-success btn-xs" %>
+        </div>
+    </div>
 </div>
+<br>
+
+
 
 <% @jours.each do |service, contenu| %>
     <div class="row">
@@ -43,18 +54,23 @@
             <% 5.times do |i| %>
                 <% i+= 1 %>
 
-                <% bg = "" %>
-                <% if @absences[utilisateur] %>
-                    <% if @absences[utilisateur].include?(i) %>
-                        <div class="col-sm-2 conge_ok">
+                <% if @off[service] %>
+                    <% if @off[service].include?(i)%>
+                        <div class="col-sm-2 ferie">
+                    <% end %>
+
+                <% else %>
+                    <% if @absences[utilisateur] %>
+                        <% if @absences[utilisateur].include?(i) %>
+                            <div class="col-sm-2 conge_ok">
+                        <% else %>
+                            <div class="col-sm-2">
+                        <% end %>
                     <% else %>
                         <div class="col-sm-2">
                     <% end %>
-                <% else %>
-                    <div class="col-sm-2">
                 <% end %>
                 
-                    <% bg = "" %>
                     <p>
                     AM : 
                     <% @jours[service][utilisateur][i][false].each do |item| %>
