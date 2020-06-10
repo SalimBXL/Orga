@@ -90,6 +90,7 @@ en:
       absences: Absences
       ajouter: Add Attributions
       aujourdhui: Today
+      ce_mois: This month
       cette_semaine: This week
       classes: Classes
       evenements: Events
@@ -106,6 +107,7 @@ en:
       works: Works
     navbar:
       aujourdhui: Today
+      ce_mois: This month
       cette_semaine: This Week
       home: Home
       login: Login

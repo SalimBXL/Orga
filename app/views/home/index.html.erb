@@ -30,6 +30,7 @@
                     <h4><%= I18n.t("home.index.aujourdhui") %></h4>
                 </p>
             </div>
+
             <div class="col-xs-2">
                 <p>
                     <!-- THIS WEEK -->
@@ -40,6 +41,18 @@
                     <h4><%= I18n.t("home.index.cette_semaine") %></h4>
                 </p>
             </div>
+
+            <div class="col-xs-2">
+                <p>
+                    <!-- THIS MONTH -->
+                    <%= link_to '<i class="material-icons">calendar_today</i>'.html_safe, 
+                        month_path,
+                        class: "btn btn-success btn-xs" 
+                    %>
+                    <h4><%= I18n.t("home.index.ce_mois") %></h4>
+                </p>
+            </div>
+
         </div>
     <% end %>
 

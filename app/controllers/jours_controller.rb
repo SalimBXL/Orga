@@ -87,6 +87,31 @@ class JoursController < ApplicationController
     end
 
     ############
+    #   Month   #
+    ############
+    def specific_month
+        unless params[:date]
+            @date = Date.today
+        else
+            @date = params[:date].to_date
+        end
+        @jours = Hash.new
+        @works = Hash.new
+        utilisateurs = Utilisateur.order(:service_id, :groupe_id, :prenom, :nom)
+        utilisateurs.each do |utilisateur|            
+            jours = Jour.of(utilisateur).where("date >= ? AND date <= ?", @date.beginning_of_month, @date.end_of_month).order(:service_id, :utilisateur_id, :date, :am_pm).includes(:utilisateur, :service)
+            jours.each do |jour|
+                @jours[utilisateur] ||= Hash.new
+                @jours[utilisateur][jour.date.day] = jour
+                @works[jour] ||= Hash.new
+                @works[jour][jour.am_pm] = WorkingList.for(jour).includes(:work)
+            end
+        end
+
+
+    end
+
+    ############
     #   Week   #
     ############
     def specific_week
