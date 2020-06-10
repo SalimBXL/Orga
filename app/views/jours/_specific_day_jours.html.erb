@@ -1,42 +1,75 @@
 
-<table class="table table-striped">
-    <tr>
-        <th><%= I18n.t("jours.index.service") %></th>
-        <th><%= I18n.t("jours.index.utilisateur") %></th>
-        <th><%= I18n.t("jours.index.am_pm") %></th>
-        <th></th>
-    </tr>
-    
+<% last_service = nil %>
+<% last_groupe = nil %>
+<% last_utilisateur = nil %>
 
 <% @specific_day_jours.each do |specific_day_jour| %>
-    <tr id="jour_<%= specific_day_jour.id %>">
-        <td><%= specific_day_jour.service.nom %></td>
-        <td><%= specific_day_jour.utilisateur.prenom_nom %></td>
-        <td><%= am_pm(specific_day_jour.am_pm) %></td>
-        <td>
-            <%= link_to '<span data-toggle="tooltip" >
-                <i class="material-icons">edit</i></span>'.html_safe, 
-                edit_jour_path(specific_day_jour),
-                class: "btn btn-warning btn-xs" 
-            %>
 
-            <%= link_to '<span data-toggle="tooltip" >
-                <i class="material-icons">close</i>'.html_safe, 
-                jour_path(specific_day_jour),
-                method: :delete,
-                remote: true,
-                data: { confirm: "Delete #{specific_day_jour.date}  ?" },
-                class: "btn btn-danger btn-xs" 
-            %>
+    <% if specific_day_jour.service.nom != last_service %>
+        <% last_service = specific_day_jour.service.nom %>
+        <div class="row">
+        <div class="col-sm-12">
+            <h3 class="well">
+                <i class="material-icons">business</i>
+                <%= specific_day_jour.service.nom.upcase %></span>
+            </h3>
+            </div>
+        </div>
+    <% end %>
+    
 
-            &nbsp;
+    <% if specific_day_jour.utilisateur.groupe.nom != last_groupe %>
+        <% last_groupe = specific_day_jour.utilisateur.groupe.nom %>
+        <div class="row">
+        <div class="col-sm-12">
+            <h4>
+            <span class="label label-success">
+                <%= specific_day_jour.utilisateur.groupe.nom %>
+            </span>
+            </h4>
+        </div>
+        </div>
+    <% end %>    
 
-            
-        </td>
-    </tr>
+
+    <% if specific_day_jour.utilisateur.prenom_nom != last_utilisateur %>
+        <% last_utilisateur = specific_day_jour.utilisateur.prenom_nom %>
+        <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong><i class="material-icons">account_circle</i>  <%= specific_day_jour.utilisateur.prenom_nom %></strong>
+            </div>
+            <div class="panel-body">
+                <p>
+                    <span class="label label-primary">AM</span>
+                    &nbsp;&nbsp;&nbsp;
+                    <% unless specific_day_jour.am_pm %>
+                        <% @specific_day_works[specific_day_jour].each do |wl| %>
+                            <span class="badge" 
+                                data-toggle="tooltip" 
+                                title='<%= "#{wl.work.nom}" %>'
+                            >
+                                <%= wl.work.code %>
+                            </span>
+                        <% end %>
+                    <% else %>
+                        ---
+                    <% end %>
+                    <br>
+                    <span class="label label-info">PM</span>
+                    &nbsp;&nbsp;&nbsp;
+                    <% if specific_day_jour.am_pm %>
+                        <% @specific_day_works[specific_day_jour].each do |wl| %>
+                            <span class="badge"><%= wl.work.code %></span>
+                        <% end %>
+                    <% else %>
+                        ---
+                    <% end %>
+                </p>
+            </div>
+        </div>
+        </div>
+    <% end %>
+
 <% end %>
 
-
-
-
-</table>

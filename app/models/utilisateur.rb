@@ -8,6 +8,8 @@ class Utilisateur < ApplicationRecord
     validates_associated :jours
     validates :nom, :prenom, :email, presence: true
     validates :email, uniqueness: true
+
+    
     
     
     def prenom_nom

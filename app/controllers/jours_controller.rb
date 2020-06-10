@@ -68,8 +68,11 @@ class JoursController < ApplicationController
     #############
     def specific_day
         @date = Date.today
-        @specific_day_jours = Jour.today
-
+        @specific_day_works = Hash.new
+        @specific_day_jours = Jour.today.select([:id, :utilisateur_id, :service_id, :am_pm]).includes(utilisateur: :groupe)
+        @specific_day_jours.each do |jour|
+            @specific_day_works[jour] = WorkingList.for(jour).includes(:work)
+        end
         
 
 
