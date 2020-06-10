@@ -5,6 +5,7 @@
     <td><%= fermeture.service.nom %></td>
     <td><%= fermeture.note %></td>
     <td>
+    <% if user_signed_in? && current_user.admin? %>
         <%= link_to '<span data-toggle="tooltip" >
             <i class="material-icons">edit</i></span>'.html_safe, 
             edit_fermeture_path(fermeture),
@@ -19,5 +20,6 @@
             data: { confirm: "Delete #{fermeture.nom} (#{fermeture.date})  ?" },
             class: "btn btn-danger btn-xs" 
         %>
+    <% end %>
     </td>
 </tr>

@@ -73,7 +73,7 @@ class UtilisateursController < ApplicationController
     private 
 
     def utilisateur_params
-        params.require(:utilisateur).permit(:prenom, :nom, :email, :phone, :gsm, :groupe_id, :service_id)
+        params.require(:utilisateur).permit(:prenom, :nom, :email, :phone, :gsm, :groupe_id, :service_id, :admin)
     end
 
     def find_utilisateur

@@ -13,16 +13,20 @@
 
 <div class="container">
     <p>
+        <% if user_signed_in? && current_user.admin? %>
         <%= link_to '<i class="material-icons">add_location</i> '.html_safe, 
             new_lieu_path,
             class: "btn btn-success btn-xs" %>
+        <% end %>
     </p>
     <div class="row" id="lieus">
         <%= render 'lieus' %>
     </div>
     <p>
+        <% if user_signed_in? && current_user.admin? %>
         <%= link_to '<i class="material-icons">add_location</i> '.html_safe, 
             new_lieu_path,
             class: "btn btn-success btn-xs" %>
+        <% end %>
     </p>
 </div>

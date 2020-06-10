@@ -11,6 +11,7 @@
             </p>
         </div>
         <div class="panel-footer">
+        <% if user_signed_in? && current_user.admin? %>
             <div class="btn-group">
                 <%= link_to '<span data-toggle="tooltip" >
                     <i class="material-icons">edit</i></span>'.html_safe, 
@@ -23,12 +24,10 @@
                     remote: true,
                     data: { confirm: "Delete #{lieu.nom} ?" },
                     class: "btn btn-danger btn-xs" %>
-                <%= link_to '<span data-toggle="tooltip" >
-                    <i class="material-icons">business</i>'.html_safe, 
-                    "/services_lieu/#{lieu.id}",
-                    class: "btn btn-info btn-xs" %>
+                
                 </span>
             </div>
+            <% end %>
         </div>
     </div>
 </div>

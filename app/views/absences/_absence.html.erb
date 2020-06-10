@@ -12,6 +12,7 @@
     <td><%= absence.type_absence.nom %></td>
     <td><%= absence.remarque %></td>
     <td>
+    <% if user_signed_in? && current_user.admin? %>
         <%= link_to '<span data-toggle="tooltip">
                     <i class="material-icons">edit</i></span>'.html_safe, 
                     edit_absence_path(absence),
@@ -25,7 +26,7 @@
                     data: { confirm: "Delete #{absence.date} - #{absence.utilisateur.prenom_nom} - #{absence.type_absence.code} ?" },
                     class: "btn btn-danger btn-xs" %>
         
-        
+    <% end %>
     </td>
     <td>
         <span class="badge"><em><%= absence.updated_at %></em></span>

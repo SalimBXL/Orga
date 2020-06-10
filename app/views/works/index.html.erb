@@ -6,9 +6,11 @@
 </h1>
 
 <p>
+<% if user_signed_in? && current_user.admin? %>
     <%= link_to '<i class="material-icons">add</i> '.html_safe, 
         new_work_path,
         class: "btn btn-success btn-xs" %>
+        <% end %>
 </p>
 
 <div id="works">
@@ -16,7 +18,9 @@
 </div>
 
 <p>
+<% if user_signed_in? && current_user.admin? %>
     <%= link_to '<i class="material-icons">add</i> '.html_safe, 
         new_work_path,
         class: "btn btn-success btn-xs" %>
+        <% end %>
 </p>

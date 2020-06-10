@@ -2,6 +2,7 @@
     <td><%= classe.nom %></td>
     <td><%= classe.description %></td>
     <td>
+    <% if user_signed_in? && current_user.admin? %>
         <%= link_to '<span data-toggle="tooltip" >
             <i class="material-icons">edit</i></span>'.html_safe, 
             edit_class_path(classe),
@@ -16,16 +17,6 @@
             data: { confirm: "Delete #{classe.nom}  ?" },
             class: "btn btn-danger btn-xs" 
         %>
-
-        &nbsp;
-
-        <%= link_to '<span data-toggle="tooltip" >
-            <i class="material-icons">build</i></span>'.html_safe, 
-            "/works_classe/#{classe.id}",
-            class: "btn btn-info btn-xs" 
-        %>
-
-
-
+    <% end %>
     </td>
 </tr>

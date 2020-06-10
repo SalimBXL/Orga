@@ -4,6 +4,7 @@
     <td><%= utilisateur.service.nom %></td>
     <td><%= utilisateur.groupe.nom %></td>
     <td>
+    <% if user_signed_in? && current_user.admin? %>
         <%= link_to '<span data-toggle="tooltip" >
             <i class="material-icons">edit</i></span>'.html_safe, 
             edit_utilisateur_path(utilisateur),
@@ -22,9 +23,7 @@
         <%= link_to '<span data-toggle="tooltip" >
             <i class="material-icons">portrait</i></span>'.html_safe, 
             utilisateur_path(utilisateur),
-            class: "btn btn-info btn-xs" %>
-
-        
-        
+            class: "btn btn-info btn-xs" %>        
+        <% end %>
     </td>
 </tr>

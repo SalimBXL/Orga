@@ -7,15 +7,19 @@
     </h1>
 </div>
 <p>
+    <% if user_signed_in? && current_user.admin? %>
     <%= link_to '<i class="material-icons">add</i> '.html_safe, 
         new_absence_path,
         class: "btn btn-success btn-xs" %>
+    <% end %>
 </p>
 <div id="absences">
     <%= render 'absences' %>
 </div>
 <p>
+    <% if user_signed_in? && current_user.admin? %>
     <%= link_to '<i class="material-icons">add</i> '.html_safe, 
         new_absence_path,
         class: "btn btn-success btn-xs" %>
+    <% end %>
 </p>

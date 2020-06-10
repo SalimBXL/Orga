@@ -7,7 +7,16 @@ class User < ApplicationRecord
 
   #before_validation :set_utilisateur, if: :should_set_utilisateur?
 
-  
+  def set_as_admin
+    self.admin = true
+  end
+
+  def admin?
+    if self.admin.nil?
+      self.admin = self.utilisateur.admin
+    end
+    self.admin
+  end
 
   private
 

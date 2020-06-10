@@ -2,6 +2,7 @@
     <td><%= groupe.nom %></td>
     <td><%= groupe.description %></td>
     <td>
+    <% if user_signed_in? && current_user.admin? %>
         <%= link_to '<span data-toggle="tooltip" >
             <i class="material-icons">edit</i></span>'.html_safe, 
             edit_groupe_path(groupe),
@@ -16,18 +17,7 @@
             data: { confirm: "Delete #{groupe.nom}  ?" },
             class: "btn btn-danger btn-xs" 
         %>
-
-        &nbsp;
-
-        <%= link_to '<span data-toggle="tooltip" >
-            <i class="material-icons">group</i></span>'.html_safe, 
-            "/utilisateurs_groupe/#{groupe.id}",
-            class: "btn btn-info btn-xs" 
-        %>
-        <%= link_to '<span data-toggle="tooltip" >
-            <i class="material-icons">build</i></span>'.html_safe, 
-            "/works_groupe/#{groupe.id}",
-            class: "btn btn-primary btn-xs" 
-        %>
+<% end %>
+        
     </td>
 </tr>
