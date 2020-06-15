@@ -81,6 +81,7 @@ Rails.application.routes.draw do
   #  Absences & Congés  #
   #######################
   resources :absences, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
+  resources :demande_conges, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
 
 
   ################

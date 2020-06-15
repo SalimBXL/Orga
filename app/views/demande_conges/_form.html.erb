@@ -1,0 +1,24 @@
+<%= form_with model: @demande_conge, local: true do |form| %>
+
+    <% if @demande_conge.errors.any? %>
+        <strong>WARNING</strong>
+        <ul>
+            <% @demande_conge.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
+
+    
+    <!-- Dates -->
+    <p>
+        <%= form.label I18n.t("demande_conges.index.date") %><br>
+        <%= form.date_field :date %> <%= form.date_field :date_fin %>
+    </p>
+
+    
+
+    <p>
+        <%= form.submit class: "btn btn-primary" %>
+    </p>
+<% end %>

@@ -1,0 +1,12 @@
+<p><%= paginate @demande_conges, remote: true %></p>
+<table class="table table-striped">
+    <tr>
+        <th><%= I18n.t("demande_conges.index.date") %></th>
+        <th><%= I18n.t("demande_conges.index.date_fin") %></th>
+        <th><%= I18n.t("demande_conges.index.date_demande") %></th>
+        <th><%= I18n.t("demande_conges.index.utilisateur") %></th>
+        <th></th>
+    </tr>
+    <%= render @demande_conges %>
+</table>
+<p><%= paginate @demande_conges, remote: true %></p>

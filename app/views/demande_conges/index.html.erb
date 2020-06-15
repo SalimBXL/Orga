@@ -1,0 +1,26 @@
+<h1>
+    <span class="label label-primary">
+        <i class="material-icons">event_busy</i>
+        <%= I18n.t("demande_conges.index.titre").upcase %>
+    </span>
+</h1>
+
+<p>
+    <% if user_signed_in? %>
+    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+        new_demande_conge_path,
+        class: "btn btn-success btn-xs" %>
+    <% end %>
+</p>
+
+<div id="demande_conges">
+    <%= render 'demande_conges' %>
+</div>
+
+<p>
+    <% if user_signed_in? %>
+    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+        new_demande_conge_path,
+        class: "btn btn-success btn-xs" %>
+    <% end %>
+</p>

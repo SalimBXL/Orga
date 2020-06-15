@@ -57,6 +57,15 @@ en:
       titre: Classes
     new:
       description: New class
+  demande_conges:
+    index:
+      date: Date
+      date_demande: Date of asking
+      date_fin: End Date
+      titre: Absences Asks
+      utilisateur: User
+    new:
+      titre: New absence ask
   errors:
     messages:
       not_saved: Not saved

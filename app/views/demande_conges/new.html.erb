@@ -1,0 +1,16 @@
+<div class="page-header">
+    <h1>
+        <span class="label label-primary">
+            <i class="material-icons">event_busy</i>
+            <%= I18n.t("demande_conges.index.titre").upcase %>
+        </span>
+    </h1>
+</div>
+<div class="container">
+    <h3>
+        <span class="label label-info">
+            <%= "#{current_user.utilisateur.prenom_nom} - #{I18n.t("demande_conges.new.titre").capitalize}" %>
+        </span>
+    </h3>
+    <%= render "form" %>
+</div>

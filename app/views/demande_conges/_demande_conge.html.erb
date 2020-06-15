@@ -1,0 +1,24 @@
+<tr id="demande_conge_<%= demande_conge.id %>">
+    <td><%= demande_conge.date %></td>
+    <td><%= demande_conge.date_fin %></td>
+    <td><%= demande_conge.date_demande %></td>
+    <td><%= demande_conge.utilisateur.prenom_nom %></td>
+    <td>
+    <% if user_signed_in? && current_user.utilisateur == demande_conge.utilisateur %>
+        <%= link_to '<span data-toggle="tooltip" >
+            <i class="material-icons">edit</i></span>'.html_safe, 
+            edit_demande_conge_path(demande_conge),
+            class: "btn btn-warning btn-xs" 
+        %>
+
+        <%= link_to '<span data-toggle="tooltip" >
+            <i class="material-icons">close</i>'.html_safe, 
+            demande_conge_path(demande_conge),
+            method: :delete,
+            remote: true,
+            data: { confirm: "Delete #{demande_conge.date} - #{demande_conge.date_fin} ?" },
+            class: "btn btn-danger btn-xs" 
+        %>
+    <% end %>
+    </td>
+</tr>

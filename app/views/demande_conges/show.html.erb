@@ -1,0 +1,19 @@
+<h1>
+    <%= @demande_conge.date %>
+</h1>
+
+<p>
+    <%= @demande_conge.date %> - <%= @demande_conge.date_fin %>
+</p>
+
+<p>
+    <%= @demande_conge.date_demande %>
+</p>
+
+<p>
+    <%= @demande_conge.utilisateur %>
+</p>
+
+<p>
+    <%= link_to " [Edit] ", edit_demande_conge_path(@demande_conge) %>
+</p>
