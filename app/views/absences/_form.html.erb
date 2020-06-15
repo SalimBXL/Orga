@@ -56,10 +56,11 @@
     </p>
 
 
-    <!-- Accord -->
-    <p>
-        <%= form.check_box :accord %> <%= form.label I18n.t("absences.new.accord") %>
-    </p>
-
+    <% if user_signed_in? && current_user.admin? %>
+        <!-- Accord -->
+        <p>
+            <%= form.check_box :accord %> <%= form.label I18n.t("absences.new.accord") %>
+        </p>
+    <% end %>
 
 <% end %>
