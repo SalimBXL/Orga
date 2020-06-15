@@ -12,7 +12,7 @@
     <td><%= absence.type_absence.nom %></td>
     <td><%= absence.remarque %></td>
     <td>
-    <% if user_signed_in? && current_user.admin? %>
+    <% if user_signed_in? && (current_user.admin? || current_user.utilisateur == absence.utilisateur) %>
         <%= link_to '<span data-toggle="tooltip">
                     <i class="material-icons">edit</i></span>'.html_safe, 
                     edit_absence_path(absence),
@@ -30,5 +30,5 @@
     </td>
     <td>
         <span class="badge"><em><%= absence.updated_at %></em></span>
-    </td>
+    <%= '<i class="material-icons conge_accord_wait">assignment_late</i>'.html_safe if absence.accord.nil? || !absence.accord %></td>
 </tr>

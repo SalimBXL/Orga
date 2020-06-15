@@ -14,6 +14,7 @@ en:
       types: Types
       utilisateurs: Users
     new:
+      accord: Allowed
       date: Date
       date_fin: End Date
       remarque: Note

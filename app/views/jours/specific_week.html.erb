@@ -57,8 +57,12 @@
                 <% bg = "" %>
                 
                 <% if @absences[utilisateur] %>
-                    <% if @absences[utilisateur].include?(i) %>
-                        <% bg = "conge_ok" %>
+                    <% unless @absences[utilisateur][i].nil? %>
+                        <% if @absences[utilisateur][i] == true %>
+                            <% bg = "conge_ok" %>
+                        <% else %>
+                            <% bg = "conge_wait" %>
+                        <% end %>
                     <% end %>
                 <% end %>
 

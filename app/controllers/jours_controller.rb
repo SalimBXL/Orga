@@ -142,9 +142,13 @@ class JoursController < ApplicationController
                 end
 
                 abs = Absence.at_for_user(@date.beginning_of_week+i.days, utilisateur_jour.utilisateur)
-                if abs.count > 0
-                    @absences[utilisateur_jour.utilisateur] ||= Array.new
-                    @absences[utilisateur_jour.utilisateur] << i+1
+                abs.each do |a|
+                    @absences[utilisateur_jour.utilisateur] ||= Hash.new
+                    if a.accord
+                        @absences[utilisateur_jour.utilisateur][i+1] =  true
+                    else
+                        @absences[utilisateur_jour.utilisateur][i+1] =  false
+                    end
                 end
 
                 if Fermeture.at_for_service?(@date.beginning_of_week+i.days, utilisateur_jour.service)

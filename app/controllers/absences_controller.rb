@@ -70,7 +70,7 @@ class AbsencesController < ApplicationController
     private 
 
     def absence_params
-        params.require(:absence).permit(:date, :date_fin, :type_absence_id, :utilisateur_id, :remarque)
+        params.require(:absence).permit(:date, :date_fin, :type_absence_id, :utilisateur_id, :remarque, :accord)
     end
 
     def find_absence

@@ -8,6 +8,7 @@ class Absence < ApplicationRecord
     scope :today, -> { self.at(Date.today) }
     scope :at_for_user, -> (d,u) { self.at(d).where(utilisateur: u) }
     scope :today_for_user, -> (u) { self.at_for_user(Date.today, u) }
+    scope :en_attente, -> { where(accord: false) }
 
     def check_date_fin
         if date
