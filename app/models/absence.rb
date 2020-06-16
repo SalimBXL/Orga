@@ -10,6 +10,21 @@ class Absence < ApplicationRecord
     scope :today_for_user, -> (u) { self.at_for_user(Date.today, u) }
     scope :en_attente, -> { where(accord: false) }
 
+    def valider
+        self.accord = true
+    end
+
+    def non_accord
+        self.accord = false
+    end
+
+    def validee?
+        if accord.nil?
+            self.accord = false
+        end
+        self.non_accord
+    end
+
     def check_date_fin
         if date
             if date_fin.nil? || date_fin.blank? 

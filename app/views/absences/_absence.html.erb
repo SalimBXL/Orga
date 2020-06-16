@@ -18,8 +18,7 @@
                     edit_absence_path(absence),
                     class: "btn btn-warning btn-xs" %>
 
-        <%= link_to '<span data-toggle="tooltip">
-                    <i class="material-icons">close</i>'.html_safe, 
+        <%= link_to '<i class="material-icons">close</i>'.html_safe, 
                     absence_path(absence),
                     method: :delete,
                     remote: true,
@@ -29,6 +28,9 @@
     <% end %>
     </td>
     <td>
-        <span class="badge"><em><%= absence.updated_at %></em></span>
-    <%= '<i class="material-icons conge_accord_wait">assignment_late</i>'.html_safe if absence.accord.nil? || !absence.accord %></td>
+        <span class="badge" ><em><%= absence.updated_at %></em></span>
+        <span data-toggle="tooltip" title="<%= I18n.t("absences.index.icone_accord") %>">
+            <%= '<i class="material-icons conge_accord_wait">assignment_late</i>'.html_safe if absence.accord.nil? || !absence.accord %>
+        </span>
+    </td>
 </tr>

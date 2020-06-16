@@ -8,6 +8,7 @@ en:
   absences:
     index:
       dates: Dates
+      icone_accord: Need to be validated by an administrtor
       mises_a_jour: Updates
       remarques: Notes
       titre: Absences

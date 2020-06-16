@@ -44,7 +44,15 @@ class AbsencesController < ApplicationController
     #   UPDATE  #
     #############
     def update
+
+        # On ajuste la date de fin
         @absence.check_date_fin
+
+        # Si absence déjà accordée, 
+        # on annule l'accord car absence est modifiée.
+        @absence.non_accord
+
+        # on sauve.
         if @absence.update(absence_params)
             flash[:notice] = "Absence modifiée"
             redirect_to absences_path
