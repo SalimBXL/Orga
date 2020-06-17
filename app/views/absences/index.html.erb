@@ -7,7 +7,7 @@
     </h1>
 </div>
 <p>
-    <% if user_signed_in? && current_user.admin? %>
+    <% if user_signed_in? %>
     <%= link_to '<i class="material-icons">add</i> '.html_safe, 
         new_absence_path,
         class: "btn btn-success btn-xs" %>
@@ -17,7 +17,7 @@
     <%= render 'absences' %>
 </div>
 <p>
-    <% if user_signed_in? && current_user.admin? %>
+    <% if user_signed_in? %>
     <%= link_to '<i class="material-icons">add</i> '.html_safe, 
         new_absence_path,
         class: "btn btn-success btn-xs" %>

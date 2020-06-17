@@ -41,7 +41,7 @@
         <% 5.times do |i| %>
             <% i+= 1 %>
             <div class="col-sm-2 label label-default">
-                <%= nom_jour(i) %>
+                <%= "#{nom_jour(i)} #{(@date.beginning_of_week+(i-1).day).day}" %>
             </div>
         <% end %>
     </div>
@@ -56,6 +56,8 @@
 
                 <% bg = "" %>
                 
+                
+                <!-- Vérifie si l'utilisateur est absent ce jour-là... -->
                 <% if @absences[utilisateur] %>
                     <% unless @absences[utilisateur][i].nil? %>
                         <% if @absences[utilisateur][i] == true %>
@@ -67,8 +69,7 @@
                 <% end %>
 
                 
-                
-                
+                <!-- Compose la fiche du jour -->
                 <div class="col-sm-2 <%= bg %>">
                     <% bg = "" %>
                     <p>

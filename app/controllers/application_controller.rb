@@ -1,11 +1,11 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_locale
+  after_action :after_login
 
   def default_url_options
     { locale: I18n.locale }
   end
-
 
   def semaines_at(date)
     if date.nil? || date.blank?
@@ -30,6 +30,17 @@ class ApplicationController < ActionController::Base
     locale = params[:locale] || cookies[:cookies] || I18n.default_locale
     I18n.locale = locale
     cookies[:locale] = { value: locale, expires: Date.today+3.days }
+  end
+
+  def after_login
+    if user_signed_in?
+      utilisateur = current_user.utilisateur
+      utilisateur.last_connection = DateTime.current()
+      utilisateur.save
+      puts "============================================"
+      puts "LAST CONNECTION : #{utilisateur.last_connection}"
+      puts "============================================"
+    end
   end
 
 end

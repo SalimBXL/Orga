@@ -5,7 +5,9 @@
         <th><%= I18n.t("utilisateurs.index.nom") %></th>
         <th><%= I18n.t("utilisateurs.index.service") %></th>
         <th><%= I18n.t("utilisateurs.index.groupe") %></th>
-        <th></th></tr>
+        <th></th>
+        <th>Last login</th>
+    </tr>
     <%= render @utilisateurs %>
 </table>
 <p><%= paginate @utilisateurs, remote: true %></p>
