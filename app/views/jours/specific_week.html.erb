@@ -1,106 +1,104 @@
-<h1>
-    <span class="label label-info">
-        <i class="material-icons">date_range</i>
-        <%= numeroSemainePourDate(@date) %>
-    </span>
-</h1>
+<div class="container">
+    <h1>
+        <span class="label label-info">
+            <i class="material-icons">date_range</i>
+            <%= numeroSemainePourDate(@date) %>
+        </span>
+    </h1>
 
-<div class="row">
-    <div class="col-sm-2">
-        <div class="badge"><%= I18n.localize @date.beginning_of_week, format: :long %> -- <%= I18n.localize @date.beginning_of_week+5.days, format: :long %></div>
-    </div>
-    <div class="col-sm-8"></div>
-    <div class="col-sm-2">
-        <div class="btn-group">
-            <%= link_to '<span data-toggle="tooltip"  >
-                            <i class="material-icons">chevron_left</i></span>'.html_safe, 
-                            week_path(date: @date-1.week), 
-                            class: "btn btn-success btn-xs" %>
-            <%= link_to '<span data-toggle="tooltip" >
-                            <i class="material-icons">adjust</i></span>'.html_safe, 
-                            week_path(date: Date.today), 
-                            class: "btn btn-success btn-xs" %>
-            <%= link_to '<span data-toggle="tooltip" >
-                            <i class="material-icons">chevron_right</i></span>'.html_safe, 
-                            week_path(date: @date+1.week), 
-                            class: "btn btn-success btn-xs" %>
-        </div>
-    </div>
-</div>
-<br>
-
-
-
-<% @jours.each do |service, contenu| %>
-    <div class="row">
-        <div class="well"><H4><%= service.nom %></H4></div>
-    </div>
     <div class="row">
         <div class="col-sm-2">
+            <div class="badge"><%= I18n.localize @date.beginning_of_week, format: :long %> -- <%= I18n.localize @date.beginning_of_week+5.days, format: :long %></div>
         </div>
-        <% 5.times do |i| %>
-            <% i+= 1 %>
-            <div class="col-sm-2 label label-default">
-                <%= "#{nom_jour(i)} #{(@date.beginning_of_week+(i-1).day).day}" %>
+        <div class="col-sm-8"></div>
+        <div class="col-sm-2">
+            <div class="btn-group">
+                <%= link_to '<span data-toggle="tooltip"  >
+                                <i class="material-icons">chevron_left</i></span>'.html_safe, 
+                                week_path(date: @date-1.week), 
+                                class: "btn btn-success btn-xs" %>
+                <%= link_to '<span data-toggle="tooltip" >
+                                <i class="material-icons">adjust</i></span>'.html_safe, 
+                                week_path(date: Date.today), 
+                                class: "btn btn-success btn-xs" %>
+                <%= link_to '<span data-toggle="tooltip" >
+                                <i class="material-icons">chevron_right</i></span>'.html_safe, 
+                                week_path(date: @date+1.week), 
+                                class: "btn btn-success btn-xs" %>
             </div>
-        <% end %>
+        </div>
     </div>
+    <br>
 
-    <% contenu.each do |utilisateur, jours| %>
+
+
+    <% @jours.each do |service, contenu| %>
+        <div class="row">
+            <div class="well"><H4><%= service.nom %></H4></div>
+        </div>
         <div class="row">
             <div class="col-sm-2">
-                <strong><%= utilisateur.prenom_nom %></strong>
             </div>
             <% 5.times do |i| %>
                 <% i+= 1 %>
-
-                <% bg = "" %>
-                
-                
-                <!-- Vérifie si l'utilisateur est absent ce jour-là... -->
-                <% if @absences[utilisateur] %>
-                    <% unless @absences[utilisateur][i].nil? %>
-                        <% if @absences[utilisateur][i] == true %>
-                            <% bg = "conge_ok" %>
-                        <% else %>
-                            <% bg = "conge_wait" %>
-                        <% end %>
-                    <% end %>
-                <% end %>
-
-                
-                <!-- Compose la fiche du jour -->
-                <div class="col-sm-2 <%= bg %>">
-                    <% bg = "" %>
-                    <p>
-                    AM : 
-                    <% @jours[service][utilisateur][i][false].each do |item| %>
-                        <% @specific_day_works[item].each do |wl| %>
-                            <% cl = "" %>
-                            <% if wl.work.code.downcase == "qc" && i==5 %>
-                                <% cl = "keep_attention" %>
-                            <% end %>
-                            <span class="label label-primary <%= cl %>"><%= wl.work.code %></span>
-                        <% end %>
-                    <% end %>
-                    </p>
-                    <p>
-                    PM : 
-                    <% @jours[service][utilisateur][i][true].each do |item| %>
-                        <% @specific_day_works[item].each do |wl| %>
-                            <% cl = "" %>
-                            <% if wl.work.code.downcase == "qc" && i==5 %>
-                                <% cl = "keep_attention" %>
-                            <% end %>
-                            <span class="label label-info <%= cl %>"><%= wl.work.code %></span>
-                        <% end %>
-                    <% end %>
-                    </p>
+                <div class="col-sm-2 label label-default">
+                    <%= "#{nom_jour(i)} #{(@date.beginning_of_week+(i-1).day).day}" %>
                 </div>
             <% end %>
         </div>
-        <br>
-    <% end %>
-    <br>
 
-<% end %>
+        <% contenu.each do |utilisateur, jours| %>
+            <div class="row">
+                <div class="col-sm-2">
+                    <strong><%= utilisateur.prenom_nom %></strong>
+                </div>
+                <% 5.times do |i| %>
+                    <% i+= 1 %>
+
+                    <% bg = "" %>
+                    
+                    
+                    <!-- Vérifie si l'utilisateur est absent ce jour-là... -->
+                    <% if @absences[utilisateur] %>
+                        <% unless @absences[utilisateur][i].nil? %>
+                            <% if @absences[utilisateur][i] == true %>
+                                <% bg = "conge_ok" %>
+                            <% else %>
+                                <% bg = "conge_wait" %>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+
+                    
+                    <!-- Compose la fiche du jour -->
+                    <div class="col-sm-2 <%= bg %>">
+                        <% bg = "" %>
+                        <p>
+                        AM : 
+                        <% @jours[service][utilisateur][i][false].each do |item| %>
+                            <% @specific_day_works[item].each do |wl| %>
+                                <% cl = "" %>
+                                <% if wl.work.code.downcase == "qc" && i==5 %>
+                                    <% cl = "keep_attention" %>
+                                <% end %>
+                                <span class="label label-primary <%= cl %>"><%= wl.work.code %></span>
+                            <% end %>
+                        <% end %>
+                        <br>
+                        PM : 
+                        <% @jours[service][utilisateur][i][true].each do |item| %>
+                            <% @specific_day_works[item].each do |wl| %>
+                                <% cl = "" %>
+                                <% if wl.work.code.downcase == "qc" && i==5 %>
+                                    <% cl = "keep_attention" %>
+                                <% end %>
+                                <span class="label label-info <%= cl %>"><%= wl.work.code %></span>
+                            <% end %>
+                        <% end %>
+                        </p>
+                    </div>
+                <% end %>
+            </div>
+        <% end %>
+    <% end %>
+</div>

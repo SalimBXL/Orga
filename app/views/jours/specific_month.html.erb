@@ -1,68 +1,130 @@
-<h1>
-    <span class="label label-info">
-        <i class="material-icons">calendar_today</i>
-        <%= @date %>
-    </span>
-</h1>
+<div class="container">
+    <h1>
+        <span class="label label-info">
+            <i class="material-icons">date_range</i>
+            <%= I18n.t("month.mois_#{(@date+15.days).month}") %>
+        </span>
+    </h1>
+    <div class="row">
+        <div class="col-sm-2">
+            <div class="badge">
+                <%= I18n.localize @date, format: :long %> -- <%= I18n.localize @date2, format: :long %>
+            </div>
+        </div>
+        <div class="col-sm-8"></div>
+        <div class="col-sm-2">
 
-<div class="row">
-    <div class="col-sm-2">
-        
-    </div>
-    <div class="col-sm-8"></div>
-    <div class="col-sm-2">
-        <div class="btn-group">
-            <%= link_to '<span data-toggle="tooltip"  >
-                            <i class="material-icons">chevron_left</i></span>'.html_safe, 
-                            month_path(date: @date-1.month), 
-                            class: "btn btn-success btn-xs" %>
-            <%= link_to '<span data-toggle="tooltip" >
-                            <i class="material-icons">adjust</i></span>'.html_safe, 
-                            month_path(date: Date.today), 
-                            class: "btn btn-success btn-xs" %>
-            <%= link_to '<span data-toggle="tooltip" >
-                            <i class="material-icons">chevron_right</i></span>'.html_safe, 
-                            month_path(date: @date+1.month), 
-                            class: "btn btn-success btn-xs" %>
+        <!-- NAVIGATION DE MOIS EN MOIS -->
+            <div class="btn-group">
+                <%= link_to '<span data-toggle="tooltip"  >
+                                <i class="material-icons">chevron_left</i></span>'.html_safe, 
+                                month_path(date: (@date+15.days)-1.month), 
+                                class: "btn btn-success btn-xs" %>
+                <%= link_to '<span data-toggle="tooltip" >
+                                <i class="material-icons">adjust</i></span>'.html_safe, 
+                                month_path(date: Date.today), 
+                                class: "btn btn-success btn-xs" %>
+                <%= link_to '<span data-toggle="tooltip" >
+                                <i class="material-icons">chevron_right</i></span>'.html_safe, 
+                                month_path(date: (@date+15.days)+1.month), 
+                                class: "btn btn-success btn-xs" %>
+            </div>
         </div>
     </div>
+    <br>
 </div>
-<br>
 
-<table class="table table-bordered">
-
-    <tr>
-        <td> </td>
-        <% @date.end_of_month.day.times do |numero| %>
-            <% numero += 1 %>
-            <td><%= numero %></td>
-        <% end %>
-    </tr>
-
-    <% @jours.keys.each do |utilisateur| %>
-        <% ligne = @jours[utilisateur] %>
+<% @jours.each do |service, contenu| %>
+    <br>
+    <!-- AFFICHAGE DU NOM DU SERVICE -->
+    <div class="well"><H4><%= service.nom %></H4></div>
+    <table class="table table-bordered grille">
+        <!-- Ligne de numéros de jours -->
         <tr>
             <td>
-                <%= utilisateur.prenom_nom %>
             </td>
-            <% @date.end_of_month.day.times do |numero| %>
-                <% date_locale = "#{@date.year}-#{@date.month}-#{numero += 1}".to_date %>
-                <td>
-                    <% unless ligne[numero].nil? %>
-                        <% jour = ligne[numero] %>
-                        <% if @works[jour][false] %>
-                            <% @works[jour][false].each do |wl| %>
-                                <div class="label label-primary"><%= wl.work.code %></div>
-                            <% end %>
+            <% ((@date2-@date).to_i).times do |i| %>
+                <% if (@date + i.day).wday!=0 %>
+                    <td>
+                        <% if (@date + i.day).wday==6 %>                        
+                            W
+                        <% else %>
+                            <%= (@date + i.day).day %>
                         <% end %>
-                        <% if @works[jour][true] %>
-                            <% @works[jour][true].each do |wl| %>
-                                <div class="label label-info"><%= wl.work.code %></div>
+                    </td>
+                <% end %>
+            <% end %>
+        </tr>
+    
+        <!-- Ligne par utilisateur -->
+        <% contenu.each do |utilisateur, jours| %>
+            <tr>
+                <td>
+                    <strong><%= utilisateur.prenom_nom %></strong>
+                </td>
+
+                <% ((@date2-@date).to_i).times do |index| %>
+                    <% date_jour = (@date + index.day) %>
+                    <% bg = "" %>
+                    
+                    <!-- Compose la fiche du jour -->
+
+                    <!-- Weekend... -->
+                    <% if date_jour.wday!=0 %>
+                        <% if date_jour.wday==6 %>
+                            <td class="weekend"></td>
+                        <% end %>
+                    <% end %>
+
+                    <!-- Jour de semaine mais service fermé... -->
+                    <% if ((1..5).include?(date_jour.wday) && !@fermetures[service.id].nil?) %>
+                        <% if @fermetures[service.id].keys.include?(date_jour.to_s) %>
+                            <td class="ferie"></td>
+                        <% end %>
+                    <% end %>
+
+                    <!-- Jour de la semaine mais utilisateur en congé-->
+                    <% if ((1..5).include?(date_jour.wday) && !@absences[utilisateur.id].nil?) %>
+                        <% if @absences[utilisateur.id].keys.include?(date_jour.to_s) %>
+                            <% if @absences[utilisateur.id][date_jour.to_s] %>
+                                <% bg = "conge_ok" %>
+                            <% else %>
+                                <% bg = "conge_wait" %>
                             <% end %>
                         <% end %>
                     <% end %>
-                </td>
-            <% end %>
-        </tr>
-    <% end %>
-</table>
+
+                    <!-- Jour de semaine "normal" -->
+                    <% if (1..5).include?(date_jour.wday) %>
+                        <td class="<%= bg %>">
+                            <!-- Works -->
+                            <% [false, true].each do |ap| %>
+                                <% dd = date_jour.to_s %>
+                                <% unless @jours[service][utilisateur][dd].nil? %>
+                                    <% unless @jours[service][utilisateur][dd][ap].nil? %>
+                                        <% @jours[service][utilisateur][dd][ap].each do |wl| %>
+                                            <!-- Change la couleur pour certains works -->
+                                            <% cl = "" %>
+                                            <% if wl.work.code.downcase == "qc" && Date.parse(dd).wday==5 %>
+                                                <% cl = "keep_attention" %>
+                                            <% end %>
+                                            <!-- Affiche le works -->
+                                            <% unless ap %>
+                                                <span class="  <%= cl %>">
+                                            <% else %>
+                                                <span class="label label-info <%= cl %>">
+                                            <% end %>
+                                                <%= wl.work.code %>
+                                            </span>
+                                        <% end %>
+                                    <% end %>
+                                <% end %>
+                            <% end %>
+                            <% bg = "" %>
+                        </td>
+                    <% end %>
+                <% end %>
+            </tr>
+        <% end %>
+    </table>
+<% end %>

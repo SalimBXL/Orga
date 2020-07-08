@@ -91,20 +91,38 @@ class JoursController < ApplicationController
     ############
     def specific_month
         unless params[:date]
-            @date = Date.today
+            @date = Date.today.beginning_of_month.beginning_of_week
+            @date2 = Date.today.end_of_month.end_of_week
         else
-            @date = params[:date].to_date
+            @date = params[:date].to_date.beginning_of_month.beginning_of_week
+            @date2 = params[:date].to_date.end_of_month.end_of_week
         end
+
         @jours = Hash.new
-        @works = Hash.new
-        utilisateurs = Utilisateur.order(:service_id, :groupe_id, :prenom, :nom)
-        utilisateurs.each do |utilisateur|            
-            jours = Jour.of(utilisateur).where("date >= ? AND date <= ?", @date.beginning_of_month, @date.end_of_month).order(:service_id, :utilisateur_id, :date, :am_pm).includes(:utilisateur, :service)
-            jours.each do |jour|
-                @jours[utilisateur] ||= Hash.new
-                @jours[utilisateur][jour.date.day] = jour
-                @works[jour] ||= Hash.new
-                @works[jour][jour.am_pm] = WorkingList.for(jour).includes(:work)
+        utilisateurs_jours = Jour.where(date: @date..@date2).order(:service_id, :utilisateur_id, :date, :am_pm)
+        utilisateurs_jours.each do |utilisateur_jour|
+            @jours[utilisateur_jour.service] ||= Hash.new
+            @jours[utilisateur_jour.service][utilisateur_jour.utilisateur] ||= Hash.new
+            dd = utilisateur_jour.date.to_s
+            @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd] ||= Hash.new
+            @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = WorkingList.for(utilisateur_jour.id).includes(:work)
+        end
+
+        @fermetures = Hash.new
+        fermetures = Fermeture.where('date_fin >= ? AND date <= ?', "2020-07-01", "2020-07-31").order(:service_id, :date, :date_fin)
+        fermetures.each do |fermeture|
+            (fermeture.date..fermeture.date_fin).each do |fj|
+                @fermetures[fermeture.service_id] ||= Hash.new
+                @fermetures[fermeture.service_id][fj.to_s] = fermeture.nom
+            end
+        end
+
+        @absences = Hash.new
+        absences = Absence.where('date_fin >= ? AND date <= ?', "2020-07-01", "2020-07-31").order(:utilisateur_id, :date, :date_fin)
+        absences.each do |absence|
+            (absence.date..absence.date_fin).each do |aj|
+                @absences[absence.utilisateur_id] ||= Hash.new
+                @absences[absence.utilisateur_id][aj.to_s] = absence.accord
             end
         end
 

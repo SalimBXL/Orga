@@ -86,7 +86,7 @@
                     <div class="col-sm-4">
                         <p>
                             <%= form.label :work1 %><br>
-                            <%= form.select(:work1, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
+                            <%= form.select(:work1, @works.collect {|p| [ "(#{@services.where(id: p.service_id).first.nom}) - [#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
                                             { include_blank: true },
                                             { :multiple => false, :size => 20 }) %>
                         </p>
@@ -94,7 +94,7 @@
                     <div class="col-sm-4">
                         <p>
                             <%= form.label :work2 %><br>
-                            <%= form.select(:work2, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
+                            <%= form.select(:work2, @works.collect {|p| [ "(#{@services.where(id: p.service_id).first.nom}) - [#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
                                            { include_blank: true },
                                             { :multiple => false, :size => 20 }) %>
                         </p>
@@ -102,7 +102,7 @@
                     <div class="col-sm-4">
                         <p>
                             <%= form.label :work3 %><br>
-                            <%= form.select(:work3, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
+                            <%= form.select(:work3, @works.collect {|p| [ "(#{@services.where(id: p.service_id).first.nom}) - [#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
                                             { include_blank: true },
                                             { :multiple => false, :size => 20 }) %>
                         </p>
@@ -110,7 +110,7 @@
                     <div class="col-sm-4">
                         <p>
                             <%= form.label :work4 %><br>
-                            <%= form.select(:work4, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
+                            <%= form.select(:work4, @works.collect {|p| [ "(#{@services.where(id: p.service_id).first.nom}) - [#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
                                             { include_blank: true },
                                             { :multiple => false, :size => 20 }) %>
                         </p>
@@ -118,7 +118,7 @@
                     <div class="col-sm-4">
                         <p>
                             <%= form.label :work5 %><br>
-                            <%= form.select(:work5, @works.collect {|p| [ "[#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
+                            <%= form.select(:work5, @works.collect {|p| [ "(#{@services.where(id: p.service_id).first.nom}) - [#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
                                             { include_blank: true },
                                             { :multiple => false, :size => 20 }) %>
                         </p>

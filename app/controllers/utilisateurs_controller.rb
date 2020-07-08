@@ -23,6 +23,8 @@ class UtilisateursController < ApplicationController
     #############
     def new
         @utilisateur = Utilisateur.new
+        @services = Service.all
+        @groupes = Groupe.all
     end
 
 
@@ -59,6 +61,8 @@ class UtilisateursController < ApplicationController
     #   EDIT    #
     #############
     def edit
+        @services = Service.all
+        @groupes = Groupe.all
     end
 
     ##############

@@ -4,6 +4,7 @@ class AjoutsController < ApplicationController
     before_action :find_groupes, only: [:new, :create, :edit]
     before_action :find_works, only: [:index, :new, :create, :edit]
     before_action :find_classes, only: [:new, :create, :edit]
+    before_action :find_services, only: [:new, :create, :edit]
     before_action :find_etendre, only: [:create, :edit]
 
     #############
@@ -178,6 +179,10 @@ class AjoutsController < ApplicationController
 
     def find_classes
         @classes = Classe.order(:nom)
+    end
+
+    def find_services
+        @services = Service.order(:nom)
     end
 
 

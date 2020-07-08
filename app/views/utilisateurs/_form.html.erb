@@ -45,7 +45,7 @@
         <%= form.label I18n.t("utilisateurs.new.service") %><br>
         <%= form.select(:service_id) do %>
             <%= select_option_tag("", nil, @utilisateur.service_id) %>
-            <% Service.all.find_each do |l| %>
+            <% @services.find_each do |l| %>
                 <%= select_option_tag(l.nom.capitalize, l.id, @utilisateur.service_id) %>
             <% end %>
         <% end %>
@@ -56,31 +56,23 @@
         <%= form.label I18n.t("utilisateurs.new.groupe") %><br>
         <%= form.select(:groupe_id) do %>
             <%= select_option_tag("", nil, @utilisateur.groupe_id) %>
-            <% Groupe.all.find_each do |l| %>
+            <% @groupes.find_each do |l| %>
                 <%= select_option_tag(l.nom.capitalize, l.id, @utilisateur.groupe_id) %>
             <% end %>
         <% end %>
     </p>
 
-
-
-
-<p>
-<% if user_signed_in? && current_user.admin? %>
-    <div class="field">
-    <%= form.label :admin %> 
-    <%= form.check_box :admin %>
-    </div>
-<% end %>
-</p>
+    <!-- ADMIN -->
+    <p>
+        <% if user_signed_in? && current_user.admin? %>
+            <div class="field">
+            <%= form.label :admin %> 
+            <%= form.check_box :admin %>
+            </div>
+        <% end %>
+    </p>
     
     <p>
-        <% if Service.all.empty? || Groupe.all.empty? %>
-            <span data-toggle="tooltip" title="Service et Groupe doivent contenir au moins une entrée.">
-                <%= form.submit class: "btn btn-primary disabled" %>
-            </span>
-        <% else %>
-            <%= form.submit class: "btn btn-primary" %>
-        <% end %>
+        <%= form.submit class: "btn btn-success" %>
     </p>
 <% end %>

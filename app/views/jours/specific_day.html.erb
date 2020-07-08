@@ -1,112 +1,112 @@
-<h1>
-    <span class="label label-info">
-        <i class="material-icons">today</i>
-        <%= "#{nom_jour(@date.cwday)} #{I18n.localize @date, format: :long}" %>
-    </span>
-</h1>
+<div class="container">
+    <h1>
+        <span class="label label-info">
+            <i class="material-icons">today</i>
+            <%= "#{nom_jour(@date.cwday)} #{I18n.localize @date, format: :long}" %>
+        </span>
+    </h1>
 
-<div class="row">
-    <div class="col-sm-10"></div>
-    <div class="col-sm-2">
-        <div class="btn-group">
-            <%= link_to '<span data-toggle="tooltip"  >
-                            <i class="material-icons">chevron_left</i></span>'.html_safe, 
-                            today_path(date: @date-1.day), 
-                            class: "btn btn-success btn-xs" %>
-            <%= link_to '<span data-toggle="tooltip" >
-                            <i class="material-icons">adjust</i></span>'.html_safe, 
-                            today_path(date: Date.today), 
-                            class: "btn btn-success btn-xs" %>
-            <%= link_to '<span data-toggle="tooltip" >
-                            <i class="material-icons">chevron_right</i></span>'.html_safe, 
-                            today_path(date: @date+1.day), 
-                            class: "btn btn-success btn-xs" %>
+    <div class="row">
+        <div class="col-sm-10"></div>
+        <div class="col-sm-2">
+            <div class="btn-group">
+                <%= link_to '<span data-toggle="tooltip"  >
+                                <i class="material-icons">chevron_left</i></span>'.html_safe, 
+                                today_path(date: @date-1.day), 
+                                class: "btn btn-success btn-xs" %>
+                <%= link_to '<span data-toggle="tooltip" >
+                                <i class="material-icons">adjust</i></span>'.html_safe, 
+                                today_path(date: Date.today), 
+                                class: "btn btn-success btn-xs" %>
+                <%= link_to '<span data-toggle="tooltip" >
+                                <i class="material-icons">chevron_right</i></span>'.html_safe, 
+                                today_path(date: @date+1.day), 
+                                class: "btn btn-success btn-xs" %>
+            </div>
         </div>
     </div>
+
+
+    <% last_service = nil %>
+    <% last_groupe = nil %>
+    <% last_utilisateur = nil %>
+
+    <% @specific_day_jours.each do |specific_day_jour| %>
+
+        <% if specific_day_jour.service != last_service %>
+            <% last_service = specific_day_jour.service %>
+            <div class="row">
+            <div class="col-sm-12">
+                <h3 class="well">
+                    <i class="material-icons">business</i>
+                    <%= specific_day_jour.service.nom.upcase %></span>
+                </h3>
+                </div>
+            </div>
+        <% end %>
+        
+
+
+        <% if specific_day_jour.utilisateur.prenom_nom != last_utilisateur %>
+            <% last_utilisateur = specific_day_jour.utilisateur.prenom_nom %>
+            <div class="col-sm-4">
+
+                <% if @absence[specific_day_jour.utilisateur] %>
+                    <div class="panel panel-success">
+                <% else %>
+                    <div class="panel panel-default">
+                <% end %>
+
+
+                <div class="panel-heading">
+                    <strong><i class="material-icons">account_circle</i>  <%= specific_day_jour.utilisateur.prenom_nom %></strong>
+                    (<%= specific_day_jour.utilisateur.phone %>)
+                </div>
+                <div class="panel-body">
+                    <p>
+                        AM : 
+                        &nbsp;&nbsp;&nbsp;
+                        <% unless specific_day_jour.am_pm %>
+                            <% @specific_day_works[specific_day_jour].each do |wl| %>
+                                <% cl = "" %>
+                                <% if wl.work.code.downcase=="qc" && @date.cwday==5 %>
+                                    <% cl = "keep_attention" %>
+                                <% end %>
+                                <span class="label label-primary <%= cl %>"
+                                    data-toggle="tooltip" 
+                                    title='<%= "#{wl.work.nom}" %>'
+                                >
+                                    <%= wl.work.code %>
+                                </span>
+                            <% end %>
+                        <% else %>
+                            ---
+                        <% end %>
+                        <br>
+                        PM : 
+                        &nbsp;&nbsp;&nbsp;
+                        <% if specific_day_jour.am_pm %>
+                            <% @specific_day_works[specific_day_jour].each do |wl| %>
+                                <% cl = "" %>
+                                <% if wl.work.code.downcase=="qc" && @date.cwday==5 %>
+                                    <% cl = "keep_attention" %>
+                                <% end %>
+                                <span class="label label-info <%= cl %>"
+                                    data-toggle="tooltip" 
+                                    title='<%= "#{wl.work.nom}" %>'
+                                ><%= wl.work.code %></span>
+                            <% end %>
+                        <% else %>
+                            ---
+                        <% end %>
+                    </p>
+                    <p>
+                        <%= specific_day_jour.note %>
+                    </p>
+                </div>
+            </div>
+            </div>
+        <% end %>
+    <% end %>
 </div>
-
-
-<% last_service = nil %>
-<% last_groupe = nil %>
-<% last_utilisateur = nil %>
-
-<% @specific_day_jours.each do |specific_day_jour| %>
-
-    <% if specific_day_jour.service.nom != last_service %>
-        <% last_service = specific_day_jour.service.nom %>
-        <div class="row">
-        <div class="col-sm-12">
-            <h3 class="well">
-                <i class="material-icons">business</i>
-                <%= specific_day_jour.service.nom.upcase %></span>
-            </h3>
-            </div>
-        </div>
-    <% end %>
-    
-
-
-    <% if specific_day_jour.utilisateur.prenom_nom != last_utilisateur %>
-        <% last_utilisateur = specific_day_jour.utilisateur.prenom_nom %>
-        <div class="col-sm-4">
-
-            <% if @absence[specific_day_jour.utilisateur] %>
-                <div class="panel panel-success">
-            <% else %>
-                <div class="panel panel-default">
-            <% end %>
-
-
-            <div class="panel-heading">
-                <strong><i class="material-icons">account_circle</i>  <%= specific_day_jour.utilisateur.prenom_nom %></strong>
-                 (<%= specific_day_jour.utilisateur.phone %>)
-            </div>
-            <div class="panel-body">
-                <p>
-                    AM : 
-                    &nbsp;&nbsp;&nbsp;
-                    <% unless specific_day_jour.am_pm %>
-                        <% @specific_day_works[specific_day_jour].each do |wl| %>
-                            <% cl = "" %>
-                            <% if wl.work.code.downcase=="qc" && @date.cwday==5 %>
-                                <% cl = "keep_attention" %>
-                            <% end %>
-                            <span class="label label-primary <%= cl %>"
-                                data-toggle="tooltip" 
-                                title='<%= "#{wl.work.nom}" %>'
-                            >
-                                <%= wl.work.code %>
-                            </span>
-                        <% end %>
-                    <% else %>
-                        ---
-                    <% end %>
-                    <br>
-                    PM : 
-                    &nbsp;&nbsp;&nbsp;
-                    <% if specific_day_jour.am_pm %>
-                        <% @specific_day_works[specific_day_jour].each do |wl| %>
-                            <% cl = "" %>
-                            <% if wl.work.code.downcase=="qc" && @date.cwday==5 %>
-                                <% cl = "keep_attention" %>
-                            <% end %>
-                            <span class="label label-info <%= cl %>"
-                                data-toggle="tooltip" 
-                                title='<%= "#{wl.work.nom}" %>'
-                            ><%= wl.work.code %></span>
-                        <% end %>
-                    <% else %>
-                        ---
-                    <% end %>
-                </p>
-                <p>
-                    <%= specific_day_jour.note %>
-                </p>
-            </div>
-        </div>
-        </div>
-    <% end %>
-
-<% end %>
-
 

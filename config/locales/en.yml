@@ -5,6 +5,19 @@ en:
   Mardi: Tuesday
   Mercredi: Wednesday
   Vendredi: Friday
+  month:
+    mois_1: January
+    mois_2: February
+    mois_3: March
+    mois_4: April
+    mois_5: May
+    mois_6: June
+    mois_7: July
+    mois_8: August
+    mois_9: September
+    mois_10: October
+    mois_11: November
+    mois_12: December
   absences:
     index:
       dates: Dates

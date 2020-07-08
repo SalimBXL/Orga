@@ -27,5 +27,14 @@ class Utilisateur < ApplicationRecord
         end
         user
     end
+
+    def conge?(date)
+        abs = Absence.where(utilisateur_id: self.id).where('date >= ? OR date_fin <= ?', date, date).first
+        if abs.nil?
+            abs
+        else 
+            abs.accord
+        end
+    end
     
 end

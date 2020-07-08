@@ -1,0 +1,74 @@
+<h1>
+    <span class="label label-info">
+        <i class="material-icons">calendar_today</i>
+        <%= @date %>
+    </span>
+</h1>
+
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8"></div>
+    <div class="col-sm-2">
+        <div class="btn-group">
+            <%= link_to '<span data-toggle="tooltip"  >
+                            <i class="material-icons">chevron_left</i></span>'.html_safe, 
+                            month_path(date: @date-1.month), 
+                            class: "btn btn-success btn-xs" %>
+            <%= link_to '<span data-toggle="tooltip" >
+                            <i class="material-icons">adjust</i></span>'.html_safe, 
+                            month_path(date: Date.today), 
+                            class: "btn btn-success btn-xs" %>
+            <%= link_to '<span data-toggle="tooltip" >
+                            <i class="material-icons">chevron_right</i></span>'.html_safe, 
+                            month_path(date: @date+1.month), 
+                            class: "btn btn-success btn-xs" %>
+        </div>
+    </div>
+</div>
+<br>
+
+<% nom_service = nil %>
+<% @jours.keys.each do |utilisateur| %>
+    <% ligne = @jours[utilisateur] %>
+    <% if nom_service != utilisateur.service.nom %>
+        <% nom_service = utilisateur.service.nom %>
+        <table class="table table-bordered">
+            <tr>
+                <td>
+                    <%= nom_service %>                    
+                <td>
+                <% @date.end_of_month.day.times do |numero| %>
+                    <% numero += 1 %>
+                    <td align="center"><strong><%= numero %></strong></td>
+                <% end %>
+                </tr>
+                <tr>
+            <% end %>
+
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                <%= utilisateur.prenom_nom %>
+            </td>
+            <% @date.end_of_month.day.times do |numero| %>
+                <% date_locale = "#{@date.year}-#{@date.month}-#{numero += 1}".to_date %>
+                <td>
+                    <% unless ligne[numero].nil? %>
+                        <% jour = ligne[numero] %>
+                        <% if @works[jour][false] %>
+                            <% @works[jour][false].each do |wl| %>
+                                <div class="label label-primary"><%= wl.work.code %></div>
+                            <% end %>
+                        <% end %>
+                        <% if @works[jour][true] %>
+                            <% @works[jour][true].each do |wl| %>
+                                <div class="label label-info"><%= wl.work.code %></div>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                </td>
+            <% end %>
+        </tr>
+    <% end %>
+</table>

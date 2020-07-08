@@ -1,0 +1,68 @@
+body {
+    margin:0 auto;
+    padding:0px;
+    border: 0px;
+}
+
+ .locale-flag {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    width: 64px;
+ }
+
+.conge_ok {
+    background-color: rgb(113, 189, 0);
+    color: white;
+}
+.conge_wait {
+    background-color: rgb(198, 255, 123);
+    color: green;
+}
+.conge_accord_ok {
+    background-color: greenyellow;
+    color: green;
+}
+.conge_accord_wait {
+    background-color: red;
+   color: white;
+}
+
+.grille {
+    font-size: 75%;
+    margin: 0;
+    padding: 0;
+    .table {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.center {
+    display: flex;
+    align-items: center;
+}
+
+.absence {
+    background-color: rgb(255,183,77);
+    color: white;
+}
+
+.keep_attention {
+    background-color:red;
+    color: white;
+}
+
+.ferie {
+    background-color:grey;
+    color: white;
+}
+.weekend {
+    background-color: lightgrey;
+    color: white;
+}
+
+
+
+.cacher { visibility: hidden; display: none; }
+.afficher { visibility: visible; }
