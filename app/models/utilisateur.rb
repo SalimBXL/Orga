@@ -10,8 +10,9 @@ class Utilisateur < ApplicationRecord
     validates :nom, :prenom, :email, presence: true
     validates :email, uniqueness: true
 
-    
-    
+    def last_action
+        self.user.last_connection unless self.user.nil?
+    end
     
     def prenom_nom
         "#{prenom} #{nom}".titleize

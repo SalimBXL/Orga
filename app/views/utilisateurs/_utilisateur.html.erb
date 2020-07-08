@@ -28,7 +28,7 @@
     </td>
 
     <td>
-        <%= time_ago_in_words(utilisateur.last_connection) unless utilisateur.last_connection.nil? %>
+        <%= time_ago_in_words(utilisateur.last_action) unless utilisateur.last_action.nil? %>
     </td>
 
 </tr>

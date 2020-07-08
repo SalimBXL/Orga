@@ -34,12 +34,11 @@ class ApplicationController < ActionController::Base
 
   def after_login
     if user_signed_in?
-      utilisateur = current_user.utilisateur
-      utilisateur.last_connection = DateTime.current()
-      utilisateur.save
-      puts "============================================"
-      puts "LAST CONNECTION : #{utilisateur.last_connection}"
-      puts "============================================"
+      current_user.last_connection = DateTime.current()
+      current_user.save
+      puts "========================================================================================"
+      puts " LAST CONNECTION : #{current_user.email} @ #{current_user.last_connection} => #{request.path}"
+      puts "========================================================================================"
     end
   end
 

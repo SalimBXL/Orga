@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 035ca12a84646ce21725a1aab9167d542823e64f
+  revision: cdf2ce209afa2e4dc65e7ccc6066032d641996b9
   branch: master
   specs:
     faker (2.13.0)
@@ -98,10 +98,10 @@ GEM
     diff-lcs (1.4.4)
     erubi (1.9.0)
     execjs (2.7.0)
-    factory_bot (6.0.2)
+    factory_bot (6.1.0)
       activesupport (>= 5.0.0)
-    factory_bot_rails (6.0.0)
-      factory_bot (~> 6.0.0)
+    factory_bot_rails (6.1.0)
+      factory_bot (~> 6.1.0)
       railties (>= 5.0.0)
     ffi (1.13.1)
     globalid (0.4.2)
