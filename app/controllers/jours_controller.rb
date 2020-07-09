@@ -97,8 +97,6 @@ class JoursController < ApplicationController
         else
             date_tmp = params[:date].to_date
         end
-        puts "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-        puts " >>> #{date_tmp.beginning_of_month} : #{date_tmp.beginning_of_month.cwday}"
         if date_tmp.beginning_of_month.cwday == 7
             date_tmp = date_tmp.beginning_of_month + 1.day
         elsif date_tmp.beginning_of_month.cwday == 6
@@ -106,8 +104,6 @@ class JoursController < ApplicationController
         else
             date_tmp = date_tmp.beginning_of_month
         end
-        puts "=== #{date_tmp}"
-        puts "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
         @date = date_tmp.beginning_of_week
         @date2 = date_tmp.end_of_month.end_of_week
 

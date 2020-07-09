@@ -36,9 +36,6 @@ class ApplicationController < ActionController::Base
     if user_signed_in?
       current_user.last_connection = DateTime.current()
       current_user.save
-      puts "========================================================================================"
-      puts " LAST CONNECTION : #{current_user.email} @ #{current_user.last_connection} => #{request.path}"
-      puts "========================================================================================"
     end
   end
 
