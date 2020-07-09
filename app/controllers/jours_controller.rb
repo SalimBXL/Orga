@@ -127,7 +127,7 @@ class JoursController < ApplicationController
         end
 
         @absences = Hash.new
-        absences = Absence.where('date_fin >= ? AND date <= ?', "2020-07-01", "2020-07-31").order(:utilisateur_id, :date, :date_fin)
+        absences = Absence.where('date_fin >= ? AND date <= ?', @date, @date2).order(:utilisateur_id, :date, :date_fin)
         absences.each do |absence|
             (absence.date..absence.date_fin).each do |aj|
                 @absences[absence.utilisateur_id] ||= Hash.new
