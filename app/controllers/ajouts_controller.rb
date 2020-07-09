@@ -111,36 +111,38 @@ class AjoutsController < ApplicationController
         job = nil
         ajout_created = false
         
-        utilisateur = Utilisateur.find_by_id(@ajout.utilisateur_id)
-        work1 = Work.find_by_id(@ajout.work1)
-        jour = Jour.where(date: @ajout, utilisateur: @ajout.utilisateur_id, am_pm: @ajout.am_pm, service_id: work1.service_id)
+        unless @ajout.nil?
+            utilisateur = Utilisateur.find_by_id(@ajout.utilisateur_id)
+            work1 = Work.find_by_id(@ajout.work1)
+            jour = Jour.where(date: @ajout, utilisateur: @ajout.utilisateur_id, am_pm: @ajout.am_pm, service_id: work1.service_id)
 
-        # Jour
-        # Check si jour existe. Sinon, on le crée.
-        unless Jour.nil?
-            jour = Jour.create(utilisateur: utilisateur, date: @ajout.date, am_pm: @ajout.am_pm, service: work1.service)
-            unless jour.save
-                flash[:danger] = "Impossible de créer la semaine..."
-                redirect_to ajouts_path
-            end
-        end
-        
-        # Working_list
-        # Check si working_list existe. Sinon, on la crée.
-        @ajout.works.each do |w|
-            unless WorkingList.exists?(jour: jour, work: w) && Work.exists?(w)
-                work = Work.find(w)
-                working_list = WorkingList.create(jour: jour, work: work)
-                unless working_list.save
-                    flash[:danger] = "Impossible de créer la working liste suivante : JOB ID:#{job.id} WORK ID:#{w}"
+            # Jour
+            # Check si jour existe. Sinon, on le crée.
+            unless Jour.nil?
+                jour = Jour.create(utilisateur: utilisateur, date: @ajout.date, am_pm: @ajout.am_pm, service: work1.service)
+                unless jour.save
+                    flash[:danger] = "Impossible de créer la semaine..."
                     redirect_to ajouts_path
                 end
             end
-        end
+            
+            # Working_list
+            # Check si working_list existe. Sinon, on la crée.
+            @ajout.works.each do |w|
+                unless WorkingList.exists?(jour: jour, work: w) && Work.exists?(w)
+                    work = Work.find(w)
+                    working_list = WorkingList.create(jour: jour, work: work)
+                    unless working_list.save
+                        flash[:danger] = "Impossible de créer la working liste suivante : JOB ID:#{job.id} WORK ID:#{w}"
+                        redirect_to ajouts_path
+                    end
+                end
+            end
 
-        # Nettoyage de la liste des ajouts
-        @ajout.destroy
-        #redirect_to ajouts_path
+            # Nettoyage de la liste des ajouts
+            @ajout.destroy
+            #redirect_to ajouts_path
+        end
         redirect_to :controller => 'ajouts', :action => 'index'
     end
 
