@@ -109,8 +109,8 @@ class AjoutsController < ApplicationController
 
         semaine = nil
         job = nil
-
         ajout_created = false
+        
         utilisateur = Utilisateur.find_by_id(@ajout.utilisateur_id)
         work1 = Work.find_by_id(@ajout.work1)
         jour = Jour.where(date: @ajout, utilisateur: @ajout.utilisateur_id, am_pm: @ajout.am_pm, service_id: work1.service_id)
@@ -140,7 +140,8 @@ class AjoutsController < ApplicationController
 
         # Nettoyage de la liste des ajouts
         @ajout.destroy
-        redirect_to ajouts_path
+        #redirect_to ajouts_path
+        redirect_to :controller => 'ajouts', :action => 'index'
     end
 
 
