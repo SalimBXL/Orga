@@ -72,17 +72,11 @@
                     <!-- Compose la fiche du jour -->
 
                     <!-- Weekend... -->
-                    <% if date_jour.wday!=0 %>
-                        <% if date_jour.wday==6 %>
-                            <td class="weekend"></td>
-                        <% end %>
+                    <% if date_jour.wday==0 %>
+                        <% # On zappe le dimanche %>
                     <% end %>
-
-                    <!-- Jour de semaine mais service fermé... -->
-                    <% if ((1..5).include?(date_jour.wday) && !@fermetures[service.id].nil?) %>
-                        <% if @fermetures[service.id].keys.include?(date_jour.to_s) %>
-                            <td class="ferie"></td>
-                        <% end %>
+                    <% if date_jour.wday==6 %>
+                        <td class="weekend"></td>
                     <% end %>
 
                     <!-- Jour de la semaine mais utilisateur en congé-->
@@ -93,6 +87,15 @@
                             <% else %>
                                 <% bg = "conge_wait" %>
                             <% end %>
+                        <% end %>
+                    <% end %>
+
+                    <!-- Jour de semaine ... -->
+                    
+                    <!-- mais service fermé... -->
+                    <% if ((1..5).include?(date_jour.wday) && !@fermetures[service.id].nil?) %>
+                        <% if @fermetures[service.id].keys.include?(date_jour.to_s) %>
+                            <% bg = "ferie" %>
                         <% end %>
                     <% end %>
 
