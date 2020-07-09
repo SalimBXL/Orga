@@ -99,9 +99,18 @@ class JoursController < ApplicationController
         end
 
         @jours = Hash.new
+
+        # Liste des utilisateurs
+        utilisateurs = Utilisateur.order(:service_id, :groupe_id, :prenom, :nom)
+        utilisateurs.each do |utilisateur|
+            @jours[utilisateur.service] ||= Hash.new
+            @jours[utilisateur.service][utilisateur] ||= Hash.new
+        end
+
+        # Liste des attributions
         utilisateurs_jours = Jour.where(date: @date..@date2).order(:service_id, :utilisateur_id, :date, :am_pm)
         utilisateurs_jours.each do |utilisateur_jour|
-            @jours[utilisateur_jour.service] ||= Hash.new
+            #@jours[utilisateur_jour.service] ||= Hash.new
             @jours[utilisateur_jour.service][utilisateur_jour.utilisateur] ||= Hash.new
             dd = utilisateur_jour.date.to_s
             @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd] ||= Hash.new
