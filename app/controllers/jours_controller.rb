@@ -90,13 +90,27 @@ class JoursController < ApplicationController
     #   Month   #
     ############
     def specific_month
+
+        # Réglage des dates de début et fin de période
         unless params[:date]
-            @date = Date.today.beginning_of_month.beginning_of_week
-            @date2 = Date.today.end_of_month.end_of_week
+            date_tmp = Date.today
         else
-            @date = params[:date].to_date.beginning_of_month.beginning_of_week
-            @date2 = params[:date].to_date.end_of_month.end_of_week
+            date_tmp = params[:date].to_date
         end
+        puts "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        puts " >>> #{date_tmp.beginning_of_month} : #{date_tmp.beginning_of_month.cwday}"
+        if date_tmp.beginning_of_month.cwday == 7
+            date_tmp = date_tmp.beginning_of_month + 1.day
+        elsif date_tmp.beginning_of_month.cwday == 6
+            date_tmp = date_tmp.beginning_of_month + 2.days
+        else
+            date_tmp = date_tmp.beginning_of_month
+        end
+        puts "=== #{date_tmp}"
+        puts "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        @date = date_tmp.beginning_of_week
+        @date2 = date_tmp.end_of_month.end_of_week
+
 
         @jours = Hash.new
 
@@ -110,11 +124,12 @@ class JoursController < ApplicationController
         # Liste des attributions
         utilisateurs_jours = Jour.where(date: @date..@date2).order(:service_id, :utilisateur_id, :date, :am_pm)
         utilisateurs_jours.each do |utilisateur_jour|
-            #@jours[utilisateur_jour.service] ||= Hash.new
-            @jours[utilisateur_jour.service][utilisateur_jour.utilisateur] ||= Hash.new
-            dd = utilisateur_jour.date.to_s
-            @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd] ||= Hash.new
-            @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = WorkingList.for(utilisateur_jour.id).includes(:work)
+            unless @jours[utilisateur_jour.service].nil?
+                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur] ||= Hash.new
+                dd = utilisateur_jour.date.to_s
+                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd] ||= Hash.new
+                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = WorkingList.for(utilisateur_jour.id).includes(:work)
+            end
         end
 
         @fermetures = Hash.new

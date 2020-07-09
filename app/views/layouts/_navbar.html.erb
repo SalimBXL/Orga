@@ -51,16 +51,19 @@
             </li>
 
             <!-- THIS MONTH -->
-            <li>
-                <%= link_to "<i class='material-icons'
-                    data-toggle='tooltip'
-                    title='#{I18n.t("home.navbar.ce_mois")}'
-                    data-placement='bottom'>
-                    calendar_today
-                    </i>".html_safe,
-                    month_path
-                %>
-            </li>
+            <% if user_signed_in? %>
+                <li>
+                    <%= link_to "<i class='material-icons'
+                        data-toggle='tooltip'
+                        title='#{I18n.t("home.navbar.ce_mois")}'
+                        data-placement='bottom'>
+                        calendar_today
+                        </i>".html_safe,
+                        month_path
+                    %>
+                </li>
+            <% end %>
+
 
 
             <!-- LANGUE -->
