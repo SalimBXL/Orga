@@ -41,27 +41,35 @@
     <!-- AFFICHAGE DU NOM DU SERVICE -->
     <div class="well"><H4><%= service.nom %></H4></div>
     <table class="table table-bordered grille">
+        <!-- Ligne de numéros de semaines -->
+        <tr>
+            <td class="tdfixe"></td>
+            <% ((@date2-@date).to_i).times do |i| %>
+                <% if (@date + i.day).wday==1 %>
+                    <td class="tdfixe2" colspan="6">
+                        <%= "##{(@date + i.day).cweek}" %>
+                    </td>
+                <% end %>
+            <% end %>
+        </tr>
         <!-- Ligne de numéros de jours -->
         <tr>
-            <td>
-            </td>
+            <td class="tdfixe"></td>
             <% ((@date2-@date).to_i).times do |i| %>
                 <% if (@date + i.day).wday!=0 %>
-                    <td>
-                        <% if (@date + i.day).wday==6 %>                        
-                            W
-                        <% else %>
-                            <%= (@date + i.day).day %>
-                        <% end %>
-                    </td>
+                    <% if (@date + i.day).wday==6 %>                        
+                        <td class="tdW">W</td>
+                    <% else %>
+                        <td class="tdfixe2"><%= (@date + i.day).day %></td>
+                    <% end %>
                 <% end %>
             <% end %>
         </tr>
     
         <!-- Ligne par utilisateur -->
         <% contenu.each do |utilisateur, jours| %>
-            <tr>
-                <td>
+            <tr class="tdfixe3"> 
+                <td class="tdfixe">
                     <strong><%= utilisateur.prenom_nom %></strong>
                 </td>
 
@@ -101,7 +109,7 @@
 
                     <!-- Jour de semaine "normal" -->
                     <% if (1..5).include?(date_jour.wday) %>
-                        <td class="<%= bg %>">
+                        <td class="tdfixe3 <%= bg %>">
                             <!-- Works -->
                             <% [false, true].each do |ap| %>
                                 <% dd = date_jour.to_s %>
