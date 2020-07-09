@@ -163,7 +163,7 @@ class AjoutsController < ApplicationController
     end
 
     def find_ajout
-        @ajout = Ajout.find_by_id(params[:id])
+        @ajout = Ajout.find(params[:id])
     end
 
     def find_utilisateurs
