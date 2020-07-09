@@ -118,7 +118,7 @@ class JoursController < ApplicationController
         end
 
         @fermetures = Hash.new
-        fermetures = Fermeture.where('date_fin >= ? AND date <= ?', "2020-07-01", "2020-07-31").order(:service_id, :date, :date_fin)
+        fermetures = Fermeture.where('date_fin >= ? AND date <= ?', @date, @date2).order(:service_id, :date, :date_fin)
         fermetures.each do |fermeture|
             (fermeture.date..fermeture.date_fin).each do |fj|
                 @fermetures[fermeture.service_id] ||= Hash.new
