@@ -71,6 +71,9 @@
 
                     
                     <!-- Compose la fiche du jour -->
+                    <% if (@date.beginning_of_week+(i-1).day) == Date.today %>
+                        <% bg = "today" %>
+                    <% end %>
                     <div class="col-sm-2 <%= bg %>">
                         <% bg = "" %>
                         <p>

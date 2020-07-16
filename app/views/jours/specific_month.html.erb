@@ -109,6 +109,12 @@
 
                     <!-- Jour de semaine "normal" -->
                     <% if (1..5).include?(date_jour.wday) %>
+                        <!-- Si le jour affiché est la date actuelle
+                             on jauni le fond ... -->
+                        <% if date_jour == Date.today %>
+                            <% bg = "today" %>
+                        <% end %>
+                        
                         <td class="tdfixe3 <%= bg %>">
                             <!-- Works -->
                             <% [false, true].each do |ap| %>
