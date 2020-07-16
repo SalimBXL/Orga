@@ -1,4 +1,11 @@
+
+<% last_service = nil %>
+<% last_groupe = nil %>
+<% last_utilisateur = nil %>
+
 <div class="container">
+
+    <!-- TITRE DATE DU JOUR -->
     <h1>
         <span class="label label-info">
             <i class="material-icons">today</i>
@@ -6,9 +13,34 @@
         </span>
     </h1>
 
-    <div class="row">
-        <div class="col-sm-10"></div>
-        <div class="col-sm-2">
+    <div class="flex-menu-day">
+
+        <!-- MENU SERVICE -->
+        <div>
+            
+            <!-- Liste des services -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <% unless @current_service.nil? %>
+                        <%= @current_service.nom %>
+                    <% else %>
+                        <%= I18n.t("jours.today.all_services") %>
+                    <% end %>
+
+                <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><%= link_to I18n.t("jours.today.all_services"), today_path(date: @date) %></li>
+                    <% @services.each do |service| %>
+                        <li>
+                        <%= link_to service.nom, today_path(date: @date, service: service.id) %>
+                        </li>
+                    <% end %>
+                </ul>
+            </li>
+        </div>
+
+        <!-- MENU NAVIGATION -->
+        <div style="flex: 0 0 120px">
             <div class="btn-group">
                 <%= link_to '<span data-toggle="tooltip"  >
                                 <i class="material-icons">chevron_left</i></span>'.html_safe, 
@@ -27,26 +59,36 @@
     </div>
 
 
-    <% last_service = nil %>
-    <% last_groupe = nil %>
-    <% last_utilisateur = nil %>
 
     <% @specific_day_jours.each do |specific_day_jour| %>
 
+        <!-- Changement de service -->
         <% if specific_day_jour.service != last_service %>
-            <% last_service = specific_day_jour.service %>
-            <div class="row">
-            <div class="col-sm-12">
-                <h3 class="well">
-                    <i class="material-icons">business</i>
-                    <%= specific_day_jour.service.nom.upcase %></span>
-                </h3>
+
+            <% if !last_service.nil? %>
                 </div>
-            </div>
+                </div>
+            <% end %>
+            <div 
+                id = "service-<%= specific_day_jour.service.id %>"
+                <% if !@current_service.nil? && @current_service.id != specific_day_jour.service.id %>
+                    style = "display: none"
+                <% end %>
+            >
+            <% last_service = specific_day_jour.service %>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3 class="well">
+                        <i class="material-icons">business</i>
+                        <%= specific_day_jour.service.nom.upcase %>
+                    </h3>
+                </div>
+            
         <% end %>
         
 
-
+        <!-- Changement d'utilisateur -->
         <% if specific_day_jour.utilisateur.prenom_nom != last_utilisateur %>
             <% last_utilisateur = specific_day_jour.utilisateur.prenom_nom %>
             <div class="col-sm-4">

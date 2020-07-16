@@ -70,6 +70,8 @@ class JoursController < ApplicationController
     def specific_day
         @specific_day_works = Hash.new
         @absence = Hash.new
+
+        # Détermine la date
         unless params[:date]
             @date = Date.today
             @specific_day_jours = Jour.today.select([:id, :utilisateur_id, :service_id, :am_pm, :note]).includes(utilisateur: :groupe)
@@ -77,12 +79,23 @@ class JoursController < ApplicationController
             @date = params[:date].to_date
             @specific_day_jours = Jour.at_day(@date).select([:id, :utilisateur_id, :service_id, :am_pm, :note]).includes(utilisateur: :groupe)
         end
+
+        # Parse les jours
         @specific_day_jours.each do |jour|
             @specific_day_works[jour] = WorkingList.for(jour).includes(:work)
             @absence[jour.utilisateur] ||= false
             if Absence.today_for_user(jour.utilisateur).count > 0
                 @absence[jour.utilisateur] = true
             end
+        end
+
+        # Charges les services
+        @services = Service.order(:nom).select([:id,:nom])
+        # Détermine le service à afficher
+        unless params[:service]
+            @current_service = nil
+        else 
+            @current_service = @services.find_by_id(params[:service])
         end
     end
 
