@@ -1,152 +1,163 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
+            <button 
+                type="button" 
+                class="navbar-toggle" 
+                data-toggle="collapse" 
+                data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span> 
+            </button>
             <a class="navbar-brand" href="#">Orga</a>
         </div>
 
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <!-- PARTIE GAUCHE -->
+            <ul class="nav navbar-nav">
+            </ul>
 
-        <!-- PARTIE GAUCHE -->
-        <ul class="nav navbar-nav">
-        </ul>
+            <!-- PARTIE DROITE -->
+            <ul class="nav navbar-nav navbar-right">
 
 
-        <!-- PARTIE DROITE -->
-        <ul class="nav navbar-nav navbar-right">
-
-
-            <!-- HOME -->
-            <li>
-                <%= link_to "<i class='material-icons' 
-                    data-toggle='tooltip'
-                    title='#{I18n.t("home.navbar.home")}'
-                    data-placement='bottom'>
-                    home
-                    </i>".html_safe, 
-                    root_path
-                %>
-            </li>
-
-            <!-- TODAY -->
-            <li>
-                <%= link_to "<i class='material-icons' 
-                    data-toggle='tooltip' 
-                    title='#{I18n.t("home.navbar.aujourdhui")}'
-                    data-placement='bottom'>
-                    today
-                    </i>".html_safe,
-                    today_path
-                %>
-            </li>
-
-            <!-- THIS WEEK -->
-            <li>
-                <%= link_to "<i class='material-icons'
-                    data-toggle='tooltip'
-                    title='#{I18n.t("home.navbar.cette_semaine")}'
-                    data-placement='bottom'>
-                    date_range
-                    </i>".html_safe,
-                    week_path
-                %>
-            </li>
-
-            <!-- THIS MONTH -->
-            <% if user_signed_in? %>
+                <!-- HOME -->
                 <li>
-                    <%= link_to "<i class='material-icons'
+                    <%= link_to "<i class='material-icons' 
                         data-toggle='tooltip'
-                        title='#{I18n.t("home.navbar.ce_mois")}'
+                        title='#{I18n.t("home.navbar.home")}'
                         data-placement='bottom'>
-                        calendar_today
-                        </i>".html_safe,
-                        month_path
+                        home
+                        </i>".html_safe, 
+                        root_path
                     %>
                 </li>
-            <% end %>
 
-
-
-            <!-- LANGUE -->
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="material-icons" 
-                        data-toggle="tooltip" 
-                        title="<%= I18n.locale.upcase %>"
-                        data-placement="bottom">
-                        language
-                    </i>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <span data-toggle="tooltip" 
-                        title="EN"
-                        data-placement="bottom">
-                        &nbsp;&nbsp;
-                        <%= link_to image_tag("flag_en.png", alt: "EN", class: "locale-flag"),
-                        url_for(only_path: true, locale: "en") %>
-                        </span>
-                    </li>
-                    <li>
-                        <span data-toggle="tooltip" 
-                        title="FR"
-                        data-placement="bottom">
-                        &nbsp;&nbsp;
-                        <%= link_to image_tag("flag_fr.png", alt: "FR", class: "locale-flag"),
-                        url_for(only_path: true, locale: "fr") %>
-                    </li>
-                    <li>
-                        <span data-toggle="tooltip" 
-                        title="NL"
-                        data-placement="bottom">
-                        &nbsp;&nbsp;
-                        <%= link_to image_tag("flag_nl.png", alt: "NL", class: "locale-flag"),
-                        url_for(only_path: true, locale: "nl") %>
-                    </li>
-                </ul>
-            </li>
-
-            <!-- PROFILE -->
-            <% if user_signed_in? %>
+                <!-- TODAY -->
                 <li>
-                    <%= link_to "<i class='material-icons'
-                            data-toggle='tooltip'
-                            title=#{I18n.t('home.navbar.profile')}
-                            data-placement='bottom'>
-                            person
+                    <%= link_to "<i class='material-icons' 
+                        data-toggle='tooltip' 
+                        title='#{I18n.t("home.navbar.aujourdhui")}'
+                        data-placement='bottom'>
+                        today
                         </i>".html_safe,
-                        utilisateur_path(current_user.utilisateur)
+                        today_path
                     %>
                 </li>
-            <% end %>
 
-            <!-- CONNEXION -->
-            <li>
+                <!-- THIS WEEK -->
                 <% if user_signed_in? %>
-                    <%= link_to "<span class='btn btn-danger btn-xs'>
-                                <i class='material-icons'
-                                    data-toggle='tooltip'
-                                    title=#{I18n.t('home.navbar.logout') } 
-                                    data-placement='bottom'>
-                                    power_settings_new
-                                </i>
-                                </span>".html_safe, 
-                                destroy_user_session_path, 
-                                method: :delete 
-                    %>
-                <% else %>
-                    <%= link_to "<span class='btn btn-success btn-xs'>
-                                <i class='material-icons'
-                                    data-toggle='tooltip'
-                                    title=#{I18n.t('home.navbar.login') } 
-                                    data-placement='bottom'>
-                                    power_settings_new
-                                </i>
-                                </span>".html_safe, 
-                                new_user_session_path
-                    %>
+                    <li>
+                        <%= link_to "<i class='material-icons'
+                            data-toggle='tooltip'
+                            title='#{I18n.t("home.navbar.cette_semaine")}'
+                            data-placement='bottom'>
+                            date_range
+                            </i>".html_safe,
+                            week_path
+                        %>
+                    </li>
                 <% end %>
-            </li>
 
-        </ul>
+                <!-- THIS MONTH -->
+                <% if user_signed_in? %>
+                    <li>
+                        <%= link_to "<i class='material-icons'
+                            data-toggle='tooltip'
+                            title='#{I18n.t("home.navbar.ce_mois")}'
+                            data-placement='bottom'>
+                            calendar_today
+                            </i>".html_safe,
+                            month_path
+                        %>
+                    </li>
+                <% end %>
+
+
+
+                <!-- LANGUE -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="material-icons" 
+                            data-toggle="tooltip" 
+                            title="<%= I18n.locale.upcase %>"
+                            data-placement="bottom">
+                            language
+                        </i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <span data-toggle="tooltip" 
+                            title="EN"
+                            data-placement="bottom">
+                            &nbsp;&nbsp;
+                            <%= link_to image_tag("flag_en.png", alt: "EN", class: "locale-flag"),
+                            url_for(only_path: true, locale: "en") %>
+                            </span>
+                        </li>
+                        <li>
+                            <span data-toggle="tooltip" 
+                            title="FR"
+                            data-placement="bottom">
+                            &nbsp;&nbsp;
+                            <%= link_to image_tag("flag_fr.png", alt: "FR", class: "locale-flag"),
+                            url_for(only_path: true, locale: "fr") %>
+                        </li>
+                        <li>
+                            <span data-toggle="tooltip" 
+                            title="NL"
+                            data-placement="bottom">
+                            &nbsp;&nbsp;
+                            <%= link_to image_tag("flag_nl.png", alt: "NL", class: "locale-flag"),
+                            url_for(only_path: true, locale: "nl") %>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- PROFILE -->
+                <% if user_signed_in? %>
+                    <li>
+                        <%= link_to "<i class='material-icons'
+                                data-toggle='tooltip'
+                                title=#{I18n.t('home.navbar.profile')}
+                                data-placement='bottom'>
+                                person
+                            </i>".html_safe,
+                            utilisateur_path(current_user.utilisateur)
+                        %>
+                    </li>
+                <% end %>
+
+                <!-- CONNEXION -->
+                <li>
+                    <% if user_signed_in? %>
+                        <%= link_to "<span class='btn btn-danger btn-xs'>
+                                    <i class='material-icons'
+                                        data-toggle='tooltip'
+                                        title=#{I18n.t('home.navbar.logout') } 
+                                        data-placement='bottom'>
+                                        power_settings_new
+                                    </i>
+                                    </span>".html_safe, 
+                                    destroy_user_session_path, 
+                                    method: :delete 
+                        %>
+                    <% else %>
+                        <%= link_to "<span class='btn btn-success btn-xs'>
+                                    <i class='material-icons'
+                                        data-toggle='tooltip'
+                                        title=#{I18n.t('home.navbar.login') } 
+                                        data-placement='bottom'>
+                                        power_settings_new
+                                    </i>
+                                    </span>".html_safe, 
+                                    new_user_session_path
+                        %>
+                    <% end %>
+                </li>
+
+            </ul>
+        </div>
     </div>
 </nav>
