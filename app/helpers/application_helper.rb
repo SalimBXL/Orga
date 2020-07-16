@@ -45,4 +45,11 @@ module ApplicationHelper
         "#{date.year}-W#{date.cweek<10 ? "0" : ""}#{date.cweek}" 
     end
 
+    def after_login
+        if user_signed_in?
+          current_user.last_connection = DateTime.current()
+          current_user.save
+        end
+      end
+
 end

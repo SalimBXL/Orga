@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_locale
-  after_action :after_login
+  #after_action :after_login
 
   def default_url_options
     { locale: I18n.locale }
