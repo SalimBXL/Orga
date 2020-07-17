@@ -97,6 +97,11 @@ class JoursController < ApplicationController
         else 
             @current_service = @services.find_by_id(params[:service])
         end
+
+        # Charge les Events
+        @events = Hash.new
+        charge_events(@date)
+        
     end
 
     ############
@@ -168,6 +173,10 @@ class JoursController < ApplicationController
             @current_service = @services.find_by_id(params[:service])
         end
 
+        # Charge les Events
+        @events = Hash.new
+        charge_events(@date)
+
     end
 
     ############
@@ -217,7 +226,7 @@ class JoursController < ApplicationController
             end
         end
 
-        # Charges les services
+        # Charge les services
         @services = Service.order(:nom).select([:id,:nom])
         # Détermine le service à afficher
         unless params[:service]
@@ -225,10 +234,27 @@ class JoursController < ApplicationController
         else 
             @current_service = @services.find_by_id(params[:service])
         end
+
+        # Charge les Events
+        @events = Hash.new
+        5.times do |i|
+            charge_events(@date.beginning_of_week+i.day)
+        end
     end
 
 
     private 
+
+    def charge_events(date)
+         # Charge les Events
+         events = Event.where(date: date).order(:service_id, :nom)
+         events.each do |event|
+             if @events[event.service_id].nil?
+                 @events[event.service_id] = Array.new
+             end
+             @events[event.service_id] << event
+         end
+    end
 
     def jour_params
         params.require(:jour).permit(:date, :utilisateur_id, :am_pm, :service_id)

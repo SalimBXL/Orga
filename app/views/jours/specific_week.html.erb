@@ -64,7 +64,11 @@
             <% end %>
         >
 
-            <div class="row"><div class="well"><H4><%= service.nom %></H4></div></div>
+            <div class="row">
+                <div class="well">
+                    <H4><%= service.nom %></H4>
+                </div>
+            </div>
 
             <!-- Affichage du nom des jours de la semaine -->
             <div class="row">
@@ -74,6 +78,17 @@
                     <% i+= 1 %>
                     <div class="col-sm-2 label label-default">
                         <%= "#{nom_jour(i)} #{(@date.beginning_of_week+(i-1).day).day}" %>
+                        <% unless @events[service.id].nil? %>
+                            <% @events[service.id].each do |event| %>
+                                <% if event.date == (@date.beginning_of_week+(i-1).day) %>
+                                    <i class="material-icons"
+                                        data-toggle="tooltip" 
+                                        title="<%= "#{event.nom.capitalize} #{event.note}" %>"
+                                    >error_outline</i>
+                                    </span>
+                                <% end %>
+                            <% end %>
+                        <% end %>
                     </div>
                 <% end %>
             </div>
