@@ -5,16 +5,41 @@
             <%= I18n.t("month.mois_#{(@date+15.days).month}") %>
         </span>
     </h1>
-    <div class="row">
-        <div class="col-sm-2">
+
+    <div class="flex-menu-day">
+        
+        <!-- Plage de dates -->
+        <div style="margin-right: auto">
             <div class="badge">
                 <%= I18n.localize @date, format: :long %> -- <%= I18n.localize @date2, format: :long %>
             </div>
         </div>
-        <div class="col-sm-8"></div>
-        <div class="col-sm-2">
 
-        <!-- NAVIGATION DE MOIS EN MOIS -->
+        <!-- MENU SERVICE -->
+        <div>
+            <!-- Liste des services -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <% unless @current_service.nil? %>
+                        <%= @current_service.nom %>
+                    <% else %>
+                        <%= I18n.t("jours.today.all_services") %>
+                    <% end %>
+
+                <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><%= link_to I18n.t("jours.today.all_services"), month_path(date: @date) %></li>
+                    <% @services.each do |service| %>
+                        <li>
+                        <%= link_to service.nom, month_path(date: @date, service: service.id) %>
+                        </li>
+                    <% end %>
+                </ul>
+            </li>
+        </div>
+
+        <!-- MENU NAVIGATION -->
+        <div style="flex: 0 0 120px">
             <div class="btn-group">
                 <%= link_to '<span data-toggle="tooltip"  >
                                 <i class="material-icons">chevron_left</i></span>'.html_safe, 
@@ -31,119 +56,125 @@
             </div>
         </div>
     </div>
-    <br>
 </div>
 
 
 
 <% @jours.each do |service, contenu| %>
     <br>
-    <!-- AFFICHAGE DU NOM DU SERVICE -->
-    <div class="well"><H4><%= service.nom %></H4></div>
-    <table class="table table-bordered grille">
-        <!-- Ligne de numéros de semaines -->
-        <tr>
-            <td class="tdfixe"></td>
-            <% ((@date2-@date).to_i).times do |i| %>
-                <% if (@date + i.day).wday==1 %>
-                    <td class="tdfixe2" colspan="6">
-                        <%= "##{(@date + i.day).cweek}" %>
-                    </td>
-                <% end %>
-            <% end %>
-        </tr>
-        <!-- Ligne de numéros de jours -->
-        <tr>
-            <td class="tdfixe"></td>
-            <% ((@date2-@date).to_i).times do |i| %>
-                <% if (@date + i.day).wday!=0 %>
-                    <% if (@date + i.day).wday==6 %>                        
-                        <td class="tdW">W</td>
-                    <% else %>
-                        <td class="tdfixe2"><%= (@date + i.day).day %></td>
-                    <% end %>
-                <% end %>
-            <% end %>
-        </tr>
-    
-        <!-- Ligne par utilisateur -->
-        <% contenu.each do |utilisateur, jours| %>
-            <tr class="tdfixe3"> 
-                <td class="tdfixe">
-                    <strong><%= utilisateur.prenom_nom %></strong>
-                </td>
-
-                <% ((@date2-@date).to_i).times do |index| %>
-                    <% date_jour = (@date + index.day) %>
-                    <% bg = "" %>
-                    
-                    <!-- Compose la fiche du jour -->
-
-                    <!-- Weekend... -->
-                    <% if date_jour.wday==0 %>
-                        <% # On zappe le dimanche %>
-                    <% end %>
-                    <% if date_jour.wday==6 %>
-                        <td class="weekend"></td>
-                    <% end %>
-
-                    <!-- Jour de la semaine mais utilisateur en congé-->
-                    <% if ((1..5).include?(date_jour.wday) && !@absences[utilisateur.id].nil?) %>
-                        <% if @absences[utilisateur.id].keys.include?(date_jour.to_s) %>
-                            <% if @absences[utilisateur.id][date_jour.to_s] %>
-                                <% bg = "conge_ok" %>
-                            <% else %>
-                                <% bg = "conge_wait" %>
-                            <% end %>
-                        <% end %>
-                    <% end %>
-
-                    <!-- Jour de semaine ... -->
-                    
-                    <!-- mais service fermé... -->
-                    <% if ((1..5).include?(date_jour.wday) && !@fermetures[service.id].nil?) %>
-                        <% if @fermetures[service.id].keys.include?(date_jour.to_s) %>
-                            <% bg = "ferie" %>
-                        <% end %>
-                    <% end %>
-
-                    <!-- Jour de semaine "normal" -->
-                    <% if (1..5).include?(date_jour.wday) %>
-                        <!-- Si le jour affiché est la date actuelle
-                             on jauni le fond ... -->
-                        <% if date_jour == Date.today %>
-                            <% bg = "today" %>
-                        <% end %>
-                        
-                        <td class="tdfixe3 <%= bg %>">
-                            <!-- Works -->
-                            <% [false, true].each do |ap| %>
-                                <% dd = date_jour.to_s %>
-                                <% unless @jours[service][utilisateur][dd].nil? %>
-                                    <% unless @jours[service][utilisateur][dd][ap].nil? %>
-                                        <% @jours[service][utilisateur][dd][ap].each do |wl| %>
-                                            <!-- Change la couleur pour certains works -->
-                                            <% cl = "" %>
-                                            <% if wl.work.code.downcase == "qc" && Date.parse(dd).wday==5 %>
-                                                <% cl = "keep_attention" %>
-                                            <% end %>
-                                            <!-- Affiche le works -->
-                                            <% unless ap %>
-                                                <span class="  <%= cl %>">
-                                            <% else %>
-                                                <span class="label label-info <%= cl %>">
-                                            <% end %>
-                                                <%= wl.work.code %>
-                                            </span>
-                                        <% end %>
-                                    <% end %>
-                                <% end %>
-                            <% end %>
-                            <% bg = "" %>
+    <div 
+        id = "service-<%= service.id %>"
+        <% if !@current_service.nil? && @current_service.id != service.id %>
+                style = "display: none"
+        <% end %>
+    >
+        <!-- AFFICHAGE DU NOM DU SERVICE -->
+        <div class="well"><H4><%= service.nom %></H4></div>
+        <table class="table table-bordered grille">
+            <!-- Ligne de numéros de semaines -->
+            <tr>
+                <td class="tdfixe"></td>
+                <% ((@date2-@date).to_i).times do |i| %>
+                    <% if (@date + i.day).wday==1 %>
+                        <td class="tdfixe2" colspan="6">
+                            <%= "##{(@date + i.day).cweek}" %>
                         </td>
                     <% end %>
                 <% end %>
             </tr>
-        <% end %>
-    </table>
+            <!-- Ligne de numéros de jours -->
+            <tr>
+                <td class="tdfixe"></td>
+                <% ((@date2-@date).to_i).times do |i| %>
+                    <% if (@date + i.day).wday!=0 %>
+                        <% if (@date + i.day).wday==6 %>                        
+                            <td class="tdW">W</td>
+                        <% else %>
+                            <td class="tdfixe2"><%= (@date + i.day).day %></td>
+                        <% end %>
+                    <% end %>
+                <% end %>
+            </tr>
+        
+            <!-- Ligne par utilisateur -->
+            <% contenu.each do |utilisateur, jours| %>
+                <tr class="tdfixe3"> 
+                    <td class="tdfixe">
+                        <strong><%= utilisateur.prenom_nom %></strong>
+                    </td>
+
+                    <% ((@date2-@date).to_i).times do |index| %>
+                        <% date_jour = (@date + index.day) %>
+                        <% bg = "" %>
+                        
+                        <!-- Compose la fiche du jour -->
+
+                        <!-- Weekend... -->
+                        <% if date_jour.wday==0 %>
+                            <% # On zappe le dimanche %>
+                        <% end %>
+                        <% if date_jour.wday==6 %>
+                            <td class="weekend"></td>
+                        <% end %>
+
+                        <!-- Jour de la semaine mais utilisateur en congé-->
+                        <% if ((1..5).include?(date_jour.wday) && !@absences[utilisateur.id].nil?) %>
+                            <% if @absences[utilisateur.id].keys.include?(date_jour.to_s) %>
+                                <% if @absences[utilisateur.id][date_jour.to_s] %>
+                                    <% bg = "conge_ok" %>
+                                <% else %>
+                                    <% bg = "conge_wait" %>
+                                <% end %>
+                            <% end %>
+                        <% end %>
+
+                        <!-- Jour de semaine ... -->
+                        
+                        <!-- mais service fermé... -->
+                        <% if ((1..5).include?(date_jour.wday) && !@fermetures[service.id].nil?) %>
+                            <% if @fermetures[service.id].keys.include?(date_jour.to_s) %>
+                                <% bg = "ferie" %>
+                            <% end %>
+                        <% end %>
+
+                        <!-- Jour de semaine "normal" -->
+                        <% if (1..5).include?(date_jour.wday) %>
+                            <!-- Si le jour affiché est la date actuelle
+                                on jauni le fond ... -->
+                            <% if date_jour == Date.today %>
+                                <% bg = "today" %>
+                            <% end %>
+                            
+                            <td class="tdfixe3 <%= bg %>">
+                                <!-- Works -->
+                                <% [false, true].each do |ap| %>
+                                    <% dd = date_jour.to_s %>
+                                    <% unless @jours[service][utilisateur][dd].nil? %>
+                                        <% unless @jours[service][utilisateur][dd][ap].nil? %>
+                                            <% @jours[service][utilisateur][dd][ap].each do |wl| %>
+                                                <!-- Change la couleur pour certains works -->
+                                                <% cl = "" %>
+                                                <% if wl.work.code.downcase == "qc" && Date.parse(dd).wday==5 %>
+                                                    <% cl = "keep_attention" %>
+                                                <% end %>
+                                                <!-- Affiche le works -->
+                                                <% unless ap %>
+                                                    <span class="  <%= cl %>">
+                                                <% else %>
+                                                    <span class="label label-info <%= cl %>">
+                                                <% end %>
+                                                    <%= wl.work.code %>
+                                                </span>
+                                            <% end %>
+                                        <% end %>
+                                    <% end %>
+                                <% end %>
+                                <% bg = "" %>
+                            </td>
+                        <% end %>
+                    <% end %>
+                </tr>
+            <% end %>
+        </table>
+    </div>
 <% end %>
