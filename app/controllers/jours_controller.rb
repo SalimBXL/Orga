@@ -159,6 +159,14 @@ class JoursController < ApplicationController
             end
         end
 
+        # Charges les services
+        @services = Service.order(:nom).select([:id,:nom])
+        # Détermine le service à afficher
+        unless params[:service]
+            @current_service = nil
+        else 
+            @current_service = @services.find_by_id(params[:service])
+        end
 
     end
 
@@ -207,6 +215,15 @@ class JoursController < ApplicationController
                     @off[utilisateur_jour.service] << i
                 end
             end
+        end
+
+        # Charges les services
+        @services = Service.order(:nom).select([:id,:nom])
+        # Détermine le service à afficher
+        unless params[:service]
+            @current_service = nil
+        else 
+            @current_service = @services.find_by_id(params[:service])
         end
     end
 
