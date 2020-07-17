@@ -1,0 +1,47 @@
+<%= form_with model: @event, local: true do |form| %>
+
+    <% if @event.errors.any? %>
+        <strong>WARNING</strong>
+        <ul>
+            <% @event.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
+
+    <!-- Nom -->
+    <p>
+        <%= form.label I18n.t("fermetures.new.nom") %><br>
+        <%= form.text_field :nom %>
+    </p>
+
+    <!-- Date -->
+    <p>
+        <%= form.label I18n.t("fermetures.new.dates") %><br>
+        <%= form.date_field :date %>
+    </p>
+
+    <!-- Service -->
+    <p>
+        <%= form.label I18n.t("fermetures.new.service") %><br>
+        <%= form.select(:service_id) do %>
+            <%= select_option_tag("", nil, @event.service_id) %>
+            <% Service.all.find_each do |l| %>
+                <%= select_option_tag(l.nom.capitalize, l.id, @event.service_id) %>
+            <% end %>
+        <% end %>
+    </p>
+
+
+    <!-- Note -->
+    <p>
+        <%= form.label I18n.t("fermetures.new.note") %><br>
+        <%= form.text_field :note %>
+    </p>
+
+
+
+    <p>
+        <%= form.submit class: "btn btn-primary" %>
+    </p>
+<% end %>

@@ -1,0 +1,21 @@
+<div class="container">
+<h1>
+    <%= @event.nom %>
+</h1>
+
+<p>
+    <%= @event.date %>
+</p>
+
+<p>
+    <%= @event.service.nom %>
+</p>
+
+<p>
+    <%= @event.note %>
+</p>
+
+<p>
+    <%= link_to " [Edit] ", edit_event_path(@event) %>
+</p>
+</div>

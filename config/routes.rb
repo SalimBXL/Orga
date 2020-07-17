@@ -89,6 +89,12 @@ Rails.application.routes.draw do
   ################
   resources :fermetures, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
 
+
+  ############
+  #  Events  #
+  ############
+  resources :events, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
+
   
   #####################
   #   Types Absences  #

@@ -71,6 +71,15 @@ en:
   errors:
     messages:
       not_saved: Not saved
+  events:
+    index:
+      dates: Dates
+      noms: Noms
+      notes: Notes
+      services: Services
+      titre: Titre
+    new:
+      titre: Titre
   fermetures:
     index:
       dates: Dates
@@ -125,8 +134,6 @@ en:
       logout: Logout
       profile: Profile
   jours:
-    today:
-      all_services: All Services
     form:
       am: AM
       date: Date
@@ -144,6 +151,8 @@ en:
       utilisateur: User
     new:
       titre: New Day
+    today:
+      all_services: All Services
   lieus:
     edit:
       nom: Edition

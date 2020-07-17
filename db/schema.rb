@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200617111930) do
+ActiveRecord::Schema.define(version: 20200617111931) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,16 @@ ActiveRecord::Schema.define(version: 20200617111930) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["utilisateur_id"], name: "index_demande_conges_on_utilisateur_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "nom"
+    t.date "date"
+    t.string "note"
+    t.bigint "service_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["service_id"], name: "index_events_on_service_id"
   end
 
   create_table "fermetures", force: :cascade do |t|
@@ -176,6 +186,7 @@ ActiveRecord::Schema.define(version: 20200617111930) do
   add_foreign_key "absences", "utilisateurs"
   add_foreign_key "ajouts", "utilisateurs"
   add_foreign_key "demande_conges", "utilisateurs"
+  add_foreign_key "events", "services"
   add_foreign_key "fermetures", "services"
   add_foreign_key "jours", "services"
   add_foreign_key "jours", "utilisateurs"

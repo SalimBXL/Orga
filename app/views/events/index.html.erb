@@ -1,27 +1,27 @@
 <div class="container">
 <h1>
     <span class="label label-primary">
-        <i class="material-icons">event_busy</i>
-        <%= I18n.t("fermetures.index.titre").upcase %>
+        <i class="material-icons">event_available</i>
+        <%= I18n.t("events.index.titre").upcase %>
     </span>
 </h1>
 
 <p>
     <% if user_signed_in? && current_user.admin? %>
     <%= link_to '<i class="material-icons">add</i> '.html_safe, 
-        new_fermeture_path,
+        new_event_path,
         class: "btn btn-success btn-xs" %>
     <% end %>
 </p>
 
-<div id="fermetures">
-    <%= render 'fermetures' %>
+<div id="events">
+    <%= render 'events' %>
 </div>
 
 <p>
     <% if user_signed_in? && current_user.admin? %>
     <%= link_to '<i class="material-icons">add</i> '.html_safe, 
-        new_fermeture_path,
+        new_event_path,
         class: "btn btn-success btn-xs" %>
     <% end %>
 </p>

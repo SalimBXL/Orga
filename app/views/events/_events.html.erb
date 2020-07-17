@@ -1,0 +1,12 @@
+<p><%= paginate @events, remote: true %></p>
+<table class="table table-striped">
+    <tr>
+        <th><%= I18n.t("events.index.noms") %></th>
+        <th><%= I18n.t("events.index.dates") %></th>
+        <th><%= I18n.t("events.index.services") %></th>
+        <th><%= I18n.t("events.index.notes") %></th>
+        <th></th>
+    </tr>
+    <%= render @events %>
+</table>
+<p><%= paginate @events, remote: true %></p>
