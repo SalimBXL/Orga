@@ -1,7 +1,7 @@
 <div class="container">
     <h1>
         <span class="label label-info">
-            <i class="material-icons">date_range</i>
+            <i class="material-icons">calendar_today</i>
             <%= I18n.t("month.mois_#{(@date+15.days).month}") %>
         </span>
     </h1>
@@ -28,10 +28,10 @@
 
                 <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><%= link_to I18n.t("jours.today.all_services"), month_path(date: @date, service: -1) %></li>
+                    <li><%= link_to I18n.t("jours.today.all_services"), month_path(date: (@date+15.days), service: -1) %></li>
                     <% @services.each do |service| %>
                         <li>
-                        <%= link_to service.nom, month_path(date: @date, service: service.id) %>
+                        <%= link_to service.nom, month_path(date: (@date+15.days), service: service.id) %>
                         </li>
                     <% end %>
                 </ul>
@@ -69,7 +69,9 @@
         <% end %>
     >
         <!-- AFFICHAGE DU NOM DU SERVICE -->
-        <div class="well"><H4><%= service.nom %></H4></div>
+        <div class="well">
+            <H3><i class="material-icons">business</i> <%= service.nom.upcase %></H3>
+        </div>
         <table class="table table-bordered grille">
             <!-- Ligne de numéros de semaines -->
             <tr>

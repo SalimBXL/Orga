@@ -6,7 +6,16 @@
         </span>
     </h1>
 
+
+
     <div class="flex-menu-day">
+
+        <!-- Plage de dates -->
+        <div style="margin-right: auto">
+            <div class="badge">
+                <%= I18n.localize @date.beginning_of_week, format: :long %> -- <%= I18n.localize (@date.end_of_week-2.days), format: :long %>
+            </div>
+        </div>
 
         <!-- MENU SERVICE -->
         <div>
@@ -66,7 +75,7 @@
 
             <div class="row">
                 <div class="well">
-                    <H4><%= service.nom %></H4>
+                    <H3><i class="material-icons">business</i> <%= service.nom.upcase %></H3>
                 </div>
             </div>
 
