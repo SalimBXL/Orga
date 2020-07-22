@@ -90,13 +90,7 @@ class JoursController < ApplicationController
         end
 
         # Charges les services
-        @services = Service.order(:nom).select([:id,:nom])
-        # Détermine le service à afficher
-        unless params[:service]
-            @current_service = nil
-        else 
-            @current_service = @services.find_by_id(params[:service])
-        end
+        charge_les_services
 
         # Charge les Events
         @events = Hash.new
@@ -165,13 +159,7 @@ class JoursController < ApplicationController
         end
 
         # Charges les services
-        @services = Service.order(:nom).select([:id,:nom])
-        # Détermine le service à afficher
-        unless params[:service]
-            @current_service = nil
-        else 
-            @current_service = @services.find_by_id(params[:service])
-        end
+        charge_les_services
 
         # Charge les Events
         @events = Hash.new
@@ -227,13 +215,7 @@ class JoursController < ApplicationController
         end
 
         # Charge les services
-        @services = Service.order(:nom).select([:id,:nom])
-        # Détermine le service à afficher
-        unless params[:service]
-            @current_service = nil
-        else 
-            @current_service = @services.find_by_id(params[:service])
-        end
+        charge_les_services
 
         # Charge les Events
         @events = Hash.new
@@ -245,8 +227,26 @@ class JoursController < ApplicationController
 
     private 
 
+    # Charge les services et détermine le service à afficher
+    def charge_les_services
+        @services = Service.order(:nom).select([:id,:nom])
+        unless params[:service]
+            if user_signed_in?
+                @current_service = current_user.utilisateur.service
+            else
+                @current_service = nil
+            end
+        else 
+            unless params[:service].to_i<0
+                @current_service = @services.find_by_id(params[:service])
+            else
+                @current_service = nil
+            end
+        end
+    end
+
+    # Charge les Events
     def charge_events(date)
-         # Charge les Events
          events = Event.where(date: date).order(:service_id, :nom)
          events.each do |event|
              if @events[event.service_id].nil?
