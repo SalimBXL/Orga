@@ -27,7 +27,11 @@ class ApplicationController < ActionController::Base
   # Création de logs
   def log(adresse, description = nil)
     date = Time.now
-    utilisateur_id = current_user.id
+    if user_signed_in?
+      utilisateur_id = current_user.id
+    else
+      utilisateur_id = nil
+    end
     add_in_logfile(date, adresse, utilisateur_id, description)
   end
 
