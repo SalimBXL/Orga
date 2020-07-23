@@ -1,8 +1,19 @@
 <tr id="utilisateur_<%= utilisateur.id %>">
-    <td><%= utilisateur.prenom.capitalize %></td>
-    <td><%= utilisateur.nom.capitalize %></td>
     <td><%= utilisateur.service.nom %></td>
     <td><%= utilisateur.groupe.nom %></td>
+    <td><%= utilisateur.prenom.capitalize %></td>
+    <td>
+        <%= utilisateur.nom.capitalize %>
+        <% if @orphelins_utilisateurs.include?(utilisateur.id) %>
+            <span class="material-icons">report_problem</span>
+        <% end %>
+    </td>
+    <td><%= utilisateur.email %></td>
+    <td>
+        <% if utilisateur.admin? %>
+        <span class="label label-success">&nbsp;</span>
+        <% end %>
+    </td>
     <td>
     <% if user_signed_in? && current_user.admin? %>
         <%= link_to '<span data-toggle="tooltip" >
@@ -30,5 +41,6 @@
     <td>
         <%= time_ago_in_words(utilisateur.last_action) unless utilisateur.last_action.nil? %>
     </td>
+
 
 </tr>

@@ -1,10 +1,12 @@
 <p><%= paginate @utilisateurs, remote: true %></p>
 <table class="table table-striped">
     <tr>
-        <th><%= I18n.t("utilisateurs.index.prenom") %></th>
-        <th><%= I18n.t("utilisateurs.index.nom") %></th>
         <th><%= I18n.t("utilisateurs.index.service") %></th>
         <th><%= I18n.t("utilisateurs.index.groupe") %></th>
+        <th><%= I18n.t("utilisateurs.index.prenom") %></th>
+        <th><%= I18n.t("utilisateurs.index.nom") %></th>
+        <th><%= I18n.t("utilisateurs.index.email") %></th>
+        <th><%= I18n.t("utilisateurs.index.admin") %></th>
         <th></th>
         <th>Last login</th>
     </tr>

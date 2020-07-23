@@ -10,6 +10,27 @@ class UtilisateursController < ApplicationController
         # Log action
         log(request.path)
         @utilisateurs = Utilisateur.order(:service_id, :groupe_id, :prenom, :nom).page(params[:page])
+        @users = User.order(:email)
+
+        @orphelins_utilisateurs = Array.new
+        @orphelins_users = Array.new
+
+        # Est-ce que cheque utilisateur possède un profil de connexion ?
+        @utilisateurs.each do |utilisateur|
+            if @users.find_by_email(utilisateur.email).nil?
+                # Problème... !!!
+                @orphelins_utilisateurs << utilisateur.id
+            end
+        end
+
+        # Est-ce que chaque profil de connexion est lié à un utilisateur ?
+        @users.each do |user|
+            if @utilisateurs.find_by_email(user.email).nil?
+                # Problème... !!!
+                @orphelins_users << user.id
+            end
+        end
+
     end
 
 

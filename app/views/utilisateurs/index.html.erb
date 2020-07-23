@@ -14,6 +14,18 @@
         <% end %>
 </p>
 
+<% if user_signed_in? && current_user.admin? %>
+    <p>
+        <% if @orphelins_users.size>0 %>
+            <div class="alert alert-warning alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <i class="material-icons">report_problem</i> <strong><%= I18n.t("utilisateurs.index.orphelins_users.warning") %> !</strong>
+                <%= I18n.t("utilisateurs.index.orphelins_users.message") %>.
+            </div>
+        <% end %>
+    </p>
+<% end %>
+
 <div id="utilisateurs">
     <%= render 'utilisateurs' %>
 </div>

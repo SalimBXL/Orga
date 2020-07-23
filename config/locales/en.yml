@@ -237,11 +237,16 @@ en:
       titre: Absences
   utilisateurs:
     index:
+      admin: Admin
+      email: Email
       groupe: Group
       log_destroy: destroy
       log_edit: edit
       log_update: update
       nom: Name
+      orphelins_users:
+        message: One connection profile or more is not linked to a user.
+        warning: Warning
       prenom: Firstname
       service: Service
       titre: Users
