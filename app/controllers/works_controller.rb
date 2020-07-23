@@ -5,6 +5,8 @@ class WorksController < ApplicationController
     #   INDEX   #
     #############
     def index
+        # Log action
+        log(request.path)
         @works = Work.order(:service_id, :classe_id, :groupe_id, :nom).page(params[:page])
     end
 
@@ -13,6 +15,8 @@ class WorksController < ApplicationController
     #   SHOW    #
     #############
     def show
+        # Log action
+        log(request.path)
     end
 
 
@@ -20,6 +24,8 @@ class WorksController < ApplicationController
     #    NEW    #
     #############
     def new
+        # Log action
+        log(request.path)
         @work = Work.new
     end
 
@@ -28,6 +34,8 @@ class WorksController < ApplicationController
     #   CREATE   #
     ##############
     def create
+        # Log action
+        log(request.path)
         @work = Work.create(work_params)
         if @work.save
             flash[:notice] = "Work créé avec succès"
@@ -41,6 +49,8 @@ class WorksController < ApplicationController
     #   UPDATE  #
     #############
     def update
+        # Log action
+        log(request.path, I18n.t("works.index.log_update"))
         if @work.update(work_params)
             flash[:notice] = "Work modifié avec succès"
             redirect_to works_path
@@ -53,12 +63,16 @@ class WorksController < ApplicationController
     #   EDIT    #
     #############
     def edit
+        # Log action
+        log(request.path, I18n.t("works.index.log_edit"))
     end
 
     ##############
     #   DESTROY  #
     ##############
     def destroy
+        # Log action
+        log(request.path, I18n.t("works.index.log_estroy"))
         @work.destroy
     end
 

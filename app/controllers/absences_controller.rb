@@ -6,6 +6,8 @@ class AbsencesController < ApplicationController
     #############
     def index
         @absences = Absence.order(date: :desc).order(:type_absence_id).page(params[:page])
+        # Log action
+        log(request.path)
     end
 
 
@@ -23,6 +25,8 @@ class AbsencesController < ApplicationController
         @absence = Absence.new
         @absence.date = Date.today
         @absence.date_fin = @absence.date
+        # Log action
+        log(request.path)
     end
 
 
@@ -30,6 +34,8 @@ class AbsencesController < ApplicationController
     #   CREATE   #
     ##############
     def create
+        # Log action
+        log(request.path)
         @absence = Absence.create(absence_params)
         if @absence.save
             flash[:notice] = "Absence(s) créée(s)"
@@ -44,6 +50,8 @@ class AbsencesController < ApplicationController
     #   UPDATE  #
     #############
     def update
+        # Log action
+        log(request.path, I18n.t("absences.index.log_update"))
 
         # On ajuste la date de fin
         @absence.check_date_fin
@@ -65,12 +73,18 @@ class AbsencesController < ApplicationController
     #   EDIT    #
     #############
     def edit
+        # Log action
+        log(request.path, I18n.t("absences.index.log_edit"))
+        # Log action
+        log(request.path)
     end
 
     ##############
     #   DESTROY  #
     ##############
     def destroy
+        # Log action
+        log(request.path, I18n.t("absences.index.log_destroy"))
         @absence.destroy
     end
 

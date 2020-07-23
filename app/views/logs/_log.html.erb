@@ -1,0 +1,24 @@
+<tr id="log_<%= log.id %>">
+    <td><%= log.date %></td>
+    <td><%= log.adresse %></td>
+    <td><%= log.utilisateur_id %></td>
+    <td><%= log.description %></td>
+    <td>
+    <% if user_signed_in? && current_user.admin? %>
+        <%= link_to '<span data-toggle="tooltip" >
+            <i class="material-icons">edit</i></span>'.html_safe, 
+            edit_log_path(log),
+            class: "btn btn-warning btn-xs" 
+        %>
+
+        <%= link_to '<span data-toggle="tooltip" >
+            <i class="material-icons">close</i>'.html_safe, 
+            log_path(log),
+            method: :delete,
+            remote: true,
+            data: { confirm: "Delete #{log.nom} (#{log.date})  ?" },
+            class: "btn btn-danger btn-xs" 
+        %>
+    <% end %>
+    </td>
+</tr>

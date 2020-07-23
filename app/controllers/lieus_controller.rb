@@ -5,6 +5,8 @@ class LieusController < ApplicationController
     #   INDEX   #
     #############
     def index
+        # Log action
+        log(request.path)
         @lieus = Lieu.order(:nom).page(params[:page])
     end
 
@@ -13,6 +15,8 @@ class LieusController < ApplicationController
     #   SHOW    #
     #############
     def show
+        # Log action
+        log(request.path)
     end
 
 
@@ -20,6 +24,8 @@ class LieusController < ApplicationController
     #    NEW    #
     #############
     def new
+        # Log action
+        log(request.path)
         @lieu = Lieu.new
     end
 
@@ -28,6 +34,8 @@ class LieusController < ApplicationController
     #   CREATE   #
     ##############
     def create
+        # Log action
+        log(request.path)
         @lieu = Lieu.create(lieu_params)
         if @lieu.save
             flash[:notice] = "Lieu créé avec succès"
@@ -41,6 +49,8 @@ class LieusController < ApplicationController
     #   UPDATE  #
     #############
     def update
+        # Log action
+        log(request.path, I18n.t("lieus.index.log_update"))
         if @lieu.update(lieu_params)
             flash[:notice] = "Lieu Modifié avec succès"
             redirect_to lieus_path
@@ -53,12 +63,16 @@ class LieusController < ApplicationController
     #   EDIT    #
     #############
     def edit
+        # Log action
+        log(request.path, I18n.t("lieus.index.log_edit"))
     end
 
     ##############
     #   DESTROY  #
     ##############
     def destroy
+        # Log action
+        log(request.path, I18n.t("lieus.index.log_destroy"))
         @lieu.destroy
     end
 

@@ -5,6 +5,8 @@ class TypeAbsencesController < ApplicationController
     #   INDEX   #
     #############
     def index
+        # Log action
+        log(request.path)
         @type_absences = TypeAbsence.order(:code, :nom).page(params[:page])
     end
 
@@ -13,6 +15,8 @@ class TypeAbsencesController < ApplicationController
     #   SHOW    #
     #############
     def show
+        # Log action
+        log(request.path)
     end
 
 
@@ -20,6 +24,8 @@ class TypeAbsencesController < ApplicationController
     #    NEW    #
     #############
     def new
+        # Log action
+        log(request.path)
         @type_absence = TypeAbsence.new
     end
 
@@ -28,6 +34,8 @@ class TypeAbsencesController < ApplicationController
     #   CREATE   #
     ##############
     def create
+        # Log action
+        log(request.path)
         @type_absence = TypeAbsence.create(type_absence_params)
         if @type_absence.save
             flash[:notice] = "Type d'absence créé avec succès"
@@ -41,6 +49,8 @@ class TypeAbsencesController < ApplicationController
     #   UPDATE  #
     #############
     def update
+        # Log action
+        log(request.path, I18n.t("type_absences.index.log_update"))
         if @type_absence.update(type_absence_params)
             flash[:notice] = "Type d'absence modifié avec succès"
             redirect_to type_absences_path
@@ -53,12 +63,16 @@ class TypeAbsencesController < ApplicationController
     #   EDIT    #
     #############
     def edit
+        # Log action
+        log(request.path, I18n.t("type_absences.index.log_edit"))
     end
 
     ##############
     #   DESTROY  #
     ##############
     def destroy
+        # Log action
+        log(request.path, I18n.t("type_absences.index.log_destroy"))
         @type_absence.destroy
     end
 

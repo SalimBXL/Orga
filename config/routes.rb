@@ -95,6 +95,12 @@ Rails.application.routes.draw do
   ############
   resources :events, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
 
+
+  ##########
+  #  Logs  #
+  ##########
+  resources :logs, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
+
   
   #####################
   #   Types Absences  #

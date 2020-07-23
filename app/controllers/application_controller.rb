@@ -24,7 +24,54 @@ class ApplicationController < ActionController::Base
     numero_semaine<10 ? "#{annee}-W0#{numero_semaine}" : "#{annee}-W#{numero_semaine}"
   end
 
+  # Création de logs
+  def log(adresse, description = nil)
+    date = Time.now
+    utilisateur_id = current_user.id
+    add_in_logfile(date, adresse, utilisateur_id, description)
+  end
+
   private
+
+  def check_logfile_size(fichier)
+    # Check si le fichier ne dépasse pas 1k de lignes
+    # Sinon le coupe en deux.
+    actions = 50
+    lignes_de_log = 5
+    limite = actions * lignes_de_log
+    file=File.open(fichier,"r")
+    lignes = file.readlines
+    taille = lignes.size
+    file.close
+    if taille >= limite
+      open(fichier, 'w') { |f|
+        lignes[(lignes.size-limite/2)..lignes.size-1].each do |ligne|
+          f << "#{ligne}"
+        end
+      }
+    end
+  end
+
+  # Ajoute dans un fichier de logs
+  def add_in_logfile(date, adresse, utilisateur_id, description)
+    fichier = "app/../log/logs.txt"
+    if File.exist?(fichier)
+      mode = 'a'
+      check_logfile_size(fichier)
+    else
+      mode = 'w'
+    end
+    open(fichier, mode) { |f|
+      f << "DATE            : #{date}\n"
+      f << "ADRESSE         : #{adresse}\n"
+      f << "UTILISATEUR_ID  : #{utilisateur_id}\n"
+      f << "DESCRIPTION     : #{description}\n"
+      f << "========================================\n"
+    }
+  end
+
+
+
 
   def set_locale
     locale = params[:locale] || cookies[:cookies] || I18n.default_locale

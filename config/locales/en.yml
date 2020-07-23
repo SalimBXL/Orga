@@ -9,6 +9,9 @@ en:
     index:
       dates: Dates
       icone_accord: Need to be validated by an administrtor
+      log_destroy: Deleting...
+      log_edit: Edit
+      log_update: Updating...
       mises_a_jour: Updates
       remarques: Notes
       titre: Absences
@@ -55,6 +58,9 @@ en:
     index:
       description: Classes allow to sort works into categories.
       descriptions: Descriptions
+      log_destroy: destroy
+      log_edit: edit
+      log_update: update
       noms: Names
       titre: Classes
     new:
@@ -74,6 +80,9 @@ en:
   events:
     index:
       dates: Dates
+      log_destroy: destroy
+      log_edit: edit
+      log_update: update
       noms: Noms
       notes: Notes
       services: Services
@@ -84,6 +93,9 @@ en:
     index:
       dates: Dates
       dates_fin: End Dates
+      log_destroy: destroy
+      log_edit: edit
+      log_update: update
       noms: Names
       notes: Notes
       services: Services
@@ -100,6 +112,9 @@ en:
       nom: Name
     index:
       description: The groups allow to sort users into categories.
+      log_destroy: destroy
+      log_edit: edit
+      log_update: update
       titre: Groups
     new:
       description: Description
@@ -118,6 +133,7 @@ en:
       groupes: Groups
       jours: Days
       lieux: Locations
+      logs: Logs
       services: Services
       sous_titre: Team Manager
       types: Types
@@ -145,6 +161,9 @@ en:
       date: Date
       edition: Edition
       jour: Day
+      log_destroy: destroy
+      log_edit: edit
+      log_update: update
       semaine: Week
       service: Service
       titre: Days
@@ -158,6 +177,9 @@ en:
       nom: Edition
     index:
       description: Locations hosts the services.
+      log_destroy: destroy
+      log_edit: edit
+      log_update: update
       titre: Locations
     new:
       adresse: Address
@@ -165,6 +187,19 @@ en:
       note: Note
       phone: Phone
       titre: New location
+  logs:
+    index:
+      adresses: Adresses
+      dates: Dates
+      descriptions: Descriptions
+      titre: Logs
+      utilisateurs: Utilisateurs
+    new:
+      adresse: Adresse
+      date: Date
+      description: Description
+      titre: Log
+      utilisateur: Utilisateur
   month:
     mois_1: January
     mois_10: October
@@ -180,6 +215,9 @@ en:
     mois_9: September
   services:
     index:
+      log_destroy: destroy
+      log_edit: edit
+      log_update: update
       titre: Services
     new:
       description: Description
@@ -191,12 +229,18 @@ en:
       codes: Codes
       description: The types allow to sort the absences as categories.
       descriptions: Descriptions
+      log_destroy: destroy
+      log_edit: edit
+      log_update: update
       noms: Names
       sous_titre: Absences Types
       titre: Absences
   utilisateurs:
     index:
       groupe: Group
+      log_destroy: destroy
+      log_edit: edit
+      log_update: update
       nom: Name
       prenom: Firstname
       service: Service
@@ -229,6 +273,11 @@ en:
       work: Work
     new:
       titre: New Working List
+  working_lists:
+    index:
+      log_destroy: destroy
+      log_edit: edit
+      log_update: update
   works:
     form:
       classe: Class
@@ -238,4 +287,7 @@ en:
       nom: Name
       service: Service
     index:
+      log_edit: edit
+      log_estroy: estroy
+      log_update: update
       titre: Works

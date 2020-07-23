@@ -2,20 +2,28 @@ class FermeturesController < ApplicationController
     before_action :find_fermeture, only: [:show, :edit, :update, :destroy]
 
     def index
+        # Log action
+        log(request.path)
         @fermetures = Fermeture.order(date: :desc).order(:service_id).page(params[:page])
     end
 
 
     def show
+        # Log action
+        log(request.path)
     end
 
 
     def new
+        # Log action
+        log(request.path)
         @fermeture = Fermeture.new
     end
    
 
     def create
+        # Log action
+        log(request.path)
         @fermeture = Fermeture.create(fermeture_params)
         if @fermeture.save
             flash[:notice] = "Fermeture créée avec succès"
@@ -27,6 +35,8 @@ class FermeturesController < ApplicationController
 
 
     def update
+        # Log action
+        log(request.path, I18n.t("fermetures.index.log_update"))
         if @fermeture.update(fermeture_params)
             flash[:notice] = "Fermeture modifiée avec succès"
             redirect_to fermetures_path
@@ -37,10 +47,14 @@ class FermeturesController < ApplicationController
 
 
     def edit
+        # Log action
+        log(request.path, I18n.t("fermetures.index.log_edit"))
     end
 
 
     def destroy
+        # Log action
+        log(request.path, I18n.t("fermetures.index.log_destroy"))
         @fermeture.destroy
     end
 

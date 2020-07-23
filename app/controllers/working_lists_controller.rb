@@ -8,6 +8,8 @@ class WorkingListsController < ApplicationController
     #   INDEX   #
     #############
     def index
+        # Log action
+        log(request.path)
         @working_lists = WorkingList.order(jour_id: :desc).order(:work_id).page(params[:page])
     end
 
@@ -16,6 +18,8 @@ class WorkingListsController < ApplicationController
     #   SHOW    #
     #############
     def show
+        # Log action
+        log(request.path)
     end
 
 
@@ -23,6 +27,8 @@ class WorkingListsController < ApplicationController
     #    NEW    #
     #############
     def new
+        # Log action
+        log(request.path)
         @working_list = WorkingList.new
     end
 
@@ -31,6 +37,8 @@ class WorkingListsController < ApplicationController
     #   CREATE   #
     ##############
     def create
+        # Log action
+        log(request.path)
         @working_list = WorkingList.create(working_list_params)
         if @working_list.save
             flash[:notice] = "Attribution créée avec succès"
@@ -44,6 +52,8 @@ class WorkingListsController < ApplicationController
     #   UPDATE  #
     #############
     def update
+        # Log action
+        log(request.path, I18n.t("working_lists.index.log_update"))
         if @working_list.update(working_list_params)
             flash[:notice] = "Working List modifiée avec succès"
             redirect_to working_lists_path
@@ -57,12 +67,16 @@ class WorkingListsController < ApplicationController
     #   EDIT    #
     #############
     def edit
+        # Log action
+        log(request.path, I18n.t("working_lists.index.log_edit"))
     end
 
     ##############
     #   DESTROY  #
     ##############
     def destroy
+        # Log action
+        log(request.path, I18n.t("working_lists.index.log_destroy"))
         @working_list.destroy
     end
 

@@ -5,6 +5,8 @@ class GroupesController < ApplicationController
     #   INDEX   #
     #############
     def index
+        # Log action
+        log(request.path)
         @groupes = Groupe.order(:nom).page(params[:page])
     end
 
@@ -13,6 +15,8 @@ class GroupesController < ApplicationController
     #   SHOW    #
     #############
     def show
+        # Log action
+        log(request.path)
     end
 
 
@@ -20,6 +24,8 @@ class GroupesController < ApplicationController
     #    NEW    #
     #############
     def new
+        # Log action
+        log(request.path)
         @groupe = Groupe.new
     end
 
@@ -28,6 +34,8 @@ class GroupesController < ApplicationController
     #   CREATE   #
     ##############
     def create
+        # Log action
+        log(request.path)
         @groupe = Groupe.create(groupe_params)
         if @groupe.save
             flash[:notice] = "Groupe créé avec succès"
@@ -41,6 +49,8 @@ class GroupesController < ApplicationController
     #   UPDATE  #
     #############
     def update
+        # Log action
+        log(request.path, I18n.t("groupes.index.log_update"))
         if @groupe.update(groupe_params)
             flash[:notice] = "Groupe modifié avec succès"
             redirect_to groupes_path
@@ -53,12 +63,16 @@ class GroupesController < ApplicationController
     #   EDIT    #
     #############
     def edit
+        # Log action
+        log(request.path, I18n.t("groupes.index.log_edit"))
     end
 
     ##############
     #   DESTROY  #
     ##############
     def destroy
+        # Log action
+        log(request.path, I18n.t("groupes.index.log_destroy"))
         @groupe.destroy
         #redirect_to groupes_path
     end

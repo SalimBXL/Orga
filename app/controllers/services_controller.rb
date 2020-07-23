@@ -5,6 +5,8 @@ class ServicesController < ApplicationController
     #   INDEX   #
     #############
     def index
+        # Log action
+        log(request.path)
         @services = Service.order(:nom).page(params[:page])
     end
 
@@ -13,6 +15,8 @@ class ServicesController < ApplicationController
     #   SHOW    #
     #############
     def show
+        # Log action
+        log(request.path)
     end
 
 
@@ -20,6 +24,8 @@ class ServicesController < ApplicationController
     #    NEW    #
     #############
     def new
+        # Log action
+        log(request.path)
         @service = Service.new
     end
 
@@ -28,6 +34,8 @@ class ServicesController < ApplicationController
     #   CREATE   #
     ##############
     def create
+        # Log action
+        log(request.path)
         @service = Service.create(service_params)
         if @service.save
             flash[:notice] = "Service créé avec succès"
@@ -41,6 +49,8 @@ class ServicesController < ApplicationController
     #   UPDATE  #
     #############
     def update
+        # Log action
+        log(request.path, I18n.t("services.index.log_update"))
         if @service.update(service_params)
             flash[:notice] = "Service modifié avec succès"
             redirect_to services_path
@@ -54,12 +64,16 @@ class ServicesController < ApplicationController
     #   EDIT    #
     #############
     def edit
+        # Log action
+        log(request.path, I18n.t("services.index.log_edit"))
     end
 
     ##############
     #   DESTROY  #
     ##############
     def destroy
+        # Log action
+        log(request.path, I18n.t("services.index.log_destroy"))
         @service.destroy
         #redirect_to services_path
     end

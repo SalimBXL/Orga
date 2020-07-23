@@ -2,20 +2,28 @@ class EventsController < ApplicationController
     before_action :find_event, only: [:show, :edit, :update, :destroy]
 
     def index
+        # Log action
+        log(request.path)
         @events = Event.order(date: :desc).order(:service_id).page(params[:page])
     end
 
 
     def show
+        # Log action
+        log(request.path)
     end
 
 
     def new
+        # Log action
+        log(request.path)
         @event = Event.new
     end
    
 
     def create
+        # Log action
+        log(request.path)
         @event = Event.create(event_params)
         if @event.save
             flash[:notice] = "Event créé avec succès"
@@ -27,6 +35,8 @@ class EventsController < ApplicationController
 
 
     def update
+        # Log action
+        log(request.path, I18n.t("events.index.log_update"))
         if @event.update(event_params)
             flash[:notice] = "Event modifié avec succès"
             redirect_to events_path
@@ -37,10 +47,14 @@ class EventsController < ApplicationController
 
 
     def edit
+        # Log action
+        log(request.path, I18n.t("events.index.log_edit"))
     end
 
 
     def destroy
+        # Log action
+        log(request.path, I18n.t("events.index.log_destroy"))
         @event.destroy
     end
 

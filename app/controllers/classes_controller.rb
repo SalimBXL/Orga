@@ -5,6 +5,8 @@ class ClassesController < ApplicationController
     #   INDEX   #
     #############
     def index
+        # Log action
+        log(request.path)
         @classes = Classe.order(:nom).page(params[:page])
     end
 
@@ -13,6 +15,8 @@ class ClassesController < ApplicationController
     #   SHOW    #
     #############
     def show
+        # Log action
+        log(request.path)
     end
 
 
@@ -20,6 +24,8 @@ class ClassesController < ApplicationController
     #    NEW    #
     #############
     def new
+        # Log action
+        log(request.path)
         @classe = Classe.new
     end
 
@@ -28,6 +34,8 @@ class ClassesController < ApplicationController
     #   CREATE   #
     ##############
     def create
+        # Log action
+        log(request.path)
         @classe = Classe.create(classe_params)
         if @classe.save
             flash[:notice] = "Classe créée avec succès"
@@ -41,6 +49,8 @@ class ClassesController < ApplicationController
     #   UPDATE  #
     #############
     def update
+        # Log action
+        log(request.path, I18n.t("classes.index.log_update"))
         if @classe.update(classe_params)
             flash[:notice] = "Classe modifiée avec succès"
             redirect_to classes_path
@@ -53,12 +63,16 @@ class ClassesController < ApplicationController
     #   EDIT    #
     #############
     def edit
+        # Log action
+        log(request.path, I18n.t("classes.index.log_edit"))
     end
 
     ##############
     #   DESTROY  #
     ##############
     def destroy
+        # Log action
+        log(request.path, I18n.t("classes.index.log_destroy"))
         @classe.destroy
     end
 

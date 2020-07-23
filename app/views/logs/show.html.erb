@@ -1,0 +1,21 @@
+<div class="container">
+<h1>
+    <%= @log.date %>
+</h1>
+
+<p>
+    <%= @log.adresse %>
+</p>
+
+<p>
+    <%= @log.utilisateur_id %>
+</p>
+
+<p>
+    <%= @log.description %>
+</p>
+
+<p>
+    <%= link_to " [Edit] ", edit_log_path(@log) %>
+</p>
+</div>

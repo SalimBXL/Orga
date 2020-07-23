@@ -8,6 +8,9 @@ class HomeController < ApplicationController
         else
            @last_git_date = nil
         end
+        
+        # Log action
+        log(request.path)
     end
 
     # ADMIN

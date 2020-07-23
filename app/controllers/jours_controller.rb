@@ -5,6 +5,8 @@ class JoursController < ApplicationController
     #   INDEX   #
     #############
     def index
+        # Log action
+        log(request.path)
         @jours = Jour.order(:numero_semaine, :numero_jour, :service_id, :am_pm, :utilisateur_id).page(params[:page])
     end
 
@@ -13,6 +15,8 @@ class JoursController < ApplicationController
     #   SHOW    #
     #############
     def show
+        # Log action
+        log(request.path)
     end
 
 
@@ -20,6 +24,8 @@ class JoursController < ApplicationController
     #    NEW    #
     #############
     def new
+        # Log action
+        log(request.path)
         @jour = Jour.new
     end
 
@@ -28,6 +34,8 @@ class JoursController < ApplicationController
     #   CREATE   #
     ##############
     def create
+        # Log action
+        log(request.path)
         @jour = Jour.create(jour_params)
         
         if @jour.save
@@ -42,6 +50,8 @@ class JoursController < ApplicationController
     #   UPDATE  #
     #############
     def update
+        # Log action
+        log(request.path, I18n.t("jours.index.log_update"))
         if @jour.update(jour_params)
             flash[:notice] = "Jour Modifié avec succès"
             redirect_to jours_path
@@ -54,12 +64,16 @@ class JoursController < ApplicationController
     #   EDIT    #
     #############
     def edit
+        # Log action
+        log(request.path, I18n.t("jours.index.log_edit"))
     end
 
     ##############
     #   DESTROY  #
     ##############
     def destroy
+        # Log action
+        log(request.path, I18n.t("jours.index.log_destroy"))
         @jour.destroy
     end
 
@@ -68,6 +82,8 @@ class JoursController < ApplicationController
     #   TODAY   #
     #############
     def specific_day
+        # Log action
+        log(request.path)
         @specific_day_works = Hash.new
         @absence = Hash.new
 
@@ -102,6 +118,8 @@ class JoursController < ApplicationController
     #   Month   #
     ############
     def specific_month
+        # Log action
+        log(request.path)
 
         # Réglage des dates de début et fin de période
         unless params[:date]
@@ -171,6 +189,8 @@ class JoursController < ApplicationController
     #   Week   #
     ############
     def specific_week
+        # Log action
+        log(request.path)
         unless params[:date]
             @date = Date.today
         else

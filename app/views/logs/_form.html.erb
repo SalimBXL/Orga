@@ -1,0 +1,44 @@
+<%= form_with model: @log, local: true do |form| %>
+
+    <% if @log.errors.any? %>
+        <strong>WARNING</strong>
+        <ul>
+            <% @log.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
+
+    
+
+    <!-- Date -->
+    <p>
+        <%= form.label I18n.t("logs.new.date") %><br>
+        <%= form.date_field :date %>
+    </p>
+
+    <!-- Adresse -->
+    <p>
+        <%= form.label I18n.t("logs.new.adresse") %><br>
+        <%= form.text_field :nom %>
+    </p>
+
+    <!-- Utilisateur -->
+    <p>
+        <%= form.label I18n.t("logs.new.utilisateur") %><br>
+        <%= form.text_field :utilisateur_id %>
+    </p>
+
+
+    <!-- Description -->
+    <p>
+        <%= form.label I18n.t("logs.new.description") %><br>
+        <%= form.text_field :description %>
+    </p>
+
+
+
+    <p>
+        <%= form.submit class: "btn btn-primary" %>
+    </p>
+<% end %>

@@ -7,6 +7,8 @@ class UtilisateursController < ApplicationController
     #   INDEX   #
     #############
     def index
+        # Log action
+        log(request.path)
         @utilisateurs = Utilisateur.order(:service_id, :groupe_id, :prenom, :nom).page(params[:page])
     end
 
@@ -15,6 +17,8 @@ class UtilisateursController < ApplicationController
     #   SHOW    #
     #############
     def show
+        # Log action
+        log(request.path)
     end
 
 
@@ -22,6 +26,8 @@ class UtilisateursController < ApplicationController
     #    NEW    #
     #############
     def new
+        # Log action
+        log(request.path)
         @utilisateur = Utilisateur.new
         @services = Service.all
         @groupes = Groupe.all
@@ -32,6 +38,8 @@ class UtilisateursController < ApplicationController
     #   CREATE   #
     ##############
     def create
+        # Log action
+        log(request.path)
         @utilisateur = Utilisateur.create(utilisateur_params)
         @utilisateur.user = @utilisateur.profil
         if @utilisateur.save
@@ -48,6 +56,8 @@ class UtilisateursController < ApplicationController
     #   UPDATE  #
     #############
     def update
+        # Log action
+        log(request.path, I18n.t("utilisateurs.index.log_update"))
         @utilisateur.user = @utilisateur.profil
         if @utilisateur.update(utilisateur_params)
             flash[:notice] = "Utilisateur modifié avec succès"
@@ -61,6 +71,8 @@ class UtilisateursController < ApplicationController
     #   EDIT    #
     #############
     def edit
+        # Log action
+        log(request.path, I18n.t("utilisateurs.index.log_edit"))
         @services = Service.all
         @groupes = Groupe.all
     end
@@ -69,6 +81,8 @@ class UtilisateursController < ApplicationController
     #   DESTROY  #
     ##############
     def destroy
+        # Log action
+        log(request.path, I18n.t("utilisateurs.index.log_destroy"))
         @utilisateur.destroy
         #redirect_to utilisateurs_path
     end

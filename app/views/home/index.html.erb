@@ -211,6 +211,14 @@
                             %>
                             <h4><%= I18n.t("home.index.jours") %></h4>
                         </p>
+                        <p>
+                            <!-- LOGS -->
+                            <%= link_to '<i class="material-icons">analytics</i>'.html_safe, 
+                                logs_path,
+                                class: "btn btn-danger btn-xs" 
+                            %>
+                            <h4><%= I18n.t("home.index.logs") %></h4>
+                        </p>
                     </div>
                     <div class="row">
                         <p>

@@ -1,0 +1,12 @@
+<p><%= paginate @logs, remote: true %></p>
+<table class="table table-striped">
+    <tr>
+        <th><%= I18n.t("logs.index.dates") %></th>
+        <th><%= I18n.t("logs.index.adresses") %></th>
+        <th><%= I18n.t("logs.index.utilisateurs") %></th>
+        <th><%= I18n.t("logs.index.descriptions") %></th>
+        <th></th>
+    </tr>
+    <%= render @logs %>
+</table>
+<p><%= paginate @logs, remote: true %></p>
