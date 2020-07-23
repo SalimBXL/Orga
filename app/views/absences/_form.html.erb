@@ -38,10 +38,19 @@
     <!-- Utilisateur -->
     <p>
         <%= form.label I18n.t("absences.new.utilisateur") %><br>
-        <%= form.select(:utilisateur_id) do %>
-            <%= select_option_tag("", nil, @absence.utilisateur_id) %>
-            <% Utilisateur.all.find_each do |l| %>
-                <%= select_option_tag(l.prenom_nom, l.id, @absence.utilisateur_id) %>                
+
+        <!-- Ne peut modifier l'utilisateur que si admin -->
+        <% if current_user.admin? %>
+            <%= form.select(:utilisateur_id) do %>
+                <%= select_option_tag("", nil, @absence.utilisateur_id) %>
+                <% Utilisateur.all.find_each do |l| %>
+                    <%= select_option_tag(l.prenom_nom, l.id, @absence.utilisateur_id) %>                
+                <% end %>
+            <% end %>
+        <% else %>
+            <%= form.select(:utilisateur_id) do %>
+                <%= select_option_tag(current_user.utilisateur.prenom_nom, current_user.utilisateur.id, @absence.utilisateur_id) %>
+                
             <% end %>
         <% end %>
     </p>
