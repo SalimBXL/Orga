@@ -7,7 +7,7 @@ class JoursController < ApplicationController
     def index
         # Log action
         log(request.path)
-        @jours = Jour.order(:numero_semaine, :numero_jour, :service_id, :am_pm, :utilisateur_id).page(params[:page])
+        @jours = Jour.order(numero_semaine: :desc).order(numero_jour: :desc).order(:service_id, :am_pm, :utilisateur_id).page(params[:page])
     end
 
 
@@ -183,6 +183,17 @@ class JoursController < ApplicationController
         @events = Hash.new
         charge_events(@date)
 
+        # mode edition ?
+        unless params[:edit_mode]
+            @edit_mode = false
+        else
+            if params[:edit_mode].downcase == 'true'
+                @edit_mode = true
+            else
+                @edit_mode = false
+            end
+        end
+
     end
 
     ############
@@ -277,7 +288,7 @@ class JoursController < ApplicationController
     end
 
     def jour_params
-        params.require(:jour).permit(:date, :utilisateur_id, :am_pm, :service_id)
+        params.require(:jour).permit(:date, :utilisateur_id, :am_pm, :service_id, :edit_mode)        
     end
 
     def find_jour

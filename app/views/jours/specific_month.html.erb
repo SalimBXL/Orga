@@ -55,6 +55,24 @@
                                 class: "btn btn-success btn-xs" %>
             </div>
         </div>
+
+        <!-- BOUTON EDIT MODE -->
+        <% if user_signed_in? && current_user.admin? %>
+            <div>
+                <% if !@edit_mode %>
+                    <%= link_to '<span data-toggle="tooltip" >
+                                <i class="material-icons">edit</i></span>'.html_safe, 
+                                month_path(date: (@date+15.days), edit_mode: true), 
+                                class: "btn btn-warning btn-xs" %>
+                <% else %>
+                    <%= link_to '<span data-toggle="tooltip" >
+                                <i class="material-icons">save</i></span>'.html_safe, 
+                                month_path(date: (@date+15.days), edit_mode: false), 
+                                class: "btn btn-warning btn-xs" %>
+                <% end %>
+            </div>
+        <% end %>
+
     </div>
 </div>
 
@@ -153,6 +171,12 @@
                                     <% dd = date_jour.to_s %>
                                     <% unless @jours[service][utilisateur][dd].nil? %>
                                         <% unless @jours[service][utilisateur][dd][ap].nil? %>
+
+                                            <!-- Transforme la cellule en bouton si mode édition actif -->
+                                            <% if user_signed_in? && current_user.admin? && @edit_mode %>
+                                                <a href="#" class="btn btn-default btn-xs" role="button">
+                                            <% end %>
+
                                             <% @jours[service][utilisateur][dd][ap].each do |wl| %>
                                                 <!-- Change la couleur pour certains works -->
                                                 <% cl = "" %>
@@ -168,9 +192,26 @@
                                                     <%= wl.work.code %>
                                                 </span>
                                             <% end %>
+
+                                            <% if user_signed_in? && current_user.admin? && @edit_mode %>
+                                                </a>
+                                            <% end %>
+
                                         <% end %>
                                     <% end %>
                                 <% end %>
+
+
+
+
+
+                                
+
+
+
+
+
+
                                 <% bg = "" %>
                             </td>
                         <% end %>
