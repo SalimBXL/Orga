@@ -29,16 +29,23 @@ class ApplicationController < ActionController::Base
     date = Time.now
     if user_signed_in?
       utilisateur_id = current_user.id
+      nom = current_user.utilisateur.prenom_nom
+      unless description.nil?
+        description = "[#{nom}] - #{description}"
+      else
+        description = "[#{nom}]"
+      end
     else
       utilisateur_id = nil
     end
-    add_in_logfile(date, adresse, utilisateur_id, description)
+    #add_in_logfile(date, adresse, utilisateur_id, description)
+    add_in_logdb(date, adresse, utilisateur_id, description)
   end
 
   private
 
   def check_logfile_size(fichier)
-    # Check si le fichier ne dépasse pas 1k de lignes
+    # Check si le fichier ne dépasse pas 1e de lignes
     # Sinon le coupe en deux.
     actions = 50
     lignes_de_log = 5
@@ -72,6 +79,21 @@ class ApplicationController < ActionController::Base
       f << "DESCRIPTION     : #{description}\n"
       f << "========================================\n"
     }
+  end
+
+  # Ajoute dans la table log de la DB
+  def add_in_logdb(date, adresse, utilisateur_id, description)
+    db_size = Log.all.count
+    if db_size > 50
+
+    end
+    log = Log.new
+    log = Log.create(date: date, adresse: adresse, utilisateur_id: utilisateur_id, description: description)
+    if log.save
+      # ok
+    else
+      flash[:alert] = I18n.t("logs.index.problem_to_save_logs_in_db")
+    end
   end
 
 
