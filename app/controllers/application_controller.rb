@@ -88,9 +88,12 @@ class ApplicationController < ActionController::Base
 
   # Ajoute dans la table log de la DB
   def add_in_logdb(date, adresse, utilisateur_id, description)
-    db_size = Log.all.count
-    if db_size > 50
-
+    limite = 100
+    db_size = Log.order(:id).count
+    if db_size > limite
+      (db_size-limite).times do |i|
+        Log.first.delete
+      end
     end
     log = Log.new
     log = Log.create(date: date, adresse: adresse, utilisateur_id: utilisateur_id, description: description)

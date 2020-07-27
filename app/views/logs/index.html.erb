@@ -1,28 +1,11 @@
 <div class="container">
-<h1>
-    <span class="label label-primary">
-        <i class="material-icons">analytics</i>
-        <%= I18n.t("logs.index.titre").upcase %>
-    </span>
-</h1>
-
-<p>
-    <% if user_signed_in? && current_user.admin? %>
-    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
-        new_log_path,
-        class: "btn btn-success btn-xs" %>
-    <% end %>
-</p>
-
-<div id="logs">
-    <%= render 'logs' %>
-</div>
-
-<p>
-    <% if user_signed_in? && current_user.admin? %>
-    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
-        new_log_path,
-        class: "btn btn-success btn-xs" %>
-    <% end %>
-</p>
+    <h1>
+        <span class="label label-primary">
+            <i class="material-icons">analytics</i>
+            <%= I18n.t("logs.index.titre").upcase %>
+        </span>
+    </h1>
+    <div id="logs">
+        <%= render 'logs' %>
+    </div>
 </div>
