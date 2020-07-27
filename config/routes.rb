@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   resources :ajouts, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
   get "ajouts/:id/valider", to: "ajouts#valider"
   get "ajouts/:id/dupliquer", to: "ajouts#dupliquer"
+  get "ajouts/:id/modification", to: "ajouts#modification"
 
 
   ##############

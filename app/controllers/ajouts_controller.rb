@@ -1,11 +1,11 @@
 class AjoutsController < ApplicationController
-    before_action :find_ajout, only: [:show, :edit, :update, :destroy, :valider, :dupliquer]
-    before_action :find_utilisateurs, only: [:new, :create, :edit]
-    before_action :find_groupes, only: [:new, :create, :edit]
-    before_action :find_works, only: [:index, :new, :create, :edit]
-    before_action :find_classes, only: [:new, :create, :edit]
-    before_action :find_services, only: [:new, :create, :edit]
-    before_action :find_etendre, only: [:create, :edit]
+    before_action :find_ajout, only: [:edit, :update, :destroy, :valider, :dupliquer]
+    before_action :find_utilisateurs, only: [:new, :create, :edit, :modification]
+    before_action :find_groupes, only: [:new, :create, :edit, :modification]
+    before_action :find_works, only: [:index, :new, :create, :edit, :modification]
+    before_action :find_classes, only: [:new, :create, :edit, :modification]
+    before_action :find_services, only: [:new, :create, :edit, :modification]
+    before_action :find_etendre, only: [:create, :edit, :modification]
 
     #############
     #   INDEX   #
@@ -14,6 +14,9 @@ class AjoutsController < ApplicationController
         @ajouts = Ajout.order(:date, :am_pm, :utilisateur_id)
         #@works = Work.all
         
+    end
+
+    def show
     end
 
 
@@ -76,6 +79,19 @@ class AjoutsController < ApplicationController
             render :edit
         end
     end
+
+    #################
+    # MODIFICATION  #
+    #################
+    def modification
+        @ajout = Ajout.new(utilisateur_id: params[:utilisateur_id], date: params[:date], am_pm: params[:am_pm])
+        @ajout.work1 = params[:work1] unless params[:work1].nil?
+        @ajout.work2 = params[:work2] unless params[:work2].nil?
+        @ajout.work3 = params[:work3] unless params[:work3].nil?
+        @ajout.work4 = params[:work4] unless params[:work4].nil?
+        @ajout.work5 = params[:work5] unless params[:work5].nil?
+        render :edit
+    end
     
 
     ##############
@@ -114,30 +130,60 @@ class AjoutsController < ApplicationController
         unless @ajout.nil?
             utilisateur = Utilisateur.find_by_id(@ajout.utilisateur_id)
             work1 = Work.find_by_id(@ajout.work1)
-            jour = Jour.where(date: @ajout, utilisateur: @ajout.utilisateur_id, am_pm: @ajout.am_pm, service_id: work1.service_id)
+            jour = Jour.where(date: @ajout.date, utilisateur: @ajout.utilisateur_id, am_pm: @ajout.am_pm, service_id: work1.service_id)
 
             # Jour
             # Check si jour existe. Sinon, on le crée.
-            unless Jour.nil?
+            if jour.nil? || jour.count < 1
                 jour = Jour.create(utilisateur: utilisateur, date: @ajout.date, am_pm: @ajout.am_pm, service: work1.service)
                 unless jour.save
                     flash[:danger] = "Impossible de créer la semaine..."
                     redirect_to ajouts_path
                 end
+            else
+                jour = jour.last
             end
+
             
-            # Working_list
+            # Working_lists trouvées en DB
+            liste_en_base = Array.new 
+            Jour.find(jour.id).working_lists.each do |wl_db|
+                liste_en_base << wl_db.work.id
+            end
+
+
             # Check si working_list existe. Sinon, on la crée.
             @ajout.works.each do |w|
-                unless WorkingList.exists?(jour: jour, work: w) && Work.exists?(w)
+                #dans la liste ?  
+                if liste_en_base.include?(w)
+                    # Si oui,  on ne fait rien.
+                    liste_en_base.delete(w)
+                else
+                    # Sinon on l'ajoute.
                     work = Work.find(w)
                     working_list = WorkingList.create(jour: jour, work: work)
                     unless working_list.save
                         flash[:danger] = "Impossible de créer la working liste suivante : JOB ID:#{job.id} WORK ID:#{w}"
                         redirect_to ajouts_path
                     end
+                    liste_en_base.delete(w)
                 end
             end
+
+
+            # Si des entrées sont en DB mais pas dans la liste, 
+            # on supprime les entrées en DB
+            if liste_en_base.count > 0
+                liste_en_base.each do |entree|
+                    wl = WorkingList.where(work: entree, jour: jour)
+                    unless wl.nil?
+                        wl.first.destroy
+                    end
+
+                end
+            end
+
+
 
             # Nettoyage de la liste des ajouts
             @ajout.destroy

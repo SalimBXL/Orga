@@ -130,6 +130,7 @@
                                 >
                                     <%= wl.work.code %>
                                 </span>
+                                &nbsp;
                             <% end %>
                         <% else %>
                             ---
@@ -146,7 +147,10 @@
                                 <span class="label label-info <%= cl %>"
                                     data-toggle="tooltip" 
                                     title='<%= "#{wl.work.nom}" %>'
-                                ><%= wl.work.code %></span>
+                                >
+                                    <%= wl.work.code %>
+                                </span>
+                                &nbsp;
                             <% end %>
                         <% else %>
                             ---
