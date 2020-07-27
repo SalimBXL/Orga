@@ -192,6 +192,7 @@ en:
       adresses: Adresses
       dates: Dates
       descriptions: Descriptions
+      problem_to_save_logs_in_db: Problem to save logs in db
       titre: Logs
       utilisateurs: Utilisateurs
     new:

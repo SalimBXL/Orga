@@ -137,7 +137,6 @@ class JoursController < ApplicationController
         @date = date_tmp.beginning_of_week
         @date2 = date_tmp.end_of_month.end_of_week
 
-
         @jours = Hash.new
 
         # Liste des utilisateurs
@@ -181,7 +180,11 @@ class JoursController < ApplicationController
 
         # Charge les Events
         @events = Hash.new
-        charge_events(@date)
+        nombre_de_jours = (@date2-@date).to_i
+        nombre_de_jours.times do |i|
+            charge_events(@date + i.day)
+        end
+
 
         # mode edition ?
         unless params[:edit_mode]
@@ -278,13 +281,14 @@ class JoursController < ApplicationController
 
     # Charge les Events
     def charge_events(date)
-         events = Event.where(date: date).order(:service_id, :nom)
-         events.each do |event|
-             if @events[event.service_id].nil?
-                 @events[event.service_id] = Array.new
-             end
-             @events[event.service_id] << event
-         end
+        date = date.to_s
+        events = Event.where(date: date).order(:service_id, :nom)
+        events.each do |event|
+            if @events[event.service_id].nil?
+                @events[event.service_id] = Array.new
+            end
+            @events[event.service_id] << event
+        end
     end
 
     def jour_params
