@@ -1,5 +1,6 @@
 class AbsencesController < ApplicationController
     before_action :find_absence, only: [:show, :edit, :update, :destroy]
+    before_action :check_logged_in
 
     #############
     #   INDEX   #

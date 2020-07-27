@@ -1,7 +1,12 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_locale
-  #after_action :after_login
+
+  def check_logged_in
+    unless user_signed_in?
+      redirect_to home_path
+    end
+  end
 
   def default_url_options
     { locale: I18n.locale }
@@ -104,6 +109,7 @@ class ApplicationController < ActionController::Base
     I18n.locale = locale
     cookies[:locale] = { value: locale, expires: Date.today+3.days }
   end
+
 
   def after_login
     if user_signed_in?

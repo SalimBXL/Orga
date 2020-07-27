@@ -1,4 +1,5 @@
 class AjoutsController < ApplicationController
+    before_action :check_logged_in
     before_action :find_ajout, only: [:edit, :update, :destroy, :valider, :dupliquer]
     before_action :find_utilisateurs, only: [:new, :create, :edit, :modification]
     before_action :find_groupes, only: [:new, :create, :edit, :modification]

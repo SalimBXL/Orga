@@ -1,4 +1,5 @@
 class LieusController < ApplicationController
+    before_action :check_logged_in
     before_action :find_lieu, only: [:show, :edit, :update, :destroy]
 
     #############

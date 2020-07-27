@@ -1,4 +1,5 @@
 class FermeturesController < ApplicationController
+    before_action :check_logged_in
     before_action :find_fermeture, only: [:show, :edit, :update, :destroy]
 
     def index

@@ -1,4 +1,5 @@
 class GroupesController < ApplicationController
+    before_action :check_logged_in
     before_action :find_groupe, only: [:show, :edit, :update, :destroy]
 
     #############

@@ -1,4 +1,5 @@
 class WorkingListsController < ApplicationController
+    before_action :check_logged_in
     before_action :find_working_list, only: [:show, :edit, :update, :destroy]
     before_action :find_services, only: [:new, :edit]
     before_action :find_jours, only: [:new, :edit]

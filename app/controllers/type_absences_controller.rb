@@ -1,4 +1,5 @@
 class TypeAbsencesController < ApplicationController
+    before_action :check_logged_in
     before_action :find_type_absence, only: [:show, :edit, :update, :destroy]
 
     #############

@@ -1,4 +1,5 @@
 class UtilisateursController < ApplicationController
+    before_action :check_logged_in
     before_action :create_user, only: [:create, :update]
     before_action :find_utilisateur, only: [:show, :edit, :update, :destroy]
     
