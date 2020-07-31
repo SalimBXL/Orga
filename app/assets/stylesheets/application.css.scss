@@ -140,3 +140,16 @@
     margin: 10px;
     text-align: center;
 }
+
+.flex-ajout {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: baseline;
+}
+.flex-ajout > div {
+    margin: 10px;
+    width: 200px;
+    text-align: start;
+}

@@ -4,16 +4,25 @@
         <%= I18n.t("ajouts.index.titre").upcase %>
     </span>
 </h1>
+
 <div class="container">
+
+    <% if @mode_edition.nil? or @mode_edition == false %>
     <h2><%= I18n.t("ajouts.new.titre").capitalize %></h2>
     <p><%= I18n.t("ajouts.new.description") %></p>
+    <% else %>
+    <br>
+    <% end %>
+    
 
-    <ul class="nav nav-tabs">
+    <% if @mode_edition.nil? or @mode_edition == false %>
+        <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#home"><strong><%= I18n.t("ajouts.new.quand") %> ?</strong></a></li>
         <li><a data-toggle="tab" href="#menu2"><strong><%= I18n.t("ajouts.new.qui") %> ?</strong></a></li>
         <li><a data-toggle="tab" href="#menu1"><strong><%= I18n.t("ajouts.new.quoi") %> ?</strong></a></li>
         <li><a data-toggle="tab" href="#menu3"><strong><%= I18n.t("ajouts.new.confirmer") %></strong></a></li>
-    </ul>
+        </ul>
+    <% end %>
 
     <%= form_with model: @ajout, local: true do |form| %>
 
@@ -33,116 +42,99 @@
 
 
         <!-- ===== QUAND ? ===== -->
-
-        <div id="home" class="tab-pane fade in active">
-            <h3><%= I18n.t("ajouts.new.quand") %> ?</h3>
-            <p><%= I18n.t("ajouts.new.quand_texte") %></p>
-
-            <p>
-                <%= form.label I18n.t("ajouts.new.date") %><br>
-                <%= form.date_field :date %>
-            </p>
-
-            <p>
-                <%= form.radio_button :am_pm, false %> <%= form.label I18n.t("ajouts.new.am") %>
-                <%= form.radio_button :am_pm, true %> <%= form.label I18n.t("ajouts.new.pm") %>
-            </p>
-
-            <p>
-                <%= form.check_box :etendre %> <%= form.label I18n.t("ajouts.new.etendre") %>
-            </p>
-
+        <% if @mode_edition.nil? or @mode_edition == false %>
+        <div id="home" class="tab-pane fade in active">            
+            <div class="flex-ajout">
+                <div>
+                    <%= form.label I18n.t("ajouts.new.date") %><br>
+                    <%= form.date_field :date %>
+                </div>
+                <div>
+                    <%= form.radio_button :am_pm, false %> <%= form.label I18n.t("ajouts.new.am") %>
+                    <%= form.radio_button :am_pm, true %> <%= form.label I18n.t("ajouts.new.pm") %>
+                </div>
+                <div>
+                    <%= form.check_box :etendre %> <%= form.label I18n.t("ajouts.new.etendre") %>
+                </div>
+            </div>
         </div>
+        <% end %>
 
 
 
         <!-- ===== QUI ? ===== -->
-
+        <% if @mode_edition.nil? or @mode_edition == false %>
         <div id="menu2" class="tab-pane fade">
-            <h3><%= I18n.t("ajouts.new.qui") %> ?</h3>
-            <p><%= form.label I18n.t("ajouts.new.qui_texte") %></p>
+            <br>
             <div class="form-group">
                 <!-- Utilisateur -->
-                <p>
-                    <%= form.label I18n.t("ajouts.new.utilisateur") %><br>
+                    <!-- <%= form.label I18n.t("ajouts.new.utilisateur") %><br> -->
                     <%= form.select(:utilisateur_id, @utilisateurs.collect {|p| [ "[#{p.service.nom}] - (#{p.groupe.nom}) - #{p.prenom_nom}", p.id ] }, 
                                             { }, 
-                                            { :multiple => false, :size => 10 }) %>
-                </p>
+                                            { :multiple => false }) %>
             </div>
         </div>
+        <% end %>
 
 
 
         <!-- ===== QUOI ? ===== -->
 
-        
+        <% if @mode_edition.nil? or @mode_edition == false %>
         <div id="menu1" class="tab-pane fade">
-            <h3><%= I18n.t("ajouts.new.quoi") %> ?</h3>
-            <p><%= I18n.t("ajouts.new.qui_texte") %></p>
+        <% end %>
             <div class="form-group">
-
                 <div class="row">
                     <div class="col-sm-4">
-                        <p>
-                            <%= form.label :work1 %><br>
+                            <%= form.label :work1 %>
                             <%= form.select(:work1, @works.collect {|p| [ "(#{@services.where(id: p.service_id).first.nom}) - [#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
                                             { include_blank: true },
-                                            { :multiple => false, :size => 20 }) %>
-                        </p>
+                                            { :multiple => false }) %>
                     </div>
                     <div class="col-sm-4">
-                        <p>
-                            <%= form.label :work2 %><br>
+                            <%= form.label :work2 %>
                             <%= form.select(:work2, @works.collect {|p| [ "(#{@services.where(id: p.service_id).first.nom}) - [#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
                                            { include_blank: true },
-                                            { :multiple => false, :size => 20 }) %>
-                        </p>
+                                            { :multiple => false }) %>
                     </div>
                     <div class="col-sm-4">
-                        <p>
-                            <%= form.label :work3 %><br>
+                            <%= form.label :work3 %>
                             <%= form.select(:work3, @works.collect {|p| [ "(#{@services.where(id: p.service_id).first.nom}) - [#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
                                             { include_blank: true },
-                                            { :multiple => false, :size => 20 }) %>
-                        </p>
-                    </div>
-                    <div class="col-sm-4">
-                        <p>
-                            <%= form.label :work4 %><br>
-                            <%= form.select(:work4, @works.collect {|p| [ "(#{@services.where(id: p.service_id).first.nom}) - [#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
-                                            { include_blank: true },
-                                            { :multiple => false, :size => 20 }) %>
-                        </p>
-                    </div>
-                    <div class="col-sm-4">
-                        <p>
-                            <%= form.label :work5 %><br>
-                            <%= form.select(:work5, @works.collect {|p| [ "(#{@services.where(id: p.service_id).first.nom}) - [#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
-                                            { include_blank: true },
-                                            { :multiple => false, :size => 20 }) %>
-                        </p>
+                                            { :multiple => false }) %>
                     </div>
                 </div>
-
+                <div class="row">
+                    <div class="col-sm-4">
+                            <%= form.label :work4 %>
+                            <%= form.select(:work4, @works.collect {|p| [ "(#{@services.where(id: p.service_id).first.nom}) - [#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
+                                            { include_blank: true },
+                                            { :multiple => false }) %>
+                    </div>
+                    <div class="col-sm-4">
+                            <%= form.label :work5 %>
+                            <%= form.select(:work5, @works.collect {|p| [ "(#{@services.where(id: p.service_id).first.nom}) - [#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
+                                            { include_blank: true },
+                                            { :multiple => false }) %>
+                    </div>
+                </div>
             </div>
+
+        <% if @mode_edition.nil? or @mode_edition == false %>
         </div>
+        <% end %>
 
 
 
         <!-- ===== CONFIRMER ? ===== -->
-
+        <% if @mode_edition.nil? or @mode_edition == false %>
         <div id="menu3" class="tab-pane fade">
-            <h3><%= I18n.t("ajouts.new.confirmer") %></h3>
-            <p><%= I18n.t("ajouts.new.confirmer_texte") %></p>
-            
-
-            <p>
-                <%= form.submit class: "btn btn-primary" %>
-            </p>
-
+        <% end %>
+            <br>
+            <%= form.submit class: "btn btn-primary" %>
+        <% if @mode_edition.nil? or @mode_edition == false %>
         </div>
-
+        <% end %>
 
     </div>
 

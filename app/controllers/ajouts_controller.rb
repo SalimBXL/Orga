@@ -26,6 +26,7 @@ class AjoutsController < ApplicationController
     ##########
     def new
         @ajout = Ajout.new
+        @mode_edition = false
     end
     
 
@@ -85,6 +86,7 @@ class AjoutsController < ApplicationController
     # MODIFICATION  #
     #################
     def modification
+        @mode_edition = true
         @ajout = Ajout.new(utilisateur_id: params[:utilisateur_id], date: params[:date], am_pm: params[:am_pm])
         @ajout.work1 = params[:work1] unless params[:work1].nil?
         @ajout.work2 = params[:work2] unless params[:work2].nil?
