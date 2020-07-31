@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   
   devise_for :users
+
+
   ###########
   ###########
   ##  API  ##
@@ -9,8 +11,11 @@ Rails.application.routes.draw do
   namespace :api do
     get 'ping' => 'table_tennis#ping'
     
-    resources :utilisateurs, only: :index
-
+    resources :utilisateurs, only: [:index, :show]
+    resources :services, only: [:index]
+    resources :groupes, only: [:index]
+    resources :jours, only: [:index, :show]
+    resources :working_lists, only: [:index, :show]
     
   end
 
