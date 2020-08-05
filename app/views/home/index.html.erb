@@ -13,21 +13,22 @@
             <br>
         </div>
     </div>
+
     <div class="container">
         <% if !user_signed_in? %>
             <div class="row">
-                <div class="col-xs-2">
-                    <p>
-                        <!-- TODAY -->
-                        <%= link_to '<i class="material-icons">today</i>'.html_safe, 
-                            today_path,
-                            class: "btn btn-success btn-xs"
-                        %>
-                        <h4><%= I18n.t("home.index.aujourdhui") %></h4>
-                    </p>
-                </div>
-
                 <% if user_signed_in? %>
+                    <div class="col-xs-2">
+                        <p>
+                            <!-- TODAY -->
+                            <%= link_to '<i class="material-icons">today</i>'.html_safe, 
+                                today_path,
+                                class: "btn btn-success btn-xs"
+                            %>
+                            <h4><%= I18n.t("home.index.aujourdhui") %></h4>
+                        </p>
+                    </div>
+
                     <div class="col-xs-2">
                         <p>
                             <!-- THIS WEEK -->

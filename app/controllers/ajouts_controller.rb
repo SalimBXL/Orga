@@ -93,7 +93,7 @@ class AjoutsController < ApplicationController
         @ajout.work3 = params[:work3] unless params[:work3].nil?
         @ajout.work4 = params[:work4] unless params[:work4].nil?
         @ajout.work5 = params[:work5] unless params[:work5].nil?
-        render :edit
+        render :modification
     end
     
 

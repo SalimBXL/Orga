@@ -35,16 +35,18 @@
                 </li>
 
                 <!-- TODAY -->
-                <li>
-                    <%= link_to "<i class='material-icons' 
-                        data-toggle='tooltip' 
-                        title='#{I18n.t("home.navbar.aujourdhui")}'
-                        data-placement='bottom'>
-                        today
-                        </i>".html_safe,
-                        today_path
-                    %>
-                </li>
+                <% if user_signed_in? %>
+                    <li>
+                        <%= link_to "<i class='material-icons' 
+                            data-toggle='tooltip' 
+                            title='#{I18n.t("home.navbar.aujourdhui")}'
+                            data-placement='bottom'>
+                            today
+                            </i>".html_safe,
+                            today_path
+                        %>
+                    </li>
+                <% end %>
 
                 <!-- THIS WEEK -->
                 <% if user_signed_in? %>
@@ -149,7 +151,7 @@
                                         data-toggle='tooltip'
                                         title=#{I18n.t('home.navbar.login') } 
                                         data-placement='bottom'>
-                                        login
+                                        vpn_key
                                     </i>
                                     </span>".html_safe, 
                                     new_user_session_path

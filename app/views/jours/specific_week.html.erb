@@ -86,6 +86,9 @@
                 <% 5.times do |i| %>
                     <% i+= 1 %>
                     <div class="col-sm-2 label label-default">
+
+                        
+
                         <%= "#{nom_jour(i)} #{(@date.beginning_of_week+(i-1).day).day}" %>
                         <% unless @events[service.id].nil? %>
                             <% @events[service.id].each do |event| %>

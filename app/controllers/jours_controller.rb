@@ -298,5 +298,8 @@ class JoursController < ApplicationController
     def find_jour
         @jour = Jour.find(params[:id])
     end
+
+
+    
     
 end

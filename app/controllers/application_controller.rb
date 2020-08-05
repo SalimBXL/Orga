@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_locale
 
+
+
   def check_logged_in
     unless user_signed_in?
       redirect_to home_path
