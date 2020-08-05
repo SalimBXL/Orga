@@ -56,22 +56,31 @@
             </div>
         </div>
 
-        <!-- BOUTON EDIT MODE -->
+        <!-- BOUTON MODE -->
         <% if user_signed_in? && current_user.admin? %>
             <div>
-                <% if !@edit_mode %>
-                    <%= link_to '<span data-toggle="tooltip" >
-                                <i class="material-icons">edit</i></span>'.html_safe, 
-                                month_path(date: (@date+15.days), edit_mode: true), 
+                <% if @edit_mode or @new_day_mode %>
+                    <%= link_to '<span data-toggle="tooltip" title="Quit edition mode">
+                                <i class="material-icons">save</i></span>'.html_safe, 
+                                month_path(date: (@date+15.days), edit_mode: false, new_day_mode: false), 
                                 class: "btn btn-warning btn-xs" %>
                 <% else %>
+                    <!-- EDIT MODE -->
                     <%= link_to '<span data-toggle="tooltip" >
-                                <i class="material-icons">save</i></span>'.html_safe, 
-                                month_path(date: (@date+15.days), edit_mode: false), 
+                                <i class="material-icons">edit</i></span>'.html_safe, 
+                                month_path(date: (@date+15.days), edit_mode: true, new_day_mode: false), 
                                 class: "btn btn-warning btn-xs" %>
+                    <!-- NEW DAY MODE -->
+                    <!--
+                    <%= link_to '<span data-toggle="tooltip" >
+                                <i class="material-icons">add_circle_outline</i></span>'.html_safe, 
+                                month_path(date: (@date+15.days), edit_mode: false, new_day_mode: true), 
+                                class: "btn btn-warning btn-xs" %>
+                    -->
                 <% end %>
             </div>
         <% end %>
+
 
     </div>
 </div>
@@ -233,7 +242,13 @@
                                                 </a>
                                             <% end %>
 
+                                            <% else %>
+                                                <!-- TODO -->
+
                                         <% end %>
+
+                                    <% else %>
+                                        <!-- TODO -->
                                     <% end %>
                                 <% end %>
 

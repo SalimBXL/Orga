@@ -185,7 +185,6 @@ class JoursController < ApplicationController
             charge_events(@date + i.day)
         end
 
-
         # mode edition ?
         unless params[:edit_mode]
             @edit_mode = false
@@ -194,6 +193,17 @@ class JoursController < ApplicationController
                 @edit_mode = true
             else
                 @edit_mode = false
+            end
+        end
+
+        # mode new day ?
+        unless params[:new_day_mode]
+            @new_day_mode = false
+        else
+            if params[:new_day_mode].downcase == 'true'
+                @new_day_mode = true
+            else
+                @new_day_mode = false
             end
         end
 
@@ -292,7 +302,7 @@ class JoursController < ApplicationController
     end
 
     def jour_params
-        params.require(:jour).permit(:date, :utilisateur_id, :am_pm, :service_id, :edit_mode)        
+        params.require(:jour).permit(:date, :utilisateur_id, :am_pm, :service_id, :edit_mode, :new_day_mode)        
     end
 
     def find_jour
