@@ -123,10 +123,71 @@ en:
   help:
     index:
       titre: Help
+      titre1: Navigation bar
+      article1-1: On the top of the screen is located the navigation bar from where you can access to the mains sections of the application.
+      article1-2: The first one is the Home button.
+      article1-3: The three nexts take you to different kind of views (as Today, This week and This monthly).
+      article1-4: Then you you have the language icon and the Profil icon, from where you have access to your own profile.
+      titre2: The green section
+      article2-1: The green section is about time related aspects of the app.
+      article2-2: Absences allows users to record their holidays or sick leaves.
+      article2-2-2: Types define the leave's category.
+      article2-3: Days Off is where the administrators record public holidays or other day like.
+      article2-4: Events is where are recorded events to be known for the good organisation of the schedules but with no influence on it.
+      titre3: The blue section
+      article3-1: The blue section is the about the main aspects of the app.
+      article3-2: Locations is about the list of the different locations where users and services are located in space.
+      article3-3: Services is a collection of services where the users are working. More than one service can be attached to a location.
+      article3-4: Groups are a way of sorting and filtering users.
+      article3-5: Users is the list of all the users of the app.
+      article3-6: Works is the list of all the jobs users can do.
+      article3-7: Classes is how are sorted the "works".
+      titre4: The red section
+      article4-1: The red section is the administrator's toolbox.
     sommaire:
       titre: SOMMAIRE
     login:
-      titre: LogIn
+      titre: Log In
+      article1: Just write your e-mail and password in the fields and click on the Log in button.
+      article2: If you have any problem with our app, feel free to write to one of the administrators to get your problem solved.
+    today:
+      titre: Today
+      titre0: Date
+      article0: The current date is in a light blue box on the left top of the screen.
+      titre1: Navigation
+      article1-1: On the top of the page, there are some widgets to navigate or to filter the informations shown on screen.
+      article1-2: The three green buttons allow you to navigate from day to day. The central one jump back to the current day.
+      article1-3: Next to the navigation buttons, there is a filter with wich you can select the service you want to be shown on screen. As default, teh current user's service is selected.
+      titre2: Services and users
+      article2-1: Users with works to do only are shown on this view. They are sorted by service according to the work's service. 
+    this_week:
+      titre: This Week
+      titre0: Date
+      article0: The current week number  is in a light blue box on the left top of the screen. Under it, in a small grey box, is print the scope date of the current view.
+      titre1: Navigation
+      article1-1: On the top of the page, there are some widgets to navigate or to filter the informations shown on screen.
+      article1-2: The three green buttons allow you to navigate from week to week. The central one jump back to the current week.
+      article1-3: Next to the navigation buttons, there is a filter with wich you can select the service you want to be shown on screen. As default, teh current user's service is selected.
+      titre2: Services and users
+      article2-1: Users with works to do only are shown on this view. They are sorted by service according to the work's service. 
+    this_month:
+      titre: This Month
+      titre0: Date
+      article0: The current month name is in a light blue box on the left top of the screen. Under it, in a small grey box, is print the scope date of the current view.
+      titre1: Navigation
+      article1-1: On the top of the page, there are some widgets to navigate or to filter the informations shown on screen.
+      article1-2: The three green buttons allow you to navigate from month to month. The central one jump back to the current month.
+      article1-3: Next to the navigation buttons, there is a filter with wich you can select the service you want to be shown on screen. As default, teh current user's service is selected.
+      titre2: Services and users
+      article2-1: Users with works to do only are shown on this view. They are sorted by service according to the work's service. 
+      titre3: Modifying a specific day
+      article3-1: xxx
+    profile:
+      titre: Profile
+      titre0: User informations
+      article0: xxx
+      titre1: login data
+      article1: xxx
   home:
     index:
       absences: Absences

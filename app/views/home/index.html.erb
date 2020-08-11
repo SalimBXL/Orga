@@ -15,79 +15,15 @@
     </div>
 
     <div class="container">
-        <% if !user_signed_in? %>
-            <div class="row">
-                <% if user_signed_in? %>
-                    <div class="col-xs-2">
-                        <p>
-                            <!-- TODAY -->
-                            <%= link_to '<i class="material-icons">today</i>'.html_safe, 
-                                today_path,
-                                class: "btn btn-success btn-xs"
-                            %>
-                            <h4><%= I18n.t("home.index.aujourdhui") %></h4>
-                        </p>
-                    </div>
-
-                    <div class="col-xs-2">
-                        <p>
-                            <!-- THIS WEEK -->
-                            <%= link_to '<i class="material-icons">date_range</i>'.html_safe, 
-                                week_path,
-                                class: "btn btn-success btn-xs" 
-                            %>
-                            <h4><%= I18n.t("home.index.cette_semaine") %></h4>
-                        </p>
-                    </div>
-
-                    <div class="col-xs-2">
-                        <p>
-                            <!-- THIS MONTH -->
-                            <%= link_to '<i class="material-icons">calendar_today</i>'.html_safe, 
-                                month_path,
-                                class: "btn btn-success btn-xs" 
-                            %>
-                            <h4><%= I18n.t("home.index.ce_mois") %></h4>
-                        </p>
-                    </div>
-                <% end %>
-
-            </div>
-        <% end %>
-
+        
         <!-- MENU STANDARD -->
         <div class="row">
             
             <% if user_signed_in? %>
             <div class="col-xs-12 col-sm-6 col-md-4" id="conteneur1">
                 
-                <div class="row">
-                
-                    <p>
-                        <!-- TODAY -->
-                        <%= link_to '<i class="material-icons">today</i>'.html_safe, 
-                            today_path,
-                            class: "btn btn-success btn-xs"
-                        %>
-                        <h4><%= I18n.t("home.index.aujourdhui") %></h4>
-                    </p>
-                    <p>
-                        <!-- THIS WEEK -->
-                        <%= link_to '<i class="material-icons">date_range</i>'.html_safe, 
-                            week_path,
-                            class: "btn btn-success btn-xs" 
-                        %>
-                        <h4><%= I18n.t("home.index.cette_semaine") %></h4>
-                    </p>
-                    
-                </div>
-                
-
-
 
                 <div class="row">
-
-
                     <!-- ABSENCES -->
                     <% if user_signed_in? %>
                     <p>
@@ -98,22 +34,22 @@
                         <h4><%= I18n.t("home.index.absences") %></h4>
                     </p>
                     <% end %>
-
-
-                    <!-- TYPES ABSENCES -->
-                    <% if user_signed_in? %>
-                    <p>
-                        <%= link_to '<i class="material-icons">healing</i>'.html_safe, 
-                            type_absences_path,
-                            class: "btn btn-success btn-xs" 
-                        %>
-                        <h4><%= I18n.t("home.index.types") %></h4>
-                    </p>
-                    <% end %>
                 </div>
 
-                <div class="row">
+                <% if user_signed_in? && current_user.admin? %>
+                    <div class="row">
+                        <!-- TYPES ABSENCES -->
+                        <p>
+                            <%= link_to '<i class="material-icons">healing</i>'.html_safe, 
+                                type_absences_path,
+                                class: "btn btn-success btn-xs" 
+                            %>
+                            <h4><%= I18n.t("home.index.types") %></h4>
+                        </p>
+                    </div>
+                <% end %>
 
+                <div class="row">
                     <!-- FERMETURES -->
                     <% if user_signed_in? %>
                     <p>
@@ -124,8 +60,9 @@
                         <h4><%= I18n.t("home.index.fermetures") %></h4>
                     </p>
                     <% end %>
+                </div>
 
-
+                <div class="row">
                     <!-- EVENEMENTS -->
                     <% if user_signed_in? %>
                     <p>

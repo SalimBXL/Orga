@@ -2,6 +2,7 @@ class HomeController < ApplicationController
 
     # ACCUEIL
     def index
+        session[:page_aide] = "index"
         fichier = "app/../last_git_date.txt"
         if File.exist?(fichier)
             @last_git_date = format_last_git_date(File.read(fichier))

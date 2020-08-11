@@ -1,8 +1,22 @@
 <%= render 'titre' %>
 <div class="container">
     <h2><%= I18n.t("help.login.titre").capitalize %></h2>
+
     <article>
-        <h3>Titre article</h3>
-        Blabla blabla..
+        <p><%= I18n.t("help.login.article1") %></p>
+    </article>
+    
+    <article>
+        <p><%= I18n.t("help.login.article2") %></p>
+        <address>
+            <ul>
+            <% @administrators.each do |administrator| %>
+                <li>
+                    - <%= administrator.prenom_nom %> : 
+                    <a href="mailto:<%= administrator.email %>"><%= administrator.email %></a>
+                </li>
+            <% end %>
+            </ul>
+        </address>
     </article>
 </div>

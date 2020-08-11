@@ -1,0 +1,24 @@
+<%= render 'titre' %>
+
+<% unless user_signed_in? %>
+    <%= render "sommaire" %>
+<% else %>
+<div class="container">
+
+    <h2><%= I18n.t("help.profile.titre").capitalize %></h2>
+
+
+    <!-- User informations -->
+    <article>
+        <h3><span class="label label-default"><%= I18n.t("help.profile.titre0").capitalize %></span></h3>
+        <p><%= I18n.t("help.profile.article0") %></p>
+    </article>
+
+    <!-- login data -->
+    <article>
+        <h3><span class="label label-default"><%= I18n.t("help.profile.titre1").capitalize %></span></h3>
+        <p><%= I18n.t("help.profile.article1") %></p>
+    </article>
+
+</div>
+<% end %>

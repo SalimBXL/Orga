@@ -1,2 +1,75 @@
 <%= render 'titre' %>
-<%= render 'sommaire' %>
+
+<% unless user_signed_in? %>
+    <%= render "sommaire" %>
+<% else %>
+<div class="container">
+
+    <h2>The home page</h2>
+
+    <!-- Navigation Bar -->
+    <article>
+        <h3><span class="label label-default"><%= I18n.t("help.index.titre1").capitalize %></span></h3>
+        <p><%= I18n.t("help.index.article1-1") %></p>
+        <p>
+            <%= I18n.t("help.index.article1-2") %><br>
+            <%= I18n.t("help.index.article1-3") %><br>
+            <%= I18n.t("help.index.article1-4") %>
+        </p>
+    </article>
+
+    <!-- Green section -->
+    <article>
+        <h3><span class="label label-success"><%= I18n.t("help.index.titre2").capitalize %></span></h3>
+        <p><%= I18n.t("help.index.article2-1") %></p>
+        <p>
+            <%= I18n.t("help.index.article2-2") %><br>
+            <% if user_signed_in? && current_user.admin? %>
+                <%= I18n.t("help.index.article2-2-2") %><br>
+            <% end %>
+            <%= I18n.t("help.index.article2-3") %><br>
+            <%= I18n.t("help.index.article2-4") %>
+        </p>
+    </article>
+
+    <!-- Blue section -->
+    <article>
+        <h3><span class="label label-info"><%= I18n.t("help.index.titre3").capitalize %></span></h3>
+        <p><%= I18n.t("help.index.article3-1") %></p>
+        <p>
+            <%= I18n.t("help.index.article3-2") %><br>
+            <%= I18n.t("help.index.article3-3") %><br>
+            <%= I18n.t("help.index.article3-4") %><br>
+            <%= I18n.t("help.index.article3-5") %><br>
+            <%= I18n.t("help.index.article3-6") %><br>
+            <%= I18n.t("help.index.article3-7") %>
+        </p>
+    </article>
+
+    <!-- Red section -->
+    <% if user_signed_in? && current_user.admin? %>
+    <article>
+        <h3><span class="label label-danger"><%= I18n.t("help.index.titre4").capitalize %></span></h3>
+        <p><%= I18n.t("help.index.article4-1") %></p>
+    </article>
+    <% end %>
+
+    
+    <article>
+        <h3>More</h3>
+        <p><%= I18n.t("help.login.article2") %></p>
+        <address>
+            <ul>
+            <% @administrators.each do |administrator| %>
+                <li>
+                    - <%= administrator.prenom_nom %> : 
+                    <a href="mailto:<%= administrator.email %>"><%= administrator.email %></a>
+                </li>
+            <% end %>
+            </ul>
+        </address>
+    </article>
+
+
+</div>
+<% end %>
