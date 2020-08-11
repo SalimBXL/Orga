@@ -131,6 +131,22 @@
                     </li>
                 <% end %>
 
+
+                <!-- HELP -->
+                <li>
+                    <%= link_to "<i class='material-icons'
+                                data-toggle='tooltip'
+                                title=#{I18n.t('home.navbar.help')}
+                                data-placement='bottom'>
+                                help
+                            </i>".html_safe,
+                            help_path
+                        %>
+                </li>
+
+
+
+
                 <!-- CONNEXION -->
                 <li>
                     <% if user_signed_in? %>

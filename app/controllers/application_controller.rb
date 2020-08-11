@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_locale
+  before_action :set_page_aide
 
 
 
@@ -50,6 +51,7 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
 
   def check_logfile_size(fichier)
     # Check si le fichier ne dépasse pas 1e de lignes
@@ -107,7 +109,9 @@ class ApplicationController < ActionController::Base
   end
 
 
-
+  def set_page_aide
+    #@page_aide = "index" unless @page_aide
+  end
 
   def set_locale
     locale = params[:locale] || cookies[:cookies] || I18n.default_locale

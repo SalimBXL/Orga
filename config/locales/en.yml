@@ -120,6 +120,13 @@ en:
       description: Description
       nom: Name
       titre: New group
+  help:
+    index:
+      titre: Help
+    sommaire:
+      titre: SOMMAIRE
+    login:
+      titre: LogIn
   home:
     index:
       absences: Absences
@@ -149,6 +156,7 @@ en:
       login: Login
       logout: Logout
       profile: Profile
+      help: Help
   jours:
     form:
       am: AM
