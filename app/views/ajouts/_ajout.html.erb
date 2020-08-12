@@ -3,7 +3,17 @@
     <td>
         <%= "#{nom_jour(ajout.date.cwday)} #{ajout.date} (#{am_pm(ajout.am_pm)})" %>
     </td>
-    <td></td>
+    <td>
+        <% check_services = ajout.check_services %>
+
+        <% unless check_services.nil? %>
+            <% check_services.each do |s| %>
+                <span class="label label-warning" title="<%= I18n.t("ajouts.index.error_service") %>"><%= s %></span><br>
+            <% end %>
+        <% else %>
+            <%= ajout.service %>
+        <% end %>
+    </td>
     <td><%= ajout.utilisateur.prenom_nom %></td>
     <td>
         <ul>

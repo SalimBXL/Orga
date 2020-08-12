@@ -6,7 +6,26 @@ class Ajout < ApplicationRecord
     before_create :set_date
     before_save :check_work
 
-    
+    def service
+        w = Work.find_by_id(work1)
+        w.service.nom unless w.nil?
+    end
+
+    def check_services
+        s = Array.new
+        wks = self.works
+        wks.each do |wk|
+            w = Work.find_by_id(wk)
+            unless w.nil?
+                s << w.service.nom unless s.include?(w.service.nom)
+            end
+        end
+        if s.count > 1
+            s
+        else
+            nil
+        end
+    end
 
     def works
         w = Array.new

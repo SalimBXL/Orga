@@ -36,6 +36,7 @@ en:
       utilisateur: User
       valider: Validate
       work: Work
+      error_service: Error. One job or more from different services
     new:
       am: AM
       confirmer: Confirm
