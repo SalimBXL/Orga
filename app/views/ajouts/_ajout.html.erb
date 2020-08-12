@@ -1,10 +1,11 @@
-<tr id="ajout_<%= ajout.id %>">
+<% check_services = ajout.check_services %>
+<tr id="ajout_<%= ajout.id %>" class="<%= 'danger' unless check_services.nil? %>">
     <% ajout.utilisateur %>
     <td>
         <%= "#{nom_jour(ajout.date.cwday)} #{ajout.date} (#{am_pm(ajout.am_pm)})" %>
     </td>
     <td>
-        <% check_services = ajout.check_services %>
+        
 
         <% unless check_services.nil? %>
             <% check_services.each do |s| %>
@@ -41,14 +42,14 @@
             <%= link_to '<i class="material-icons">file_copy</i><br>
                 Dupliquer'.html_safe,
                 "ajouts/#{ajout.id}/dupliquer", 
-                class: "btn btn-info",
+                class: "btn btn-info #{"disabled" unless check_services.nil?}",
                 title: I18n.t("ajouts.index.dupliquer") %>
         </div>
         <div class="btn-group">
             <%= link_to '<i class="material-icons">playlist_add_check</i><br>
                 Valider'.html_safe, 
                 "ajouts/#{ajout.id}/valider", 
-                class: "btn btn-success",
+                class: "btn btn-success #{"disabled" unless check_services.nil?}",
                 title: I18n.t("ajouts.index.valider") %>
         </div>
     </td>
