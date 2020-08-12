@@ -16,6 +16,11 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <!-- PARTIE GAUCHE -->
             <ul class="nav navbar-nav">
+                <% if user_signed_in? %>
+                    <li>
+                        <%= link_to "[#{current_user.utilisateur.prenom_nom.upcase}]", utilisateur_path(current_user.utilisateur.id) %>
+                    </li>
+                <% end %>
             </ul>
 
             <!-- PARTIE DROITE -->
