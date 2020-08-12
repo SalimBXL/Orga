@@ -1,0 +1,50 @@
+<%= render 'titre' %>
+
+<% unless user_signed_in? %>
+    <%= render "sommaire" %>
+<% else %>
+<div class="container">
+
+    <h2><%= I18n.t("help.ajout_new.titre").capitalize %></h2>
+
+
+    <!-- Présentations -->
+    <article>
+        <h3><span class="label label-info"><%= I18n.t("help.ajout_new.titre0").capitalize %></span></h3>
+        <p><%= I18n.t("help.ajout_new.article0") %></p>
+    </article>
+
+    <!-- For each job -->
+    <article>
+        <h3><span class="label label-success"><%= I18n.t("help.ajout_new.titre1").capitalize %></span></h3>
+        <p><%= I18n.t("help.ajout_new.article1-1") %></p>
+        <p>
+            <%= I18n.t("help.ajout_new.article1-2") %><br>
+            <%= I18n.t("help.ajout_new.article1-3") %>
+        </p>
+    </article>
+
+    <!-- Problems -->
+    <article>
+        <h3><span class="label label-warning"><%= I18n.t("help.ajout_new.titre2").capitalize %></span></h3>
+        <p><%= I18n.t("help.ajout_new.article2") %></p>
+    </article>
+    
+    <article>
+        <h3>More</h3>
+        <p><%= I18n.t("help.login.article2") %></p>
+        <address>
+            <ul>
+            <% @administrators.each do |administrator| %>
+                <li>
+                    - <%= administrator.prenom_nom %> : 
+                    <a href="mailto:<%= administrator.email %>"><%= administrator.email %></a>
+                </li>
+            <% end %>
+            </ul>
+        </address>
+    </article>
+
+
+</div>
+<% end %>

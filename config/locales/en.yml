@@ -122,6 +122,15 @@ en:
       nom: Name
       titre: New group
   help:
+    ajouts:
+      titre: Attributions
+      titre0: The attribution's list
+      article0: The attribution's page shows the list of all the created but not yet confirmed jobs. We sometimes call an attribution list a "batch".
+      titre1: What you see for each line
+      article1-1: On each line (of created but not yet confirmed job) you can see basics attribution's informations as the date (including the AM/PM type), the service, the user whom the attribution is made for and the jobs included in the current batch.
+      article1-2: You also have a bunch of buttons with witch you can delete, edit, duplicate or confirm the current batch.
+      titre2: Problems you may have
+      article2: You may have problems if you create a batch with works from different services. A batch if supposed to include only same service works. If you do want to add a works from a another service, you have to create another batch with a different Time Part (AM-PM).
     index:
       titre: Help
       titre1: Navigation bar
