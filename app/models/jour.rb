@@ -11,6 +11,7 @@ class Jour < ApplicationRecord
     scope :today, -> { where(date: Date.today).order(:service_id, :utilisateur_id, :am_pm) }
     scope :at_day, -> (atday) { where(date: atday).order(:service_id, :utilisateur_id, :am_pm) }
     scope :of, -> (user_id) { where(utilisateur_id: user_id) }
+    scope :today_of, -> (user_id) { where(date: Date.today, utilisateur_id: user_id).order(:service_id, :am_pm) }
 
     def numero_semaine
         "#{date.year}-W#{date.cweek<10 ? "0" : ""}#{date.cweek}"
