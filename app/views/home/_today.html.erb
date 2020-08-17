@@ -4,9 +4,11 @@
         <h3><%= date_localized %></h3>
         <article>
             <!-- MESSAGE / COMMUNICATION -->
-            <% @events[current_user.utilisateur.service.id].each do |event| %>
-                <span class="label label-default"><%= event.nom %></span>
-                <%= event.note %>
+            <% if @events and @events[current_user.utilisateur.service.id] %>
+                <% @events[current_user.utilisateur.service.id].each do |event| %>
+                    <span class="label label-default"><%= event.nom %></span>
+                    <%= event.note %>
+                <% end %>
             <% end %>
         </article>
         <br>
