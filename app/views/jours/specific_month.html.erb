@@ -1,300 +1,45 @@
 <% session[:page_aide] = "this_month" %>
 
-<div class="container">
-    <h1>
-        <span class="label label-info">
-            <i class="material-icons">calendar_today</i>
-            <%= I18n.t("month.mois_#{(@date+15.days).month}") %>
-        </span>
-    </h1>
 
-    <div class="flex-menu-day">
-        
-        <!-- Plage de dates -->
-        <div style="margin-right: auto">
-            <div class="badge">
-                <%= I18n.localize @date, format: :long %> -- <%= I18n.localize @date2, format: :long %>
-            </div>
-        </div>
-
-        <!-- MENU SERVICE -->
-        <div>
-            <!-- Liste des services -->
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <% unless @current_service.nil? %>
-                        <%= @current_service.nom %>
-                    <% else %>
-                        <%= I18n.t("jours.today.all_services") %>
-                    <% end %>
-
-                <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><%= link_to I18n.t("jours.today.all_services"), month_path(date: (@date+15.days), service: -1) %></li>
-                    <% @services.each do |service| %>
-                        <li>
-                        <%= link_to service.nom, month_path(date: (@date+15.days), service: service.id) %>
-                        </li>
-                    <% end %>
-                </ul>
-            </li>
-        </div>
-
-        <!-- MENU NAVIGATION -->
-        <div style="flex: 0 0 120px">
-            <div class="btn-group">
-                <%= link_to '<span data-toggle="tooltip"  >
-                                <i class="material-icons">chevron_left</i></span>'.html_safe, 
-                                month_path(date: (@date+15.days)-1.month), 
-                                class: "btn btn-success btn-xs" %>
-                <%= link_to '<span data-toggle="tooltip" >
-                                <i class="material-icons">adjust</i></span>'.html_safe, 
-                                month_path(date: Date.today), 
-                                class: "btn btn-success btn-xs" %>
-                <%= link_to '<span data-toggle="tooltip" >
-                                <i class="material-icons">chevron_right</i></span>'.html_safe, 
-                                month_path(date: (@date+15.days)+1.month), 
-                                class: "btn btn-success btn-xs" %>
-            </div>
-        </div>
-
-        <!-- BOUTON MODE -->
-        <% if user_signed_in? && current_user.admin? %>
-            <div>
-                <% if @edit_mode or @new_day_mode %>
-                    <%= link_to '<span data-toggle="tooltip" title="Quit edition mode">
-                                <i class="material-icons">save</i></span>'.html_safe, 
-                                month_path(date: (@date+15.days), edit_mode: false, new_day_mode: false), 
-                                class: "btn btn-warning btn-xs" %>
-                <% else %>
-                    <!-- EDIT MODE -->
-                    <%= link_to '<span data-toggle="tooltip" >
-                                <i class="material-icons">edit</i></span>'.html_safe, 
-                                month_path(date: (@date+15.days), edit_mode: true, new_day_mode: false), 
-                                class: "btn btn-warning btn-xs" %>
-                    <!-- NEW DAY MODE -->
-                    <!--
-                    <%= link_to '<span data-toggle="tooltip" >
-                                <i class="material-icons">add_circle_outline</i></span>'.html_safe, 
-                                month_path(date: (@date+15.days), edit_mode: false, new_day_mode: true), 
-                                class: "btn btn-warning btn-xs" %>
-                    -->
-                <% end %>
-            </div>
-        <% end %>
-
-
-    </div>
-</div>
-
+<!-- EN-TÊTE -->
+<%= render partial: "header_month" %>
 
 
 <% @jours.each do |service, contenu| %>
     <br>
+
+    <!-- AFFICHAGE DU NOM DU SERVICE -->
     <div 
         id = "service-<%= service.id %>"
         <% if !@current_service.nil? && @current_service.id != service.id %>
                 style = "display: none"
         <% end %>
-    >
-        <!-- AFFICHAGE DU NOM DU SERVICE -->
-        <div class="well">
-            <H3><i class="material-icons">business</i> <%= service.nom.upcase %></H3>
-        </div>
-        <table class="table table-bordered grille">
-            <!-- Ligne de numéros de semaines -->
-            <tr>
-                <td class="tdfixe"></td>
-                <% ((@date2-@date).to_i).times do |i| %>
-                    <% if (@date + i.day).wday==1 %>
-                        <td class="tdfixe2" colspan="6">
-                            <%= "##{(@date + i.day).cweek}" %>
-                        </td>
-                    <% end %>
-                <% end %>
-            </tr>
-
-            
-            <!-- Ligne de numéros de jours -->
-            <tr>
-                <td class="tdfixe"></td>
-                <% ((@date2-@date).to_i).times do |i| %>
-                    <% if (@date + i.day).wday!=0 %>
-                        <% if (@date + i.day).wday==6 %> 
-                            <!-- WEEKEND -->                       
-                            <td class="tdW">W</td>
-                        <% else %>
-                            <!-- JOUR DE SEMAINE -->
-                            <td class="tdfixe2">
-                                <!-- Numéro du jour -->
-                                <%= (@date + i.day).day %>
-                                
-                                <!-- EVENTS -->
-                                <% unless @events[service.id].nil? %>
-                                    <% @events[service.id].each do |event| %>
-                                        <% if event.date == (@date+ i.day) %>
-                                            <br>
-                                            <i class="material-icons"
-                                                data-toggle="tooltip" 
-                                                title="<%= "#{event.nom.capitalize} #{event.note}" %>"
-                                            >error_outline</i>
-                                        <% end %>
-                                    <% end %>
-                                <% end %>
-                            </td>
-                        <% end %>
-                    <% end %>
-                <% end %>
-            </tr>
+        >
+        <%= render partial: "nom_service_month", locals: { service: service } %>
         
+
+        <table class="table table-bordered grille">
+
+
+            <!-- Ligne de numéros de semaines -->
+            <%= render partial: "ligne_numero_semaines_month" %>
+
+            <!-- Ligne de numéros de jours -->
+            <%= render partial: "ligne_numero_jour_month", locals: { service: service } %>
+
             <!-- Ligne par utilisateur -->
             <% contenu.each do |utilisateur, jours| %>
-                <tr class="tdfixe3"> 
-                    <td class="tdfixe">
-                        <strong><%= utilisateur.prenom_nom %></strong>
-                    </td>
-
-                    <% ((@date2-@date).to_i).times do |index| %>
-                        <% date_jour = (@date + index.day) %>
-                        <% bg = "" %>
-                        
-                        <!-- Compose la fiche du jour -->
-
-                        <!-- Weekend... -->
-                        <% if date_jour.wday==0 %>
-                            <% # On zappe le dimanche %>
-                        <% end %>
-                        <% if date_jour.wday==6 %>
-                            <td class="weekend"></td>
-                        <% end %>
-
-                        <!-- Jour de la semaine mais utilisateur en congé-->
-                        <% if ((1..5).include?(date_jour.wday) && !@absences[utilisateur.id].nil?) %>
-                            <% if @absences[utilisateur.id].keys.include?(date_jour.to_s) %>
-                                <% if @absences[utilisateur.id][date_jour.to_s] %>
-                                    <% bg = "conge_ok" %>
-                                <% else %>
-                                    <% bg = "conge_wait" %>
-                                <% end %>
-                            <% end %>
-                        <% end %>
-
-                        <!-- Jour de semaine ... -->
-                        
-                        <!-- mais service fermé... -->
-                        <% if ((1..5).include?(date_jour.wday) && !@fermetures[service.id].nil?) %>
-                            <% if @fermetures[service.id].keys.include?(date_jour.to_s) %>
-                                <% bg = "ferie" %>
-                            <% end %>
-                        <% end %>
-
-                        <!-- Jour de semaine "normal" -->
-                        <% if (1..5).include?(date_jour.wday) %>
-                            <!-- Si le jour affiché est la date actuelle
-                                on jauni le fond ... -->
-                            <% if date_jour == Date.today %>
-                                <% bg = "today" %>
-                            <% end %>
-                            
-                            <td class="tdfixe3 <%= bg %>">
-                                <!-- Works -->
-                                <% [false, true].each do |ap| %>
-                                    <% dd = date_jour.to_s %>
-                                    <% unless @jours[service][utilisateur][dd].nil? %>
-                                        <% unless @jours[service][utilisateur][dd][ap].nil? %>
-
-                                            <!-- Transforme la cellule en bouton si mode édition actif -->
-                                            <% if user_signed_in? && current_user.admin? && @edit_mode %>
-                                                <% ajout = Ajout.new(utilisateur_id: utilisateur.id, date: dd, am_pm: ap) %>
-                                                <% unless @jours[service][utilisateur][dd][ap][0].nil? %>
-                                                    <% ajout.work1 = @jours[service][utilisateur][dd][ap][0].work.id %>
-                                                <% end %>
-                                                <% unless @jours[service][utilisateur][dd][ap][1].nil? %>
-                                                    <% ajout.work2 = @jours[service][utilisateur][dd][ap][1].work.id %>
-                                                <% end %>
-                                                <% unless @jours[service][utilisateur][dd][ap][2].nil? %>
-                                                    <% ajout.work3 = @jours[service][utilisateur][dd][ap][2].work.id %>
-                                                <% end %>
-                                                <% unless @jours[service][utilisateur][dd][ap][3].nil? %>
-                                                    <% ajout.work4 = @jours[service][utilisateur][dd][ap][3].work.id %>
-                                                <% end %>
-                                                <% unless @jours[service][utilisateur][dd][ap][4].nil? %>
-                                                    <% ajout.work5 = @jours[service][utilisateur][dd][ap][4].work.id %>
-                                                <% end %>
-                                                <a href="/ajouts/-1/modification?utilisateur_id=<%= utilisateur.id %>&date=<%= dd %>&am_pm=<%= ap %>&work1=<%= @jours[service][utilisateur][dd][ap][0].work.id %>&work2=<%= @jours[service][utilisateur][dd][ap][1].work.id unless @jours[service][utilisateur][dd][ap][1].nil? %>&work3=<%= @jours[service][utilisateur][dd][ap][2].work.id unless @jours[service][utilisateur][dd][ap][2].nil?%>&work4=<%= @jours[service][utilisateur][dd][ap][3].work.id unless @jours[service][utilisateur][dd][ap][3].nil?%>&work5=<%= @jours[service][utilisateur][dd][ap][4].work.id unless @jours[service][utilisateur][dd][ap][4].nil?%>" class="btn btn-default btn-xs" role="button">
-                                            <% end %>
-
-                                            <% @jours[service][utilisateur][dd][ap].each do |wl| %>
-                                                <!-- Change la couleur pour certains works -->
-                                                <% cl = "" %>
-                                                <% if wl.work.code.downcase == "qc" && Date.parse(dd).wday==5 %>
-                                                    <% cl = "keep_attention" %>
-                                                <% end %>
-                                                <!-- Affiche le works -->
-                                                <% unless ap %>
-                                                    <span class="  <%= cl %>">
-                                                <% else %>
-                                                    <span class="label label-info <%= cl %>">
-                                                <% end %>
-                                                    <%= wl.work.code %>
-                                                </span>
-                                            <% end %>
-
-                                            <% if user_signed_in? && current_user.admin? && @edit_mode %>
-                                                </a>
-                                            <% end %>
-
-                                            <% else %>
-                                                <!-- TODO -->
-
-                                        <% end %>
-
-                                    <% else %>
-                                        <!-- TODO -->
-                                    <% end %>
-                                <% end %>
-
-
-
-
-
-                                
-
-
-
-
-
-
-                                <% bg = "" %>
-                            </td>
-                        <% end %>
-                    <% end %>
-                </tr>
+                <%= render partial: "ligne_utilisateur_month", 
+                    locals: { 
+                        utilisateur: utilisateur, 
+                        jours: jours,
+                        service: service
+                    } %>
             <% end %>
         </table>
     </div>
 
-
     <!-- Rappel des Events -->
-    <% unless @events[service.id].nil? %>
-        <% if @current_service.nil? or @current_service.id == service.id %>
-            <article>
-            <% @events[service.id].each do |event| %>
-                <span class="label label-info">
-                    <%= I18n.localize event.date, format: :long %>
-                </span>
-                &nbsp;&nbsp;
-                <strong>
-                    <%= event.nom.capitalize %> : 
-                </strong>
-                <%= event.note %><br>
-            <% end %>
-            </article>
-            <br>
-        <% end %>
-    <% end %>
-
-
-
-
+    <%= render partial: "rappel_events_month", locals: { service: service } %>
+    
 <% end %>

@@ -1,0 +1,30 @@
+<tr>
+    <td class="tdfixe"></td>
+    <% ((@date2-@date).to_i).times do |i| %>
+        <% if (@date + i.day).wday!=0 %>
+            <% if (@date + i.day).wday==6 %> 
+                <!-- WEEKEND -->                       
+                <td class="tdW">W</td>
+            <% else %>
+                <!-- JOUR DE SEMAINE -->
+                <td class="tdfixe2">
+                    <!-- Numéro du jour -->
+                    <%= (@date + i.day).day %>
+                    
+                    <!-- EVENTS -->
+                    <% unless @events[service.id].nil? %>
+                        <% @events[service.id].each do |event| %>
+                            <% if event.date == (@date+ i.day) %>
+                                <br>
+                                <i class="material-icons"
+                                    data-toggle="tooltip" 
+                                    title="<%= "#{event.nom.capitalize} #{event.note}" %>"
+                                >error_outline</i>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                </td>
+            <% end %>
+        <% end %>
+    <% end %>
+</tr>

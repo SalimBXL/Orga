@@ -157,6 +157,7 @@ class JoursController < ApplicationController
             end
         end
 
+        # Charge les fermetures
         @fermetures = Hash.new
         fermetures = Fermeture.where('date_fin >= ? AND date <= ?', @date, @date2).order(:service_id, :date, :date_fin)
         fermetures.each do |fermeture|
@@ -166,6 +167,7 @@ class JoursController < ApplicationController
             end
         end
 
+        # Charge les absences
         @absences = Hash.new
         absences = Absence.where('date_fin >= ? AND date <= ?', @date, @date2).order(:utilisateur_id, :date, :date_fin)
         absences.each do |absence|
