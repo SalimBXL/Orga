@@ -158,14 +158,7 @@ class JoursController < ApplicationController
         end
 
         # Charge les fermetures
-        @fermetures = Hash.new
-        fermetures = Fermeture.where('date_fin >= ? AND date <= ?', @date, @date2).order(:service_id, :date, :date_fin)
-        fermetures.each do |fermeture|
-            (fermeture.date..fermeture.date_fin).each do |fj|
-                @fermetures[fermeture.service_id] ||= Hash.new
-                @fermetures[fermeture.service_id][fj.to_s] = fermeture.nom
-            end
-        end
+        charge_fermetures(@date, @date2)        
 
         # Charge les absences
         @absences = Hash.new
@@ -252,13 +245,12 @@ class JoursController < ApplicationController
                         @absences[utilisateur_jour.utilisateur][i+1] =  false
                     end
                 end
-
-                if Fermeture.at_for_service?(@date.beginning_of_week+i.days, utilisateur_jour.service)
-                    @off[utilisateur_jour.service] ||= Array.new
-                    @off[utilisateur_jour.service] << i
-                end
             end
         end
+
+        charge_fermetures(@date.beginning_of_week, @date.beginning_of_week+5.days)
+
+       
 
         # Charge les services
         charge_les_services

@@ -3,7 +3,7 @@ class Fermeture < ApplicationRecord
     before_validation :set_date_fin
     validates :nom, :date, :date_fin, presence: true
 
-    scope :at, -> (d) { where("date <= ? AND date_fin >= ?", d, d) }
+    scope :at, -> (d) { where('date_fin >= ? AND date <= ?', d, d) }
     scope :at_for_service, -> (d,u) { self.at(d).where(service_id: u) }
     scope :at_for_service?, -> (d,u) { self.at_for_service(d, u).count>0 }
 

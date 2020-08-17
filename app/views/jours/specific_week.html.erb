@@ -128,8 +128,13 @@
                             <% end %>
                         <% end %>
 
+                        <!-- Service fermé ? -->
+                        <% bg = "ferie" if @fermetures[service.id] and @fermetures[service.id][(@date.beginning_of_week+i-1).to_s] %>
+                        
+
                         <!-- Compose la fiche du jour -->
                         <div class="col-sm-2 <%= bg %>">
+                            <%=  %>
                             
                             <p>
                             AM : 

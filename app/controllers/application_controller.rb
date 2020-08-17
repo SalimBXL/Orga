@@ -157,4 +157,17 @@ def charge_events(date)
     end
 end
 
+
+# Charge les fermetures
+def charge_fermetures(date, date2)
+  @fermetures = Hash.new
+  fermetures = Fermeture.where('date_fin >= ? AND date <= ?', date, date2).order(:service_id, :date, :date_fin)
+  fermetures.each do |fermeture|
+      (fermeture.date..fermeture.date_fin).each do |fj|
+          @fermetures[fermeture.service_id] ||= Hash.new
+          @fermetures[fermeture.service_id][fj.to_s] = fermeture.nom
+      end
+  end
+end
+
 end
