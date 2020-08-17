@@ -13,7 +13,7 @@ class HomeController < ApplicationController
         # Log action
         log(request.path)
 
-        get_today
+        get_today if user_signed_in?
 
     end
 

@@ -219,6 +219,7 @@ en:
       welcome: Welcome
       working_lists: Working Lists
       works: Works
+      no_schedule: Nothing planned for today in your agenda.
     navbar:
       aujourdhui: Today
       ce_mois: This month
