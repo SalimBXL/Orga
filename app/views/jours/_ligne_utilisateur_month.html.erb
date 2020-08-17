@@ -16,14 +16,10 @@
         <!-- Si Jour de semaine ... -->
         <% if (1..5).include?(date_jour.wday) %>
 
-            <!-- mais service fermé... -->
-            <% unless @fermetures[service.id].nil? %>
-                <% unless @fermetures[service.id][date_jour.to_s].nil? %>
-                    <td class="ferie"></td>
-                <% end %>
-            <% end %>
-
             
+
+            <!-- service ouvert... -->
+        
             <!-- mais utilisateur en congé-->
             <% unless @absences[utilisateur.id].nil? %>
                 <% if @absences[utilisateur.id].keys.include?(date_jour.to_s) %>
@@ -34,15 +30,21 @@
                     <% end %>
                 <% end %>
             <% else %>
-
                 <!-- Jour de semaine "normal" -->
-
                 <% if date_jour == Date.today %>
                     <!-- Si jour est date actuelle on jauni le fond ... -->
                     <% bg = "today" %>
                 <% end %>
-
             <% end %>
+
+            <!-- service fermé... -->
+            <% unless @fermetures[service.id].nil? %>
+                <% unless @fermetures[service.id][date_jour.to_s].nil? %>
+                    <!-- <td class="ferie"></td> -->
+                    <% bg = "ferie" %>
+                <% end %>
+            <% end %>
+            
 
             <!-- On affiche la cellule du jour -->
             <%= render partial: "cellule_jour_month", locals: { 

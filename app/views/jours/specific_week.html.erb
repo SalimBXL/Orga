@@ -107,7 +107,7 @@
                 <% end %>
             </div>
 
-            <!-- Changement d'utilsiateur --->
+            <!-- Changement d'utilisateur --->
             <% contenu.each do |utilisateur, jours| %>
                 <div class="row">
                     <div class="col-sm-2">
@@ -129,11 +129,8 @@
                         <% end %>
 
                         <!-- Compose la fiche du jour -->
-                        <% if (@date.beginning_of_week+(i-1).day) == Date.today %>
-                            <% bg = "today" %>
-                        <% end %>
                         <div class="col-sm-2 <%= bg %>">
-                            <% bg = "" %>
+                            
                             <p>
                             AM : 
                             <% @jours[service][utilisateur][i][false].each do |item| %>
