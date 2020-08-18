@@ -12,9 +12,7 @@ class AjoutsController < ApplicationController
     #   INDEX   #
     #############
     def index
-        @ajouts = Ajout.order(:date, :am_pm, :utilisateur_id)
-        #@works = Work.all
-        
+        @ajouts = Ajout.order(:date, :am_pm, :utilisateur_id)        
     end
 
     def show

@@ -6,6 +6,10 @@ class Ajout < ApplicationRecord
     before_create :set_date
     before_save :check_work
 
+    def exists_in_db?
+        Jour.where(date: date, utilisateur_id: utilisateur.id, am_pm: am_pm).first
+    end
+
     def service
         w = Work.find_by_id(work1)
         w.service.nom unless w.nil?

@@ -1,19 +1,40 @@
-<% check_services = ajout.check_services %>
-<tr id="ajout_<%= ajout.id %>" class="<%= 'danger' unless check_services.nil? %>">
+
+<% classe = "" %>
+<% valide = true %>
+
+<!-- plusieurs services définis... -->
+<% if check_services = ajout.check_services %>
+    <% classe = "warning" unless check_services.nil? %>
+    <% valide = false %>
+    <% message = I18n.t("ajouts.index.error_service") %>
+<% end %>
+
+<!-- un batch existe déjà pour cet utilisateur à cette date au même part time... -->
+<% if ajout_exists = ajout.exists_in_db? %>
+    <% classe = "danger" if ajout_exists %>
+    <% valide = false %>
+    <% message = I18n.t("ajouts.index.error_already_exists") %>
+<% end %>
+
+
+<tr id="ajout_<%= ajout.id %>" class="<%= classe %>">
+
     <% ajout.utilisateur %>
     <td>
         <%= "#{nom_jour(ajout.date.cwday)} #{ajout.date} (#{am_pm(ajout.am_pm)})" %>
     </td>
     <td>
         
-
-        <% unless check_services.nil? %>
+        <!-- On affiche le/les service(s) -->
+        <% if check_services %>
             <% check_services.each do |s| %>
-                <span class="label label-warning" title="<%= I18n.t("ajouts.index.error_service") %>"><%= s %></span><br>
+                <span class="label label-warning" title="<%= message %>"><%= s %></span><br>
             <% end %>
         <% else %>
             <%= ajout.service %>
         <% end %>
+
+
     </td>
     <td><%= ajout.utilisateur.prenom_nom %></td>
     <td>
@@ -42,15 +63,23 @@
             <%= link_to '<i class="material-icons">file_copy</i><br>
                 Dupliquer'.html_safe,
                 "ajouts/#{ajout.id}/dupliquer", 
-                class: "btn btn-info #{"disabled" unless check_services.nil?}",
+                class: "btn btn-info #{"disabled" unless valide}",
                 title: I18n.t("ajouts.index.dupliquer") %>
         </div>
         <div class="btn-group">
             <%= link_to '<i class="material-icons">playlist_add_check</i><br>
                 Valider'.html_safe, 
                 "ajouts/#{ajout.id}/valider", 
-                class: "btn btn-success #{"disabled" unless check_services.nil?}",
+                class: "btn btn-success #{"disabled" unless valide}",
                 title: I18n.t("ajouts.index.valider") %>
         </div>
+    </td>
+
+    <td>
+        <% unless valide %>
+            <span class="badge" title="<%= message %> <%= I18n.t("ajouts.index.warning") %>">
+                <span class="material-icons">warning</span>
+            </span>
+        <% end %>
     </td>
 </tr>

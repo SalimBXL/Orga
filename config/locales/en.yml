@@ -37,6 +37,8 @@ en:
       valider: Validate
       work: Work
       error_service: Error. One job or more from different services
+      error_already_exists: Error. A batch already exists for this user and this day at the same am/pm.
+      warning: Error. Please check this line.
     new:
       am: AM
       confirmer: Confirm
