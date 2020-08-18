@@ -45,10 +45,13 @@ class HomeController < ApplicationController
         # Parse les jours
         @specific_day_jours.each do |jour|
             @specific_day_works[jour] = WorkingList.for(jour).includes(:work)
-            @absence ||= false
-            if Absence.today_for_user(jour.utilisateur).count > 0
-                @absence = true
-            end
+        end
+
+        # Check les absences
+        @absence = false
+        abs = Absence.today_for_user(current_user.utilisateur)
+        if abs.count > 0
+            @absence = abs
         end
 
         # Charges les services

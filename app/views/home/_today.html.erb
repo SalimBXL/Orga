@@ -1,12 +1,29 @@
 <% date_localized = "#{nom_jour(@date.cwday)} #{I18n.localize @date, format: :long}" %>
 <div class="row">
+
+    <!-- Première boîte à gauche -->
     <div class=" col-md-4">
         <h3><%= date_localized %></h3>
         <article>
             <!-- MESSAGE / COMMUNICATION -->
+
+            <!-- Absences -->
+            <% if @absence %>
+                <% @absence.each do |abs| %>
+                    <span class="label label-success">
+                        <%= I18n.t("home.index.absences") %> : &nbsp;&nbsp;&nbsp; 
+                        <%= I18n.localize abs.date, format: :long %> - 
+                        <%= I18n.localize abs.date_fin, format: :long %> (<%= (abs.date_fin - abs.date + 1).to_i %>)
+                    </span>
+                <% end %>
+            <% end %>
+
+            <!-- Events -->
             <% if @events and @events[current_user.utilisateur.service.id] %>
                 <% @events[current_user.utilisateur.service.id].each do |event| %>
-                    <span class="label label-default"><%= event.nom %></span>
+                    <span class="label label-default">
+                        <%= event.nom %>
+                    </span>
                     <%= event.note %>
                 <% end %>
             <% end %>
@@ -14,7 +31,13 @@
         <br>
     </div>
     
+    <!-- Jobs de l'utilisateur -->
+
+    
     <% if @specific_day_jours.nil? or @specific_day_jours.size < 1 %>
+
+        <!-- Si pas de job aujourd'hui -->
+
         <div class=" col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading"></div>
@@ -27,14 +50,18 @@
             </div>
         </div>
     <% else %>
-    
+
+        <!-- Si jobs aujourd'hui -->
+
         <% last_service = nil %>
 
         <!-- HORAIRE DU JOUR -->
         <% @specific_day_jours.each do |specific_day_jour| %>
             <div class=" col-md-4">
                 <!-- PANELS -->
-                <div class="panel panel-default">
+                <% panel = "default" %>
+                <% panel = "success" if @absence %>
+                <div class="panel panel-<%= panel %>">
                     <!-- Changement de service -->
                     <% if specific_day_jour.service != last_service %>
                         <% if !last_service.nil? %>
@@ -126,9 +153,6 @@
             </div>
         <% end %>
 
-        <!-- ABSENCES -->
-        <% if @absences and @absences.count > 0 %>
-            <%= @absences %>
-        <% end %>
+        
     <% end %>
 </div>
