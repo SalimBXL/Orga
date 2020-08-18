@@ -1,0 +1,41 @@
+<% panel = "default" %>
+<% panel = "success" if @absence[utilisateur] %>
+
+<div class="panel panel-<%= panel %>">
+
+    <!-- HEADER -->
+    <div class="panel-heading">
+        <strong>
+            <i class="material-icons">account_circle</i>  <%= utilisateur.prenom_nom %>
+        </strong> (<%= utilisateur.phone %>)
+    </div>
+
+    
+    <!-- BODY -->
+    <div class="panel-body">
+        AM : &nbsp;&nbsp;&nbsp;
+        <%= render partial: "liste_works_day", locals: { 
+            label: "primary",
+            wls: specific_day_jour[false] 
+            } if specific_day_jour[false] 
+        %><br>
+        PM : &nbsp;&nbsp;&nbsp;
+        <%= render partial: "liste_works_day", locals: { 
+            label: "info",
+            wls: specific_day_jour[true] 
+            } if specific_day_jour[true] 
+        %>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="panel-footer">
+         
+    </div>
+
+
+
+
+
+
+    
+</div>

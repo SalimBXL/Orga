@@ -90,19 +90,27 @@ class JoursController < ApplicationController
         # Détermine la date
         unless params[:date]
             @date = Date.today
-            @specific_day_jours = Jour.today.select([:id, :utilisateur_id, :service_id, :am_pm, :note]).includes(utilisateur: :groupe)
+            specific_day_jours = Jour.today.order(:utilisateur_id).select([:id, :utilisateur_id, :service_id, :am_pm, :note]).includes(utilisateur: :groupe)
         else
             @date = params[:date].to_date
-            @specific_day_jours = Jour.at_day(@date).select([:id, :utilisateur_id, :service_id, :am_pm, :note]).includes(utilisateur: :groupe)
+            specific_day_jours = Jour.at_day(@date).order(:utilisateur_id).select([:id, :utilisateur_id, :service_id, :am_pm, :note]).includes(utilisateur: :groupe)
         end
 
-        # Parse les jours
-        @specific_day_jours.each do |jour|
-            @specific_day_works[jour] = WorkingList.for(jour).includes(:work)
+        # Check les absences
+        specific_day_jours.each do |jour|
             @absence[jour.utilisateur] ||= false
             if Absence.today_for_user(jour.utilisateur).count > 0
                 @absence[jour.utilisateur] = true
             end
+        end
+
+        # Parse les jours
+        @specific_day_jours = Hash.new
+        specific_day_jours.each do |jour|
+            @specific_day_jours[jour.service] ||= Hash.new
+            @specific_day_jours[jour.service][jour.utilisateur] ||= Hash.new
+            @specific_day_jours[jour.service][jour.utilisateur][jour.am_pm] ||= Array.new
+            @specific_day_jours[jour.service][jour.utilisateur][jour.am_pm] = WorkingList.for(jour.id).includes(:work)
         end
 
         # Charges les services

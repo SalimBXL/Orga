@@ -1,0 +1,30 @@
+<% if service != @last_service %>
+    <% if !@last_service.nil? %>
+        </div>
+        </div>
+    <% end %>
+    <div 
+        id = "service-<%= service.id %>"
+        <% if !@current_service.nil? && @current_service.id != service.id %>
+            style = "display: none"
+        <% end %>
+    >
+    <% @last_service = service.id %>
+    <div class="row">
+        <div class="col-sm-12">
+            <h3 class="well">
+                <i class="material-icons">business</i>
+                <%= service.nom.upcase %>
+                <% unless @events[service.id].nil? %>
+                    <% @events[service.id].each do |event| %>
+                        <span class="badge"
+                            data-toggle="tooltip" 
+                            title="<%= event.note %>"
+                        >
+                        <%= event.nom.capitalize %>
+                        </span>
+                    <% end %>
+                <% end %>
+            </h3>
+        </div>
+<% end %>
