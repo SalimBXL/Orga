@@ -1,0 +1,16 @@
+<div class="container">
+<article>
+    <h3><%= I18n.t("help.login.more") %></h3>
+    <p><%= I18n.t("help.login.article2") %></p>
+    <address>
+        <ul>
+        <% @administrators.each do |administrator| %>
+            <li>
+                - <%= administrator.prenom_nom %> : 
+                <a href="mailto:<%= administrator.email %>"><%= administrator.email %></a>
+            </li>
+        <% end %>
+        </ul>
+    </address>
+</article>
+</div>

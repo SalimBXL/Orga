@@ -31,14 +31,14 @@ en:
       date: Date
       dupliquer: Copy
       editer: Edit
+      error_already_exists: Error. A batch already exists for this user and this day at the same am/pm.
+      error_service: Error. One job or more from different services
       service: Service
       titre: Attributions
       utilisateur: User
       valider: Validate
-      work: Work
-      error_service: Error. One job or more from different services
-      error_already_exists: Error. A batch already exists for this user and this day at the same am/pm.
       warning: Error. Please check this line.
+      work: Work
     new:
       am: AM
       confirmer: Confirm
@@ -124,29 +124,82 @@ en:
       nom: Name
       titre: New group
   help:
+    absences_types:
+      article0: There are many types of absences. In the Type page, you can see all the different kind of absences encoded in the system.
+      article1: The Absences page shows a list of all the absences recorded by the users. For each item, the list contains two dates (start and ending), a user (whom the absence is applicable), the kind of absence (as described in the types), a note (a description or any kind of information), maybe some buttons and an update information.
+      article2: Any user can add an absence for his own (and only for himself). It requires to set the start and ending date (the same date obviously if the absence is for one day), the kind of absence and maybe a description (not mandatory). You can't change the user except if you are admin.
+      article3: After been created, any new absence must be validated by an administrator. While an item is not validated, it appears as light green in the views and turns dark green after validation.
+      titre: Absences and types
+      titre0: Types
+      titre1: Absences
+      titre2: Adding/Editing an absence
+      titre3: Confirmation/Validation
+    ajout_new:
+      article0: Article0
+      article1-1: Article1-1
+      article1-2: Article1-2
+      article1-3: Article1-3
+      article2: Article2
+      titre: Titre
+      titre0: Titre0
+      titre1: Titre1
+      titre2: Titre2
     ajouts:
-      titre: Attributions
-      titre0: The attribution's list
       article0: The attribution's page shows the list of all the created but not yet confirmed jobs. We sometimes call an attribution list a "batch".
-      titre1: What you see for each line
       article1-1: On each line (of created but not yet confirmed job) you can see basics attribution's informations as the date (including the AM/PM type), the service, the user whom the attribution is made for and the jobs included in the current batch.
       article1-2: You also have a bunch of buttons with witch you can delete, edit, duplicate or confirm the current batch.
-      titre2: Problems you may have
+      article1-3: Article1-3
       article2: You may have problems if you create a batch with works from different services. A batch if supposed to include only same service works. If you do want to add a works from a another service, you have to create another batch with a different Time Part (AM-PM).
+      titre: Attributions
+      titre0: The attribution's list
+      titre1: What you see for each line
+      titre2: Problems you may have
+    classes_works:
+      article0: Class are ways to sort the works into categories. A class has a name and a description.
+      article1: A work a nothing more than the smallest logic unit for a job. A job (or a work) is described with a code (a number or some letters, very short name), a name (a regular name to call the job), a description, a group (a work is designed for a group), a class (the category of the work) and a service (where the job is actually supposed to be done).
+      article2: If several jobs are given to a user for a specific date and time, we call it a batch. A batch can have till five works. Each user can have two batchs a day (named AM/PM).
+      article3: Only the administrators can add and/or edit an item.
+      titre: Classes and Works
+      titre0: Classes
+      titre1: Works
+      titre2: Batchs
+      titre3: Adding/Editing
+    days_off:
+      article0: The days off are the days when a service is closed. This is exactly what happend if a manager decides to close a service for New Year's Eve (i.e.) or for National Day.
+      article1: The page is a list with columns. A column with a name, where the manager gave a name to identify this off day. Two dates (start and ending). A column with the service wich apply the item. And a last column with a note, a description about the item.
+      article2: Only the administrators can add and/or edit an item.
+      titre: Days Off
+      titre0: What are the days off ?
+      titre1: Page description
+      titre2: Adding/Editing
+    events:
+      article0: An event is something happening (or an information to keep in mind) for a specific date. It is more often used as a remind for specific events or important dates. It applies only for one service.
+      article1: The Events page is a list with four columns as a name, a date, a service and (maybe) a description.
+      article2: Only the administrators can add and/or edit an item.
+      titre: Events
+      titre0: What is an event ?
+      titre1: Page description
+      titre2: Adding/Editing
+    first_page:
+      article0: Orga is an online tool for schedule and team management.
+      article1: From here, you have to log in to access and use the application.
+      article2: You need a login and a password to enter into Orga. The email is your professional email. The password is provided by the manager when you sign in the first time. You can change your password after your first login in.
+      article3: You have do not have any access to the application, you need to ask a login and a password by sending a message to the manager or to an administrator.
+      titre: Orga
+      titre0: What is Orga ?
+      titre1: What to do now ?
+      titre2: How to log in ?
+      titre3: How to sign in ?
     index:
-      titre: Help
-      titre1: Navigation bar
       article1-1: On the top of the screen is located the navigation bar from where you can access to the mains sections of the application.
       article1-2: The first one is the Home button.
       article1-3: The three nexts take you to different kind of views (as Today, This week and This monthly).
       article1-4: Then you you have the language icon and the Profil icon, from where you have access to your own profile.
-      titre2: The green section
       article2-1: The green section is about time related aspects of the app.
       article2-2: Absences allows users to record their holidays or sick leaves.
       article2-2-2: Types define the leave's category.
       article2-3: Days Off is where the administrators record public holidays or other day like.
       article2-4: Events is where are recorded events to be known for the good organisation of the schedules but with no influence on it.
-      titre3: The blue section
       article3-1: The blue section is the about the main aspects of the app.
       article3-2: Locations is about the list of the different locations where users and services are located in space.
       article3-3: Services is a collection of services where the users are working. More than one service can be attached to a location.
@@ -154,52 +207,73 @@ en:
       article3-5: Users is the list of all the users of the app.
       article3-6: Works is the list of all the jobs users can do.
       article3-7: Classes is how are sorted the "works".
-      titre4: The red section
       article4-1: The red section is the administrator's toolbox.
-    sommaire:
-      titre: SOMMAIRE
+      titre: Help
+      titre1: Navigation bar
+      titre2: The green section
+      titre3: The blue section
+      titre4: The red section
+    locations_services:
+      article0: Locations are the geographical location of a service, as a place with an address you cand find on a map.
+      article1: A service is a logical unit where users are working as a departement. Many services can be hosted in the same locations (as many departements can be hosted in the same building).
+      article2: Only the administrators can add and/or edit an item.
+      titre: Locations and Services
+      titre0: Locations
+      titre1: Services
+      titre2: Adding/Editing
     login:
-      titre: Log In
       article1: Just write your e-mail and password in the fields and click on the Log in button.
       article2: If you have any problem with our app, feel free to write to one of the administrators to get your problem solved.
-    today:
-      titre: Today
-      titre0: Date
-      article0: The current date is in a light blue box on the left top of the screen.
-      titre1: Navigation
-      article1-1: On the top of the page, there are some widgets to navigate or to filter the informations shown on screen.
-      article1-2: The three green buttons allow you to navigate from day to day. The central one jump back to the current day.
-      article1-3: Next to the navigation buttons, there is a filter with wich you can select the service you want to be shown on screen. As default, teh current user's service is selected.
-      titre2: Services and users
-      article2-1: Users with works to do only are shown on this view. They are sorted by service according to the work's service. 
-    this_week:
-      titre: This Week
-      titre0: Date
-      article0: The current week number  is in a light blue box on the left top of the screen. Under it, in a small grey box, is print the scope date of the current view.
-      titre1: Navigation
-      article1-1: On the top of the page, there are some widgets to navigate or to filter the informations shown on screen.
-      article1-2: The three green buttons allow you to navigate from week to week. The central one jump back to the current week.
-      article1-3: Next to the navigation buttons, there is a filter with wich you can select the service you want to be shown on screen. As default, teh current user's service is selected.
-      titre2: Services and users
-      article2-1: Users with works to do only are shown on this view. They are sorted by service according to the work's service. 
+      more: More
+      titre: Log In
+    profile:
+      article0: xxx
+      article1: xxx
+      titre: Profile
+      titre0: User informations
+      titre1: login data
+    sommaire:
+      titre: SOMMAIRE
     this_month:
-      titre: This Month
-      titre0: Date
       article0: The current month name is in a light blue box on the left top of the screen. Under it, in a small grey box, is print the scope date of the current view.
-      titre1: Navigation
       article1-1: On the top of the page, there are some widgets to navigate or to filter the informations shown on screen.
       article1-2: The three green buttons allow you to navigate from month to month. The central one jump back to the current month.
       article1-3: Next to the navigation buttons, there is a filter with wich you can select the service you want to be shown on screen. As default, teh current user's service is selected.
-      titre2: Services and users
-      article2-1: Users with works to do only are shown on this view. They are sorted by service according to the work's service. 
-      titre3: Modifying a specific day
+      article2-1: Users with works to do only are shown on this view. They are sorted by service according to the work's service.
       article3-1: xxx
-    profile:
-      titre: Profile
-      titre0: User informations
-      article0: xxx
-      titre1: login data
-      article1: xxx
+      titre: This Month
+      titre0: Date
+      titre1: Navigation
+      titre2: Services and users
+      titre3: Modifying a specific day
+    this_week:
+      article0: The current week number  is in a light blue box on the left top of the screen. Under it, in a small grey box, is print the scope date of the current view.
+      article1-1: On the top of the page, there are some widgets to navigate or to filter the informations shown on screen.
+      article1-2: The three green buttons allow you to navigate from week to week. The central one jump back to the current week.
+      article1-3: Next to the navigation buttons, there is a filter with wich you can select the service you want to be shown on screen. As default, teh current user's service is selected.
+      article2-1: Users with works to do only are shown on this view. They are sorted by service according to the work's service.
+      titre: This Week
+      titre0: Date
+      titre1: Navigation
+      titre2: Services and users
+    today:
+      article0: The current date is in a light blue box on the left top of the screen.
+      article1-1: On the top of the page, there are some widgets to navigate or to filter the informations shown on screen.
+      article1-2: The three green buttons allow you to navigate from day to day. The central one jump back to the current day.
+      article1-3: Next to the navigation buttons, there is a filter with wich you can select the service you want to be shown on screen. As default, teh current user's service is selected.
+      article2-1: Users with works to do only are shown on this view. They are sorted by service according to the work's service.
+      titre: Today
+      titre0: Date
+      titre1: Navigation
+      titre2: Services and users
+    users_groups:
+      article0: A group is a logical unit with joins users of the same kind, like the operator's group, the admin's group, etc. A group is defined by a name and a description.
+      article1: A user is a person (defined by a name and an email). A user needs to be linked to a group and a service. 
+      article2: Only the administrators can add and/or edit an item.
+      titre: Groups and Users
+      titre0: Groups
+      titre1: Users
+      titre2: Adding/Editing
   home:
     index:
       absences: Absences
@@ -214,6 +288,7 @@ en:
       jours: Days
       lieux: Locations
       logs: Logs
+      no_schedule: Nothing planned for today in your agenda.
       services: Services
       sous_titre: Team Manager
       types: Types
@@ -221,16 +296,15 @@ en:
       welcome: Welcome
       working_lists: Working Lists
       works: Works
-      no_schedule: Nothing planned for today in your agenda.
     navbar:
       aujourdhui: Today
       ce_mois: This month
       cette_semaine: This Week
+      help: Help
       home: Home
       login: Login
       logout: Logout
       profile: Profile
-      help: Help
   jours:
     form:
       am: AM
