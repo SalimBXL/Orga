@@ -227,11 +227,14 @@ en:
       more: More
       titre: Log In
     profile:
-      article0: xxx
-      article1: xxx
+      article0: On this page, a user can find and edit his own informations (Edit user informations).
+      article1: He can also chnage his login password (Edit login profile)
+      article2: The page shows all the "absences" recorded for the user as a green line (light or dark) into a two weeks agenda. Light green is a not yet validated period. Dark green is a confirmed period. Administrators only can validate an absence. 
+      article3: A two weeks schedule with the user's batchs.
       titre: Profile
-      titre0: User informations
-      titre1: login data
+      titre0: User informations and login data
+      titre2: Absences  [! Not yet implented !]
+      titre3: User agenda  [! Not yet implented !]
     sommaire:
       titre: SOMMAIRE
     this_month:
