@@ -5,41 +5,5 @@
 <%= render partial: "header_month" %>
 
 
-<% @jours.each do |service, contenu| %>
-    <br>
-
-    <!-- AFFICHAGE DU NOM DU SERVICE -->
-    <div 
-        id = "service-<%= service.id %>"
-        <% if !@current_service.nil? && @current_service.id != service.id %>
-                style = "display: none"
-        <% end %>
-        >
-        <%= render partial: "nom_service_month", locals: { service: service } %>
-        
-
-        <table class="table table-bordered grille">
-
-
-            <!-- Ligne de numéros de semaines -->
-            <%= render partial: "ligne_numero_semaines_month" %>
-
-            <!-- Ligne de numéros de jours -->
-            <%= render partial: "ligne_numero_jour_month", locals: { service: service } %>
-
-            <!-- Ligne par utilisateur -->
-            <% contenu.each do |utilisateur, jours| %>
-                <%= render partial: "ligne_utilisateur_month", 
-                    locals: { 
-                        utilisateur: utilisateur, 
-                        jours: jours,
-                        service: service
-                    } %>
-            <% end %>
-        </table>
-    </div>
-
-    <!-- Rappel des Events -->
-    <%= render partial: "rappel_events_month", locals: { service: service } %>
-    
-<% end %>
+<!-- Calendrier -->
+<%= render partial: "vue_calendrier_month" %>

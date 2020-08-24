@@ -70,14 +70,14 @@
             <%= link_to '<i class="material-icons">playlist_add_check</i><br>
                 Valider'.html_safe, 
                 "ajouts/#{ajout.id}/valider", 
-                class: "btn btn-success #{"disabled" unless valide}",
+                class: "btn btn-success ",
                 title: I18n.t("ajouts.index.valider") %>
         </div>
     </td>
 
     <td>
         <% unless valide %>
-            <span class="badge" title="<%= message %> <%= I18n.t("ajouts.index.warning") %>">
+            <span class="badge" title="<%= message %>">
                 <span class="material-icons">warning</span>
             </span>
         <% end %>

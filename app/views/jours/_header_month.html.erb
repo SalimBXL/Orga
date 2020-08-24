@@ -41,15 +41,15 @@
         <!-- MENU NAVIGATION -->
         <div style="flex: 0 0 120px">
             <div class="btn-group">
-                <%= link_to '<span data-toggle="tooltip"  >
+                <%= link_to '<span data-toggle="tooltip" title="Previous" >
                                 <i class="material-icons">chevron_left</i></span>'.html_safe, 
                                 month_path(date: (@date+15.days)-1.month), 
                                 class: "btn btn-success btn-xs" %>
-                <%= link_to '<span data-toggle="tooltip" >
+                <%= link_to '<span data-toggle="tooltip" title="CURRENT" >
                                 <i class="material-icons">adjust</i></span>'.html_safe, 
                                 month_path(date: Date.today), 
                                 class: "btn btn-success btn-xs" %>
-                <%= link_to '<span data-toggle="tooltip" >
+                <%= link_to '<span data-toggle="tooltip" title="Next" >
                                 <i class="material-icons">chevron_right</i></span>'.html_safe, 
                                 month_path(date: (@date+15.days)+1.month), 
                                 class: "btn btn-success btn-xs" %>
@@ -66,17 +66,25 @@
                                 class: "btn btn-warning btn-xs" %>
                 <% else %>
                     <!-- EDIT MODE -->
-                    <%= link_to '<span data-toggle="tooltip" >
-                                <i class="material-icons">edit</i></span>'.html_safe, 
+                    <% test = "<span data-toggle='tooltip' title='Edit'><i class='material-icons'>edit</i></span>" %>
+                    <%= link_to test.html_safe, 
                                 month_path(date: (@date+15.days), edit_mode: true, new_day_mode: false), 
                                 class: "btn btn-warning btn-xs" %>
                     <!-- NEW DAY MODE -->
-                    <!--
-                    <%= link_to '<span data-toggle="tooltip" >
-                                <i class="material-icons">add_circle_outline</i></span>'.html_safe, 
-                                month_path(date: (@date+15.days), edit_mode: false, new_day_mode: true), 
-                                class: "btn btn-warning btn-xs" %>
-                    -->
+                    <button title="Add"
+                            data-toggle="collapse" 
+                            data-target="#ajouts"
+                            class="btn btn-warning btn-xs">
+                            <i class="material-icons">add_circle_outline</i>
+                    </button>
+                    <div id="ajouts" class="collapse">
+                        Lorem ipsum dolor text....
+                        <% @ajout = Ajout.new %>
+                        <% @mode_edition = false %>
+                        <%  %>
+                        <%= render "ajouts/form" %>
+                    </div>
+                    
                 <% end %>
             </div>
         <% end %>

@@ -31,7 +31,7 @@ en:
       date: Date
       dupliquer: Copy
       editer: Edit
-      error_already_exists: Error. A batch already exists for this user and this day at the same am/pm.
+      error_already_exists: Error. A batch already exists for this user at this day (same am/pm). If you valid this line, the existing batch will be replaced.
       error_service: Error. One job or more from different services
       service: Service
       titre: Attributions

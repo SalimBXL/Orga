@@ -210,6 +210,15 @@ class JoursController < ApplicationController
             end
         end
 
+        if user_signed_in? && current_user.admin?
+            find_groupes
+            find_utilisateurs
+            find_services
+            find_classes
+            find_works
+        end
+        
+
     end
 
     ############

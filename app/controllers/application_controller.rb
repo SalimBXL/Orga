@@ -170,4 +170,25 @@ def charge_fermetures(date, date2)
   end
 end
 
+
+def find_utilisateurs
+  @utilisateurs = Utilisateur.order(:service_id, :groupe_id, :prenom, :nom)
+end
+
+def find_groupes
+  @groupes = Groupe.order(:nom)
+end
+
+def find_works
+  @works = Work.order(:service_id, :classe_id, :groupe_id, :nom)
+end
+
+def find_classes
+  @classes = Classe.order(:nom)
+end
+
+def find_services
+  @services = Service.order(:nom)
+end
+
 end
