@@ -14,3 +14,12 @@
     </h3>
     <%= render "form" %>
 </div>
+<hr>
+<div class="container">
+    <article>
+        <h4>Works</h4>
+        <% @jour.working_lists.each do |wkls| %>
+            <%= wkls.work.code %>
+        <% end %>
+    </article>
+</div>
