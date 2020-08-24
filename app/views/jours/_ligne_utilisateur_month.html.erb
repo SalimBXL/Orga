@@ -16,6 +16,12 @@
         <!-- Si Jour de semaine ... -->
         <% if (1..5).include?(date_jour.wday) %>
 
+            <!-- Jour de semaine "normal" -->
+            <% if date_jour == Date.today %>
+                <!-- Si jour est date actuelle on jauni le fond ... -->
+                <% bg = "today" %>
+            <% end %>
+
             
 
             <!-- service ouvert... -->
@@ -53,6 +59,7 @@
                 service: service,
                 utilisateur: utilisateur
              } %>
+             
 
         <% end %>
     <% end %>
