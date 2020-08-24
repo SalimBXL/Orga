@@ -1,4 +1,10 @@
-<tr id="jour_<%= jour.id %>">
+<% problem = false %>
+<% bg = "" %>
+<% problem = true if jour.works?<1 %>
+<% bg = "danger" if problem %>
+
+
+<tr id="jour_<%= jour.id %>" class="<%= bg %>">
     <td><%= jour.numero_semaine %></td>
     <td><%= jour.date %></td>
     <td><%= nom_jour(jour.numero_jour) %></td>
@@ -24,7 +30,11 @@
         &nbsp;
 
         <!-- Check si il existe des works pour ce jour -->
-        <%= jour.works? %>
+        <% if problem %>
+            <span class="material-icons">
+                report_problem
+            </span>
+        <% end %>
 
         
     </td>

@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="page-header">
+    <h1>
+        <span class="label label-primary">
+            <i class="material-icons">construction</i>
+            <%= I18n.t("tools.index.titre").upcase %>
+        </span>
+    </h1>
+    </div>
+</div>
+
+<% if user_signed_in? && current_user.admin? %>
+    <% session[:page_aide] = "tools" %>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <article>
+                    <h3><%= I18n.t("tools.check_days.titre").capitalize %></h3>
+                    <p>bbb</p>
+                    <a href=<%= check_days_path %> class="btn btn-info" role="button">
+                        <%= I18n.t("tools.check_days.titre").downcase %>
+                    </a>
+                </article>
+            </div>
+            <div class="col-sm-4">
+                <!--
+                <article>
+                    <h3>Check days</h3>
+                    <p>bbb</p>
+                    <a href="#" class="btn btn-info" role="button">Check days</a>
+                </article>
+                -->
+            </div>
+            <div class="col-sm-4">
+                <!--
+                <article>
+                    <h3>Check days</h3>
+                    <p>bbb</p>
+                    <a href="#" class="btn btn-info" role="button">Check days</a>
+                </article>
+                -->
+            </div>
+        </div>
+    </div>
+<% else %>
+    <div class="container"><% session[:page_aide] = "" %></div>
+<% end %>

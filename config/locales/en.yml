@@ -5,6 +5,11 @@ en:
   Mardi: Tuesday
   Mercredi: Wednesday
   Vendredi: Friday
+  tools:
+    index:
+      titre: Tools
+    check_days:
+      titre: Check Days
   absences:
     index:
       dates: Dates
@@ -279,6 +284,7 @@ en:
       titre2: Adding/Editing
   home:
     index:
+      tools: Tools
       absences: Absences
       ajouter: Add Attributions
       aujourdhui: Today

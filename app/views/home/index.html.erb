@@ -172,6 +172,14 @@
                             %>
                             <h4><%= I18n.t("home.index.ajouter") %></h4>
                         </p>
+                        <p>
+                            <!-- TOOLS -->
+                            <%= link_to '<i class="material-icons">construction</i>'.html_safe, 
+                                tools_path,
+                                class: "btn btn-danger btn-xs" 
+                            %>
+                            <h4><%= I18n.t("home.index.tools") %></h4>
+                        </p>
                     </div>
                 </div>
             <% end %>

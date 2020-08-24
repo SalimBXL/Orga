@@ -43,6 +43,8 @@ Rails.application.routes.draw do
   get "home", to: "home#index"
   get "admin", to: "home#admin"
 
+  get "tools", to: "tools#index"
+  get "check_days", to: "tools#check_days"
 
 
 
