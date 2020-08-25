@@ -3,22 +3,17 @@ class HomeController < ApplicationController
     # ACCUEIL
     def index
         session[:page_aide] = "index"
+        
+        # Log action
+        log(request.path)
+
         fichier = "app/../last_git_date.txt"
         if File.exist?(fichier)
             @last_git_date = format_last_git_date(File.read(fichier))
         else
            @last_git_date = nil
         end
-        
-        # Log action
-        log(request.path)
-
         get_today if user_signed_in?
-
-    end
-
-    # ADMIN
-    def admin
     end
 
     private 
@@ -62,5 +57,4 @@ class HomeController < ApplicationController
         charge_events(@date)
         
     end
-
 end

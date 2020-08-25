@@ -6,6 +6,10 @@ class ToolsController < ApplicationController
         log(request.path)
     end
 
+
+    ##############
+    # CHECK DAYS #
+    ##############
     def check_days
         @problemes = Array.new
 
@@ -19,9 +23,34 @@ class ToolsController < ApplicationController
                 @problemes << jour if working_lists.count <1
             end
         end
+    end
 
-        # si la liste des problèmes ext plus grande que 0, on affiche.
 
+    ###############
+    # CHECK USERS #
+    ###############
+    def check_users
+        @problemes = Hash.new
+
+        # on fait la liste des utilisateurs et des profils de login
+        @utilisateurs = Utilisateur.all
+        @profiles = User.all
+
+        # pour chaque utilisateur, on vérifie s'il y a au moins un profil
+        if @utilisateurs
+            @utilisateurs.each do |utilisateur|
+                @problemes[utilisateur.email] ||= Hash.new
+                @problemes[utilisateur.email]["utilisateur"] = utilisateur
+            end
+        end
+
+        # pour chaque profil, on vérifie s'il y a au moins un utilisateur
+        if @profiles
+            @profiles.each do |profile|
+                @problemes[profile.email] ||= Hash.new
+                @problemes[profile.email]["profile"] = profile
+            end
+        end
     end
 
     private 

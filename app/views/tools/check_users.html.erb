@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="page-header">
+    <h1>
+        <span class="label label-primary">
+            <i class="material-icons">construction</i>
+            <%= I18n.t("tools.check_users.titre").upcase %>
+        </span>
+    </h1>
+    </div>
+</div>
+
+<div class="container">
+    <% if @problemes.count > 0 %>
+        <% index = 0 %>
+        <% @problemes.keys.each do |email| %>
+
+            <% if !@problemes[email]["utilisateur"] or !@problemes[email]["profile"] %>
+                <% index += 1 %>
+            
+                <%= email %>
+
+                <!-- UTILISATEUR -->
+
+                <br>
+                <% if !@problemes[email]["utilisateur"] %>
+                    <span class="label label-warning">[UTILISATEUR]</span>
+                    Pas de profil utilisateur.
+                <% else %>
+                    [UTILISATEUR]
+                    <span id="utilisateur_<%= @problemes[email]["utilisateur"].id %>">
+                <% end %>
+                
+
+                <!-- PROFILE -->
+
+                <br>
+                <% if !@problemes[email]["profile"] %>
+                    <span class="label label-warning">[PROFILE]</span>
+                    Pas de profil de connection.
+                <% else %>
+                    [PROFILE]
+                    <%= @problemes[email]["profile"] %>
+                <% end %>
+                <hr>
+            <% end %>
+        <% end %>
+
+        <p><%= index %> problems</p>
+
+    <% else %>
+        No problem found.
+    <% end %>
+</div>
+<hr>
+<div class="container">
+    <a href=<%= tools_path %> class="btn btn-info" role="button">
+        <<
+    </a>
+</div>

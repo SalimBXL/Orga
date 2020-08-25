@@ -10,7 +10,7 @@
 </div>
 
 <div class="container">
-    <% if @problemes %>
+    <% if @problemes.count > 0 %>
         <% @problemes.each do |jour| %>
             <span id="jour_<%= jour.id %>">
                 <%= jour.numero_semaine %> | 
@@ -36,5 +36,13 @@
                 <hr>
             </span>
         <% end %>
+    <% else %>
+        No problem found.
     <% end %>
+</div>
+<hr>
+<div class="container">
+    <a href=<%= tools_path %> class="btn btn-info" role="button">
+        <<
+    </a>
 </div>

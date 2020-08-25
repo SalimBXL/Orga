@@ -10,6 +10,10 @@ en:
       titre: Tools
     check_days:
       titre: Check Days
+      description: This tool check if objects DAYS is well linked with at least one working_lists object.
+    check_users:
+      titre: Check Users
+      description: This tool check if user's profiles are well linked to a login profile.
   absences:
     index:
       dates: Dates
