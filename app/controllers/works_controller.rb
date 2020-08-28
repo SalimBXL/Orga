@@ -8,7 +8,11 @@ class WorksController < ApplicationController
     def index
         # Log action
         log(request.path)
-        @works = Work.order(:service_id, :classe_id, :groupe_id, :nom).page(params[:page])
+        if current_user.admin?
+            @works = Work.order(:service_id, :classe_id, :groupe_id, :nom).page(params[:page])
+        else
+            @works = Work.where(service: current_user.utilisateur.service).order(:service_id, :classe_id, :groupe_id, :nom).page(params[:page])
+        end
     end
 
 

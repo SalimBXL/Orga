@@ -12,7 +12,11 @@ class AjoutsController < ApplicationController
     #   INDEX   #
     #############
     def index
-        @ajouts = Ajout.order(:date, :am_pm, :utilisateur_id)        
+        if current_user.admin?
+            @ajouts = Ajout.order(:date, :am_pm, :utilisateur_id)        
+        else
+            @ajouts = Ajout.where(current_user.utilisateur.service).order(:date, :am_pm, :utilisateur_id)
+        end
     end
 
     def show
@@ -214,10 +218,5 @@ class AjoutsController < ApplicationController
     def find_ajout
         @ajout = Ajout.find_by_id(params[:id])
     end
-
-    
-
-    
-
 
 end

@@ -8,23 +8,9 @@
     </span>
 </h1>
 
-<p>
-    <% if user_signed_in? && current_user.admin? %>
-    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
-        new_fermeture_path,
-        class: "btn btn-success btn-xs" %>
-    <% end %>
-</p>
+<%= render partial: "add" %>
 
-<div id="fermetures">
-    <%= render 'fermetures' %>
-</div>
+<div id="fermetures"><%= render 'fermetures' %></div>
 
-<p>
-    <% if user_signed_in? && current_user.admin? %>
-    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
-        new_fermeture_path,
-        class: "btn btn-success btn-xs" %>
-    <% end %>
-</p>
+<%= render partial: "add" %>
 </div>

@@ -1,10 +1,12 @@
+<% if current_user.admin? || current_user.utilisateur.service == event.service %>
 <tr id="event_<%= event.id %>">
     <td><%= event.nom %></td>
     <td><%= event.date %></td>
     <td><%= event.service.nom %></td>
     <td><%= event.note %></td>
     <td>
-    <% if user_signed_in? && current_user.admin? %>
+    <% if user_signed_in? && current_user.utilisateur.admin %>
+        
         <%= link_to '<span data-toggle="tooltip" >
             <i class="material-icons">edit</i></span>'.html_safe, 
             edit_event_path(event),
@@ -19,6 +21,8 @@
             data: { confirm: "Delete #{event.nom} (#{event.date})  ?" },
             class: "btn btn-danger btn-xs" 
         %>
+        
     <% end %>
     </td>
 </tr>
+<% end %>

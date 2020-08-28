@@ -8,23 +8,9 @@
     </span>
 </h1>
 
-<p>
-    <% if user_signed_in? && current_user.admin? %>
-    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
-        new_event_path,
-        class: "btn btn-success btn-xs" %>
-    <% end %>
-</p>
+<%= render partial: "add" %>
 
-<div id="events">
-    <%= render 'events' %>
-</div>
+<div id="events"><%= render 'events' %></div>
 
-<p>
-    <% if user_signed_in? && current_user.admin? %>
-    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
-        new_event_path,
-        class: "btn btn-success btn-xs" %>
-    <% end %>
-</p>
+<%= render partial: "add" %>
 </div>

@@ -172,7 +172,11 @@ end
 
 
 def find_utilisateurs
-  @utilisateurs = Utilisateur.order(:service_id, :groupe_id, :prenom, :nom)
+  if current_user.admin?
+    @utilisateurs = Utilisateur.order(:service_id, :groupe_id, :prenom, :nom)
+  else
+    @utilisateurs = Utilisateur.where(service: current_user.utilisateur.service).order(:service_id, :groupe_id, :prenom, :nom)
+  end
 end
 
 def find_groupes
@@ -180,7 +184,11 @@ def find_groupes
 end
 
 def find_works
-  @works = Work.order(:service_id, :classe_id, :groupe_id, :nom)
+  if current_user.admin?
+    @works = Work.order(:service_id, :classe_id, :groupe_id, :nom)
+  else
+    @works = Work.where(service: current_user.utilisateur.service).order(:service_id, :classe_id, :groupe_id, :nom)
+  end
 end
 
 def find_classes

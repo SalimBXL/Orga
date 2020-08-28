@@ -5,15 +5,6 @@ en:
   Mardi: Tuesday
   Mercredi: Wednesday
   Vendredi: Friday
-  tools:
-    index:
-      titre: Tools
-    check_days:
-      titre: Check Days
-      description: This tool check if objects DAYS is well linked with at least one working_lists object.
-    check_users:
-      titre: Check Users
-      description: This tool check if user's profiles are well linked to a login profile.
   absences:
     index:
       dates: Dates
@@ -98,7 +89,7 @@ en:
       noms: Noms
       notes: Notes
       services: Services
-      titre: Titre
+      titre: Events
     new:
       titre: Titre
   fermetures:
@@ -238,7 +229,7 @@ en:
     profile:
       article0: On this page, a user can find and edit his own informations (Edit user informations).
       article1: He can also chnage his login password (Edit login profile)
-      article2: The page shows all the "absences" recorded for the user as a green line (light or dark) into a two weeks agenda. Light green is a not yet validated period. Dark green is a confirmed period. Administrators only can validate an absence. 
+      article2: The page shows all the "absences" recorded for the user as a green line (light or dark) into a two weeks agenda. Light green is a not yet validated period. Dark green is a confirmed period. Administrators only can validate an absence.
       article3: A two weeks schedule with the user's batchs.
       titre: Profile
       titre0: User informations and login data
@@ -280,7 +271,7 @@ en:
       titre2: Services and users
     users_groups:
       article0: A group is a logical unit with joins users of the same kind, like the operator's group, the admin's group, etc. A group is defined by a name and a description.
-      article1: A user is a person (defined by a name and an email). A user needs to be linked to a group and a service. 
+      article1: A user is a person (defined by a name and an email). A user needs to be linked to a group and a service.
       article2: Only the administrators can add and/or edit an item.
       titre: Groups and Users
       titre0: Groups
@@ -288,7 +279,6 @@ en:
       titre2: Adding/Editing
   home:
     index:
-      tools: Tools
       absences: Absences
       ajouter: Add Attributions
       aujourdhui: Today
@@ -304,6 +294,7 @@ en:
       no_schedule: Nothing planned for today in your agenda.
       services: Services
       sous_titre: Team Manager
+      tools: Tools
       types: Types
       utilisateurs: Users
       welcome: Welcome
@@ -394,6 +385,15 @@ en:
       lieu: Location
       nom: Name
       titre: New Service
+  tools:
+    check_days:
+      description: This tool check if objects DAYS is well linked with at least one working_lists object.
+      titre: Check Days
+    check_users:
+      description: This tool check if user's profiles are well linked to a login profile.
+      titre: Check Users
+    index:
+      titre: Tools
   type_absences:
     index:
       codes: Codes
@@ -408,11 +408,13 @@ en:
   utilisateurs:
     index:
       admin: Admin
+      administrator: Administrator
       email: Email
       groupe: Group
       log_destroy: destroy
       log_edit: edit
       log_update: update
+      manager: Manager
       nom: Name
       orphelins_users:
         message: One connection profile or more is not linked to a user.

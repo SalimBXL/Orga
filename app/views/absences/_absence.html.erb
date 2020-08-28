@@ -1,3 +1,5 @@
+<% if current_user.admin? || current_user.utilisateur.service == absence.utilisateur.service %>
+
 <tr id="absence_<%= absence.id %>">
     <td><%= absence.date %></td>
     <td><% if !absence.date_fin.blank? || !absence.date_fin.nil? %>
@@ -11,8 +13,13 @@
     <td><%= absence.utilisateur.prenom_nom %></td>
     <td><%= absence.type_absence.nom %></td>
     <td><%= absence.remarque %></td>
+
     <td>
-    <% if user_signed_in? && (current_user.admin? || current_user.utilisateur == absence.utilisateur) %>
+    <% service_utilisateur = absence.utilisateur.service %>
+    <% if user_signed_in? && 
+        (current_user.admin? || 
+        current_user.utilisateur == absence.utilisateur ||
+        (current_user.utilisateur.service == absence.utilisateur.service && current_user.utilisateur.admin)) %>
         <%= link_to '<span data-toggle="tooltip">
                     <i class="material-icons">edit</i></span>'.html_safe, 
                     edit_absence_path(absence),
@@ -34,3 +41,4 @@
         </span>
     </td>
 </tr>
+<% end %>

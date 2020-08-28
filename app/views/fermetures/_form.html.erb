@@ -26,7 +26,12 @@
         <%= form.label I18n.t("fermetures.new.service") %><br>
         <%= form.select(:service_id) do %>
             <%= select_option_tag("", nil, @fermeture.service_id) %>
-            <% Service.all.find_each do |l| %>
+            <% unless current_user.admin? %>
+                <% services = Service.where(id: current_user.utilisateur.service.id) %>
+            <% else %>
+                <% services = Service.all %>
+            <% end %>
+            <% services.find_each do |l| %>
                 <%= select_option_tag(l.nom.capitalize, l.id, @fermeture.service_id) %>
             <% end %>
         <% end %>

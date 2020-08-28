@@ -39,11 +39,16 @@
     <p>
         <%= form.label I18n.t("absences.new.utilisateur") %><br>
 
-        <!-- Ne peut modifier l'utilisateur que si admin -->
-        <% if current_user.admin? %>
+        <!-- Ne peut modifier l'utilisateur que si admin ou manager -->
+        <% if current_user.utilisateur.admin %>
             <%= form.select(:utilisateur_id) do %>
                 <%= select_option_tag("", nil, @absence.utilisateur_id) %>
-                <% Utilisateur.all.find_each do |l| %>
+                <% if current_user.admin? %>
+                    <% utilisateurs = Utilisateur.all %>
+                <% else %>
+                    <% utilisateurs = Utilisateur.where(service: current_user.utilisateur.service) %>
+                <% end %>
+                <% utilisateurs.find_each do |l| %>
                     <%= select_option_tag(l.prenom_nom, l.id, @absence.utilisateur_id) %>                
                 <% end %>
             <% end %>
@@ -65,7 +70,7 @@
     </p>
 
 
-    <% if user_signed_in? && current_user.admin? %>
+    <% if user_signed_in? && current_user.utilisateur.admin %>
         <!-- Accord -->
         <p>
             <%= form.check_box :accord %> <%= form.label I18n.t("absences.new.accord") %>

@@ -1,3 +1,4 @@
+<% if current_user.admin? || current_user.utilisateur.service == fermeture.service %>
 <tr id="fermeture_<%= fermeture.id %>">
     <td><%= fermeture.nom %></td>
     <td><%= fermeture.date %></td>
@@ -5,21 +6,24 @@
     <td><%= fermeture.service.nom %></td>
     <td><%= fermeture.note %></td>
     <td>
-    <% if user_signed_in? && current_user.admin? %>
-        <%= link_to '<span data-toggle="tooltip" >
-            <i class="material-icons">edit</i></span>'.html_safe, 
-            edit_fermeture_path(fermeture),
-            class: "btn btn-warning btn-xs" 
-        %>
+    <% if user_signed_in? && current_user.utilisateur.admin %>
+        <% if (fermeture.service == current_user.utilisateur.service) || current_user.admin? %>
+            <%= link_to '<span data-toggle="tooltip" >
+                <i class="material-icons">edit</i></span>'.html_safe, 
+                edit_fermeture_path(fermeture),
+                class: "btn btn-warning btn-xs" 
+            %>
 
-        <%= link_to '<span data-toggle="tooltip" >
-            <i class="material-icons">close</i>'.html_safe, 
-            fermeture_path(fermeture),
-            method: :delete,
-            remote: true,
-            data: { confirm: "Delete #{fermeture.nom} (#{fermeture.date})  ?" },
-            class: "btn btn-danger btn-xs" 
-        %>
+            <%= link_to '<span data-toggle="tooltip" >
+                <i class="material-icons">close</i>'.html_safe, 
+                fermeture_path(fermeture),
+                method: :delete,
+                remote: true,
+                data: { confirm: "Delete #{fermeture.nom} (#{fermeture.date})  ?" },
+                class: "btn btn-danger btn-xs" 
+            %>
+        <% end %>
     <% end %>
     </td>
 </tr>
+<% end %>

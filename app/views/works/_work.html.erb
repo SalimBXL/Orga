@@ -7,7 +7,7 @@
     <td><%= work.service.nom unless work.service.nil? %></td>
 
     <td>
-    <% if user_signed_in? && current_user.admin? %>
+    <% if user_signed_in? && current_user.utilisateur.admin %>
         <%= link_to '<span data-toggle="tooltip">
             <i class="material-icons">edit</i></span>'.html_safe, 
             edit_work_path(work),

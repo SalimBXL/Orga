@@ -2,20 +2,25 @@
     <td><%= utilisateur.service.nom %></td>
     <td><%= utilisateur.groupe.nom %></td>
     <td><%= utilisateur.prenom.capitalize %></td>
-    <td>
-        <%= utilisateur.nom.capitalize %>
-        <% if @orphelins_utilisateurs.include?(utilisateur.id) %>
-            <span class="material-icons">report_problem</span>
-        <% end %>
-    </td>
+    <td><%= utilisateur.nom.capitalize %></td>
     <td><%= utilisateur.email %></td>
+    
+    <!-- ADMIN -->
+    <!-- Différence Super Admin et Manager -->
     <td>
         <% if utilisateur.admin? %>
-        <span class="label label-success">&nbsp;</span>
+            <span class="label label-success">
+                <% if utilisateur.profil.admin %>
+                    <%= I18n.t("utilisateurs.index.administrator").capitalize %>
+                <% else %>
+                    <%= I18n.t("utilisateurs.index.manager").capitalize %>
+                <% end %>
+            </span>
         <% end %>
     </td>
     <td>
     <% if user_signed_in? && current_user.admin? %>
+
         <%= link_to '<span data-toggle="tooltip" >
             <i class="material-icons">edit</i></span>'.html_safe, 
             edit_utilisateur_path(utilisateur),

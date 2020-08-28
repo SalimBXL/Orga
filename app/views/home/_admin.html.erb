@@ -1,22 +1,24 @@
 <div class="col-xs-12 col-sm-12 col-md-4" id="conteneur3">
-    <div class="row">
-        <p>
-            <!-- LOGS -->
-            <%= link_to '<i class="material-icons">analytics</i>'.html_safe, 
-                logs_path,
-                class: "btn btn-danger btn-xs" 
-            %>
-            <h4><%= I18n.t("home.index.logs") %></h4>
-        </p>
-         <p>
-            <!-- TOOLS -->
-            <%= link_to '<i class="material-icons">construction</i>'.html_safe, 
-                tools_path,
-                class: "btn btn-danger btn-xs" 
-            %>
-            <h4><%= I18n.t("home.index.tools") %></h4>
-        </p>
-    </div>
+    <% if current_user.admin? %>
+        <div class="row">
+            <p>
+                <!-- LOGS -->
+                <%= link_to '<i class="material-icons">analytics</i>'.html_safe, 
+                    logs_path,
+                    class: "btn btn-danger btn-xs" 
+                %>
+                <h4><%= I18n.t("home.index.logs") %></h4>
+            </p>
+            <p>
+                <!-- TOOLS -->
+                <%= link_to '<i class="material-icons">construction</i>'.html_safe, 
+                    tools_path,
+                    class: "btn btn-danger btn-xs" 
+                %>
+                <h4><%= I18n.t("home.index.tools") %></h4>
+            </p>
+        </div>
+    <% end %>
     <div class="row">
         <p>
             <!-- JOURS -->
@@ -26,14 +28,16 @@
             %>
             <h4><%= I18n.t("home.index.jours") %></h4>
         </p>
-        <p>
-            <!-- WORKING_LISTS -->
-            <%= link_to '<i class="material-icons">list_alt</i>'.html_safe, 
-                working_lists_path,
-                class: "btn btn-danger btn-xs" 
-            %>
-            <h4><%= I18n.t("home.index.working_lists") %></h4>
-        </p>
+        <% if current_user.admin? %>
+            <p>
+                <!-- WORKING_LISTS -->
+                <%= link_to '<i class="material-icons">list_alt</i>'.html_safe, 
+                    working_lists_path,
+                    class: "btn btn-danger btn-xs" 
+                %>
+                <h4><%= I18n.t("home.index.working_lists") %></h4>
+            </p>
+        <% end %>
         <p>
             <!-- ADD ATTRIBS -->
             <%= link_to '<i class="material-icons">playlist_add</i>'.html_safe, 

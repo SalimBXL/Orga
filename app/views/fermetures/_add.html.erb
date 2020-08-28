@@ -1,0 +1,7 @@
+<p>
+    <% if user_signed_in? && current_user.utilisateur.admin %>
+    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+        new_fermeture_path,
+        class: "btn btn-success btn-xs" %>
+    <% end %>
+</p>

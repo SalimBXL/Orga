@@ -7,7 +7,12 @@ class JoursController < ApplicationController
     def index
         # Log action
         log(request.path)
-        @jours = Jour.order(numero_semaine: :desc).order(numero_jour: :desc).order(:service_id, :am_pm, :utilisateur_id).page(params[:page])
+
+        if current_user.admin?
+            @jours = Jour.order(numero_semaine: :desc).order(numero_jour: :desc).order(:service_id, :am_pm, :utilisateur_id).page(params[:page])
+        else
+            @jours = Jour.where(service: current_user.utilisateur.service).order(numero_semaine: :desc).order(numero_jour: :desc).order(:service_id, :am_pm, :utilisateur_id).page(params[:page])
+        end
     end
 
 

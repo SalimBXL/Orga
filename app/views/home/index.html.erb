@@ -76,14 +76,16 @@
             <% if user_signed_in? %>
                 <div class="col-xs-12 col-sm-6 col-md-4" id="conteneur2">
                     <div class="row">
-                        <p>
-                            <!-- LIEUX -->
-                            <%= link_to '<i class="material-icons">location_city</i>'.html_safe, 
-                                lieus_path,
-                                class: "btn btn-primary btn-xs" 
-                            %>
-                            <h4><%= I18n.t("home.index.lieux") %></h4>
-                        </p>
+                        <% if current_user.admin? %>
+                            <p>
+                                <!-- LIEUX -->
+                                <%= link_to '<i class="material-icons">location_city</i>'.html_safe, 
+                                    lieus_path,
+                                    class: "btn btn-primary btn-xs" 
+                                %>
+                                <h4><%= I18n.t("home.index.lieux") %></h4>
+                            </p>
+                        <% end %>
                         <p>
                             <!-- SERVICES -->
                             <%= link_to '<i class="material-icons">business</i>'.html_safe, 
@@ -94,14 +96,17 @@
                         </p>
                     </div>
                     <div class="row">
-                        <p>
-                            <!-- GROUPES -->
-                            <%= link_to '<i class="material-icons">group_work</i>'.html_safe, 
-                                groupes_path,
-                                class: "btn btn-primary btn-xs" 
-                            %>
-                            <h4><%= I18n.t("home.index.groupes") %></h4>
-                        </p>
+
+                        <% if current_user.admin? %>
+                            <p>
+                                <!-- GROUPES -->
+                                <%= link_to '<i class="material-icons">group_work</i>'.html_safe, 
+                                    groupes_path,
+                                    class: "btn btn-primary btn-xs" 
+                                %>
+                                <h4><%= I18n.t("home.index.groupes") %></h4>
+                            </p>
+                        <% end %>
                         <p>
                             <!-- UTILISATEURS -->
                             <%= link_to '<i class="material-icons">group</i>'.html_safe, 
@@ -112,14 +117,16 @@
                         </p>
                     </div>
                     <div class="row">
-                        <p>
-                            <!-- CLASSES -->
-                            <%= link_to '<i class="material-icons">category</i>'.html_safe, 
-                                classes_path,
-                                class: "btn btn-primary btn-xs" 
-                            %>
-                            <h4><%= I18n.t("home.index.classes") %></h4>
-                        </p>
+                        <% if current_user.admin? %>
+                            <p>
+                                <!-- CLASSES -->
+                                <%= link_to '<i class="material-icons">category</i>'.html_safe, 
+                                    classes_path,
+                                    class: "btn btn-primary btn-xs" 
+                                %>
+                                <h4><%= I18n.t("home.index.classes") %></h4>
+                            </p>
+                        <% end %>
                         <p>
                             <!-- WORKS -->
                             <%= link_to '<i class="material-icons">build</i>'.html_safe, 
@@ -131,7 +138,7 @@
                     </div>
                 </div>
             <% end %>
-            <%= render partial: "admin" if user_signed_in? && current_user.admin? %>
+            <%= render partial: "admin" if user_signed_in? && current_user.utilisateur.admin %>
         </div>
     </div>
 </div>
