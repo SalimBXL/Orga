@@ -435,6 +435,8 @@ en:
       edit_login: Edit login profile
       fiche: User informations
       login: Login Data
+      administrator: Administrator
+      manager: Manager
   working_list:
     edit:
       titre: Edition
