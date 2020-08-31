@@ -28,11 +28,16 @@
 
                 <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><%= link_to I18n.t("jours.today.all_services"), month_path(date: (@date+15.days), service: -1) %></li>
+                    
                     <% @services.each do |service| %>
+                        <% unless @current_service.id == service.id %>
                         <li>
-                        <%= link_to service.nom, month_path(date: (@date+15.days), service: service.id) %>
+                        <button title="<%= service.nom %>" data-toggle="collapse" 
+                            data-target="#service-<%= service.id %>" class="btn btn-link btn-xs">
+                            <%= service.nom %>
+                        </button>
                         </li>
+                        <% end %>
                     <% end %>
                 </ul>
             </li>
@@ -81,10 +86,8 @@
                             <i class="material-icons">add_circle_outline</i>
                     </button>
                     <div id="ajouts" class="collapse">
-                        Lorem ipsum dolor text....
                         <% @ajout = Ajout.new %>
                         <% @mode_edition = false %>
-                        <%  %>
                         <%= render "ajouts/form" %>
                     </div>
                     

@@ -1,13 +1,14 @@
+
 <% @jours.each do |service, contenu| %>
     <br>
 
     <!-- AFFICHAGE DU NOM DU SERVICE -->
-    <div 
-        id = "service-<%= service.id %>"
+    <div id = "service-<%= service.id %>"
         <% if !@current_service.nil? && @current_service.id != service.id %>
-                style = "display: none"
+                class="collapse"
         <% end %>
         >
+
         <%= render partial: "nom_service_month", locals: { service: service } %>
         
 
@@ -30,9 +31,10 @@
                     } %>
             <% end %>
         </table>
-    </div>
 
-    <!-- Rappel des Events -->
-    <%= render partial: "rappel_events_month", locals: { service: service } %>
+        <!-- Rappel des Events -->
+        <%= render partial: "rappel_events_month", locals: { service: service } %>
+
+    </div>
     
 <% end %>
