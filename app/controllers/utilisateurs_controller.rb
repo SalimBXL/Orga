@@ -80,10 +80,16 @@ class UtilisateursController < ApplicationController
     def update
         # Log action
         log(request.path, I18n.t("utilisateurs.index.log_update"))
+
+        @utilisateur.profil.admin = false if @utilisateur.admin == false
+
         @utilisateur.user = @utilisateur.profil
+
         if @utilisateur.update(utilisateur_params)
-            flash[:notice] = "Utilisateur modifié avec succès"
-            redirect_to utilisateurs_path
+            if @utilisateur.profil.save
+                flash[:notice] = "Utilisateur modifié avec succès"
+                redirect_to utilisateurs_path
+            end
         else 
             render :edit
         end
