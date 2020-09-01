@@ -46,6 +46,7 @@ Rails.application.routes.draw do
   get "tools", to: "tools#index"
   get "check_days", to: "tools#check_days"
   get "check_users", to: "tools#check_users"
+  get "check_admins", to: "tools#check_admins"
 
 
   ##############

@@ -16,32 +16,44 @@
 
             <% if !@problemes[email]["utilisateur"] or !@problemes[email]["profile"] %>
                 <% index += 1 %>
-            
-                <%= email %>
+                <article>
+                    <h4><strong><%= email %></strong></h4>
 
-                <!-- UTILISATEUR -->
+                    <!-- UTILISATEUR -->
+                    <% if !@problemes[email]["utilisateur"] %>
+                        <span class="label label-warning">[UTILISATEUR]</span>
+                        Pas de profil utilisateur.
+                    <% else %>
+                        [UTILISATEUR]
+                        <span id="utilisateur_<%= @problemes[email]["utilisateur"].id %>">
+                            <%= @problemes[email]["utilisateur"].email %>
+                        </span>
+                    <% end %>
+                    
+                    <br>
 
-                <br>
-                <% if !@problemes[email]["utilisateur"] %>
-                    <span class="label label-warning">[UTILISATEUR]</span>
-                    Pas de profil utilisateur.
-                <% else %>
-                    [UTILISATEUR]
-                    <span id="utilisateur_<%= @problemes[email]["utilisateur"].id %>">
-                <% end %>
-                
+                    <!-- PROFILE -->                    
+                    <% if !@problemes[email]["profile"] %>
+                        <span class="label label-warning">[PROFILE]</span>
+                        Pas de profil de connection.
+                    <% else %>
+                        [PROFILE]
+                        <%= @problemes[email]["profile"].email %>
+                    <% end %>
 
-                <!-- PROFILE -->
+                    <!-- Solution proposée -->
+                    <% if !@problemes[email]["utilisateur"] %>
+                        <!-- On supprime le profil de connection ? -->
+                        <p><i>>>> Delete connection profile to solve the problem or create a user profile.</i></p>
+                    <% end %>
+                    <% if !@problemes[email]["profile"] %>
+                        <!-- On supprime le profil utilisateur ? -->
+                        <p><i>>>> Delete user profile to solve the problem or create connection profile.</i></p>
+                    <% end %>
 
-                <br>
-                <% if !@problemes[email]["profile"] %>
-                    <span class="label label-warning">[PROFILE]</span>
-                    Pas de profil de connection.
-                <% else %>
-                    [PROFILE]
-                    <%= @problemes[email]["profile"] %>
-                <% end %>
-                <hr>
+                    <hr>
+                </article>
+
             <% end %>
         <% end %>
 

@@ -386,6 +386,14 @@ en:
       nom: Name
       titre: New Service
   tools:
+    check_admins:
+      description: This tool check the administrator's roles.
+      manager: Manager
+      no_problem: No problem
+      problems: Problems
+      super_admins: Super admins
+      titre: Check admins
+      no_super_admin: Error! No super admin found...
     check_days:
       description: This tool check if objects DAYS is well linked with at least one working_lists object.
       titre: Check Days
@@ -431,11 +439,11 @@ en:
       prenom: Firstname
       service: Service
     show:
+      administrator: Administrator
       edit_informations: Edit user informations
       edit_login: Edit login profile
       fiche: User informations
       login: Login Data
-      administrator: Administrator
       manager: Manager
   working_list:
     edit:

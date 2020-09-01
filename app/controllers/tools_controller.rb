@@ -26,6 +26,21 @@ class ToolsController < ApplicationController
     end
 
 
+    ################
+    # CHECK ADMINS #
+    ################
+    def check_admins
+        @managers = Array.new
+        @super_admins = Array.new
+        @problems = Array.new
+        Utilisateur.all.each do |utilisateur|
+            @managers << utilisateur if utilisateur.admin and !utilisateur.profil.admin
+            @super_admins << utilisateur if utilisateur.admin and utilisateur.profil.admin
+            @problems << utilisateur if !utilisateur.admin and utilisateur.profil.admin
+        end
+    end
+
+
     ###############
     # CHECK USERS #
     ###############

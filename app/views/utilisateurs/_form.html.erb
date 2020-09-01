@@ -63,16 +63,16 @@
     </p>
 
     <!-- ADMIN -->
-    <p>
-        <% if user_signed_in? && current_user.admin? %>
-            <div class="field">
-            <%= form.label :admin %> 
-            <%= form.check_box :admin %>
-            </div>
-        <% end %>
-    </p>
-    
-    <p>
-        <%= form.submit class: "btn btn-success" %>
-    </p>
+    <% if user_signed_in? && current_user.admin? %>
+        <hr>
+        <article>
+            <h4>
+                <div class="field">
+                    <%= form.check_box :admin %> <%= form.label :admin %>
+                </div>
+            </h4>
+        </article>
+        <hr>
+    <% end %>
+    <%= form.submit class: "btn btn-success" %>
 <% end %>

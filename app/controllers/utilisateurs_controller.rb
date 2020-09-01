@@ -97,6 +97,7 @@ class UtilisateursController < ApplicationController
         log(request.path, I18n.t("utilisateurs.index.log_edit"))
         @services = Service.all
         @groupes = Groupe.all
+        
     end
 
     ##############

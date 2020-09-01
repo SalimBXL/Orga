@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="page-header">
+    <h1>
+        <span class="label label-primary">
+            <i class="material-icons">construction</i>
+            <%= I18n.t("tools.check_admins.titre").upcase %>
+        </span>
+    </h1>
+    </div>
+</div>
+
+<div class="container">
+    <div class="panel panel-success">
+        <div class="panel-heading"><%= I18n.t("tools.check_admins.super_admins") %></div>
+        <div class="panel-body">
+            <% @super_admins.each do |su| %>
+                <span class="label label-success"><%= su.prenom_nom %></span>
+                &nbsp;&nbsp;&nbsp;
+            <% end %>
+        </div>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading"><%= I18n.t("tools.check_admins.manager") %></div>
+        <div class="panel-body">
+            <% @managers.each do |ma| %>
+                <span class="label label-info"><%= ma.prenom_nom %></span>
+                &nbsp;&nbsp;&nbsp;
+            <% end %>
+        </div>
+    </div>
+
+    <div class="panel panel-warning">
+        <div class="panel-heading"><%= I18n.t("tools.check_admins.problems") %></div>
+        <div class="panel-body">
+
+            <% if @super_admins.count < 1 %>
+                <span class="label label-danger">
+                    <%= I18n.t("tools.check_admins.no_super_admin") %>
+                </span>
+            <% end %>
+
+            <% @problems.each do |pr| %>
+                <span class="label label-warning"><%= pr.prenom_nom %></span>
+                &nbsp;&nbsp;&nbsp;
+            <% end %>
+        </div>
+    </div>
+    
+</div>
+<hr>
+<div class="container">
+    <a href=<%= tools_path %> class="btn btn-info" role="button">
+        <<
+    </a>
+</div>
