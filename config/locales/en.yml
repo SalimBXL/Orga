@@ -291,6 +291,7 @@ en:
       jours: Days
       lieux: Locations
       logs: Logs
+      managing_absences: Managing absences
       no_schedule: Nothing planned for today in your agenda.
       services: Services
       sous_titre: Team Manager
@@ -301,6 +302,7 @@ en:
       working_lists: Working Lists
       works: Works
     navbar:
+      absences: Absences
       aujourdhui: Today
       ce_mois: This month
       cette_semaine: This Week
@@ -390,10 +392,10 @@ en:
       description: This tool check the administrator's roles.
       manager: Manager
       no_problem: No problem
+      no_super_admin: Error! No super admin found...
       problems: Problems
       super_admins: Super admins
       titre: Check admins
-      no_super_admin: Error! No super admin found...
     check_days:
       description: This tool check if objects DAYS is well linked with at least one working_lists object.
       titre: Check Days

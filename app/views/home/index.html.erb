@@ -8,67 +8,6 @@
         </div>
     </div>
     <%= render "today" if user_signed_in? %>
+    <%= render "barre_menu" if user_signed_in? %>
 </div>
 
-<div class="container">
-    <div class="row">
-
-        <div class="btn-group">
-            <a href="<%= absences_path %>" class="btn btn-success" role="button">
-                <i class="material-icons">healing</i><br>
-                <%= I18n.t("home.index.absences") %>
-            </a>
-            <a href="<%= type_absences_path %>" class="btn btn-success" role="button">
-                <i class="material-icons">healing</i><br>
-                <%= I18n.t("home.index.types") %>
-            </a>
-        </div>
-
-        <div class="btn-group">
-            <a href="<%= fermetures_path %>" class="btn btn-success" role="button">
-                <i class="material-icons">event_busy</i><br>
-                <%= I18n.t("home.index.fermetures") %>
-            </a>
-            <a href="<%= events_path %>" class="btn btn-success" role="button">
-                <i class="material-icons">event_available</i><br>
-                <%= I18n.t("home.index.evenements") %>
-            </a>
-        </div>
-
-        <div class="btn-group">
-            <a href="<%= lieus_path %>" class="btn btn-primary" role="button">
-                <i class="material-icons">location_city</i><br>
-                <%= I18n.t("home.index.lieux") %>
-            </a>
-            <a href="<%= services_path %>" class="btn btn-primary" role="button">
-                <i class="material-icons">business</i><br>
-                <%= I18n.t("home.index.services") %>
-            </a>
-        </div>
-
-        <div class="btn-group">
-            <a href="<%= groupes_path %>" class="btn btn-primary" role="button">
-                <i class="material-icons">group_work</i><br>
-                <%= I18n.t("home.index.groupes") %>
-            </a>
-            <a href="<%= utilisateurs_path %>" class="btn btn-primary" role="button">
-                <i class="material-icons">group</i><br>
-                <%= I18n.t("home.index.utilisateurs") %>
-            </a>
-        </div>
-
-        <div class="btn-group">
-            <a href="<%= classes_path %>" class="btn btn-primary" role="button">
-                <i class="material-icons">category</i><br>
-                <%= I18n.t("home.index.classes") %>
-            </a>
-            <a href="<%= works_path %>" class="btn btn-primary" role="button">
-                <i class="material-icons">build</i><br>
-                <%= I18n.t("home.index.works") %>
-            </a>
-        </div>
-        
-        <%= render partial: "admin" if user_signed_in? && current_user.utilisateur.admin %>
-
-    </div>
-</div>

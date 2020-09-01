@@ -90,6 +90,42 @@ class AbsencesController < ApplicationController
         @absence.destroy
     end
 
+    ##########
+    # GRILLE #
+    ##########
+    def grille
+        log(request.path, "Show grille absences")
+
+        # Réglage des dates de début et fin de période
+        unless params[:date]
+            date_tmp = Date.today
+        else
+            date_tmp = params[:date].to_date
+        end
+        if date_tmp.beginning_of_month.cwday == 7
+            date_tmp = date_tmp.beginning_of_month + 1.day
+        elsif date_tmp.beginning_of_month.cwday == 6
+            date_tmp = date_tmp.beginning_of_month + 2.days
+        else
+            date_tmp = date_tmp.beginning_of_month
+        end
+        @date = date_tmp.beginning_of_week
+        @date2 = date_tmp.end_of_month.end_of_week
+        
+        # Charge les absences
+        @absences = Hash.new
+        absences = Absence.where('date_fin >= ? AND date <= ?', @date, @date2).order(:utilisateur_id, :date, :date_fin)
+        absences.each do |absence|
+            (absence.date..absence.date_fin).each do |aj|
+                @absences[absence.utilisateur_id] ||= Hash.new
+                @absences[absence.utilisateur_id][aj] = absence
+            end
+        end
+
+        find_utilisateurs
+
+    end
+
 
     private 
 

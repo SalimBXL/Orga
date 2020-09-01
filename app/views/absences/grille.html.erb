@@ -1,0 +1,51 @@
+<% session[:page_aide] = "absences_types" %>
+
+<div class="container">
+    <div class="page-header">
+        <h1>
+            <span class="label label-warning">
+                <i class="material-icons">healing</i>
+                <%= I18n.t("home.index.managing_absences").upcase %>
+            </span>
+        </h1>
+
+        <span class="label label-danger"><i>in progress...</i></span>
+
+    </div>
+</div>
+
+<div class="container">
+
+    <table class="table table-condensed table-bordered">
+        <thead>
+            <tr>
+                <th> </th>
+                <% (@date2-@date).to_i.times do |i| %>
+                    <% md = (@date+i.day).mday %>
+                    <% md = "0#{md}" if md < 10 %>
+                    <th><%= md %></th>
+                <% end %>
+            </tr>
+        </thead>
+        <tbody>
+            <% @utilisateurs.each do |utilisateur| %>
+                <tr>
+                    <td><%= utilisateur.prenom_nom %></td>
+                    <% (@date2-@date).to_i.times do |i| %>
+                        <% if @absences[utilisateur.id] and @absences[utilisateur.id][@date+i.day] %>
+                            <% bg = " " %>
+                            <% bg = "conge_wait" if @absences[utilisateur.id][@date+i.day].accord == false %>
+                            <% bg = "conge_ok" if @absences[utilisateur.id][@date+i.day].accord == true %>
+                            <td class="<%= bg %>">
+                                <!-- <%= @absences[utilisateur.id][@date+i.day].id %> -->
+                            </td>
+                        <% else %>
+                            <td></td>
+                        <% end %>
+                    <% end %>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+
+</div>

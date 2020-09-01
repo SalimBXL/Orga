@@ -43,6 +43,10 @@ Rails.application.routes.draw do
   get "home", to: "home#index"
   get "admin", to: "home#admin"
 
+  
+  #############
+  #   Tools   #
+  #############
   get "tools", to: "tools#index"
   get "check_days", to: "tools#check_days"
   get "check_users", to: "tools#check_users"
@@ -92,7 +96,7 @@ Rails.application.routes.draw do
   #  Absences & Congés  #
   #######################
   resources :absences, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
-  resources :demande_conges, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
+  get "grille", to: "absences#grille"
 
 
   ################
