@@ -67,6 +67,12 @@
         <%= form.text_field :description %>
     </p>
 
+
+    <p>
+        <%= form.label I18n.t("works.form.mark") %><br>
+        <%= form.check_box :mark %>
+    </p>
+
     <p>
         <%= form.submit class: "btn btn-primary" %>
     </p>

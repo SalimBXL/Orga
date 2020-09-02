@@ -473,6 +473,7 @@ en:
       code: Code
       description: Description
       groupe: Group
+      mark: Mark
       nom: Name
       service: Service
     index:

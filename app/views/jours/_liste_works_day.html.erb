@@ -1,9 +1,14 @@
 <% wls.each do |wl| %>
     <% cl = "" %>
     <% work = wl.work %>
+
+
     <% if work.code.downcase=="qc" && @date.cwday==5 %>
         <% cl = "keep_attention" %>
     <% end %>
+
+    <% label = "warning" if work.mark %>
+
     <span class="label label-<%= label %> <%= cl %>"
         data-toggle="tooltip" 
         title='<%= "#{work.nom}" %>'

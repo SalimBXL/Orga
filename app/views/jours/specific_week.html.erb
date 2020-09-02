@@ -140,22 +140,26 @@
                             AM : 
                             <% @jours[service][utilisateur][i][false].each do |item| %>
                                 <% @specific_day_works[item].each do |wl| %>
+                                    <% label = "primary" %>
+                                    <% label = "warning" if wl.work.mark %>
                                     <% cl = "" %>
                                     <% if wl.work.code.downcase == "qc" && i==5 %>
                                         <% cl = "keep_attention" %>
                                     <% end %>
-                                    <span class="label label-primary <%= cl %>"><%= wl.work.code %></span>
+                                    <span class="label label-<%= label %> <%= cl %>"><%= wl.work.code %></span>
                                 <% end %>
                             <% end %>
                             <br>
                             PM : 
                             <% @jours[service][utilisateur][i][true].each do |item| %>
                                 <% @specific_day_works[item].each do |wl| %>
+                                    <% label = "info" %>
+                                    <% label = "warning" if wl.work.mark %>
                                     <% cl = "" %>
                                     <% if wl.work.code.downcase == "qc" && i==5 %>
                                         <% cl = "keep_attention" %>
                                     <% end %>
-                                    <span class="label label-info <%= cl %>"><%= wl.work.code %></span>
+                                    <span class="label label-<%= label %> <%= cl %>"><%= wl.work.code %></span>
                                 <% end %>
                             <% end %>
                             </p>

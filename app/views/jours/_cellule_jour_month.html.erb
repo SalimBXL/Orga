@@ -35,10 +35,12 @@
                     <% end %>
                     <!-- Affiche le works -->
                     <% unless ap %>
-                        <span class="  <%= cl %>">
+                        <% label = "" %>
                     <% else %>
-                        <span class="label label-info <%= cl %>">
+                        <% label = "label label-info" %>
                     <% end %>
+                    <% label = "label label-warning" if wl.work.mark %>
+                    <span class="<%= label %> <%= cl %>">
                         <strong><%= wl.work.code %></strong>
                     </span>
                 <% end %>
