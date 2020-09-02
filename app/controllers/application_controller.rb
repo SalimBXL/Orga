@@ -172,7 +172,7 @@ end
 
 
 def find_utilisateurs
-  if current_user.admin?
+  if current_user.admin? or current_user.utilisateur.admin
     @utilisateurs = Utilisateur.order(:service_id, :groupe_id, :prenom, :nom)
   else
     @utilisateurs = Utilisateur.where(service: current_user.utilisateur.service).order(:service_id, :groupe_id, :prenom, :nom)

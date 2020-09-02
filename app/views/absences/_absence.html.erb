@@ -1,4 +1,4 @@
-<% if current_user.admin? || current_user.utilisateur.service == absence.utilisateur.service %>
+<% if current_user.admin? || current_user.utilisateur.admin || current_user.utilisateur == absence.utilisateur %>
 
 <tr id="absence_<%= absence.id %>">
     <td><%= absence.date %></td>
@@ -19,7 +19,7 @@
     <% if user_signed_in? && 
         (current_user.admin? || 
         current_user.utilisateur == absence.utilisateur ||
-        (current_user.utilisateur.service == absence.utilisateur.service && current_user.utilisateur.admin)) %>
+        current_user.utilisateur.admin) %>
         <%= link_to '<span data-toggle="tooltip">
                     <i class="material-icons">edit</i></span>'.html_safe, 
                     edit_absence_path(absence),

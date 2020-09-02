@@ -48,7 +48,7 @@
                 <% else %>
                     <% utilisateurs = Utilisateur.where(service: current_user.utilisateur.service) %>
                 <% end %>
-                <% utilisateurs.find_each do |l| %>
+                <% @utilisateurs.find_each do |l| %>
                     <%= select_option_tag(l.prenom_nom, l.id, @absence.utilisateur_id) %>                
                 <% end %>
             <% end %>
