@@ -8,7 +8,7 @@ class AbsencesController < ApplicationController
     def index
         #@absences = Absence.order(:accord).order(date: :desc).page(params[:page])
         @absences = Absence.where(accord: true).order(date: :desc).page(params[:page])
-        @absences_non_validees = Absence.where(accord: false).order(date: :desc)
+        @absences_non_validees = Absence.where(accord: !true).order(date: :desc)
         
         # Log action
         log(request.path)
