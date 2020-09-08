@@ -65,13 +65,13 @@
                                 
                                 <td colspan= "<%= jours_absence %>" class="<%= bg %>">
                                     <% if @absences[utilisateur.id][@date+i.day].accord == false %>
-                                        <%= link_to '<span class="material-icons">assignment_turned_in</span>'.html_safe, 
+                                        <%= link_to "#{@absences[utilisateur.id][@date+i.day].type_absence.code}", 
                                             edit_absence_path(@absences[utilisateur.id][@date+i.day]),
                                             class: "btn btn-danger btn-xs"
                                         %>
                                     <% end %>
                                     <% if @absences[utilisateur.id][@date+i.day].accord == true %>
-                                        <%= link_to '<span class="material-icons">done_outline</span>'.html_safe, 
+                                        <%= link_to "#{@absences[utilisateur.id][@date+i.day].type_absence.code}", 
                                             edit_absence_path(@absences[utilisateur.id][@date+i.day]),
                                             class: "btn btn-success btn-xs"
                                         %>
