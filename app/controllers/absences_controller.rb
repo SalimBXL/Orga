@@ -112,7 +112,7 @@ class AbsencesController < ApplicationController
             date_tmp = date_tmp.beginning_of_month
         end
         @date = date_tmp.beginning_of_week
-        @date2 = (date_tmp.end_of_month+10.days).end_of_week
+        @date2 = (date_tmp.end_of_month+40.days).end_of_week
         
         # Charge les absences
         @absences = Hash.new

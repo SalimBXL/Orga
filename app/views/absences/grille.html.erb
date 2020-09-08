@@ -15,12 +15,30 @@
 </div>
 
 <div class="container">
+    <% today = Date.today %>
     <% tmp_last_service = nil %>
+    <% tmp_last_month = nil %>
     <% nombre_jours = (@date2-@date).to_i %>
     <% jours_absence = 0 %>
 
     <table class="table table-condensed table-bordered">
         <thead>
+            <!-- Ligne des mois -->
+            <tr>
+                <th> </th>
+                <% i = 0 %>
+                <% while i < nombre_jours %>
+                    <% if (@date+i.day).month != tmp_last_month %>
+                        <% tmp_last_month = (@date+i.day).month %>
+                        <th colspan="<%= ((@date+i.day).end_of_month.mday - (@date+i.day).mday + 1) %>">
+                            <%= (@date+i.day).strftime("%b") %>
+                        </th>
+                    <% end %>
+                    <% i+= 1 %>
+                <% end %>
+            </tr>
+
+            <!-- Ligne des numéros de jour -->
             <tr>
                 <th> </th>
                 <% i = 0 %>
