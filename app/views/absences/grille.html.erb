@@ -82,7 +82,7 @@
                                 <% end %>
                                 
                                 <td colspan= "<%= jours_absence %>" class="<%= bg %>">
-                                    <% if @absences[utilisateur.id][@date+i.day].accord == false %>
+                                    <% if @absences[utilisateur.id][@date+i.day].accord == false or @absences[utilisateur.id][@date+i.day].accord.nil? %>
                                         <%= link_to "#{@absences[utilisateur.id][@date+i.day].type_absence.code}", 
                                             edit_absence_path(@absences[utilisateur.id][@date+i.day]),
                                             class: "btn btn-danger btn-xs"
