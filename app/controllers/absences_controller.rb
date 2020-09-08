@@ -6,7 +6,7 @@ class AbsencesController < ApplicationController
     #   INDEX   #
     #############
     def index
-        @absences = Absence.order(:accord).order(date: :desc).page(params[:page])
+        @absences = Absence.order(date: :desc).page(params[:page])
         
         # Log action
         log(request.path)
@@ -17,7 +17,7 @@ class AbsencesController < ApplicationController
     # NOT YET VALIDATED #
     #####################
     def not_yet_validated
-        @absences = Absence.where(accord: !true).order(:date, :date_fin).page(params[:page])
+        @absences = Absence.where('date_fin >= ?', Date.today).where(accord: false).order(:date, :date_fin).page(params[:page])
         # Log action
         log(request.path)
     end
@@ -26,7 +26,7 @@ class AbsencesController < ApplicationController
     # VALIDATED #
     #############
     def validated
-        @absences = Absence.where(accord: true).order(date: :desc).order(:date_fin).page(params[:page])
+        @absences = Absence.where('date_fin >= ?', Date.today).where(accord: true).order(date: :desc).order(:date_fin).page(params[:page])
         # Log action
         log(request.path)
     end
