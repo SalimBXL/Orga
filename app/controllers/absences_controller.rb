@@ -17,7 +17,7 @@ class AbsencesController < ApplicationController
     # NOT YET VALIDATED #
     #####################
     def not_yet_validated
-        @absences = Absence.where('date_fin >= ?', Date.today).where(accord: false).order(:date, :date_fin).page(params[:page])
+        @absences = Absence.where(accord: false).or(Absence.where(accord: nil)).where('date_fin >= ?', Date.today).order(:date, :date_fin).page(params[:page])
         # Log action
         log(request.path)
     end
