@@ -6,7 +6,8 @@ class AbsencesController < ApplicationController
     #   INDEX   #
     #############
     def index
-        @absences = Absence.order(:accord).order(date: :desc).page(params[:page])
+        #@absences = Absence.order(:accord).order(date: :desc).page(params[:page])
+        @absences = Absence.order(:accord).order(date: :desc)
         
         # Log action
         log(request.path)
