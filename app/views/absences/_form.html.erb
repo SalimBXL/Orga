@@ -40,22 +40,14 @@
         <%= form.label I18n.t("absences.new.utilisateur") %><br>
 
         <!-- Ne peut modifier l'utilisateur que si admin ou manager -->
-        <% if current_user.utilisateur.admin %>
-            <%= form.select(:utilisateur_id) do %>
+        <%= form.select(:utilisateur_id) do %>
+            <% if current_user.utilisateur.admin %>
                 <%= select_option_tag("", nil, @absence.utilisateur_id) %>
-                <% if current_user.admin? %>
-                    <% utilisateurs = Utilisateur.all %>
-                <% else %>
-                    <% utilisateurs = Utilisateur.where(service: current_user.utilisateur.service) %>
+                <% @utilisateurs.order(:service_id, :groupe_id, :prenom, :nom).find_each do |l| %>
+                    <%= select_option_tag("[#{l.service.nom}] - #{l.prenom_nom}", l.id, @absence.utilisateur_id) %>                
                 <% end %>
-                <% @utilisateurs.find_each do |l| %>
-                    <%= select_option_tag(l.prenom_nom, l.id, @absence.utilisateur_id) %>                
-                <% end %>
-            <% end %>
-        <% else %>
-            <%= form.select(:utilisateur_id) do %>
+            <% else %>
                 <%= select_option_tag(current_user.utilisateur.prenom_nom, current_user.utilisateur.id, @absence.utilisateur_id) %>
-                
             <% end %>
         <% end %>
     </p>

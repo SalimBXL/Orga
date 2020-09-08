@@ -119,7 +119,7 @@ class JoursController < ApplicationController
         end
 
         # Charges les services
-        charge_les_services
+        find_services if @services.nil?
 
         # Charge les Events
         @events = Hash.new
@@ -184,7 +184,7 @@ class JoursController < ApplicationController
         end
 
         # Charges les services
-        charge_les_services
+        find_services if @services.nil?
 
         # Charge les Events
         @events = Hash.new
@@ -275,7 +275,7 @@ class JoursController < ApplicationController
        
 
         # Charge les services
-        charge_les_services
+        find_services if @services.nil?
 
         # Charge les Events
         @events = Hash.new

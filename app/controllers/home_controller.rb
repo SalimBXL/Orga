@@ -13,6 +13,17 @@ class HomeController < ApplicationController
         else
            @last_git_date = nil
         end
+
+        # Charge le cache
+        if user_signed_in?
+            find_utilisateurs if @utilisateurs.nil?
+            find_groupes if @groupes.nil?
+            find_works if @works.nil?
+            find_classes if @classes.nil?
+            find_services if @services.nil?
+        end
+
+        # Check les jobs du user courant
         get_today if user_signed_in?
     end
 
@@ -34,7 +45,7 @@ class HomeController < ApplicationController
         @absence = Hash.new
 
         # Détermine la date
-        @date = Date.today
+        date = Date.today
         @specific_day_jours = Jour.today_of(current_user.utilisateur.id).select([:id, :utilisateur_id, :service_id, :am_pm, :note]).includes(utilisateur: :groupe)
 
         # Parse les jours
@@ -49,8 +60,6 @@ class HomeController < ApplicationController
             @absence = abs
         end
 
-        # Charges les services
-        charge_les_services
 
         # Charge les Events
         @events = Hash.new

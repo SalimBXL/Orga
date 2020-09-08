@@ -127,15 +127,73 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # Charge les services et détermine le service à afficher
-  def charge_les_services
-    @services = Service.order(:nom).select([:id,:nom])
-    unless params[:service]
-        if user_signed_in?
-            @current_service = current_user.utilisateur.service
-        else
-            @current_service = nil
+  
+
+  # Charge les Events
+  def charge_events(date)
+      date = date.to_s
+      events = Event.where(date: date).order(:service_id, :nom)
+      events.each do |event|
+          if @events[event.service_id].nil?
+              @events[event.service_id] = Array.new
+          end
+          @events[event.service_id] << event
+      end
+  end
+
+
+  # Charge les fermetures
+  def charge_fermetures(date, date2)
+    @fermetures = Hash.new
+    fermetures = Fermeture.where('date_fin >= ? AND date <= ?', date, date2).order(:service_id, :date, :date_fin)
+    fermetures.each do |fermeture|
+        (fermeture.date..fermeture.date_fin).each do |fj|
+            @fermetures[fermeture.service_id] ||= Hash.new
+            @fermetures[fermeture.service_id][fj.to_s] = fermeture.nom
         end
+    end
+  end
+
+
+  # # # # #  LISTES DE DONNEES A METTRE EN CACHE  # # # # #
+
+  def find_utilisateurs
+    log(request.path, "find_utilisateurs")
+    if current_user.admin? or current_user.utilisateur.admin
+      @utilisateurs = Utilisateur.order(:service_id, :groupe_id, :prenom, :nom)
+    else
+      @utilisateurs = Utilisateur.where(service: current_user.utilisateur.service).order(:service_id, :groupe_id, :prenom, :nom)
+    end
+  end
+
+  def find_groupes
+    log(request.path, "find_groupes")
+    @groupes = Groupe.order(:nom)
+  end
+
+  def find_works
+    log(request.path, "find_works")
+    if current_user.admin?
+      @works = Work.order(:service_id, :classe_id, :groupe_id, :nom)
+    else
+      @works = Work.where(service: current_user.utilisateur.service).order(:service_id, :classe_id, :groupe_id, :nom)
+    end
+  end
+
+  def find_classes
+    log(request.path, "find_classes")
+    @classes = Classe.order(:nom)
+  end
+
+  def find_services
+    log(request.path, "find_services")
+    @services = Service.order(:nom)
+    unless params[:service]
+      if user_signed_in?
+          @current_service = current_user.utilisateur.service
+      else
+          @current_service = nil
+      end
     else 
         unless params[:service].to_i<0
             @current_service = @services.find_by_id(params[:service])
@@ -143,60 +201,6 @@ class ApplicationController < ActionController::Base
             @current_service = nil
         end
     end
-end
-
-# Charge les Events
-def charge_events(date)
-    date = date.to_s
-    events = Event.where(date: date).order(:service_id, :nom)
-    events.each do |event|
-        if @events[event.service_id].nil?
-            @events[event.service_id] = Array.new
-        end
-        @events[event.service_id] << event
-    end
-end
-
-
-# Charge les fermetures
-def charge_fermetures(date, date2)
-  @fermetures = Hash.new
-  fermetures = Fermeture.where('date_fin >= ? AND date <= ?', date, date2).order(:service_id, :date, :date_fin)
-  fermetures.each do |fermeture|
-      (fermeture.date..fermeture.date_fin).each do |fj|
-          @fermetures[fermeture.service_id] ||= Hash.new
-          @fermetures[fermeture.service_id][fj.to_s] = fermeture.nom
-      end
   end
-end
-
-
-def find_utilisateurs
-  if current_user.admin? or current_user.utilisateur.admin
-    @utilisateurs = Utilisateur.order(:service_id, :groupe_id, :prenom, :nom)
-  else
-    @utilisateurs = Utilisateur.where(service: current_user.utilisateur.service).order(:service_id, :groupe_id, :prenom, :nom)
-  end
-end
-
-def find_groupes
-  @groupes = Groupe.order(:nom)
-end
-
-def find_works
-  if current_user.admin?
-    @works = Work.order(:service_id, :classe_id, :groupe_id, :nom)
-  else
-    @works = Work.where(service: current_user.utilisateur.service).order(:service_id, :classe_id, :groupe_id, :nom)
-  end
-end
-
-def find_classes
-  @classes = Classe.order(:nom)
-end
-
-def find_services
-  @services = Service.order(:nom)
-end
 
 end

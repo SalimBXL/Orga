@@ -27,6 +27,7 @@ class AbsencesController < ApplicationController
         @absence = Absence.new
         @absence.date = Date.today
         @absence.date_fin = @absence.date
+        find_utilisateurs if @utilisateurs.nil?
         # Log action
         log(request.path)
     end
