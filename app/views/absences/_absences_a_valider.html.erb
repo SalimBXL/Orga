@@ -1,6 +1,5 @@
 <!-- Table paginée -->
 <h3><span class="label label-danger"><%= I18n.t("absences.index.not_valid_yet") %></span></h3>
-<p><%= paginate @absences_non_validees, remote: true %></p>
 <table class="table table-striped">
     <tr>
         <th colspan=3><%= I18n.t("absences.index.dates") %></th>
@@ -12,4 +11,3 @@
     </tr>
     <%= render partial: "absence_non_validee" %>
 </table>
-<p><%= paginate @absences_non_validees, remote: true %></p>
