@@ -6,6 +6,15 @@
                 <i class="material-icons">healing</i><br>
                 <%= I18n.t("home.index.absences") %>
             </a>
+            <a href="<%= not_yet_validated_absences_path %>" class="btn btn-success" role="button">
+                <i class="material-icons">healing</i><br>
+                <%= I18n.t("home.index.waiting") %>
+            </a>
+            <a href="<%= validated_absences_path %>" class="btn btn-success" role="button">
+                <i class="material-icons">healing</i><br>
+                <%= I18n.t("home.index.validated") %>
+            </a>
+
             <a href="<%= type_absences_path %>" class="btn btn-success" role="button">
                 <i class="material-icons">healing</i><br>
                 <%= I18n.t("home.index.types") %>

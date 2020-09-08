@@ -13,12 +13,14 @@ en:
       log_edit: Edit
       log_update: Updating...
       mises_a_jour: Updates
+      not__yet_valid: Not  yet valid
       not_valid_yet: Not valid yet
       remarques: Notes
       titre: Absences
       types: Types
       utilisateurs: Users
       valid: Valid
+      validated: Validated
     new:
       accord: Allowed
       date: Date
@@ -295,11 +297,15 @@ en:
       logs: Logs
       managing_absences: Managing absences
       no_schedule: Nothing planned for today in your agenda.
+      not_yet_validated_absences: Not yet validated absences
+      note_yet_validated_absences: Note yet validated absences
       services: Services
       sous_titre: Team Manager
       tools: Tools
       types: Types
       utilisateurs: Users
+      validated: Validated
+      waiting: Waiting
       welcome: Welcome
       working_lists: Working Lists
       works: Works
