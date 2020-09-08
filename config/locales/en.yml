@@ -13,10 +13,12 @@ en:
       log_edit: Edit
       log_update: Updating...
       mises_a_jour: Updates
+      not_valid_yet: Not valid yet
       remarques: Notes
       titre: Absences
       types: Types
       utilisateurs: Users
+      valid: Valid
     new:
       accord: Allowed
       date: Date

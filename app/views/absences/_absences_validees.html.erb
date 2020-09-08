@@ -1,0 +1,15 @@
+<!-- Table paginée -->
+<h3><span class="label label-success"><%= I18n.t("absences.index.valid") %></span></h3>
+<p><%= paginate @absences, remote: true %></p>
+<table class="table table-striped">
+    <tr>
+        <th colspan=3><%= I18n.t("absences.index.dates") %></th>
+        <th><%= I18n.t("absences.index.utilisateurs") %></th>
+        <th><%= I18n.t("absences.index.types") %></th>
+        <th><%= I18n.t("absences.index.remarques") %></th>
+        <th></th>
+        <th><%= I18n.t("absences.index.mises_a_jour") %></th>
+    </tr>
+    <%= render @absences %>
+</table>
+<p><%= paginate @absences, remote: true %></p>
