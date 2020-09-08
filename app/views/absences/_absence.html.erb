@@ -1,5 +1,5 @@
 <% if current_user.admin? || current_user.utilisateur.admin || current_user.utilisateur == absence.utilisateur %>
-    <% @absences.each do |absence| %>
+    
         <tr id="absence_<%= absence.id %>">
             <td><%= absence.date %></td>
             <td><% if !absence.date_fin.blank? || !absence.date_fin.nil? %>
@@ -41,5 +41,5 @@
                 </span>
             </td>
         </tr>
-    <% end %>
+    
 <% end %>

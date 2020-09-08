@@ -10,6 +10,6 @@
         <th></th>
         <th><%= I18n.t("absences.index.mises_a_jour") %></th>
     </tr>
-    <%= render partial: "absence" %>
+    <%= render @absences %>
 </table>
 <p><%= paginate @absences, remote: true %></p>
