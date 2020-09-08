@@ -72,7 +72,7 @@
                     <% while i < nombre_jours %>
                             <% if @absences[utilisateur.id] and @absences[utilisateur.id][@date+i.day] %>
                                 <% bg = " " %>
-                                <% bg = "conge_wait" if @absences[utilisateur.id][@date+i.day].accord == false %>
+                                <% bg = "conge_wait" if @absences[utilisateur.id][@date+i.day].accord == false or @absences[utilisateur.id][@date+i.day].accord.nil? %>
                                 <% bg = "conge_ok" if @absences[utilisateur.id][@date+i.day].accord == true %>
                                                             
                                 <% if @absences[utilisateur.id][@date+i.day].date == @date+i.day %>
