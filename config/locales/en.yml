@@ -449,6 +449,7 @@ en:
       prenom: Firstname
       service: Service
     show:
+      absences: Absences
       administrator: Administrator
       days: Days
       edit_informations: Edit user informations

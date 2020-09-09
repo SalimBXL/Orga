@@ -52,6 +52,14 @@ class UtilisateursController < ApplicationController
                 @wks[jour] <<  workinglist.work.code
             end
         end
+
+        @absences = Hash.new
+        absences = Absence.where(utilisateur: @utilisateur).where('date_fin >= ?', Date.today.beginning_of_month).order(:date, :date_fin)
+        absences.each do |absence|
+            (absence.date..absence.date_fin).each do |aj|
+                @absences[aj] = absence
+            end
+        end
     end
 
 
