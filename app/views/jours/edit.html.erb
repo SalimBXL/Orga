@@ -7,19 +7,39 @@
 </h1>
 </div>
 <div class="container">
-    <h3>
-        <span class="label label-info">
-            <em><%= I18n.t("jours.index.edition") %></em>
-        </span>
-    </h3>
-    <%= render "form" %>
-</div>
-<hr>
-<div class="container">
-    <article>
-        <h4>Works</h4>
-        <% @jour.working_lists.each do |wkls| %>
-            <%= wkls.work.code %>
-        <% end %>
-    </article>
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>
+                <span class="label label-info">
+                    <em><%= I18n.t("jours.index.edition") %></em>
+                </span>
+            </h3>
+            <%= render "form" %>
+        </div>
+        <div class="col-sm-4">
+            <article>
+                <h4><span class="label label-default">Works</span></h4>
+                <% @jour.working_lists.each do |wkls| %>
+                    <%= wkls.work.code %><br>
+                <% end %>
+            </article>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <hr>
+            <span class = "label label-danger" > DELETE DAY
+            <%= link_to '<span data-toggle="tooltip" >
+                <i class="material-icons">close</i>'.html_safe, 
+                jour_path(@jour),
+                method: :delete,
+                remote: true,
+                data: { confirm: "Delete #{@jour.date}  ?" },
+                class: "btn btn-danger btn-xs"
+            %>
+            </span>
+        </div>
+        
+    <hr>
 </div>

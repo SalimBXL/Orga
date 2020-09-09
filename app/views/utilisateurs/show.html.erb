@@ -73,7 +73,7 @@
                             <% end  %>
                             <% bg = "primary" %>
                             <% bg = "info" if jour.am_pm %>
-                            <a href="#" class="btn btn-<%= bg %>">
+                            <a href="<%= edit_jour_path(jour.id) %>" class="btn btn-<%= bg %> btn-xs">
                                 <% @wks[jour].each do |wk| %>
                                     <%= wk %>
                                 <% end %>
