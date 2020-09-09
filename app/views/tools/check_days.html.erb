@@ -9,7 +9,9 @@
     </div>
 </div>
 
+<!-- WORKING LIST PROBLEMS -->
 <div class="container">
+    <span class="label label-warning">WORKING LISTS</span><br>
     <% if @problemes.count > 0 %>
         <% @problemes.each do |jour| %>
             <span id="jour_<%= jour.id %>">
@@ -40,6 +42,27 @@
         No problem found.
     <% end %>
 </div>
+<hr>
+
+<!-- BATCHS PROBLEMS -->
+<div class="container">
+    <span class="label label-warning">BATCHS</span><br>
+    <% if @problemes_batchs.count > 0 %>
+        <% @problemes_batchs.each do |jour| %>
+            <span id="jour_<%= jour.id %>">
+                <%= jour.numero_semaine %> | 
+                <%= jour.date %> | 
+                <%= jour.utilisateur.prenom_nom %> |
+                &nbsp;&nbsp;&nbsp;
+                Too much batches this day for this user
+                <hr>
+            </span>
+        <% end %>
+    <% else %>
+        No problem found.
+    <% end %>
+</div>
+
 <hr>
 <div class="container">
     <a href=<%= tools_path %> class="btn btn-info" role="button">

@@ -12,15 +12,27 @@ class ToolsController < ApplicationController
     ##############
     def check_days
         @problemes = Array.new
+        @problemes_batchs = Array.new
+        tmp_batch_par_jour = Hash.new
 
         # on fait la liste des days
         jours = Jour.all
 
-        # pour chaque day, on vérifie s'il y a au moins une working_list
+        # pour chaque day...
         if jours
             jours.each do |jour|
+
+                tmp_batch_par_jour[jour.date] ||= Hash.new
+                tmp_batch_par_jour[jour.date][jour.utilisateur_id] ||= 0
+
+                # on vérifie s'il y a au moins une working_list
                 working_lists = jour.working_lists
                 @problemes << jour if working_lists.count <1
+
+                # on vérifie s'il n'y a pas plus de deux batch
+                tmp_batch_par_jour[jour.date][jour.utilisateur_id] += 1
+                @problemes_batchs << jour if tmp_batch_par_jour[jour.date][jour.utilisateur_id] > 2
+
             end
         end
     end

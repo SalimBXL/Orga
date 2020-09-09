@@ -1,112 +1,190 @@
 <% session[:page_aide] = "profile" %>
 
 <div class="container">
-<div class="row">
-    <div class="col-sm-8">
-        <div class="well well-lg">
-            <h1>
-                <span class="label label-default">
-                <i class="material-icons">person</i> <%= @utilisateur.prenom_nom.upcase %>
-                </span>
-            </h1>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <!-- PROFILE UTILISATEUR -->
-    <div class="col-sm-4">
-        <div class="panel panel-default ">
-            <div class="panel-heading">
-                <h2>
+    <div class="row">
+        
+        <!-- Colonne de gauche/centre -->
+        <div class="col-sm-8">
+            <!-- TITRE PRENOM NOM -->
+            <div class="well well-lg">
+                <h1>
                     <span class="label label-default">
-                    <i class="material-icons">account_box</i> <%= I18n.t("utilisateurs.show.fiche").capitalize %>
+                    <i class="material-icons">person</i> <%= @utilisateur.prenom_nom.upcase %>
                     </span>
-                </h2>
+                </h1>
             </div>
-            <div class="panel-body">
-                <p>
-                    <span class="material-icons">email</span>
-                    <%= @utilisateur.email %>
-                </p>
-                <p>
-                    <span class="material-icons">phone</span>
-                    <%= @utilisateur.phone %>
-                </p>
 
-                <p>
-                    <span class="material-icons">phone_iphone</span>
-                    <%= @utilisateur.gsm %>
-                </p>
-                <p>
-                    <span class="material-icons">group</span>
-                    <%= @utilisateur.groupe.nom %>
-                </p>
-                <p>
-                    <span class="material-icons">business</span>
-                    <%= @utilisateur.service.nom %>
-                </p>
-            </div>
-            <div class="panel-footer">
-                <%= link_to " [#{I18n.t('utilisateurs.show.edit_informations')}] ", 
-                    edit_utilisateur_path(@utilisateur),
-                    class: "btn btn-info"
-                %>
+            <div class="panel panel-default ">
+                <!-- JOURS -->
+                <div class="panel-body">
+                    <h3><span class="label label-danger">
+                        <%= I18n.t("utilisateurs.show.days").capitalize %>
+                        </span>
+                    </h3>
+                    <article>
+                        <% tmp_numero_semaine = nil %>
+                        <% tmp_numero_mois = nil %>
+                        <% tmp_date = nil %>
+                        <% n_jour = 0 %>
+
+                        <table class="table-condensed table-bordered">
+                        <tr>
+                            <th class="tdfixe">Months</th>
+                            <th class="tdfixe">Weeks</th>
+                            <th class="tdfixe"><%= I18n.t("Lundi").capitalize %></th>
+                            <th class="tdfixe"><%= I18n.t("Mardi").capitalize %></th>
+                            <th class="tdfixe"><%= I18n.t("Mercredi").capitalize %></th>
+                            <th class="tdfixe"><%= I18n.t("Jeudi").capitalize %></th>
+                            <th class="tdfixe"><%= I18n.t("Vendredi").capitalize %></th>
+                        </tr>
+
+                        <% @jours.each do |jour| %>
+                            <% if tmp_numero_mois != jour.date.month %>
+                                <% tmp_numero_mois = jour.date.month %>
+                                <% tmp_numero_semaine = jour.numero_semaine %>
+                                <% unless tmp_numero_mois.nil? %>
+                                    </tr>
+                                <% end %>
+                                
+                                <tr>
+                                    <td class="tdfixe">
+                                        <strong><%= jour.date.month %></strong>
+                                    </td>
+                                    <td class="tdfixe">
+                                        [<%= jour.numero_semaine %>]
+                                        <% n_jour = 1 %>
+                                    </td>
+                            <% else %>
+                                <% if tmp_numero_semaine != jour.numero_semaine %>
+                                    <% tmp_numero_semaine = jour.numero_semaine %>
+                                    <% unless tmp_numero_semaine.nil? %>
+                                        </tr>
+                                    <% end %>
+                                    <tr>
+                                        <td class="tdfixe"></td>
+                                        <td class="tdfixe">
+                                            [<%= jour.numero_semaine %>]
+                                            <% n_jour = 1 %>
+                                        </td>
+                                <% end %>
+                            <% end %>
+                            
+                            <% if tmp_date != jour.date %>
+                                <% tmp_date = jour.date %>
+                                <% unless tmp_date.nil? %>
+                                    </td>
+                                <% end %>
+
+                                <% if n_jour != jour.date.cwday %>
+                                    <% (jour.date.cwday-n_jour).times do %>
+                                    <td class="tdfixe"></td>
+                                    <% end %>
+                                <% end %>
+                                <td class="tdfixe">
+
+                                
+                            <% else %>
+                                <br>
+                            <% end %>
+                            <% bg = "primary" %>
+                            <% bg = "info" if jour.am_pm %>
+                            <a href="#" class="btn btn-<%= bg %>">
+                                <%= jour.date %>
+                            </a>
+                        <% end %>
+                        </td></tr>
+                        </table>
+                    </article>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- PROFILE CONNEXION (User) -->
-    <div class="col-sm-4">
-        <div class="panel panel-default ">
-            <div class="panel-heading">
-                <h2>
-                    <span class="label label-default">
-                        <i class="material-icons">login</i> <%= I18n.t("utilisateurs.show.login").capitalize %>
-                    </span>
-                </h2>
-            </div>
-            <div class="panel-body">
-
-                <% if @utilisateur.user || current_user.admin? %>
+        <!-- Colonne de droite -->
+        <div class="col-sm-4">
+            <div class="panel panel-default ">
+                <!-- USER INFO -->
+                <div class="panel-heading">
+                    <h2>
+                        <span class="label label-default">
+                        <i class="material-icons">account_box</i> <%= I18n.t("utilisateurs.show.fiche").capitalize %>
+                        </span>
+                    </h2>
+                </div>
+                <div class="panel-body">
                     <p>
                         <span class="material-icons">email</span>
-                        <%= @utilisateur.user.email %>
+                        <%= @utilisateur.email %>
                     </p>
                     <p>
-                        <span class="material-icons">vpn_key</span>
-                        <%= @utilisateur.user.password %>
+                        <span class="material-icons">phone</span>
+                        <%= @utilisateur.phone %>
                     </p>
-
                     <p>
-                        <span class="material-icons">admin_panel_settings</span>
-                        <% if @utilisateur.profil.admin %>
-                            <%= I18n.t("utilisateurs.show.administrator").capitalize %>
-                        <% else %>
-                            <% if @utilisateur.admin %>
-                                <%= I18n.t("utilisateurs.show.manager").capitalize %>
-                            <% else %>
-                                - - -
-                            <% end %>
-                        <% end %>
+                        <span class="material-icons">phone_iphone</span>
+                        <%= @utilisateur.gsm %>
                     </p>
-                <% else %>
-                    
-
-                <% end %>
-
+                    <p>
+                        <span class="material-icons">group</span>
+                        <%= @utilisateur.groupe.nom %>
+                    </p>
+                    <p>
+                        <span class="material-icons">business</span>
+                        <%= @utilisateur.service.nom %>
+                    </p>
+                </div>
+                <div class="panel-footer">
+                    <%= link_to " [#{I18n.t('utilisateurs.show.edit_informations')}] ", 
+                        edit_utilisateur_path(@utilisateur),
+                        class: "btn btn-info"
+                    %>
+                </div>
             </div>
-            <div class="panel-footer">
-                <% if @utilisateur.user %>
-                    <% if (@utilisateur.user == current_user) || current_user.admin? %>
-                        <%= link_to " [#{I18n.t('utilisateurs.show.edit_login')}] ", 
-                            edit_user_registration_path,
-                            class: "btn btn-info"
-                        %>
+            <!-- PROFILE CONNEXION (User) -->
+            <div class="panel panel-default ">
+                <div class="panel-heading">
+                    <h2>
+                        <span class="label label-default">
+                            <i class="material-icons">login</i> <%= I18n.t("utilisateurs.show.login").capitalize %>
+                        </span>
+                    </h2>
+                </div>
+                <div class="panel-body">
+
+                    <% if @utilisateur.user || current_user.admin? %>
+                        <p>
+                            <span class="material-icons">email</span>
+                            <%= @utilisateur.user.email %>
+                        </p>
+                        <p>
+                            <span class="material-icons">vpn_key</span>
+                            <%= @utilisateur.user.password %>
+                        </p>
+
+                        <p>
+                            <span class="material-icons">admin_panel_settings</span>
+                            <% if @utilisateur.profil.admin %>
+                                <%= I18n.t("utilisateurs.show.administrator").capitalize %>
+                            <% else %>
+                                <% if @utilisateur.admin %>
+                                    <%= I18n.t("utilisateurs.show.manager").capitalize %>
+                                <% else %>
+                                    - - -
+                                <% end %>
+                            <% end %>
+                        </p>
                     <% end %>
-                <% end %>
+                </div>
+                <div class="panel-footer">
+                    <% if @utilisateur.user %>
+                        <% if (@utilisateur.user == current_user) || current_user.admin? %>
+                            <%= link_to " [#{I18n.t('utilisateurs.show.edit_login')}] ", 
+                                edit_user_registration_path,
+                                class: "btn btn-info"
+                            %>
+                        <% end %>
+                    <% end %>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>

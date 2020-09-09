@@ -450,6 +450,7 @@ en:
       service: Service
     show:
       administrator: Administrator
+      days: Days
       edit_informations: Edit user informations
       edit_login: Edit login profile
       fiche: User informations
