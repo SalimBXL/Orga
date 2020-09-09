@@ -4,7 +4,7 @@
     <div class="row">
         
         <!-- Colonne de gauche/centre -->
-        <div class="col-sm-8">
+        <div class="col-sm-9">
             <!-- TITRE PRENOM NOM -->
             <div class="well well-lg">
                 <h1>
@@ -36,9 +36,11 @@
                             <th class="tdfixe"><%= I18n.t("Mercredi").capitalize %></th>
                             <th class="tdfixe"><%= I18n.t("Jeudi").capitalize %></th>
                             <th class="tdfixe"><%= I18n.t("Vendredi").capitalize %></th>
+                            <th class="tdfixe">W</th>
                         </tr>
 
                         <% @jours.each do |jour| %>
+
                             <% if tmp_numero_mois != jour.date.month %>
                                 <% tmp_numero_mois = jour.date.month %>
                                 <% tmp_numero_semaine = jour.numero_semaine %>
@@ -75,10 +77,11 @@
                                     </td>
                                 <% end %>
 
-                                <% if n_jour != jour.date.cwday %>
+                                <% if n_jour < jour.date.cwday %>
                                     <% (jour.date.cwday-n_jour).times do %>
-                                    <td class="tdfixe"></td>
+                                        <td class="tdfixe"></td>
                                     <% end %>
+                                    <% n_jour = jour.date.cwday + 1 %>
                                 <% end %>
                                 <td class="tdfixe">
 
@@ -100,7 +103,7 @@
         </div>
 
         <!-- Colonne de droite -->
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="panel panel-default ">
                 <!-- USER INFO -->
                 <div class="panel-heading">
