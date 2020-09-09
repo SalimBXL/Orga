@@ -43,7 +43,7 @@ class UtilisateursController < ApplicationController
         log(request.path)
 
         # trouve les jours
-        @jours = Jour.where('date >= ?', Date.today-10.days).where(utilisateur: current_user.utilisateur).order(:date, :service_id)
+        @jours = Jour.where('date >= ?', Date.today-10.days).where(utilisateur: @utilisateur).order(:date, :service_id)
     end
 
 
