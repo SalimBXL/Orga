@@ -25,7 +25,7 @@
                         <% tmp_numero_semaine = nil %>
                         <% tmp_numero_mois = nil %>
                         <% tmp_date = nil %>
-                        <% n_jour = 0 %>
+                        <% n_jour = 1 %>
 
                         <table class="table-condensed table-bordered">
                         <tr>
@@ -38,61 +38,41 @@
                             <th class="tdfixe"><%= I18n.t("Vendredi").capitalize %></th>
                             <th class="tdfixe">W</th>
                         </tr>
-
+                        
+                        <% n_jour = 6 %>
                         <% @jours.each do |jour| %>
-
-                            <% if tmp_numero_mois != jour.date.month %>
-                                <% tmp_numero_mois = jour.date.month %>
-                                <% tmp_numero_semaine = jour.numero_semaine %>
-                                <% unless tmp_numero_mois.nil? %>
-                                    </tr>
-                                <% end %>
-                                
+                            <% if n_jour > 6 %>
+                                </tr>
                                 <tr>
-                                    <td class="tdfixe">
-                                        <strong><%= jour.date.month %></strong>
-                                    </td>
-                                    <td class="tdfixe">
-                                        [<%= jour.numero_semaine %>]
-                                        <% n_jour = 1 %>
-                                    </td>
-                            <% else %>
-                                <% if tmp_numero_semaine != jour.numero_semaine %>
-                                    <% tmp_numero_semaine = jour.numero_semaine %>
-                                    <% unless tmp_numero_semaine.nil? %>
-                                        </tr>
-                                    <% end %>
-                                    <tr>
-                                        <td class="tdfixe"></td>
-                                        <td class="tdfixe">
-                                            [<%= jour.numero_semaine %>]
-                                            <% n_jour = 1 %>
-                                        </td>
+                                    <td class="tdfixe"></td>
+                                    <td class="tdfixe"></td>
+                                <% n_jour = 0 %>
+                            <% end %>
+                            <% if n_jour > jour.numero_jour %>
+                                <% (6 - n_jour).times do %>
+                                    <td class="tdfixe"></td>
+                                <% end %>
+                                </tr>
+                                <tr>
+                                    <td class="tdfixe"><%= jour.date.month %></td>
+                                    <td class="tdfixe"><%= jour.numero_semaine %></td>
+                                <% n_jour = 0 %>
+                            <% end %>
+                            <% if n_jour < jour.numero_jour %>
+                                <% (n_jour - jour.numero_jour).times do %>
+                                    <td class="tdfixe"></td>
+                                    <% n_jour = jour.numero_jour %>
                                 <% end %>
                             <% end %>
-                            
-                            <% if tmp_date != jour.date %>
+                            <% unless jour.date == tmp_date %>
+                                </td><td class="tdfixe">
                                 <% tmp_date = jour.date %>
-                                <% unless tmp_date.nil? %>
-                                    </td>
-                                <% end %>
-
-                                <% if n_jour < jour.date.cwday %>
-                                    <% (jour.date.cwday-n_jour).times do %>
-                                        <td class="tdfixe"></td>
-                                    <% end %>
-                                    <% n_jour = jour.date.cwday + 1 %>
-                                <% end %>
-                                <td class="tdfixe">
-
-                                
-                            <% else %>
-                                <br>
-                            <% end %>
+                                <% n_jour += 1 %>
+                            <% end  %>
                             <% bg = "primary" %>
                             <% bg = "info" if jour.am_pm %>
                             <a href="#" class="btn btn-<%= bg %>">
-                                <%= jour.date %>
+                                <%= jour.date %> <%= n_jour %> <%= jour.numero_jour %>
                             </a>
                         <% end %>
                         </td></tr>
