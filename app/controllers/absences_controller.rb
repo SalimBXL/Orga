@@ -6,7 +6,11 @@ class AbsencesController < ApplicationController
     #   INDEX   #
     #############
     def index
-        @absences = Absence.order(date: :desc).page(params[:page])
+        if current_user.admin or current_user.utilisateur.admin
+            @absences = Absence.order(date: :desc).page(params[:page])
+        else 
+            @absences = Absence.where(utilisateur: current_user.utilisateur).order(date: :desc).page(params[:page])
+        end
         
         # Log action
         log(request.path)

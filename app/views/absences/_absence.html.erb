@@ -19,9 +19,10 @@
         current_user.utilisateur == absence.utilisateur ||
         current_user.utilisateur.admin) %>
 
-        <% if absence.accord.nil? || !absence.accord %>
-
-        <%= link_to '<span data-toggle="tooltip">
+        <% if (current_user.utilisateur == absence.utilisateur and (absence.accord.nil? || !absence.accord) ) or
+            (current_user.admin? || current_user.utilisateur.admin)
+        %>
+            <%= link_to '<span data-toggle="tooltip">
                     <i class="material-icons">edit</i></span>'.html_safe, 
                     edit_absence_path(absence),
                     class: "btn btn-warning btn-xs" %>
