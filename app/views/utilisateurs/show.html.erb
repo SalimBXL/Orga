@@ -29,8 +29,7 @@
 
                         <table class="table-condensed table-bordered">
                         <tr>
-                            <th class="tdfixe">Months</th>
-                            <th class="tdfixe">Weeks</th>
+                            <th class="tdfixe">Period</th>
                             <th class="tdfixe"><%= I18n.t("Lundi").capitalize %></th>
                             <th class="tdfixe"><%= I18n.t("Mardi").capitalize %></th>
                             <th class="tdfixe"><%= I18n.t("Mercredi").capitalize %></th>
@@ -45,7 +44,6 @@
                                 </tr>
                                 <tr>
                                     <td class="tdfixe"></td>
-                                    <td class="tdfixe"></td>
                                 <% n_jour = 0 %>
                             <% end %>
                             <% if n_jour > jour.numero_jour %>
@@ -54,8 +52,12 @@
                                 <% end %>
                                 </tr>
                                 <tr>
-                                    <td class="tdfixe"><%= jour.date.month %></td>
-                                    <td class="tdfixe"><%= jour.numero_semaine %></td>
+                                    <td class="tdfixe">
+                                        <div class="badge">
+                                            <%= I18n.localize jour.date.beginning_of_week, format: :short %> -- 
+                                            <%= I18n.localize (jour.date.end_of_week), format: :short %>
+                                        </div>
+                                    </td>
                                 <% n_jour = 0 %>
                             <% end %>
                             <% if n_jour < jour.numero_jour %>
@@ -72,7 +74,9 @@
                             <% bg = "primary" %>
                             <% bg = "info" if jour.am_pm %>
                             <a href="#" class="btn btn-<%= bg %>">
-                                <%= jour.date %> <%= n_jour %> <%= jour.numero_jour %>
+                                <% @wks[jour].each do |wk| %>
+                                    <%= wk %>
+                                <% end %>
                             </a>
                         <% end %>
                         </td></tr>

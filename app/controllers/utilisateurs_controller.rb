@@ -44,6 +44,14 @@ class UtilisateursController < ApplicationController
 
         # trouve les jours
         @jours = Jour.where('date >= ?', Date.today-10.days).where(utilisateur: @utilisateur).order(:date, :service_id)
+        
+        @wks = Hash.new
+        @jours.each do |jour|
+            WorkingList.where(jour_id: jour.id).each do |workinglist|
+                @wks[jour] ||= Array.new
+                @wks[jour] <<  workinglist.work.code
+            end
+        end
     end
 
 
