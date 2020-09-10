@@ -29,7 +29,13 @@
 
     <!-- FOOTER -->
     <div class="panel-footer">
-         
+         <% if @absence[utilisateur] %>
+            <% unless @absence[utilisateur].accord %>
+                <span class="label label-warning">
+                <%= I18n.t("jours.today.not_yet_accorded") %>
+                </span>
+            <% end %>
+         <% end %>
     </div>
 
 

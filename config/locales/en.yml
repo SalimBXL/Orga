@@ -342,6 +342,7 @@ en:
       titre: New Day
     today:
       all_services: All Services
+      not_yet_accorded: Not yet accorded.
   lieus:
     edit:
       nom: Edition

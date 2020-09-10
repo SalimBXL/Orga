@@ -102,11 +102,11 @@ class JoursController < ApplicationController
         end
 
         # Check les absences
+        Absence.where('date_fin >= ? AND date <= ?', @date, @date).order(:utilisateur_id, :date, :date_fin).each do |absence|
+            @absence[absence.utilisateur] = absence
+        end
         specific_day_jours.each do |jour|
-            @absence[jour.utilisateur] ||= false
-            if Absence.today_for_user(jour.utilisateur).count > 0
-                @absence[jour.utilisateur] = true
-            end
+            @absence[jour.utilisateur] ||= nil
         end
 
         # Parse les jours
