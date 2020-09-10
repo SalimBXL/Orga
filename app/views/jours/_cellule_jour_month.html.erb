@@ -70,9 +70,10 @@
                             <% if @jours[autre_service][utilisateur][dd] %>
                                 <% [false, true].each do |autre_ap| %>
                                     <% if @jours[autre_service][utilisateur][dd][autre_ap] %>
-                                        <% @jours[autre_service][utilisateur][dd][autre_ap].each do |autre_wl| %>
-                                            <span title="<%= autre_service.nom %>" class="already_a_job"><i>[<%= autre_wl.work.code %>]</i></span>
-                                        <% end %>
+                                        <span title="<%= autre_service.nom %>" class="already_a_job"><i>
+                                        <% i_wl = 0 %>
+                                        [<% @jours[autre_service][utilisateur][dd][autre_ap].each do |autre_wl| %><%= autre_wl.work.code %><%= "&nbsp;".html_safe if i_wl < (@jours[autre_service][utilisateur][dd][autre_ap].count-1) %><% i_wl += 1 %><% end %>]
+                                        </i></span>
                                     <% end %>
                                     <br>
                                 <% end %>
