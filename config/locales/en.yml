@@ -200,7 +200,7 @@ en:
       article1-3: The three nexts take you to different kind of views (as Today, This week and This monthly).
       article1-4: Then you you have the language icon and the Profil icon, from where you have access to your own profile.
       article2-1: The green section is about time related aspects of the app.
-      article2-2: Absences allows users to record their holidays or sick leaves.
+      article2-2: Absences allows users to record their holidays or sick leaves. There are three lists, Absences/Waiting/Validated, where users can follow the status of their requests.
       article2-2-2: Types define the leave's category.
       article2-3: Days Off is where the administrators record public holidays or other day like.
       article2-4: Events is where are recorded events to be known for the good organisation of the schedules but with no influence on it.
@@ -212,11 +212,13 @@ en:
       article3-6: Works is the list of all the jobs users can do.
       article3-7: Classes is how are sorted the "works".
       article4-1: The red section is the administrator's toolbox.
+      article5-1: The orange section is the manager's options.
       titre: Help
       titre1: Navigation bar
       titre2: The green section
       titre3: The blue section
       titre4: The red section
+      titre5: The orange section
     locations_services:
       article0: Locations are the geographical location of a service, as a place with an address you cand find on a map.
       article1: A service is a logical unit where users are working as a departement. Many services can be hosted in the same locations (as many departements can be hosted in the same building).
@@ -230,6 +232,10 @@ en:
       article2: If you have any problem with our app, feel free to write to one of the administrators to get your problem solved.
       more: More
       titre: Log In
+    messages:
+      article0: The "messages" section allows managers and admins to leave messages to all the users of a service via the home page.
+      titre: Messages
+      titre0: Purpose
     profile:
       article0: On this page, a user can find and edit his own informations (Edit user informations).
       article1: He can also chnage his login password (Edit login profile)
@@ -296,6 +302,7 @@ en:
       lieux: Locations
       logs: Logs
       managing_absences: Managing absences
+      messages: Messages
       no_schedule: Nothing planned for today in your agenda.
       not_yet_validated_absences: Not yet validated absences
       note_yet_validated_absences: Note yet validated absences
@@ -372,6 +379,24 @@ en:
       description: Description
       titre: Log
       utilisateur: Utilisateur
+  messages:
+    form:
+      from: From
+      note: Note
+      service: Service
+      to: To
+    index:
+      log_destroy: Log destroy
+      log_edit: Log edit
+      log_update: Log update
+      titre: Messages
+    new:
+      date: Valid from
+      date_fin: To
+      note: Note
+      service: Service
+      titre: New message
+      utilisateur: User
   month:
     mois_1: January
     mois_10: October

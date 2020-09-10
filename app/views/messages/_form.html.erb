@@ -1,0 +1,45 @@
+<%= form_with model: @message, local: true do |form| %>
+
+    <% if @message.errors.any? %>
+        <strong>WARNING</strong>
+        <ul>
+            <% @message.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
+
+    <!-- Note -->
+    <p>
+        <%= form.label I18n.t("messages.new.note") %><br>
+        <%= form.text_field :note %>
+    </p>
+
+    <!-- Service -->
+    <p>
+        <%= form.label I18n.t("messages.new.service") %><br>
+        <%= form.select(:service_id) do %>
+            <%= select_option_tag("", nil, @message.service) %>
+            <% Service.order(:nom).find_each do |l| %>
+                <%= select_option_tag(l.nom.capitalize, l.id, @message.service_id) %>
+            <% end %>
+        <% end %>
+    </p>
+
+
+    <!-- Dates -->
+    <p>
+        <%= form.label I18n.t("messages.new.date") %><br>
+        <%= form.date_field :date %>
+    </p>
+    <p>
+        <%= form.label I18n.t("messages.new.date_fin") %><br>
+        <%= form.date_field :date_fin %>
+    </p>
+
+
+    <!-- Submit -->
+    <p>
+        <%= form.submit class: "btn btn-primary" %>
+    </p>
+<% end %>

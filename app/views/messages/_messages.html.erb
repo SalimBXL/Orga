@@ -1,0 +1,20 @@
+<div class="container">
+    <p>
+        <%= paginate @messages, remote: true %>
+    </p>
+    
+    <table class="table table-striped">
+        <tr>
+            <th><%= I18n.t("messages.form.from") %></th>
+            <th><%= I18n.t("messages.form.to") %></th>
+            <th><%= I18n.t("messages.form.service") %></th>
+            <th><%= I18n.t("messages.form.note") %></th>
+            <th></th>
+        </tr>
+        <%= render @messages %>
+    </table>
+
+    <p>
+        <%= paginate @messages, remote: true %>
+    </p>
+</div>

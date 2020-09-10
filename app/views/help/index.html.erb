@@ -47,6 +47,14 @@
     </article>
 
     <!-- Red section -->
+    <% if user_signed_in? && current_user.utilisateur.admin? %>
+    <article>
+        <h3><span class="label label-warning"><%= I18n.t("help.index.titre5").capitalize %></span></h3>
+        <p><%= I18n.t("help.index.article5-1") %></p>
+    </article>
+    <% end %>
+
+    <!-- Red section -->
     <% if user_signed_in? && current_user.admin? %>
     <article>
         <h3><span class="label label-danger"><%= I18n.t("help.index.titre4").capitalize %></span></h3>

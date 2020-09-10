@@ -142,6 +142,17 @@ class ApplicationController < ActionController::Base
   end
 
 
+  # Charge les messages
+  def charge_messages(date)
+    puts "****************************"
+    puts "****************************"
+    puts "LOOK FOR MESSAGES AT #{date}"
+    puts "****************************"
+    puts "****************************"
+    @messages = Message.where('date_fin >= ? AND date <= ?', date, date).order(:service_id, :date, :date_fin)
+end
+
+
   # Charge les fermetures
   def charge_fermetures(date, date2)
     @fermetures = Hash.new

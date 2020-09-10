@@ -1,0 +1,10 @@
+<% if @absence %>
+    <span class="label label-success"><%= I18n.t("home.index.absences") %></span>
+    <% @absence.each do |abs| %>
+        <%= I18n.localize abs.date, format: :long %>
+        <% if abs.date_fin != abs.date %>
+                - 
+            <%= I18n.localize abs.date_fin, format: :short %> (<%= (abs.date_fin - abs.date + 1).to_i %>)
+        <% end %>
+    <% end %>
+<% end %>

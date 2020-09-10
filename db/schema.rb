@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200902144930) do
+ActiveRecord::Schema.define(version: 2020091012140633) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,6 +119,18 @@ ActiveRecord::Schema.define(version: 20200902144930) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.bigint "service_id"
+    t.string "note"
+    t.date "date"
+    t.date "date_fin"
+    t.bigint "utilisateur_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["service_id"], name: "index_messages_on_service_id"
+    t.index ["utilisateur_id"], name: "index_messages_on_utilisateur_id"
+  end
+
   create_table "services", force: :cascade do |t|
     t.bigint "lieu_id"
     t.string "nom"
@@ -200,6 +212,8 @@ ActiveRecord::Schema.define(version: 20200902144930) do
   add_foreign_key "fermetures", "services"
   add_foreign_key "jours", "services"
   add_foreign_key "jours", "utilisateurs"
+  add_foreign_key "messages", "services"
+  add_foreign_key "messages", "utilisateurs"
   add_foreign_key "services", "lieus"
   add_foreign_key "utilisateurs", "groupes"
   add_foreign_key "utilisateurs", "services"

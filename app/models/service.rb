@@ -1,6 +1,7 @@
 class Service < ApplicationRecord
     belongs_to :lieu
     has_many :utilisateurs
+    has_many :messages, dependent: :destroy
     has_many :fermeture, dependent: :destroy
     has_many :works, dependent: :destroy
     has_many :jours, dependent: :destroy

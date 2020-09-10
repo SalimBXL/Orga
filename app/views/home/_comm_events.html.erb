@@ -1,0 +1,6 @@
+<% if @events and @events[current_user.utilisateur.service.id] %>
+    <% @events[current_user.utilisateur.service.id].each do |event| %>
+        <span class="label label-default"><%= event.service.nom %></span>
+        <%= event.nom %><%= " : #{event.note}" if event.note %>
+    <% end %>
+<% end %>

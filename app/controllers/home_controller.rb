@@ -63,7 +63,11 @@ class HomeController < ApplicationController
 
         # Charge les Events
         @events = Hash.new
-        charge_events(@date)
+        charge_events(date)
+
+        # Charge les messages
+        @messages = Array.new
+        charge_messages(date)
         
     end
 end

@@ -1,0 +1,13 @@
+<h1>
+    <%= @message.nom %>
+</h1>
+<p>
+    <strong>Service :</strong> <%= @message.service.nom %>
+</p>
+<p>
+    <strong>Note(s) :</strong> <%= @message.note %>
+</p>
+
+<p>
+    <%= link_to " [Edit] ", edit_message_path(@message) %>
+</p>

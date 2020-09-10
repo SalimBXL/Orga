@@ -1,13 +1,31 @@
 <div class="container">
-<div class="page-header">
-<h1>
-    <span class="label label-primary">
-        <i class="material-icons">healing</i>
-        <%= "Absences".upcase %>
-    </span>
-</h1>
-</div>
-<div class="container">
-    <%= render "form" %>
-</div>
+    <div class="page-header">
+        <h1>
+            <span class="label label-primary">
+                <i class="material-icons">healing</i>
+                <%= "Absences".upcase %>
+            </span>
+        </h1>
+    </div>
+    <div class="container">
+        <%= render "form" %>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <hr>
+            <span class = "label label-danger" > DELETE ABSENCE
+            <%= link_to '<span data-toggle="tooltip" >
+                <i class="material-icons">close</i>'.html_safe, 
+                absence_path(@absence),
+                method: :delete,
+                remote: true,
+                data: { confirm: "Delete #{@absence.date}/#{@absence.date_fin}  ?" },
+                class: "btn btn-danger btn-xs"
+            %>
+            </span>
+        </div>
+    </div>
+    <hr>
+
 </div>

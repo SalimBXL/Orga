@@ -80,6 +80,12 @@ Rails.application.routes.draw do
   resources :services, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
 
 
+  ###############
+  #   messages  #
+  ###############
+  resources :messages, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
+
+
   ###########
   #  Lieux  #
   ###########

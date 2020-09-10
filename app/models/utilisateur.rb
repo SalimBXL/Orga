@@ -2,6 +2,7 @@ class Utilisateur < ApplicationRecord
     belongs_to :groupe
     belongs_to :service
     belongs_to :user
+    has_many :messages, dependent: :destroy
     has_many :jours, dependent: :destroy
     has_many :absences, dependent: :destroy
     has_many :demande_conges, dependent: :destroy

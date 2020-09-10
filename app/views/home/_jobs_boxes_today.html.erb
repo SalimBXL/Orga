@@ -1,0 +1,81 @@
+<% last_service = nil %>
+<!-- HORAIRE DU JOUR -->
+<% @specific_day_jours.each do |specific_day_jour| %>
+
+    <div class=" col-md-4">
+        <% panel = "default" %>
+        <% panel = "success" if @absence %>
+        <div class="panel panel-<%= panel %>">
+
+            <!-- HEADING PANEL -->
+            <div class="panel-heading">
+                <i class="material-icons">business</i>
+                <%= specific_day_jour.service.nom.upcase %>
+            </div>
+
+            <!-- CONTENT PANEL -->
+            <div class="panel-body">
+                <p>
+                    AM : 
+                    &nbsp;&nbsp;&nbsp;
+                    <% unless specific_day_jour.am_pm %>
+                        <% @specific_day_works[specific_day_jour].each do |wl| %>
+                            <% cl = "" %>
+                            <% if wl.work.code.downcase=="qc" && @date.cwday==5 %>
+                                <% cl = "keep_attention" %>
+                            <% end %>
+                            <span class="label label-primary <%= cl %>"
+                                data-toggle="tooltip" 
+                                title='<%= "#{wl.work.nom}" %>'
+                            >
+                                <%= wl.work.code %>
+                            </span>
+                            &nbsp;
+                        <% end %>
+                    <% else %>
+                        ---
+                    <% end %>
+                    <br>
+                    PM : 
+                    &nbsp;&nbsp;&nbsp;
+                    <% if specific_day_jour.am_pm %>
+                        <% @specific_day_works[specific_day_jour].each do |wl| %>
+                            <% cl = "" %>
+                            <% if wl.work.code.downcase=="qc" && @date.cwday==5 %>
+                                <% cl = "keep_attention" %>
+                            <% end %>
+                            <span class="label label-info <%= cl %>"
+                                data-toggle="tooltip" 
+                                title='<%= "#{wl.work.nom}" %>'
+                            >
+                                <%= wl.work.code %>
+                            </span>
+                            &nbsp;
+                        <% end %>
+                    <% else %>
+                        ---
+                    <% end %>
+                </p>
+                <p><%= specific_day_jour.note %></p>
+            </div>
+
+            <!-- FOOTER PANEL -->
+            <div class="panel-footer">
+                <% unless @events[specific_day_jour.service.id].nil? %>
+                    <% @events[specific_day_jour.service.id].each do |event| %>
+                        <span class="badge"
+                            data-toggle="tooltip" 
+                            title="<%= event.note %>"
+                        >
+                        <%= event.nom.capitalize %>
+                        </span>
+                    <% end %>
+                <% end %>
+            </div>
+
+
+
+        </div>
+    </div>
+
+<% end %>
