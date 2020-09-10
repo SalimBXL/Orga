@@ -1,12 +1,12 @@
 <hr>
 <footer>
+    <% last_git_date = Date.parse(@last_git_date) unless @last_git_date.nil? %>
     <p>
-        &copy;2020 Salim A. JOLY - PET Scan ULB Erasme, Cyclotron Biomedical. 
-        <em><%= "[Last update : #{@last_git_date}]" unless @last_git_date.nil? %></em>
-        
-         <% if user_signed_in? && current_user.admin? %>
+        &copy;2020 Salim A. JOLY - PET Scan ULB Erasme, Cyclotron Biomedical.
+        <%= " (v#{last_git_date.strftime('%y.%m.%d.%H%M')})" unless @last_git_date.nil? %>
+    </p>
+
+    <% if user_signed_in? && current_user.admin? %>
             === <%= "[#{params}][#{session[:page_aide]}]" %>
         <% end %>
-
-    </p>
 </footer>
