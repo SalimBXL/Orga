@@ -116,6 +116,7 @@
                     <% 5.times do |i| %>
                         <% i+= 1 %>
                         <% bg = "" %>
+                        <% bg = "today" if (@date.beginning_of_week+i-1) == Date.today %>
                         
                         <!-- Vérifie si l'utilisateur est absent ce jour-là... -->
                         <% if @absences[utilisateur] %>
@@ -134,8 +135,6 @@
 
                         <!-- Compose la fiche du jour -->
                         <div class="col-sm-2 <%= bg %>">
-                            <%=  %>
-                            
                             <p>
                             AM : 
                             <% @jours[service][utilisateur][i][false].each do |item| %>
