@@ -1,0 +1,69 @@
+<div class="panel panel-default ">    
+    <div class="panel-body">
+        <h3><span class="label label-danger">
+            <%= I18n.t("utilisateurs.show.days").capitalize %>
+            </span>
+        </h3>
+        <article>
+            <% tmp_numero_semaine = nil %>
+            <% tmp_numero_mois = nil %>
+            <% tmp_date = nil %>
+            <% n_jour = 1 %>
+
+            <table class="table-condensed table-bordered">
+            <tr>
+                <th class="tdfixe">Period</th>
+                <th class="tdfixe"><%= I18n.t("Lundi").capitalize %></th>
+                <th class="tdfixe"><%= I18n.t("Mardi").capitalize %></th>
+                <th class="tdfixe"><%= I18n.t("Mercredi").capitalize %></th>
+                <th class="tdfixe"><%= I18n.t("Jeudi").capitalize %></th>
+                <th class="tdfixe"><%= I18n.t("Vendredi").capitalize %></th>
+                <th class="tdfixe">W</th>
+            </tr>
+            
+            <% n_jour = 6 %>
+            <% @jours.each do |jour| %>
+                <% if n_jour > 6 %>
+                    </tr>
+                    <tr>
+                        <td class="tdfixe"></td>
+                    <% n_jour = 0 %>
+                <% end %>
+                <% if n_jour > jour.numero_jour %>
+                    <% (6 - n_jour).times do %>
+                        <td class="tdfixe"></td>
+                    <% end %>
+                    </tr>
+                    <tr>
+                        <td class="tdfixe">
+                            <div class="badge">
+                                <%= I18n.localize jour.date.beginning_of_week, format: :short %> -- 
+                                <%= I18n.localize (jour.date.end_of_week), format: :short %>
+                            </div>
+                        </td>
+                    <% n_jour = 0 %>
+                <% end %>
+                <% if n_jour < jour.numero_jour %>
+                    <% (n_jour - jour.numero_jour).times do %>
+                        <td class="tdfixe"></td>
+                        <% n_jour = jour.numero_jour %>
+                    <% end %>
+                <% end %>
+                <% unless jour.date == tmp_date %>
+                    </td><td class="tdfixe">
+                    <% tmp_date = jour.date %>
+                    <% n_jour += 1 %>
+                <% end  %>
+                <% bg = "primary" %>
+                <% bg = "info" if jour.am_pm %>
+                <a href="<%= edit_jour_path(jour.id) %>" class="btn btn-<%= bg %> btn-xs">
+                    <% @wks[jour].each do |wk| %>
+                        <%= wk %>
+                    <% end %>
+                </a>
+            <% end %>
+            </td></tr>
+            </table>
+        </article>
+    </div>
+</div>

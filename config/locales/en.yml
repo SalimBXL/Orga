@@ -483,6 +483,7 @@ en:
       fiche: User informations
       login: Login Data
       manager: Manager
+      my_month: My month
   working_list:
     edit:
       titre: Edition
