@@ -62,7 +62,7 @@
         </div>
 
         <!-- BOUTON MODE -->
-        <% if user_signed_in? && current_user.admin? %>
+        <% if user_signed_in? && current_user.utilisateur.admin %>
             <div>
                 <% if @edit_mode or @new_day_mode %>
                     <%= link_to '<span data-toggle="tooltip" title="Quit edition mode">

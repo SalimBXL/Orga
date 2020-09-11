@@ -297,12 +297,14 @@ en:
       classes: Classes
       evenements: Events
       fermetures: Days Off
+      from_template: From template
       groupes: Groups
       jours: Days
       lieux: Locations
       logs: Logs
       managing_absences: Managing absences
       messages: Messages
+      new_batch: New batch
       no_schedule: Nothing planned for today in your agenda.
       not_yet_validated_absences: Not yet validated absences
       note_yet_validated_absences: Note yet validated absences

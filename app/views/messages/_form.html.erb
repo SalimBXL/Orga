@@ -20,7 +20,12 @@
         <%= form.label I18n.t("messages.new.service") %><br>
         <%= form.select(:service_id) do %>
             <%= select_option_tag("", nil, @message.service) %>
-            <% Service.order(:nom).find_each do |l| %>
+            <% if current_user.admin? %>
+                <% services = Service.order(:nom) %>
+            <% else %>
+                <% services = Service.where(id: current_user.utilisateur.service.id) %>
+            <% end %>
+            <% services.find_each do |l| %>
                 <%= select_option_tag(l.nom.capitalize, l.id, @message.service_id) %>
             <% end %>
         <% end %>

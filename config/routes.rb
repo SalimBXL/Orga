@@ -60,6 +60,7 @@ Rails.application.routes.draw do
   get "ajouts/:id/valider", to: "ajouts#valider"
   get "ajouts/:id/dupliquer", to: "ajouts#dupliquer"
   get "ajouts/:id/modification", to: "ajouts#modification"
+  get "ajouts/from_template", to: "ajouts#from_template"
 
 
   ##############

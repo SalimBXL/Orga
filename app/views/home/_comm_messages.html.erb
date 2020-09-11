@@ -1,6 +1,8 @@
 <% if @messages %>
     <% @messages.each do |message| %>
-        <span class="label label-primary"><%= message.service.nom %></span>
-        <%= message.note.capitalize %>
+        <% if (message.service == current_user.utilisateur.service) or current_user.admin? %>
+            <span class="label label-primary"><%= message.service.nom %></span>
+            <%= message.note.capitalize %>
+        <% end %>
     <% end %>
 <% end %>

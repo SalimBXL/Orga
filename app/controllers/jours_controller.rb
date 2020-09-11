@@ -215,7 +215,7 @@ class JoursController < ApplicationController
             end
         end
 
-        if user_signed_in? && current_user.admin?
+        if user_signed_in? && (current_user.admin? or current_user.utilisateur.admin)
             find_groupes
             find_utilisateurs
             find_services

@@ -10,7 +10,13 @@
 <p>
     <%= link_to '<i class="material-icons">playlist_add</i>'.html_safe, 
         new_ajout_path,
-        class: "btn btn-success btn-xs" %>
+        class: "btn btn-success btn-xs",
+        title: "New batch" %>
+
+    <%= link_to '<i class="material-icons">content_copy</i>'.html_safe, 
+        ajouts_new_ajout_from_template_path,
+        class: "btn btn-warning btn-xs",
+        title: "New batch from template" %>
 </p>
 
 <div class="container">
@@ -20,6 +26,7 @@
 <p>
     <%= link_to '<i class="material-icons">playlist_add</i>'.html_safe, 
         new_ajout_path,
-        class: "btn btn-success btn-xs" %>
+        class: "btn btn-success btn-xs",
+        title: "New batch" %>
 </p>
 </div>
