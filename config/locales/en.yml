@@ -310,6 +310,7 @@ en:
       note_yet_validated_absences: Note yet validated absences
       services: Services
       sous_titre: Team Manager
+      templates: Templates
       tools: Tools
       types: Types
       utilisateurs: Users
@@ -423,6 +424,24 @@ en:
       lieu: Location
       nom: Name
       titre: New Service
+  templates:
+    edit:
+      edit_template: Edit template
+    index:
+      annuler: Delete
+      editer: Edite
+      nom: Names
+      titre: Templates
+    new:
+      am_pm: Am pm
+      day: Day
+      description: Description
+      informations: Informations
+      new_template: New template
+      nom: Name
+      service: Service
+      work: Work
+      work1: Work1
   tools:
     check_admins:
       description: This tool check the administrator's roles.

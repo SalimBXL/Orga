@@ -1,0 +1,27 @@
+<% session[:page_aide] = "templates" %>
+<div class="container">
+<h1>
+    <span class="label label-primary">
+        <i class="material-icons">content_copy</i>
+        <%= I18n.t("templates.index.titre").upcase %>
+    </span>
+</h1>
+
+<p>
+    <%= link_to '<i class="material-icons">playlist_add</i>'.html_safe, 
+        new_template_path,
+        class: "btn btn-success btn-xs",
+        title: "New template" %>
+</p>
+
+<div class="container">
+    <%= render 'templates' %>
+</div>
+
+<p>
+    <%= link_to '<i class="material-icons">playlist_add</i>'.html_safe, 
+        new_template_path,
+        class: "btn btn-success btn-xs",
+        title: "New template" %>
+</p>
+</div>

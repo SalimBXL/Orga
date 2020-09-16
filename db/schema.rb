@@ -140,6 +140,44 @@ ActiveRecord::Schema.define(version: 2020091012140633) do
     t.index ["lieu_id"], name: "index_services_on_lieu_id"
   end
 
+  create_table "templates", force: :cascade do |t|
+    t.boolean "am_pm1"
+    t.integer "work1_1"
+    t.integer "work1_2"
+    t.integer "work1_3"
+    t.integer "work1_4"
+    t.integer "work1_5"
+    t.boolean "am_pm2"
+    t.integer "work2_1"
+    t.integer "work2_2"
+    t.integer "work2_3"
+    t.integer "work2_4"
+    t.integer "work2_5"
+    t.boolean "am_pm3"
+    t.integer "work3_2"
+    t.integer "work3_3"
+    t.integer "work3_4"
+    t.integer "work3_5"
+    t.boolean "am_pm4"
+    t.integer "work4_1"
+    t.integer "work4_2"
+    t.integer "work4_3"
+    t.integer "work4_4"
+    t.integer "work4_5"
+    t.boolean "am_pm5"
+    t.integer "work5_1"
+    t.integer "work5_2"
+    t.integer "work5_3"
+    t.integer "work5_4"
+    t.integer "work5_5"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "nom"
+    t.string "description"
+    t.integer "service_id"
+    t.integer "work3_1"
+  end
+
   create_table "type_absences", force: :cascade do |t|
     t.string "code"
     t.string "nom"

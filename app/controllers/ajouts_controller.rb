@@ -26,9 +26,6 @@ class AjoutsController < ApplicationController
         @ajout = Ajout.new
         @mode_edition = false
     end
-
-    def from_template
-    end
     
 
     ##############

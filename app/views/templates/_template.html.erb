@@ -1,0 +1,28 @@
+
+<tr id="template_<%= template.id %>" >
+    <td>
+        <%= template.nom %>
+    </td>
+    <td>
+        <%= template.description %>
+    </td>
+    <td>
+        <%= template.service_id %>
+    </td>
+    <td>
+        <div class="btn-group">
+            <%= link_to '<i class="material-icons">cancel</i><br>
+                Annuler'.html_safe, template_path(template), 
+                class: "btn btn-danger",
+                title: I18n.t("templates.index.annuler"),
+                method: :delete,
+                remote: true, 
+                data: { confirm: "Delete #{template.nom} ?" } %>
+            <%= link_to '<i class="material-icons">undo</i><br>
+                Editer'.html_safe, 
+                edit_template_path(template), 
+                class: "btn btn-primary",
+                title: I18n.t("templates.index.editer") %>
+        </div>
+    </td>
+</tr>

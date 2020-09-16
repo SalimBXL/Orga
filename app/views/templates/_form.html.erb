@@ -1,0 +1,73 @@
+<%= form_with model: @template, local: true do |form| %>
+    <% if @template.errors.any? %>
+        <strong>WARNING</strong>
+        <ul>
+            <% @template.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
+
+    <hr>
+
+    <!-- Informations -->
+    <div class="row">
+        <div class="col-xs-5 col-sm-4 col-lg-2">
+            <h4>
+                <span class="label label-default">
+                    <%= form.label I18n.t("templates.new.informations") %>
+                </span>
+            </h4>
+        </div>
+        <div class="col-xs-5 col-sm-4 col-lg-2">
+            <p>
+                <%= form.label I18n.t("templates.new.nom") %><br>
+                <%= form.text_field :nom %>
+            </p>
+        </div>
+        <div class="col-xs-5 col-sm-4 col-lg-2">
+            <p>
+                <%= form.label I18n.t("templates.new.description") %><br>
+                <%= form.text_field :description %>
+            </p>
+        </div>
+        <div class="col-xs-5 col-sm-4 col-lg-2">
+            <p>
+                <%= form.label I18n.t("templates.new.service") %><br>
+                <%= form.select(:service_id) do %>
+                    <%= select_option_tag("", nil, @template.service_id) %>
+                    <% @services.find_each do |l| %>
+                        <%= select_option_tag(l.nom.capitalize, l.id, @template.service_id) %>
+                    <% end %>
+                <% end %>
+            </p>
+        </div>
+    </div>
+
+    <!-- Jours -->
+    <% index_jour = 1 %>
+    <% @liste.each do |jour| %>
+        <div class="row">
+            <hr>
+            <div class="col-xs-5 col-sm-4 col-lg-2">
+                <h4>
+                    <span class="label label-default">
+                        <%= form.label "#{I18n.t("templates.new.day")}#{index_jour}" %>
+                    </span>
+                </h4>
+            </div>
+            <% index_work = 1 %>
+            <% jour.each do |clef| %>
+                <div class="col-xs-5 col-sm-4 col-lg-2">
+                    <%= form.label "#{I18n.t("templates.new.work")}#{index_work}" %><br>
+                    <%= form.text_field clef %>
+                    <% index_work += 1 %>
+                </div>
+            <% end %>
+        </div>
+        <% index_jour += 1 %>
+    <% end %>
+
+    <%= form.submit class: "btn btn-success" %>
+
+<% end %>
