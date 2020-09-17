@@ -25,6 +25,11 @@ class AjoutsController < ApplicationController
     def new
         @ajout = Ajout.new
         @mode_edition = false
+        if current_user.admin?
+            @templates = Template.all
+        else
+            @templates = Template.where(id: current_user.utilisateur.service.id)
+        end
     end
     
 
@@ -34,18 +39,49 @@ class AjoutsController < ApplicationController
     def create
         err = false
         @ajouts = Array.new
-
-        # Si etendre à la semaine, 
-        # on crée 5 jobs pour chacun des jours
-        if (@etendre)
-            5.times do |i|
-                @ajouts[i] = Ajout.create(ajout_params)
-                @ajouts[i].date = @ajouts[i].date.beginning_of_week + i.days
-            end
-        else
-            @ajouts[0] = Ajout.create(ajout_params)
+        if params[:ajout][:date].nil? or params[:ajout][:date].blank?
+            params[:ajout][:date] = Date.today.to_s
         end
 
+        # SI TEMPLATE ...
+        if !params[:ajout][:template].blank? and !params[:ajout][:template].nil?
+            #puts "**************************************"
+            #puts "TEMPLATE..."
+            #puts "**************************************"
+            template = Template.find_by_id(params[:ajout][:template])
+            if (!template.nil? or !template.blank?) and 
+                (!params[:ajout][:utilisateur_id].nil? or !params[:ajout][:utilisateur_id].blank?)
+                liste_ajouts = template.create_array_from_template(params[:ajout][:utilisateur_id])
+                5.times do |i|
+                    @ajouts[i] = Ajout.create(liste_ajouts[i])
+                    if params[:ajout][:date].nil? or params[:ajout][:date].blank?
+                        @ajouts[i].date = Date.today.beginning_of_week + i.days
+                    else
+                        @ajouts[i].date = Date.parse(params[:ajout][:date]).beginning_of_week + i.days
+                    end
+                end
+            end
+        else 
+            #puts "**************************************"
+            #puts "NO TEMPLATE"
+            #puts "**************************************"
+            # Si etendre à la semaine, 
+            # on crée 5 jobs pour chacun des jours
+            if (@etendre)
+                5.times do |i|
+                    @ajouts[i] = Ajout.create(ajout_params)
+                    @ajouts[i].date = @ajouts[i].date.beginning_of_week + i.days
+                end
+            else
+                @ajouts[0] = Ajout.create(ajout_params)
+            end
+        end
+
+
+        puts "**************************************"
+        pp params
+        puts "**************************************"
+        
         # on sauve les ajouts
         @ajouts.each do |a|
             if a.save

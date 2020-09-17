@@ -1,14 +1,30 @@
-<p><%= paginate @jours, remote: true %></p>
+<p><%= paginate @jours, remote: true %>  <input class="form-control" id="myInput" type="text" placeholder="Search.."></p>
+<br>
 <table class="table table-striped">
-    <tr>
-        <th><%= I18n.t("jours.index.semaine") %></th>
-        <th><%= I18n.t("jours.index.date") %></th>
-        <th><%= I18n.t("jours.index.jour") %></th>
-        <th><%= I18n.t("jours.index.service") %></th>
-        <th><%= I18n.t("jours.index.utilisateur") %></th>
-        <th><%= I18n.t("jours.index.am_pm") %></th>
-        <th></th>
-    </tr>
-    <%= render @jours %>
+    <thead>
+        <tr>
+            <th><%= I18n.t("jours.index.semaine") %></th>
+            <th><%= I18n.t("jours.index.date") %></th>
+            <th><%= I18n.t("jours.index.jour") %></th>
+            <th><%= I18n.t("jours.index.service") %></th>
+            <th><%= I18n.t("jours.index.utilisateur") %></th>
+            <th><%= I18n.t("jours.index.am_pm") %></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="myTable">
+        <%= render @jours %>
+    </tbody>
 </table>
 <p><%= paginate @jours, remote: true %></p>
+
+<script>
+    $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>

@@ -3,6 +3,52 @@ class Template < ApplicationRecord
     before_save :check_works
 
 
+    # date utilisateur_id work1 work2 work3 work4 work5 
+    def create_array_from_template(utilisateur_id)
+        liste = Array.new
+        ligne = Hash.new
+        ligne["utilisateur_id"] = utilisateur_id
+
+        ligne["work1"] = work1_1
+        ligne["work2"] = work1_2
+        ligne["work3"] = work1_3
+        ligne["work4"] = work1_4
+        ligne["work5"] = work1_5
+        liste << ligne
+
+        ligne["work1"] = work2_1
+        ligne["work2"] = work2_2
+        ligne["work3"] = work2_3
+        ligne["work4"] = work2_4
+        ligne["work5"] = work2_5
+        liste << ligne
+
+        ligne["work1"] = work3_1
+        ligne["work2"] = work3_2
+        ligne["work3"] = work3_3
+        ligne["work4"] = work3_4
+        ligne["work5"] = work3_5
+        liste << ligne
+
+        ligne["work1"] = work4_1
+        ligne["work2"] = work4_2
+        ligne["work3"] = work4_3
+        ligne["work4"] = work4_4
+        ligne["work5"] = work4_5
+        liste << ligne
+
+        ligne["work1"] = work5_1
+        ligne["work2"] = work5_2
+        ligne["work3"] = work5_3
+        ligne["work4"] = work5_4
+        ligne["work5"] = work5_5
+        liste << ligne
+
+        return liste
+    end
+
+
+
     private
 
     def check_works

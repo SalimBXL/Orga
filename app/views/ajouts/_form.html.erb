@@ -125,6 +125,13 @@
                                                 { :multiple => false }) %>
                         </div>
                     </div>
+
+                    <hr>
+
+                    <% if (@mode_edition.nil? or @mode_edition == false) and params[:action] == "new" %>
+                        <%= render partial: "template", locals: {form: form} %>
+                    <% end %>
+
                 </div>
 
             <% if @mode_edition.nil? or @mode_edition == false %>

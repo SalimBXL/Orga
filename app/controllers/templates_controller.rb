@@ -12,7 +12,7 @@ class TemplatesController < ApplicationController
     #   INDEX   #
     #############
     def index
-        @templates = Template.order(:nom)
+        @templates = Template.all.order(:nom)
     end
 
     def show
