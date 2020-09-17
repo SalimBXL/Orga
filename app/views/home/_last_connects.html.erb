@@ -2,7 +2,9 @@
     <div class="well well-sm">
         Lately connected : 
         <% @last_connects.each do |last_connect| %>
-            <%= last_connect.prenom_nom %> (<%= time_ago_in_words(last_connect.last_action) unless last_connect.last_action.nil? %>) &nbsp;&nbsp;&nbsp;
+            <% unless last_connect.utilisateur.nil? and last_connect.last_connection.nil? %>
+                <%= last_connect.utilisateur.prenom_nom %> (<%= time_ago_in_words(last_connect.last_connection) %>) &nbsp;&nbsp;&nbsp;
+            <% end %>
         <% end %>
     </div>
 </div>

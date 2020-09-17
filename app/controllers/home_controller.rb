@@ -27,7 +27,7 @@ class HomeController < ApplicationController
         get_today if user_signed_in?
 
         # Charge les dernières connections 
-        @last_connects =Utilisateur.order(last_connection: :desc).limit(5)
+        @last_connects = User.where.not(last_connection: nil).order(last_connection: :desc).limit(5)
     end
 
     private 
