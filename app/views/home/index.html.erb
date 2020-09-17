@@ -9,5 +9,7 @@
     </div>
     <%= render "today" if user_signed_in? %>
     <%= render "barre_menu" if user_signed_in? %>
+
+    <%= render "last_connects" if user_signed_in? and current_user.utilisateur.admin %>
 </div>
 

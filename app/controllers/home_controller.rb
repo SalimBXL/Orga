@@ -25,6 +25,9 @@ class HomeController < ApplicationController
 
         # Check les jobs du user courant
         get_today if user_signed_in?
+
+        # Charge les dernières connections 
+        @last_connects =Utilisateur.order(last_connection: :desc).limit(5)
     end
 
     private 

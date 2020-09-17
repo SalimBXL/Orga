@@ -1,0 +1,8 @@
+<br><div class="row">
+    <div class="well well-sm">
+        Lately connected : 
+        <% @last_connects.each do |last_connect| %>
+            <%= last_connect.prenom_nom %> (<%= time_ago_in_words(last_connect.last_action) unless last_connect.last_action.nil? %>) &nbsp;&nbsp;&nbsp;
+        <% end %>
+    </div>
+</div>
