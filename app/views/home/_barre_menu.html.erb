@@ -1,6 +1,4 @@
-<div class="container">
-    <div class="row">
-
+<div class="row">
         <div class="btn-group">
             <a href="<%= absences_path %>" class="btn btn-success" role="button">
                 <i class="material-icons">healing</i><br>
@@ -14,14 +12,12 @@
                 <i class="material-icons">healing</i><br>
                 <%= I18n.t("home.index.validated") %>
             </a>
-
+        </div>
+        <div class="btn-group">
             <a href="<%= type_absences_path %>" class="btn btn-success" role="button">
                 <i class="material-icons">healing</i><br>
                 <%= I18n.t("home.index.types") %>
             </a>
-        </div>
-
-        <div class="btn-group">
             <a href="<%= fermetures_path %>" class="btn btn-success" role="button">
                 <i class="material-icons">event_busy</i><br>
                 <%= I18n.t("home.index.fermetures") %>
@@ -31,7 +27,6 @@
                 <%= I18n.t("home.index.evenements") %>
             </a>
         </div>
-
         <div class="btn-group">
             <a href="<%= lieus_path %>" class="btn btn-primary" role="button">
                 <i class="material-icons">location_city</i><br>
@@ -42,7 +37,6 @@
                 <%= I18n.t("home.index.services") %>
             </a>
         </div>
-
         <div class="btn-group">
             <a href="<%= groupes_path %>" class="btn btn-primary" role="button">
                 <i class="material-icons">group_work</i><br>
@@ -53,7 +47,6 @@
                 <%= I18n.t("home.index.utilisateurs") %>
             </a>
         </div>
-
         <div class="btn-group">
             <a href="<%= classes_path %>" class="btn btn-primary" role="button">
                 <i class="material-icons">category</i><br>
@@ -64,10 +57,8 @@
                 <%= I18n.t("home.index.works") %>
             </a>
         </div>
-        
-        <%= render partial: "admin" if user_signed_in? && current_user.admin %>
-
         <%= render partial: "manager" if user_signed_in? && current_user.utilisateur.admin %>
-
-    </div>
+</div>
+<div class="row">
+    <%= render partial: "admin" if user_signed_in? && current_user.admin %>
 </div>

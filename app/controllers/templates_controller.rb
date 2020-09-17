@@ -5,7 +5,8 @@ class TemplatesController < ApplicationController
     before_action :find_groupes, only: [:new, :create, :edit, :modification]
     before_action :find_works, only: [:index, :new, :create, :edit, :modification]
     before_action :find_classes, only: [:new, :create, :edit, :modification]
-    before_action :find_services, only: [:new, :create, :edit, :modification]
+    before_action :find_services, only: [:new, :create, :edit, :modification, :index]
+    before_action :build_list, only: [:new, :create, :edit, :modification]
 
     #############
     #   INDEX   #
@@ -23,7 +24,6 @@ class TemplatesController < ApplicationController
     #   NEW  #
     ##########
     def new
-        build_list if @liste.nil?
         @template = Template.new
     end
     
@@ -32,12 +32,10 @@ class TemplatesController < ApplicationController
     #   CREATE   #
     ##############
     def create
-        
         @template = Template.create(template_params)
         if @template.save
             flash[:notice] = "Template créé avec succès"
         else
-            #build_list if @liste.nil?
             render :new
         end
         redirect_to templates_path

@@ -1,6 +1,5 @@
 class Template < ApplicationRecord
     validates :nom, :service_id, presence: true
-    after_validation :set_am_pms
     before_save :check_works
 
 

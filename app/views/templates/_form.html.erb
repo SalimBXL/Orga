@@ -60,7 +60,14 @@
             <% jour.each do |clef| %>
                 <div class="col-xs-5 col-sm-4 col-lg-2">
                     <%= form.label "#{I18n.t("templates.new.work")}#{index_work}" %><br>
-                    <%= form.text_field clef %>
+                    <%= form.select(clef) do %>
+                        <%= select_option_tag("", nil, @template[clef]) %>
+                        <% @works.each do |l| %>
+                            <%= select_option_tag(l.code, l.id, @template[clef]) %>
+                        <% end %>
+                    <% end %>
+
+
                     <% index_work += 1 %>
                 </div>
             <% end %>

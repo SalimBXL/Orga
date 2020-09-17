@@ -292,6 +292,7 @@ en:
       absences: Absences
       ajouter: Add Attributions
       aujourdhui: Today
+      batchs: Batchs
       ce_mois: This month
       cette_semaine: This week
       classes: Classes
@@ -429,6 +430,8 @@ en:
       edit_template: Edit template
     index:
       annuler: Delete
+      delete: Delete
+      edit: Edit
       editer: Edite
       nom: Names
       titre: Templates
