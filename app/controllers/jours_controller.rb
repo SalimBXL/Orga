@@ -215,15 +215,13 @@ class JoursController < ApplicationController
             end
         end
 
+
         if user_signed_in? && (current_user.admin? or current_user.utilisateur.admin)
-            find_groupes
             find_utilisateurs
-            find_services
             find_classes
             find_works
         end
         
-
     end
 
     ############
@@ -272,8 +270,6 @@ class JoursController < ApplicationController
 
         charge_fermetures(@date.beginning_of_week, @date.beginning_of_week+5.days)
 
-       
-
         # Charge les services
         find_services if @services.nil?
 
@@ -285,9 +281,7 @@ class JoursController < ApplicationController
     end
 
 
-    private 
-
-    
+    private     
 
     def jour_params
         params.require(:jour).permit(:date, :utilisateur_id, :am_pm, :service_id, :edit_mode, :new_day_mode)        
@@ -296,8 +290,5 @@ class JoursController < ApplicationController
     def find_jour
         @jour = Jour.find(params[:id])
     end
-
-
-    
-    
+ 
 end

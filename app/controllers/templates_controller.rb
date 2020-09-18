@@ -1,10 +1,8 @@
 class TemplatesController < ApplicationController
     before_action :check_logged_in
     before_action :find_template, only: [:edit, :update, :destroy, :valider, :dupliquer]
-    before_action :find_utilisateurs, only: [:new, :create, :edit, :modification]
     before_action :find_groupes, only: [:new, :create, :edit, :modification]
-    before_action :find_works, only: [:index, :new, :create, :edit, :modification]
-    before_action :find_classes, only: [:new, :create, :edit, :modification]
+    before_action :find_works, only: [:new, :create, :edit, :modification]
     before_action :find_services, only: [:new, :create, :edit, :modification, :index]
     before_action :build_list, only: [:new, :create, :edit, :modification]
 

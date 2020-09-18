@@ -16,11 +16,11 @@ class HomeController < ApplicationController
 
         # Charge le cache
         if user_signed_in?
-            find_utilisateurs if @utilisateurs.nil?
-            find_groupes if @groupes.nil?
-            find_works if @works.nil?
-            find_classes if @classes.nil?
-            find_services if @services.nil?
+            #find_utilisateurs if @utilisateurs.nil?
+            #find_groupes if @groupes.nil?
+            #find_works if @works.nil?
+            #find_classes if @classes.nil?
+            #find_services if @services.nil?
         end
 
         # Check les jobs du user courant
@@ -63,14 +63,12 @@ class HomeController < ApplicationController
             @absence = abs
         end
 
-
         # Charge les Events
         @events = Hash.new
         charge_events(date)
 
         # Charge les messages
         @messages = Array.new
-        charge_messages(date)
-        
+        charge_messages(date)        
     end
 end
