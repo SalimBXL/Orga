@@ -28,7 +28,8 @@
         
             <!-- mais utilisateur en congé-->
             <% unless @absences[utilisateur.id].nil? %>
-                <% if @absences[utilisateur.id].keys.include?(date_jour.to_s) %>
+            <% var_abs = @absences[utilisateur.id][date_jour.to_s] %>
+                <% if @absences[utilisateur.id].keys.include?(date_jour.to_s) %>                    
                     <% if @absences[utilisateur.id][date_jour.to_s] %>
                         <% bg = "conge_ok" %>
                     <% else %>
@@ -57,7 +58,8 @@
                 bg: bg,
                 date_jour: date_jour,
                 service: service,
-                utilisateur: utilisateur
+                utilisateur: utilisateur,
+                abs: var_abs
              } %>
              
 
