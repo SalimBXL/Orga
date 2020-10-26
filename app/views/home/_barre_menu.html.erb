@@ -62,3 +62,13 @@
 <div class="row">
     <%= render partial: "admin" if user_signed_in? && current_user.admin %>
 </div>
+
+<div class="row">
+<!-- Bouton secrétaire -->
+<div class="btn-group">
+    <a href="<%= secr_pet_path %>" class="btn btn-info" role="button">
+        <i class="material-icons">PET</i><br>
+        <%= I18n.t("home.index.secretary") %>
+    </a>
+</div>
+</div>

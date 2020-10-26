@@ -281,6 +281,104 @@ class JoursController < ApplicationController
     end
 
 
+    ################
+    #   Secr_pet   #
+    ################
+    def secr_pet
+        # Log action
+        log(request.path)
+
+        # Réglage des dates de début et fin de période
+        unless params[:date]
+            date_tmp = Date.today
+        else
+            date_tmp = params[:date].to_date
+        end
+        if date_tmp.beginning_of_month.cwday == 7
+            date_tmp = date_tmp.beginning_of_month + 1.day
+        elsif date_tmp.beginning_of_month.cwday == 6
+            date_tmp = date_tmp.beginning_of_month + 2.days
+        else
+            date_tmp = date_tmp.beginning_of_month
+        end
+        @date = date_tmp.beginning_of_week
+        @date2 = date_tmp.end_of_month.end_of_week
+
+        @jours = Hash.new
+
+        # Liste des utilisateurs
+        utilisateurs = Utilisateur.order(:service_id, :groupe_id, :prenom, :nom)
+        utilisateurs.each do |utilisateur|
+            @jours[utilisateur.service] ||= Hash.new
+            @jours[utilisateur.service][utilisateur] ||= Hash.new
+        end
+
+        # Liste des attributions
+        utilisateurs_jours = Jour.where(date: @date..@date2).order(:service_id, :utilisateur_id, :date, :am_pm)
+        utilisateurs_jours.each do |utilisateur_jour|
+            unless @jours[utilisateur_jour.service].nil?
+                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur] ||= Hash.new
+                dd = utilisateur_jour.date.to_s
+                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd] ||= Hash.new
+                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = WorkingList.for(utilisateur_jour.id).includes(:work)
+            end
+        end
+
+        # Charge les fermetures
+        charge_fermetures(@date, @date2)        
+
+        # Charge les absences
+        @absences = Hash.new
+        absences = Absence.where('date_fin >= ? AND date <= ?', @date, @date2).order(:utilisateur_id, :date, :date_fin)
+        absences.each do |absence|
+            (absence.date..absence.date_fin).each do |aj|
+                @absences[absence.utilisateur_id] ||= Hash.new
+                @absences[absence.utilisateur_id][aj.to_s] = absence.accord
+            end
+        end
+
+        # Charges les services
+        find_services if @services.nil?
+
+        # Charge les Events
+        @events = Hash.new
+        nombre_de_jours = (@date2-@date).to_i
+        nombre_de_jours.times do |i|
+            charge_events(@date + i.day)
+        end
+
+        # mode edition ?
+        unless params[:edit_mode]
+            @edit_mode = false
+        else
+            if params[:edit_mode].downcase == 'true'
+                @edit_mode = true
+            else
+                @edit_mode = false
+            end
+        end
+
+        # mode new day ?
+        unless params[:new_day_mode]
+            @new_day_mode = false
+        else
+            if params[:new_day_mode].downcase == 'true'
+                @new_day_mode = true
+            else
+                @new_day_mode = false
+            end
+        end
+
+
+        if user_signed_in? && (current_user.admin? or current_user.utilisateur.admin)
+            find_utilisateurs
+            find_classes
+            find_works
+        end
+        
+    end
+
+
     private     
 
     def jour_params

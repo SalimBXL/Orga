@@ -144,6 +144,7 @@ Rails.application.routes.draw do
   get "today", to: "jours#specific_day"
   get "week", to: "jours#specific_week"
   get "month", to: "jours#specific_month"
+  get "secr_pet", to: "jours#secr_pet"
 
 
   ###################

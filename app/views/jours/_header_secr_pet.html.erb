@@ -1,0 +1,70 @@
+<div class="container">
+    <h1>
+        <span class="label label-info">
+            <i class="material-icons">calendar_today</i>
+            <%= I18n.t("month.mois_#{(@date+15.days).month}") %>
+        </span>
+        &nbsp;&nbsp;&nbsp;
+         <span class="label label-info">
+            <%= I18n.t("home.index.secretary") %>
+         </span>
+    </h1>
+
+    <div class="flex-menu-day">
+        
+        <!-- Plage de dates -->
+        <div style="margin-right: auto">
+            <div class="badge">
+                <%= I18n.localize @date, format: :long %> -- <%= I18n.localize @date2, format: :long %>
+            </div>
+        </div>
+
+        <!-- MENU SERVICE -->
+        <div>
+            <!-- Liste des services -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <% unless @current_service.nil? %>
+                        <%= @current_service.nom %>
+                    <% else %>
+                        <%= I18n.t("jours.today.all_services") %>
+                    <% end %>
+
+                <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    
+                    <% @services.each do |service| %>
+                        <% unless @current_service.id == service.id %>
+                        <li>
+                        <button title="<%= service.nom %>" data-toggle="collapse" 
+                            data-target="#service-<%= service.id %>" class="btn btn-link btn-xs">
+                            <%= service.nom %>
+                        </button>
+                        </li>
+                        <% end %>
+                    <% end %>
+                </ul>
+            </li>
+        </div>
+
+        <!-- MENU NAVIGATION -->
+        <div style="flex: 0 0 120px">
+            <div class="btn-group">
+                <%= link_to '<span data-toggle="tooltip" title="Previous" >
+                                <i class="material-icons">chevron_left</i></span>'.html_safe, 
+                                month_path(date: (@date+15.days)-1.month), 
+                                class: "btn btn-success btn-xs" %>
+                <%= link_to '<span data-toggle="tooltip" title="CURRENT" >
+                                <i class="material-icons">adjust</i></span>'.html_safe, 
+                                month_path(date: Date.today), 
+                                class: "btn btn-success btn-xs" %>
+                <%= link_to '<span data-toggle="tooltip" title="Next" >
+                                <i class="material-icons">chevron_right</i></span>'.html_safe, 
+                                month_path(date: (@date+15.days)+1.month), 
+                                class: "btn btn-success btn-xs" %>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
