@@ -14,6 +14,8 @@ class AbsencesController < ApplicationController
         
         # Log action
         log(request.path)
+
+        session[:return_user_id] = nil
     end
 
 
@@ -111,6 +113,13 @@ class AbsencesController < ApplicationController
         # Log action
         log(request.path, I18n.t("absences.index.log_destroy"))
         @absence.destroy
+
+        if !session[:return_user_id].blank? or !session[:return_user_id].nil?
+            tmp = session[:return_user_id]
+            session[:return_user_id] = nil
+            redirect_to utilisateur_path(id: tmp)
+        end
+
     end
 
     ##########
@@ -118,6 +127,8 @@ class AbsencesController < ApplicationController
     ##########
     def grille
         log(request.path, "Show grille absences")
+
+        
 
         # Réglage des dates de début et fin de période
         unless params[:date]
