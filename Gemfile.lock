@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 89312ee89c618d9be4b0527da91048e80813c81c
+  revision: 86d563d6468f7eec6e8cd62ec25654498921a2df
   branch: master
   specs:
     faker (2.14.0)
@@ -202,7 +202,7 @@ GEM
       railties (>= 5.0)
     rspec-core (3.9.3)
       rspec-support (~> 3.9.3)
-    rspec-expectations (3.9.3)
+    rspec-expectations (3.9.4)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
     rspec-mocks (3.9.1)

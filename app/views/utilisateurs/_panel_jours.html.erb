@@ -41,14 +41,16 @@
                                 <%= I18n.localize (jour.date.end_of_week), format: :short %>
                             </div>
                         </td>
-                    <% n_jour = 0 %>
+                    <% n_jour = 1 %>
                 <% end %>
+                
                 <% if n_jour < jour.numero_jour %>
-                    <% (n_jour - jour.numero_jour).times do %>
+                    <% (jour.numero_jour - n_jour).times do %>
                         <td class="tdfixe"></td>
-                        <% n_jour = jour.numero_jour %>
                     <% end %>
+                    <% n_jour = jour.numero_jour %>
                 <% end %>
+                
                 <% unless jour.date == tmp_date %>
                     </td><td class="tdfixe">
                     <% tmp_date = jour.date %>
@@ -56,11 +58,14 @@
                 <% end  %>
                 <% bg = "primary" %>
                 <% bg = "info" if jour.am_pm %>
-                <a href="<%= edit_jour_path(jour.id) %>" class="btn btn-<%= bg %> btn-xs">
-                    <% @wks[jour].each do |wk| %>
-                        <%= wk %>
-                    <% end %>
-                </a>
+                
+                    <a href="<%= edit_jour_path(jour.id) %>" class="btn btn-<%= bg %> btn-xs">
+                        <% @wks[jour].each do |wk| %>
+                            <%= wk %>
+                        <% end %>
+                    </a>
+                    
+            
             <% end %>
             </td></tr>
             </table>

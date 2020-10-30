@@ -8,6 +8,8 @@ class JoursController < ApplicationController
         # Log action
         log(request.path)
 
+        session[:return_user_id] = nil
+
         if current_user.admin?
             @jours = Jour.order(numero_semaine: :desc).order(numero_jour: :desc).order(:service_id, :am_pm, :utilisateur_id).page(params[:page])
         else
@@ -71,6 +73,9 @@ class JoursController < ApplicationController
     def edit
         # Log action
         log(request.path, I18n.t("jours.index.log_edit"))
+
+
+
     end
 
     ##############
@@ -80,6 +85,13 @@ class JoursController < ApplicationController
         # Log action
         log(request.path, I18n.t("jours.index.log_destroy"))
         @jour.destroy
+    
+        if !session[:return_user_id].blank? or !session[:return_user_id].nil?
+            tmp = session[:return_user_id]
+            session[:return_user_id] = nil
+            redirect_to utilisateur_path(id: tmp)
+        end
+
     end
 
 
