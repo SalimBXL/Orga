@@ -4,10 +4,10 @@
 
     <!-- AFFICHAGE DU NOM DU SERVICE -->
     <div id = "service-<%= service.id %>"
-        <% if !@current_service.nil? && @current_service.id != service.id %>
+        <% if !@current_service.nil? && @current_service.id != service.id && !current_user.admin %>
                 class="collapse"
         <% end %>
-        >
+    >
 
         <%= render partial: "nom_service_month", locals: { service: service } %>
         
