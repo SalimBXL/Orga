@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 86d563d6468f7eec6e8cd62ec25654498921a2df
+  revision: a1ffab7246fe7a77438f9e582e5b2ffacba32bb6
   branch: master
   specs:
     faker (2.14.0)
@@ -50,17 +50,17 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     arel (8.0.0)
     ast (2.4.1)
-    autoprefixer-rails (10.0.1.0)
+    autoprefixer-rails (10.0.2.0)
       execjs
     bcrypt (3.1.16)
-    better_errors (2.8.3)
+    better_errors (2.9.1)
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
     bindex (0.8.1)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
-    bootstrap (4.5.2)
+    bootstrap (4.5.3)
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 1.14.3, < 2)
       sassc-rails (>= 2.0.0)
@@ -252,7 +252,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    terminal-table (1.8.0)
+    terminal-table (2.0.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
     thor (1.0.1)
     thread_safe (0.3.6)
@@ -260,7 +260,7 @@ GEM
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
-    tzinfo (1.2.7)
+    tzinfo (1.2.8)
       thread_safe (~> 0.1)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)

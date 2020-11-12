@@ -1,0 +1,29 @@
+<% session[:page_aide] = "bug_repports_types" %>
+
+<div class="container">
+<div class="page-header">
+    <h1>
+        <span class="label label-primary">
+            <i class="material-icons">bug_report</i>
+            <%= I18n.t("bug_repports.index.titre").upcase %>
+        </span>
+    </h1>
+</div>
+<p>
+    <% if user_signed_in? %>
+    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+        new_bug_repport_path,
+        class: "btn btn-success btn-xs" %>
+    <% end %>
+</p>
+<div id="bug_repports">
+    <%= render 'bug_repports' %>
+</div>
+<p>
+    <% if user_signed_in? %>
+    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+        new_bug_repport_path,
+        class: "btn btn-success btn-xs" %>
+    <% end %>
+</p>
+<div class="container">

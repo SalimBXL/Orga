@@ -64,11 +64,19 @@
 </div>
 
 <div class="row">
-<!-- Bouton secrétaire -->
-<div class="btn-group">
-    <a href="<%= secr_pet_path %>" class="btn btn-info" role="button">
-        <i class="material-icons">PET</i><br>
-        <%= I18n.t("home.index.secretary") %>
-    </a>
-</div>
+    <!-- Bouton secrétaire -->
+    <div class="btn-group">
+        <a href="<%= secr_pet_path %>" class="btn btn-info" role="button">
+            <i class="material-icons">PET</i><br>
+            <%= I18n.t("home.index.secretary") %>
+        </a>
+    </div>
+
+    <!-- Bouton BUG -->
+    <div class="btn-group">
+        <a href="<%= bug_repports_path %>" class="btn btn-info" role="button">
+            <i class="material-icons">bug_report</i><br>
+            <%= I18n.t("home.index.bug_repport") %>
+        </a>
+    </div>
 </div>

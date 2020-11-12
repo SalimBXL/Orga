@@ -1,0 +1,32 @@
+<tr id="bug_repport_<%= bug_repport.id %>">
+    <td><%= bug_repport.date %></td>
+    <td><%= bug_repport.utilisateur.prenom_nom %></td>
+    <td><%= bug_repport.nom %></td>
+    <td><%= bug_repport.description %></td>
+    <td>
+    <% service_utilisateur = bug_repport.utilisateur.service %>
+    <% if user_signed_in? && 
+        (current_user.admin? || 
+        current_user.utilisateur == bug_repport.utilisateur ||
+        current_user.utilisateur.admin) %>
+
+        <% if (current_user.utilisateur == bug_repport.utilisateur) or
+            (current_user.admin? || current_user.utilisateur.admin)
+        %>
+            <%= link_to '<span data-toggle="tooltip">
+                    <i class="material-icons">edit</i></span>'.html_safe, 
+                    edit_bug_repport_path(bug_repport),
+                    class: "btn btn-warning btn-xs" %>
+        <% end %>
+
+        <%= link_to '<i class="material-icons">close</i>'.html_safe, 
+                    bug_repport_path(bug_repport),
+                    method: :delete,
+                    remote: true,
+                    data: { confirm: "Delete #{bug_repport.date} - #{bug_repport.utilisateur.prenom_nom}  ?" },
+                    class: "btn btn-danger btn-xs" %>
+        
+    <% end %>
+    </td>
+    
+</tr>

@@ -58,6 +58,22 @@ en:
       quoi: What
       titre: New attributions(s)
       utilisateur: User
+  bug_repports:
+    index:
+      dates: Dates
+      descriptions: Descriptions
+      icone_accord: Icone accord
+      log_destroy: Log destroy
+      log_edit: Log edit
+      log_update: Log update
+      mises_a_jour: update
+      noms: Bugs
+      remarques: Notes
+      titre: Bug Repports
+      types: Types
+      utilisateurs: Users
+    new:
+      titre: Bug Repport
   classes:
     form:
       description: Description
@@ -293,6 +309,7 @@ en:
       ajouter: Add Attributions
       aujourdhui: Today
       batchs: Batchs
+      bug_repport: Bug repport
       ce_mois: This month
       cette_semaine: This week
       classes: Classes

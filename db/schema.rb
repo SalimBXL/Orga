@@ -42,6 +42,16 @@ ActiveRecord::Schema.define(version: 2020091012140633) do
     t.index ["utilisateur_id"], name: "index_ajouts_on_utilisateur_id"
   end
 
+  create_table "bug_repports", force: :cascade do |t|
+    t.bigint "utilisateur_id"
+    t.date "date"
+    t.string "nom"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["utilisateur_id"], name: "index_bug_repports_on_utilisateur_id"
+  end
+
   create_table "classes", force: :cascade do |t|
     t.string "nom"
     t.string "description"
@@ -245,6 +255,7 @@ ActiveRecord::Schema.define(version: 2020091012140633) do
   add_foreign_key "absences", "type_absences"
   add_foreign_key "absences", "utilisateurs"
   add_foreign_key "ajouts", "utilisateurs"
+  add_foreign_key "bug_repports", "utilisateurs"
   add_foreign_key "demande_conges", "utilisateurs"
   add_foreign_key "events", "services"
   add_foreign_key "fermetures", "services"

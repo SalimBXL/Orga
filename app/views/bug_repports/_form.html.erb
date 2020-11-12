@@ -1,0 +1,54 @@
+<%= form_with model: @bug_repport, local: true do |form| %>
+
+    <% if @bug_repport.date.blank? %>
+        <% @bug_repport.date = Date.today %>
+    <% end %>
+    
+
+    <% if @bug_repport.errors.any? %>
+        <strong>WARNING</strong>
+        <ul>
+            <% @bug_repport.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
+
+    <!-- Dates -->
+    <p>
+        <%= form.label I18n.t("absences.new.date") %><br>
+        <%= form.date_field :date %>
+    </p>
+
+    <!-- Utilisateur -->
+    <p>
+        <%= form.label I18n.t("absences.new.utilisateur") %><br>
+
+        <!-- Ne peut modifier l'utilisateur que si admin ou manager -->
+        <%= form.select(:utilisateur_id) do %>
+            <% if current_user.utilisateur.admin %>
+                <%= select_option_tag("", nil, @bug_repport.utilisateur_id) %>
+                <% @utilisateurs.order(:service_id, :groupe_id, :prenom, :nom).find_each do |l| %>
+                    <%= select_option_tag("[#{l.service.nom}] - #{l.prenom_nom}", l.id, @bug_repport.utilisateur_id) %>                
+                <% end %>
+            <% else %>
+                <%= select_option_tag(current_user.utilisateur.prenom_nom, current_user.utilisateur.id, @bug_repport.utilisateur_id) %>
+            <% end %>
+        <% end %>
+    </p>
+
+    <!-- nom / description -->
+    <p>
+        <%= form.label I18n.t("absences.new.nom") %><br>
+        <%= form.text_field :nom %>
+    </p>
+    <p>
+        <%= form.label I18n.t("absences.new.description") %><br>
+        <%= form.text_area :description, size: "50x3" %>
+    </p>
+    <p>
+        <%= form.submit class: "btn btn-primary" %>
+    </p>
+
+
+<% end %>

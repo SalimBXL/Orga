@@ -1,0 +1,17 @@
+<h1>
+    <%= @bug_repport.date %>
+</h1>
+<p>
+    <%= @bug_repport.utilisateur.prenom_nom %>
+</p>
+<p>
+    <%= @bug_repport.type_bug_repport.nom %><br>
+    <%= @bug_repport.type_bug_repport.description %>
+</p>
+<p>
+    <%= @bug_repport.remarque %>
+</p>
+
+<p>
+    <%= link_to " [Edit] ", edit_bug_repport_path(@bug_repport) %>
+</p>

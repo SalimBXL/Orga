@@ -98,6 +98,12 @@ Rails.application.routes.draw do
   resources :lieus, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
 
 
+  ##################
+  #  Bug Repports  #
+  ##################
+  resources :bug_repports, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
+
+
   ###################
   #   Utilisateurs  #
   ###################
