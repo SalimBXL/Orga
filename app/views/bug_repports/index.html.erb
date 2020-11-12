@@ -1,29 +1,58 @@
 <% session[:page_aide] = "bug_repports_types" %>
 
 <div class="container">
-<div class="page-header">
-    <h1>
-        <span class="label label-primary">
-            <i class="material-icons">bug_report</i>
-            <%= I18n.t("bug_repports.index.titre").upcase %>
-        </span>
-    </h1>
+
+    <div class="page-header">
+        <h1>
+            <span class="label label-primary">
+                <i class="material-icons">bug_report</i>
+                <%= I18n.t("bug_repports.index.titre").upcase %>
+            </span>
+        </h1>
+    </div>
+
+    <table>
+        <tr align="center">
+            <td><h2><span class="label label-default">
+                <i class="material-icons">outlined_flag</i>&nbsp;</span>&nbsp;</H2></td>
+            <td><h2><span class="label label-primary">
+                <i class="material-icons">flag</i></span>&nbsp;</H2></td>
+            <td><h2><span class="label label-info">
+                <i class="material-icons">sync_problem</i></span>&nbsp;</H2></td>
+            <td><h2><span class="label label-danger">
+                <i class="material-icons">report_problem</i></span>&nbsp;</H2></td>
+            <td><h2><span class="label label-success">
+                <i class="material-icons">check</i></span>&nbsp;</H2></td>
+        </tr>
+        <tr align="center">
+            <td>Waitting</td>
+            <td>Working</td>
+            <td>Testing</td>
+            <td>Problem</td>
+            <td>Done</td>
+        </tr>
+    </table>
+
+    <br>
+
+    <p>
+        <% if user_signed_in? %>
+        <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+            new_bug_repport_path,
+            class: "btn btn-success btn-xs" %>
+        <% end %>
+    </p>
+
+    <div id="bug_repports">
+        <%= render 'bug_repports' %>
+    </div>
+
+    <p>
+        <% if user_signed_in? %>
+        <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+            new_bug_repport_path,
+            class: "btn btn-success btn-xs" %>
+        <% end %>
+    </p>
+    
 </div>
-<p>
-    <% if user_signed_in? %>
-    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
-        new_bug_repport_path,
-        class: "btn btn-success btn-xs" %>
-    <% end %>
-</p>
-<div id="bug_repports">
-    <%= render 'bug_repports' %>
-</div>
-<p>
-    <% if user_signed_in? %>
-    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
-        new_bug_repport_path,
-        class: "btn btn-success btn-xs" %>
-    <% end %>
-</p>
-<div class="container">

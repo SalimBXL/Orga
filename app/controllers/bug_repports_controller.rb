@@ -97,7 +97,7 @@ class BugRepportsController < ApplicationController
     private 
 
     def bug_repport_params
-        params.require(:bug_repport).permit(:date, :nom, :description, :utilisateur_id)
+        params.require(:bug_repport).permit(:date, :nom, :description, :utilisateur_id, :status)
     end
 
     def find_bug_repport

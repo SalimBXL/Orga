@@ -25,6 +25,8 @@ en:
       accord: Allowed
       date: Date
       date_fin: End Date
+      description: Description
+      nom: Nom
       remarque: Note
       titre: New absence
       type_absence: Type of absence
@@ -69,6 +71,7 @@ en:
       mises_a_jour: update
       noms: Bugs
       remarques: Notes
+      status: Status
       titre: Bug Repports
       types: Types
       utilisateurs: Users

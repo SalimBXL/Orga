@@ -17,10 +17,10 @@
             <span class = "label label-danger" > DELETE REPPORT
             <%= link_to '<span data-toggle="tooltip" >
                 <i class="material-icons">close</i>'.html_safe, 
-                bug_report_path(@bug_report),
+                bug_repports_path(@bug_repport),
                 method: :delete,
                 remote: true,
-                data: { confirm: "Delete #{@bug_report.date}/#{@bug_report.date_fin}  ?" },
+                data: { confirm: "Delete #{@bug_repport.date}  ?" },
                 class: "btn btn-danger btn-xs"
             %>
             </span>

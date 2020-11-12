@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2020091012140633) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status"
     t.index ["utilisateur_id"], name: "index_bug_repports_on_utilisateur_id"
   end
 

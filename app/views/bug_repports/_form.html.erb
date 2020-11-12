@@ -46,6 +46,22 @@
         <%= form.label I18n.t("absences.new.description") %><br>
         <%= form.text_area :description, size: "50x3" %>
     </p>
+
+    <!-- STATUS -->
+    <%= form.select(:status) do %>
+        <% if current_user.utilisateur.admin %>
+            <% [
+                ["outlined_flag", "Waitting"],
+                ["flag", "Working"],
+                ["sync_problem", "Testing"],
+                ["report_problem", "Problem"],
+                ["check", "Done"]
+                ].each do |l| %>
+                <%= select_option_tag("#{l[1]}", l[0], @bug_repport.status) %>                
+            <% end %>
+        <% end %>
+    <% end %>
+
     <p>
         <%= form.submit class: "btn btn-primary" %>
     </p>
