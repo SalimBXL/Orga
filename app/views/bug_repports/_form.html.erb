@@ -48,8 +48,8 @@
     </p>
 
     <!-- STATUS -->
-    <%= form.select(:status) do %>
-        <% if current_user.utilisateur.admin %>
+    <% if current_user.utilisateur.admin %>
+        <%= form.select(:status) do %>
             <% [
                 ["outlined_flag", "Waitting"],
                 ["flag", "Working"],

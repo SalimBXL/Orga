@@ -1,4 +1,12 @@
-<tr id="bug_repport_<%= bug_repport.id %>">
+<% bg = "default" %>
+<% @status_color.each do |icon, couleur| %>
+    <% if icon == bug_repport.status %>
+        <% bg = couleur %>
+        <% break %>
+    <% end %>
+<% end %>
+
+<tr id="bug_repport_<%= bug_repport.id %>" class="<%= bg %>">
     <td><%= bug_repport.date %></td>
     <td><i class="material-icons"><%= bug_repport.status %></i></td>
     <td><%= bug_repport.utilisateur.prenom_nom %></td>

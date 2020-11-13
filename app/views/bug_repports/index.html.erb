@@ -11,28 +11,37 @@
         </h1>
     </div>
 
-    <table>
-        <tr align="center">
-            <td><h2><span class="label label-default">
-                <i class="material-icons">outlined_flag</i>&nbsp;</span>&nbsp;</H2></td>
-            <td><h2><span class="label label-primary">
-                <i class="material-icons">flag</i></span>&nbsp;</H2></td>
-            <td><h2><span class="label label-info">
-                <i class="material-icons">sync_problem</i></span>&nbsp;</H2></td>
-            <td><h2><span class="label label-danger">
-                <i class="material-icons">report_problem</i></span>&nbsp;</H2></td>
-            <td><h2><span class="label label-success">
-                <i class="material-icons">check</i></span>&nbsp;</H2></td>
-        </tr>
-        <tr align="center">
-            <td>Waitting</td>
-            <td>Working</td>
-            <td>Testing</td>
-            <td>Problem</td>
-            <td>Done</td>
-        </tr>
-    </table>
+    <% @status_color = [
+        ["sync_problem", "info"], 
+        ["outlined_flag", "default"], 
+        ["check", "success"],
+        ["report_problem", "danger"],
+        ["flag", "primary"]
+    ] %>
 
+    <div class="table-responsive">
+        <table class="table">
+            <tr align="center">
+                <td><h2><span class="label label-<%= @status_color[1][1] %>">
+                    <i class="material-icons"><%= @status_color[1][0] %></i>&nbsp;</span>&nbsp;</H2></td>
+                <td><h2><span class="label label-<%= @status_color[4][1] %>">
+                    <i class="material-icons"><%= @status_color[4][0] %></i></span>&nbsp;</H2></td>
+                <td><h2><span class="label label-<%= @status_color[0][1] %>">
+                    <i class="material-icons"><%= @status_color[0][0] %></i></span>&nbsp;</H2></td>
+                <td><h2><span class="label label-<%= @status_color[3][1] %>">
+                    <i class="material-icons"><%= @status_color[3][0] %></i></span>&nbsp;</H2></td>
+                <td><h2><span class="label label-<%= @status_color[2][1] %>">
+                    <i class="material-icons"><%= @status_color[2][0] %></i></span>&nbsp;</H2></td>
+            </tr>
+            <tr align="center">
+                <td>Waitting</td>
+                <td>Working</td>
+                <td>Testing</td>
+                <td>Problem</td>
+                <td>Done</td>
+            </tr>
+        </table>
+    </div>
     <br>
 
     <p>
