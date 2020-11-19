@@ -81,6 +81,19 @@
                     </li>
                 <% end %>
 
+                <!-- BLOG -->
+                <% if user_signed_in? %>
+                    <li>
+                        <%= link_to "<i class='material-icons'
+                            data-toggle='tooltip'
+                            title='#{I18n.t("home.navbar.blog")}'
+                            data-placement='bottom'>
+                            rss_feed
+                            </i>".html_safe,
+                            blog_messages_path
+                        %>
+                    </li>
+                <% end %>
 
                 <!-- LANGUE -->
                 <li class="dropdown">

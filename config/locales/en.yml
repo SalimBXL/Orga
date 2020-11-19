@@ -60,6 +60,17 @@ en:
       quoi: What
       titre: New attributions(s)
       utilisateur: User
+  blog_messages:
+    form:
+      category: Category
+      date: Date
+      service: Service
+      title: Title
+    index:
+      blog: Blog
+      titre: Titre
+    new:
+      titre: Titre
   bug_repports:
     index:
       dates: Dates
@@ -312,6 +323,7 @@ en:
       ajouter: Add Attributions
       aujourdhui: Today
       batchs: Batchs
+      blog: Blog
       bug_repport: Bug repport
       ce_mois: This month
       cette_semaine: This week
@@ -344,6 +356,7 @@ en:
     navbar:
       absences: Absences
       aujourdhui: Today
+      blog: Blog
       ce_mois: This month
       cette_semaine: This Week
       help: Help

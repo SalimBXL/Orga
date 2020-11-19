@@ -1,0 +1,46 @@
+<%= form_with model: @blog_message, local: true do |form| %>
+
+    <% if @blog_message.errors.any? %>
+        <strong>WARNING</strong>
+        <ul>
+            <% @blog_message.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
+
+    <!-- Titre -->
+    <p>
+        <%= form.label I18n.t("blog_messages.new.title") %><br>
+        <%= form.text_field :title %>
+    </p>
+
+    <!-- Service -->
+    <p>
+        <%= form.label I18n.t("blog_messages.new.service") %><br>
+        <%= form.select(:service_id) do %>
+            <%= select_option_tag("", nil, @blog_message.service_id) %>
+            <% if current_user.admin? %>
+                <% services = Service.order(:nom) %>
+            <% else %>
+                <% services = Service.where(id: current_user.utilisateur.service.id) %>
+            <% end %>
+            <% services.find_each do |l| %>
+                <%= select_option_tag(l.nom.capitalize, l.id, @blog_message.service_id) %>
+            <% end %>
+        <% end %>
+    </p>
+
+
+    <!-- Date -->
+    <p>
+        <%= form.label I18n.t("blog_messages.new.date") %><br>
+        <%= form.date_field :date %>
+    </p>
+
+
+    <!-- Submit -->
+    <p>
+        <%= form.submit class: "btn btn-primary" %>
+    </p>
+<% end %>

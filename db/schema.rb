@@ -42,6 +42,28 @@ ActiveRecord::Schema.define(version: 2020091012140633) do
     t.index ["utilisateur_id"], name: "index_ajouts_on_utilisateur_id"
   end
 
+  create_table "blog_categories", force: :cascade do |t|
+    t.string "nom"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "blog_messages", force: :cascade do |t|
+    t.bigint "utilisateur_id"
+    t.bigint "blog_category_id"
+    t.bigint "service_id"
+    t.string "title"
+    t.string "keywords"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "date"
+    t.index ["blog_category_id"], name: "index_blog_messages_on_blog_category_id"
+    t.index ["service_id"], name: "index_blog_messages_on_service_id"
+    t.index ["utilisateur_id"], name: "index_blog_messages_on_utilisateur_id"
+  end
+
   create_table "bug_repports", force: :cascade do |t|
     t.bigint "utilisateur_id"
     t.date "date"
@@ -256,6 +278,9 @@ ActiveRecord::Schema.define(version: 2020091012140633) do
   add_foreign_key "absences", "type_absences"
   add_foreign_key "absences", "utilisateurs"
   add_foreign_key "ajouts", "utilisateurs"
+  add_foreign_key "blog_messages", "blog_categories"
+  add_foreign_key "blog_messages", "services"
+  add_foreign_key "blog_messages", "utilisateurs"
   add_foreign_key "bug_repports", "utilisateurs"
   add_foreign_key "demande_conges", "utilisateurs"
   add_foreign_key "events", "services"

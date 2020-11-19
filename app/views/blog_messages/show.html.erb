@@ -1,0 +1,17 @@
+<h1>
+    <%= @blog_message.title %>
+</h1>
+<p>
+    <strong>Date :</strong> <%= @blog_message.date %>
+</p>
+
+<p>
+    <strong>Service :</strong> <%= @blog_message.service.nom %>
+</p>
+<p>
+    <strong>Article :</strong> <%= @blog_message.description %>
+</p>
+
+<p>
+    <%= link_to " [Edit] ", edit_blog_message_path(@blog_message) %>
+</p>

@@ -105,6 +105,18 @@ Rails.application.routes.draw do
 
 
   ###################
+  #  Blog Messages  #
+  ###################
+  resources :blog_messages, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
+
+
+  #####################
+  #  Blog Categories  #
+  #####################
+  resources :blog_categories, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
+
+
+  ###################
   #   Utilisateurs  #
   ###################
   resources :utilisateurs, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
