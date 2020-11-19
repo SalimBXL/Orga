@@ -1,0 +1,7 @@
+INCLUDES
+employees = Employee.where(status: "active").includes(:company).where(companies: { verified: true })
+
+JOINS
+employees = Employee.where(status: "active").joins(:company).where(companies: { verified: true })
+
+test = Utilisateur.where(admin: "true").includes(:user).where(users: { admin: true })
