@@ -1,0 +1,29 @@
+<tr id="blog_category<%= blog_category.id %>">
+    <td>
+        <%= blog_category.nom %>
+    </td>
+
+    <td>
+        <%= blog_category.description %>
+    </td>
+
+    <td>
+        <% if user_signed_in? && current_user.admin? %>
+            <div class="btn-group">
+                <%= link_to '<span data-toggle="tooltip">
+                    <i class="material-icons">edit</i></span>'.html_safe, 
+                    edit_blog_category_path(blog_category),
+                    class: "btn btn-warning btn-xs" %>
+
+                <%= link_to '<span data-toggle="tooltip" >
+                    <i class="material-icons">close</i>'.html_safe, 
+                    blog_category_path(blog_category),
+                    method: :delete,
+                    remote: true,
+                    data: { confirm: "Delete blog_category #{blog_category.nom} ?" },
+                    class: "btn btn-danger btn-xs" %>
+            </div>
+            <% end %>
+        </div>
+    </td>
+</tr>

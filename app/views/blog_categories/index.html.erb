@@ -1,21 +1,21 @@
-<% session[:page_aide] = "blog_messages" %>
+<% session[:page_aide] = "blog_categories" %>
 
 <div class="page-header">
     <h1>
         <span class="label label-primary">
             <i class="material-icons">rss_feed</i>
-            <%= I18n.t("blog_messages.index.blog").upcase %>
+            <%= I18n.t("blog_categories.index.blog").upcase %>
         </span>
     </h1>
-
-    <div class="container">
-        <%= link_to '<i class="material-icons">category</i><br>Categories '.html_safe, 
-        blog_categories_path,
-        class: "btn btn-info btn-xs" %>
-    </div>
+    <h4>
+        <span class="label label-info">
+            <i class="material-icons">rss_feed</i>
+            <%= I18n.t("blog_categories.index.categories").upcase %>
+        </span>
+    </h4>
 </div>
 
-<% session[:page_aide] = "blog_messages" %>
+<% session[:page_aide] = "blog_categories" %>
 
 
 <div class="container">
@@ -23,19 +23,19 @@
     <p>
         <% if user_signed_in? && (current_user.admin? or current_user.utilisateur.admin) %>
         <%= link_to '<i class="material-icons">add</i> '.html_safe, 
-            new_blog_message_path,
+            new_blog_category_path,
             class: "btn btn-success btn-xs" %>
         <% end %>
     </p>
     
-    <div class="row" id="blog_messages">
-        <%= render 'blog_messages' %>
+    <div class="row" id="blog_categories">
+        <%= render 'blog_categories' %>
     </div>
 
     <p>
         <% if user_signed_in? && (current_user.admin? or current_user.utilisateur.admin) %>
         <%= link_to '<i class="material-icons">add</i> '.html_safe, 
-            new_blog_message_path,
+            new_blog_category_path,
             class: "btn btn-success btn-xs" %>
         <% end %>
     </p>

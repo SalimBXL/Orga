@@ -60,17 +60,33 @@ en:
       quoi: What
       titre: New attributions(s)
       utilisateur: User
+  blog_categories:
+    form:
+      description: Description
+      nom: Name
+    index:
+      blog: Blog
+      categories: Categories
+      titre: Title
+    new:
+      description: Description
+      new_category: New category
+      nom: Name
+      titre: Title
   blog_messages:
     form:
       category: Category
       date: Date
       service: Service
-      title: Title
+      title: Articles
     index:
       blog: Blog
-      titre: Titre
+      titre: Articles
     new:
-      titre: Titre
+      date: Date
+      service: Service
+      title: Title
+      titre: New Article
   bug_repports:
     index:
       dates: Dates

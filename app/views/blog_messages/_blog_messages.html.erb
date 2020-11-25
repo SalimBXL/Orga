@@ -3,14 +3,7 @@
         <%= paginate @blog_messages, remote: true %>
     </p>
     
-    <table class="table table-striped">
-        <tr>
-            <th><%= I18n.t("blog_messages.form.date") %></th>            
-            <th><%= I18n.t("blog_messages.form.service") %></th>
-            <th><%= I18n.t("blog_messages.form.category") %></th>
-            <th><%= I18n.t("blog_messages.form.title") %></th>
-            <th></th>
-        </tr>
+    <table class="table">
         <%= render @blog_messages %>
     </table>
 

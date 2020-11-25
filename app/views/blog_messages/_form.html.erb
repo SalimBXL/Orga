@@ -15,6 +15,23 @@
         <%= form.text_field :title %>
     </p>
 
+    <!-- -->
+    <p>
+        <%= form.label I18n.t("blog_message.new.description") %><br>
+        <%= form.text_area :description, cols: 80, rows: 5%>
+    </p>
+
+    <!-- Category -->
+    <p>
+        <%= form.label I18n.t("blog_messages.new.category") %><br>
+        <%= form.select(:blog_category_id) do %>
+            <%= select_option_tag("", nil, @blog_message.blog_category_id) %>
+            <% @categories.each do |l| %>
+                <%= select_option_tag(l.nom.capitalize, l.id, @blog_message.blog_category_id) %>
+            <% end %>
+        <% end %>
+    </p>
+
     <!-- Service -->
     <p>
         <%= form.label I18n.t("blog_messages.new.service") %><br>
@@ -33,9 +50,22 @@
 
 
     <!-- Date -->
+    <% if (@blog_message.date == nil || @blog_message.date == '') %>
+        <% @blog_message.date = Date.today %>
+    <% end %>
+
     <p>
         <%= form.label I18n.t("blog_messages.new.date") %><br>
         <%= form.date_field :date %>
+    </p>
+
+    <!-- Utilisateur -->
+    <% if @blog_message.utilisateur_id == nil %>
+        <% @blog_message.utilisateur_id = current_user.utilisateur.id %>
+    <% end %>
+    <p>
+        <%= form.label I18n.t("blog_messages.new.user") %> : <%= @blog_message.utilisateur_id %><br>
+        <%= form.hidden_field :utilisateur_id %>
     </p>
 
 

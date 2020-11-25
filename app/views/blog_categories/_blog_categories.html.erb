@@ -1,0 +1,18 @@
+<div class="container">
+    <p>
+        <%= paginate @blog_categories, remote: true %>
+    </p>
+    
+    <table class="table table-striped">
+        <tr>
+            <th><%= I18n.t("blog_categories.form.nom") %></th>            
+            <th><%= I18n.t("blog_categories.form.description") %></th>
+            <th></th>
+        </tr>
+        <%= render @blog_categories %>
+    </table>
+
+    <p>
+        <%= paginate @blog_categories, remote: true %>
+    </p>
+</div>

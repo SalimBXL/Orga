@@ -1,6 +1,5 @@
-class BlogMessagesController < ApplicationController
-    before_action :find_message, only: [:show, :edit, :update, :destroy]
-    before_action :find_categories
+class BlogCategoriesController < ApplicationController
+    before_action :find_categories, only: [:show, :edit, :update, :destroy]
 
     #############
     #   INDEX   #
@@ -8,7 +7,7 @@ class BlogMessagesController < ApplicationController
     def index
         # Log action
         log(request.path)
-        @blog_messages = BlogMessage.order(date: :desc).page(params[:page])
+        @blog_categories = BlogCategory.order(:nom).page(params[:page])
     end
 
 
@@ -27,7 +26,7 @@ class BlogMessagesController < ApplicationController
     def new
         # Log action
         log(request.path)
-        @blog_message = BlogMessage.new
+        @blog_category = BlogCategory.new
     end
 
 
@@ -37,10 +36,10 @@ class BlogMessagesController < ApplicationController
     def create
         # Log action
         log(request.path)
-        @blog_message = BlogMessage.create(message_params)
-        if @blog_message.save
-            flash[:notice] = "Article créé avec succès"
-            redirect_to blog_messages_path
+        @blog_category = BlogCategory.create(category_params)
+        if @blog_category.save
+            flash[:notice] = "Catégorie créée avec succès"
+            redirect_to blog_categories_path
         else
             render :new
         end
@@ -52,9 +51,9 @@ class BlogMessagesController < ApplicationController
     def update
         # Log action
         log(request.path, I18n.t("messages.index.log_update"))
-        if @blog_message.update(message_params)
-            flash[:notice] = "Article modifié avec succès"
-            redirect_to blog_messages_path
+        if @blog_category.update(category_params)
+            flash[:notice] = "Catégorie modifiée avec succès"
+            redirect_to blog_categories_path
         else
             redirect_to :edit
         end
@@ -75,22 +74,18 @@ class BlogMessagesController < ApplicationController
     def destroy
         # Log action
         log(request.path, I18n.t("messages.index.log_destroy"))
-        @blog_message.destroy
+        @blog_category.destroy
     end
 
 
     private 
 
-    def message_params
-        params.require(:blog_message).permit(:service_id, :title, :date, :utilisateur_id, :description, :blog_category_id)
-    end
-
-    def find_message
-        @blog_message = BlogMessage.find(params[:id])
+    def category_params
+        params.require(:blog_category).permit(:nom, :description)
     end
 
     def find_categories
-        @categories = BlogCategory.order(:nom)
+        @blog_category = Category.find(params[:id])
     end
 
 

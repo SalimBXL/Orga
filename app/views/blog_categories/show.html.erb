@@ -1,0 +1,10 @@
+<h1>
+    <%= @blog_category.nom %>
+</h1>
+<p>
+    <strong>Description :</strong> <%= @blog_category.description %>
+</p>
+
+<p>
+    <%= link_to " [Edit] ", edit_blog_category_path(@blog_category) %>
+</p>

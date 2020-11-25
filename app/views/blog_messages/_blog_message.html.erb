@@ -1,20 +1,22 @@
 <tr id="blog_message_<%= blog_message.id %>">
     <td>
-        <%= blog_message.date %>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong><%= blog_message.title.capitalize %></strong>
+                (<span class="label label-primary"><%= blog_message.service_id %></span>)
+            </div>
+            <div class="panel-body">
+                <p><%= blog_message.description %></p>
+                <p>
+                    Keyword(s) : 
+                    <span class="label label-info"><%= blog_message.blog_category_id %></span>
+                </p>
+            </div>
+            <div class="panel-footer">
+                <h6>Created : <%= blog_message.date %> / Updated : <%= blog_message.date %> / Published : <%= blog_message.date %></h6>
+            </div>
+        </div>
     </td>
-
-    <td>
-        <%= blog_message.service.nom %>
-    </td>
-
-    <td>
-        <%= blog_message.category %>
-    </td>
-
-    <td>
-        <%= blog_message.title %>
-    </td>
-
     <td>
         <% if user_signed_in? && current_user.admin? %>
             <div class="btn-group">
@@ -22,16 +24,14 @@
                     <i class="material-icons">edit</i></span>'.html_safe, 
                     edit_blog_message_path(blog_message),
                     class: "btn btn-warning btn-xs" %>
-
                 <%= link_to '<span data-toggle="tooltip" >
                     <i class="material-icons">close</i>'.html_safe, 
                     blog_message_path(blog_message),
                     method: :delete,
                     remote: true,
-                    data: { confirm: "Delete blog_message #{blog_message.date}/#{blog_message.date_fin} [#{blog_message.service.nom}] ?" },
+                    data: { confirm: "Delete blog_message '#{blog_message.title}' (#{blog_message.date}) [#{blog_message.service_id}] ?" },
                     class: "btn btn-danger btn-xs" %>
             </div>
-            <% end %>
-        </div>
+        <% end %>
     </td>
 </tr>
