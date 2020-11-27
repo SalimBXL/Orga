@@ -28,6 +28,10 @@ class HomeController < ApplicationController
 
         # Charge les dernières connections 
         @last_connects = User.where.not(last_connection: nil).order(last_connection: :desc).limit(5)
+
+        # Charge les trois derniers articles du blog
+        @articles = BlogMessage.order(date: :desc).order(:updated_at).last(3)
+
     end
 
     private 

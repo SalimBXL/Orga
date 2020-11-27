@@ -61,10 +61,7 @@
 </div>
 <div class="row">
     <%= render partial: "admin" if user_signed_in? && current_user.admin %>
-</div>
-
-<div class="row">
-    <!-- Bouton secrétaire -->
+        <!-- Bouton secrétaire -->
     <div class="btn-group">
         <a href="<%= secr_pet_path %>" class="btn btn-info" role="button">
             <i class="material-icons">PET</i><br>
@@ -87,7 +84,17 @@
             <%= I18n.t("home.index.blog").upcase %>
         </a>
     </div>
+</div>
 
+<br>
 
-
+<!-- BARRE BLOG ARTICLES -->
+<div class="row">
+    <div class="col-sm-3"><h4>Blog's Last Articles : </h4></div>
+    <% @articles.each do |article| %>
+        <div class="well well-sm col-sm-3">
+            <strong><%= article.title.capitalize %></strong><br>
+            <%= article.description.truncate(25) %>
+        </div>
+    <% end %>
 </div>
