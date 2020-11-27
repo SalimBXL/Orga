@@ -52,6 +52,34 @@ class BlogMessagesController < ApplicationController
             @blog_categories[s] = categories[s]
         end
 
+        ## CLASSES
+        classes = Hash.new
+        Classe.all.each do |s|
+            classes[s.id] = s.nom
+        end
+        blog_classes = Array.new
+        @blog_messages.each do |u|
+            blog_classes << u.classe
+        end
+        @blog_classes = Hash.new
+        blog_classes.each do |s|
+            @blog_classes[s] = classes[s]
+        end
+
+        ## GROUPES
+        groupes = Hash.new
+        Groupe.all.each do |s|
+            groupes[s.id] = s.nom
+        end
+        blog_groupes = Array.new
+        @blog_messages.each do |u|
+            blog_groupes << u.groupe
+        end
+        @blog_groupes = Hash.new
+        blog_groupes.each do |s|
+            @blog_groupes[s] = groupes[s]
+        end
+
     end
 
 
@@ -125,7 +153,7 @@ class BlogMessagesController < ApplicationController
     private 
 
     def message_params
-        params.require(:blog_message).permit(:service_id, :title, :date, :utilisateur_id, :description, :blog_category_id)
+        params.require(:blog_message).permit(:service_id, :title, :date, :utilisateur_id, :description, :blog_category_id, :groupe, :classe)
     end
 
     def find_message

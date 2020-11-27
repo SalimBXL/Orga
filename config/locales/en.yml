@@ -73,6 +73,10 @@ en:
       new_category: New category
       nom: Name
       titre: Title
+  blog_message:
+    new:
+      description: Description
+      optional_fields: Optional fields
   blog_messages:
     form:
       category: Category
@@ -83,10 +87,14 @@ en:
       blog: Blog
       titre: Articles
     new:
+      category: Category
+      classe: Classe
       date: Date
+      groupe: Groupe
       service: Service
       title: Title
       titre: New Article
+      user: User
   bug_repports:
     index:
       dates: Dates

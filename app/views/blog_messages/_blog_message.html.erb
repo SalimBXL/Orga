@@ -4,18 +4,18 @@
             <div class="panel-heading">
                 <strong><%= blog_message.title.capitalize %></strong>
                 - <i>[<%= @blog_utilisateurs[blog_message.utilisateur_id] %>]</i>
-                <span class="label label-primary"><%= @blog_services[blog_message.service_id] %></span>
+                <span class="label label-info"><%= @blog_categories[blog_message.blog_category_id] %></span>
                 
             </div>
             <div class="panel-body">
                 <p><%= blog_message.description %></p>
                 <p>
                     Keyword(s) : 
-                    <span class="label label-info"><%= @blog_categories[blog_message.blog_category_id] %></span>
+                    <span class="label label-primary"><%= @blog_services[blog_message.service_id] %></span>
+                    <span class="label label-default"><%= @blog_classes[blog_message.classe] %></span>
+                    <span class="label label-default"><%= @blog_groupes[blog_message.groupe] %></span>
                 </p>
-            </div>
-            <div class="panel-footer">
-                <h6>Created : <%= blog_message.date %> / Updated : <%= blog_message.date %> / Published : <%= blog_message.date %></h6>
+                <p><h6>(Created : <%= blog_message.date %> / Updated : <%= blog_message.date %> / Published : <%= blog_message.date %>)</h6></p>
             </div>
         </div>
     </td>

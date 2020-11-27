@@ -7,12 +7,6 @@
             <%= I18n.t("blog_messages.index.blog").upcase %>
         </span>
     </h1>
-
-    <div class="container">
-        <%= link_to '<i class="material-icons">category</i><br>Categories '.html_safe, 
-        blog_categories_path,
-        class: "btn btn-info btn-xs" %>
-    </div>
 </div>
 
 <% session[:page_aide] = "blog_messages" %>
@@ -22,6 +16,9 @@
 
     <p>
         <% if user_signed_in? && (current_user.admin? or current_user.utilisateur.admin) %>
+            <%= link_to '<i class="material-icons">category</i><br>Categories '.html_safe, 
+            blog_categories_path,
+            class: "btn btn-info btn-xs" %>
         <%= link_to '<i class="material-icons">add</i> '.html_safe, 
             new_blog_message_path,
             class: "btn btn-success btn-xs" %>

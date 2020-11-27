@@ -11,19 +11,19 @@
 
     <!-- Titre -->
     <p>
-        <%= form.label I18n.t("blog_messages.new.title") %><br>
+        <%= form.label I18n.t("blog_messages.new.title") %>*<br>
         <%= form.text_field :title %>
     </p>
 
-    <!-- -->
+    <!-- Description -->
     <p>
-        <%= form.label I18n.t("blog_message.new.description") %><br>
+        <%= form.label I18n.t("blog_message.new.description") %>*<br>
         <%= form.text_area :description, cols: 80, rows: 5%>
     </p>
 
     <!-- Category -->
     <p>
-        <%= form.label I18n.t("blog_messages.new.category") %><br>
+        <%= form.label I18n.t("blog_messages.new.category") %>*
         <%= form.select(:blog_category_id) do %>
             <%= select_option_tag("", nil, @blog_message.blog_category_id) %>
             <% @categories.each do |l| %>
@@ -32,30 +32,12 @@
         <% end %>
     </p>
 
-    <!-- Service -->
-    <p>
-        <%= form.label I18n.t("blog_messages.new.service") %><br>
-        <%= form.select(:service_id) do %>
-            <%= select_option_tag("", nil, @blog_message.service_id) %>
-            <% if current_user.admin? %>
-                <% services = Service.order(:nom) %>
-            <% else %>
-                <% services = Service.where(id: current_user.utilisateur.service.id) %>
-            <% end %>
-            <% services.find_each do |l| %>
-                <%= select_option_tag(l.nom.capitalize, l.id, @blog_message.service_id) %>
-            <% end %>
-        <% end %>
-    </p>
-
-
     <!-- Date -->
     <% if (@blog_message.date == nil || @blog_message.date == '') %>
         <% @blog_message.date = Date.today %>
     <% end %>
-
     <p>
-        <%= form.label I18n.t("blog_messages.new.date") %><br>
+        <%= form.label I18n.t("blog_messages.new.date") %>* 
         <%= form.date_field :date %>
     </p>
 
@@ -67,6 +49,60 @@
         <%= form.label I18n.t("blog_messages.new.user") %> : <%= @blog_message.utilisateur_id %><br>
         <%= form.hidden_field :utilisateur_id %>
     </p>
+
+    <table>
+    <tr>
+    <td>
+        <p><strong><%= I18n.t("blog_message.new.optional_fields") %> : </strong></p>
+    </td>
+    <td>&nbsp;&nbsp;&nbsp;</td>
+    <td>
+        <!-- Service -->
+        <p>
+            <%= form.label I18n.t("blog_messages.new.service") %>
+            <%= form.select(:service_id) do %>
+                <%= select_option_tag("", nil, @blog_message.service_id) %>
+                <% if current_user.admin? %>
+                    <% services = Service.order(:nom) %>
+                <% else %>
+                    <% services = Service.where(id: current_user.utilisateur.service.id) %>
+                <% end %>
+                <% services.find_each do |l| %>
+                    <%= select_option_tag(l.nom.capitalize, l.id, @blog_message.service_id) %>
+                <% end %>
+            <% end %>
+        </p>
+    </td>
+    <td>&nbsp;&nbsp;&nbsp;</td>
+    <td>
+        <!-- Classe -->
+        <p>
+            <%= form.label I18n.t("blog_messages.new.classe") %>
+            <%= form.select(:classe) do %>
+                <%= select_option_tag("", nil, @blog_message.classe) %>
+                <% classes = Classe.order(:nom) %>
+                <% classes.find_each do |l| %>
+                    <%= select_option_tag(l.nom.capitalize, l.id, @blog_message.classe) %>
+                <% end %>
+            <% end %>
+        </p>
+    </td>
+    <td>&nbsp;&nbsp;&nbsp;</td>
+    <td>
+        <!-- Groupe -->
+        <p>
+            <%= form.label I18n.t("blog_messages.new.groupe") %>
+            <%= form.select(:groupe) do %>
+                <%= select_option_tag("", nil, @blog_message.groupe) %>
+                <% groupes = Groupe.order(:nom) %>
+                <% groupes.find_each do |l| %>
+                    <%= select_option_tag(l.nom.capitalize, l.id, @blog_message.groupe) %>
+                <% end %>
+            <% end %>
+        </p>
+    </td>
+    </tr>
+    </table>
 
 
     <!-- Submit -->
