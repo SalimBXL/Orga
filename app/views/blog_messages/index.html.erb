@@ -19,10 +19,11 @@
             <%= link_to '<i class="material-icons">category</i><br>Categories '.html_safe, 
             blog_categories_path,
             class: "btn btn-info btn-xs" %>
+        <% end %>
+
         <%= link_to '<i class="material-icons">add</i> '.html_safe, 
             new_blog_message_path,
             class: "btn btn-success btn-xs" %>
-        <% end %>
     </p>
     
     <div class="row" id="blog_messages">
@@ -30,10 +31,8 @@
     </div>
 
     <p>
-        <% if user_signed_in? && (current_user.admin? or current_user.utilisateur.admin) %>
         <%= link_to '<i class="material-icons">add</i> '.html_safe, 
             new_blog_message_path,
             class: "btn btn-success btn-xs" %>
-        <% end %>
     </p>
 </div>
