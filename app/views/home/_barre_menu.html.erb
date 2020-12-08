@@ -85,17 +85,3 @@
         </a>
     </div>
 </div>
-
-<br>
-
-<!-- BARRE BLOG ARTICLES -->
-<div class="row">
-    <div class="col-sm-3"><h4>Blog's Last Articles : </h4></div>
-    <% @articles.each do |article| %>
-        <div class="well well-sm col-sm-3">
-            <strong><%= article.title.capitalize %></strong><br>
-            <%= article.description.truncate(25) %>&nbsp;&nbsp;&nbsp;
-            <a href="<%= blog_message_path(article) %>" class="btn btn-default btn-xs" role="button">Read</a>
-        </div>
-    <% end %>
-</div>
