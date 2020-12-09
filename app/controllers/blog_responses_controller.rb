@@ -24,7 +24,7 @@ class BlogResponsesController < ApplicationController
         @blog_response = BlogResponse.create(message_params)
         if @blog_response.save
             flash[:notice] = "Réponse créée avec succès"
-            redirect_to blog_messages_path
+            redirect_to blog_message_path(message_params[:blog_message_id])
         else
             render :new
         end
