@@ -23,7 +23,10 @@
                     data: { confirm: "Delete blog_category #{blog_category.nom} ?" },
                     class: "btn btn-danger btn-xs" %>
             </div>
-            <% end %>
-        </div>
+        <% end %>
+        <%= link_to '<span data-toggle="tooltip" title="See Articles...">
+                    <i class="material-icons">read_more</i></span>'.html_safe, 
+                    blog_messages_path(blog_category_id: blog_category),
+                    class: "btn btn-success btn-xs" %>
     </td>
 </tr>

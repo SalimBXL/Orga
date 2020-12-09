@@ -4,10 +4,8 @@
 
             <div class="panel-heading">
                 <strong><%= blog_message.title.capitalize %></strong>
-                - <i>[<%= @blog_utilisateurs[blog_message.utilisateur_id] %>]</i>
-                <span class="label label-info"><%= @blog_categories[blog_message.blog_category_id] %></span>
-
-                
+                - <i>[<a href="<%= blog_messages_path(utilisateur_id: blog_message.utilisateur_id) %>" class="btn btn-link btn-xs" role="button"><%= @blog_utilisateurs[blog_message.utilisateur_id] %></a>]</i>
+                - <a href="<%= blog_messages_path(blog_category_id: blog_message.blog_category_id) %>" class="btn btn-info btn-xs" role="button"><%= @blog_categories[blog_message.blog_category_id] %></a>
             </div>
 
             <div class="panel-body">
@@ -15,9 +13,19 @@
                 <% if @blog_services[blog_message.service_id] or @blog_classes[blog_message.classe] or @blog_groupes[blog_message.groupe] %>
                     <p>
                         Keyword(s) : 
-                        <span class="label label-primary"><%= @blog_services[blog_message.service_id] %></span>
-                        <span class="label label-default"><%= @blog_classes[blog_message.classe] %></span>
-                        <span class="label label-default"><%= @blog_groupes[blog_message.groupe] %></span>
+
+                        <% if @blog_services[blog_message.service_id] %>
+                            <a href="<%= blog_messages_path(service_id: blog_message.service_id) %>" class="btn btn-primary btn-xs" role="button"><%= @blog_services[blog_message.service_id] %></a>
+                        <% end %>
+                        
+                        <% if @blog_classes[blog_message.classe] %>
+                            <a href="<%= blog_messages_path(classe: blog_message.classe) %>" class="btn btn-default btn-xs" role="button"><%= @blog_classes[blog_message.classe] %></a>
+                        <% end %>
+
+                        <% if @blog_groupes[blog_message.groupe] %>
+                            <a href="<%= blog_messages_path(groupe: blog_message.groupe) %>" class="btn btn-default btn-xs" role="button"><%= @blog_groupes[blog_message.groupe] %></a>
+                        <% end %>
+                        
                     </p>
                 <% end %>
                 <p><%= blog_message.description.truncate(80) %></p>
