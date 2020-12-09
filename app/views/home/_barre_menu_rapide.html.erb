@@ -1,0 +1,31 @@
+<div class="row">
+    <!-- <div class="btn-group"> -->
+
+        <!-- SUPER USER -->
+        <a href="<%= not_yet_validated_absences_path %>" class="btn btn-success" role="button">
+                <i class="material-icons">healing</i><br>
+                <%= I18n.t("home.index.waiting") %>
+            </a>
+        <a href="<%= utilisateurs_path %>" class="btn btn-primary" role="button">
+                <i class="material-icons">group</i><br>
+                <%= I18n.t("home.index.utilisateurs") %>
+            </a>
+        <a href="<%= ajouts_path %>" class="btn btn-warning" role="button">
+                <i class="material-icons">playlist_add</i><br>
+                <%= I18n.t("home.index.batchs") %>
+            </a>
+        <a href="<%= grille_path %>" class="btn btn-warning" role="button">
+                <i class="material-icons">healing</i><br>
+                <%= I18n.t("home.index.absences") %>
+            </a>
+        <a href="<%= bug_repports_path %>" class="btn btn-info" role="button">
+                <i class="material-icons">bug_report</i><br>
+                <%= I18n.t("home.index.bug_repport") %>
+            </a>
+        <a href="<%= blog_messages_path %>" class="btn btn-info" role="button">
+                <i class="material-icons">rss_feed</i><br>
+                <%= I18n.t("home.index.blog").upcase %>
+            </a>
+
+    <!-- </div> -->
+</div>
