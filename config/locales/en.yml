@@ -95,6 +95,34 @@ en:
       title: Title
       titre: New Article
       user: User
+    show:
+      article: Article
+      back_to_articles: Back to articles
+      category: Category
+      classe: Classe
+      created_at: Created at
+      dates_and_keywords: Dates and keywords
+      description: Description
+      edit_article: Edit article
+      groupe: Groupe
+      published_at: Published at
+      respond: Respond
+      responses: Responses
+      service: Service
+      title: Title
+      updated_at: Updated at
+      user: User
+  blog_response:
+    new:
+      description: Description
+      message_id: Message
+      user: User
+  blog_responses:
+    index:
+      titre: Titre
+    new:
+      titre: New response
+      user: User
   bug_repports:
     index:
       dates: Dates

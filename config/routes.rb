@@ -108,6 +108,7 @@ Rails.application.routes.draw do
   #  Blog Messages  #
   ###################
   resources :blog_messages, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
+  resources :blog_responses, only: [ :new, :edit, :create, :update, :destroy ]
 
 
   #####################

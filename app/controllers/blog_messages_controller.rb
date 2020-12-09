@@ -1,6 +1,11 @@
 class BlogMessagesController < ApplicationController
     before_action :find_message, only: [:show, :edit, :update, :destroy]
+    before_action :find_classes
     before_action :find_categories
+    before_action :find_groupes
+    before_action :find_services
+    before_action :find_utilisateurs
+    
 
     #############
     #   INDEX   #
@@ -9,77 +14,6 @@ class BlogMessagesController < ApplicationController
         # Log action
         log(request.path)
         @blog_messages = BlogMessage.order(date: :desc).page(params[:page])
-
-        ## UTILISATEURS
-        utilisateurs = Hash.new
-        Utilisateur.all.each do |u|
-            utilisateurs[u.id] = u.prenom_nom
-        end
-        blog_users = Array.new
-        @blog_messages.each do |u|
-            blog_users << u.utilisateur_id
-        end
-        @blog_utilisateurs = Hash.new
-        blog_users.each do |u|
-            @blog_utilisateurs[u] = utilisateurs[u]
-        end
-
-        ## SERVICES
-        services = Hash.new
-        Service.all.each do |s|
-            services[s.id] = s.nom
-        end
-        blog_services = Array.new
-        @blog_messages.each do |u|
-            blog_services << u.service_id
-        end
-        @blog_services = Hash.new
-        blog_services.each do |s|
-            @blog_services[s] = services[s]
-        end
-
-        ## CAREGORIES
-        categories = Hash.new
-        BlogCategory.all.each do |s|
-            categories[s.id] = s.nom
-        end
-        blog_categories = Array.new
-        @blog_messages.each do |u|
-            blog_categories << u.blog_category_id
-        end
-        @blog_categories = Hash.new
-        blog_categories.each do |s|
-            @blog_categories[s] = categories[s]
-        end
-
-        ## CLASSES
-        classes = Hash.new
-        Classe.all.each do |s|
-            classes[s.id] = s.nom
-        end
-        blog_classes = Array.new
-        @blog_messages.each do |u|
-            blog_classes << u.classe
-        end
-        @blog_classes = Hash.new
-        blog_classes.each do |s|
-            @blog_classes[s] = classes[s]
-        end
-
-        ## GROUPES
-        groupes = Hash.new
-        Groupe.all.each do |s|
-            groupes[s.id] = s.nom
-        end
-        blog_groupes = Array.new
-        @blog_messages.each do |u|
-            blog_groupes << u.groupe
-        end
-        @blog_groupes = Hash.new
-        blog_groupes.each do |s|
-            @blog_groupes[s] = groupes[s]
-        end
-
     end
 
 
@@ -89,6 +23,7 @@ class BlogMessagesController < ApplicationController
     def show
         # Log action
         log(request.path)
+        @responses = BlogResponse.where(blog_message_id: @blog_message.id)
     end
 
 
@@ -162,7 +97,38 @@ class BlogMessagesController < ApplicationController
 
     def find_categories
         @categories = BlogCategory.order(:nom)
+        @blog_categories = Hash.new
+        @categories.each do |s|
+            @blog_categories[s.id] = s.nom
+        end
     end
 
+    def find_classes
+        @blog_classes = Hash.new
+        Classe.all.each do |s|
+            @blog_classes[s.id] = s.nom
+        end
+    end
+
+    def find_groupes
+        @blog_groupes = Hash.new
+        Groupe.all.each do |s|
+            @blog_groupes[s.id] = s.nom
+        end
+    end
+
+    def find_services
+        @blog_services = Hash.new
+        Service.all.each do |s|
+            @blog_services[s.id] = s.nom
+        end
+    end
+
+    def find_utilisateurs
+        @blog_utilisateurs = Hash.new
+        Utilisateur.all.each do |s|
+            @blog_utilisateurs[s.id] = s.prenom_nom
+        end
+    end
 
 end

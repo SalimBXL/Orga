@@ -1,0 +1,23 @@
+<div class="page-header">
+<h1>
+    <span class="label label-primary">
+        <i class="material-icons">rss_feed</i>
+        <%= I18n.t("blog_messages.index.blog").upcase %>
+    </span>
+</h1>
+</div>
+<div class="container">
+
+    <!-- Message -->
+    <blockquote>
+        <%= @message.description %>
+    </blockquote>
+
+    <h3>
+        <span class="label label-info">
+            <%= I18n.t("blog_responses.new.titre").capitalize %>
+        </span>
+    </h3>
+
+    <%= render "form" %>
+</div>

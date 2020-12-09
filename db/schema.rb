@@ -66,6 +66,16 @@ ActiveRecord::Schema.define(version: 2020091012140633) do
     t.index ["utilisateur_id"], name: "index_blog_messages_on_utilisateur_id"
   end
 
+  create_table "blog_responses", force: :cascade do |t|
+    t.bigint "utilisateur_id"
+    t.bigint "blog_message_id"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["blog_message_id"], name: "index_blog_responses_on_blog_message_id"
+    t.index ["utilisateur_id"], name: "index_blog_responses_on_utilisateur_id"
+  end
+
   create_table "bug_repports", force: :cascade do |t|
     t.bigint "utilisateur_id"
     t.date "date"
@@ -283,6 +293,8 @@ ActiveRecord::Schema.define(version: 2020091012140633) do
   add_foreign_key "blog_messages", "blog_categories"
   add_foreign_key "blog_messages", "services"
   add_foreign_key "blog_messages", "utilisateurs"
+  add_foreign_key "blog_responses", "blog_messages"
+  add_foreign_key "blog_responses", "utilisateurs"
   add_foreign_key "bug_repports", "utilisateurs"
   add_foreign_key "demande_conges", "utilisateurs"
   add_foreign_key "events", "services"

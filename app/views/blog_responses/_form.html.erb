@@ -1,0 +1,38 @@
+<%= form_with model: @blog_response, local: true do |form| %>
+
+    <% if @blog_response.errors.any? %>
+        <strong>WARNING</strong>
+        <ul>
+            <% @blog_response.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
+
+
+    <!-- Description -->
+    <p>
+        <%= form.label I18n.t("blog_response.new.description") %>*<br>
+        <%= form.text_area :description, cols: 80, rows: 5%>
+    </p>
+
+    <!-- Utilisateur -->
+    <% if @blog_response.utilisateur_id == nil %>
+        <% @blog_response.utilisateur_id = current_user.utilisateur.id %>
+    <% end %>
+    <p>
+        <%= form.label I18n.t("blog_response.new.user") %> : <%= @blog_response.utilisateur_id %><br>
+        <%= form.hidden_field :utilisateur_id %>
+    </p>
+
+    <!-- Blog message ID -->
+    <p>
+        <%= form.label I18n.t("blog_response.new.message_id") %> : <%= @blog_response.blog_message_id %><br>
+        <%= form.hidden_field :blog_message_id %>
+    </p>
+
+    <!-- Submit -->
+    <p>
+        <%= form.submit class: "btn btn-primary" %>
+    </p>
+<% end %>

@@ -1,27 +1,36 @@
 <tr id="blog_message_<%= blog_message.id %>">
     <td>
         <div class="panel panel-default">
+
             <div class="panel-heading">
                 <strong><%= blog_message.title.capitalize %></strong>
                 - <i>[<%= @blog_utilisateurs[blog_message.utilisateur_id] %>]</i>
                 <span class="label label-info"><%= @blog_categories[blog_message.blog_category_id] %></span>
+
                 
             </div>
+
             <div class="panel-body">
-                <p><%= blog_message.description %></p>
-                <p>
-                    Keyword(s) : 
-                    <span class="label label-primary"><%= @blog_services[blog_message.service_id] %></span>
-                    <span class="label label-default"><%= @blog_classes[blog_message.classe] %></span>
-                    <span class="label label-default"><%= @blog_groupes[blog_message.groupe] %></span>
-                </p>
                 <p><h6>(Created : <%= blog_message.date %> / Updated : <%= blog_message.date %> / Published : <%= blog_message.date %>)</h6></p>
+                <% if @blog_services[blog_message.service_id] or @blog_classes[blog_message.classe] or @blog_groupes[blog_message.groupe] %>
+                    <p>
+                        Keyword(s) : 
+                        <span class="label label-primary"><%= @blog_services[blog_message.service_id] %></span>
+                        <span class="label label-default"><%= @blog_classes[blog_message.classe] %></span>
+                        <span class="label label-default"><%= @blog_groupes[blog_message.groupe] %></span>
+                    </p>
+                <% end %>
+                <p><%= blog_message.description.truncate(80) %></p>
             </div>
         </div>
     </td>
     <td>
-        <% if user_signed_in? && (current_user.admin? || current_user.utilisateur.id == blog_message.utilisateur_id) %>
-            <div class="btn-group">
+        <div class="btn-group">
+            <%= link_to '<span data-toggle="tooltip">
+                    <i class="material-icons">import_contacts</i></span>'.html_safe, 
+                    blog_message_path(blog_message),
+                    class: "btn btn-success btn-xs" %>
+            <% if user_signed_in? && (current_user.admin? || current_user.utilisateur.id == blog_message.utilisateur_id) %>
                 <%= link_to '<span data-toggle="tooltip">
                     <i class="material-icons">edit</i></span>'.html_safe, 
                     edit_blog_message_path(blog_message),
@@ -33,7 +42,8 @@
                     remote: true,
                     data: { confirm: "Delete blog_message '#{blog_message.title}' (#{blog_message.date}) [#{blog_message.service_id}] ?" },
                     class: "btn btn-danger btn-xs" %>
-            </div>
-        <% end %>
+            <% end %>
+        </div>
+
     </td>
 </tr>
