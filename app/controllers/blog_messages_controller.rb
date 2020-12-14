@@ -19,6 +19,7 @@ class BlogMessagesController < ApplicationController
         @blog_messages = BlogMessage.where(utilisateur_id: params[:utilisateur_id]).order(date: :desc).page(params[:page]) if params[:utilisateur_id]
         @blog_messages = BlogMessage.where(classe: params[:classe]).order(date: :desc).page(params[:page]) if params[:classe]
         @blog_messages = BlogMessage.where(groupe: params[:groupe]).order(date: :desc).page(params[:page]) if params[:groupe]
+        @blog_messages = BlogMessage.where(logbook: true).order(date: :desc).page(params[:page]) if params[:logbook]
         @blog_messages = BlogMessage.order(date: :desc).page(params[:page]) if @blog_messages.nil?
     end
 
@@ -94,7 +95,7 @@ class BlogMessagesController < ApplicationController
     private 
 
     def message_params
-        params.require(:blog_message).permit(:service_id, :title, :date, :utilisateur_id, :description, :blog_category_id, :groupe, :classe)
+        params.require(:blog_message).permit(:service_id, :title, :date, :utilisateur_id, :description, :blog_category_id, :groupe, :classe, :logbook)
     end
 
     def find_message

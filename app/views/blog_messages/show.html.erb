@@ -1,5 +1,11 @@
 <div class="container">
-    <h1><span class="label label-primary"><%= @blog_message.title.capitalize %> </span></h1>
+    <h1>
+        <span class="label label-primary"><%= @blog_message.title.capitalize %> </span>
+        <% if @blog_message.logbook %>
+            &nbsp;&nbsp;&nbsp;
+            <span class="label label-danger material-icons">local_library</span>
+        <% end %>
+    </h1>
     <strong><i>[<%= @blog_utilisateurs[@blog_message.utilisateur_id] %>]</i></strong>
     <hr>
 

@@ -1,10 +1,12 @@
 <tr id="blog_message_<%= blog_message.id %>">
     <td>
 
+        <!-- >
         <% if blog_message.date != @last_date %>
             <% @last_date = blog_message.date %>
             <H3><%= blog_message.date %></H3>
         <% end %>
+        -->
 
         <% nbr_reponses = BlogResponse.where(blog_message_id: blog_message.id).size %>
 
@@ -16,6 +18,14 @@
                 - <a href="<%= blog_messages_path(blog_category_id: blog_message.blog_category_id) %>" class="btn btn-info btn-xs" role="button"><%= @blog_categories[blog_message.blog_category_id] %></a>
                 <% if nbr_reponses and nbr_reponses > 0 %>
                     - <span class="badge"><%= pluralize(nbr_reponses, 'response') %></span>
+                <% end %>
+
+                <% if blog_message.logbook %>
+                    <a href="<%= blog_messages_path(logbook: true) %>" 
+                        class="btn btn-danger btn-xs " role="button"
+                        data-toggle="tooltip" title="LogBook">
+                        <span class="material-icons">local_library</span>
+                    </a>
                 <% end %>
             </div>
 

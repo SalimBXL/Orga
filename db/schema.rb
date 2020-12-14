@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2020091012140633) do
     t.datetime "date"
     t.integer "groupe"
     t.integer "classe"
+    t.boolean "logbook"
     t.index ["blog_category_id"], name: "index_blog_messages_on_blog_category_id"
     t.index ["service_id"], name: "index_blog_messages_on_service_id"
     t.index ["utilisateur_id"], name: "index_blog_messages_on_utilisateur_id"
