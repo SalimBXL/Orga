@@ -394,7 +394,7 @@ class JoursController < ApplicationController
     private     
 
     def jour_params
-        params.require(:jour).permit(:date, :utilisateur_id, :am_pm, :service_id, :edit_mode, :new_day_mode)        
+        params.require(:jour).permit(:date, :utilisateur_id, :am_pm, :service_id, :edit_mode, :new_day_mode, :note)
     end
 
     def find_jour

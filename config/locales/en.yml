@@ -91,6 +91,7 @@ en:
       classe: Classe
       date: Date
       groupe: Groupe
+      logbook: Logbook
       service: Service
       title: Title
       titre: New Article
@@ -431,6 +432,7 @@ en:
       log_destroy: destroy
       log_edit: edit
       log_update: update
+      note: Note
       semaine: Week
       service: Service
       titre: Days

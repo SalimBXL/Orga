@@ -31,11 +31,16 @@
     <div class="panel-footer">
          <% if @absence[utilisateur] %>
             <% unless @absence[utilisateur].accord %>
-                <span class="label label-warning">
-                <%= I18n.t("jours.today.not_yet_accorded") %>
-                </span>
+                <p>
+                    <span class="label label-warning">
+                        <%= I18n.t("jours.today.not_yet_accorded") %>
+                    </span>
+                </p>
             <% end %>
          <% end %>
+         <p>
+            
+         </p>
     </div>
 
 
