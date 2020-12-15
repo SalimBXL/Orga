@@ -30,7 +30,7 @@
             </div>
 
             <div class="panel-body">
-                <p><h6>(Created : <%= blog_message.date %> / Updated : <%= blog_message.date %> / Published : <%= blog_message.date %>)</h6></p>
+                <p><h6>(Created : <%= blog_message.date %> / Updated : <%= blog_message.date %> / Published : <a href="<%= blog_messages_path(date: blog_message.date) %>" class="btn btn-link btn-xs" role="button"><%= blog_message.date %></a>)</h6></p>
                 <% if @blog_services[blog_message.service_id] or @blog_classes[blog_message.classe] or @blog_groupes[blog_message.groupe] %>
                     <p>
                         Keyword(s) : 
