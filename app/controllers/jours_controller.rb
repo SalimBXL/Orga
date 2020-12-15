@@ -332,7 +332,21 @@ class JoursController < ApplicationController
                 @jours[utilisateur_jour.service][utilisateur_jour.utilisateur] ||= Hash.new
                 dd = utilisateur_jour.date.to_s
                 @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd] ||= Hash.new
-                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = WorkingList.for(utilisateur_jour.id).includes(:work)
+
+                #@jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = WorkingList.for(utilisateur_jour.id).includes(:work)
+                WorkingList.for(utilisateur_jour.id).includes(:work).each do  |w|
+                    if w.work.early_value 
+                        if !@jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm]
+                            @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = w.work.early_value
+                        else
+                            if @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] > w.work.early_value
+                                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = w.work.early_value
+                            end
+                        end
+                    end
+                end
+
+                
             end
         end
 
@@ -354,32 +368,32 @@ class JoursController < ApplicationController
 
         # Charge les Events
         @events = Hash.new
-        nombre_de_jours = (@date2-@date).to_i
-        nombre_de_jours.times do |i|
-            charge_events(@date + i.day)
-        end
+        #nombre_de_jours = (@date2-@date).to_i
+        #nombre_de_jours.times do |i|
+        #    charge_events(@date + i.day)
+        #end
 
         # mode edition ?
-        unless params[:edit_mode]
-            @edit_mode = false
-        else
-            if params[:edit_mode].downcase == 'true'
-                @edit_mode = true
-            else
-                @edit_mode = false
-            end
-        end
+        #unless params[:edit_mode]
+        #    @edit_mode = false
+        #else
+        #    if params[:edit_mode].downcase == 'true'
+        #        @edit_mode = true
+        #    else
+        #        @edit_mode = false
+        #    end
+        #end
 
         # mode new day ?
-        unless params[:new_day_mode]
-            @new_day_mode = false
-        else
-            if params[:new_day_mode].downcase == 'true'
-                @new_day_mode = true
-            else
-                @new_day_mode = false
-            end
-        end
+        #unless params[:new_day_mode]
+        #    @new_day_mode = false
+        #else
+        #    if params[:new_day_mode].downcase == 'true'
+        #        @new_day_mode = true
+        #    else
+        #        @new_day_mode = false
+        #    end
+        #end
 
 
         if user_signed_in? && (current_user.admin? or current_user.utilisateur.admin)
@@ -387,6 +401,8 @@ class JoursController < ApplicationController
             find_classes
             find_works
         end
+
+        @values = ["Early 1", "Early 2", "Regular"]
         
     end
 

@@ -1,6 +1,7 @@
 class WorksController < ApplicationController
     before_action :check_logged_in
     before_action :find_work, only: [:show, :edit, :update, :destroy]
+    before_action :load_early_values, only: [:show, :edit, :index]
 
     #############
     #   INDEX   #
@@ -85,11 +86,15 @@ class WorksController < ApplicationController
     private 
 
     def work_params
-        params.require(:work).permit(:nom, :description, :groupe_id, :classe_id, :service_id, :code, :mark)
+        params.require(:work).permit(:nom, :description, :groupe_id, :classe_id, :service_id, :code, :mark, :early_value)
     end
 
     def find_work
         @work = Work.find(params[:id])
+    end
+
+    def load_early_values
+        @values = ["Early 1", "Early 2", "Regular"]
     end
     
 end

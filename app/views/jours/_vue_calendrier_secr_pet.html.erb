@@ -4,6 +4,7 @@
 
     <!-- AFFICHAGE DU NOM DU SERVICE -->
     <div id = "service-<%= service.id %>"
+        <% @current_service = nil %>
         <% if !@current_service.nil? && @current_service.id != service.id %>
                 class="collapse"
         <% end %>

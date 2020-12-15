@@ -7,10 +7,13 @@
     <% [false, true].each do |ap| %>
         <% unless @jours[service][utilisateur][dd].nil? %>
             <% unless @jours[service][utilisateur][dd][ap].nil? %>
-                <% @jours[service][utilisateur][dd][ap].each do |wl| %>
-                    <% if wl.work.code == "5" %><span class="label label-info"><strong><%= wl.work.code %></strong></span><% end %>
-                    <% if wl.work.code == "QC" %><span class="label label-danger"><strong><%= wl.work.code %></strong></span><% end %>
-                <% end %>
+                <% wl = @jours[service][utilisateur][dd][ap] %>
+                   
+                    
+                    <% if wl == 0 %><span class="label label-info"><strong><%= @values[wl] %></strong></span><% end %>
+                    <% if wl == 1 %><span class="label label-danger"><strong><%= @values[wl] %></strong></span><% end %>
+                    
+                
             <% else %>
                 <!-- TODO -->
             <% end %>
@@ -18,28 +21,7 @@
         <% end %>
     <% end %>
 
-    <!-- Si il existe un job au même jour dans un autre service, écrire une note -->
-        <!--
-            <% @services.each do |autre_service| %>
-                <% if autre_service != service %>
-                    <% if @jours[autre_service] %>
-                        <% if @jours[autre_service][utilisateur] %>
-                            <% if @jours[autre_service][utilisateur][dd] %>
-                                <% [false, true].each do |autre_ap| %>
-                                    <% if @jours[autre_service][utilisateur][dd][autre_ap] %>
-                                        <span title="<%= autre_service.nom %>" class="already_a_job"><i>
-                                        <% i_wl = 0 %>
-                                        [<% @jours[autre_service][utilisateur][dd][autre_ap].each do |autre_wl| %><%= autre_wl.work.code %><%= "&nbsp;".html_safe if i_wl < (@jours[autre_service][utilisateur][dd][autre_ap].count-1) %><% i_wl += 1 %><% end %>]
-                                        </i></span>
-                                    <% end %>
-                                    <br>
-                                <% end %>
-                            <% end %>
-                        <% end %>
-                    <% end %>
-                <% end %>
-            <% end %>
-        -->
+    
 
 
     <% bg = "" %>

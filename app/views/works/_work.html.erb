@@ -7,6 +7,11 @@
             <span class="material-icons">outlined_flag</span>
         <% end %>
     </td>
+    <td>
+        <% if work.early_value and work.early_value != 2 %>
+            <%= @values[work.early_value] %>
+        <% end %>
+    </td>
     <td><%= work.groupe.nom unless work.groupe.nil? %></td>
     <td><%= work.classe.nom unless work.classe.nil? %></td>
     <td><%= work.service.nom unless work.service.nil? %></td>

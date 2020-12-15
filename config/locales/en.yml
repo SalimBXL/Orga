@@ -621,9 +621,11 @@ en:
       classe: Class
       code: Code
       description: Description
+      early_value: Early value
       groupe: Group
       mark: Mark
       nom: Name
+      secretary_info: Secretary info
       service: Service
     index:
       log_edit: edit

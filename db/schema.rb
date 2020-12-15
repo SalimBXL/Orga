@@ -283,6 +283,7 @@ ActiveRecord::Schema.define(version: 2020091012140633) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "mark"
+    t.integer "early_value"
     t.index ["classe_id"], name: "index_works_on_classe_id"
     t.index ["groupe_id"], name: "index_works_on_groupe_id"
     t.index ["service_id"], name: "index_works_on_service_id"

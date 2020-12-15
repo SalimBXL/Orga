@@ -9,72 +9,95 @@
         </ul>
     <% end %>
 
-    <!-- Nom -->
-    <p>
-        <%= form.label I18n.t("works.form.nom") %><br>
-        <%= form.text_field :nom %>
-    </p>
 
-    <!-- Code -->
-    <p>
-        <%= form.label I18n.t("works.form.code") %><br>
-        <%= form.text_field :code %>
-    </p>
+    <div class="row">
+        <div class="col-sm-4">
+            <!-- Nom -->
+            <p>
+                <%= form.label I18n.t("works.form.nom") %><br>
+                <%= form.text_field :nom %>
+            </p>
 
-    <!-- Groupe -->
-    <p>
-        <%= form.label I18n.t("works.form.groupe") %><br>
-        <%= form.select(:groupe_id) do %>
-            <%= select_option_tag("", nil, @work.groupe_id) %>
-            <% Groupe.all.find_each do |l| %>
-                <%= select_option_tag(l.nom.capitalize, l.id, @work.groupe_id) %>
-            <% end %>
-        <% end %>
-    </p>
+            <!-- Code -->
+            <p>
+                <%= form.label I18n.t("works.form.code") %><br>
+                <%= form.text_field :code %>
+            </p>
 
-    <!-- Classe -->
-    <p>
-        <%= form.label I18n.t("works.form.classe") %><br>
-        <%= form.select(:classe_id) do %>
-            <%= select_option_tag("", nil, @work.classe_id) %>
-            <% Classe.all.find_each do |l| %>
-                <%= select_option_tag(l.nom.capitalize, l.id, @work.classe_id) %>
-            <% end %>
-        <% end %>
-    </p>
-
-
-    <!-- SERVICE -->
-    <% if current_user.admin? %>
-        <% services = Service.all %>
-    <% else %>
-        <% services = Service.where(id: current_user.utilisateur.service) %>
-    <% end %>
-    <p>
-        <%= form.label I18n.t("works.form.service") %><br>
-        <%= form.select(:service_id) do %>
-            <%= select_option_tag("", nil, @work.service_id) %>
-            <% services.find_each do |l| %>
-                <%= select_option_tag(l.nom.capitalize, l.id, @work.service_id) %>
-            <% end %>
-        <% end %>
-    </p>
-
-
-    <!-- Description -->
+            <!-- Description -->
     <p>
         <%= form.label I18n.t("works.form.description") %><br>
         <%= form.text_field :description %>
     </p>
+        </div>
+        
+        <div class="col-sm-4">
+            <!-- Groupe -->
+            <p>
+                <%= form.label I18n.t("works.form.groupe") %><br>
+                <%= form.select(:groupe_id) do %>
+                    <%= select_option_tag("", nil, @work.groupe_id) %>
+                    <% Groupe.all.find_each do |l| %>
+                        <%= select_option_tag(l.nom.capitalize, l.id, @work.groupe_id) %>
+                    <% end %>
+                <% end %>
+            </p>
 
+            <!-- Classe -->
+            <p>
+                <%= form.label I18n.t("works.form.classe") %><br>
+                <%= form.select(:classe_id) do %>
+                    <%= select_option_tag("", nil, @work.classe_id) %>
+                    <% Classe.all.find_each do |l| %>
+                        <%= select_option_tag(l.nom.capitalize, l.id, @work.classe_id) %>
+                    <% end %>
+                <% end %>
+            </p>
 
-    <p>
-        <%= form.label I18n.t("works.form.mark") %><br>
-        <%= form.check_box :mark %>
-    </p>
+            <!-- SERVICE -->
+            <% if current_user.admin? %>
+                <% services = Service.all %>
+            <% else %>
+                <% services = Service.where(id: current_user.utilisateur.service) %>
+            <% end %>
+            <p>
+                <%= form.label I18n.t("works.form.service") %><br>
+                <%= form.select(:service_id) do %>
+                    <%= select_option_tag("", nil, @work.service_id) %>
+                    <% services.find_each do |l| %>
+                        <%= select_option_tag(l.nom.capitalize, l.id, @work.service_id) %>
+                    <% end %>
+                <% end %>
+            </p>
+        </div>
+    </div>
 
-    <p>
-        <%= form.submit class: "btn btn-primary" %>
-    </p>
+    <div class="row">
+        <div class="col-sm-4">
+            <p>
+                <%= form.label I18n.t("works.form.mark") %> 
+                <%= form.check_box :mark %>
+            </p>
+        </div>
+
+        <div class="col-sm-4">
+            <!-- 0 -> 5:00 / 1 -> 6:30 / 2 -> 7:30 -->
+            <p>
+                <%= form.label I18n.t("works.form.secretary_info") %><br>
+                <%= form.select(:early_value) do %>
+                    <% @values.each_with_index do |i, l| %>
+                        <% @work.early_value = 2 unless @work.early_value %>
+                        <%= select_option_tag( i, l, @work.early_value) %>
+                    <% end %>
+                <% end %>
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <p><%= form.submit class: "btn btn-primary" %></p>
+        </div>
+    </div>
 
 <% end %>

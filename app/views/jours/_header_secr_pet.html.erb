@@ -52,15 +52,15 @@
             <div class="btn-group">
                 <%= link_to '<span data-toggle="tooltip" title="Previous" >
                                 <i class="material-icons">chevron_left</i></span>'.html_safe, 
-                                month_path(date: (@date+15.days)-1.month), 
+                                secr_pet_path(date: (@date+15.days)-1.month), 
                                 class: "btn btn-success btn-xs" %>
                 <%= link_to '<span data-toggle="tooltip" title="CURRENT" >
                                 <i class="material-icons">adjust</i></span>'.html_safe, 
-                                month_path(date: Date.today), 
+                                secr_pet_path(date: Date.today), 
                                 class: "btn btn-success btn-xs" %>
                 <%= link_to '<span data-toggle="tooltip" title="Next" >
                                 <i class="material-icons">chevron_right</i></span>'.html_safe, 
-                                month_path(date: (@date+15.days)+1.month), 
+                                secr_pet_path(date: (@date+15.days)+1.month), 
                                 class: "btn btn-success btn-xs" %>
             </div>
         </div>

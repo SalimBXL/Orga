@@ -6,4 +6,11 @@ class Work < ApplicationRecord
     validates_associated :working_lists
     validates :nom, :code, presence: true
     validates :code, uniqueness: true
+    before_validation :set_early_value
+
+    private
+
+    def set_early_value
+        self.early_value = 2 unless early_value
+    end
 end
