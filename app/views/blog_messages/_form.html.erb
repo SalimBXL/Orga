@@ -62,11 +62,7 @@
             <%= form.label I18n.t("blog_messages.new.service") %>
             <%= form.select(:service_id) do %>
                 <%= select_option_tag("", nil, @blog_message.service_id) %>
-                <% if current_user.admin? %>
-                    <% services = Service.order(:nom) %>
-                <% else %>
-                    <% services = Service.where(id: current_user.utilisateur.service.id) %>
-                <% end %>
+                <% services = Service.order(:nom) %>
                 <% services.find_each do |l| %>
                     <%= select_option_tag(l.nom.capitalize, l.id, @blog_message.service_id) %>
                 <% end %>
