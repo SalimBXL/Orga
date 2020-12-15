@@ -337,10 +337,11 @@ class JoursController < ApplicationController
                 WorkingList.for(utilisateur_jour.id).includes(:work).each do  |w|
                     if w.work.early_value 
                         if !@jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm]
-                            @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = w.work.early_value
+                            #@jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = w.work.early_value
+                            @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = [w.work.service_id, w.work.early_value]
                         else
-                            if @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] > w.work.early_value
-                                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = w.work.early_value
+                            if @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm][1] > w.work.early_value
+                                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = [w.work.service_id, w.work.early_value]
                             end
                         end
                     end
