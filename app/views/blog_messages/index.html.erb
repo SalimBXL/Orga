@@ -13,19 +13,36 @@
 
 
 <div class="container">
+    <div class="row">
 
-    <p>
-        <% if user_signed_in? && (current_user.admin? or current_user.utilisateur.admin) %>
-            <%= link_to '<i class="material-icons">category</i><br>Categories '.html_safe, 
-            blog_categories_path,
-            class: "btn btn-info btn-xs" %>
-        <% end %>
+        <div class="col-sm-1">
+            <% if user_signed_in? && (current_user.admin? or current_user.utilisateur.admin) %>
+                <%= link_to '<i class="material-icons">category</i><br>Categories '.html_safe, 
+                blog_categories_path,
+                class: "btn btn-info btn-xs" %>
+            <% end %>
+        </div>
 
-        <%= link_to '<i class="material-icons">add</i> '.html_safe, 
-            new_blog_message_path,
-            class: "btn btn-success btn-xs" %>
-    </p>
-    
+        <div class="col-sm-1">
+            <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+                new_blog_message_path,
+                class: "btn btn-success btn-xs" %>
+        </div>
+
+        <form id="search" action="<%= blog_messages_path %>">
+            <div class="input-group">
+                <div class="col-sm-7">
+                    <%= text_field_tag :search, params[:search], id: 'content_search_term',class: 'form-control', placeholder:'Search...' %>
+                </div>
+                <div class="col-sm-1">
+                    <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
+                </div>
+            </div>
+        </form>
+        
+        
+    </div>
+
     <div class="row" id="blog_messages">
         <%= render 'blog_messages' %>
     </div>
