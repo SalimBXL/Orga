@@ -25,7 +25,8 @@
             <div class="col-sm-4">            
                 <%= render partial: "box_day", locals: { 
                         specific_day_jour: @specific_day_jours[service][utilisateur],
-                        utilisateur: utilisateur
+                        utilisateur: utilisateur,
+                        note: @specific_day_jours[service][utilisateur]["notes"]
                     } 
                 %>
             </div>

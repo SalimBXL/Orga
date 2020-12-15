@@ -128,6 +128,8 @@ class JoursController < ApplicationController
             @specific_day_jours[jour.service][jour.utilisateur] ||= Hash.new
             @specific_day_jours[jour.service][jour.utilisateur][jour.am_pm] ||= Array.new
             @specific_day_jours[jour.service][jour.utilisateur][jour.am_pm] = WorkingList.for(jour.id).includes(:work)
+            @specific_day_jours[jour.service][jour.utilisateur]["notes"] ||= Hash.new
+            @specific_day_jours[jour.service][jour.utilisateur]["notes"][jour.am_pm] = jour.note
         end
 
         # Charges les services
@@ -179,6 +181,8 @@ class JoursController < ApplicationController
                 dd = utilisateur_jour.date.to_s
                 @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd] ||= Hash.new
                 @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = WorkingList.for(utilisateur_jour.id).includes(:work)
+                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd]["notes"] ||= Hash.new
+                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd]["notes"][utilisateur_jour.am_pm] = utilisateur_jour.note
             end
         end
 
@@ -250,6 +254,7 @@ class JoursController < ApplicationController
         @absences = Hash.new
         @off = Hash.new
         @specific_day_works = Hash.new
+        @specific_day_note = Hash.new
         @jours = Hash.new
         utilisateurs_jours = Jour.where(numero_semaine: numeroSemainePourDate(@date)).order(:service_id, :utilisateur_id).select([:utilisateur_id, :service_id]).distinct.includes(:utilisateur, :service)
         utilisateurs_jours.each do |utilisateur_jour|
@@ -263,9 +268,11 @@ class JoursController < ApplicationController
 
                 @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][i][false].each do |jour|
                     @specific_day_works[jour] = WorkingList.for(jour).includes(:work)
+                    @specific_day_note[jour] = jour.note
                 end
                 @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][i][true].each do |jour|
                     @specific_day_works[jour] = WorkingList.for(jour).includes(:work)
+                    @specific_day_note[jour] = jour.note
                 end
 
                 abs = Absence.at_for_user(@date.beginning_of_week+i.days, utilisateur_jour.utilisateur)

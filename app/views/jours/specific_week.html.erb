@@ -145,7 +145,10 @@
                                     <% if wl.work.code.downcase == "qc" && i==5 %>
                                         <% cl = "keep_attention" %>
                                     <% end %>
-                                    <span class="label label-<%= label %> <%= cl %>"><%= wl.work.code %></span>
+                                    <span data-toggle="tooltip" title="<%= @specific_day_note[item] %>" class="label label-<%= label %> <%= cl %>"><%= wl.work.code %></span>
+                                <% end %>
+                                <% if @specific_day_note[item] %>
+                                    <span data-toggle="tooltip" title="<%= @specific_day_note[item] %>">(!)</span>
                                 <% end %>
                             <% end %>
                             <br>
@@ -158,7 +161,10 @@
                                     <% if wl.work.code.downcase == "qc" && i==5 %>
                                         <% cl = "keep_attention" %>
                                     <% end %>
-                                    <span class="label label-<%= label %> <%= cl %>"><%= wl.work.code %></span>
+                                    <span data-toggle="tooltip" title="<%= @specific_day_note[item] %>" class="label label-<%= label %> <%= cl %>"><%= wl.work.code %></span>
+                                <% end %>
+                                <% if @specific_day_note[item] %>
+                                    <span data-toggle="tooltip" title="<%= @specific_day_note[item] %>">(!)</span>
                                 <% end %>
                             <% end %>
                             </p>

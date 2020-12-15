@@ -29,6 +29,10 @@
 
     <!-- FOOTER -->
     <div class="panel-footer">
+
+        <p class="text-danger"><%= note[false] if note[false] %></p>
+        <p class="text-danger"><%= note[true] if note[true] %></p>
+
          <% if @absence[utilisateur] %>
             <% unless @absence[utilisateur].accord %>
                 <p>

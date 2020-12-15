@@ -45,6 +45,10 @@
                     </span>
                 <% end %>
 
+                <% if @jours[service][utilisateur][dd]["notes"][ap] %>
+                    <span data-toggle="tooltip" title="<%= @jours[service][utilisateur][dd]["notes"][ap] %>">(!)</span>
+                <% end %>
+
                 <% if user_signed_in? && current_user.admin? && @edit_mode %>
                     </a>
                 <% end %>
