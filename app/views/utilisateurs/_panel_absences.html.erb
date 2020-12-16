@@ -5,7 +5,7 @@
             </span>
         </h3>
         <article>
-            <table class="table-condensed table-bordered">
+            <table class="table table-condensed table-bordered">
             <tr>
                 <th class="tdfixe">Month</th>
                 <% 31.times do |i| %>
@@ -14,27 +14,35 @@
                 <% end %>
             </tr>
             <% 6.times do |i| %>
-                <% mois = (Date.today.beginning_of_month + (i*31).days) %>
+                <% mois = (Date.today.beginning_of_month + (i).months) %>
                 <tr>
                     <td><%= mois.strftime("%b") %></td>
-                    <% (mois.end_of_month.day).times do |i2| %>
+                    <% (Time.days_in_month(mois.month.to_i, mois.year.to_i)).times do |i2| %>
                         <% aj = mois+i2.days %>
-                        <% bg = "" %>
-                        <% if @absences[aj] and @absences[aj].accord %>
-                            <% bg = "conge_ok" %>
-                            <% bg_btn = "success" %>
-                        <% end %>
-                        <% if @absences[aj] and (@absences[aj].accord.nil? or !@absences[aj].accord) %>
-                            <% bg = "conge_wait"  %>
-                            <% bg_btn = "danger" %>
-                        <% end %>
-                        <td class="<%= bg %>">
-                            <% if @absences[aj] %>
-                                <a href="<%= edit_absence_path(@absences[aj]) %>" class="btn btn-<%= bg_btn %> btn-xs">
-                                    <%= @absences[aj].type_absence.code %>
-                                </a>
+                        <!-- Si le jour est en semaine...-->
+                        <% if (1..5).include?(aj.wday) %>
+
+                            <% bg = "" %>
+                            <% if @absences[aj] and @absences[aj].accord %>
+                                <% bg = "conge_ok" %>
+                                <% bg_btn = "success" %>
                             <% end %>
-                        </td>
+                            <% if @absences[aj] and (@absences[aj].accord.nil? or !@absences[aj].accord) %>
+                                <% bg = "conge_wait"  %>
+                                <% bg_btn = "danger" %>
+                            <% end %>
+                            <td class="<%= bg %>">
+                            
+                                <% if @absences[aj] %>
+                                    <a href="<%= edit_absence_path(@absences[aj]) %>" class="btn btn-<%= bg_btn %> btn-xs">
+                                        <%= @absences[aj].type_absence.code %>
+                                    </a>
+                                <% end %>
+                            </td>
+
+                        <% else %>
+                            <td class="weekend">&nbsp;</td>
+                        <% end %>    
                     <% end %>
                 </tr>
             <% end %>
