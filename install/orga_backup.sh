@@ -17,4 +17,4 @@ echo " "
 echo "*********************"
 echo "   BACKUP DATABASE   "
 echo "*********************"
-pg_dump -F t MyDataBase_development > backup.tar
+pg_dump -F t -U orga MyDataBase_development > backup.tar
