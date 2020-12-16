@@ -7,39 +7,62 @@
 </h1>
 </div>
 <div class="container">
+    <h3>
+        <span class="label label-info">
+            <em><%= I18n.t("jours.index.edition") %></em>
+        </span>
+    </h3>
     <div class="row">
         <div class="col-sm-4">
-            <h3>
-                <span class="label label-info">
-                    <em><%= I18n.t("jours.index.edition") %></em>
-                </span>
-            </h3>
             <%= render "form" %>
         </div>
         <div class="col-sm-4">
-            <article>
-                <h4><span class="label label-default">Works</span></h4>
-                <% @jour.working_lists.each do |wkls| %>
-                    <%= wkls.work.code %><br>
-                <% end %>
-            </article>
-        </div>
-    </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Working List</div>
+                <div class="panel-body">
+                    <% @jour.working_lists.each do |wkls| %>
+                        [<%= wkls.work.code %>] &nbsp;&nbsp;
+                    <% end %>
+                </div>
+            </div>
 
-    <div class="row" id="deleteButton">
-        <div class="col-sm-4">
-            <hr>
-            <span class = "label label-danger" > DELETE DAY
-            <%= link_to '<span data-toggle="tooltip" >
-                <i class="material-icons">close</i>'.html_safe, 
-                jour_path(@jour),
-                method: :delete,
-                remote: true,
-                data: { confirm: "Delete #{@jour.date}  ?" },
-                class: "btn btn-danger btn-xs"
-            %>
-            </span>
+            <div class="panel panel-default">
+                <div class="panel-heading">Actions</div>
+                <div class="panel-body">
+
+                    <p class="text-danger">
+                        <%= link_to '<span data-toggle="tooltip" title="Delete this batch">
+                            <i class="material-icons">close</i><br>
+                            Delete this batch'.html_safe, 
+                            jour_path(@jour),
+                            method: :delete,
+                            remote: true,
+                            data: { confirm: "Delete #{@jour.date}  ?" },
+                            class: "btn btn-danger btn-xs" %>
+                        This will delete this batch permanently !
+                    </p>
+
+                    <hr>
+
+                    <% if current_user.admin? %>
+                        <% utilisateurs = Utilisateur.all %>
+                    <% else %>
+                        <% utilisateurs = Utilisateur.where(service: current_user.utilisateur.service) %>
+                    <% end %>
+                    <%= form_with model: @jour, local: true do |form| %>
+                        <p>
+                            Swap with : <%= form.select(:utilisateur_id) do %>
+                                <%= select_option_tag("", nil, @jour.utilisateur_id) %>
+                                <% utilisateurs.find_each do |l| %>
+                                    <%= select_option_tag(l.prenom_nom, l.id, @jour.utilisateur_id) %>                
+                                <% end %>
+                            <% end %>
+                            <%= form.submit "Swap users", class: "btn btn-warning" %>
+                        </p>
+                    <% end %>
+
+                </div>
+            </div>
         </div>
     </div>
-    <hr>
 </div>

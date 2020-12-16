@@ -10,58 +10,75 @@
 <% end %>
 
 
+<!-- Utilisateur -->
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <%= form.label I18n.t("jours.form.utilisateur") %>
+    </div>
+    <div class="panel-body">
+        <% if current_user.admin? %>
+            <% utilisateurs = Utilisateur.all %>
+        <% else %>
+            <% utilisateurs = Utilisateur.where(service: current_user.utilisateur.service) %>
+        <% end %>
+        <p>
+            <%= form.select(:utilisateur_id) do %>
+                <%= select_option_tag("", nil, @jour.utilisateur_id) %>
+                <% utilisateurs.find_each do |l| %>
+                    <%= select_option_tag(l.prenom_nom, l.id, @jour.utilisateur_id) %>                
+                <% end %>
+            <% end %>
+        </p>
 
+        <!-- Service -->
+        <% if current_user.admin? %>
+            <% services = Service.all %>
+        <% else %>
+            <% services = Service.where(id: current_user.utilisateur.service) %>
+        <% end %>
 
-
-    <!-- Dates -->
-    <p>
-        <%= form.label I18n.t("jours.form.date") %><br>
-        <%= form.date_field :date %>
-    </p>
-
-    <!-- Service -->
-    <% if current_user.admin? %>
-        <% services = Service.all %>
-    <% else %>
-        <% services = Service.where(id: current_user.utilisateur.service) %>
-    <% end %>
-    <p>
-        <%= form.label I18n.t("jours.form.service") %><br>
-        <%= form.select(:service_id) do %>
+        <p>
+            <%= form.label I18n.t("jours.form.service") %> : 
+            <%= services.find(@jour.service_id).nom.capitalize %>
+            <!--
+            <%= form.select(:service_id) do %>
             <%= select_option_tag("", nil, @jour.service_id) %>
             <% services.find_each do |l| %>
-                <%= select_option_tag(l.nom.capitalize, l.id, @jour.service_id) %>
+            <%= select_option_tag(l.nom.capitalize, l.id, @jour.service_id) %>
             <% end %>
-        <% end %>
-    </p>
-
-    <!-- Utilisateur -->
-    <% if current_user.admin? %>
-        <% utilisateurs = Utilisateur.all %>
-    <% else %>
-        <% utilisateurs = Utilisateur.where(service: current_user.utilisateur.service) %>
-    <% end %>
-    <p>
-        <%= form.label I18n.t("jours.form.utilisateur") %><br>
-        <%= form.select(:utilisateur_id) do %>
-            <%= select_option_tag("", nil, @jour.utilisateur_id) %>
-            <% utilisateurs.find_each do |l| %>
-                <%= select_option_tag(l.prenom_nom, l.id, @jour.utilisateur_id) %>                
             <% end %>
-        <% end %>
-    </p>
+            -->
+        </p>
+    </div>
+</div>
 
-    <p>
-        <%= form.radio_button :am_pm, false %> <%= I18n.t("jours.form.am") %>
-        <%= form.radio_button :am_pm, true %> <%= I18n.t("jours.form.pm") %>
-    </p>
+<!-- Date and time -->
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <%= form.label I18n.t("jours.form.date") %>
+    </div>
+    <div class="panel-body">
+        <p>
+            <%= form.date_field :date %>
+        </p>
+        <p>
+            <%= form.radio_button :am_pm, false %> <%= I18n.t("jours.form.am") %>
+            <%= form.radio_button :am_pm, true %> <%= I18n.t("jours.form.pm") %>
+        </p>
+    </div>
+</div>
 
-    <p>
+<div class="panel panel-default">
+    <div class="panel-heading">
         <%= form.label :note %>
-        <%= form.text_field :note %>
-    </p>
-
-
+    </div>
+    <div class="panel-body">
+        <p>
+            
+            <%= form.text_field :note %>
+        </p>
+    </div>
+</div>
 
 <p>
     <%= form.submit class: "btn btn-success" %>
