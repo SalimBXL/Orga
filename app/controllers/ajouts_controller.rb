@@ -77,10 +77,6 @@ class AjoutsController < ApplicationController
             end
         end
 
-
-        puts "**************************************"
-        pp params
-        puts "**************************************"
         
         # on sauve les ajouts
         @ajouts.each do |a|
