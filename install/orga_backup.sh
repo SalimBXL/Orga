@@ -17,4 +17,4 @@ echo " "
 echo "*********************"
 echo "   BACKUP DATABASE   "
 echo "*********************"
-pg_dump -U orga -h localhost -p5432 --password -Ft MyDataBase_development > backup.tar
+pg_dump -U orga -h localhost -p5432 --password -Ft MyDataBase_development > ~/RUBY/Orga/backup.tar
