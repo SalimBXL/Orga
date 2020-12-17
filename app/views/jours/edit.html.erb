@@ -50,6 +50,8 @@
                         <% utilisateurs = Utilisateur.where(service: current_user.utilisateur.service) %>
                     <% end %>
                     <%= form_with model: @jour, local: true do |form| %>
+                        <%= hidden_field_tag 'swap', @jour.utilisateur.id %>
+                        <%= hidden_field_tag 'job', @jour.id %>
                         <p>
                             Swap with : <%= form.select(:utilisateur_id) do %>
                                 <%= select_option_tag("", nil, @jour.utilisateur_id) %>

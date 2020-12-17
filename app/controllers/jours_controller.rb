@@ -59,12 +59,58 @@ class JoursController < ApplicationController
     def update
         # Log action
         log(request.path, I18n.t("jours.index.log_update"))
+
+        if params[:swap]
+
+            # Swap batch entre deux users
+        
+            user1 = Utilisateur.find(params[:swap].to_i) if params[:swap]
+            user2 = Utilisateur.find(params[:jour][:utilisateur_id].to_i)
+            job1 = @jour
+            job2 = Jour.where(utilisateur_id: user2.id, date: @jour.date, am_pm: @jour.am_pm).first
+
+            ## Repart vers la page edit si on a pas les deux utilisateurs
+            render :edit unless user1 and user2
+
+            puts "***************************************"
+            puts "***************************************"
+            puts " USER 1 => #{user1.prenom_nom}"
+            puts " USER 2 => #{user2.prenom_nom}"
+            puts " JOB 1 => #{job1}"
+            puts " JOB 2 => #{job2}"
+            puts "***************************************"
+            puts "***************************************"
+
+            ## Si on a pas de job pour le second user, 
+            ## on effectue un simple update
+            ## Sinon on update d'abord le second, puis update normal.
+
+            job1.utilisateur_id = user2.id
+            if job1.update(utilisateur_id: user2.id)
+                # ok
+                if job2
+                    job2.utilisateur_id = user1.id
+                    if job2.update(utilisateur_id: user1.id)
+                        flash[:notice] = "Jour Modifié avec succès"
+                    else 
+                        :edit
+                    end
+                end
+            else
+                flash[:notice] = "Un problème a été rencontré !"
+                render :edit
+            end
+
+        end
+            
+        # Update normal
         if @jour.update(jour_params)
-            flash[:notice] = "Jour Modifié avec succès"
-            redirect_to jours_path
+            flash[:notice] = "Jour Modifié avec succès"    
         else 
             render :edit
         end
+
+        redirect_to jours_path
     end
 
     #############

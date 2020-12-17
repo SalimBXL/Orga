@@ -31,13 +31,15 @@
                 <ul class="dropdown-menu">
                     
                     <% @services.each do |service| %>
-                        <% unless @current_service.id == service.id %>
-                        <li>
-                        <button title="<%= service.nom %>" data-toggle="collapse" 
-                            data-target="#service-<%= service.id %>" class="btn btn-link btn-xs">
-                            <%= service.nom %>
-                        </button>
-                        </li>
+                        <% if @services %>
+                            <% unless @current_service.id == service.id %>
+                                <li>
+                                <button title="<%= service.nom %>" data-toggle="collapse" 
+                                    data-target="#service-<%= service.id %>" class="btn btn-link btn-xs">
+                                    <%= service.nom %>
+                                </button>
+                                </li>
+                            <% end %>
                         <% end %>
                     <% end %>
                 </ul>
