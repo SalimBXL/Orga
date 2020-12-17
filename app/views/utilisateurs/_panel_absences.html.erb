@@ -23,20 +23,33 @@
                         <% if (1..5).include?(aj.wday) %>
 
                             <% bg = "" %>
+                            <% affiche_ok = nil %>
+
                             <% if @absences[aj] and @absences[aj].accord %>
                                 <% bg = "conge_ok" %>
                                 <% bg_btn = "success" %>
+                                <% affiche_ok = true if current_user.admin or current_user.utilisateur.admin %>
                             <% end %>
+
                             <% if @absences[aj] and (@absences[aj].accord.nil? or !@absences[aj].accord) %>
                                 <% bg = "conge_wait"  %>
                                 <% bg_btn = "danger" %>
+                                <% affiche_ok = true %>
                             <% end %>
-                            <td class="<%= bg %>">
+
                             
+
+                            <td class="<%= bg %>">
                                 <% if @absences[aj] %>
-                                    <a href="<%= edit_absence_path(@absences[aj]) %>" class="btn btn-<%= bg_btn %> btn-xs">
-                                        <%= @absences[aj].type_absence.code %>
-                                    </a>
+                                    <% if affiche_ok %>
+                                        <a href="<%= edit_absence_path(@absences[aj]) %>" class="btn btn-<%= bg_btn %> btn-xs">
+                                            <%= @absences[aj].type_absence.code %>
+                                        </a>
+                                    <% else %>
+                                        <span class="label label-<%= bg_btn %> btn-xs">
+                                            <%= @absences[aj].type_absence.code %>
+                                        </span>
+                                    <% end %>
                                 <% end %>
                             </td>
 

@@ -59,7 +59,9 @@
                 <% bg = "primary" %>
                 <% bg = "info" if jour.am_pm %>
                 
-                    <a href="<%= edit_jour_path(jour.id) %>" class="btn btn-<%= bg %> btn-xs">
+                    <a href="<%= edit_jour_path(jour.id) %>" 
+                        data-toggle="tooltip" title="<%= jour.service.nom %>"
+                        class="btn btn-<%= bg %> btn-xs">
                         <% @wks[jour].each do |wk| %>
                             <%= wk %>
                         <% end %>
