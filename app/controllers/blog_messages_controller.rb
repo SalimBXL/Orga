@@ -16,13 +16,11 @@ class BlogMessagesController < ApplicationController
         @blog_messages = nil
         @blog_messages = BlogMessage.where(blog_category_id: params[:blog_category_id]).order(date: :desc).page(params[:page]) if params[:blog_category_id]
         @blog_messages = BlogMessage.where(service_id: params[:service_id]).order(date: :desc).page(params[:page]) if params[:service_id]
-        @blog_messages = BlogMessage.where(utilisateur_id: params[:utilisateur_id]).order(date: :desc).page(params[:page]) if params[:utilisateur_id]
-        @blog_messages = BlogMessage.where(date: params[:date]).order(date: :desc).page(params[:page]) if params[:date]
+        @blog_messages = BlogMessage.where(utilisateur_id: params[:utilisateur_id]).order(date: :desc).page(params[:page]) if params[:utilisateur_id]        
         @blog_messages = BlogMessage.where(classe: params[:classe]).order(date: :desc).page(params[:page]) if params[:classe]
         @blog_messages = BlogMessage.where(groupe: params[:groupe]).order(date: :desc).page(params[:page]) if params[:groupe]
         @blog_messages = BlogMessage.where(logbook: true).order(date: :desc).page(params[:page]) if params[:logbook]
-        #@blog_messages = BlogMessage.where("title ilike ?", "%#{params[:search_title]}%").order(date: :desc).page(params[:page]) if params[:search_title]
-        #@blog_messages = BlogMessage.where("description ilike ?", "%#{params[:search_body]}%").order(date: :desc).page(params[:page]) if params[:search_body]
+        @blog_messages = BlogMessage.where(date: params[:date].to_datetime.strftime("%Y-%m-%d")).order(date: :desc).page(params[:page]) if params[:date] and !params[:date].blank?
         @blog_messages = BlogMessage.where("title ilike ? OR description ilike ?", "%#{params[:search]}%", "%#{params[:search]}%").order(date: :desc).page(params[:page]) if params[:search]
         @blog_messages = BlogMessage.order(date: :desc).page(params[:page]) if @blog_messages.nil?
     end

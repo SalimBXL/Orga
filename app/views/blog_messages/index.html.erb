@@ -14,39 +14,46 @@
 
 <div class="container">
     <div class="row">
-
-        <div class="col-sm-1">
+        
+        <div class="col-sm-4">
+            <!-- CATEGORIES -->
             <% if user_signed_in? && (current_user.admin? or current_user.utilisateur.admin) %>
                 <%= link_to '<i class="material-icons">category</i><br>Categories '.html_safe, 
                 blog_categories_path,
                 class: "btn btn-info btn-xs" %>
             <% end %>
-        </div>
-
-        <div class="col-sm-1">
+        
+            <!-- NEW ARTICLE -->
             <%= link_to '<i class="material-icons">add</i> '.html_safe, 
                 new_blog_message_path,
                 class: "btn btn-success btn-xs" %>
         </div>
-
-        <form id="search" action="<%= blog_messages_path %>">
-            <div class="input-group">
-                <div class="col-sm-7">
+        
+        <div class="col-sm-4">
+            <!-- SEARCH -->
+            <form id="search" action="<%= blog_messages_path %>">
                     <%= text_field_tag :search, params[:search], id: 'content_search_term',class: 'form-control', placeholder:'Search...' %>
-                </div>
-                <div class="col-sm-1">
                     <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
-                </div>
-            </div>
-        </form>
-        
-        
-    </div>
+            </form>
+        </div>
 
+        <div class="col-sm-2">
+            <!-- DATE -->
+            <form id="search" action="<%= blog_messages_path %>">
+                    <%= date_field_tag :date, '' %>
+                    <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
+            </form>
+        </div>
+
+    </div>
+    
+
+    <!-- MESSAGES -->
     <div class="row" id="blog_messages">
         <%= render 'blog_messages' %>
     </div>
 
+    <!-- NEW ARTICLER -->
     <p>
         <%= link_to '<i class="material-icons">add</i> '.html_safe, 
             new_blog_message_path,
