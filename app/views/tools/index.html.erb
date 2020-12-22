@@ -13,6 +13,10 @@
     <% session[:page_aide] = "tools" %>
     <div class="container">
         <div class="row">
+
+
+            <!-- DAYS -->
+
             <div class="col-sm-4">
                 <article>
                     <h3><%= I18n.t("tools.check_days.titre").capitalize %></h3>
@@ -22,6 +26,10 @@
                     </a>
                 </article>
             </div>
+
+
+            <!-- USERS -->
+
             <div class="col-sm-4">
                 <article>
                     <h3><%= I18n.t("tools.check_users.titre").capitalize %></h3>
@@ -31,6 +39,10 @@
                     </a>
                 </article>
             </div>
+
+
+            <!-- ADMINS -->
+
             <div class="col-sm-4">
                 <article>
                     <h3><%= I18n.t("tools.check_admins.titre").capitalize %></h3>
@@ -40,7 +52,27 @@
                     </a>
                 </article>
             </div>
+
         </div>
+        <br>
+        <hr>
+        <div class="row">
+
+
+            <!-- BACKUP DB -->
+
+            <div class="col-sm-4">
+                <article>
+                    <h3><%= I18n.t("tools.backup_db.titre").capitalize %></h3>
+                    <p><%= I18n.t("tools.backup_db.description") %></p>
+                    <a href=<%= backup_db_path %> class="btn btn-info" role="button">
+                        <%= I18n.t("tools.back_up.titre").downcase %>
+                    </a>
+                </article>
+            </div>
+
+        </div>
+        <br>
     </div>
 <% else %>
     <div class="container"><% session[:page_aide] = "" %></div>

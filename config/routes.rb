@@ -51,6 +51,7 @@ Rails.application.routes.draw do
   get "check_days", to: "tools#check_days"
   get "check_users", to: "tools#check_users"
   get "check_admins", to: "tools#check_admins"
+  get "backup_db", to: "tools#backup_db"
 
 
   ##############

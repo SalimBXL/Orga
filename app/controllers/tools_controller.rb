@@ -53,6 +53,36 @@ class ToolsController < ApplicationController
     end
 
 
+    ##############
+    # BACK UP DB #
+    ##############
+    def backup_db
+        current_directory = Dir.pwd
+        @current_directory = File.join(current_directory, "backup")
+        @old_name = "backup.tar"
+        @new_name = "_backup.tar"
+        @old_archive_size = 0
+        @new_archive_size = 0
+        @remove_status = false
+        @rename_status = false
+        @command_status = false
+        @size_status = false
+        @old_backup_exists = false
+        @backup_exists = false
+
+        @remove_status = remove_old_backup
+        @rename_status = rename_previous_backup
+        @command_status = create_archive
+
+        pp "************************************"
+        pp @command_status
+        pp "************************************"
+
+        
+        
+    end
+
+
     ###############
     # CHECK USERS #
     ###############
@@ -83,5 +113,52 @@ class ToolsController < ApplicationController
     private 
 
 
+    def remove_old_backup
+        @old_backup = File.join(@current_directory, @new_name)
+        old_backup_glob = Dir.glob(@old_backup)
+        @old_backup_exists = old_backup_glob.size == 1 ? true : false
+        # Si l'ancien backup n'existe pas...
+            return true unless @old_backup_exists
+        # Si l'ancien backup trouvé n'est pas un fichier...
+            return true if File.directory?(old_backup_glob.first)
+        # Supprime l'ancien backup
+            @remove_command = "rm -rf #{@old_backup}"
+            retour = File.delete(@old_backup)
+            #retour = nil
+            return true if retour == 1
+
+        remove_old_backup = false
+    end
+
+
+    def rename_previous_backup
+        @backup = File.join(@current_directory, @old_name)
+        backup_glob = Dir.glob(@backup)
+        @backup_exists = backup_glob.size == 1 ? true : false
+        # Si le backup n'existe pas...
+            return true unless @backup_exists
+        # Si le backup trouvé n'est pas un fichier...
+            return true if File.directory?(backup_glob.first)
+        # Renomme le backup
+            @rename_command = "mv #{@backup} #{@old_backup}"
+            #retour = nil
+            retour = File.rename(@backup, @old_backup)
+            return true if retour == 0
+
+        rename_previous_backup = false
+    end
+
+
+    def create_archive
+        #@tar_command = "pg_dump 'host=localhost port=5432 dbname=MyDataBase_development user=orga password=orga' -Ft  > #{@backup}"
+        @tar_command = "pg_dump 'dbname=orga_development user=salim' -Ft  > #{@backup}"
+        retour = IO.popen(@tar_command, in: :in)
+
+        pp "******************************"
+        pp Dir.glob(File.path(@backup))
+        pp "******************************"
+        
+        create_archive = File.exist?(@backup)
+    end
 
 end

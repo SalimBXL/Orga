@@ -1,0 +1,140 @@
+<div class="container">
+    <div class="page-header">
+    <h1>
+        <span class="label label-warning">
+            <i class="material-icons">construction</i>
+            <%= I18n.t("tools.backup_db.titre").upcase %>
+        </span>
+    </h1>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="row <%= "text-danger" unless @remove_status %> <%= "text-success" if @remove_status %>">
+        <h3>Remove old backup</h3>
+        <div class="col-sm-10">
+            <ul>
+                <li>Current directory : <kbd><%= @current_directory %></kbd></li>
+                <li>Old backup : <kbd><%= @old_backup %></kbd></li>
+                <% if @old_backup_exists %>
+                    <li>Command : <code><%= @remove_command %></code></li>
+                <% else %>
+                    <p><i>No previous backup found.</i></p>
+                <% end %>
+            </ul>
+        </div>
+        <div class="col-sm-2">
+            <p>
+                Status : 
+                <% if @remove_status %>
+                    <span class="text-success material-icons">check_circle</span>
+                <% else %>
+                    <span class="text-danger material-icons">cancel</span>
+                <% end %>
+            </p>
+        </div>
+    </div>
+
+    <div 
+        class="row 
+            <%= @remove_status ? @rename_status ? "text-success" : "text-danger" : "text-muted" %>
+        ">
+        <h3>Rename old archive</h3>
+        <div class="col-sm-10">
+            <ul>
+                <li>Old name : <kbd><%= @old_name %></kbd></li>
+                <li>New name : <kbd><%= @new_name %></kbd></li>
+                <% if @backup_exists %>
+                    <li>Command : <code><%= @rename_command %></code></li>
+                <% else %>
+                    <p><i>No backup found.</i></p>
+                <% end %>
+            </ul>
+        </div>
+        <div class="col-sm-2">
+            <p>
+                Status : 
+                <% if @rename_status %>
+                    <span class="text-success material-icons">check_circle</span>
+                <% else %>
+                    <span class="text-danger material-icons">cancel</span>
+                <% end %>
+            </p>
+        </div>
+    </div>
+
+    <div 
+        class="row 
+            <%= @rename_status ? @command_status ? "text-success" : "text-danger" : "text-muted" %>
+        ">
+        <h3>Create new archive</h3>
+        <div class="col-sm-10">
+            <p>Command : <code><%= @tar_command %></code></p>
+        </div>
+        <div class="col-sm-2">
+            <p>
+                Status : 
+                <% if @command_status %>
+                    <span class="text-success material-icons">check_circle</span>
+                <% else %>
+                    <span class="text-danger material-icons">cancel</span>
+                <% end %>
+            </p>
+        </div>
+    </div>
+    
+    <div 
+        class="row 
+            <%= @command_status ? @size_status ? "text-success" : "text-danger" : "text-muted" %>
+        ">
+        <h3>Check new archive</h3>
+        <div class="col-sm-10">
+            <ul>
+                <li>Old archive's size : <kbd><%= @old_archive_size %></kbd></li>
+                <li>New archive's size : <kbd><%= @new_archive_size %></kbd></li>
+            </ul>
+        </div>
+        <div class="col-sm-2">
+            <p>
+                Status : 
+                <% if @size_status %>
+                    <span class="text-success material-icons">check_circle</span>
+                <% else %>
+                    <span class="text-danger material-icons">cancel</span>
+                <% end %>
+            </p>
+        </div>
+    </div>
+
+    <div
+        class="row 
+            <%= @size_status ? "text-info" : "text-muted" %>
+        ">
+        <h3>Download backup</h3>
+        <div class="col-sm-10">
+            <% if @rename_status and @command_status and @size_status %>
+                <p class="text-success">
+                    Everything seems to be fine. You can try to download the archive.
+                </p>
+            <% else %>
+                <p class="text-danger">
+                    <strong>One problem or more. Please contact administrator.</strong>
+                </p>
+            <% end %>
+        </div>
+        <div class="col-sm-2">
+            <% if @rename_status and @command_status and @size_status %>
+                <a href="#" class="btn btn-success btn-xs" role="button"><span class="material-icons">get_app</span></a>
+            <% end %>
+        </div>
+    </div>
+
+</div>
+
+<hr>
+<div class="container">
+    <a href=<%= tools_path %> class="btn btn-info" role="button">
+        <<
+    </a>
+</div>

@@ -535,6 +535,11 @@ en:
       work: Work
       work1: Work1
   tools:
+    back_up:
+      titre: Back Up Database
+    backup_db:
+      description: This tool help to create a backup of the database. It creates a TAR file contaiing the SQL structure and the whole database's datas.
+      titre: Back Up Database
     check_admins:
       description: This tool check the administrator's roles.
       manager: Manager
