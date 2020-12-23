@@ -65,6 +65,7 @@
                 <article>
                     <h3><%= I18n.t("tools.backup_db.titre").capitalize %></h3>
                     <p><%= I18n.t("tools.backup_db.description") %></p>
+                    <p><span class="bg-info">Note</span> : <i><%= I18n.t("tools.backup_db.time") %></i></p>
                     <a href=<%= backup_db_path %> class="btn btn-info" role="button">
                         <%= I18n.t("tools.back_up.titre").downcase %>
                     </a>

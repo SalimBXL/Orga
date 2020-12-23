@@ -73,13 +73,21 @@ class ToolsController < ApplicationController
         @remove_status = remove_old_backup
         @rename_status = rename_previous_backup
         @command_status = create_archive
+        @size_status = check_archive_size
+    end
 
-        pp "************************************"
-        pp @command_status
-        pp "************************************"
-
-        
-        
+    def download_backup
+        #current_directory = File.join(Dir.pwd, "backup")
+        #backup = File.join(current_directory, "backup.tar")
+        backup = params[:backup]
+        if backup
+            mnt = (Time.now).to_s.gsub(" ", "_")
+            send_file(
+                "#{backup}",
+                filename: "#{mnt}_#{File.basename(backup)}",
+                type: "application/tar"
+            )
+        end
     end
 
 
@@ -126,7 +134,6 @@ class ToolsController < ApplicationController
             retour = File.delete(@old_backup)
             #retour = nil
             return true if retour == 1
-
         remove_old_backup = false
     end
 
@@ -144,7 +151,6 @@ class ToolsController < ApplicationController
             #retour = nil
             retour = File.rename(@backup, @old_backup)
             return true if retour == 0
-
         rename_previous_backup = false
     end
 
@@ -153,12 +159,26 @@ class ToolsController < ApplicationController
         #@tar_command = "pg_dump 'host=localhost port=5432 dbname=MyDataBase_development user=orga password=orga' -Ft  > #{@backup}"
         @tar_command = "pg_dump 'dbname=orga_development user=salim' -Ft  > #{@backup}"
         retour = IO.popen(@tar_command, in: :in)
-
-        pp "******************************"
-        pp Dir.glob(File.path(@backup))
-        pp "******************************"
-        
+        boucle_temporelle
         create_archive = File.exist?(@backup)
+    end
+
+
+    def boucle_temporelle
+        time = 5    # Cinq secondes
+        time_start = Time.now
+        begin      
+            time_running = Time.now - time_start
+            # Boucle temporelle qui laisse le temps au système de créer l'archive.
+            tri = time_running.to_i
+        end until (tri >= time)
+    end
+
+
+    def check_archive_size
+        @old_archive_size = File.size?(@old_backup)
+        @new_archive_size = File.size?(@backup)
+        check_archive_size = (@new_archive_size >= @old_archive_size)
     end
 
 end

@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   get "check_users", to: "tools#check_users"
   get "check_admins", to: "tools#check_admins"
   get "backup_db", to: "tools#backup_db"
+  get "download_backup", to: "tools#download_backup"
 
 
   ##############

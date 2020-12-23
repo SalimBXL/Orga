@@ -125,7 +125,7 @@
         </div>
         <div class="col-sm-2">
             <% if @rename_status and @command_status and @size_status %>
-                <a href="#" class="btn btn-success btn-xs" role="button"><span class="material-icons">get_app</span></a>
+                <a href="<%= download_backup_path(backup: @backup) %>" class="btn btn-success btn-xs" role="button"><span class="material-icons">get_app</span></a>
             <% end %>
         </div>
     </div>
