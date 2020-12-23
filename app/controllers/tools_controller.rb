@@ -77,8 +77,6 @@ class ToolsController < ApplicationController
     end
 
     def download_backup
-        #current_directory = File.join(Dir.pwd, "backup")
-        #backup = File.join(current_directory, "backup.tar")
         backup = params[:backup]
         if backup
             mnt = (Time.now).to_s.gsub(" ", "_")
@@ -156,8 +154,10 @@ class ToolsController < ApplicationController
 
 
     def create_archive
-        #@tar_command = "pg_dump 'host=localhost port=5432 dbname=MyDataBase_development user=orga password=orga' -Ft  > #{@backup}"
-        @tar_command = "pg_dump 'dbname=orga_development user=salim' -Ft  > #{@backup}"
+        # Ligne OVH
+        @tar_command = "pg_dump 'host=localhost port=5432 dbname=MyDataBase_development user=orga password=orga' -Ft  > #{@backup}"
+        #Ligne localhost
+        #@tar_command = "pg_dump 'dbname=orga_development user=salim' -Ft  > #{@backup}"
         retour = IO.popen(@tar_command, in: :in)
         boucle_temporelle
         create_archive = File.exist?(@backup)
