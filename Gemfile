@@ -52,7 +52,11 @@ gem 'devise'
 
 gem "autoprefixer-rails"
 
-gem 'openweathermap', '~> 0.2.3'
+# OPENWEATHER
+#gem 'openweathermap', '~> 0.2.3'
+
+# PRAWN
+gem 'prawn', '~>2.2.0'
 
 
 group :development, :test do

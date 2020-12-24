@@ -55,16 +55,16 @@
     </td>
     <td>
         <div class="btn-group">
-            <%= link_to '<span data-toggle="tooltip">
+            <%= link_to '<span data-toggle="tooltip" title="Read">
                     <i class="material-icons">import_contacts</i></span>'.html_safe, 
                     blog_message_path(blog_message),
                     class: "btn btn-success btn-xs" %>
             <% if user_signed_in? && (current_user.admin? || current_user.utilisateur.id == blog_message.utilisateur_id) %>
-                <%= link_to '<span data-toggle="tooltip">
+                <%= link_to '<span data-toggle="tooltip" title="Edit...">
                     <i class="material-icons">edit</i></span>'.html_safe, 
                     edit_blog_message_path(blog_message),
                     class: "btn btn-warning btn-xs" %>
-                <%= link_to '<span data-toggle="tooltip" >
+                <%= link_to '<span data-toggle="tooltip" title="Delete!">
                     <i class="material-icons">close</i>'.html_safe, 
                     blog_message_path(blog_message),
                     method: :delete,
@@ -73,6 +73,11 @@
                     class: "btn btn-danger btn-xs" %>
             <% end %>
         </div>
+        
+        <%= link_to '<span data-toggle="tooltip" title="Export PDF">
+                    <i class="material-icons">picture_as_pdf</i></span>'.html_safe, 
+                    blog_message_export_pdf_path("pdf", blog_message: blog_message),
+                    class: "btn btn-info btn-xs" if blog_message.logbook %>
 
     </td>
 </tr>

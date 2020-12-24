@@ -84,6 +84,7 @@ class BlogMessagesController < ApplicationController
         log(request.path, I18n.t("messages.index.log_edit"))
     end
 
+
     ##############
     #   DESTROY  #
     ##############
@@ -93,6 +94,8 @@ class BlogMessagesController < ApplicationController
         @blog_message.destroy
     end
 
+
+    
 
     private 
 
