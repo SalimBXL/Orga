@@ -178,7 +178,7 @@ class ToolsController < ApplicationController
     def check_archive_size
         @old_archive_size = File.size?(@old_backup)
         @new_archive_size = File.size?(@backup)
-        check_archive_size = (@new_archive_size >= @old_archive_size)
+        check_archive_size = (!@new_archive_size.nil? and !@old_archive_size.nil?) ? (@new_archive_size >= @old_archive_size) : false
     end
 
 end
