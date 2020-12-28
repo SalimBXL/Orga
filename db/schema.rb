@@ -147,6 +147,14 @@ ActiveRecord::Schema.define(version: 2020091012140633) do
     t.index ["utilisateur_id"], name: "index_jours_on_utilisateur_id"
   end
 
+  create_table "konfigurations", force: :cascade do |t|
+    t.string "key"
+    t.string "value"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "lieus", force: :cascade do |t|
     t.string "nom"
     t.text "adresse"

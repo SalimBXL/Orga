@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: d32beae1ed41353c9b74db8b30512deb2366a0cf
+  revision: a1ba45c7c79bac3ad9da5a3018f9f91bfd8ff707
   branch: master
   specs:
     faker (2.15.1)
@@ -154,7 +154,7 @@ GEM
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
-    parser (2.7.2.0)
+    parser (3.0.0.0)
       ast (~> 2.4.1)
     pdf-core (0.7.0)
     pg (1.2.3)

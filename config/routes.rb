@@ -55,6 +55,12 @@ Rails.application.routes.draw do
   get "download_backup", to: "tools#download_backup"
 
 
+  ####################
+  #   Configuration  #
+  ####################
+  resources :konfigurations, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
+
+
   ##############
   #   Ajouts   #
   ##############

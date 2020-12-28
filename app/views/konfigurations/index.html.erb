@@ -1,0 +1,14 @@
+<div class="container">
+    <h1>
+        <span class="label label-primary">
+            <i class="material-icons">settings</i>
+            <%= I18n.t("konfigurations.index.titre").upcase %>
+        </span>
+    </h1>
+
+    <p><%= link_to "[+]", new_konfiguration_path %></p>
+
+    <div id="konfigurations">
+        <%= render 'konfigurations' %>
+    </div>
+</div>

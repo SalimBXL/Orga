@@ -1,5 +1,6 @@
 class JoursController < ApplicationController
     before_action :find_jour, only: [:show, :edit, :update, :destroy]
+    before_action :read_konfig, only: [:specific_month]
 
     #############
     #   INDEX   #

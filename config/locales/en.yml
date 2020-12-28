@@ -1,21 +1,21 @@
 ---
 en:
-  Janvier: January
-  Fevrier: February
-  Mars: March
-  Avril: April
-  Mai: May
-  Juin: June
-  Juillet: July
   Aout: August
-  Septembre: September
-  Octobre: October
-  Novembre: November
+  Avril: April
   Decembre: December
+  Fevrier: February
+  Janvier: January
   Jeudi: Thursday
+  Juillet: July
+  Juin: June
   Lundi: Monday
+  Mai: May
   Mardi: Tuesday
+  Mars: March
   Mercredi: Wednesday
+  Novembre: November
+  Octobre: October
+  Septembre: September
   Vendredi: Friday
   absences:
     index:
@@ -455,6 +455,14 @@ en:
     today:
       all_services: All Services
       not_yet_accorded: Not yet accorded.
+  konfigurations:
+    index:
+      descriptions: Descriptions
+      keys: Keys
+      titre: Configuration
+      values: Values
+    new:
+      titre: New config value
   lieus:
     edit:
       nom: Edition
@@ -569,6 +577,9 @@ en:
       titre: Check Users
     index:
       titre: Tools
+    konfigure:
+      description: This tool help to configure this app.
+      titre: Configure
   type_absences:
     index:
       codes: Codes

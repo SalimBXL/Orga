@@ -5,6 +5,22 @@ class ApplicationController < ActionController::Base
 
 
 
+  def read_konfig(key = nil)
+    @konfiguration ||= Hash.new
+    if key.nil?
+        liste = Konfiguration.where("key LIKE ?", "#{params[:controller]}_#{params[:action]}%")
+    else
+        liste = Konfiguration.where("key LIKE ?", "#{key}%")
+    end
+    konfiguration ||= Hash.new
+    liste.each do |item|
+        konfiguration[item.key] = item.value
+    end
+    @konfiguration = konfiguration.symbolize_keys
+  end
+
+
+
   def check_logged_in
     unless user_signed_in?
       redirect_to home_path

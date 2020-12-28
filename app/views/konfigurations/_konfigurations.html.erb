@@ -1,0 +1,10 @@
+<p><%= paginate @konfigurations, remote: true %></p>
+<table class="table table-condensed">
+    <tr>
+        <th><%= I18n.t("konfigurations.index.keys") %></th>
+        <th><%= I18n.t("konfigurations.index.values") %></th>
+        <th><%= I18n.t("konfigurations.index.descriptions") %></th>
+    </tr>
+    <%= render @konfigurations %>
+</table>
+<p><%= paginate @konfigurations, remote: true %></p>

@@ -1,4 +1,5 @@
 class ToolsController < ApplicationController
+    before_action :read_konfig, only: [:backup_db]
 
     # ACCUEIL
     def index
@@ -155,9 +156,12 @@ class ToolsController < ApplicationController
 
     def create_archive
         # Ligne OVH
-        @tar_command = "pg_dump 'host=localhost port=5432 dbname=MyDataBase_development user=orga password=orga' -Ft  > #{@backup}"
+        #@tar_command = "pg_dump 'host=localhost port=5432 dbname=MyDataBase_development user=orga password=orga' -Ft  > #{@backup}"
+        @tar_command = @konfiguration[:tools_backup_db_tar_command] ? "#{@konfiguration[:tools_backup_db_tar_command]}" : "pg_dump 'host=localhost port=5432 dbname=MyDataBase_development user=orga password=orga' -Ft  > #{@backup}"
+
         #Ligne localhost
         #@tar_command = "pg_dump 'dbname=orga_development user=salim' -Ft  > #{@backup}"
+        
         retour = IO.popen(@tar_command, in: :in)
         boucle_temporelle
         create_archive = File.exist?(@backup)
@@ -165,7 +169,9 @@ class ToolsController < ApplicationController
 
 
     def boucle_temporelle
-        time = 5    # Cinq secondes
+        #time = 5    # Cinq secondes
+        time = @konfiguration[:tools_backup_db_loop_length] ? "#{@konfiguration[:tools_backup_db_loop_length]}".to_i : 5
+
         time_start = Time.now
         begin      
             time_running = Time.now - time_start
@@ -180,5 +186,8 @@ class ToolsController < ApplicationController
         @new_archive_size = File.size?(@backup)
         check_archive_size = (!@new_archive_size.nil? and !@old_archive_size.nil?) ? (@new_archive_size >= @old_archive_size) : false
     end
+
+
+    
 
 end
