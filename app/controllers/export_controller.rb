@@ -24,17 +24,11 @@ class ExportController < ApplicationController
         blog_category = BlogCategory.find(blog_message.blog_category_id) if blog_message.blog_category_id
         groupe = Groupe.find(blog_message.groupe) if blog_message.groupe
         classe = Classe.find(blog_message.classe) if blog_message.classe
-
-        pp "********************************"
-        pp blog_message
-        pp "********************************"
-
         
         respond_to do |format|
             #some other formats like: format.html { render :show }
             format.pdf do
                 pdf = Prawn::Document.new
-                pdf.text "Hellow World!!!"
                 pdf.text service.nom
                 pdf.text utilisateur.prenom_nom
                 pdf.text blog_category.nom
