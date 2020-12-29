@@ -4,6 +4,15 @@ class UtilisateursController < ApplicationController
     before_action :find_utilisateur, only: [:show, :edit, :update, :destroy]
     
 
+    #   send welcome email  #
+    def send_welcome_email(user)
+        @utilisateur = user
+        respond_to do |format|
+            UserMailer.with(user: user).welcome_email.deliver_now
+            format.html { redirect_to(utilisateurs_path, notice: "Message sent to #{user.email}...") }
+        end
+    end
+
     #############
     #   INDEX   #
     #############
@@ -39,6 +48,7 @@ class UtilisateursController < ApplicationController
     #   SHOW    #
     #############
     def show
+        #send_welcome_email @utilisateur
         # Log action
         log(request.path)
 
