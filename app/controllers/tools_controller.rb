@@ -76,7 +76,10 @@ class ToolsController < ApplicationController
         #pp "***** Rename previous backup *****"
         @rename_status = rename_previous_backup
         #pp "***** Create archive TAR *****"
-        @command_status = create_archive
+        tmp = create_archive
+        @command_status = (tmp == true) ? true : false
+        @command_message = @command_status ? nil : tmp
+
         #pp "***** Check archive size *****"
         @size_status = check_archive_size
     end
@@ -166,9 +169,12 @@ class ToolsController < ApplicationController
         #Ligne localhost
         #@tar_command = "pg_dump 'dbname=orga_development user=salim' -Ft  > #{@backup}"
         
-        retour = IO.popen(@tar_command, in: :in)
+        #retour = IO.popen(@tar_command, in: :in)
+        retour = IO.popen(@tar_command, :err=>[:child, :out])
+        msg = retour.readlines
+        retour.close
         boucle_temporelle
-        create_archive = File.exist?(@backup)
+        create_archive = (File.exist?(@backup) and $?.success?) ? true : msg
     end
 
 

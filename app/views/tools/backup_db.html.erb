@@ -71,6 +71,9 @@
         <h3>Create new archive</h3>
         <div class="col-sm-10">
             <p>Command : <code><%= @tar_command %></code></p>
+            <% unless @command_status %>
+                <p class="bg-primary"><%= @command_message %></p>
+            <% end %>
         </div>
         <div class="col-sm-2">
             <p>
