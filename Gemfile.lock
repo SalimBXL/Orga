@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: a1ba45c7c79bac3ad9da5a3018f9f91bfd8ff707
+  revision: e706f34eaaa8b906bddcf6fd50f5f7e462757ae8
   branch: master
   specs:
     faker (2.15.1)
@@ -107,7 +107,7 @@ GEM
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     highline (2.0.3)
-    i18n (1.8.5)
+    i18n (1.8.6)
       concurrent-ruby (~> 1.0)
     i18n-tasks (0.9.33)
       activesupport (>= 4.0.2)
@@ -148,11 +148,12 @@ GEM
       mini_mime (>= 0.1.1)
     method_source (1.0.0)
     mini_mime (1.0.2)
-    mini_portile2 (2.4.0)
+    mini_portile2 (2.5.0)
     minitest (5.14.2)
     nio4r (2.5.4)
-    nokogiri (1.10.10)
-      mini_portile2 (~> 2.4.0)
+    nokogiri (1.11.0)
+      mini_portile2 (~> 2.5.0)
+      racc (~> 1.4)
     orm_adapter (0.5.0)
     parser (3.0.0.0)
       ast (~> 2.4.1)
@@ -164,6 +165,7 @@ GEM
       ttfunk (~> 1.5)
     public_suffix (4.0.6)
     puma (3.12.6)
+    racc (1.5.2)
     rack (2.2.3)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)

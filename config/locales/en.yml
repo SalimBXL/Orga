@@ -462,7 +462,10 @@ en:
       titre: Configuration
       values: Values
     new:
+      description: Description
+      key: Key
       titre: New config value
+      value: Value
   lieus:
     edit:
       nom: Edition

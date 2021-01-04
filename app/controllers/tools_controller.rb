@@ -71,9 +71,13 @@ class ToolsController < ApplicationController
         @old_backup_exists = false
         @backup_exists = false
 
+        #pp "***** Remove old backup *****"
         @remove_status = remove_old_backup
+        #pp "***** Rename previous backup *****"
         @rename_status = rename_previous_backup
+        #pp "***** Create archive TAR *****"
         @command_status = create_archive
+        #pp "***** Check archive size *****"
         @size_status = check_archive_size
     end
 
@@ -157,7 +161,7 @@ class ToolsController < ApplicationController
     def create_archive
         # Ligne OVH
         #@tar_command = "pg_dump 'host=localhost port=5432 dbname=MyDataBase_development user=orga password=orga' -Ft  > #{@backup}"
-        @tar_command = @konfiguration[:tools_backup_db_tar_command] ? "#{@konfiguration[:tools_backup_db_tar_command]}" : "pg_dump 'host=localhost port=5432 dbname=MyDataBase_development user=orga password=orga' -Ft  > #{@backup}"
+        @tar_command = @konfiguration[:tools_backup_db_tar_command] ? "#{@konfiguration[:tools_backup_db_tar_command]} > #{@backup}" : "pg_dump 'host=localhost port=5432 dbname=MyDataBase_development user=orga password=orga' -Ft > #{@backup}"
 
         #Ligne localhost
         #@tar_command = "pg_dump 'dbname=orga_development user=salim' -Ft  > #{@backup}"

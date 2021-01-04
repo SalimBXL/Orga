@@ -95,6 +95,14 @@ ActiveRecord::Schema.define(version: 2020091012140633) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "configurations", force: :cascade do |t|
+    t.string "key"
+    t.string "value"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "demande_conges", force: :cascade do |t|
     t.date "date"
     t.date "date_fin"
