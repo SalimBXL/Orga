@@ -81,7 +81,7 @@
         
         <%= link_to '<span data-toggle="tooltip" title="Export PDF">
                     <i class="material-icons">picture_as_pdf</i></span>'.html_safe, 
-                    blog_message_export_pdf_path("pdf", blog_message: blog_message),
+                    blog_message_export_pdf_path(blog_message: blog_message, format: :pdf),
                     class: "btn btn-info btn-xs" if blog_message.logbook %>
 
     </td>

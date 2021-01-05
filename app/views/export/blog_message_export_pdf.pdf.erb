@@ -1,0 +1,38 @@
+<div class="container">
+    <h1>
+        <span class="label label-primary"><%= @blog_message.title.capitalize %> </span>
+        
+    </h1>
+    <strong><i>[<%= @utilisateur.prenom_nom %>]</i></strong>
+    <hr>
+
+    <!-- DATES AND KEYWORDS -->
+    <h3><span class="label label-default"><%= I18n.t("blog_messages.show.dates_and_keywords") %></span></h3>
+    <div class="row">
+        <div class="col-sm-4">
+            <strong><%= I18n.t("blog_messages.show.published_at") %> :</strong> <%= @blog_message.date %><br>
+            <strong><%= I18n.t("blog_messages.show.created_at") %> :</strong> <%= @blog_message.created_at %><br>
+            <strong><%= I18n.t("blog_messages.show.updated_at") %> :</strong> <%= @blog_message.updated_at %>
+        </div>
+        <div class="col-sm-4">
+            <strong><%= I18n.t("blog_messages.show.service") %> :</strong> <span class="label label-primary"><%= @service.nom %></span><br>
+            <strong><%= I18n.t("blog_messages.show.groupe") %> :</strong> <span class="label label-default"><%= @groupe.nom %></span><br>
+            <strong><%= I18n.t("blog_messages.show.classe") %> :</strong> <span class="label label-default"><%= @classe.nom %></span>
+        </div>
+        <div class="col-sm-4">
+            <strong><%= I18n.t("blog_messages.show.category") %> :</strong> <span class="label label-info"><%= @category.nom %></span><br>
+            <strong><%= I18n.t("blog_messages.show.user") %> :</strong> <i>[<%= @utilisateur.prenom_nom %>]</i><br>
+        </div>
+    </div>
+
+    <hr>
+    
+    <!-- TEXT -->
+    <h3><span class="label label-default"><%= I18n.t("blog_messages.show.article") %></span></h3>
+    <p>
+        <strong><%= I18n.t("blog_messages.show.title") %> :</strong> <%= @blog_message.title.capitalize %><br>
+        <strong><%= I18n.t("blog_messages.show.description") %> :</strong><br>
+        <%= @blog_message.description %>
+    </p>
+    
+</div>
