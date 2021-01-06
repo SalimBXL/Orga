@@ -8,68 +8,53 @@
             <% tmp_numero_semaine = nil %>
             <% tmp_numero_mois = nil %>
             <% tmp_date = nil %>
+            <% tmp_lundi = nil %>
+            <% tmp_jour = nil %>
             <% n_jour = 1 %>
 
             <table class="table-condensed table-bordered">
-            <tr>
-                <th class="tdfixe">Period</th>
-                <th class="tdfixe"><%= I18n.t("Lundi").capitalize %></th>
-                <th class="tdfixe"><%= I18n.t("Mardi").capitalize %></th>
-                <th class="tdfixe"><%= I18n.t("Mercredi").capitalize %></th>
-                <th class="tdfixe"><%= I18n.t("Jeudi").capitalize %></th>
-                <th class="tdfixe"><%= I18n.t("Vendredi").capitalize %></th>
-                <th class="tdfixe">W</th>
-            </tr>
-            
-            <% n_jour = 6 %>
-            <% @jours.each do |jour| %>
-                <% if n_jour > 6 %>
-                    </tr>
+                <!-- Ligne des noms de jour -->
+                <tr>
+                    <th class="tdfixe">Period</th>
+                    <th class="tdfixe"><%= I18n.t("Lundi").capitalize %></th>
+                    <th class="tdfixe"><%= I18n.t("Mardi").capitalize %></th>
+                    <th class="tdfixe"><%= I18n.t("Mercredi").capitalize %></th>
+                    <th class="tdfixe"><%= I18n.t("Jeudi").capitalize %></th>
+                    <th class="tdfixe"><%= I18n.t("Vendredi").capitalize %></th>
+                    <th class="tdfixe">W</th>
+                </tr>
+                
+                <% for i in 0..5 %>
+                    <% tmp_lundi = (Date.today + (i*7).days).beginning_of_week %>
+                    <!-- Ligne de semaine -->
                     <tr>
-                        <td class="tdfixe"></td>
-                    <% n_jour = 0 %>
-                <% end %>
-                <% if n_jour > jour.numero_jour %>
-                    <% (6 - n_jour).times do %>
-                        <td class="tdfixe"></td>
-                    <% end %>
-                    </tr>
-                    <tr>
+                        <!-- Case de la date -->
                         <td class="tdfixe">
                             <div class="badge">
-                                <%= I18n.localize jour.date.beginning_of_week, format: :short %> -- 
-                                <%= I18n.localize (jour.date.end_of_week), format: :short %>
+                                <%= I18n.localize tmp_lundi, format: :short %> -- 
+                                <%= I18n.localize (tmp_lundi.end_of_week - 2.days), format: :short %>
                             </div>
                         </td>
-                    <% n_jour = 1 %>
-                <% end %>
-                
-                <% if n_jour < jour.numero_jour %>
-                    <% (jour.numero_jour - n_jour).times do %>
-                        <td class="tdfixe"></td>
-                    <% end %>
-                    <% n_jour = jour.numero_jour %>
-                <% end %>
-                
-                <% unless jour.date == tmp_date %>
-                    </td><td class="tdfixe">
-                    <% tmp_date = jour.date %>
-                    <% n_jour += 1 %>
-                <% end  %>
-                <% bg = "primary" %>
-                <% bg = "info" if jour.am_pm %>
-                
-                    <a href="<%= edit_jour_path(jour.id) %>" 
-                        data-toggle="tooltip" title="<%= jour.service.nom %>"
-                        class="btn btn-<%= bg %> btn-xs">
-                        <% @wks[jour].each do |wk| %>
-                            <%= wk %>
+
+                        <!-- Pour chaque jour... -->
+                        <% for d in 0..5 %>
+                            <% tmp_jour = tmp_lundi + d.days %>
+                            <td class="tdfixe">
+                                <% @jours.where(date: tmp_jour).each do |batch| %>
+                                    <% bg = "primary" %>
+                                    <% bg = "info" if batch.am_pm %>
+                                    <a href="<%= edit_jour_path(batch.id) %>" 
+                                        data-toggle="tooltip" title="<%= batch.service.nom %>"
+                                        class="btn btn-<%= bg %> btn-xs">
+                                        <% @wks[batch].each do |wk| %>
+                                            <%= wk %>
+                                        <% end %>
+                                    </a>
+                                <% end %>
+                            </td>
                         <% end %>
-                    </a>
-                    
-            
-            <% end %>
-            </td></tr>
+                    </tr>
+                <% end %>
             </table>
         </article>
     </div>
