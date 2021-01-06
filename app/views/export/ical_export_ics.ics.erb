@@ -1,0 +1,20 @@
+header = Array.new
+"BEGIN:VCALENDAR"
+"VERSION:2.0"
+"PRODID:-//hacksw/handcal//NONSGML v1.0//EN"
+
+
+"BEGIN:VEVENT"
+"UID:#{@utilisateur.email}/#{@jour.am_pm}"
+"DTSTAMP:#{Date.today.year}#{Date.today.month}#{Date.today.day}T#{Time.now.hour}#{Date.today.minute}00Z"
+"ORGANIZER;CN=#{current_user.utilisateur.prenom_nom}:MAILTO:#{current_user.utilisateur.email}"
+"DTSTART:#{@jour.date}"
+"DTEND:#{@jour.date}"
+"LOCATION:#{@jour.service.nom} (#{@jour.service.lieu.nom})"
+"SUMMARY:ORGA (#{@jour.am_pm}) - X X"
+"CATEGORIES:XXXXX"
+"DESCRIPTION:-Xxxxxxxx (X)\n-Xxxxxx (X)\n"
+"    \nhttp://127.0.0.1:3000/today?date=#{@jour.date}&service=-1\n"
+"URL:http://127.0.0.1:3000/today?date=#{@jour.date}&locale=en&service=-1"
+"END:VEVENT"
+"END:VCALENDAR"
