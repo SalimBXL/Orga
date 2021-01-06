@@ -85,7 +85,8 @@ class BlogCategoriesController < ApplicationController
     end
 
     def find_categories
-        @blog_category = Category.find(params[:id])
+        @blog_category = BlogCategory.find(params[:id])
+        
     end
 
 
