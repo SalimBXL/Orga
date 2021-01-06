@@ -1,0 +1,25 @@
+<%= "BEGIN:VCALENDAR" %>
+<%= "VERSION:2.0" %>
+<%= "PRODID:-//hacksw/handcal//NONSGML v1.0//EN" %>
+<% @jours.each do |jour| %>
+<% jour_date = jour.date %>
+<% jour_am_pm = am_pm(jour.am_pm).downcase %>
+<% description = Array.new %>
+<% jour.working_lists.each do |key, value| %>
+    <% description << "-#{key.work.nom} (#{key.work.code})\\n" %>
+<% end %>
+<%= "BEGIN:VEVENT" %>
+<%= "UID:#{@utilisateur_email}/#{jour_am_pm}" %>
+<%= "DTSTAMP:#{Date.today.year}#{0 if Date.today.month<10}#{Date.today.month}#{0 if Date.today.day<10}#{Date.today.day}T#{0 if Time.now.hour<10}#{Time.now.hour}#{0 if Time.now.min<10}#{Time.now.min}00" %>
+<%= "ORGANIZER:CN=#{@administrateur_prenom_nom}:MAILTO:#{@administrateur_email}" %>
+<%= "DTSTART:#{jour_date.year}#{0 if jour_date.month<10}#{jour_date.month}#{0 if jour_date.day<10}#{jour_date.day}" %>
+<%= "DTEND:#{jour_date.year}#{0 if jour_date.month<10}#{jour_date.month}#{0 if jour_date.day<10}#{jour_date.day}" %>
+<%= "LOCATION:#{@service_nom} (#{@lieu_nom})" %>
+<%= "SUMMARY:ORGA (#{jour_am_pm}) - #{jour.works_list.keys*' '}" %>
+<%= "CATEGORIES:#{jour.working_lists.first.work.classe.nom}" %>
+<%= "DESCRIPTION: #{description*' '}" %>
+    <%= "    \\nhttp://127.0.0.1:3000/today?date=#{jour_date}&service=-1\\n" %>
+<%= "URL:http://127.0.0.1:3000/today?date=#{jour_date}&locale=en&service=-1" %>
+<%= "END:VEVENT" %>
+<% end %>
+<%= "END:VCALENDAR" %>

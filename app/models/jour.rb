@@ -18,6 +18,14 @@ class Jour < ApplicationRecord
         self.working_lists.count
     end
 
+    def works_list
+        liste = Hash.new
+        self.working_lists.each do |wk|
+            liste[wk.work.code] = wk.work.nom
+        end
+        works_list = liste
+    end
+
     def numero_semaine
         "#{date.year}-W#{date.cweek<10 ? "0" : ""}#{date.cweek}"
     end

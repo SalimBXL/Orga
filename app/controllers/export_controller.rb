@@ -26,6 +26,29 @@ class ExportController < ApplicationController
 
     end
 
+    
+    #################
+    #   ICAL ICS    #
+    #################
+    def ical_export_ics
+        j = Jour.find(params[:jour])
+        @jours = Jour.where(date: j.date, utilisateur: j.utilisateur)
+        if @jours.size > 0
+            @utilisateur_email = @jours.first.utilisateur.email
+            @administrateur_prenom_nom = current_user.utilisateur.prenom_nom
+            @administrateur_email = current_user.utilisateur.email
+            @service_nom = @jours.first.service.nom
+            @lieu_nom = @jours.first.service.lieu.nom
+        end
+
+        respond_to do |format|
+            format.html
+            format.text do
+                render text: "file_name"
+            end
+        end
+
+    end
 
     ########################
     #   BLOG MESSAGE PDF   #
@@ -45,40 +68,6 @@ class ExportController < ApplicationController
                 render pdf: "file_name"
             end
         end
-
-
-        # respond_to  do |format|
-        #     format.html
-        #     format.pdf do
-        #         pdf = render_to_string :pdf => 'test',
-        #         #layout: 'pdf.html.erb',
-        #         template: 'exports/blog_message_export_pdf.html.erb',
-        #         header: { :right => '[page] of [topage]' },
-        #         margin: { top: 0, bottom: 0, left: 0, right: 0 },
-        #         outline: { outline: true, outline_depth: 2 }
-        #     end
-        # end
-        
-        # respond_to do |format|
-        #     #some other formats like: format.html { render :show }
-        #     format.pdf do
-        #         pdf = Prawn::Document.new
-        #         pdf.text service.nom
-        #         pdf.text utilisateur.prenom_nom
-        #         pdf.text blog_category.nom
-        #         pdf.text groupe.nom
-        #         pdf.text classe.nom
-        #         pdf.text blog_message.title
-        #         pdf.text blog_message.keywords
-        #         pdf.text blog_message.description
-        #         pdf.text blog_message.created_at.to_s
-                
-        #         send_data pdf.render,
-        #             filename: "export.pdf",
-        #             type: 'application/pdf',
-        #             disposition: 'inline'
-        #     end
-        # end
     end
 
 end

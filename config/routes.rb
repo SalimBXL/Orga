@@ -173,6 +173,7 @@ Rails.application.routes.draw do
   get "week", to: "jours#specific_week"
   get "month", to: "jours#specific_month"
   get "secr_pet", to: "jours#secr_pet"
+  get "ical_export_ics", to: "export#ical_export_ics"
 
 
   ###################
