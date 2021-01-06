@@ -19,27 +19,26 @@
         <% end %>
     </td>
     <td>
-    <% if user_signed_in? && current_user.admin? %>
+        <% if user_signed_in? && current_user.admin? %>
+            <%= link_to '<span data-toggle="tooltip" >
+                <i class="material-icons">edit</i></span>'.html_safe, 
+                edit_utilisateur_path(utilisateur),
+                class: "btn btn-warning btn-xs" %>
+            <%= link_to '<span data-toggle="tooltip" >
+                <i class="material-icons">close</i>'.html_safe, 
+                utilisateur_path(utilisateur),
+                method: :delete,
+                remote: true,
+                data: { confirm: "Delete #{utilisateur.prenom_nom} ?" },
+                class: "btn btn-danger btn-xs" %>
+        <% end %>
 
-        <%= link_to '<span data-toggle="tooltip" >
-            <i class="material-icons">edit</i></span>'.html_safe, 
-            edit_utilisateur_path(utilisateur),
-            class: "btn btn-warning btn-xs" %>
-        <%= link_to '<span data-toggle="tooltip" >
-            <i class="material-icons">close</i>'.html_safe, 
-            utilisateur_path(utilisateur),
-            method: :delete,
-            remote: true,
-            data: { confirm: "Delete #{utilisateur.prenom_nom} ?" },
-            class: "btn btn-danger btn-xs" %>
-        
-
-        &nbsp;
-
-        <%= link_to '<span data-toggle="tooltip" >
-            <i class="material-icons">portrait</i></span>'.html_safe, 
-            utilisateur_path(utilisateur),
-            class: "btn btn-info btn-xs" %>        
+        <% if user_signed_in? && current_user.utilisateur.admin? %>
+            &nbsp;
+            <%= link_to '<span data-toggle="tooltip" >
+                <i class="material-icons">portrait</i></span>'.html_safe, 
+                utilisateur_path(utilisateur),
+                class: "btn btn-info btn-xs" %>
         <% end %>
     </td>
 
