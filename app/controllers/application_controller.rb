@@ -160,11 +160,6 @@ class ApplicationController < ActionController::Base
 
   # Charge les messages
   def charge_messages(date)
-    puts "****************************"
-    puts "****************************"
-    puts "LOOK FOR MESSAGES AT #{date}"
-    puts "****************************"
-    puts "****************************"
     @messages = Message.where('date_fin >= ? AND date <= ?', date, date).order(:service_id, :date, :date_fin)
 end
 

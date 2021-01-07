@@ -80,6 +80,7 @@ module ApplicationHelper
         if user_signed_in?
             current_user.last_connection = DateTime.current()
             current_user.save
+            puts "***** >>>> USER LOGGED IN - #{current_user.utilisateur.prenom_nom} <<<<< *****"
         end
     end
 
