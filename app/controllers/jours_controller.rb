@@ -1,6 +1,6 @@
 class JoursController < ApplicationController
     before_action :find_jour, only: [:show, :edit, :update, :destroy]
-    before_action :read_konfig, only: [:specific_month]
+    before_action :read_konfig, only: [:specific_month, :secr_pet]
 
     #############
     #   INDEX   #
@@ -73,14 +73,7 @@ class JoursController < ApplicationController
             ## Repart vers la page edit si on a pas les deux utilisateurs
             render :edit unless user1 and user2
 
-            puts "***************************************"
-            puts "***************************************"
-            puts " USER 1 => #{user1.prenom_nom}"
-            puts " USER 2 => #{user2.prenom_nom}"
-            puts " JOB 1 => #{job1}"
-            puts " JOB 2 => #{job2}"
-            puts "***************************************"
-            puts "***************************************"
+            
 
             ## Si on a pas de job pour le second user, 
             ## on effectue un simple update
@@ -242,7 +235,14 @@ class JoursController < ApplicationController
         absences.each do |absence|
             (absence.date..absence.date_fin).each do |aj|
                 @absences[absence.utilisateur_id] ||= Hash.new
-                @absences[absence.utilisateur_id][aj.to_s] = absence.accord
+                @absences[absence.utilisateur_id][aj.to_s] = Array.new
+                if @konfiguration[:jours_specific_month]
+                    @absences[absence.utilisateur_id][aj.to_s][0] = (absence.type_absence.code.downcase == @konfiguration[:jours_specific_month].downcase) ? "" : absence.type_absence.code 
+                    @absences[absence.utilisateur_id][aj.to_s][1] = absence.accord
+                else
+                    @absences[absence.utilisateur_id][aj.to_s][0] = absence.type_absence.code
+                    @absences[absence.utilisateur_id][aj.to_s][1] = absence.accord
+                end
             end
         end
 
@@ -414,7 +414,14 @@ class JoursController < ApplicationController
         absences.each do |absence|
             (absence.date..absence.date_fin).each do |aj|
                 @absences[absence.utilisateur_id] ||= Hash.new
-                @absences[absence.utilisateur_id][aj.to_s] = absence.accord
+                @absences[absence.utilisateur_id][aj.to_s] = Array.new
+                if @konfiguration[:jours_secr_pet]
+                    @absences[absence.utilisateur_id][aj.to_s][0] = (absence.type_absence.code.downcase == @konfiguration[:jours_secr_pet].downcase) ? "" : absence.type_absence.code
+                    @absences[absence.utilisateur_id][aj.to_s][1] = absence.accord
+                else
+                    @absences[absence.utilisateur_id][aj.to_s][0] = absence.type_absence.code
+                    @absences[absence.utilisateur_id][aj.to_s][1] = absence.accord
+                end
             end
         end
 
@@ -423,34 +430,7 @@ class JoursController < ApplicationController
 
         # Charge les Events
         @events = Hash.new
-        #nombre_de_jours = (@date2-@date).to_i
-        #nombre_de_jours.times do |i|
-        #    charge_events(@date + i.day)
-        #end
-
-        # mode edition ?
-        #unless params[:edit_mode]
-        #    @edit_mode = false
-        #else
-        #    if params[:edit_mode].downcase == 'true'
-        #        @edit_mode = true
-        #    else
-        #        @edit_mode = false
-        #    end
-        #end
-
-        # mode new day ?
-        #unless params[:new_day_mode]
-        #    @new_day_mode = false
-        #else
-        #    if params[:new_day_mode].downcase == 'true'
-        #        @new_day_mode = true
-        #    else
-        #        @new_day_mode = false
-        #    end
-        #end
-
-
+        
         if user_signed_in? && (current_user.admin? or current_user.utilisateur.admin)
             find_utilisateurs
             find_classes
@@ -458,6 +438,10 @@ class JoursController < ApplicationController
         end
 
         @values = ["Early 1", "Early 2", "Regular"]
+
+        puts "**********************"
+        pp @konfiguration
+        puts "**********************"
         
     end
 
