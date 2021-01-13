@@ -155,6 +155,14 @@ class ToolsController < ApplicationController
             @batchs_per_user[batch.utilisateur] << batch
         end
 
+        @batchs_per_user_done = Hash.new
+        liste = Jour.where("date::date <= ? AND date::text LIKE ?", Date.today, "#{Date.today.year}-%").order(:utilisateur_id)
+        last_user = nil
+        liste.each do |batch|
+            @batchs_per_user_done[batch.utilisateur] ||= Array.new
+            @batchs_per_user_done[batch.utilisateur] << batch
+        end
+
     end
 
 
