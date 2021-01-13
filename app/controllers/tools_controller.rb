@@ -124,6 +124,42 @@ class ToolsController < ApplicationController
         end
     end
 
+
+    #################
+    #   STATISTICS  #
+    #################
+    def statistics
+
+        # BATCHS PER YEAR
+
+        @batchs_per_year = Hash.new
+        @batchs_per_year_total = Hash.new
+        ((Date.today.year - 1) .. Date.today.year).each do |y|
+            @batchs_per_year_total[y] = 0
+            (1 .. 12).each do |m|
+                m = (m<10) ? "0#{m}" : "#{m}"
+                @batchs_per_year[y] ||= Hash.new
+                @batchs_per_year[y][m] = Jour.where("date::text LIKE ?", "#{y}-#{m}-%").size
+                @batchs_per_year_total[y] += @batchs_per_year[y][m]
+            end
+        end
+
+
+        # BATCHS PER USER
+
+        @batchs_per_user = Hash.new
+        liste = Jour.where("date::text LIKE ?", "#{Date.today.year}%").order(:utilisateur_id)
+        last_user = nil
+        liste.each do |batch|
+            @batchs_per_user[batch.utilisateur] ||= Array.new
+            @batchs_per_user[batch.utilisateur] << batch
+        end
+
+    end
+
+
+    # ###############################################################################
+
     private 
 
 

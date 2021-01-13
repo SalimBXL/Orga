@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="page-header">
+    <h1>
+        <span class="label label-warning">
+            <i class="material-icons">analytics</i>
+            <%= I18n.t("tools.statistics.titre").upcase %>
+        </span>
+    </h1>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>Number of Batchs per year</h3>
+            <table class="table">
+                <% @batchs_per_year_total.keys.each do |y| %>
+                    <tr>
+                        <td><strong><%= y %> : </strong></td>
+                        <td><%= @batchs_per_year_total[y] %></td>
+                    </tr>
+                <% end %>
+            </table>
+        </div>
+        
+        <div class="col-sm-8">
+            <h3>Number of Batchs (per month)</h3>
+            <table class="table">
+            <% @batchs_per_year.keys.each do |y| %>
+                <tr>
+                    <% (1 .. 12).each do |m| %>
+                        <% m = (m<10) ? "0#{m}" : "#{m}" %>
+                        <td><strong><%= m %></strong></td>
+                        <td><%= @batchs_per_year[y][m] %></td>
+                    <% end %>
+                </tr>
+            <% end %>
+            </table>
+        </div>
+        
+        <div class="col-sm-4">
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>Batchs per user this year</h3>
+            <ol>
+            <% @batchs_per_user.keys.each do |u| %>
+                <li><%= u.prenom_nom %> : <%= @batchs_per_user[u].size %></li>
+            <% end %>
+            </ol>
+        </div>
+        
+        <div class="col-sm-4">
+        </div>
+        
+        <div class="col-sm-4">
+        </div>
+    </div>
+
+</div>

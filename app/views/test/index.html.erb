@@ -1,0 +1,18 @@
+<% hey = "Hum!" %>
+<h1>TEST</h1>
+
+<div class="row">
+
+    <div class="col-sm-4">
+        <% @users1.each do |user| %>
+            <%= user.email %> <%= user.last_connection %>
+        <% end %>
+    </div>
+
+    <div class="col-sm-4">
+        <% @users2.each do |user| %>
+            <%= user.email %> <%= user.last_connection %>
+        <% end %>
+    </div>
+
+</div>

@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   get "check_admins", to: "tools#check_admins"
   get "backup_db", to: "tools#backup_db"
   get "download_backup", to: "tools#download_backup"
+  get "statistics", to: "tools#statistics"
 
 
   ####################
@@ -190,4 +191,5 @@ Rails.application.routes.draw do
   
   ######## TESTS
   get "show.pdf", to: "export#show"
+  get "test", to: "test#index"
 end

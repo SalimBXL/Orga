@@ -583,6 +583,9 @@ en:
     konfigure:
       description: This tool help to configure this app.
       titre: Configure
+    statistics:
+      description: This tool shows a dashboard with several stats about the database and the user's load.
+      titre: Statistics
   type_absences:
     index:
       codes: Codes
