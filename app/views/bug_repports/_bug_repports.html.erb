@@ -1,7 +1,7 @@
 <!-- Table paginée -->
 <p><%= paginate @bug_repports, remote: true %></p>
-<div class="table-responsive">
-    <table class="table table-striped">
+
+    <table class="table table-condensed">
         <tr>
             <th><%= I18n.t("bug_repports.index.dates") %></th>
             <th><%= I18n.t("bug_repports.index.status") %></th>
@@ -11,5 +11,5 @@
         </tr>
         <%= render @bug_repports %>
     </table>
-</div>
+
 <p><%= paginate @bug_repports, remote: true %></p>
