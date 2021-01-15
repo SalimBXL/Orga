@@ -4,9 +4,9 @@
     </p>
     
     <% @last_date = nil %>
-    <table class="table">
+    
         <%= render @blog_messages %>
-    </table>
+    
 
     <p>
         <%= paginate @blog_messages, remote: true %>
