@@ -43,13 +43,23 @@
                                 <% @jours.where(date: tmp_jour).each do |batch| %>
                                     <% bg = "primary" %>
                                     <% bg = "info" if batch.am_pm %>
-                                    <a href="<%= edit_jour_path(batch.id) %>" 
-                                        data-toggle="tooltip" title="<%= batch.service.nom %>"
-                                        class="btn btn-<%= bg %> btn-xs">
-                                        <% @wks[batch].each do |wk| %>
-                                            <%= wk %>
-                                        <% end %>
-                                    </a>
+
+                                    <% if current_user.admin? || (current_user.utilisateur.admin? and current_user.utilisateur.service == batch.service) %>
+                                        <a href="<%= edit_jour_path(batch.id) %>" 
+                                            class="btn btn-<%= bg %> btn-xs">
+                                            <% @wks[batch].each do |wk| %>
+                                                <%= wk %>
+                                            <% end %>
+                                        </a>
+                                    <% else %>
+                                        <span data-toggle="tooltip" 
+                                            title="<%= batch.service.nom %>"
+                                            class="btn btn-<%= bg %> btn-xs">
+                                            <% @wks[batch].each do |wk| %>
+                                                <%= wk %>
+                                            <% end %>
+                                        </span>
+                                    <% end %>
                                 <% end %>
                             </td>
                         <% end %>
