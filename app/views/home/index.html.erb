@@ -20,5 +20,12 @@
     
     <%= render "barre_menu" if user_signed_in? %>
     <%= render "last_connects" if user_signed_in? and current_user.utilisateur.admin %>
+
+    <% if user_signed_in? && current_user.admin? %>
+        <p>
+            <%= "#{@bugs_new} new bug(s)." if @bugs_new > 0 %> 
+            <%= "#{@bugs_test} bug(s) on test." if @bugs_test > 0 %>
+        </p>
+    <% end %>
 </div>
 

@@ -21,6 +21,10 @@
         <a href="<%= bug_repports_path %>" class="btn btn-info" role="button">
                 <i class="material-icons">bug_report</i><br>
                 <%= I18n.t("home.index.bug_repport") %>
+
+                <% if @bugs_new > 0 %>
+                    <span class="badge"><%= "#{@bugs_new} new bug(s)." %></span>
+                <% end %>
             </a>
         <a href="<%= blog_messages_path %>" class="btn btn-info" role="button">
                 <i class="material-icons">rss_feed</i><br>

@@ -32,6 +32,12 @@ class HomeController < ApplicationController
         # Charge les trois derniers articles du blog
         @articles = BlogMessage.order(date: :desc).order(:updated_at).last(3)
 
+        # Nombre de bugs en attente
+        if user_signed_in? && current_user.admin?
+            @bugs_new = BugRepport.where(status: "outlined_flag").size
+            @bugs_test = BugRepport.where(status: "sync_problem").size
+        end
+
     end
 
     private 
