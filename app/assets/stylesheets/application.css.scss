@@ -28,6 +28,9 @@
  body {
      background-color: white;
      font-family: "Montserrat";
+     margin:0 auto;
+    padding:0px;
+    border: 0px;
  }
 
  .locale-flag {
@@ -79,14 +82,14 @@
    color: white;
 }
 
-.grille {
-    font-size: 75%;
-    margin: 0;
-    padding: 0;
-    .table {
-        margin: 0;
-        padding: 0;
-    }
+.ferie {
+    background-color:grey;
+    color: white;
+}
+.weekend {
+    background-color: lightgrey;
+    color: white;
+    width: min-content;
 }
 
 .center {
@@ -107,17 +110,6 @@
 .already_a_job {
     color: gray;
 }
-
-.ferie {
-    background-color:grey;
-    color: white;
-}
-.weekend {
-    background-color: lightgrey;
-    color: white;
-}
-
-
 
 .cacher { visibility: hidden; display: none; }
 .afficher { visibility: visible; }
@@ -162,9 +154,7 @@
     text-align: start;
 }
 
-.tdfixe {
-    width: 150px;
-}
+
 
 .today {
     background-color: lightyellow;

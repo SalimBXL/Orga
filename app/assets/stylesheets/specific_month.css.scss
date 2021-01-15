@@ -1,81 +1,47 @@
-body {
-    margin:0 auto;
-    padding:0px;
-    border: 0px;
+
+table {
+    font-size: 75%;
+    margin: 5px;
+    padding: 0;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid rgb(192,192,192);
+    text-align: left;
 }
 
- .locale-flag {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 10px;
-    width: 64px;
- }
+table td {
+    border: 1px solid rgb(192,192,192);
+    margin: 5px;
+    padding: 5px;
+}
 
-.conge_ok {
-    background-color: rgb(113, 189, 0);
+.ligne:hover {background-color:#f5f5f5;}
+
+.nom_utilisateur {
+    width: 90px;
+    min-width: 90px;
+    max-width: 90px;
+}
+.weekend {
+    width: 18px;
+    min-width: 18px;
+    max-width: 18px;
+    background-color: lightgrey;
     color: white;
 }
-.conge_wait {
-    background-color: rgb(198, 255, 123);
-    color: green;
-}
-.conge_accord_ok {
-    background-color: greenyellow;
-    color: green;
-}
-.conge_accord_wait {
-    background-color: red;
-   color: white;
+
+.normal {
+    width: 50px;
+    min-width: 50px;
+    max-width: 50px;
 }
 
-.grille {
-    font-size: 75%;
-    margin: 0;
-    padding: 0;
-    .table {
-        margin: 0;
-        padding: 0;
-    }
-}
-
-.tdfixe {
-    width: 150px;
-}
-.tdfixe2 {
-    width: 90px;
-}
-.tdfixe2-meteo {
-    //width: 90px;
-    margin: 0;
-    padding: 0;
-}
-.tffixe3 {
-    height: 90px;
-}
-.tdW {
-    width: 15px;
-    
-}
-
-.center {
-    display: flex;
-    align-items: center;
+.ferie {
+    background-color:grey;
+    color: white;
 }
 
 .absence {
     background-color: rgb(255,183,77);
     color: white;
 }
-
-.keep_attention {
-    background-color:red;
-    color: white;
-}
-
-
-
-
-
-
-.cacher { visibility: hidden; display: none; }
-.afficher { visibility: visible; }

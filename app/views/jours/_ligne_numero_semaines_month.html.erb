@@ -1,8 +1,9 @@
 <tr>
-    <td class="tdfixe"></td>
+    <td class="nom_utilisateur"></td>
+
     <% ((@date2-@date).to_i).times do |i| %>
         <% if (@date + i.day).wday==1 %>
-            <td class="tdfixe2" colspan="6">
+            <td colspan="6">
                 <%= "##{(@date + i.day).cweek}" %>
             </td>
         <% end %>

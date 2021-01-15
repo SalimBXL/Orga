@@ -1,13 +1,13 @@
 <tr>
-    <td class="tdfixe"></td>
+    <td class="nom_utilisateur"></td>
     <% ((@date2-@date).to_i).times do |i| %>
         <% if (@date + i.day).wday!=0 %>
             <% if (@date + i.day).wday==6 %> 
                 <!-- WEEKEND -->                       
-                <td class="tdW">W</td>
+                <td class="weekend">W</td>
             <% else %>
                 <!-- JOUR DE SEMAINE -->
-                <td class="tdfixe2">
+                <td class="normal">
                     <!-- Numéro du jour -->
                     <%= (@date + i.day).day %>
                     
