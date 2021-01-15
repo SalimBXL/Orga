@@ -23,7 +23,7 @@
                 <%= I18n.t("home.index.bug_repport") %>
 
                 <% if @bugs_new > 0 %>
-                    <span class="badge"><%= "#{@bugs_new} new bug(s)." %></span>
+                    <span class="badge"><%= @bugs_new %></span>
                 <% end %>
             </a>
         <a href="<%= blog_messages_path %>" class="btn btn-info" role="button">
