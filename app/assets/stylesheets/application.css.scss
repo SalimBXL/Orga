@@ -104,7 +104,9 @@ table td {
 .weekend {
     background-color: lightgrey;
     color: white;
-    width: min-content;
+    width: 18px;
+    min-width: 18px;
+    max-width: 18px;
 }
 
 .center {
