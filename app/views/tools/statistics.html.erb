@@ -25,9 +25,9 @@
     <% @batchs_per_user.keys.each do |u| %>
         <tr class="ligne">
             <td class="nom_utilisateur"><%= u.prenom_nom %></td>  
-            <td><%= @total_per_user[u] unless @total_per_user[u].nil? %></td>
-            <td><%= @total_per_user_done[u] unless @total_per_user_done[u].nil? %></td>
-            <td><%= (@total_per_user[u] - @total_per_user_done[u]) %></td>
+            <td><%= @total_per_user[u].to_i %></td>
+            <td><%= @total_per_user_done[u].to_i %></td>
+            <td><%= (@total_per_user[u].to_i - @total_per_user_done[u].to_i) %></td>
             <tD></td>
             <% @works.keys.each do |id| %>
                 <td><%= @batchs_per_user[u][id] %></td>
