@@ -59,6 +59,7 @@
         </div>
         <%= render partial: "manager" if user_signed_in? && current_user.utilisateur.admin %>
 </div>
+<br>
 <div class="row">
     <%= render partial: "admin" if user_signed_in? && current_user.admin %>
         <!-- Bouton secrétaire -->
@@ -84,4 +85,15 @@
             <%= I18n.t("home.index.blog").upcase %>
         </a>
     </div>
+
+    <!-- BACKUP DB -->
+    <% if current_user.utilisateur.admin? %>
+        <div class="btn-group">
+            <a href=<%= backup_db_path %> class="btn btn-info" role="button">
+                <i class="material-icons">save_alt</i><br>
+                Backup
+            </a>
+        </div>
+    <% end %>
+
 </div>

@@ -130,39 +130,38 @@ class ToolsController < ApplicationController
     #################
     def statistics
 
-        # BATCHS PER YEAR
+        @works = Hash.new
+        Work.order(:service_id, :code).each do |work|
+            @works[work.id] = work.code
+        end
 
-        @batchs_per_year = Hash.new
-        @batchs_per_year_total = Hash.new
-        ((Date.today.year - 1) .. Date.today.year).each do |y|
-            @batchs_per_year_total[y] = 0
-            (1 .. 12).each do |m|
-                m = (m<10) ? "0#{m}" : "#{m}"
-                @batchs_per_year[y] ||= Hash.new
-                @batchs_per_year[y][m] = Jour.where("date::text LIKE ?", "#{y}-#{m}-%").size
-                @batchs_per_year_total[y] += @batchs_per_year[y][m]
+        # Nombre des batchs passés cette année.
+        #
+        @batchs_per_user_done = Hash.new
+        @total_per_user_done = Hash.new
+        liste = Jour.where("date::date <= ? AND date::text LIKE ?", Date.today, "#{Date.today.year}-%").order(:utilisateur_id)
+        liste.each do |batch|
+            @total_per_user_done[batch.utilisateur] ||= 0
+            @total_per_user_done[batch.utilisateur] = @total_per_user_done[batch.utilisateur] + 1
+        end
+
+        # Liste des batchs prévus cette année.
+        #
+        @batchs_per_user = Hash.new
+        @total_per_user = Hash.new
+        liste = Jour.where("date::text LIKE ?", "#{Date.today.year}%").order(:utilisateur_id)
+        liste.each do |batch|
+            @total_per_user[batch.utilisateur] ||= 0
+            @total_per_user[batch.utilisateur] = @total_per_user[batch.utilisateur] + 1
+            working_lists = WorkingList.where(jour_id: batch.id)
+            working_lists.each do |wl|
+                @batchs_per_user[batch.utilisateur] ||= Hash.new
+                @batchs_per_user[batch.utilisateur][wl.work_id] ||= 0
+                @batchs_per_user[batch.utilisateur][wl.work_id] = @batchs_per_user[batch.utilisateur][wl.work_id] + 1
             end
         end
 
-
-        # BATCHS PER USER
-
-        @batchs_per_user = Hash.new
-        liste = Jour.where("date::text LIKE ?", "#{Date.today.year}%").order(:utilisateur_id)
-        last_user = nil
-        liste.each do |batch|
-            @batchs_per_user[batch.utilisateur] ||= Array.new
-            @batchs_per_user[batch.utilisateur] << batch
-        end
-
-        @batchs_per_user_done = Hash.new
-        liste = Jour.where("date::date <= ? AND date::text LIKE ?", Date.today, "#{Date.today.year}-%").order(:utilisateur_id)
-        last_user = nil
-        liste.each do |batch|
-            @batchs_per_user_done[batch.utilisateur] ||= Array.new
-            @batchs_per_user_done[batch.utilisateur] << batch
-        end
-
+                
     end
 
 

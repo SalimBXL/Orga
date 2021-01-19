@@ -9,87 +9,33 @@
     </div>
 </div>
 
-<div class="container">
 
-    <div class="row">
-        <div class="col-sm-4">
-            <h3>Batchs per user this year</h3>
-            <table class="table table-condensed table-striped">
-                <tr>
-                    <th> </th>
-                    <th>Scheduled</th>
-                    <th>Done</th>
-                    <th>Done/Week</th>
-                    <th>To Do</th>
-                </tr>
 
-                <% total = 0 %>
-                <% total_done = 0 %>
-                <% nombre_personnes = 0 %>
+    <h3>Batchs per user this year</h3>
+    <table class="table table-bordered grille">
+        <tr>
+            <th> </th>
+            <th>Scheduled</th>
+            <th>Done</th>
+            <th>ToDo</th>
+            <% @works.keys.each do |id| %>
+                <th><%= @works[id] %></th>
+            <% end %>
+        </tr>
 
-                <% @batchs_per_user.keys.each do |u| %>
-                    <tr>
-                        <td><%= u.prenom_nom %></td>  
-                        <td><%= @batchs_per_user[u].size unless @batchs_per_user[u].nil? %></td>
-                        <td><%= @batchs_per_user_done[u].size unless @batchs_per_user_done[u].nil? %></td>
-                        <td><%= (@batchs_per_user_done[u].size/Date.today.cweek) unless @batchs_per_user_done[u].nil? %></td>
-                        <td><%= ( @batchs_per_user[u].size - @batchs_per_user_done[u].size ) if (@batchs_per_user_done[u] and @batchs_per_user[u]) %></td>
+        <% @batchs_per_user.keys.each do |u| %>
+            <tr class="ligne">
+                <td class="nom_utilisateur"><%= u.prenom_nom %></td>  
+                <td><%= @total_per_user[u] unless @total_per_user[u].nil? %></td>
+                <td><%= @total_per_user_done[u] unless @total_per_user_done[u].nil? %></td>
+                <td><%= (@total_per_user[u] - @total_per_user_done[u]) unless (@total_per_user[u].nil? and @total_per_user_done[u].nil?) %></td>
 
-                        <% total = total + @batchs_per_user[u].size unless @batchs_per_user[u].nil? %>
-                        <% total_done = total_done + @batchs_per_user_done[u].size unless @batchs_per_user_done[u].nil? %>
-                    </tr>
+                <% @works.keys.each do |id| %>
+                    <td><%= @batchs_per_user[u][id] %></td>
                 <% end %>
-                <% nombre_personnes = @batchs_per_user.keys.size %>
-            </table>
-        </div>
 
-        <div class="col-sm-4">
-            <h3>Number of Batchs per year</h3>
-            <table class="table">
-                <% @batchs_per_year_total.keys.each do |y| %>
-                    <tr>
-                        <td><strong><%= y %> : </strong></td>
-                        <td><%= @batchs_per_year_total[y] %></td>
-                    </tr>
-                <% end %>
-            </table>
-        </div>
-        
-        <div class="col-sm-4">
-            <h3>Batchs per user this year</h3>
-            <table class="table table-condensed">
-                <tr>
-                    <th> </th>
-                    <th>Scheduled</th>
-                    <th>Done<th>
-                </tr>
-                <tr>
-                    <td>Average / Pers. this year</td>
-                    <td><%= (total / nombre_personnes) %></td>
-                    <td><%= (total_done / nombre_personnes) %></td>
-                </tr>
-                <tr>
-                    <td>Average / Pers./ Week</td>
-                    <td>-</td>
-                    <td><%= (total_done / nombre_personnes / Date.today.cweek) %></td>
-                </tr>
-            </table>
-        </div>
-        
-        <div class="col-sm-8">
-            <h3>Number of Batchs (per month)</h3>
-            <table class="table">
-                <% @batchs_per_year.keys.each do |y| %>
-                    <tr>
-                        <% (1 .. 12).each do |m| %>
-                            <% m = (m<10) ? "0#{m}" : "#{m}" %>
-                            <td><strong><%= m %></strong></td>
-                            <td><%= @batchs_per_year[y][m] %></td>
-                        <% end %>
-                    </tr>
-                <% end %>
-            </table>
-        </div>
-    </div>
+                <td></td>
+            </tr>
+        <% end %>
+    </table>
 
-</div>
