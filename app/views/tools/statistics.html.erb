@@ -9,33 +9,31 @@
     </div>
 </div>
 
-
-
-    <h3>Batchs per user this year</h3>
-    <table class="table table-bordered grille">
-        <tr>
-            <th> </th>
-            <th>Scheduled</th>
-            <th>Done</th>
-            <th>ToDo</th>
-            <% @works.keys.each do |id| %>
-                <th><%= @works[id] %></th>
-            <% end %>
-        </tr>
-
-        <% @batchs_per_user.keys.each do |u| %>
-            <tr class="ligne">
-                <td class="nom_utilisateur"><%= u.prenom_nom %></td>  
-                <td><%= @total_per_user[u] unless @total_per_user[u].nil? %></td>
-                <td><%= @total_per_user_done[u] unless @total_per_user_done[u].nil? %></td>
-                <td><%= (@total_per_user[u] - @total_per_user_done[u]) unless (@total_per_user[u].nil? and @total_per_user_done[u].nil?) %></td>
-
-                <% @works.keys.each do |id| %>
-                    <td><%= @batchs_per_user[u][id] %></td>
-                <% end %>
-
-                <td></td>
-            </tr>
+<h3>Batchs per user this year</h3>
+<table class="table table-bordered table-striped grille">
+    <tr>
+        <th> </th>
+        <th>Scheduled</th>
+        <th>Done</th>
+        <th>ToDo</th>
+        <% @works.keys.each do |id| %>
+            <th><%= @works[id] %></th>
         <% end %>
-    </table>
+    </tr>
+
+    <% @batchs_per_user.keys.each do |u| %>
+        <tr class="ligne">
+            <td class="nom_utilisateur"><%= u.prenom_nom %></td>  
+            <td><%= @total_per_user[u] unless @total_per_user[u].nil? %></td>
+            <td><%= @total_per_user_done[u] unless @total_per_user_done[u].nil? %></td>
+            <td><%= (@total_per_user[u] - @total_per_user_done[u]) unless (@total_per_user[u].nil? and @total_per_user_done[u].nil?) %></td>
+
+            <% @works.keys.each do |id| %>
+                <td><%= @batchs_per_user[u][id] %></td>
+            <% end %>
+
+            <td></td>
+        </tr>
+    <% end %>
+</table>
 
