@@ -16,25 +16,57 @@
         <th>Scheduled</th>
         <th>Done</th>
         <th>ToDo</th>
-        <th></th>
-        <% @works.keys.each do |id| %>
-            <th><%= @works[id] %></th>
+
+        <% tmp_class = nil %>
+        <% @works.each do |work| %>
+            <% unless work.classe_id == tmp_class %>
+                <% tmp_class = work.classe_id %>
+                <th></th>
+            <% end %>
+            <th><%= work.code %></th>
         <% end %>
     </tr>
 
-    <% @batchs_per_user.keys.each do |u| %>
+    <% tmp_service = nil %>
+    <% tmp_groupe = nil %>
+    <% @utilisateurs.each do |utilisateur| %>
+
+        <!-- SERVICE -->
+        <% unless utilisateur.service_id == tmp_service %>
+            <% tmp_service = utilisateur.service_id %>
+            <tr>
+                <td colspan="<%= 5+@works.size %>"><h5><%= @services[utilisateur.service_id] %></h5></td>
+            </tr>
+        <% end %>
+
+        <!-- GROUPE -->
+        <% unless utilisateur.groupe_id == tmp_groupe %>
+            <% tmp_groupe = utilisateur.groupe_id %>
+            <tr>
+                <td colspan="<%= 5+@works.size %>"><strong><%= @groupes[utilisateur.groupe_id].upcase %></strong></td>
+            </tr>
+        <% end %>
+
+        <!-- UTILISATEUR -->
         <tr class="ligne">
-            <td class="nom_utilisateur"><%= u.prenom_nom %></td>  
-            <td><%= @total_per_user[u].to_i %></td>
-            <td><%= @total_per_user_done[u].to_i %></td>
-            <td><%= (@total_per_user[u].to_i - @total_per_user_done[u].to_i) %></td>
-            <tD></td>
-            <% @works.keys.each do |id| %>
-                <td><%= @batchs_per_user[u][id] %></td>
+            <td class="nom_utilisateur"><%= utilisateur.prenom_nom %></td>
+            <td><%= @total_per_user[utilisateur].to_i %></td>
+            <td><%= @total_per_user_done[utilisateur].to_i %></td>
+            <td><%= (@total_per_user[utilisateur].to_i - @total_per_user_done[utilisateur].to_i) %></td>
+
+            <!-- WORKS -->
+            <% tmp_class = nil %>
+            <% @works.each do |work| %>
+                <% unless work.classe_id == tmp_class %>
+                    <% tmp_class = work.classe_id %>
+                    <th></th>
+                <% end %>
+                <td><%= @batchs_per_user[utilisateur][work.id] unless @batchs_per_user[utilisateur].nil? %></td>
             <% end %>
 
-            <td></td>
         </tr>
     <% end %>
+
+
 </table>
 

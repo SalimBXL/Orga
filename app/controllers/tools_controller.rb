@@ -130,10 +130,19 @@ class ToolsController < ApplicationController
     #################
     def statistics
 
-        @works = Hash.new
-        Work.order(:service_id, :code).each do |work|
-            @works[work.id] = work.code
+        @services = Hash.new
+        Service.order(:id).each do |k|
+            @services[k.id] = k.nom
         end
+
+        @groupes = Hash.new
+        Groupe.order(:id).each do |k|
+            @groupes[k.id] = k.nom
+        end
+
+        @utilisateurs = Utilisateur.order(:service_id, :groupe_id, :prenom, :nom)
+        @works = Work.order(:service_id, :code)
+        
 
         # Nombre des batchs passés cette année.
         #
