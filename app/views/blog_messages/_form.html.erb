@@ -107,9 +107,13 @@
             <br><%= form.label I18n.t("blog_messages.new.logbook") %>
             <%= form.check_box :logbook %>
 
-            <% if user_signed_in? && (current_user.admin? || current_user.utilisateur.admin?) %>
-                <br><%= form.label I18n.t("blog_messages.new.reviewed") %>
-                <%= form.check_box :reviewed %>
+            <% if @blog_message.logbook %>
+                <% unless current_user.utilisateur.id == @blog_message.utilisateur_id %>
+                    <% if user_signed_in? && (current_user.admin? || current_user.utilisateur.admin?) %>
+                        <br><%= form.label I18n.t("blog_messages.new.reviewed") %>
+                        <%= form.check_box :reviewed %>
+                    <% end %>
+                <% end %>
             <% end %>
         </h6>
     </td>
