@@ -99,11 +99,18 @@
     </td>
     <td>&nbsp;&nbsp;&nbsp;</td>
     <td>&nbsp;&nbsp;&nbsp;</td>
+    
+    <!-- LOGBOOK & REVIEWED -->
     <td>
         <h6>
             <span class="label label-danger  material-icons">local_library</span>
             <br><%= form.label I18n.t("blog_messages.new.logbook") %>
             <%= form.check_box :logbook %>
+
+            <% if user_signed_in? && (current_user.admin? || current_user.utilisateur.admin?) %>
+                <br><%= form.label I18n.t("blog_messages.new.reviewed") %>
+                <%= form.check_box :reviewed %>
+            <% end %>
         </h6>
     </td>
     </tr>

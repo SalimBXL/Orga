@@ -14,7 +14,12 @@
     <div class="col-sm-1"></div>
     
     <% nbr_reponses = BlogResponse.where(blog_message_id: blog_message.id).size %>
-    <div class="panel panel-default col-sm-8 ">
+    <% if blog_message.logbook and !blog_message.reviewed %>
+        <% panel_color = "panel-danger" %>
+    <% else %>
+        <% panel_color = "panel-default" %>
+    <% end %>
+    <div class="panel <%= panel_color %> col-sm-8 ">
 
         <div class="panel-heading">
             <strong><%= blog_message.title.capitalize %></strong>
@@ -30,6 +35,10 @@
                     data-toggle="tooltip" title="LogBook">
                     <span class="material-icons">local_library</span>
                 </a>
+                <% unless blog_message.reviewed %>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="label label-danger">Not yet reviewed !</span>
+                <% end %>
             <% end %>
         </div>
 

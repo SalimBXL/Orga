@@ -27,6 +27,15 @@
             <%= link_to '<i class="material-icons">add</i> '.html_safe, 
                 new_blog_message_path,
                 class: "btn btn-success btn-xs" %>
+
+            &nbsp;&nbsp;&nbsp;
+            <% if @not_yet_reviewed_messages > 0 %>
+            <a href="<%= blog_messages_path(reviewed: true) %>"
+                class="btn btn-danger btn-xs" role="button">
+                <span class="badge"><%= @not_yet_reviewed_messages %></span> article(s) not yet reviewed
+            </a>
+            <% end %>
+            
         </div>
         
         <div class="col-sm-4">

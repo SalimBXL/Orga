@@ -13,7 +13,11 @@ class BlogMessagesController < ApplicationController
     def index
         # Log action
         log(request.path)
+        
+        @not_yet_reviewed_messages = BlogMessage.where(logbook: true, reviewed: nil).size
+
         @blog_messages = nil
+        @blog_messages = BlogMessage.where(logbook: true, reviewed: nil).order(date: :desc).page(params[:page]) if params[:reviewed]
         @blog_messages = BlogMessage.where(blog_category_id: params[:blog_category_id]).order(date: :desc).page(params[:page]) if params[:blog_category_id]
         @blog_messages = BlogMessage.where(service_id: params[:service_id]).order(date: :desc).page(params[:page]) if params[:service_id]
         @blog_messages = BlogMessage.where(utilisateur_id: params[:utilisateur_id]).order(date: :desc).page(params[:page]) if params[:utilisateur_id]        
@@ -100,7 +104,7 @@ class BlogMessagesController < ApplicationController
     private 
 
     def message_params
-        params.require(:blog_message).permit(:service_id, :title, :date, :utilisateur_id, :description, :blog_category_id, :groupe, :classe, :logbook)
+        params.require(:blog_message).permit(:service_id, :title, :date, :utilisateur_id, :description, :blog_category_id, :groupe, :classe, :logbook, :reviewed)
     end
 
     def find_message

@@ -32,7 +32,12 @@
     <hr>
     
     <!-- TEXT -->
-    <h3><span class="label label-default"><%= I18n.t("blog_messages.show.article") %></span></h3>
+    <h3>
+        <span class="label label-default"><%= I18n.t("blog_messages.show.article") %></span>
+        <% if @blog_message.logbook and !@blog_message.reviewed %>
+            <span class="label label-danger">Not yet reviewed !</span>
+        <% end %>
+    </h3>
     <p>
         <strong><%= I18n.t("blog_messages.show.title") %> :</strong> <%= @blog_message.title.capitalize %><br>
         <strong><%= I18n.t("blog_messages.show.description") %> :</strong><br>
