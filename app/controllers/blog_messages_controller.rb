@@ -24,7 +24,11 @@ class BlogMessagesController < ApplicationController
         @blog_messages = BlogMessage.where(classe: params[:classe]).order(date: :desc).page(params[:page]) if params[:classe]
         @blog_messages = BlogMessage.where(groupe: params[:groupe]).order(date: :desc).page(params[:page]) if params[:groupe]
         @blog_messages = BlogMessage.where(logbook: true).order(date: :desc).page(params[:page]) if params[:logbook]
-        @blog_messages = BlogMessage.where(date: params[:date].to_datetime.strftime("%Y-%m-%d")).order(date: :desc).page(params[:page]) if params[:date] and !params[:date].blank?
+        
+        #@blog_messages = BlogMessage.where(date: params[:date].to_datetime.strftime("%Y-%m-%d")).order(date: :desc).page(params[:page]) if params[:date] and !params[:date].blank?
+        
+        @blog_messages = BlogMessage.where("date >= ? and date <= ?", params[:date].to_datetime.strftime("%Y-%m-%d"), params[:date].to_datetime.end_of_month.strftime("%Y-%m-%d")).order(date: :desc).page(params[:page]) if params[:date] and !params[:date].blank?
+        
         @blog_messages = BlogMessage.where("title ilike ? OR description ilike ?", "%#{params[:search]}%", "%#{params[:search]}%").order(date: :desc).page(params[:page]) if params[:search]
         @blog_messages = BlogMessage.order(date: :desc).page(params[:page]) if @blog_messages.nil?
     end
