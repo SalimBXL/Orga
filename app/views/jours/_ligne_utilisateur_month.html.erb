@@ -33,7 +33,7 @@
             <% unless @absences[utilisateur.id].nil? %>
                 <% var_abs = @absences[utilisateur.id][date_jour.to_s] %>
                 <% if @absences[utilisateur.id].keys.include?(date_jour.to_s) %>
-                    <% if @absences[utilisateur.id][date_jour.to_s] %>
+                    <% if @absences[utilisateur.id][date_jour.to_s][1]%>
                         <% bg = "conge_ok" %>
                     <% else %>
                         <% bg = "conge_wait" %>
