@@ -1,5 +1,5 @@
 class BlogMessagesController < ApplicationController
-    before_action :find_message, only: [:show, :edit, :update, :destroy]
+    before_action :find_message, only: [:show, :edit, :update, :destroy, :review]
     before_action :find_classes
     before_action :find_categories
     before_action :find_groupes
@@ -104,6 +104,19 @@ class BlogMessagesController < ApplicationController
         # Log action
         log(request.path, I18n.t("messages.index.log_destroy"))
         @blog_message.destroy
+    end
+
+
+    #############
+    #   REVIEW  #
+    #############
+    def review
+        log(request.path, I18n.t("messages.index.log_review_blog"))
+        @blog_message.reviewed = true if @blog_message.logbook and @blog_message.reviewed.nil?
+        if @blog_message.update(reviewed: @blog_message.reviewed)
+            flash[:notice] = "Article modifié avec succès"
+        end
+        redirect_to blog_messages_path
     end
 
 

@@ -104,6 +104,7 @@ en:
       date: Date
       groupe: Groupe
       logbook: Logbook
+      reviewed: Reviewed
       search: Search
       service: Service
       title: Title
@@ -122,6 +123,8 @@ en:
       published_at: Published at
       respond: Respond
       responses: Responses
+      review: Review
+      rewiew: Rewiew
       service: Service
       title: Title
       updated_at: Updated at
