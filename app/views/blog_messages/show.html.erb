@@ -43,6 +43,12 @@
         <strong><%= I18n.t("blog_messages.show.description") %> :</strong><br>
         <%= @blog_message.description %>
     </p>
+    <p>
+        &nbsp;&nbsp;&nbsp;
+        <% if @blog_message.logbook and @blog_message.reviewed==true and !@blog_message.reviewer.nil? %>
+            <span class="text-muted">[Reviewed by <%= @reviewer %>]</span>
+        <% end %>
+    </p>
     
     <!-- BUTTONS -->
     <p>

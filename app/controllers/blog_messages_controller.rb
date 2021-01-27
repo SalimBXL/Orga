@@ -14,7 +14,8 @@ class BlogMessagesController < ApplicationController
         # Log action
         log(request.path)
         
-        @not_yet_reviewed_messages = BlogMessage.where(logbook: true, reviewed: nil).size
+        @not_yet_reviewed_messages = BlogMessage.where(logbook: true)
+        @not_yet_reviewed_messages = @not_yet_reviewed_messages.where(reviewed: nil).or(@not_yet_reviewed_messages.where(reviewed: false)).size
 
         @blog_messages = nil
         @blog_messages = BlogMessage.where(blog_category_id: params[:blog_category_id]).order(date: :desc).page(params[:page]) if params[:blog_category_id]
@@ -45,6 +46,7 @@ class BlogMessagesController < ApplicationController
         # Log action
         log(request.path)
         @responses = BlogResponse.where(blog_message_id: @blog_message.id)
+        @reviewer = @blog_message.reviewer ? Utilisateur.find(@blog_message.reviewer).prenom_nom : nil        
     end
 
 
@@ -79,6 +81,7 @@ class BlogMessagesController < ApplicationController
     def update
         # Log action
         log(request.path, I18n.t("messages.index.log_update"))
+        
         if @blog_message.update(message_params)
             flash[:notice] = "Article modifié avec succès"
             redirect_to blog_messages_path
@@ -113,7 +116,8 @@ class BlogMessagesController < ApplicationController
     def review
         log(request.path, I18n.t("messages.index.log_review_blog"))
         @blog_message.reviewed = true if @blog_message.logbook and @blog_message.reviewed.nil?
-        if @blog_message.update(reviewed: @blog_message.reviewed)
+        @blog_message.reviewer = current_user.utilisateur.id if @blog_message.reviewed = true
+        if @blog_message.update(reviewed: @blog_message.reviewed, reviewer: @blog_message.reviewer)
             flash[:notice] = "Article modifié avec succès"
         end
         redirect_to blog_messages_path

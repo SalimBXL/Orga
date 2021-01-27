@@ -28,6 +28,7 @@
                 new_blog_message_path,
                 class: "btn btn-success btn-xs" %>
 
+            <!-- NOT YET REVIEWED LABEL -->
             &nbsp;&nbsp;&nbsp;
             <% if @not_yet_reviewed_messages > 0 %>
             <a href="<%= blog_messages_path(reviewed: true) %>"
