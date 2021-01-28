@@ -27,7 +27,12 @@ class BlogMessagesController < ApplicationController
         @blog_messages = BlogMessage.where(logbook: true).order(date: :desc).page(params[:page]) if params[:logbook]
 
         # Date + Logbook
-        @blog_messages = @blog_messages.where("date >= ? and date <= ?", params[:date].to_datetime.strftime("%Y-%m-%d"), params[:date].to_datetime.end_of_month.strftime("%Y-%m-%d")).where(logbook: true).order(date: :desc).order(date: :desc).page(params[:page]) if (params[:date] and !params[:date].blank? and params[:logbook])
+        if (params[:date] and !params[:date].blank? and params[:logbook])
+            @blog_messages = @blog_messages.where("date >= ? and date <= ?", params[:date].to_datetime.strftime("%Y-%m-%d"), params[:date].to_datetime.end_of_month.strftime("%Y-%m-%d")).where(logbook: true).order(date: :desc).order(date: :desc).page(params[:page])
+            @possible_to_export = true
+        else
+            @possible_to_export = false
+        end
         
         # Date seulement
         @blog_messages = BlogMessage.where("date >= ? and date <= ?", params[:date].to_datetime.strftime("%Y-%m-%d"), params[:date].to_datetime.end_of_month.strftime("%Y-%m-%d")).order(date: :desc).page(params[:page]) if (params[:date] and !params[:date].blank? and !params[:logbook])
@@ -35,6 +40,7 @@ class BlogMessagesController < ApplicationController
         # Logbook reviewed seulement
         @blog_messages = BlogMessage.where(logbook: true, reviewed: nil).order(date: :desc).page(params[:page]) if params[:reviewed]
         
+        # Toutes les entrées...
         @blog_messages = BlogMessage.order(date: :desc).page(params[:page]) if @blog_messages.nil?
     end
 

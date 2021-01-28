@@ -9,8 +9,6 @@
     </h1>
 </div>
 
-<% session[:page_aide] = "blog_messages" %>
-
 
 <div class="container">
     <div class="row">
@@ -63,6 +61,25 @@
                         >Search</button>
                     </p>
             </form>
+        </div>
+
+        <div class="col-sm-2">
+            <% if @possible_to_export %>
+
+                <%= link_to '<span data-toggle="tooltip" title="Export logbook entries as PDF">
+                    <i class="material-icons">get_app</i></span>'.html_safe, 
+                    blog_message_export_pdf_path(date: params[:date], format: :pdf),
+                    class: "btn btn-danger btn-xs"
+                %>
+
+
+                <a href="#" 
+                    class="btn btn-danger btn-xs" role="button"
+                    data-toggle="tooltip" title="Export logbook entries as PDF">
+                    <span class="material-icons">get_app</span>
+                    (<%= params[:date] %>)
+                </a>
+            <% end %>
         </div>
 
     </div>
