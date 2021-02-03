@@ -118,6 +118,8 @@ class AbsencesController < ApplicationController
             tmp = session[:return_user_id]
             session[:return_user_id] = nil
             redirect_to utilisateur_path(id: tmp)
+        else 
+            redirect_to absences_path()
         end
 
     end
