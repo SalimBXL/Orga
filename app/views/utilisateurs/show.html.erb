@@ -1,10 +1,5 @@
 <% session[:page_aide] = "profile" %>
 
-
-    <div class="row">
-        
-        <!-- Colonne de gauche/centre -->
-        <div class="col-sm-9">
             <!-- TITRE PRENOM NOM -->
             <div class="well well-lg">
                 <h1>
@@ -14,23 +9,25 @@
                 </h1>
             </div>
 
-            <!-- Mois utilisateur -->
-            <!-- <%= render partial: "panel_mois_utilisateur" %> -->
-
+    <div class="container">
             <!-- Congés -->
             <%= render partial: "panel_absences" %>
+    </div>
 
+    <div class="container">
             <!-- JOURS -->
             <%= render partial: "panel_jours" %>
             
-        </div>
+    </div>
 
-        <!-- Colonne de droite -->
-        <div class="col-sm-3">
+    <div class="row">
+
+        <div class="col-sm-6">
             <!-- USER INFO -->
             <%= render partial: "user_info" %>
+        </div>
+        <div class="col-sm-6">
             <!-- PROFILE CONNEXION (User) -->
             <%= render partial: "login_data" %>
         </div>
-
     </div>

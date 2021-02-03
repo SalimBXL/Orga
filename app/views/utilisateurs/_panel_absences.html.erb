@@ -26,13 +26,21 @@
                             <% affiche_ok = nil %>
 
                             <% if @absences[aj] and @absences[aj].accord %>
-                                <% bg = "conge_ok" %>
+                                <% if @absences[aj].halfday %>
+                                    <% bg = "conge_ok_demi" %>
+                                <% else %>
+                                    <% bg = "conge_ok" %>
+                                <% end %>
                                 <% bg_btn = "success" %>
                                 <% affiche_ok = true if current_user.admin or current_user.utilisateur.admin %>
                             <% end %>
 
                             <% if @absences[aj] and (@absences[aj].accord.nil? or !@absences[aj].accord) %>
-                                <% bg = "conge_wait"  %>
+                                <% if @absences[aj].halfday %>
+                                    <% bg = "conge_wait_demi" %>
+                                <% else %>
+                                    <% bg = "conge_wait"  %>
+                                <% end %>
                                 <% bg_btn = "danger" %>
                                 <% affiche_ok = true %>
                             <% end %>
