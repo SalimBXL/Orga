@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2020091012140633) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "accord"
+    t.boolean "halfday"
     t.index ["type_absence_id"], name: "index_absences_on_type_absence_id"
     t.index ["utilisateur_id"], name: "index_absences_on_utilisateur_id"
   end

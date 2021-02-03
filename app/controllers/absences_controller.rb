@@ -167,7 +167,9 @@ class AbsencesController < ApplicationController
         if params[:date_fin] and params[:date]
             params[:date_fin] = params[:date] if params[:date_fin] < params[:date]
         end
-        params.require(:absence).permit(:date, :date_fin, :type_absence_id, :utilisateur_id, :remarque, :accord)        
+        params[:absence][:date_fin] = params[:absence][:date] if params[:absence][:halfday]
+        params.require(:absence).permit(:date, :date_fin, :type_absence_id, :utilisateur_id, :remarque, :accord, :halfday)
+
     end
 
     def find_absence

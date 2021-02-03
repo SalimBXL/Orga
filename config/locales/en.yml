@@ -38,6 +38,7 @@ en:
       date: Date
       date_fin: End Date
       description: Description
+      halfday: Halfday
       nom: Nom
       remarque: Note
       titre: New absence
@@ -507,6 +508,7 @@ en:
     index:
       log_destroy: Log destroy
       log_edit: Log edit
+      log_review_blog: Log review blog
       log_update: Log update
       titre: Messages
     new:

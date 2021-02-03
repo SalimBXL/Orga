@@ -9,7 +9,10 @@
         <% end %>
     </td>
     <td><%= absence.utilisateur.prenom_nom %></td>
-    <td><%= absence.type_absence.nom %></td>
+    <td>
+        <%= absence.type_absence.nom %>
+        <%= "(*)" if absence.halfday %>
+    </td>
     <td><%= absence.remarque %></td>
 
     <td>
