@@ -121,10 +121,15 @@
                         <!-- Vérifie si l'utilisateur est absent ce jour-là... -->
                         <% if @absences[utilisateur] %>
                             <% unless @absences[utilisateur][i].nil? %>
-                                <% if @absences[utilisateur][i] == true %>
-                                    <% bg = "conge_ok" %>
+                                <% if @absences[utilisateur][i][1] == true %>
+                                    <% demi = "_demi" %>
                                 <% else %>
-                                    <% bg = "conge_wait" %>
+                                    <% demi = "" %>
+                                <% end %>
+                                <% if @absences[utilisateur][i][0] == true %>
+                                    <% bg = "conge_ok#{demi}" %>
+                                <% else %>
+                                    <% bg = "conge_wait#{demi}" %>
                                 <% end %>
                             <% end %>
                         <% end %>

@@ -30,11 +30,23 @@
             <% unless @absences[utilisateur.id].nil? %>
                 <% var_abs = @absences[utilisateur.id][date_jour.to_s] %>
                 <% if @absences[utilisateur.id].keys.include?(date_jour.to_s) %>
-                    <% if @absences[utilisateur.id][date_jour.to_s][1] %>
-                        <% bg = "conge_ok" %>
+
+                    <% if @absences[utilisateur.id][date_jour.to_s].size > 2 %>
+                        <% if @absences[utilisateur.id][date_jour.to_s][2] %>
+                            <% demi = "_demi" %>
+                        <% end  %>
                     <% else %>
-                        <% bg = "conge_wait" %>
+                        <% demi = "" %>
                     <% end %>
+
+                    <!-- Congé ok ou wait -->
+                    <% if @absences[utilisateur.id][date_jour.to_s][1] %>
+                        <% bg = "conge_ok#{demi}" %>
+                    <% else %>
+                        <% bg = "conge_wait#{demi}" %>
+                    <% end %>
+
+
                 <% end %>
             <% else %>
                 <!-- Jour de semaine "normal" -->

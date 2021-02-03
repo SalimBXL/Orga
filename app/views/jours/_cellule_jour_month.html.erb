@@ -33,11 +33,13 @@
                     <!-- Change la couleur pour certains works -->
                     <% cl = "" %>
                     <% if @konfiguration %>
+                        
                         <% if (wl.work.code.downcase == @konfiguration[:jours_specific_month_keep_attention_code].downcase) and (Date.parse(dd).wday == @konfiguration[:jours_specific_month_keep_attention_day].to_i) %>
                             <% #if wl.work.code.downcase == "qc" && Date.parse(dd).wday==5 %>
                             
                             <% cl = "keep_attention" %>
                         <% end %>
+                        
                     <% end %>
                     <!-- Affiche le works -->
                     <% unless ap %>
@@ -71,6 +73,7 @@
 
         <% end %>
     <% end %>
+
 
     <!-- Si il existe un job au même jour dans un autre servcie, écrire une note -->
             <% @services.each do |autre_service| %>

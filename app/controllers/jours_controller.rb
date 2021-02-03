@@ -239,10 +239,13 @@ class JoursController < ApplicationController
                 if @konfiguration[:jours_specific_month]
                     @absences[absence.utilisateur_id][aj.to_s][0] = (absence.type_absence.code.downcase == @konfiguration[:jours_specific_month].downcase) ? "" : absence.type_absence.code 
                     @absences[absence.utilisateur_id][aj.to_s][1] = absence.accord
+                    @absences[absence.utilisateur_id][aj.to_s][2] = absence.halfday
                 else
                     @absences[absence.utilisateur_id][aj.to_s][0] = absence.type_absence.code
                     @absences[absence.utilisateur_id][aj.to_s][1] = absence.accord
+                    @absences[absence.utilisateur_id][aj.to_s][2] = absence.halfday
                 end
+
             end
         end
 
@@ -325,10 +328,16 @@ class JoursController < ApplicationController
                 abs = Absence.at_for_user(@date.beginning_of_week+i.days, utilisateur_jour.utilisateur)
                 abs.each do |a|
                     @absences[utilisateur_jour.utilisateur] ||= Hash.new
+                    @absences[utilisateur_jour.utilisateur][i+1] = Array.new
                     if a.accord
-                        @absences[utilisateur_jour.utilisateur][i+1] =  true
+                        @absences[utilisateur_jour.utilisateur][i+1][0] = true
                     else
-                        @absences[utilisateur_jour.utilisateur][i+1] =  false
+                        @absences[utilisateur_jour.utilisateur][i+1][0] =  false
+                    end
+                    if a.halfday
+                        @absences[utilisateur_jour.utilisateur][i+1][1] = true
+                    else
+                        @absences[utilisateur_jour.utilisateur][i+1][1] = false
                     end
                 end
             end
@@ -418,9 +427,11 @@ class JoursController < ApplicationController
                 if @konfiguration[:jours_secr_pet]
                     @absences[absence.utilisateur_id][aj.to_s][0] = (absence.type_absence.code.downcase == @konfiguration[:jours_secr_pet].downcase) ? "" : absence.type_absence.code
                     @absences[absence.utilisateur_id][aj.to_s][1] = absence.accord
+                    @absences[absence.utilisateur_id][aj.to_s][2] = absence.halfday
                 else
                     @absences[absence.utilisateur_id][aj.to_s][0] = absence.type_absence.code
                     @absences[absence.utilisateur_id][aj.to_s][1] = absence.accord
+                    @absences[absence.utilisateur_id][aj.to_s][2] = absence.halfday
                 end
             end
         end
@@ -438,10 +449,6 @@ class JoursController < ApplicationController
         end
 
         @values = ["Early 1", "Early 2", "Regular"]
-
-        puts "**********************"
-        pp @konfiguration
-        puts "**********************"
         
     end
 
