@@ -61,10 +61,10 @@ class JoursController < ApplicationController
         # Log action
         log(request.path, I18n.t("jours.index.log_update"))
 
-        if params[:swap]
 
-            # Swap batch entre deux users
-        
+        # Swap batch entre deux users
+
+        if params[:swap]
             user1 = Utilisateur.find(params[:swap].to_i) if params[:swap]
             user2 = Utilisateur.find(params[:jour][:utilisateur_id].to_i)
             job1 = @jour
@@ -72,8 +72,6 @@ class JoursController < ApplicationController
 
             ## Repart vers la page edit si on a pas les deux utilisateurs
             render :edit unless user1 and user2
-
-            
 
             ## Si on a pas de job pour le second user, 
             ## on effectue un simple update
@@ -94,9 +92,10 @@ class JoursController < ApplicationController
                 flash[:notice] = "Un problème a été rencontré !"
                 render :edit
             end
-
         end
             
+
+
         # Update normal
         if @jour.update(jour_params)
             flash[:notice] = "Jour Modifié avec succès"    
@@ -104,7 +103,12 @@ class JoursController < ApplicationController
             render :edit
         end
 
-        redirect_to jours_path
+        if params[:swap]
+            redirect_to utilisateur_path(user1)
+        else 
+            #redirect_to jours_path
+            redirect_to utilisateur_path(@jour.utilisateur_id)
+        end
     end
 
     #############
@@ -113,9 +117,6 @@ class JoursController < ApplicationController
     def edit
         # Log action
         log(request.path, I18n.t("jours.index.log_edit"))
-
-
-
     end
 
     ##############
