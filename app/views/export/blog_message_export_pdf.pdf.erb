@@ -1,29 +1,68 @@
+<% date_impression = Date.today().strftime('%Y/%m/%d') %>  
+<% heure_impression = Time.now.strftime('%H:%M') %>
+
+<h1>LogBook - <%= @blog_messages.first[:blog_message].created_at.strftime('%Y/%m') %></h1>
+<code>(Printed : <%= date_impression %> @ <%= heure_impression %>)</code>
+
+<hr>
+<ol>
 <% @blog_messages.each do |blog_message| %>
+    <li>
+        <%= blog_message[:blog_message].title.capitalize %>
+    </li>
+<% end %>
+</ol>
+<hr>
+
+<% index = 0 %>
+<% nombre = @blog_messages.length %>
+<% @blog_messages.each do |blog_message| %>
+    <% index += 1 %>
 
     <div class="container">
-        <h1>
-            <span class="label label-primary"><%= blog_message[:blog_message].title.capitalize %> </span>
-            
-        </h1>
-        <strong><i>[<%= blog_message[:utilisateur].prenom_nom %>]</i></strong>
+        <h2><%= index %>) <%= blog_message[:blog_message].title.capitalize %></h2>
+        <strong>
+            <i>
+                [<%= blog_message[:utilisateur].prenom_nom  unless blog_message[:utilisateur].nil? %>]
+            </i>
+        </strong>
         
-
         <!-- DATES AND KEYWORDS -->
-        <h3><span class="label label-default">
-                <strong><%= I18n.t("blog_messages.show.category") %> :</strong> <span class="label label-info"><%= blog_message[:category].nom %></span>
-            </span>
+        <h3>
+            <strong>
+                <%= I18n.t("blog_messages.show.category") %> :
+            </strong>
+            <%= blog_message[:category].nom  unless blog_message[:category].nil? %>
         </h3>
 
         <table>
             <tr>
-                <td><strong><%= I18n.t("blog_messages.show.service") %> :</strong> <span class="label label-primary"><%= blog_message[:service].nom %></span></td>
-                <td><strong><%= I18n.t("blog_messages.show.groupe") %> :</strong> <span class="label label-default"><%= blog_message[:groupe].nom %></span></td>
-                <td><strong><%= I18n.t("blog_messages.show.classe") %> :</strong> <span class="label label-default"><%= blog_message[:classe].nom %></span></td>
+                <td>
+                    <strong><%= I18n.t("blog_messages.show.service") %> :</strong>
+                    <%= blog_message[:service].nom unless blog_message[:service].nil? %>
+                </td>
+                <td>
+                    <strong><%= I18n.t("blog_messages.show.groupe") %> :</strong>
+                    <%= blog_message[:groupe].nom  unless blog_message[:groupe].nil? %>
+                </td>
+                <td>
+                    <strong><%= I18n.t("blog_messages.show.classe") %> :</strong>
+                    <%= blog_message[:classe].nom  unless blog_message[:classe].nil? %>
+                </td>
             </tr>
             <tr>
-                <td><strong><%= I18n.t("blog_messages.show.published_at") %> :</strong> <%= blog_message[:blog_message].date %></td>
-                <td><strong><%= I18n.t("blog_messages.show.created_at") %> :</strong> <%= blog_message[:blog_message].created_at %></td>
-                <td><strong><%= I18n.t("blog_messages.show.updated_at") %> :</strong> <%= blog_message[:blog_message].updated_at %></td>
+                <td>
+                    <strong><%= I18n.t("blog_messages.show.published_at") %> :</strong>
+                    <%= blog_message[:blog_message].date.strftime('%Y/%m/%d') %>
+                </td>
+                <td>
+                    <strong><%= I18n.t("blog_messages.show.created_at") %> :</strong>
+                    <%= blog_message[:blog_message].created_at.strftime('%Y/%m/%d %H:%M') %>
+                </td>
+                <td>
+                    <strong><%= I18n.t("blog_messages.show.updated_at") %> :</strong>
+                    <%= blog_message[:blog_message].updated_at.strftime('%Y/%m/%d %H:%M') %>
+                </td>
             </tr>
         </table>
 
@@ -37,3 +76,6 @@
     <hr>
 
 <% end %>
+
+<hr>
+<hr>

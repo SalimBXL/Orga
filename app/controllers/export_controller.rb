@@ -58,21 +58,29 @@ class ExportController < ApplicationController
         @blog_messages = Array.new
 
         if params[:blog_message]
-            liste = BlogMessage.find(params[:blog_message])
+            blog_message = BlogMessage.find(params[:blog_message])
+            article = Hash.new
+                article[:id] = blog_message.id
+                article[:blog_message] = blog_message
+                article[:service] = blog_message.service_id ? Service.find(blog_message.service_id): nil
+                article[:utilisateur] = blog_message.utilisateur_id ? Utilisateur.find(blog_message.utilisateur_id) : nil
+                article[:category] = blog_message.blog_category_id ? BlogCategory.find(blog_message.blog_category_id) : nil
+                article[:groupe] = blog_message.groupe ? Groupe.find(blog_message.groupe) : nil
+                article[:classe] = blog_message.classe ? Classe.find(blog_message.classe) : nil
+                @blog_messages << article
         elsif params[:date]
             liste = BlogMessage.where("date >= ? and date <= ?", params[:date].to_datetime.strftime("%Y-%m-%d"), params[:date].to_datetime.end_of_month.strftime("%Y-%m-%d")).where(logbook: true).order(:date)
-        end
-
-        liste.each do |blog_message|
-            article = Hash.new
-            article[:id] = blog_message.id
-            article[:blog_message] = blog_message
-            article[:service] = blog_message.service_id ? Service.find(blog_message.service_id): nil
-            article[:utilisateur] = blog_message.utilisateur_id ? Utilisateur.find(blog_message.utilisateur_id) : nil
-            article[:category] = blog_message.blog_category_id ? BlogCategory.find(blog_message.blog_category_id) : nil
-            article[:groupe] = blog_message.groupe ? Groupe.find(blog_message.groupe) : nil
-            article[:classe] = blog_message.classe ? Classe.find(blog_message.classe) : nil
-            @blog_messages << article
+            liste.each do |blog_message|
+                article = Hash.new
+                article[:id] = blog_message.id
+                article[:blog_message] = blog_message
+                article[:service] = blog_message.service_id ? Service.find(blog_message.service_id): nil
+                article[:utilisateur] = blog_message.utilisateur_id ? Utilisateur.find(blog_message.utilisateur_id) : nil
+                article[:category] = blog_message.blog_category_id ? BlogCategory.find(blog_message.blog_category_id) : nil
+                article[:groupe] = blog_message.groupe ? Groupe.find(blog_message.groupe) : nil
+                article[:classe] = blog_message.classe ? Classe.find(blog_message.classe) : nil
+                @blog_messages << article
+            end
         end
 
         respond_to do |format|
