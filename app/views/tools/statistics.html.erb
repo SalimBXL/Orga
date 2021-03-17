@@ -9,7 +9,7 @@
     </div>
 </div>
 
-
+<!-- Formulaire sélection du Work -->
 <div class="container">
     <form action="<%= statistics_path %>" method="get">
         <p>
@@ -31,40 +31,40 @@
     </form>
 </div>
 
-
-<h3>TITLE</h3>
+<hr>
 
 <p>Plage de dates : <%= @date_job_past %> / <%= @date_job_futur %></p>
 
-<table class="table table-bordered table-striped grille">
-    <tr>
-        <th>Utilisateurs</th>
-        <% @works.each do |work| %>
-            <% if params[:work].blank? %>
-                <th><%= work.code %></th>
-            <% else %>
-                <th><%= work.nom %> (<%= work.code %>)</th>
-            <% end %>
-        <% end %>
-    </tr>
-    
-    <% @jours.keys.each do |utilisateur| %>
-        <tr class="ligne">
-            <td class="nom_utilisateur"><%= utilisateur.prenom_nom %></td>
+<% unless @works.nil? %>
+
+    <table class="table table-bordered table-striped grille">
+        <tr>
+            <th>Utilisateurs</th>
             <% @works.each do |work| %>
-                <td><%= @jours[utilisateur][work] %></td>
-        <% end %>
+                <% if params[:work].blank? %>
+                    <th><%= work.code %></th>
+                <% else %>
+                    <th><%= work.nom %> (<%= work.code %>)</th>
+                <% end %>
+            <% end %>
         </tr>
-    <% end %>
-    
-    <tr class="ligne">
-        <td class="nom_utilisateur"></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
+        
+        <% @jours.keys.each do |utilisateur| %>
+            <tr class="ligne">
+                <td class="nom_utilisateur"><%= utilisateur.prenom_nom %></td>
+                <% @works.each do |work| %>
+                    <td><%= @jours[utilisateur][work] %></td>
+            <% end %>
+            </tr>
+        <% end %>
+        
+        <tr class="ligne">
+            <td class="nom_utilisateur"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
 
-
-
-</table>
+    </table>
+<% end %>
 

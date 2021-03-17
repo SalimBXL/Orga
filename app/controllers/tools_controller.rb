@@ -130,78 +130,37 @@ class ToolsController < ApplicationController
     #################
     def statistics
 
-        # Trouve la plage de dates
-        @date_job_futur = Jour.order(:date).last.date
-        @date_job_past = @date_job_futur - 1.year
+        @works = nil
 
-        # Trouve les Jours qui ont été programmés dans l'intervalle de dates
-        jours = Jour.where("date::date >= ?", @date_job_past).order(:utilisateur_id)
-
-        # Trouve les Works de la base
-        if params[:work].blank?
-            @works = Work.order(:service_id, :classe_id, :code)
-        else
-            @works = Work.where(id: params[:work])
-        end
-
-        # Trie les jours par utilisateur
-        @jours = Hash.new
-        jours.each do |jour|
-            # Liste des WorkingLists par Jour
-            if params[:work].blank?
-                liste = WorkingList.where(jour_id: jour.id)
-            else
-                liste = WorkingList.where(jour_id: jour.id, work_id: params[:work])
-            end
-            liste.each do |wl|
-                @jours[jour.utilisateur] ||= Hash.new
-                @jours[jour.utilisateur][wl.work] ||= 0
-                @jours[jour.utilisateur][wl.work] = @jours[jour.utilisateur][wl.work] + 1
-            end
-        end
-                
-
-        # @services = Hash.new
-        # Service.order(:id).each do |k|
-        #     @services[k.id] = k.nom
-        # end
-
-        # @groupes = Hash.new
-        # Groupe.order(:id).each do |k|
-        #     @groupes[k.id] = k.nom
-        # end
-
-        # @utilisateurs = Utilisateur.order(:service_id, :groupe_id, :prenom, :nom)
-        # @works = Work.order(:service_id, :code)
         
+        unless params[:work].blank?
 
-        # # Nombre des batchs passés cette année.
-        # #
-        # @batchs_per_user_done = Hash.new
-        # @total_per_user_done = Hash.new
-        # liste = Jour.where("date::date <= ? AND date::text LIKE ?", Date.today, "#{Date.today.year}-%").order(:utilisateur_id)
-        # liste.each do |batch|
-        #     @total_per_user_done[batch.utilisateur] ||= 0
-        #     @total_per_user_done[batch.utilisateur] = @total_per_user_done[batch.utilisateur] + 1
-        # end
+            # Trouve les Works de la base
+            @works = Work.where(id: params[:work])
+        
+            # Trouve la plage de dates
+            @date_job_futur = Jour.order(:date).last.date
+            @date_job_past = @date_job_futur - 1.year
 
-        # # Liste des batchs prévus cette année.
-        # #
-        # @batchs_per_user = Hash.new
-        # @total_per_user = Hash.new
-        # liste = Jour.where("date::text LIKE ?", "#{Date.today.year}%").order(:utilisateur_id)
-        # liste.each do |batch|
-        #     @total_per_user[batch.utilisateur] ||= 0
-        #     @total_per_user[batch.utilisateur] = @total_per_user[batch.utilisateur] + 1
-        #     working_lists = WorkingList.where(jour_id: batch.id)
-        #     working_lists.each do |wl|
-        #         @batchs_per_user[batch.utilisateur] ||= Hash.new
-        #         @batchs_per_user[batch.utilisateur][wl.work_id] ||= 0
-        #         @batchs_per_user[batch.utilisateur][wl.work_id] = @batchs_per_user[batch.utilisateur][wl.work_id] + 1
-        #     end
-        # end
+            # Trouve les Jours qui ont été programmés dans l'intervalle de dates
+            jours = Jour.where("date::date >= ?", @date_job_past).order(:utilisateur_id)
 
-                
+            # Trie les jours par utilisateur
+            @jours = Hash.new
+            jours.each do |jour|
+                # Liste des WorkingLists par Jour
+                if params[:work].blank?
+                    liste = WorkingList.where(jour_id: jour.id)
+                else
+                    liste = WorkingList.where(jour_id: jour.id, work_id: params[:work])
+                end
+                liste.each do |wl|
+                    @jours[jour.utilisateur] ||= Hash.new
+                    @jours[jour.utilisateur][wl.work] ||= 0
+                    @jours[jour.utilisateur][wl.work] = @jours[jour.utilisateur][wl.work] + 1
+                end
+            end
+        end    
     end
 
 
