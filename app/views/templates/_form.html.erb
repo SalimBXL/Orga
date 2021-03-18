@@ -63,7 +63,7 @@
                     <%= form.select(clef) do %>
                         <%= select_option_tag("", nil, @template[clef]) %>
                         <% @works.each do |l| %>
-                            <%= select_option_tag(l.code, l.id, @template[clef]) %>
+                            <%= select_option_tag("(#{l.service.nom}) #{l.code}", l.id, @template[clef]) %>
                         <% end %>
                     <% end %>
 

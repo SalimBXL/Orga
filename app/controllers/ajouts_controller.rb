@@ -86,9 +86,10 @@ class AjoutsController < ApplicationController
                 err = true
             end
         end
-        if (err)
-            render :new
-        end
+
+        #if (err)
+        #    render :new
+        #end
         redirect_to ajouts_path
     end
 
