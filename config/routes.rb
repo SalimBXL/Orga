@@ -198,5 +198,6 @@ Rails.application.routes.draw do
 
   ########## Export DB
   #get "exports", to: "export#index"
+  get "logbook_articles_json", to: "export#logbook_articles_json"
 
 end

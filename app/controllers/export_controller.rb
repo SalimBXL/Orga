@@ -4,6 +4,10 @@ class ExportController < ApplicationController
         
     end
 
+    def logbook_articles_json
+        @json = Utilisateur.all.as_json
+    end
+
     def show
         respond_to  do |format|
             format.html
