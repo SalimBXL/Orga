@@ -17,7 +17,7 @@
 
             <!-- DAYS -->
 
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <article>
                     <h3><%= I18n.t("tools.check_days.titre").capitalize %></h3>
                     <p><%= I18n.t("tools.check_days.description") %></p>
@@ -30,7 +30,7 @@
 
             <!-- USERS -->
 
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <article>
                     <h3><%= I18n.t("tools.check_users.titre").capitalize %></h3>
                     <p><%= I18n.t("tools.check_users.description") %></p>
@@ -43,7 +43,7 @@
 
             <!-- ADMINS -->
 
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <article>
                     <h3><%= I18n.t("tools.check_admins.titre").capitalize %></h3>
                     <p><%= I18n.t("tools.check_admins.description") %></p>
@@ -61,7 +61,7 @@
 
             <!-- BACKUP DB -->
 
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <article>
                     <h3><%= I18n.t("tools.backup_db.titre").capitalize %></h3>
                     <p><%= I18n.t("tools.backup_db.description") %></p>
@@ -72,9 +72,22 @@
                 </article>
             </div>
 
+            <!-- EXPORTS -->
+
+            <div class="col-sm-3">
+                <article>
+                    <h3><%= I18n.t("tools.exports.titre").capitalize %></h3>
+                    <p><%= I18n.t("tools.exports.description") %></p>
+                    
+                    <a href=<%= exports_path %> class="btn btn-info" role="button">
+                        <%= I18n.t("tools.exports.titre").downcase %>
+                    </a>
+                </article>
+            </div>
+
             <!-- CONFIGURE -->
 
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <article>
                     <h3><%= I18n.t("tools.konfigure.titre").capitalize %></h3>
                     <p><%= I18n.t("tools.konfigure.description") %></p>
@@ -86,7 +99,7 @@
 
             <!-- STATISTICS -->
 
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <article>
                     <h3><%= I18n.t("tools.statistics.titre").capitalize %></h3>
                     <p><%= I18n.t("tools.statistics.description") %></p>

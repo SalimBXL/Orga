@@ -8,6 +8,14 @@ class ToolsController < ApplicationController
     end
 
 
+    ###########
+    # EXPORTS #
+    ###########
+    def exports
+        
+    end
+
+
     ##############
     # CHECK DAYS #
     ##############

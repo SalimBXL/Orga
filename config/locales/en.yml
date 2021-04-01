@@ -583,6 +583,9 @@ en:
     check_users:
       description: This tool check if user's profiles are well linked to a login profile.
       titre: Check Users
+    exports:
+      description: This tool help to export tables or parts of the database in many formats.
+      titre: Exports
     index:
       titre: Tools
     konfigure:
