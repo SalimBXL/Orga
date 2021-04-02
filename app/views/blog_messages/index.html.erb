@@ -69,16 +69,12 @@
                 <%= link_to '<span data-toggle="tooltip" title="Export logbook entries as PDF">
                     <i class="material-icons">get_app</i></span>'.html_safe, 
                     blog_message_export_pdf_path(date: params[:date], format: :pdf),
+                    target: :_blank,
                     class: "btn btn-danger btn-xs"
                 %>
 
 
-                <a href="#" 
-                    class="btn btn-danger btn-xs" role="button"
-                    data-toggle="tooltip" title="Export logbook entries as PDF">
-                    <span class="material-icons">get_app</span>
-                    (<%= params[:date] %>)
-                </a>
+               
             <% end %>
         </div>
 
