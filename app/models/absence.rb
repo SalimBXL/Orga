@@ -27,12 +27,17 @@ class Absence < ApplicationRecord
 
     def check_date_fin
         if date
+
+            # Initialise la date de fin si nulle
             if date_fin.nil? || date_fin.blank? 
                 self.date_fin = date
             end
+            
+            # Corrige la date de fin si anterieure à date de départ
             if date_fin<date
                 self.date_fin = date
             end
+
         end
     end
     

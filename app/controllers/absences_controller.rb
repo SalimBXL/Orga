@@ -65,6 +65,9 @@ class AbsencesController < ApplicationController
         # Log action
         log(request.path)
         @absence = Absence.create(absence_params)
+
+        @absence.check_date_fin
+
         if @absence.save
             flash[:notice] = "Absence(s) créée(s)"
             redirect_to absences_path
