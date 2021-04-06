@@ -11,15 +11,25 @@ default: &default
 
 development:
   <<: *default
-  database: orga_development
+  database: MyDataBase_development
+  host: localhost
+  port: 5432
+  username: orga
+  password: orga
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: orga_test
+  database: MyDataBase_test
+  host: localhost
+  port: 5432
+  username: orga
+  password: orga
 
 production:
   <<: *default
-  database: orga_production
+  database: MyDataBase_production
+  username: orga
+  password: <%= ENV['MYDATABASE_DATABASE_PASSWORD'] %>

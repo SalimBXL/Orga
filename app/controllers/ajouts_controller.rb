@@ -25,11 +25,18 @@ class AjoutsController < ApplicationController
     def new
         @ajout = Ajout.new
         @mode_edition = false
-        if current_user.admin?
-            @templates = Template.all
-        else
-            @templates = Template.where(id: current_user.utilisateur.service.id)
-        end
+
+        services = Service.all
+        @service = Array.new
+        Service.all.order(:nom).each {|service| @service[service.id] = service.nom}
+
+        @templates = Template.all.order(:service_id, :nom)
+
+        # if current_user.admin?
+        #     @templates = Template.all
+        # else
+        #     @templates = Template.where(id: current_user.utilisateur.service.id)
+        # end
     end
     
 
