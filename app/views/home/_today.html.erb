@@ -1,27 +1,28 @@
 <% if user_signed_in? %>
     <% @date = Date.today %>
     <% date_localized = "#{nom_jour(@date.cwday)} #{I18n.localize @date, format: :long}" %>
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4 class="text-info"><%= date_localized %></h4></div>
+        <div class="panel-body">
+            <div class="row">
 
-    <div class="row">
+                <!-- Première boîte à gauche -->
+                <%= render partial: "left_box", locals: { date_localized: date_localized } %>
+                
+                <!-- Jobs de l'utilisateur -->
+                
+                <% if @specific_day_jours.nil? or @specific_day_jours.size < 1 %>
 
-        <!-- Première boîte à gauche -->
-        <%= render partial: "left_box", locals: { date_localized: date_localized } %>
-        
+                    <!-- Si pas de job aujourd'hui -->
+                    <%= render partial: "no_job_today" %>
+                    
+                <% else %>
 
-        <!-- Jobs de l'utilisateur -->
-        
-        
-        <% if @specific_day_jours.nil? or @specific_day_jours.size < 1 %>
+                    <!-- Si jobs aujourd'hui -->
+                    <%= render partial: "jobs_boxes_today" %>
 
-            <!-- Si pas de job aujourd'hui -->
-            <%= render partial: "no_job_today" %>
-            
-        <% else %>
-
-            <!-- Si jobs aujourd'hui -->
-            <%= render partial: "jobs_boxes_today" %>
-
-        <% end %>
-
+                <% end %>
+            </div>
+        </div>
     </div>
 <% end %>
