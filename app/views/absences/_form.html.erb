@@ -9,7 +9,7 @@
         <strong>WARNING</strong>
         <ul>
             <% @absence.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
+                <li class="bg-danger"><%= message %></li>
             <% end %>
         </ul>
     <% end %>
@@ -53,7 +53,7 @@
         <%= form.select(:utilisateur_id) do %>
             <% if current_user.utilisateur.admin %>
                 <%= select_option_tag("", nil, @absence.utilisateur_id) %>
-                <% @utilisateurs.order(:service_id, :groupe_id, :prenom, :nom).find_each do |l| %>
+                <% @utilisateurs.find_each do |l| %>
                     <%= select_option_tag("[#{l.service.nom}] - #{l.prenom_nom}", l.id, @absence.utilisateur_id) %>                
                 <% end %>
             <% else %>

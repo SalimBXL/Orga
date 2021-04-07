@@ -40,5 +40,9 @@ class Absence < ApplicationRecord
 
         end
     end
+
+    def conflict_exists?
+        false
+    end
     
 end

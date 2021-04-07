@@ -68,12 +68,20 @@ class AbsencesController < ApplicationController
 
         @absence.check_date_fin
 
-        if @absence.save
-            flash[:notice] = "Absence(s) créée(s)"
-            redirect_to absences_path
-        else
-            flash[:danger] = "Erreur(s)"
+        if @absence.conflict_exists?
+            flash[:alert] = "Date conflict with an existing absence."
+            find_utilisateurs if @utilisateurs.nil?
             render :new
+        else
+
+            if @absence.save
+                flash[:notice] = "Absence(s) créée(s)"
+                redirect_to absences_path
+            else
+                flash[:alert] = "Erreur(s)"
+                render :new
+            end
+
         end
     end
 
