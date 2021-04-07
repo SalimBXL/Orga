@@ -68,10 +68,15 @@ class AbsencesController < ApplicationController
 
         @absence.check_date_fin
 
-        if @absence.conflict_exists?
-            flash[:alert] = "Date conflict with an existing absence."
+        list_abs = @absence.conflict_exists?
+        if list_abs
+            texte = "Date conflict with an existing absence : "
+            list_abs.each do |line|
+                texte = texte + "[ID: #{line.id} - DATE: #{line.date} - DATE_FIN: #{line.date_fin}]"
+            end
+            flash[:alert] = texte
             find_utilisateurs if @utilisateurs.nil?
-            render :new
+            render :edit
         else
 
             if @absence.save
