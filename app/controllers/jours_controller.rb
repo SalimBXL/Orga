@@ -260,6 +260,10 @@ class JoursController < ApplicationController
             charge_events(@date + i.day)
         end
 
+        @templates = Template.all.order(:service_id, :nom)
+        @service = Array.new
+        Service.all.order(:nom).each {|service| @service[service.id] = service.nom}
+
         # mode edition ?
         unless params[:edit_mode]
             @edit_mode = false

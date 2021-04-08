@@ -129,9 +129,14 @@
                     <hr>
 
                     <!-- === TEMPLATE === -->
-                    <% if (@mode_edition.nil? or @mode_edition == false) and params[:action] == "new" %>
+                    <% if (@mode_edition.nil? or @mode_edition == false) and (params[:action] == "new") %>
                         <%= render partial: "template", locals: {form: form} %>
                     <% end %>
+                    <% if (@mode_edition.nil? or @mode_edition == false) and (params[:action] == "specific_month") %>
+                        <%= render partial: "ajouts/template", locals: {form: form} %>
+                    <% end %>
+
+                    <hr>
 
                 </div>
 
