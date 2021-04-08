@@ -64,6 +64,22 @@
             <a href="<%= edit_blog_message_path(@blog_message) %>" class="btn btn-warning btn-xs" role="button"><%= I18n.t("blog_messages.show.edit_article") %></a>
         <% end %>
 
+        <!-- add Wiki entry -->
+        <% if @blog_message.logbook and (current_user.admin? or current_user.utilisateur.admin? or current_user.utilisateur.id == @blog_message.utilisateur_id) %>
+            &nbsp;&nbsp;&nbsp;
+            <% unless @wiki_exists.nil? %>
+                <a href="<%= review_blog_message_path(id: @blog_message) %>" 
+                    class="btn btn-default btn-xs" role="button">
+                    <%= I18n.t("blog_messages.show.read_wiki") %>
+                </a>
+            <% else %>
+                <a href="<%= review_blog_message_path(id: @blog_message) %>" 
+                    class="btn btn-default btn-xs" role="button">
+                    <%= I18n.t("blog_messages.show.create_wiki_page") %>
+                </a>
+            <% end %>
+        <% end %>
+
         <!-- new respond -->
         &nbsp;&nbsp;&nbsp;
         <a href="<%= new_blog_response_path(blog_message_id: @blog_message) %>" class="btn btn-success btn-xs" role="button"><%= I18n.t("blog_messages.show.respond") %></a>
@@ -76,6 +92,7 @@
                 <%= I18n.t("blog_messages.show.review") %>
             </a>
         <% end %>
+
     </p>
 
     <!-- RESPONSES -->

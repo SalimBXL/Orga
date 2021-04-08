@@ -1,0 +1,24 @@
+<% session[:page_aide] = "wiki_pages" %>
+
+<div class="page-header">
+    <h1>
+        <span class="label label-primary">
+            <i class="material-icons">account_tree</i>
+            <%= I18n.t("wiki_pages.index.wiki").upcase %>
+        </span>
+    </h1>
+</div>
+
+<div class="container">
+
+    <p>
+        <%= link_to '<i class="material-icons">note_add</i> '.html_safe, 
+                new_wiki_page_path,
+                class: "btn btn-success btn-xs" %>
+    </p>
+
+    <div id="wiki_pages">
+        <%= render 'wiki_pages' %>
+    </div>
+
+</div>

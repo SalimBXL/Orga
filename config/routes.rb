@@ -122,6 +122,12 @@ Rails.application.routes.draw do
   get "blog_message_export_pdf", to: "export#blog_message_export_pdf"
   get "review_blog_message", to: "blog_messages#review"
 
+  ################
+  #  Wiki Pages  #
+  ################
+  resources :wiki_pages, only: [ :show, :index, :new, :edit, :create, :update, :destroy]
+
+
 
   #####################
   #  Blog Categories  #

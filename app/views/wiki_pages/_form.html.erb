@@ -1,0 +1,93 @@
+<%= form_with model: @wiki_page, local: true do |form| %>
+
+    <% if @wiki_page.errors.any? %>
+        <strong>WARNING</strong>
+        <ul>
+            <% @wiki_page.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
+
+    <!-- Titre -->
+    <p>
+        <%= form.label I18n.t("wiki_pages.new.title") %>*<br>
+        <%= form.text_field :title %>
+    </p>
+
+    <!-- Description -->
+    <p>
+        <%= form.label I18n.t("wiki_pages.new.description") %>*<br>
+        <%= form.text_area :problem_description, cols: 80, rows: 3 %>
+    </p>
+
+    <!-- Solution Short -->
+    <p>
+        <%= form.label I18n.t("wiki_pages.new.solution_short") %>*<br>
+        <%= form.text_area :solution_short, cols: 80, rows: 3 %>
+    </p>
+
+    <!-- Solution long -->
+    <p>
+        <%= form.label I18n.t("wiki_pages.new.solution_long") %><br>
+        <%= form.text_area :solution_long, cols: 80, rows: 15 %>
+    </p>
+
+    <hr>
+
+    <!-- Blog Message ID -->
+    <p>
+        <%= form.label I18n.t("wiki_pages.new.blog_message_id") %><br>
+        <%= form.text_field :blog_message_id %>
+    </p>
+
+    <!-- Utilisateur -->
+    <% if @wiki_page.utilisateur_id == nil %>
+        <% @wiki_page.utilisateur_id = current_user.utilisateur.id %>
+    <% end %>
+    <p>
+        <%= form.label I18n.t("wiki_pages.new.user") %> : <%= @wiki_page.utilisateur_id %><br>
+        <%= form.hidden_field :utilisateur_id %>
+    </p>
+
+    <!-- Category -->
+    <p>
+        <%= form.label I18n.t("wiki_pages.new.category") %>
+        <%= form.select(:blog_category_id) do %>
+            <%= select_option_tag("", nil, @wiki_page.blog_category_id) %>
+            <% @categories.each do |l| %>
+                <%= select_option_tag(l.nom.capitalize, l.id, @wiki_page.blog_category_id) %>
+            <% end %>
+        <% end %>
+    </p>
+
+    <!-- Service -->
+    <p>
+        <%= form.label I18n.t("wiki_pages.new.service") %>
+        <%= form.select(:service_id) do %>
+            <%= select_option_tag("", nil, @wiki_page.service_id) %>
+            <% services = Service.order(:nom) %>
+            <% services.find_each do |l| %>
+                <%= select_option_tag(l.nom.capitalize, l.id, @wiki_page.service_id) %>
+            <% end %>
+        <% end %>
+    </p>
+    
+    <!-- Groupe -->
+    <p>
+        <%= form.label I18n.t("wiki_pages.new.groupe") %>
+        <%= form.select(:groupe) do %>
+            <%= select_option_tag("", nil, @wiki_page.groupe_id) %>
+            <% groupes = Groupe.order(:nom) %>
+            <% groupes.find_each do |l| %>
+                <%= select_option_tag(l.nom.capitalize, l.id, @wiki_page.groupe_id) %>
+            <% end %>
+        <% end %>
+    </p>
+    
+
+    <!-- Submit -->
+    <p>
+        <%= form.submit class: "btn btn-primary" %>
+    </p>
+<% end %>

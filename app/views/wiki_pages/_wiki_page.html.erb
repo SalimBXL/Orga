@@ -1,0 +1,14 @@
+
+    <div class="col-sm-4" id="wiki_page_<%= wiki_page.id %>">
+        <div class="panel panel-info">
+
+            <div class="panel-heading">
+                <%= link_to wiki_page.title, wiki_page_path(wiki_page) %>
+            </div>
+
+            <div class="panel-body">
+                <%= wiki_page.problem_description.truncate(80) %>
+            </div>
+
+        </div>
+    </div>

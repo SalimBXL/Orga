@@ -116,12 +116,14 @@ en:
       back_to_articles: Back to articles
       category: Category
       classe: Classe
+      create_wiki_page: Create wiki page
       created_at: Created at
       dates_and_keywords: Dates and keywords
       description: Description
       edit_article: Edit article
       groupe: Groupe
       published_at: Published at
+      read_wiki: Read wiki
       respond: Respond
       responses: Responses
       review: Review
@@ -130,6 +132,7 @@ en:
       title: Title
       updated_at: Updated at
       user: User
+      wiki: Wiki
   blog_response:
     new:
       description: Description
@@ -421,6 +424,7 @@ en:
       validated: Validated
       waiting: Waiting
       welcome: Welcome
+      wiki: Wiki
       working_lists: Working Lists
       works: Works
     navbar:
@@ -640,6 +644,20 @@ en:
       login: Login Data
       manager: Manager
       my_month: My month
+  wiki_pages:
+    index:
+      title: Title
+      wiki: Wiki
+    new:
+      blog_message_id: Blog message
+      category: Category
+      description: Description
+      groupe: Groupe
+      service: Service
+      solution_long: Solution long
+      solution_short: Solution short
+      title: Title
+      user: User
   working_list:
     edit:
       titre: Edition
