@@ -67,13 +67,13 @@
         <!-- add Wiki entry -->
         <% if @blog_message.logbook and (current_user.admin? or current_user.utilisateur.admin? or current_user.utilisateur.id == @blog_message.utilisateur_id) %>
             &nbsp;&nbsp;&nbsp;
-            <% unless @wiki_exists.nil? %>
-                <a href="<%= review_blog_message_path(id: @blog_message) %>" 
+            <% unless @wiki_id.nil? %>
+                <a href="<%= wiki_page_path(@wiki_id) %>" 
                     class="btn btn-default btn-xs" role="button">
                     <%= I18n.t("blog_messages.show.read_wiki") %>
                 </a>
             <% else %>
-                <a href="<%= review_blog_message_path(id: @blog_message) %>" 
+                <a href="<%= new_wiki_page_path(blog_message_id: @blog_message.id) %>" 
                     class="btn btn-default btn-xs" role="button">
                     <%= I18n.t("blog_messages.show.create_wiki_page") %>
                 </a>

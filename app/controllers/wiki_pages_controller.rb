@@ -45,6 +45,16 @@ class WikiPagesController < ApplicationController
         # Log action
         log(request.path)
         @wiki_page = WikiPage.new
+        if params[:blog_message_id]
+            @wiki_page.blog_message_id = params[:blog_message_id]
+            blog_message = BlogMessage.find(@wiki_page.blog_message_id)
+            if blog_message
+                @wiki_page.blog_category_id = blog_message.blog_category_id
+                @wiki_page.service_id = blog_message.service_id
+                @wiki_page.groupe_id = blog_message.groupe
+                @wiki_page.keywords = blog_message.keywords
+            end
+        end
     end
 
 

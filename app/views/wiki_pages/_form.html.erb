@@ -37,14 +37,12 @@
 
     <!-- Blog Message ID -->
     <p>
-        <%= form.label I18n.t("wiki_pages.new.blog_message_id") %><br>
-        <%= form.text_field :blog_message_id %>
+        <%= form.label I18n.t("wiki_pages.new.blog_message_id") %> : <%= @wiki_page.blog_message_id %><br>
+        <%= form.hidden_field :blog_message_id %>
     </p>
 
     <!-- Utilisateur -->
-    <% if @wiki_page.utilisateur_id == nil %>
-        <% @wiki_page.utilisateur_id = current_user.utilisateur.id %>
-    <% end %>
+    <% @wiki_page.utilisateur_id = current_user.utilisateur.id %>
     <p>
         <%= form.label I18n.t("wiki_pages.new.user") %> : <%= @wiki_page.utilisateur_id %><br>
         <%= form.hidden_field :utilisateur_id %>

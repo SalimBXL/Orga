@@ -1,6 +1,68 @@
-<div class="container">
+<div class="page-header">
     <h1>
-        <span class="label label-primary"><%= @wiki_page.title.capitalize %> </span>
+        <span class="label label-primary">
+            <i class="material-icons">account_tree</i>
+            <%= I18n.t("wiki_pages.index.wiki").upcase %>
+        </span>
     </h1>
+</div>
+
+<div class="container">
+
+    <h2><span class="label label-info"><%= @wiki_page.title.capitalize %> </span></h2>
+
+    <h3><span class="label label-warning"><%= I18n.t("wiki_pages.show.problem").capitalize %></span></h3>
+    <p><%= @wiki_page.problem_description %></p>
+
+    <h3><span class="label label-success"><%= I18n.t("wiki_pages.show.solution").capitalize %></span></h3>
+    <p><%= @wiki_page.solution_short %></p>
+
+    <hr>
+    <div class="row">
+        
+        <div class="col-sm-3">
+            <span class="label label-default">References</span><br>
+            <small>
+                (Update: <%= I18n.localize @wiki_page.updated_at, format: :long %> by <%= @wiki_page.utilisateur_id %>)
+            </small>
+        </div>
+
+        <div class="col-sm-3">
+            Service: <% unless @wiki_page.service_id.nil? %>
+                    [<%= @wiki_page.service_id %>]
+                <% else %>
+                    - - -
+                <% end %><br>
+
+            Groupe: <% unless @wiki_page.groupe_id.nil? %>
+                    [<%= @wiki_page.groupe_id %>]
+                <% else %>
+                    - - -
+                <% end %><br>
+
+            <%= "Category: [#{@wiki_page.blog_category_id}]" unless @wiki_page.blog_message_id.nil? %>
+            
+        </div>
+        
+        <div class="col-sm-3">
+            <%= "Keywords: [#{@wiki_page.keywords}]" unless @wiki_page.keywords.nil? %>
+        </div>
+
+        <div class="col-sm-3">
+            <% unless @wiki_page.blog_message_id.nil? %>
+                <a href="<%= blog_message_path(@wiki_page.blog_message_id) %>" class="btn btn-xs btn-default" role="button">See Blog Article</a>
+            <% end %>
+        </div>
+
+    </div>
+    <hr>
+
+    <h4><span class="label label-primary"><%= I18n.t("wiki_pages.show.detailed_solution").upcase %></span></h4>
+    <p><%= @wiki_page.solution_long %></p>
+
+    <hr>
+
+    <a href="<%= wiki_pages_path %>" class="btn btn-xs btn-info" role="button"> << Back to WikiPages </a>
+    <a href="<%= edit_wiki_page_path(@wiki_page) %>" class="btn btn-xs btn-default" role="button">Edit this Article</a>
     
 </div>

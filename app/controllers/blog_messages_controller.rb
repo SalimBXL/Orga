@@ -52,7 +52,9 @@ class BlogMessagesController < ApplicationController
         # Log action
         log(request.path)
         @responses = BlogResponse.where(blog_message_id: @blog_message.id)
-        @reviewer = @blog_message.reviewer ? Utilisateur.find(@blog_message.reviewer).prenom_nom : nil        
+        @reviewer = @blog_message.reviewer ? Utilisateur.find(@blog_message.reviewer).prenom_nom : nil
+        wiki_id = WikiPage.where(blog_message_id: @blog_message.id).first
+        @wiki_id = (wiki_id.nil?) ? nil : wiki_id.id
     end
 
 

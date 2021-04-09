@@ -658,6 +658,12 @@ en:
       solution_short: Solution short
       title: Title
       user: User
+    show:
+      detailed_solution: Detailed solution
+      long: Long
+      problem: Problem
+      short: Short
+      solution: Solution
   working_list:
     edit:
       titre: Edition
