@@ -16,6 +16,12 @@
         <div class="col-sm-4">
             <div class="panel panel-default">
                 <div class="panel-body">
+
+                    <!-- NEW ARTICLE -->
+                    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+                        new_blog_message_path,
+                        class: "btn btn-success btn-xs" %>
+
                     <!-- CATEGORIES -->
                     <% if user_signed_in? && (current_user.admin? or current_user.utilisateur.admin) %>
                         <%= link_to '<i class="material-icons">category</i><br>Categories '.html_safe, 
@@ -23,10 +29,23 @@
                         class: "btn btn-info btn-xs" %>
                     <% end %>
                 
-                    <!-- NEW ARTICLE -->
-                    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
-                        new_blog_message_path,
-                        class: "btn btn-success btn-xs" %>
+                    <!-- SERVICES -->
+                    <% @blog_services.each do |service| %>
+                        <% if params[:service_id] %>
+                            <% activ_button = (service[0].to_i == params[:service_id].to_i) ? "active" : "" %>
+                        <% else %>
+                            <% activ_button = (service[0].to_i == @current_user.utilisateur.service_id.to_i) ? "active" : "" %>
+                        <% end %>
+                        <a href="<%= blog_messages_path(service_id: service[0]) %>" class="btn btn-primary btn-xs <%= activ_button %>" role="button">
+                            <i class="material-icons">business</i><br>
+                            <%= service[1] %>
+                        </a>
+                    <% end %>
+                    <a href="<%= blog_messages_path(service_id: -1) %>" class="btn btn-primary btn-xs <%= "active" if params[:service_id] == "-1" %>" role="button">
+                        <i class="material-icons">business</i><br>
+                        <%= "All" %>
+                    </a>
+                    
 
                     <!-- NOT YET REVIEWED LABEL -->
                     &nbsp;&nbsp;&nbsp;
