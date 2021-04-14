@@ -74,7 +74,7 @@
     <!-- Groupe -->
     <p>
         <%= form.label I18n.t("wiki_pages.new.groupe") %>
-        <%= form.select(:groupe) do %>
+        <%= form.select(:groupe_id) do %>
             <%= select_option_tag("", nil, @wiki_page.groupe_id) %>
             <% groupes = Groupe.order(:nom) %>
             <% groupes.find_each do |l| %>

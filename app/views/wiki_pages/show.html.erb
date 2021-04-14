@@ -23,24 +23,24 @@
         <div class="col-sm-3">
             <span class="label label-default">References</span><br>
             <small>
-                (Update: <%= I18n.localize @wiki_page.updated_at, format: :long %> by <%= @wiki_page.utilisateur_id %>)
+                (Update: <%= I18n.localize @wiki_page.updated_at, format: :long %> by <%= @blog_utilisateurs[@wiki_page.utilisateur_id] %>)
             </small>
         </div>
 
         <div class="col-sm-3">
             Service: <% unless @wiki_page.service_id.nil? %>
-                    [<%= @wiki_page.service_id %>]
+                    [<%= @blog_services[@wiki_page.service_id] %>]
                 <% else %>
                     - - -
                 <% end %><br>
 
             Groupe: <% unless @wiki_page.groupe_id.nil? %>
-                    [<%= @wiki_page.groupe_id %>]
+                    [<%= @blog_groupes[@wiki_page.groupe_id] %>]
                 <% else %>
                     - - -
                 <% end %><br>
 
-            <%= "Category: [#{@wiki_page.blog_category_id}]" unless @wiki_page.blog_message_id.nil? %>
+            Category: <%= @blog_categories[@wiki_page.blog_category_id] unless @wiki_page.blog_category_id.nil? %>
             
         </div>
         

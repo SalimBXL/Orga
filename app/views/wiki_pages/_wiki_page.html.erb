@@ -4,10 +4,21 @@
 
             <div class="panel-heading">
                 <%= link_to wiki_page.title, wiki_page_path(wiki_page) %>
+                
+                <% unless wiki_page.service_id.nil? %>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="label label-info">
+                        <%= @blog_services[wiki_page.service_id]  %>
+                    </span>
+                <% end %>
             </div>
 
             <div class="panel-body">
                 <%= wiki_page.problem_description.truncate(80) %>
+                <hr>
+                <span class="label label-default"><%= @blog_groupes[wiki_page.groupe_id] unless wiki_page.groupe_id.nil? %></span>&nbsp;
+                <span class="label label-default"><%= @blog_categories[wiki_page.blog_category_id] unless wiki_page.blog_category_id.nil? %></span>&nbsp;
+            
             </div>
 
         </div>
