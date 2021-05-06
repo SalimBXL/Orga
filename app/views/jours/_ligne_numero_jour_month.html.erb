@@ -4,7 +4,23 @@
         <% if (@date + i.day).wday!=0 %>
             <% if (@date + i.day).wday==6 %> 
                 <!-- WEEKEND -->                       
-                <td class="weekend">W</td>
+                <td class="weekend">
+                    <% unless @events[service.id].nil? %>
+                        <% @events[service.id].each do |event| %>
+                            <% if event.date == (@date+ i.day) %>
+                                <br>
+                                <h5>
+                                <span class="label label-info"
+                                    data-toggle="tooltip"
+                                    title="<%= "#{event.nom.capitalize} #{event.note}" %>">
+                                    (*)
+                                </span>
+                                </h5>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                
+                </td>
             <% else %>
                 <!-- JOUR DE SEMAINE -->
                 <td class="normal">

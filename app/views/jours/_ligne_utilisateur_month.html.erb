@@ -10,7 +10,16 @@
 
         <!-- Si Weekend... -->        
         <% if date_jour.wday==6 %>
-            <td class="weekend"></td>
+            <td class="weekend">
+                
+                <%= render partial: "cellule_jour_month_bullet", locals: { 
+                    bg: bg,
+                    date_jour: date_jour,
+                    service: service,
+                    utilisateur: utilisateur
+                } %>
+            
+            </td>
         <% end %>
 
         <!-- Si Jour de semaine ... -->

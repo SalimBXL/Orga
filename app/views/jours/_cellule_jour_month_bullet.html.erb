@@ -1,0 +1,19 @@
+
+<% dd = date_jour.to_s %>
+
+<!-- Works -->
+<% [false, true].each do |ap| %>
+    <% unless @jours[service][utilisateur][dd].nil? %>
+        <% unless @jours[service][utilisateur][dd][ap].nil? %>
+            <% @jours[service][utilisateur][dd][ap].each do |wl| %>
+                <% label = "label label-primary" %>
+                <span class="<%= label %> " 
+                    data-toggle="tooltip" 
+                    title="<%= wl.work.code %>">
+                    <strong>*</strong>
+                </span>
+            <% end %>
+        <% end %>
+    <% end %>
+<% end %>
+<% bg = "" %>
