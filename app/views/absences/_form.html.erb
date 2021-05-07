@@ -20,7 +20,10 @@
     <p>
         <%= form.label I18n.t("absences.new.date") %><br>
         <%= form.date_field :date %>
+
         &nbsp; &nbsp; &nbsp;
+
+        <!-- Half Days -->
         <span id="halfday">
             <%= form.check_box :halfday %> <%= form.label I18n.t("absences.new.halfday") %>
         </span>

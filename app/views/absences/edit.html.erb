@@ -7,14 +7,35 @@
             </span>
         </h1>
     </div>
-    <div class="container">
-        <%= render "form" %>
-    </div>
 
-    <div class="row">
-        <div class="col-sm-4">
-            <hr>
-            <span class = "label label-danger" > DELETE ABSENCE
+
+<div class="row">
+    <div class="col-sm-6">
+
+        <!-- FORM -->
+        <div class="container">
+            <%= render "form" %>
+        </div>
+    
+    </div>
+    
+    <div class="col-sm-6">
+        <!-- DELETE -->
+        <p><strong>Remove One Day In A Period</strong></p>
+        
+        <!-- Supprimer premier jour ? => avancer la date de départ de un jour -->
+
+        <!-- Supprimer dernier jour ? => Split 
+            a: date départ -> jour pointé-1
+            b: Jour pointé +1 -> date de fin
+        -->
+        
+        <!-- Supprimer un autre jour ? => reculer la date de fin de un jour -->
+
+        <hr>
+
+        <p><strong>Delete Absence</strong></p>
+        <span class = "label label-danger" > DELETE ABSENCE
             <%= link_to '<span data-toggle="tooltip" >
                 <i class="material-icons">close</i>'.html_safe, 
                 absence_path(@absence),
@@ -23,9 +44,7 @@
                 data: { confirm: "Delete #{@absence.date}/#{@absence.date_fin}  ?" },
                 class: "btn btn-danger btn-xs"
             %>
-            </span>
-        </div>
+        </span>
     </div>
-    <hr>
 
 </div>
