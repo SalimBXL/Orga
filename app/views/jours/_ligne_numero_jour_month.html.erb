@@ -9,13 +9,13 @@
                         <% @events[service.id].each do |event| %>
                             <% if event.date == (@date+ i.day) %>
                                 <br>
-                                <h5>
-                                <span class="label label-info"
+                                
+                                <span class="label label-default"
                                     data-toggle="tooltip"
                                     title="<%= "#{event.nom.capitalize} #{event.note}" %>">
-                                    (*)
+                                    *
                                 </span>
-                                </h5>
+                                
                             <% end %>
                         <% end %>
                     <% end %>

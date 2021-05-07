@@ -399,17 +399,24 @@ class JoursController < ApplicationController
             unless @jours[utilisateur_jour.service].nil?
                 @jours[utilisateur_jour.service][utilisateur_jour.utilisateur] ||= Hash.new
                 dd = utilisateur_jour.date.to_s
+                dw = utilisateur_jour.date.wday
+
                 @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd] ||= Hash.new
 
-                #@jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = WorkingList.for(utilisateur_jour.id).includes(:work)
-                WorkingList.for(utilisateur_jour.id).includes(:work).each do  |w|
-                    if w.work.early_value 
-                        if !@jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm]
-                            #@jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = w.work.early_value
-                            @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = [w.work.service_id, w.work.early_value]
-                        else
-                            if @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm][1] > w.work.early_value
+                wksl = WorkingList.for(utilisateur_jour.id).includes(:work)
+                wksl.each do  |w|
+
+                    if dw == 6
+                        @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = wksl
+                        
+                    else
+                        if w.work.early_value 
+                            if !@jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm]
                                 @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = [w.work.service_id, w.work.early_value]
+                            else
+                                if @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm][1] > w.work.early_value
+                                    @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = [w.work.service_id, w.work.early_value]
+                                end
                             end
                         end
                     end
@@ -445,13 +452,11 @@ class JoursController < ApplicationController
         find_services if @services.nil?
 
         # Charge les Events
-        @events = Hash.new
-        
-        if user_signed_in? && (current_user.admin? or current_user.utilisateur.admin)
-            find_utilisateurs
-            find_classes
-            find_works
-        end
+         @events = Hash.new
+        # nombre_de_jours = (@date2-@date).to_i
+        # nombre_de_jours.times do |i|
+        #     charge_events(@date + i.day)
+        # end
 
         @values = ["Early 1", "Early 2", "Regular"]
         
