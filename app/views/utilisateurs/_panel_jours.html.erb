@@ -24,10 +24,14 @@
                     <th class="tdfixe">W</th>
                 </tr>
                 
-                <% for i in 0..8 %>
+                <% for i in -2..8 %>
                     <% tmp_lundi = (Date.today + (i*7).days).beginning_of_week %>
+                    
                     <!-- Ligne de semaine -->
-                    <tr>
+
+                    <% ligne_color = (tmp_lundi.cweek == Date.today.cweek) ? "today" : "" %>
+
+                    <tr class="<%= ligne_color %>">
                         <!-- Case de la date -->
                         <td class="tdfixe">
                             <div class="badge">
