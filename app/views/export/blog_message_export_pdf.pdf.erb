@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%= csrf_meta_tags %>
+    <meta charset="UTF-8">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
 <% date_impression = Date.today().strftime('%Y/%m/%d') %>  
 <% heure_impression = Time.now.strftime('%H:%M') %>
 
@@ -79,3 +88,6 @@
 
 <hr>
 <hr>
+</body>
+
+</html>
