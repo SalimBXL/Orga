@@ -87,8 +87,17 @@
                                     type="submit" 
                                     id="button-addon2"
                                 >Search</button>
+                                <% if @possible_to_export %>
+                        <%= link_to '<span data-toggle="tooltip" title="Export logbook entries as PDF">
+                            <i class="material-icons">get_app</i></span>'.html_safe, 
+                            blog_message_export_pdf_path(date: params[:date], format: :pdf),
+                            target: :_blank,
+                            class: "btn btn-danger btn-xs"
+                        %>
+                    <% end %>
                             </p>
                     </form>
+                    
                 </div>
             </div>
         </div>
@@ -102,9 +111,6 @@
                     target: :_blank,
                     class: "btn btn-danger btn-xs"
                 %>
-
-
-               
             <% end %>
         </div>
 
