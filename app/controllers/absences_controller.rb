@@ -1,5 +1,5 @@
 class AbsencesController < ApplicationController
-    before_action :find_absence, only: [:show, :edit, :update, :destroy]
+    before_action :find_absence, only: [:show, :edit, :update, :destroy, :remove_one_day]
     before_action :check_logged_in
 
     #############
@@ -187,6 +187,51 @@ class AbsencesController < ApplicationController
         end
 
         find_utilisateurs
+    end
+
+    def remove_one_day
+        day_to_remove = params[:day]
+
+        puts "***************"
+        puts "***************"
+        puts "DAY TO REMOVE : #{day_to_remove}"
+        puts "DATE          : #{@absence.date}"
+        puts "DATE_FIN      : #{@absence.date_fin}"
+
+        #Supprimer premier jour ? => avancer la date de départ de un jour
+        if day_to_remove.to_s == @absence.date.to_s
+            @absence.date = (@absence.date + 1.day)
+            # on sauve.
+            if @absence.update(@absence.as_json)
+                flash[:notice] = "Absence modifiée =>  #{@absence.date} - #{@absence.date_fin}"
+                redirect_to utilisateur_path(@absence.utilisateur)
+            end
+        
+        #Supprimer un autre jour ? => reculer la date de fin de un jour
+        elsif day_to_remove.to_s == @absence.date_fin.to_s
+            @absence.date_fin = (@absence.date_fin - 1.day)
+            if @absence.update(@absence.as_json)
+                flash[:notice] = "Absence modifiée =>  #{@absence.date} - #{@absence.date_fin}"
+                redirect_to utilisateur_path(@absence.utilisateur)
+            end
+        else
+
+            #Supprimer autre jour ? => Split 
+            #   a: date départ -> jour pointé-1
+            #   b: Jour pointé +1 -> date de fin
+            backup_date = @absence.date_fin
+            @absence.date_fin = (day_to_remove.to_date - 1.day)
+            if @absence.update(@absence.as_json)
+                #flash[:notice] = "Absence modifiée =>  #{@absence.date} - #{@absence.date_fin}"
+                #redirect_to utilisateur_path(@absence.utilisateur)
+                @absence.date = (day_to_remove.to_date + 1.day)
+                @absence.date_fin = backup_date
+                @absence.id = nil
+                @absence = Absence.create(@absence.as_json)
+                redirect_to utilisateur_path(@absence.utilisateur)
+            end
+
+        end
 
     end
 

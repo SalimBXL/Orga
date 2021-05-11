@@ -148,6 +148,7 @@ Rails.application.routes.draw do
   get "grille", to: "absences#grille"
   get "not_yet_validated_absences", to: "absences#not_yet_validated"
   get "validated_absences", to: "absences#validated"
+  get "remove_one_day", to: "absences#remove_one_day"
 
 
   ################
