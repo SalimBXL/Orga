@@ -5,11 +5,23 @@ class AbsencesController < ApplicationController
     #############
     #   INDEX   #
     #############
+
     def index
+
+        @utilisateurs = Utilisateur.order(:service_id, :groupe_id, :prenom, :nom)
+
         if current_user.admin or current_user.utilisateur.admin
-            @absences = Absence.order(date: :desc).page(params[:page])
+            absences = Absence.order(date: :desc).page(params[:page])
         else 
-            @absences = Absence.where(utilisateur: current_user.utilisateur).order(date: :desc).page(params[:page])
+            absences = Absence.where(utilisateur: current_user.utilisateur).order(date: :desc).page(params[:page])
+        end
+
+        if params[:utilisateur_id]
+            @filtre = params[:utilisateur_id]
+            @absences = absences.where(utilisateur_id: params[:utilisateur_id])
+        else
+            @filtre = nil
+            @absences = absences
         end
         
         # Log action

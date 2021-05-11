@@ -9,13 +9,35 @@
         </span>
     </h1>
 </div>
+
+
 <p>
-    <% if user_signed_in? %>
-    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
-        new_absence_path,
-        class: "btn btn-success btn-xs" %>
-    <% end %>
+    <form class="form-inline" action="<%= absences_path %>" method="get">
+
+        <% if user_signed_in? %>
+        <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+            new_absence_path,
+            class: "btn btn-success btn-xs" %>
+        <% end %>
+
+        <div class="form-group">
+            <select class="form-control" id="utilisateur_id" name="utilisateur_id">
+                <option></option>
+                <% @utilisateurs.each do |utilisateur| %>
+                    <option value="<%= utilisateur.id %>" >
+                        [<%= utilisateur.service.nom %>]
+                        (<%= utilisateur.groupe.nom %>)
+                        <%= utilisateur.prenom_nom %>
+                    </option>
+                <% end %>
+            </select>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+    </form>
 </p>
+
+
+
 <div id="absences">
     <%= render 'absences' %>
 </div>
