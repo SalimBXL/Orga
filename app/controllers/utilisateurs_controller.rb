@@ -54,7 +54,10 @@ class UtilisateursController < ApplicationController
 
         session[:return_user_id] = @utilisateur.id
 
+
+        #
         # trouve les jours
+        #
         @jours = Jour.where('date >= ?', Date.today-10.days).where(utilisateur: @utilisateur).order(:date, :service_id)
         
         @wks = Hash.new
@@ -65,6 +68,16 @@ class UtilisateursController < ApplicationController
             end
         end
 
+
+        #
+        # trouve les tâches
+        #
+        @tasks = []
+        @tasks[26] = "test"
+
+        #
+        # trouve les absences
+        #
         @absences = Hash.new
         absences = Absence.where(utilisateur: @utilisateur).where('date_fin >= ?', Date.today.beginning_of_month).order(:date, :date_fin)
         absences.each do |absence|

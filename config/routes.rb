@@ -197,6 +197,14 @@ Rails.application.routes.draw do
   ############
   resources :works, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
   
+
+  ############
+  #   Tasks  #
+  ############
+  resources :tasks, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
+
+
+
   
   ######## TESTS
   get "show.pdf", to: "export#show"

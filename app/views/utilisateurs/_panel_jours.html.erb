@@ -15,7 +15,8 @@
             <table class="table-condensed table-bordered">
                 <!-- Ligne des noms de jour -->
                 <tr>
-                    <th class="tdfixe">Period</th>
+                    <th class="tdfixe">Periods</th>
+                    <th class="tdfixe"></th>
                     <th class="tdfixe"><%= I18n.t("Lundi").capitalize %></th>
                     <th class="tdfixe"><%= I18n.t("Mardi").capitalize %></th>
                     <th class="tdfixe"><%= I18n.t("Mercredi").capitalize %></th>
@@ -39,6 +40,15 @@
                                 <%= I18n.localize (tmp_lundi.end_of_week - 2.days), format: :short %>
                             </div>
                         </td>
+
+                        <td class="tdfixe">
+                            <% if @tasks[tmp_lundi.cweek] %>
+                                <div class="label label-warning">
+                                    <%= @tasks[tmp_lundi.cweek] %>
+                                </div>
+                            <% end %>
+                        </td>
+                        
 
                         <!-- Pour chaque jour... -->
                         <% for d in 0..5 %>

@@ -25,10 +25,10 @@
             </p>
 
             <!-- Description -->
-    <p>
-        <%= form.label I18n.t("works.form.description") %><br>
-        <%= form.text_field :description %>
-    </p>
+            <p>
+                <%= form.label I18n.t("works.form.description") %><br>
+                <%= form.text_field :description %>
+            </p>
         </div>
         
         <div class="col-sm-4">
@@ -68,6 +68,19 @@
                         <%= select_option_tag(l.nom.capitalize, l.id, @work.service_id) %>
                     <% end %>
                 <% end %>
+            </p>
+        </div>
+
+        <div class="col-sm-4">
+            <!-- Durée / Fréquence -->
+            <p>
+                <%= form.label I18n.t("works.form.length") %> (minutes)<br>
+                <%= form.text_field :length %>
+            </p>
+
+            <p>
+                <%= form.label I18n.t("works.form.repeat") %> (times in a year)<br>
+                <%= form.text_field :repeat %>
             </p>
         </div>
     </div>

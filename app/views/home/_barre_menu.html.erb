@@ -56,11 +56,18 @@
                 <i class="material-icons">build</i><br>
                 <%= I18n.t("home.index.works") %>
             </a>
+            <a href="<%= tasks_path %>" class="btn btn-primary" role="button">
+                <i class="material-icons">settings_ethernet</i><br>
+                <%= I18n.t("home.index.tasks") %>
+            </a>
         </div>
-        <%= render partial: "manager" if user_signed_in? && current_user.utilisateur.admin %>
+        
 </div>
 <br>
 <div class="row">
+
+    <%= render partial: "manager" if user_signed_in? && current_user.utilisateur.admin %>
+
     <%= render partial: "admin" if user_signed_in? && current_user.admin %>
         <!-- Bouton secrétaire -->
     <div class="btn-group">

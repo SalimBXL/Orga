@@ -1,0 +1,27 @@
+<h1>
+    <%= @task.nom %>
+</h1>
+
+<p>
+    <strong>Code : </strong> <%= @task.code %>
+</p>
+
+<p>
+    <strong>Classe : </strong> <%= @task.classe.nom %>
+</p>
+
+<p>
+    <strong>Groupe : </strong> <%= @task.groupe.nom %>
+</p>
+
+<p>
+    <strong>Service : </strong> <%= @task.service.nom %>
+</p>
+
+<p>
+    <strong>Description : </strong> <%= @task.description %> 
+</p>
+
+<p>
+    <%= link_to " [Edit] ", edit_task_path(@task) %>
+</p>

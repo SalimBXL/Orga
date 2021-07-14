@@ -86,7 +86,7 @@ class WorksController < ApplicationController
     private 
 
     def work_params
-        params.require(:work).permit(:nom, :description, :groupe_id, :classe_id, :service_id, :code, :mark, :early_value)
+        params.require(:work).permit(:nom, :description, :groupe_id, :classe_id, :service_id, :code, :mark, :early_value, :length, :repeat)
     end
 
     def find_work

@@ -417,6 +417,7 @@ en:
       secretary: Secretary
       services: Services
       sous_titre: Team Manager
+      tasks: Tasks
       templates: Templates
       tools: Tools
       types: Types
@@ -546,6 +547,19 @@ en:
       lieu: Location
       nom: Name
       titre: New Service
+  tasks:
+    form:
+      classe: Classe
+      code: Code
+      description: Description
+      groupe: Groupe
+      nom: Nom
+      service: Service
+    index:
+      log_edit: Log edit
+      log_estroy: Log estroy
+      log_update: Log update
+      titre: Tasks
   templates:
     edit:
       edit_template: Edit template
@@ -691,8 +705,10 @@ en:
       description: Description
       early_value: Early value
       groupe: Group
+      length: Length
       mark: Mark
       nom: Name
+      repeat: Repeat
       secretary_info: Secretary info
       service: Service
     index:

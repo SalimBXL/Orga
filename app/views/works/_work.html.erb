@@ -2,6 +2,14 @@
     <td colspan="2"><strong><%= work.code %></strong> </td>
     <td> <%= work.nom %></td>
     <td><%= work.description %></td>
+    <td><%= work.length %></td>
+    <td>
+        <% if work.repeat %>
+            <span class="label label-default">
+                <%= work.repeat %>
+            </span>
+        <% end %>
+    </td>
     <td>
         <% if work.mark %>
             <span class="material-icons">outlined_flag</span>

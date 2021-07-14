@@ -205,6 +205,20 @@ ActiveRecord::Schema.define(version: 2020091012140633) do
     t.index ["lieu_id"], name: "index_services_on_lieu_id"
   end
 
+  create_table "tasks", force: :cascade do |t|
+    t.bigint "groupe_id"
+    t.bigint "classe_id"
+    t.bigint "service_id"
+    t.string "nom"
+    t.string "code"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["classe_id"], name: "index_tasks_on_classe_id"
+    t.index ["groupe_id"], name: "index_tasks_on_groupe_id"
+    t.index ["service_id"], name: "index_tasks_on_service_id"
+  end
+
   create_table "templates", force: :cascade do |t|
     t.boolean "am_pm1"
     t.integer "work1_1"
@@ -318,6 +332,8 @@ ActiveRecord::Schema.define(version: 2020091012140633) do
     t.datetime "updated_at", null: false
     t.boolean "mark"
     t.integer "early_value"
+    t.integer "length"
+    t.integer "repeat"
     t.index ["classe_id"], name: "index_works_on_classe_id"
     t.index ["groupe_id"], name: "index_works_on_groupe_id"
     t.index ["service_id"], name: "index_works_on_service_id"
@@ -340,6 +356,9 @@ ActiveRecord::Schema.define(version: 2020091012140633) do
   add_foreign_key "messages", "services"
   add_foreign_key "messages", "utilisateurs"
   add_foreign_key "services", "lieus"
+  add_foreign_key "tasks", "classes", column: "classe_id"
+  add_foreign_key "tasks", "groupes"
+  add_foreign_key "tasks", "services"
   add_foreign_key "utilisateurs", "groupes"
   add_foreign_key "utilisateurs", "services"
   add_foreign_key "utilisateurs", "users"
