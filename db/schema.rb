@@ -144,6 +144,17 @@ ActiveRecord::Schema.define(version: 2020091012140633) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "hebdos", force: :cascade do |t|
+    t.bigint "utilisateur_id"
+    t.integer "numero_semaine"
+    t.string "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "task_id"
+    t.index ["task_id"], name: "index_hebdos_on_task_id"
+    t.index ["utilisateur_id"], name: "index_hebdos_on_utilisateur_id"
+  end
+
   create_table "jours", force: :cascade do |t|
     t.bigint "utilisateur_id"
     t.bigint "service_id"
@@ -351,6 +362,8 @@ ActiveRecord::Schema.define(version: 2020091012140633) do
   add_foreign_key "demande_conges", "utilisateurs"
   add_foreign_key "events", "services"
   add_foreign_key "fermetures", "services"
+  add_foreign_key "hebdos", "tasks"
+  add_foreign_key "hebdos", "utilisateurs"
   add_foreign_key "jours", "services"
   add_foreign_key "jours", "utilisateurs"
   add_foreign_key "messages", "services"

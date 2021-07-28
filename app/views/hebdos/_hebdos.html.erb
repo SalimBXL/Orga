@@ -1,0 +1,12 @@
+<p><%= paginate @hebdos, remote: true %></p>
+<table class="table table-striped">
+    <tr>
+        <th><%= I18n.t("hebdos.edit.numero_semaine") %></th>
+        <th><%= I18n.t("hebdos.edit.utilisateur") %></th>
+        <th><%= I18n.t("hebdos.edit.task") %></th>
+        <th><%= I18n.t("hebdos.edit.note") %></th>
+        <th></th>
+    </tr>
+    <%= render @hebdos %>
+</table>
+<p><%= paginate @hebdos, remote: true %></p>

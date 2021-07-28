@@ -230,6 +230,24 @@ en:
       description: Description
       nom: Name
       titre: New group
+  hebdos:
+    edit:
+      note: Note
+      numero_semaine: Week
+      task: Task
+      utilisateur: User
+    index:
+      description: " "
+      log_destroy: Log destroy
+      log_edit: Log edit
+      log_update: Log update
+      titre: Hebdos
+    new:
+      note: Note
+      task: Task
+      titre: Titre
+      utilisateur: Utilisateur
+      week: Week
   help:
     absences_types:
       article0: There are many types of absences. In the Type page, you can see all the different kind of absences encoded in the system.
@@ -405,6 +423,7 @@ en:
       fermetures: Days Off
       from_template: From template
       groupes: Groups
+      hebdos: Hebdos
       jours: Days
       lieux: Locations
       logs: Logs

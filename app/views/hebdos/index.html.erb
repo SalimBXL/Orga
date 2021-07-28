@@ -1,0 +1,36 @@
+<% session[:page_aide] = "hebdos" %>
+
+<div class="container">
+
+<h1>
+    <span class="label label-danger">
+        <i class="material-icons">settings_ethernet</i>
+        <%= I18n.t("hebdos.index.titre").upcase %>
+    </span>
+</h1>
+
+<p>
+    <%= I18n.t("hebdos.index.description") %>
+</p>
+
+<p>
+<% if user_signed_in? && current_user.admin? %>
+    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+        new_hebdo_path,
+        class: "btn btn-success btn-xs" %>
+        <% end %>
+</p>
+
+
+<div id="hebdos">
+    <%= render 'hebdos' %>
+</div>
+
+<p>
+<% if user_signed_in? && current_user.admin? %>
+    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+        new_hebdo_path,
+        class: "btn btn-success btn-xs" %>
+        <% end %>
+</p>
+</div>

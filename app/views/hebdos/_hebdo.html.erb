@@ -1,0 +1,26 @@
+<tr id="hebdo_<%= hebdo.id %>">
+    <td><%= hebdo.numero_semaine %></td>
+    <td><%= hebdo.utilisateur.prenom_nom %></td>
+    <td><%= hebdo.task.nom %></td>
+    <td><%= hebdo.note %></td>
+
+    <td>
+    <% if user_signed_in? && current_user.admin? %>
+        <%= link_to '<span data-toggle="tooltip" >
+            <i class="material-icons">edit</i></span>'.html_safe, 
+            edit_hebdo_path(hebdo),
+            class: "btn btn-warning btn-xs" 
+        %>
+
+        <%= link_to '<span data-toggle="tooltip" >
+            <i class="material-icons">close</i>'.html_safe, 
+            hebdo_path(hebdo),
+            method: :delete,
+            remote: true,
+            data: { confirm: "Delete #{hebdo.task.nom}  ?" },
+            class: "btn btn-danger btn-xs" 
+        %>
+<% end %>
+        
+    </td>
+</tr>

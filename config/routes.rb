@@ -204,6 +204,12 @@ Rails.application.routes.draw do
   resources :tasks, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
 
 
+  #############
+  #   Hebdos  #
+  #############
+  resources :hebdos, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
+
+
 
   
   ######## TESTS

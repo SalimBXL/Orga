@@ -1,0 +1,39 @@
+<%= form_with model: @hebdo, local: true do |form| %>
+
+    <% if @hebdo.errors.any? %>
+        <strong>WARNING</strong>
+        <ul>
+            <% @hebdo.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
+
+    <!-- Week -->
+    <p>
+        <%= form.label I18n.t("hebdos.new.week") %><br>
+        <%= form.text_field :numero_semaine %>
+    </p>
+
+    <!-- Utilisateur -->
+    <p>
+        <%= form.label I18n.t("hebdos.new.utilisateur") %><br>
+        <%= form.text_field :utilisateur_id %>
+    </p>
+
+    <!-- Task -->
+    <p>
+        <%= form.label I18n.t("hebdos.new.task") %><br>
+        <%= form.text_field :task_id %>
+    </p>
+
+    <!-- Note -->
+    <p>
+        <%= form.label I18n.t("hebdos.new.note") %><br>
+        <%= form.text_field :note %>
+    </p>
+
+    <p>
+        <%= form.submit class: "btn btn-primary" %>
+    </p>
+<% end %>

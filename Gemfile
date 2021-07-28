@@ -72,6 +72,8 @@ group :development, :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
 
+  gem 'hirb', '~> 0.7.3'
+
   # RSPEC
   gem 'rspec-rails', '~> 3.7'
 

@@ -33,18 +33,22 @@
                     <% ligne_color = (tmp_lundi.cweek == Date.today.cweek) ? "today" : "" %>
 
                     <tr class="<%= ligne_color %>">
+
                         <!-- Case de la date -->
                         <td class="tdfixe">
                             <div class="badge">
                                 <%= I18n.localize tmp_lundi, format: :short %> -- 
                                 <%= I18n.localize (tmp_lundi.end_of_week - 2.days), format: :short %>
                             </div>
-                        </td>
+                            <small>(#<%= tmp_lundi.cweek %>)</small>
 
-                        <td class="tdfixe">
+                            &nbsp;&nbsp;&nbsp;
+
                             <% if @tasks[tmp_lundi.cweek] %>
-                                <div class="label label-warning">
-                                    <%= @tasks[tmp_lundi.cweek] %>
+                                <div class="label label-warning" 
+                                    data-toggle="tooltip" 
+                                    title="<%= @tasks[tmp_lundi.cweek] %>">
+                                    <%= link_to @tasks[tmp_lundi.cweek], hebdos_path() %>
                                 </div>
                             <% end %>
                         </td>
