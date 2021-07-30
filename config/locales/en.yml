@@ -568,12 +568,15 @@ en:
       titre: New Service
   tasks:
     form:
+      basics_informations: Basics informations
       classe: Classe
       code: Code
       description: Description
       groupe: Groupe
       nom: Nom
+      occurrences: Occurrences
       service: Service
+      user_target: User target
     index:
       log_edit: Log edit
       log_estroy: Log estroy
