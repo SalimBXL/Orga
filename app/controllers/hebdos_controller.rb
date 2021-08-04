@@ -44,8 +44,17 @@ class HebdosController < ApplicationController
     def create
         # Log action
         log(request.path)
+
+        if params[:hebdo][:week]
+            spl = params[:hebdo][:week].split("-")
+            if spl.size == 2
+                params[:hebdo][:year_id] = spl.first
+                params[:hebdo][:numero_semaine] = spl.last[1..]
+            end
+            params[:hebdo].delete(:week)
+        end
+
         @hebdo = Hebdo.create(hebdo_params)
-        
         if @hebdo.save
             flash[:notice] = "Hebdo créé avec succès"
             redirect_to hebdos_path
@@ -90,7 +99,7 @@ class HebdosController < ApplicationController
     private     
 
     def hebdo_params
-        params.require(:hebdo).permit(:numero_semaine, :utilisateur_id, :task_id, :note, :year_id)
+        params.require(:hebdo).permit(:utilisateur_id, :task_id, :note, :numero_semaine, :year_id)
     end
 
     def find_hebdos

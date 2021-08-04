@@ -9,16 +9,12 @@
         </ul>
     <% end %>
 
-    <!-- Year -->
-    <p>
-        <%= form.label I18n.t("hebdos.new.year") %><br>
-        <%= form.text_field :year_id %>
-    </p>
 
-    <!-- Week -->
+    <!-- PICKUP DATE -->
     <p>
-        <%= form.label I18n.t("hebdos.new.week") %><br>
-        <%= form.text_field :numero_semaine %>
+        <%= form.label I18n.t("hebdos.new.date") %><br>
+        <%= form.week_field :week %>
+        <!-- <input type="week" name="hebdo" id="week" required> -->
     </p>
 
     <!-- Utilisateur -->
