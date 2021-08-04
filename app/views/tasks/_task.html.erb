@@ -1,6 +1,7 @@
 <tr id="task_<%= task.id %>">
-    <td colspan="2"><strong><%= task.code %></strong> </td>
-    <td> <%= task.nom %></td>
+    <td><strong><%= task.code %></strong> </td>
+    <td><%= task.repeat %></td>
+    <td><%= task.nom %></td>
     <td><%= task.description %></td>
     <td><%= task.groupe.nom unless task.groupe.nil? %></td>
     <td><%= task.classe.nom unless task.classe.nil? %></td>

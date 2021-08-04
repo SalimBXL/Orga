@@ -225,6 +225,7 @@ ActiveRecord::Schema.define(version: 2020091012140633) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "repeat"
     t.index ["classe_id"], name: "index_tasks_on_classe_id"
     t.index ["groupe_id"], name: "index_tasks_on_groupe_id"
     t.index ["service_id"], name: "index_tasks_on_service_id"

@@ -85,7 +85,24 @@
         <div class="col-sm-4">
             <fieldset>
             <legend><%= I18n.t("tasks.form.occurrences").capitalize %></legend>
-
+            <p>
+                <%= form.label I18n.t("tasks.form.repeat") %><br>
+                <%= form.select(:repeat) do %>
+                    <%= select_option_tag("", nil, @task.repeat) %>
+                    <% repeats = [
+                        [1, "Annual"],
+                        [2, "semestrial"],
+                        [4, "trimestrial"],
+                        [6, "bimestriel"],
+                        [12, "mensuel"],
+                        [24, "bimensuel"],
+                        [52, "hebdomadaire"]
+                    ] %>
+                    <% repeats.each do |l| %>
+                        <%= select_option_tag("#{l[1].capitalize} (#{l[0]})", l[0], @task.repeat) %>
+                    <% end %>
+                <% end %>
+            </p>
             </fieldset>
         </div>
 
