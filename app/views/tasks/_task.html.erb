@@ -1,6 +1,13 @@
 <tr id="task_<%= task.id %>">
     <td><strong><%= task.code %></strong> </td>
-    <td><%= task.repeat %></td>
+
+    <td>
+        <% color = (@completion[task.id].nil? or task.repeat.nil?) ? "danger" : (@completion[task.id] < task.repeat) ? "warning" : "success" %>
+        <span class="label label-<%= color %>">
+            <%= @completion[task.id] %> / <%= task.repeat %>
+        </span>
+    </td>
+
     <td><%= task.nom %></td>
     <td><%= task.description %></td>
     <td><%= task.groupe.nom unless task.groupe.nil? %></td>

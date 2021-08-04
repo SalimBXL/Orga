@@ -14,6 +14,13 @@ class TasksController < ApplicationController
         else
             @tasks = Task.where(service: current_user.utilisateur.service).order(:service_id, :classe_id, :groupe_id, :nom).page(params[:page])
         end
+
+        @completion = Hash.new
+        hebdos = Hebdo.where(year_id: Date.today.year)
+        hebdos.each do |hebdo|
+            @completion[hebdo.task_id] ||= 0
+            @completion[hebdo.task_id] = @completion[hebdo.task_id] + 1
+        end
     end
 
 

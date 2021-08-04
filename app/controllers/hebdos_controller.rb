@@ -90,7 +90,7 @@ class HebdosController < ApplicationController
     private     
 
     def hebdo_params
-        params.require(:hebdo).permit(:numero_semaine, :utilisateur_id, :task_id, :note)
+        params.require(:hebdo).permit(:numero_semaine, :utilisateur_id, :task_id, :note, :year_id)
     end
 
     def find_hebdos

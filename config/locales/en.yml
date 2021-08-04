@@ -236,6 +236,7 @@ en:
       numero_semaine: Week
       task: Task
       utilisateur: User
+      year: Year
     index:
       description: " "
       log_destroy: Log destroy
@@ -248,6 +249,7 @@ en:
       titre: Titre
       utilisateur: Utilisateur
       week: Week
+      year: Year
   help:
     absences_types:
       article0: There are many types of absences. In the Type page, you can see all the different kind of absences encoded in the system.
@@ -575,6 +577,7 @@ en:
       groupe: Groupe
       nom: Nom
       occurrences: Occurrences
+      repeat: Repeat
       service: Service
       user_target: User target
     index:
