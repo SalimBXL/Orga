@@ -38,6 +38,8 @@ class HomeController < ApplicationController
             @bugs_test = BugRepport.where(status: "sync_problem").size
         end
 
+        
+
     end
 
     private 
@@ -79,6 +81,9 @@ class HomeController < ApplicationController
 
         # Charge les messages
         @messages = Array.new
-        charge_messages(date)        
+        charge_messages(date)
+
+        # Charge les tâches
+        find_tasks(current_user.utilisateur.id)
     end
 end

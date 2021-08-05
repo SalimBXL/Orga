@@ -72,13 +72,8 @@ class UtilisateursController < ApplicationController
         #
         # trouve les tâches
         #
-        @tasks = []
-        from = (Date.today-3.weeks).cweek
-        to = (Date.today+9.weeks).cweek
-        hebdos = Hebdo.where('numero_semaine > ? AND numero_semaine < ?', from, to ).where(utilisateur: @utilisateur).order(:numero_semaine)
-        hebdos.each do |hebdo|
-            @tasks[hebdo.numero_semaine] = hebdo.task.nom
-        end
+        find_tasks(@utilisateur)
+
 
         #
         # trouve les absences

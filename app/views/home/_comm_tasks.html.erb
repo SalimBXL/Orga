@@ -1,0 +1,5 @@
+
+<% if @tasks[Date.today.cweek] %>
+    <%= "TASK : " %>
+    <%= print_task(Date.today.cweek) %>
+<% end %>

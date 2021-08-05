@@ -171,6 +171,7 @@ class JoursController < ApplicationController
             @specific_day_jours[jour.service][jour.utilisateur][jour.am_pm] = WorkingList.for(jour.id).includes(:work)
             @specific_day_jours[jour.service][jour.utilisateur]["notes"] ||= Hash.new
             @specific_day_jours[jour.service][jour.utilisateur]["notes"][jour.am_pm] = jour.note
+            @specific_day_jours[jour.service][jour.utilisateur]["task"] = find_tasks(jour.utilisateur)
         end
 
         # Charges les services

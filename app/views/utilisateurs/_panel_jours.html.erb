@@ -39,17 +39,14 @@
                                 <%= I18n.localize tmp_lundi, format: :short %> -- 
                                 <%= I18n.localize (tmp_lundi.end_of_week - 2.days), format: :short %>
                             </div>
+
                             <small>(#<%= tmp_lundi.cweek %>)</small>
 
                             &nbsp;&nbsp;&nbsp;
+                            <%= print_task(tmp_lundi.cweek) %>
+                            
 
-                            <% if @tasks[tmp_lundi.cweek] %>
-                                <div class="label label-warning" 
-                                    data-toggle="tooltip" 
-                                    title="<%= @tasks[tmp_lundi.cweek] %>">
-                                    <%= link_to @tasks[tmp_lundi.cweek], hebdos_path() %>
-                                </div>
-                            <% end %>
+                            
                         </td>
                         
 
