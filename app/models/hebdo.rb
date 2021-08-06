@@ -11,6 +11,11 @@ class Hebdo < ApplicationRecord
         self.numero_semaine = "#{date.year}-W#{date.cweek<10 ? "0" : ""}#{date.cweek}"
     end
 
+    
+    def week
+        "#{year_id}-W#{numero_semaine}"
+    end
+
     private
 
     def set_year_if_empty

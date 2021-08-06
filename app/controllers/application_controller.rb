@@ -229,6 +229,7 @@ end
   #
   # trouve les tâches
   #
+  
   def find_tasks(utilisateur)
     @tasks = []
     from = (Date.today-3.weeks).cweek

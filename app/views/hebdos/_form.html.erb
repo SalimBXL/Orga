@@ -13,20 +13,31 @@
     <!-- PICKUP DATE -->
     <p>
         <%= form.label I18n.t("hebdos.new.date") %><br>
-        <%= form.week_field :week %>
-        <!-- <input type="week" name="hebdo" id="week" required> -->
+        <input type="week" name="hebdo[:week]" id="hebdo_week" value="<%= @hebdo.week %>" required>
     </p>
 
     <!-- Utilisateur -->
     <p>
         <%= form.label I18n.t("hebdos.new.utilisateur") %><br>
-        <%= form.text_field :utilisateur_id %>
+        <% unless current_user.admin? %>
+            <% temp = @utilisateurs %>
+            <% @utilisateurs = temp.where(service: current_user.utilisateur.service) %>
+        <% end %>
+        <%= form.select(:utilisateur_id, @utilisateurs.collect {|p| [ "[#{p.service.nom}] - (#{p.groupe.nom}) - #{p.prenom_nom}", p.id ] }, 
+                                    { }, 
+                                    { :multiple => false }) %>
     </p>
 
     <!-- Task -->
     <p>
         <%= form.label I18n.t("hebdos.new.task") %><br>
-        <%= form.text_field :task_id %>
+        <% unless current_user.admin? %>
+            <% temp = @tsks %>
+            <% @tsks = temp.where(service: current_user.utilisateur.service) %>
+        <% end %>
+        <%= form.select(:task_id, @tsks.collect {|p| [ "[#{p.service.nom}] - (#{p.groupe.nom}) - #{p.nom}", p.id ] }, 
+                                    { }, 
+                                    { :multiple => false }) %>
     </p>
 
     <!-- Note -->

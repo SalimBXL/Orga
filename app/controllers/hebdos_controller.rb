@@ -35,6 +35,8 @@ class HebdosController < ApplicationController
         # Log action
         log(request.path)
         @hebdo = Hebdo.new
+        find_utilisateurs
+        @tsks = Task.order(:service_id, :groupe_id, :nom)
     end
 
 
@@ -85,6 +87,9 @@ class HebdosController < ApplicationController
     def edit
         # Log action
         log(request.path, I18n.t("hebdos.index.log_edit"))
+        find_utilisateurs
+        @tsks = Task.order(:service_id, :groupe_id, :nom)
+        
     end
 
     ##############
