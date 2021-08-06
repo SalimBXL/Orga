@@ -43,7 +43,7 @@
                             <small>(#<%= tmp_lundi.cweek %>)</small>
 
                             &nbsp;&nbsp;&nbsp;
-                            <%= print_task(tmp_lundi.cweek) %>
+                            <%= print_task(tmp_lundi.cweek) if @tasks[tmp_lundi.cweek] %>
                             
 
                             
