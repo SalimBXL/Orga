@@ -112,6 +112,9 @@
                 <div class="row">
                     <div class="col-sm-2">
                         <strong><%= utilisateur.prenom_nom %></strong>
+                        <% @tasks = jours[:task] %>
+                        <%= print_task(@date.cweek) if @tasks.size > 0%>
+                        
                     </div>
                     <% 5.times do |i| %>
                         <% i+= 1 %>

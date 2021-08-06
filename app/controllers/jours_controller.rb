@@ -171,7 +171,8 @@ class JoursController < ApplicationController
             @specific_day_jours[jour.service][jour.utilisateur][jour.am_pm] = WorkingList.for(jour.id).includes(:work)
             @specific_day_jours[jour.service][jour.utilisateur]["notes"] ||= Hash.new
             @specific_day_jours[jour.service][jour.utilisateur]["notes"][jour.am_pm] = jour.note
-            @specific_day_jours[jour.service][jour.utilisateur]["task"] = find_tasks(jour.utilisateur)
+            find_tasks(jour.utilisateur)
+            @specific_day_jours[jour.service][jour.utilisateur][:task] = @tasks[@date.cweek]
         end
 
         # Charges les services
@@ -316,6 +317,8 @@ class JoursController < ApplicationController
         utilisateurs_jours.each do |utilisateur_jour|
             @jours[utilisateur_jour.service] ||= Hash.new
             @jours[utilisateur_jour.service][utilisateur_jour.utilisateur] ||= Hash.new
+            find_tasks(utilisateur_jour.utilisateur)
+            @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][:task] = @tasks
             5.times do |i|
                 i += 1
                 @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][i] ||= Hash.new

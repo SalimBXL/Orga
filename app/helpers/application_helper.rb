@@ -89,7 +89,7 @@ module ApplicationHelper
             data-toggle='tooltip' 
             title='#{@tasks[cweek]}'>
             #{link_to @tasks[cweek], hebdos_path()}
-        </div>".html_safe if @tasks[cweek]
+        </div>".html_safe if @tasks
     end
 
     

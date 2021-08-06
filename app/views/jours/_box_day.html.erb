@@ -30,10 +30,12 @@
     <!-- FOOTER -->
     <div class="panel-footer">
 
+        <!-- Notes -->
         <p class="text-danger"><%= note[false] if note[false] %></p>
         <p class="text-danger"><%= note[true] if note[true] %></p>
 
-         <% if @absence[utilisateur] %>
+        <!-- Absences -->
+        <% if @absence[utilisateur] %>
             <% unless @absence[utilisateur].accord %>
                 <p>
                     <span class="label label-warning">
@@ -41,7 +43,13 @@
                     </span>
                 </p>
             <% end %>
-         <% end %>
+        <% end %>
+
+        <!-- Tasks -->
+        <p>
+            <% @tasks[@date.cweek] = specific_day_jour[:task] %>
+            <%= print_task(@date.cweek) if specific_day_jour[:task] %>
+        </p>
 
         
     </div>
