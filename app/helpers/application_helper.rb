@@ -92,6 +92,17 @@ module ApplicationHelper
         </div>".html_safe if @tasks
     end
 
+    def repeats 
+        [
+            [1, "Annual"],
+            [2, "semestrial"],
+            [4, "trimestrial"],
+            [6, "bimestriel"],
+            [12, "mensuel"],
+            [24, "bimensuel"],
+            [52, "hebdomadaire"]
+        ]
+    end
     
 
 end
