@@ -15,6 +15,9 @@
         <!-- Changement de service -->
         <%= render partial: "nom_service_day", locals: { service: service } %>
 
+
+        
+
         <!-- Changement d'utilisateur -->
         <% @specific_day_jours[service].keys.each do |utilisateur| %>
             <% if utilisateur != last_utilisateur %>

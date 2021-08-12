@@ -72,6 +72,15 @@ class HebdosController < ApplicationController
         # Log action
         log(request.path, I18n.t("hebdos.index.log_update"))
 
+        if params[:hebdo][:week]
+            spl = params[:hebdo][:week].split("-")
+            if spl.size == 2
+                params[:hebdo][:year_id] = spl.first
+                params[:hebdo][:numero_semaine] = spl.last[1..]
+            end
+            params[:hebdo].delete(:week)
+        end
+
         if @hebdo.update(hebdo_params)
             flash[:notice] = "Hebdo Modifié avec succès"    
         else 
@@ -104,7 +113,7 @@ class HebdosController < ApplicationController
     private     
 
     def hebdo_params
-        params.require(:hebdo).permit(:utilisateur_id, :task_id, :note, :numero_semaine, :year_id)
+        params.require(:hebdo).permit(:utilisateur_id, :task_id, :note, :numero_semaine, :year_id, :week)
     end
 
     def find_hebdos
