@@ -244,6 +244,7 @@ en:
       log_update: Log update
       titre: Hebdos
     new:
+      date: Date
       note: Note
       task: Task
       titre: Titre
