@@ -13,6 +13,7 @@
             <% n_jour = 1 %>
 
             <table class="table-condensed table-bordered">
+
                 <!-- Ligne des noms de jour -->
                 <tr>
                     <th class="tdfixe">Periods</th>
@@ -28,7 +29,6 @@
                     <% tmp_lundi = (Date.today + (i*7).days).beginning_of_week %>
                     
                     <!-- Ligne de semaine -->
-
                     <% ligne_color = (tmp_lundi.cweek == Date.today.cweek) ? "today" : "" %>
 
                     <tr class="<%= ligne_color %>">
@@ -44,9 +44,6 @@
 
                             &nbsp;&nbsp;&nbsp;
                             <%= print_task(tmp_lundi.cweek) if @tasks[tmp_lundi.cweek] %>
-                            
-
-                            
                         </td>
                         
 
@@ -54,6 +51,7 @@
                         <% for d in 0..5 %>
                             <% tmp_jour = tmp_lundi + d.days %>
                             <td class="tdfixe">
+                            
                                 <% @jours.where(date: tmp_jour).each do |batch| %>
                                     <% bg = "primary" %>
                                     <% bg = "info" if batch.am_pm %>
