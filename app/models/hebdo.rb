@@ -16,6 +16,10 @@ class Hebdo < ApplicationRecord
         "#{year_id}-W#{numero_semaine}"
     end
 
+
+
+    
+
     private
 
     def set_year_if_empty

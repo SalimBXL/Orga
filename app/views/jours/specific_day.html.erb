@@ -3,6 +3,10 @@
 <% @last_service = nil %>
 <% last_groupe = nil %>
 <% last_utilisateur = nil %>
+<% liste_tasks = Array.new %>
+<% @hebdos.keys.each do |k| %>
+    <% liste_tasks << k %>
+<% end %>
 
 <div class="container">
 
@@ -24,19 +28,35 @@
                 <% last_utilisateur = utilisateur %>
             <% end %>
 
+
             <!-- Dessine la boîte -->
-            <div class="col-sm-4">            
+            <div class="col-sm-4">
                 <%= render partial: "box_day", locals: { 
                         specific_day_jour: @specific_day_jours[service][utilisateur],
                         utilisateur: utilisateur,
-                        note: @specific_day_jours[service][utilisateur]["notes"]
-                    } 
+                        note: @specific_day_jours[service][utilisateur]["notes"],
+                        task: @hebdos[utilisateur.id]
+                    }
                 %>
+                <% liste_tasks.delete(utilisateur.id) %>
             </div>
+            
 
         <% end %>
-        
+
     <% end %>
+
+    <% if liste_tasks.length > 0 %>
+        <hr>
+        <p>Tasks : </p>
+        <ul>
+        <% liste_tasks.each do |id| %>
+            <li>
+                <%= @hebdos[id].last %>
+                <span class='label label-warning'><%= link_to "#{@hebdos[id].first}", hebdos_path() %></span>
+            </li>
+        <% end %>
+        </ul>
+    <% end %>
+    
 </div>
-
-

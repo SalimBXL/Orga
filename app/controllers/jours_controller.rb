@@ -162,6 +162,18 @@ class JoursController < ApplicationController
             @absence[jour.utilisateur] ||= nil
         end
 
+        # Charge les tasks pour la journée
+        @hebdos = Hash.new
+        h = Hebdo.where(numero_semaine: @date.cweek)
+        h.each do |hh|
+            @hebdos[hh.utilisateur_id] = [hh.task.nom, hh.utilisateur.prenom_nom]
+        end
+        
+        
+            
+
+
+
         # Parse les jours
         @specific_day_jours = Hash.new
         specific_day_jours.each do |jour|
@@ -181,6 +193,8 @@ class JoursController < ApplicationController
         # Charge les Events
         @events = Hash.new
         charge_events(@date)
+
+        
         
     end
 
