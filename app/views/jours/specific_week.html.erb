@@ -1,5 +1,10 @@
 <% session[:page_aide] = "this_week" %>
 
+<% liste_tasks = Array.new %>
+<% @hebdos.keys.each do |k| %>
+    <% liste_tasks << k %>
+<% end %>
+
 <div class="container">
     <h1>
         <span class="label label-info">
@@ -114,6 +119,7 @@
                         <strong><%= utilisateur.prenom_nom %></strong>
                         <% @tasks = jours[:task] %>
                         <%= print_task(@date.cweek) if @tasks[@date.cweek]%>
+                        <% liste_tasks.delete(utilisateur.id) %>
                         
                     </div>
                     <% 5.times do |i| %>
@@ -202,6 +208,19 @@
             <% end %>
         <% end %>
 
-
     <% end %>
+    <!-- Autres tâches -->
+        <% if liste_tasks.length > 0 %>
+            <div class="col-sm-4 panel panel-warning">
+                <p>Tasks : </p>
+                <ul>
+                <% liste_tasks.each do |id| %>
+                    <li>
+                        <%= @hebdos[id].last %>
+                        <span class='label label-warning'><%= link_to "#{@hebdos[id].first}", hebdos_path() %></span>
+                    </li>
+                <% end %>
+                </ul>
+            </div>
+        <% end %>
 </div>

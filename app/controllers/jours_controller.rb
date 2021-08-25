@@ -170,10 +170,6 @@ class JoursController < ApplicationController
         end
         
         
-            
-
-
-
         # Parse les jours
         @specific_day_jours = Hash.new
         specific_day_jours.each do |jour|
@@ -375,6 +371,13 @@ class JoursController < ApplicationController
         @events = Hash.new
         5.times do |i|
             charge_events(@date.beginning_of_week+i.day)
+        end
+
+        # Charge les tasks pour la journée
+        @hebdos = Hash.new
+        h = Hebdo.where(numero_semaine: @date.cweek)
+        h.each do |hh|
+            @hebdos[hh.utilisateur_id] = [hh.task.nom, hh.utilisateur.prenom_nom]
         end
     end
 

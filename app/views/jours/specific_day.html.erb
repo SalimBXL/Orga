@@ -20,8 +20,6 @@
         <%= render partial: "nom_service_day", locals: { service: service } %>
 
 
-        
-
         <!-- Changement d'utilisateur -->
         <% @specific_day_jours[service].keys.each do |utilisateur| %>
             <% if utilisateur != last_utilisateur %>
@@ -40,23 +38,22 @@
                 %>
                 <% liste_tasks.delete(utilisateur.id) %>
             </div>
-            
-
         <% end %>
 
-    <% end %>
-
-    <% if liste_tasks.length > 0 %>
-        <hr>
-        <p>Tasks : </p>
-        <ul>
-        <% liste_tasks.each do |id| %>
-            <li>
-                <%= @hebdos[id].last %>
-                <span class='label label-warning'><%= link_to "#{@hebdos[id].first}", hebdos_path() %></span>
-            </li>
+        <!-- Autres tâches -->
+        <% if liste_tasks.length > 0 %>
+            <div class="col-sm-4 panel panel-warning">
+                <p>Tasks : </p>
+                <ul>
+                <% liste_tasks.each do |id| %>
+                    <li>
+                        <%= @hebdos[id].last %>
+                        <span class='label label-warning'><%= link_to "#{@hebdos[id].first}", hebdos_path() %></span>
+                    </li>
+                <% end %>
+                </ul>
+            </div>
         <% end %>
-        </ul>
     <% end %>
     
 </div>
