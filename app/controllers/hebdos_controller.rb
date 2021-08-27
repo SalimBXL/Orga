@@ -110,6 +110,51 @@ class HebdosController < ApplicationController
         @hebdo.destroy
     end
 
+
+    ##########
+    # GRILLE #
+    ##########
+    def grille
+        log(request.path, "Show grille hebdos")
+
+        # Réglage des dates de début et fin de période
+        unless params[:date]
+            date_tmp = Date.today
+        else
+            date_tmp = params[:date].to_date
+        end
+        if date_tmp.beginning_of_month.cwday == 7
+            date_tmp = date_tmp.beginning_of_month + 1.day
+        elsif date_tmp.beginning_of_month.cwday == 6
+            date_tmp = date_tmp.beginning_of_month + 2.days
+        else
+            date_tmp = date_tmp.beginning_of_month
+        end
+        @date = date_tmp.beginning_of_week
+        annee = @date.year
+        @date2 = (date_tmp.end_of_month+180.days).end_of_week
+        annee2 = @date2.year
+        
+        # Charge les hebdos
+        @hebdos = Hash.new
+        hebdos = Hebdo.where('numero_semaine >= ? AND year_id >= ?', @date.cweek, @date.year).order(:utilisateur_id)
+        hebdos.each do |hebdo|
+            @hebdos[hebdo.utilisateur_id] ||= Hash.new
+            @hebdos[hebdo.utilisateur_id][hebdo.numero_semaine] = hebdo
+        end
+
+        @completion = Hash.new
+        hebdos = Hebdo.where('year_id >= ?', @date.year)
+        hebdos.each do |hebdo|
+            @completion[hebdo.year_id] ||= Hash.new
+            @completion[hebdo.year_id][hebdo.task_id] ||= 0
+            @completion[hebdo.year_id][hebdo.task_id] = @completion[hebdo.year_id][hebdo.task_id] + 1
+        end
+
+        find_utilisateurs
+    end
+    
+
     private     
 
     def hebdo_params

@@ -208,7 +208,7 @@ Rails.application.routes.draw do
   #   Hebdos  #
   #############
   resources :hebdos, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
-
+  get "grille_hebdos", to: "hebdos#grille"
 
 
   

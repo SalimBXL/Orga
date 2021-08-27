@@ -1,0 +1,103 @@
+<% session[:page_aide] = "grille_hebdos" %>
+
+<div class="container">
+    <div class="page-header">
+        <h1>
+            <span class="label label-warning">
+                <i class="material-icons">healing</i>
+                <%= I18n.t("home.index.hebdos").upcase %>
+            </span>
+        </h1>
+    </div>
+</div>
+
+<div class="container">
+    <% today = Date.today %>
+    <% tmp_last_service = nil %>
+    <% tmp_last_month = nil %>
+    <% nombre_jours = (@date2-@date).to_i %>
+    <% jours_absence = 0 %>
+
+    <table class="table table-condensed table-bordered">
+        <thead>
+            <!-- Ligne des mois -->
+            <tr>
+                <th> </th>
+                <% i = 0 %>
+                <% while i < nombre_jours %>
+                    <% if (@date+i.day).month != tmp_last_month %>
+                        <% tmp_last_month = (@date+i.day).month %>
+                        <th colspan="<%= ((@date+i.day).end_of_month.mday - (@date+i.day).mday + 1) %>">
+                            <%= (@date+i.day).strftime("%b") %>
+                        </th>
+                    <% end %>
+                    <% i+= 1 %>
+                <% end %>
+            </tr>
+
+            <!-- Ligne des numéros de jour -->
+            <tr>
+                <th> </th>
+                <% i = 0 %>
+                <% while i < nombre_jours %>
+                    <% if (@date+i.day).wday == 6 %>
+                        <th colspan="2">W</th>
+                        <% i+= 1 %>
+                    <% else %>
+                        <% md = (@date+i.day).mday %>
+                        <% md = "0#{md}" if md < 10 %>
+                        <th><%= md %></th>
+                    <% end %>
+                    <% i+= 1 %>
+                <% end %>
+            </tr>
+        </thead>
+        <tbody>
+            <% @utilisateurs.each do |utilisateur| %>
+                <% if utilisateur.service != tmp_last_service %>
+                    <% tmp_last_service = utilisateur.service %>
+                    <tr><td></td></tr>
+                    <tr>
+                        <td colspan="<%= nombre_jours+1 %>">
+                            <strong><%= tmp_last_service.nom.upcase %></strong>
+                        </td>
+                    </tr>
+                <% end %>
+                <tr>
+                    <td>
+                        <%= utilisateur.prenom_nom %>
+                        <%= @hebdos[utilisateur.id].size if @hebdos[utilisateur.id] %>
+                    </td>
+                    <% i = 0 %>
+                    <% while i < nombre_jours %>
+
+                            <% if @hebdos[utilisateur.id] and @hebdos[utilisateur.id][(@date+i.day).cweek] and (@date+i.day).wday == 1 %>
+                                <% i += 2 %>
+                                    <% an = @hebdos[utilisateur.id][(@date+i.day).cweek].year_id %>
+                                    <% tsk = @hebdos[utilisateur.id][(@date+i.day).cweek].task %>
+                                    <% bg = "" %>
+                                    <% if @completion[an][tsk.id] == tsk.repeat %>
+                                        <% bg = "conge_ok" %>
+                                    <% else %>
+                                        <% bg = "hebdo" %>
+                                    <% end %>
+                                <td colspan= "5" class="<%= bg %>">
+                                    <%= tsk.nom %>
+                                    (<%= @completion[an][tsk.id] %>/<%= @hebdos[utilisateur.id][(@date+i.day).cweek].task.repeat %>)
+                                </td>
+                                <% i += 3 %>
+                            <% else %>
+                                <% bg = "" %>
+                                <% bg = "weekend" if (@date+i.day).wday == 6 or (@date+i.day).wday == 0 %>
+                                <td class="<%= bg %>"></td>
+                                <% i += 1 %>
+                            <% end %>
+                        
+                        
+                    <% end %>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+
+</div>
