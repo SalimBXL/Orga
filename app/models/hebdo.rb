@@ -13,7 +13,7 @@ class Hebdo < ApplicationRecord
 
     
     def week
-        "#{year_id}-W#{numero_semaine}"
+        "#{year_id}-W#{numero_semaine<10 ? "0" : ""}#{numero_semaine}"
     end
 
 

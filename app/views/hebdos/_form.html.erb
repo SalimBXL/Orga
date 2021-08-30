@@ -13,6 +13,7 @@
     <!-- PICKUP DATE -->
     <p>
         <%= form.label I18n.t("hebdos.new.date") %><br>
+        <%= @hebdo.week %>
         <input type="week" name="hebdo[week]" id="hebdo_week" value="<%= @hebdo.week %>" required>
     </p>
 

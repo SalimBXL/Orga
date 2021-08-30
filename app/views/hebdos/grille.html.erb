@@ -71,29 +71,26 @@
                     <% i = 0 %>
                     <% while i < nombre_jours %>
 
-                            <% if @hebdos[utilisateur.id] and @hebdos[utilisateur.id][(@date+i.day).cweek] and (@date+i.day).wday == 1 %>
-                                <% i += 2 %>
-                                    <% an = @hebdos[utilisateur.id][(@date+i.day).cweek].year_id %>
-                                    <% tsk = @hebdos[utilisateur.id][(@date+i.day).cweek].task %>
-                                    <% bg = "" %>
-                                    <% if @completion[an][tsk.id] == tsk.repeat %>
-                                        <% bg = "conge_ok" %>
-                                    <% else %>
-                                        <% bg = "hebdo" %>
-                                    <% end %>
-                                <td colspan= "5" class="<%= bg %>">
-                                    <%= tsk.nom %>
-                                    (<%= @completion[an][tsk.id] %>/<%= @hebdos[utilisateur.id][(@date+i.day).cweek].task.repeat %>)
-                                </td>
-                                <% i += 3 %>
+                        <% if @hebdos[utilisateur.id] and (@hebdos[utilisateur.id][(@date+i.day).year] and (@hebdos[utilisateur.id][(@date+i.day).year][(@date+i.day).cweek] and (@date+i.day).wday == 1)) %>
+                            <% hbd = @hebdos[utilisateur.id][(@date+i.day).year][(@date+i.day).cweek] %>
+                            <% i += 2 %>
+                            <% bg = "" %>
+                            <% if @completion[hbd.year_id][hbd.task.id] == hbd.task.repeat %>
+                                <% bg = "conge_ok" %>
                             <% else %>
-                                <% bg = "" %>
-                                <% bg = "weekend" if (@date+i.day).wday == 6 or (@date+i.day).wday == 0 %>
-                                <td class="<%= bg %>"></td>
-                                <% i += 1 %>
+                                <% bg = "hebdo" %>
                             <% end %>
-                        
-                        
+                            <td colspan= "5" class="<%= bg %>">
+                                <%= hbd.task.nom %>
+                                (<%= @completion[hbd.year_id][hbd.task.id] %>/<%= hbd.task.repeat %>)
+                            </td>
+                            <% i += 3 %>
+                        <% else %>
+                            <% bg = "" %>
+                            <% bg = "weekend" if (@date+i.day).wday == 6 or (@date+i.day).wday == 0 %>
+                            <td class="<%= bg %>"></td>
+                            <% i += 1 %>
+                        <% end %>
                     <% end %>
                 </tr>
             <% end %>

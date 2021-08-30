@@ -136,16 +136,15 @@ class HebdosController < ApplicationController
         annee2 = @date2.year
         
         # Charge les hebdos
+        @completion = Hash.new
         @hebdos = Hash.new
-        hebdos = Hebdo.where('numero_semaine >= ? AND year_id >= ?', @date.cweek, @date.year).order(:utilisateur_id)
+        hebdos = Hebdo.where('year_id >= ?', @date.year).order(:utilisateur_id, :year_id, :numero_semaine)
+
         hebdos.each do |hebdo|
             @hebdos[hebdo.utilisateur_id] ||= Hash.new
-            @hebdos[hebdo.utilisateur_id][hebdo.numero_semaine] = hebdo
-        end
+            @hebdos[hebdo.utilisateur_id][hebdo.year_id] ||= Hash.new
+            @hebdos[hebdo.utilisateur_id][hebdo.year_id][hebdo.numero_semaine] = hebdo
 
-        @completion = Hash.new
-        hebdos = Hebdo.where('year_id >= ?', @date.year)
-        hebdos.each do |hebdo|
             @completion[hebdo.year_id] ||= Hash.new
             @completion[hebdo.year_id][hebdo.task_id] ||= 0
             @completion[hebdo.year_id][hebdo.task_id] = @completion[hebdo.year_id][hebdo.task_id] + 1
