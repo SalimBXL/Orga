@@ -306,6 +306,7 @@ ActiveRecord::Schema.define(version: 2020091012140633) do
     t.bigint "user_id"
     t.boolean "admin"
     t.datetime "last_connection"
+    t.boolean "inactive"
     t.index ["groupe_id"], name: "index_utilisateurs_on_groupe_id"
     t.index ["service_id"], name: "index_utilisateurs_on_service_id"
     t.index ["user_id"], name: "index_utilisateurs_on_user_id"

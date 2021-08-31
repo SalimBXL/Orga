@@ -4,9 +4,13 @@
             <div class="well well-lg">
                 <h1>
                     <span class="label label-default">
-                    <i class="material-icons">person</i> <%= @utilisateur.prenom_nom.upcase %>
+                        <i class="material-icons">person</i>
+                        <%= @utilisateur.prenom_nom.upcase %>
                     </span>
                 </h1>
+                <% if @utilisateur.inactive %>
+                    <span class="label label-danger">INACTIVE</span>
+                <% end %>
             </div>
 
     <div class="container">

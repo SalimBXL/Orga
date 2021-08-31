@@ -656,6 +656,7 @@ en:
       administrator: Administrator
       email: Email
       groupe: Group
+      inactive: Inactive
       log_destroy: destroy
       log_edit: edit
       log_update: update

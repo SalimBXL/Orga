@@ -5,6 +5,13 @@
     <td><%= utilisateur.nom.capitalize %></td>
     <td><%= utilisateur.email %></td>
     
+    <!-- INACTIVE -->
+    <td>
+        <% if utilisateur.inactive %>
+            <span class="text-danger"><i class="material-icons">person_off</i></span>
+        <% end %>
+    </td>
+
     <!-- ADMIN -->
     <!-- Différence Super Admin et Manager -->
     <td>

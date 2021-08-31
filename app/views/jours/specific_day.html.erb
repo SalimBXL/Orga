@@ -27,17 +27,19 @@
             <% end %>
 
 
-            <!-- Dessine la boîte -->
-            <div class="col-sm-4">
-                <%= render partial: "box_day", locals: { 
-                        specific_day_jour: @specific_day_jours[service][utilisateur],
-                        utilisateur: utilisateur,
-                        note: @specific_day_jours[service][utilisateur]["notes"],
-                        task: @hebdos[utilisateur.id]
-                    }
-                %>
-                <% liste_tasks.delete(utilisateur.id) %>
-            </div>
+            <!-- Dessine la boîte si utilisateur pas inactif -->
+            <% unless utilisateur.inactive %>
+                <div class="col-sm-4">
+                    <%= render partial: "box_day", locals: { 
+                            specific_day_jour: @specific_day_jours[service][utilisateur],
+                            utilisateur: utilisateur,
+                            note: @specific_day_jours[service][utilisateur]["notes"],
+                            task: @hebdos[utilisateur.id]
+                        }
+                    %>
+                    <% liste_tasks.delete(utilisateur.id) %>
+                </div>
+            <% end %>
         <% end %>
 
         <!-- Autres tâches -->
