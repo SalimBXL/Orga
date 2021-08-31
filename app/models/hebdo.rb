@@ -5,6 +5,7 @@ class Hebdo < ApplicationRecord
     validates :numero_semaine, presence: true
     validates :year_id, presence: true
     before_validation :set_year_if_empty
+    before_create :set_year_if_empty
     
 
     def set_numero_semaine(date)
@@ -24,6 +25,7 @@ class Hebdo < ApplicationRecord
 
     def set_year_if_empty
         self.year_id = "#{Date.today.year}" if year_id.nil?
+        self.numero_semaine = "#{Date.today.cweek}" if numero_semaine.nil?
     end
 
 end

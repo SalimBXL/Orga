@@ -100,7 +100,8 @@ module ApplicationHelper
             [6, "bimestriel"],
             [12, "mensuel"],
             [24, "bimensuel"],
-            [52, "hebdomadaire"]
+            [52, "hebdomadaire"],
+            [104, "bihebdomadaire"]
         ]
     end
     

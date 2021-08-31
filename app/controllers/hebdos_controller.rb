@@ -35,6 +35,8 @@ class HebdosController < ApplicationController
         # Log action
         log(request.path)
         @hebdo = Hebdo.new
+        @hebdo.year_id = "#{Date.today.year}" if @hebdo.year_id.nil?
+        @hebdo.numero_semaine = "#{Date.today.cweek}" if @hebdo.numero_semaine.nil?
         find_utilisateurs
         @tsks = Task.order(:service_id, :groupe_id, :nom)
     end
