@@ -2,7 +2,9 @@
     <td><%= hebdo.year_id %></td>
     <td><%= hebdo.numero_semaine %></td>
     <td><%= hebdo.utilisateur.prenom_nom %></td>
-    <td><%= hebdo.task.nom %></td>
+    <td>
+        (<%= hebdo.task.code %>) <%= hebdo.task.nom %>
+    </td>
     <td><%= hebdo.note %></td>
 
     <td>

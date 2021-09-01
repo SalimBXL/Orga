@@ -119,8 +119,21 @@
                         <div class="col-sm-2">
                             <strong><%= utilisateur.prenom_nom %></strong>
                             <% @tasks = jours[:task] %>
-                            <%= print_task(@date.cweek) if @tasks[@date.cweek]%>
-                            <% liste_tasks.delete(utilisateur.id) %>
+                            <% if @tasks[@date.cweek] %>
+                                <p>
+                                <% @tasks[@date.cweek].each do |tsk| %>
+                                    <%= "<span class='label label-warning'
+                                        data-toggle='tooltip' 
+                                        title='#{tsk.last}'>
+                                        #{link_to tsk.first, hebdos_path()}
+                                        </span>&nbsp;".html_safe
+                                    %>
+                                    &nbsp;
+                                <% end %>
+                                </p>
+                            <% end %>
+
+                            <% liste_tasks.delete(utilisateur) %>
                             
                         </div>
                         <% 5.times do |i| %>
@@ -218,8 +231,16 @@
                 <ul>
                 <% liste_tasks.each do |id| %>
                     <li>
-                        <%= @hebdos[id].last %>
-                        <span class='label label-warning'><%= link_to "#{@hebdos[id].first}", hebdos_path() %></span>
+                        <%= id.prenom_nom %>
+                        <% @hebdos[id].each do |tsk| %>
+                            <%= "<span class='label label-warning'
+                                data-toggle='tooltip' 
+                                title='#{tsk.first.last}'>
+                                #{link_to tsk.first.first, hebdos_path()}
+                                </span>&nbsp;".html_safe
+                            %>
+                            &nbsp;
+                        <% end %>
                     </li>
                 <% end %>
                 </ul>

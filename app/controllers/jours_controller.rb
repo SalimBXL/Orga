@@ -166,7 +166,11 @@ class JoursController < ApplicationController
         @hebdos = Hash.new
         h = Hebdo.where(numero_semaine: @date.cweek)
         h.each do |hh|
-            @hebdos[hh.utilisateur_id] = [hh.task.nom, hh.utilisateur.prenom_nom]
+            @hebdos[hh.utilisateur] ||= Array.new
+            noeud = Array.new
+            noeud << hh.task.code
+            noeud << hh.task.nom
+            @hebdos[hh.utilisateur] << [noeud, hh.utilisateur.prenom_nom]
         end
         
         
@@ -373,11 +377,15 @@ class JoursController < ApplicationController
             charge_events(@date.beginning_of_week+i.day)
         end
 
-        # Charge les tasks pour la journée
+        # Charge les tasks pour la semaine
         @hebdos = Hash.new
         h = Hebdo.where(numero_semaine: @date.cweek)
         h.each do |hh|
-            @hebdos[hh.utilisateur_id] = [hh.task.nom, hh.utilisateur.prenom_nom]
+            @hebdos[hh.utilisateur] ||= Array.new
+            noeud = Array.new
+            noeud << hh.task.code
+            noeud << hh.task.nom
+            @hebdos[hh.utilisateur] << [noeud, hh.utilisateur.prenom_nom]
         end
     end
 

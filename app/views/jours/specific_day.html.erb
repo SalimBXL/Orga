@@ -34,10 +34,10 @@
                             specific_day_jour: @specific_day_jours[service][utilisateur],
                             utilisateur: utilisateur,
                             note: @specific_day_jours[service][utilisateur]["notes"],
-                            task: @hebdos[utilisateur.id]
+                            task: @hebdos[utilisateur]
                         }
                     %>
-                    <% liste_tasks.delete(utilisateur.id) %>
+                    <% liste_tasks.delete(utilisateur) %>
                 </div>
             <% end %>
         <% end %>
@@ -47,10 +47,21 @@
             <div class="col-sm-4 panel panel-warning">
                 <p>Tasks : </p>
                 <ul>
-                <% liste_tasks.each do |id| %>
-                    <li>
-                        <%= @hebdos[id].last %>
-                        <span class='label label-warning'><%= link_to "#{@hebdos[id].first}", hebdos_path() %></span>
+                <% liste_tasks.each do |utilisateur| %>
+                    <li>*<%= utilisateur.prenom_nom %>
+                        
+                            <% @hebdos[utilisateur].each do |h| %>
+                        
+                                    <%= "<span class='label label-warning'
+                                        data-toggle='tooltip' 
+                                        title='#{h.first.last}'>
+                                        #{link_to h.first.first, hebdos_path()}
+                                        </span>&nbsp;".html_safe
+                                    %>
+                                    </span>
+                        
+                            <% end %>
+                        
                     </li>
                 <% end %>
                 </ul>

@@ -47,9 +47,17 @@
 
         <!-- Tasks -->
         <% if task %>
-            <div class='label label-warning'>
-                <%= link_to task.first, hebdos_path() %>
-            </div>
+            <% task.each do |tsk| %>
+            <span class='label label-warning'>
+                <%= "<span class='label label-warning'
+                    data-toggle='tooltip' 
+                    title='#{tsk.first.last}'>
+                    #{link_to tsk.first.first, hebdos_path()}
+                    </span>&nbsp;".html_safe
+                %>
+            </span>
+            &nbsp;
+            <% end %>
         <% end %>
     
     </div>

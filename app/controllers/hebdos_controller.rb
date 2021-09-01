@@ -145,7 +145,8 @@ class HebdosController < ApplicationController
         hebdos.each do |hebdo|
             @hebdos[hebdo.utilisateur_id] ||= Hash.new
             @hebdos[hebdo.utilisateur_id][hebdo.year_id] ||= Hash.new
-            @hebdos[hebdo.utilisateur_id][hebdo.year_id][hebdo.numero_semaine] = hebdo
+            @hebdos[hebdo.utilisateur_id][hebdo.year_id][hebdo.numero_semaine] ||= Array.new
+            @hebdos[hebdo.utilisateur_id][hebdo.year_id][hebdo.numero_semaine] << hebdo
 
             @completion[hebdo.year_id] ||= Hash.new
             @completion[hebdo.year_id][hebdo.task_id] ||= 0

@@ -85,11 +85,16 @@ module ApplicationHelper
     end
 
     def print_task(cweek)
-        "<div class='label label-warning'
-            data-toggle='tooltip' 
-            title='#{@tasks[cweek]}'>
-            #{link_to @tasks[cweek], hebdos_path()}
-        </div>".html_safe if @tasks
+        if @tasks
+            @tasks[cweek].each do |tsk|
+                "<span class='label label-warning'
+                    data-toggle='tooltip' 
+                    title='#{tsk.last}'>
+                    *
+                    #{link_to tsk.first, hebdos_path()}
+                </span>".html_safe
+            end
+        end
     end
 
     def repeats 
