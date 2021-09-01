@@ -10,6 +10,28 @@
 </div>
 
 <div class="container">
+    <% if @pas_profil_utilisateur.length > 0 %>
+        <p>Un profil de connexion trouvé mais pas de profil utilisateur : </p>
+        <ul>
+        <% @pas_profil_utilisateur.each do |email| %>
+            <li><%= email %></li>
+        <% end %>
+        </ul>
+        <hr>
+    <% end %>
+    
+    <% if @pas_profil_connection.length > 0 %>
+        <p>Un profil utilisateur trouvé mais pas de profil de connexion : </p>
+        <ul>
+        <% if @pas_profil_connection.length > 0 %>
+            <li><%= email %></li>
+        <% end %>
+        </ul>
+        <hr>
+    <% end %>
+</div>
+
+<div class="container">
     <% if @problemes.count > 0 %>
         <% index = 0 %>
         <% @problemes.keys.each do |email| %>
