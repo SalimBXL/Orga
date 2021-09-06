@@ -14,7 +14,8 @@ class HebdosController < ApplicationController
         if current_user.admin?
             @hebdos = Hebdo.order(numero_semaine: :desc).order(:utilisateur_id, :task_id).page(params[:page])
         else
-            @hebdos = Hebdo.where(service: current_user.utilisateur.service).order(numero_semaine: :desc).order(:utilisateur_id, :task_id).page(params[:page])
+            #@hebdos = Hebdo.where(service_id: current_user.utilisateur.service.id).order(numero_semaine: :desc).order(:utilisateur_id, :task_id).page(params[:page])
+            @hebdos = Hebdo.order(numero_semaine: :desc).order(:utilisateur_id, :task_id).page(params[:page])
         end
     end
 

@@ -70,6 +70,12 @@
 
     <%= render partial: "admin" if user_signed_in? && current_user.admin %>
         <!-- Bouton secrétaire -->
+
+    <a href="<%= grille_hebdos_path %>" class="btn btn-danger" role="button">
+                <i class="material-icons">settings_ethernet</i><br>
+                <%= I18n.t("home.index.grille_hebdos") %>
+            </a>
+
     <div class="btn-group">
         <a href="<%= secr_pet_path %>" class="btn btn-info" role="button">
             <i class="material-icons">PET</i><br>

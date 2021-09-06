@@ -234,6 +234,7 @@ en:
     edit:
       note: Note
       numero_semaine: Week
+      service: Service
       task: Task
       utilisateur: User
       year: Year
@@ -426,6 +427,7 @@ en:
       fermetures: Days Off
       from_template: From template
       grille: Grille
+      grille_hebdos: Grille hebdos
       groupes: Groups
       hebdos: Hebdos
       jours: Days

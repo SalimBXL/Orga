@@ -2,6 +2,7 @@ class Hebdo < ApplicationRecord
     belongs_to :utilisateur
     belongs_to :task
     
+    
     validates :numero_semaine, presence: true
     validates :year_id, presence: true
     before_validation :set_year_if_empty

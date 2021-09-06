@@ -152,6 +152,8 @@ ActiveRecord::Schema.define(version: 2020091012140633) do
     t.datetime "updated_at", null: false
     t.bigint "task_id"
     t.bigint "year_id"
+    t.bigint "service_id"
+    t.index ["service_id"], name: "index_hebdos_on_service_id"
     t.index ["task_id"], name: "index_hebdos_on_task_id"
     t.index ["utilisateur_id"], name: "index_hebdos_on_utilisateur_id"
     t.index ["year_id"], name: "index_hebdos_on_year_id"
