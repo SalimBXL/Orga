@@ -1,98 +1,62 @@
 <div class="row">
-        <div class="btn-group">
-            <a href="<%= absences_path %>" class="btn btn-success" role="button">
-                <i class="material-icons">healing</i><br>
-                <%= I18n.t("home.index.absences") %>
-            </a>
-            <a href="<%= not_yet_validated_absences_path %>" class="btn btn-success" role="button">
-                <i class="material-icons">healing</i><br>
-                <%= I18n.t("home.index.waiting") %>
-            </a>
-            <a href="<%= validated_absences_path %>" class="btn btn-success" role="button">
-                <i class="material-icons">healing</i><br>
-                <%= I18n.t("home.index.validated") %>
-            </a>
-        </div>
-        <div class="btn-group">
-            <a href="<%= type_absences_path %>" class="btn btn-success" role="button">
-                <i class="material-icons">healing</i><br>
-                <%= I18n.t("home.index.types") %>
-            </a>
-            <a href="<%= fermetures_path %>" class="btn btn-success" role="button">
-                <i class="material-icons">event_busy</i><br>
-                <%= I18n.t("home.index.fermetures") %>
-            </a>
-            <a href="<%= events_path %>" class="btn btn-success" role="button">
-                <i class="material-icons">event_available</i><br>
-                <%= I18n.t("home.index.evenements") %>
-            </a>
-        </div>
-        <div class="btn-group">
-            <a href="<%= lieus_path %>" class="btn btn-primary" role="button">
-                <i class="material-icons">location_city</i><br>
-                <%= I18n.t("home.index.lieux") %>
-            </a>
-            <a href="<%= services_path %>" class="btn btn-primary" role="button">
-                <i class="material-icons">business</i><br>
-                <%= I18n.t("home.index.services") %>
-            </a>
-        </div>
-        <div class="btn-group">
-            <a href="<%= groupes_path %>" class="btn btn-primary" role="button">
-                <i class="material-icons">group_work</i><br>
-                <%= I18n.t("home.index.groupes") %>
-            </a>
-            <a href="<%= utilisateurs_path %>" class="btn btn-primary" role="button">
-                <i class="material-icons">group</i><br>
-                <%= I18n.t("home.index.utilisateurs") %>
-            </a>
-        </div>
-        <div class="btn-group">
-            <a href="<%= classes_path %>" class="btn btn-primary" role="button">
-                <i class="material-icons">category</i><br>
-                <%= I18n.t("home.index.classes") %>
-            </a>
-            <a href="<%= works_path %>" class="btn btn-primary" role="button">
-                <i class="material-icons">build</i><br>
-                <%= I18n.t("home.index.works") %>
-            </a>
-            <a href="<%= tasks_path %>" class="btn btn-primary" role="button">
-                <i class="material-icons">settings_ethernet</i><br>
-                <%= I18n.t("home.index.tasks") %>
-            </a>
-        </div>
-        
-</div>
-<br>
-<div class="row">
 
-    <%= render partial: "manager" if user_signed_in? && current_user.utilisateur.admin %>
-
-    <%= render partial: "admin" if user_signed_in? && current_user.admin %>
-        <!-- Bouton secrétaire -->
-
-    <a href="<%= grille_hebdos_path %>" class="btn btn-danger" role="button">
-                <i class="material-icons">settings_ethernet</i><br>
-                <%= I18n.t("home.index.grille_hebdos") %>
-            </a>
-
+    <!-- Absences -->
     <div class="btn-group">
-        <a href="<%= secr_pet_path %>" class="btn btn-info" role="button">
-            <i class="material-icons">PET</i><br>
-            <%= I18n.t("home.index.secretary") %>
+        <a href="<%= absences_path %>" class="btn btn-success" role="button">
+            <i class="material-icons">healing</i><br>
+            <%= I18n.t("home.index.absences") %>
         </a>
     </div>
 
-    <!-- Bouton BUG -->
+    <!-- Events, days off et types absences -->
     <div class="btn-group">
+        <a href="<%= type_absences_path %>" class="btn btn-success" role="button">
+            <i class="material-icons">healing</i><br>
+            <%= I18n.t("home.index.types") %>
+        </a>
+        <a href="<%= fermetures_path %>" class="btn btn-success" role="button">
+            <i class="material-icons">event_busy</i><br>
+            <%= I18n.t("home.index.fermetures") %>
+        </a>
+        <a href="<%= events_path %>" class="btn btn-success" role="button">
+            <i class="material-icons">event_available</i><br>
+            <%= I18n.t("home.index.evenements") %>
+        </a>
+    </div>
+
+    <!-- Classes, works et tâches -->        
+    <div class="btn-group">
+        <a href="<%= classes_path %>" class="btn btn-primary" role="button">
+            <i class="material-icons">category</i><br>
+            <%= I18n.t("home.index.classes") %>
+        </a>
+        <a href="<%= works_path %>" class="btn btn-primary" role="button">
+            <i class="material-icons">build</i><br>
+            <%= I18n.t("home.index.works") %>
+        </a>
+        <a href="<%= tasks_path %>" class="btn btn-primary" role="button">
+            <i class="material-icons">settings_ethernet</i><br>
+            <%= I18n.t("home.index.tasks") %>
+        </a>
+    </div>
+
+    <div class="btn-group">
+        <!-- grille des Hebdos -->
+        <a href="<%= grille_hebdos_path %>" class="btn btn-danger" role="button">
+            <i class="material-icons">settings_ethernet</i><br>
+            <%= I18n.t("home.index.grille_hebdos") %>
+        </a>
+    </div>
+
+    <div class="btn-group">
+
+        <!-- Bouton BUG -->
         <a href="<%= bug_repports_path %>" class="btn btn-info" role="button">
             <i class="material-icons">bug_report</i><br>
             <%= I18n.t("home.index.bug_repport") %>
         </a>
-    </div>
-
-    <!-- Bouton BLOG -->
-    <div class="btn-group">
+    
+        <!-- Bouton BLOG -->
         <a href="<%= blog_messages_path %>" class="btn btn-info" role="button">
             <i class="material-icons">rss_feed</i><br>
             <%= I18n.t("home.index.blog").upcase %>
@@ -102,5 +66,17 @@
             <%= I18n.t("home.index.wiki").capitalize %>
         </a>
     </div>
+        
+</div>
 
+<br>
+
+<div class="row">
+
+    <!-- Barre Managers -->
+    <%= render partial: "manager" if user_signed_in? && current_user.utilisateur.admin %>
+
+    <!-- Barre Admins -->
+    <%= render partial: "admin" if user_signed_in? && current_user.admin %>
+        
 </div>

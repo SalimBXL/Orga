@@ -1,4 +1,38 @@
 <div class="btn-group">
+    <a href="<%= not_yet_validated_absences_path %>" class="btn btn-success" role="button">
+        <i class="material-icons">healing</i><br>
+        <%= I18n.t("home.index.waiting") %>
+    </a>
+    <a href="<%= validated_absences_path %>" class="btn btn-success" role="button">
+        <i class="material-icons">healing</i><br>
+        <%= I18n.t("home.index.validated") %>
+    </a>
+</div>
+
+<div class="btn-group">
+    <div class="btn-group">
+        <a href="<%= lieus_path %>" class="btn btn-primary" role="button">
+            <i class="material-icons">location_city</i><br>
+            <%= I18n.t("home.index.lieux") %>
+        </a>
+        <a href="<%= services_path %>" class="btn btn-primary" role="button">
+            <i class="material-icons">business</i><br>
+            <%= I18n.t("home.index.services") %>
+        </a>
+    </div>
+    <div class="btn-group">
+        <a href="<%= groupes_path %>" class="btn btn-primary" role="button">
+            <i class="material-icons">group_work</i><br>
+            <%= I18n.t("home.index.groupes") %>
+        </a>
+        <a href="<%= utilisateurs_path %>" class="btn btn-primary" role="button">
+            <i class="material-icons">group</i><br>
+            <%= I18n.t("home.index.utilisateurs") %>
+        </a>
+    </div>
+</div>
+
+<div class="btn-group">
     <a href="<%= ajouts_path %>" class="btn btn-warning" role="button">
         <i class="material-icons">playlist_add</i><br>
         <%= I18n.t("home.index.batchs") %>
@@ -27,5 +61,13 @@
     <a href="<%= hebdos_path %>" class="btn btn-danger" role="button">
         <i class="material-icons">settings_ethernet</i><br>
         <%= I18n.t("home.index.hebdos") %>
+    </a>
+</div>
+
+<div class="btn-group">
+    <!-- Bouton secrétaire -->
+    <a href="<%= secr_pet_path %>" class="btn btn-info" role="button">
+        <i class="material-icons">PET</i><br>
+        <%= I18n.t("home.index.secretary") %>
     </a>
 </div>

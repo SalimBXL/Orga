@@ -7,20 +7,31 @@
             </p>
         </div>
     </div>
+
+    <!-- TODAY -->
     <%= render "today" if user_signed_in? %>
 
+    <!-- ADMIN MENU -->
     <% if user_signed_in? and current_user.admin %>
         <div class="row">
             <div class="col-sm-1"></div>
-            <div class="col-sm-4"><H3><span class="label label-default material-icons">admin_panel_settings</span> Admin shortcuts : <H3></div>
+            <div class="col-sm-4">
+                <H3>
+                    <span class="label label-default material-icons">admin_panel_settings</span> Admin shortcuts : 
+                <H3>
+            </div>
             <div class="col-sm-7"><%= render "barre_menu_rapide" %></div>
         </div>
         <hr>
     <% end %>
     
+    <!-- MENU -->
     <%= render "barre_menu" if user_signed_in? %>
+
+    <!-- CONNECTED -->
     <%= render "last_connects" if user_signed_in? and current_user.utilisateur.admin %>
 
+    <!-- BUGS -->
     <% if user_signed_in? && current_user.admin? %>
         <p>
             <%= "#{@bugs_new} new bug(s)." if @bugs_new > 0 %> 
