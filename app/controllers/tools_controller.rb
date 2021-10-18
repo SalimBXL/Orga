@@ -235,13 +235,17 @@ class ToolsController < ApplicationController
     def create_archive
         # Ligne OVH
         #@tar_command = "pg_dump 'host=localhost port=5432 dbname=MyDataBase_development user=orga password=orga' -Ft  > #{@backup}"
-        @tar_command = @konfiguration[:tools_backup_db_tar_command] ? "#{@konfiguration[:tools_backup_db_tar_command]} > #{@backup}" : "pg_dump 'host=localhost port=5432 dbname=MyDataBase_development user=orga password=orga' -Ft > #{@backup}"
+        #@tar_command = @konfiguration[:tools_backup_db_tar_command] ? "#{@konfiguration[:tools_backup_db_tar_command]} > #{@backup}" : "pg_dump 'host=localhost port=5432 dbname=MyDataBase_development user=orga password=orga' -Ft > #{@backup}"
 
-        #Ligne localhost
+        # Ligne localhost
         #@tar_command = "pg_dump 'dbname=orga_development user=salim' -Ft  > #{@backup}"
+
+        # Ligne ENV
+        @tar_command = "#{ENV['BCK_DB_TAR_CMD']} > #{@backup}"
         
         #retour = IO.popen(@tar_command, in: :in)
         retour = IO.popen(@tar_command, :err=>[:child, :out])
+
         msg = retour.readlines
         retour.close
         boucle_temporelle
