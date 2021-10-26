@@ -30,6 +30,9 @@ test:
 
 production:
   <<: *default
-  database: MyDataBase_production
-  username: orga
+  database: <%= ENV['MYDATABASE_DATABASE'] %>
+  host: localhost
+  port: <%= ENV['MYDATABASE_DATABASE_PORT'] %>
+  username: <%= ENV['MYDATABASE_DATABASE_USERNAME'] %>
   password: <%= ENV['MYDATABASE_DATABASE_PASSWORD'] %>
+  
