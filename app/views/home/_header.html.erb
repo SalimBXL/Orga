@@ -1,0 +1,8 @@
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-4">ORGA</h1>
+        <p class="lead">
+            <%= "#{I18n.t("home.index.welcome")} #{current_user.utilisateur.prenom if (user_signed_in? && current_user.utilisateur) }".upcase %>
+        </p>
+    </div>
+</div>

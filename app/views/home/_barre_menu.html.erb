@@ -74,9 +74,9 @@
 <div class="row">
 
     <!-- Barre Managers -->
-    <%= render partial: "manager" if user_signed_in? && current_user.utilisateur.admin %>
+    <%= render partial: "manager" if user_signed_in? && is_manager? %>
 
     <!-- Barre Admins -->
-    <%= render partial: "admin" if user_signed_in? && current_user.admin %>
+    <%= render partial: "admin" if user_signed_in? && is_super_admin? %>
         
 </div>

@@ -1,10 +1,11 @@
 <% last_service = nil %>
-<!-- HORAIRE DU JOUR -->
+
 <% @specific_day_jours.each do |specific_day_jour| %>
 
     <div class=" col-md-4">
         <% panel = "default" %>
         <% panel = "success" if @absence %>
+
         <div class="panel panel-<%= panel %>">
 
             <!-- HEADING PANEL -->
@@ -15,13 +16,14 @@
 
             <!-- CONTENT PANEL -->
             <div class="panel-body">
+
                 <p>
                     AM : 
                     &nbsp;&nbsp;&nbsp;
                     <% unless specific_day_jour.am_pm %>
                         <% @specific_day_works[specific_day_jour].each do |wl| %>
                             <% cl = "" %>
-                            <% if wl.work.code.downcase=="qc" && @date.cwday==5 %>
+                            <% if wl.work.code.downcase=="qc" && Date.today.cwday==5 %>
                                 <% cl = "keep_attention" %>
                             <% end %>
                             <span class="label label-primary <%= cl %>"
@@ -41,7 +43,7 @@
                     <% if specific_day_jour.am_pm %>
                         <% @specific_day_works[specific_day_jour].each do |wl| %>
                             <% cl = "" %>
-                            <% if wl.work.code.downcase=="qc" && @date.cwday==5 %>
+                            <% if wl.work.code.downcase=="qc" && Date.today.cwday==5 %>
                                 <% cl = "keep_attention" %>
                             <% end %>
                             <span class="label label-info <%= cl %>"
@@ -56,7 +58,9 @@
                         ---
                     <% end %>
                 </p>
+
                 <p class="text-danger"><%= specific_day_jour.note %></p>
+
             </div>
 
             <!-- FOOTER PANEL -->
@@ -72,10 +76,6 @@
                     <% end %>
                 <% end %>
             </div>
-
-
-
         </div>
     </div>
-
 <% end %>

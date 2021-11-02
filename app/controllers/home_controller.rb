@@ -8,41 +8,27 @@ class HomeController < ApplicationController
         log(request.path)
 
         fichier = "app/../last_git_date.txt"
-        if File.exist?(fichier)
-            @last_git_date = format_last_git_date(File.read(fichier))
-        else
-           @last_git_date = nil
-        end
-
-        # Charge le cache
-        if user_signed_in?
-            #find_utilisateurs if @utilisateurs.nil?
-            #find_groupes if @groupes.nil?
-            #find_works if @works.nil?
-            #find_classes if @classes.nil?
-            #find_services if @services.nil?
-        end
+        @last_git_date = File.exist?(fichier) ? format_last_git_date(File.read(fichier)) : @last_git_date = nil
 
         # Check les jobs du user courant
         get_today if user_signed_in?
 
         # Charge les dernières connections 
-        @last_connects = User.where.not(last_connection: nil).order(last_connection: :desc).limit(5)
-
-        # Charge les trois derniers articles du blog
-        @articles = BlogMessage.order(date: :desc).order(:updated_at).last(3)
+        get_lasts_connected if user_signed_in?
 
         # Nombre de bugs en attente
-        if user_signed_in? && current_user.admin?
+        get_bugs_in_queue if user_signed_in? 
+        
+    end
+
+    private
+
+    def get_bugs_in_queue
+        if is_super_admin?
             @bugs_new = BugRepport.where(status: "outlined_flag").size
             @bugs_test = BugRepport.where(status: "sync_problem").size
         end
-
-        
-
     end
-
-    private 
 
     def format_last_git_date(dt)
         formatted = dt
@@ -52,6 +38,11 @@ class HomeController < ApplicationController
         formatted.to_sentence
     end
 
+    def get_lasts_connected
+        if is_super_admin?
+            @last_connects = User.where.not(last_connection: nil).order(last_connection: :desc).limit(5)
+        end
+    end
 
     def get_today
         # Log action
@@ -60,12 +51,11 @@ class HomeController < ApplicationController
         @absence = Hash.new
 
         # Détermine la date
-        date = Date.today
-        @specific_day_jours = Jour.today_of(current_user.utilisateur.id).select([:id, :utilisateur_id, :service_id, :am_pm, :note]).includes(utilisateur: :groupe)
+        @specific_day_jours = Jour.today_of(current_user.utilisateur.id)
 
         # Parse les jours
         @specific_day_jours.each do |jour|
-            @specific_day_works[jour] = WorkingList.for(jour).includes(:work)
+            @specific_day_works[jour] = WorkingList.for(jour)
         end
 
         # Check les absences
@@ -77,13 +67,13 @@ class HomeController < ApplicationController
 
         # Charge les Events
         @events = Hash.new
-        charge_events(date)
+        charge_events(Date.today, current_user.utilisateur.service)
 
         # Charge les messages
         @messages = Array.new
-        charge_messages(date)
+        charge_messages(Date.today)
 
         # Charge les tâches
-        find_tasks(current_user.utilisateur.id)
+        find_tasks(current_user.utilisateur, true)
     end
 end

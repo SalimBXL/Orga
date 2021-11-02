@@ -1,5 +1,18 @@
 module ApplicationHelper
 
+    def is_manager?
+        current_user.utilisateur.admin unless current_user.nil?
+      end
+    
+      def is_super_admin?
+        current_user.admin unless current_user.nil?
+      end
+    
+      def is_manager_or_super_admin?
+        (is_super_admin? or is_manager?) unless current_user.nil?
+      end
+
+
     def am_pm(valeur)
         valeur ? "PM" : "AM"
     end

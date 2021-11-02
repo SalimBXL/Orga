@@ -8,21 +8,18 @@ class AbsencesController < ApplicationController
 
     def index
 
-        @utilisateurs = Utilisateur.order(:service_id, :groupe_id, :prenom, :nom)
+        @absences = is_manager_or_super_admin? ? Absence.order(date: :desc).page(params[:page]) : Absence.where(utilisateur: current_user.utilisateur).order(date: :desc).page(params[:page])
 
-        if current_user.admin or current_user.utilisateur.admin
-            absences = Absence.order(date: :desc).page(params[:page])
-        else 
-            absences = Absence.where(utilisateur: current_user.utilisateur).order(date: :desc).page(params[:page])
-        end
+        is_manager_or_super_admin? && (@utilisateurs = Utilisateur.order(:service_id, :groupe_id, :prenom, :nom))
 
-        if params[:utilisateur_id]
-            @filtre = params[:utilisateur_id]
-            @absences = absences.where(utilisateur_id: params[:utilisateur_id])
-        else
-            @filtre = nil
-            @absences = absences
-        end
+
+        #if params[:utilisateur_id]
+        #    @filtre = params[:utilisateur_id]
+        #    @absences = absences.where(utilisateur_id: params[:utilisateur_id])
+        #else
+        #    @filtre = nil
+        #    @absences = absences
+        #end
         
         # Log action
         log(request.path)

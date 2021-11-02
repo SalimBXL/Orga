@@ -1,38 +1,22 @@
 <div class="container">
-    <div class="jumbotron">
-        <div class="container">
-            <h1 class="display-4">ORGA</h1>
-            <p class="lead">
-                <%= "#{I18n.t("home.index.welcome")} #{current_user.utilisateur.prenom if (user_signed_in? && current_user.utilisateur) }".upcase %>
-            </p>
-        </div>
-    </div>
+
+    <!-- HEADER -->
+    <%= render "header" %>
 
     <!-- TODAY -->
     <%= render "today" if user_signed_in? %>
 
     <!-- ADMIN MENU -->
-    <% if user_signed_in? and current_user.admin %>
-        <div class="row">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-4">
-                <H3>
-                    <span class="label label-default material-icons">admin_panel_settings</span> Admin shortcuts : 
-                <H3>
-            </div>
-            <div class="col-sm-7"><%= render "barre_menu_rapide" %></div>
-        </div>
-        <hr>
-    <% end %>
+    <%= render "barre_menu_rapide" if user_signed_in? and is_super_admin? %>
     
     <!-- MENU -->
     <%= render "barre_menu" if user_signed_in? %>
 
     <!-- CONNECTED -->
-    <%= render "last_connects" if user_signed_in? and current_user.utilisateur.admin %>
+    <%= render "last_connects" if user_signed_in? and is_super_admin? %>
 
     <!-- BUGS -->
-    <% if user_signed_in? && current_user.admin? %>
+    <% if user_signed_in? && is_super_admin? %>
         <p>
             <%= "#{@bugs_new} new bug(s)." if @bugs_new > 0 %> 
             <%= "#{@bugs_test} bug(s) on test." if @bugs_test > 0 %>

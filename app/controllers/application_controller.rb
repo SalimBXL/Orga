@@ -4,6 +4,18 @@ class ApplicationController < ActionController::Base
   before_action :set_page_aide
 
 
+  def is_manager?
+    current_user.utilisateur.admin unless current_user.nil?
+  end
+
+  def is_super_admin?
+    current_user.admin unless current_user.nil?
+  end
+
+  def is_manager_or_super_admin?
+    (is_super_admin? or is_manager?) unless current_user.nil?
+  end
+
 
   def read_konfig(key = nil)
     @konfiguration ||= Hash.new
@@ -62,7 +74,6 @@ class ApplicationController < ActionController::Base
     else
       utilisateur_id = nil
     end
-    #add_in_logfile(date, adresse, utilisateur_id, description)
     add_in_logdb(date, adresse, utilisateur_id, description)
   end
 
@@ -146,15 +157,13 @@ class ApplicationController < ActionController::Base
   
 
   # Charge les Events
-  def charge_events(date)
-      date = date.to_s
-      events = Event.where(date: date).order(:service_id, :nom)
-      events.each do |event|
-          if @events[event.service_id].nil?
-              @events[event.service_id] = Array.new
-          end
-          @events[event.service_id] << event
-      end
+  def charge_events(date, service = nil)
+    date = date.to_s
+    events = service.nil? ? Event.where(date: date).order(:service_id, :nom) : Event.where(date: date, service: service).order(:nom)
+    events.each do |event|
+      @events[event.service_id].nil? && @events[event.service_id] = Array.new
+      @events[event.service_id] << event
+    end
   end
 
 
@@ -230,11 +239,16 @@ end
   # trouve les tâches
   #
   
-  def find_tasks(utilisateur)
+  def find_tasks(utilisateur, today = false)
+    if today
+      hebdos = Hebdo.where(numero_semaine: Date.today.cweek, utilisateur: utilisateur).order(:numero_semaine)
+    else
+      from = (Date.today-3.weeks).cweek
+      to = (Date.today+9.weeks).cweek
+      hebdos = Hebdo.where('numero_semaine > ? AND numero_semaine < ?', from, to ).where(utilisateur: utilisateur).order(:numero_semaine)
+    end
+
     @tasks = Hash.new
-    from = (Date.today-3.weeks).cweek
-    to = (Date.today+9.weeks).cweek
-    hebdos = Hebdo.where('numero_semaine > ? AND numero_semaine < ?', from, to ).where(utilisateur: utilisateur).order(:numero_semaine)
     hebdos.each do |hebdo|
         @tasks[hebdo.numero_semaine] ||= Array.new
         noeud =Array.new
