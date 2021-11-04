@@ -1,0 +1,14 @@
+<div class="page-header">
+    <h1>
+        <span class="label label-primary">
+            <i class="material-icons">healing</i>
+            <%= I18n.t("absences.index.titre").upcase %>
+        </span>
+    </h1>
+</div>
+
+<p>
+    <form class="form-inline" action="<%= absences_path %>" method="get">
+        <%= render "liste_utilisateurs" if (is_manager_or_super_admin?) %>
+    </form>
+</p>

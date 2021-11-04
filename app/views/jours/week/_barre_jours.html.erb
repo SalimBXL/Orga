@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-sm-2"></div>
+    <% 5.times do |i| %>
+        <% i+= 1 %>
+        <div class="col-sm-2 label label-default">
+            <%= "#{nom_jour(i)} #{(@date.beginning_of_week+(i-1).day).day}" %>
+            <% unless @events[service.id].nil? %>
+                <% @events[service.id].each do |event| %>
+                    <% if event.date == (@date.beginning_of_week+(i-1).day) %>
+                        <i class="material-icons"
+                            data-toggle="tooltip" 
+                            title="<%= "#{event.nom.capitalize} #{event.note}" %>">
+                            error_outline
+                        </i>
+                    <% end %>
+                <% end %>
+            <% end %>
+        </div>
+    <% end %>
+</div>

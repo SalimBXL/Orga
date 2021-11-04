@@ -59,7 +59,6 @@ class UtilisateursController < ApplicationController
         # trouve les jours
         #
         @jours = Jour.where('date >= ?', Date.today-15.days).where(utilisateur: @utilisateur).order(:date, :service_id)
-        
         @wks = Hash.new
         @jours.each do |jour|
             WorkingList.where(jour_id: jour.id).each do |workinglist|

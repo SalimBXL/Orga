@@ -1,37 +1,23 @@
 <% session[:page_aide] = "profile" %>
 
-            <!-- TITRE PRENOM NOM -->
-            <div class="well well-lg">
-                <h1>
-                    <span class="label label-default">
-                        <i class="material-icons">person</i>
-                        <%= @utilisateur.prenom_nom.upcase %>
-                    </span>
-                </h1>
-                <% if @utilisateur.inactive %>
-                    <span class="label label-danger">INACTIVE</span>
-                <% end %>
-            </div>
+<!-- TITRE PRENOM NOM -->
+<%= render partial: "utilisateurs/show/header" %>
 
-    <div class="container">
-            <!-- Congés -->
-            <%= render partial: "panel_absences" %>
-    </div>
+<!-- Congés -->
+<div class="container"><%= render partial: "utilisateurs/show/panel_absences" %></div>
 
-    <div class="container">
-            <!-- JOURS -->
-            <%= render partial: "panel_jours" %>
-            
-    </div>
+<!-- JOURS -->
+<div class="container"><%= render partial: "utilisateurs/show/panel_jours" %></div>
 
-    <div class="row">
 
-        <div class="col-sm-6">
-            <!-- USER INFO -->
-            <%= render partial: "user_info" %>
-        </div>
-        <div class="col-sm-6">
-            <!-- PROFILE CONNEXION (User) -->
-            <%= render partial: "login_data" %>
-        </div>
-    </div>
+<div class="row">
+
+    <!-- USER INFO -->
+    <div class="col-sm-6"><%= render partial: "utilisateurs/show/user_info" %></div>
+
+    <!-- PROFILE CONNEXION (User) -->
+    <% if @utilisateur.user || is_super_admin? %>
+        <div class="col-sm-6"><%= render partial: "utilisateurs/show/login_data" %></div>
+    <% end %>
+
+</div>

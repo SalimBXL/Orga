@@ -1,39 +1,19 @@
 <% session[:page_aide] = "absences_types" %>
 
 <div class="container">
-<div class="page-header">
-    <h1>
-        <span class="label label-primary">
-            <i class="material-icons">healing</i>
-            <%= I18n.t("absences.index.titre").upcase %>
-        </span>
-    </h1>
-</div>
 
+    <%= render partial: "absences/header" %>
 
-<p>
-    <form class="form-inline" action="<%= absences_path %>" method="get">
-
-        <% if user_signed_in? %>
-        <%= link_to '<i class="material-icons">add</i> '.html_safe, 
-            new_absence_path,
-            class: "btn btn-success btn-xs" %>
-        <% end %>
-
-        <%= render "liste_utilisateurs" if (is_manager_or_super_admin?) %>
-    </form>
-</p>
-
-
-
-<div id="absences">
-    <%= render 'absences' %>
-</div>
-<p>
     <% if user_signed_in? %>
-    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
-        new_absence_path,
-        class: "btn btn-success btn-xs" %>
+        <%= link_to '<i class="material-icons">add</i> '.html_safe, new_absence_path,
+            class: "btn btn-success btn-xs" %>
     <% end %>
-</p>
-<div class="container">
+
+    <div id="absences"><%= render 'absences' %></div>
+
+    <% if user_signed_in? %>
+        <%= link_to '<i class="material-icons">add</i> '.html_safe, new_absence_path,
+            class: "btn btn-success btn-xs" %>
+    <% end %>
+
+</div>

@@ -10,14 +10,14 @@
 
 <div class="container">
 
-    <!-- TITRE DATE DU JOUR -->
-    <%= render partial: "header_day"  %>
+    <!-- TITRE & DATE DU JOUR -->
+    <%= render partial: "jours/day/header_day"  %>
     
     <!-- Par service... -->
     <% @specific_day_jours.keys.each do |service| %>
 
         <!-- Changement de service -->
-        <%= render partial: "nom_service_day", locals: { service: service } %>
+        <%= render partial: "jours/day/nom_service_day", locals: { service: service } %>
 
 
         <!-- Changement d'utilisateur -->
@@ -30,7 +30,7 @@
             <!-- Dessine la boîte si utilisateur pas inactif -->
             <% unless utilisateur.inactive %>
                 <div class="col-sm-4">
-                    <%= render partial: "box_day", locals: { 
+                    <%= render partial: "jours/day/box_day", locals: { 
                             specific_day_jour: @specific_day_jours[service][utilisateur],
                             utilisateur: utilisateur,
                             note: @specific_day_jours[service][utilisateur]["notes"],
@@ -47,11 +47,9 @@
             <div class="col-sm-4 panel panel-warning">
                 <p>Tasks : </p>
                 <ul>
-                <% liste_tasks.each do |utilisateur| %>
-                    <li>*<%= utilisateur.prenom_nom %>
-                        
+                    <% liste_tasks.each do |utilisateur| %>
+                        <li>*<%= utilisateur.prenom_nom %>    
                             <% @hebdos[utilisateur].each do |h| %>
-                        
                                     <%= "<span class='label label-warning'
                                         data-toggle='tooltip' 
                                         title='#{h.first.last}'>
@@ -59,14 +57,11 @@
                                         </span>&nbsp;".html_safe
                                     %>
                                     </span>
-                        
                             <% end %>
-                        
-                    </li>
-                <% end %>
+                        </li>
+                    <% end %>
                 </ul>
             </div>
         <% end %>
-    <% end %>
-    
+    <% end %>    
 </div>

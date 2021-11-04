@@ -1,0 +1,93 @@
+<% tmp_numero_semaine = nil %>
+<% tmp_numero_mois = nil %>
+<% tmp_date = nil %>
+<% tmp_lundi = nil %>
+<% tmp_jour = nil %>
+<% n_jour = 1 %>
+
+<div class="panel panel-default ">    
+    <div class="panel-body">
+        <h3><span class="label label-danger"><%= I18n.t("utilisateurs.show.days").capitalize %></span></h3>
+        
+        <table class="table-condensed table-bordered">
+
+            <!-- Ligne des noms de jour -->
+            <tr>
+                <th class="tdfixe">Periods</th>
+                <th class="tdfixe"><%= I18n.t("Lundi").capitalize %></th>
+                <th class="tdfixe"><%= I18n.t("Mardi").capitalize %></th>
+                <th class="tdfixe"><%= I18n.t("Mercredi").capitalize %></th>
+                <th class="tdfixe"><%= I18n.t("Jeudi").capitalize %></th>
+                <th class="tdfixe"><%= I18n.t("Vendredi").capitalize %></th>
+                <th class="tdfixe">W</th>
+            </tr>
+            
+            <% for i in -2..8 %>
+                <% tmp_lundi = (Date.today + (i*7).days).beginning_of_week %>
+                
+                <!-- Ligne de semaine -->
+                <% ligne_color = (tmp_lundi.cweek == Date.today.cweek) ? "today" : "" %>
+
+                <tr class="<%= ligne_color %>">
+
+                    <!-- Case de la date -->
+                    <td class="tdfixe">
+
+                        <div class="badge">
+                            <%= I18n.localize tmp_lundi, format: :short %> -- 
+                            <%= I18n.localize (tmp_lundi.end_of_week - 2.days), format: :short %>
+                        </div>
+
+                        <small>(#<%= tmp_lundi.cweek %>)</small>
+
+                        &nbsp;&nbsp;&nbsp;
+                        
+                        <% if @tasks[tmp_lundi.cweek] %>
+                            <% @tasks[tmp_lundi.cweek].each do |tsk| %>
+                                <%= "<span class='label label-warning'
+                                    data-toggle='tooltip' 
+                                    title='#{tsk.last}'>
+                                    #{link_to tsk.first, hebdos_path()}
+                                    </span>&nbsp;".html_safe
+                                %>
+                                &nbsp;
+                            <% end %>
+                        <% end %>
+
+                    </td>
+                    
+
+                    <!-- Pour chaque jour... -->
+                    <% for d in 0..5 %>
+                        <% tmp_jour = tmp_lundi + d.days %>
+                        <td class="tdfixe">
+                        
+                            <% @jours.where(date: tmp_jour).each do |batch| %>
+                                <% bg = "primary" %>
+                                <% bg = "info" if batch.am_pm %>
+
+                                <% if current_user.admin? || (current_user.utilisateur.admin? and current_user.utilisateur.service == batch.service) %>
+                                    <a href="<%= edit_jour_path(batch.id) %>" 
+                                        class="btn btn-<%= bg %> btn-xs">
+                                        <% @wks[batch].each do |wk| %>
+                                            <%= wk %>
+                                        <% end %>
+                                    </a>
+                                <% else %>
+                                    <span data-toggle="tooltip" 
+                                        title="<%= batch.service.nom %>"
+                                        class="btn btn-<%= bg %> btn-xs">
+                                        <% @wks[batch].each do |wk| %>
+                                            <%= wk %>
+                                        <% end %>
+                                    </span>
+                                <% end %>
+                            <% end %>
+                        </td>
+                    <% end %>
+                </tr>
+            <% end %>
+        </table>
+        
+    </div>
+</div>

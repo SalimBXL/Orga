@@ -32,11 +32,6 @@ class AjoutsController < ApplicationController
 
         @templates = Template.all.order(:service_id, :nom)
 
-        # if current_user.admin?
-        #     @templates = Template.all
-        # else
-        #     @templates = Template.where(id: current_user.utilisateur.service.id)
-        # end
     end
     
 
@@ -52,9 +47,6 @@ class AjoutsController < ApplicationController
 
         # SI TEMPLATE ...
         if !params[:ajout][:template].blank? and !params[:ajout][:template].nil?
-            #puts "**************************************"
-            #puts "TEMPLATE..."
-            #puts "**************************************"
             template = Template.find_by_id(params[:ajout][:template])
             if (!template.nil? or !template.blank?) and 
                 (!params[:ajout][:utilisateur_id].nil? or !params[:ajout][:utilisateur_id].blank?)
@@ -69,9 +61,6 @@ class AjoutsController < ApplicationController
                 end
             end
         else 
-            #puts "**************************************"
-            #puts "NO TEMPLATE"
-            #puts "**************************************"
             # Si etendre à la semaine, 
             # on crée 5 jobs pour chacun des jours
             if (@etendre)
@@ -84,7 +73,6 @@ class AjoutsController < ApplicationController
             end
         end
 
-        
         # on sauve les ajouts
         @ajouts.each do |a|
             if a.save
@@ -94,9 +82,6 @@ class AjoutsController < ApplicationController
             end
         end
 
-        #if (err)
-        #    render :new
-        #end
         redirect_to ajouts_path
     end
 
@@ -223,8 +208,6 @@ class AjoutsController < ApplicationController
 
                 end
             end
-
-
 
             # Nettoyage de la liste des ajouts
             @ajout.destroy

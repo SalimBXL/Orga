@@ -54,7 +54,7 @@
 
         <!-- Ne peut modifier l'utilisateur que si admin ou manager -->
         <%= form.select(:utilisateur_id) do %>
-            <% if current_user.utilisateur.admin %>
+            <% if is_super_admin? %>
                 <%= select_option_tag("", nil, @absence.utilisateur_id) %>
                 <% @utilisateurs.find_each do |l| %>
                     <%= select_option_tag("[#{l.service.nom}] - #{l.prenom_nom}", l.id, @absence.utilisateur_id) %>                

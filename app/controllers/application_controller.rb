@@ -216,6 +216,7 @@ end
     @classes = Classe.order(:nom)
   end
 
+  
   def find_services
     log(request.path, "find_services")
     @services = Service.order(:nom)
@@ -238,24 +239,20 @@ end
   #
   # trouve les tâches
   #
-  
   def find_tasks(utilisateur, today = false)
-    if today
-      hebdos = Hebdo.where(numero_semaine: Date.today.cweek, utilisateur: utilisateur).order(:numero_semaine)
-    else
-      from = (Date.today-3.weeks).cweek
-      to = (Date.today+9.weeks).cweek
-      hebdos = Hebdo.where('numero_semaine > ? AND numero_semaine < ?', from, to ).where(utilisateur: utilisateur).order(:numero_semaine)
-    end
-
     @tasks = Hash.new
+    semaine = (Date.today-3.weeks).cweek
+    annee = (Date.today+9.weeks).year
+
+    hebdos = today ? 
+      Hebdo.where(numero_semaine: Date.today.cweek, year_id: Date.today.year, utilisateur: utilisateur).order(:numero_semaine) : 
+      Hebdo.where('numero_semaine > ? AND year_id < ?', semaine, annee ).where(utilisateur: utilisateur).order(:numero_semaine)
+    
+      #Hebdo.where('numero_semaine > ? AND numero_semaine < ?', from, to ).where(utilisateur: utilisateur).order(:numero_semaine)
+
     hebdos.each do |hebdo|
         @tasks[hebdo.numero_semaine] ||= Array.new
-        noeud =Array.new
-        noeud << hebdo.task.code
-        noeud << hebdo.task.nom
-        @tasks[hebdo.numero_semaine] << noeud
+        @tasks[hebdo.numero_semaine] << [hebdo.task.code, hebdo.task.nom]
     end
   end
-
 end
