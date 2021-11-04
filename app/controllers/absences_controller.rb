@@ -1,6 +1,7 @@
 class AbsencesController < ApplicationController
     before_action :find_absence, only: [:show, :edit, :update, :destroy, :remove_one_day]
     before_action :check_logged_in
+    before_action :find_utilisateurs, only: [:grille, :edit]
 
     #############
     #   INDEX   #
@@ -9,17 +10,7 @@ class AbsencesController < ApplicationController
     def index
 
         @absences = is_manager_or_super_admin? ? Absence.order(date: :desc).page(params[:page]) : Absence.where(utilisateur: current_user.utilisateur).order(date: :desc).page(params[:page])
-
         is_manager_or_super_admin? && (@utilisateurs = Utilisateur.order(:service_id, :groupe_id, :prenom, :nom))
-
-
-        #if params[:utilisateur_id]
-        #    @filtre = params[:utilisateur_id]
-        #    @absences = absences.where(utilisateur_id: params[:utilisateur_id])
-        #else
-        #    @filtre = nil
-        #    @absences = absences
-        #end
         
         # Log action
         log(request.path)
@@ -33,7 +24,6 @@ class AbsencesController < ApplicationController
     #####################
     def not_yet_validated
         @absences = Absence.where(accord: false).or(Absence.where(accord: nil)).where('date_fin >= ?', Date.today).order(:date, :date_fin).page(params[:page])
-        # Log action
         log(request.path)
     end
 
@@ -42,7 +32,6 @@ class AbsencesController < ApplicationController
     #############
     def validated
         @absences = Absence.where('date_fin >= ?', Date.today).where(accord: true).order(date: :desc).order(:date_fin).page(params[:page])
-        # Log action
         log(request.path)
     end
 
@@ -62,7 +51,6 @@ class AbsencesController < ApplicationController
         @absence.date = Date.today
         @absence.date_fin = @absence.date
         find_utilisateurs if @utilisateurs.nil?
-        # Log action
         log(request.path)
     end
 
@@ -71,10 +59,9 @@ class AbsencesController < ApplicationController
     #   CREATE   #
     ##############
     def create
-        # Log action
         log(request.path)
-        @absence = Absence.create(absence_params)
 
+        @absence = Absence.create(absence_params)
         @absence.check_date_fin
 
         list_abs = @absence.conflict_exists?
@@ -103,10 +90,8 @@ class AbsencesController < ApplicationController
     #   UPDATE  #
     #############
     def update
-        # Log action
         log(request.path, I18n.t("absences.index.log_update"))
 
-        # On ajuste la date de fin
         @absence.check_date_fin
 
         # Si absence déjà accordée, 
@@ -126,16 +111,13 @@ class AbsencesController < ApplicationController
     #   EDIT    #
     #############
     def edit
-        # Log action
         log(request.path, I18n.t("absences.index.log_edit"))
-        find_utilisateurs
     end
 
     ##############
     #   DESTROY  #
     ##############
     def destroy
-        # Log action
         log(request.path, I18n.t("absences.index.log_destroy"))
         @absence.destroy
 
@@ -155,21 +137,15 @@ class AbsencesController < ApplicationController
     def grille
         log(request.path, "Show grille absences")
 
-        
-
         # Réglage des dates de début et fin de période
-        unless params[:date]
-            date_tmp = Date.today
-        else
-            date_tmp = params[:date].to_date
-        end
-        if date_tmp.beginning_of_month.cwday == 7
-            date_tmp = date_tmp.beginning_of_month + 1.day
-        elsif date_tmp.beginning_of_month.cwday == 6
-            date_tmp = date_tmp.beginning_of_month + 2.days
-        else
+        date_tmp = params[:date] ? date_tmp = params[:date].to_date : date_tmp = Date.today
+        
+        date_tmp = (date_tmp.beginning_of_month.cwday == 7) ? 
+            date_tmp.beginning_of_month + 1.day : 
+            (date_tmp.beginning_of_month.cwday == 6) ? 
+            date_tmp = date_tmp.beginning_of_month + 2.days :
             date_tmp = date_tmp.beginning_of_month
-        end
+
         @date = date_tmp.beginning_of_week
         @date2 = (date_tmp.end_of_month+180.days).end_of_week
         
@@ -182,23 +158,14 @@ class AbsencesController < ApplicationController
                 @absences[absence.utilisateur_id][aj] = absence
             end
         end
-
-        find_utilisateurs
     end
 
     def remove_one_day
         day_to_remove = params[:day]
 
-        puts "***************"
-        puts "***************"
-        puts "DAY TO REMOVE : #{day_to_remove}"
-        puts "DATE          : #{@absence.date}"
-        puts "DATE_FIN      : #{@absence.date_fin}"
-
         #Supprimer premier jour ? => avancer la date de départ de un jour
         if day_to_remove.to_s == @absence.date.to_s
             @absence.date = (@absence.date + 1.day)
-            # on sauve.
             if @absence.update(@absence.as_json)
                 flash[:notice] = "Absence modifiée =>  #{@absence.date} - #{@absence.date_fin}"
                 redirect_to utilisateur_path(@absence.utilisateur)
@@ -219,17 +186,13 @@ class AbsencesController < ApplicationController
             backup_date = @absence.date_fin
             @absence.date_fin = (day_to_remove.to_date - 1.day)
             if @absence.update(@absence.as_json)
-                #flash[:notice] = "Absence modifiée =>  #{@absence.date} - #{@absence.date_fin}"
-                #redirect_to utilisateur_path(@absence.utilisateur)
                 @absence.date = (day_to_remove.to_date + 1.day)
                 @absence.date_fin = backup_date
                 @absence.id = nil
                 @absence = Absence.create(@absence.as_json)
                 redirect_to utilisateur_path(@absence.utilisateur)
             end
-
         end
-
     end
 
 
