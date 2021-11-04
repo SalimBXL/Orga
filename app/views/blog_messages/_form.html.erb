@@ -46,7 +46,7 @@
         <% @blog_message.utilisateur_id = current_user.utilisateur.id %>
     <% end %>
     <p>
-        <%= form.label I18n.t("blog_messages.new.user") %> : <%= @blog_message.utilisateur_id %><br>
+        <%= form.label I18n.t("blog_messages.new.user") %> : <%= @blog_utilisateurs[@blog_message.utilisateur_id] %><br>
         <%= form.hidden_field :utilisateur_id %>
     </p>
 
@@ -62,9 +62,8 @@
             <%= form.label I18n.t("blog_messages.new.service") %>
             <%= form.select(:service_id) do %>
                 <%= select_option_tag("", nil, @blog_message.service_id) %>
-                <% services = Service.order(:nom) %>
-                <% services.find_each do |l| %>
-                    <%= select_option_tag(l.nom.capitalize, l.id, @blog_message.service_id) %>
+                <% @blog_services.keys.each do |l| %>
+                    <%= select_option_tag(@blog_services[l].capitalize, l, @blog_message.service_id) %>
                 <% end %>
             <% end %>
         </p>
@@ -76,9 +75,8 @@
             <%= form.label I18n.t("blog_messages.new.classe") %>
             <%= form.select(:classe) do %>
                 <%= select_option_tag("", nil, @blog_message.classe) %>
-                <% classes = Classe.order(:nom) %>
-                <% classes.find_each do |l| %>
-                    <%= select_option_tag(l.nom.capitalize, l.id, @blog_message.classe) %>
+                <% @blog_classes.keys.each do |l| %>
+                    <%= select_option_tag(@blog_classes[l].capitalize, l, @blog_message.classe) %>
                 <% end %>
             <% end %>
         </p>
@@ -90,9 +88,8 @@
             <%= form.label I18n.t("blog_messages.new.groupe") %>
             <%= form.select(:groupe) do %>
                 <%= select_option_tag("", nil, @blog_message.groupe) %>
-                <% groupes = Groupe.order(:nom) %>
-                <% groupes.find_each do |l| %>
-                    <%= select_option_tag(l.nom.capitalize, l.id, @blog_message.groupe) %>
+                <% @blog_groupes.keys.each do |l| %>
+                    <%= select_option_tag(@blog_groupes[l].capitalize, l, @blog_message.groupe) %>
                 <% end %>
             <% end %>
         </p>

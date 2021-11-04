@@ -5,7 +5,6 @@ class BlogCategoriesController < ApplicationController
     #   INDEX   #
     #############
     def index
-        # Log action
         log(request.path)
         @blog_categories = BlogCategory.order(:nom).page(params[:page])
     end
@@ -15,7 +14,6 @@ class BlogCategoriesController < ApplicationController
     #   SHOW    #
     #############
     def show
-        # Log action
         log(request.path)
     end
 
@@ -24,7 +22,6 @@ class BlogCategoriesController < ApplicationController
     #    NEW    #
     #############
     def new
-        # Log action
         log(request.path)
         @blog_category = BlogCategory.new
     end
@@ -34,7 +31,6 @@ class BlogCategoriesController < ApplicationController
     #   CREATE   #
     ##############
     def create
-        # Log action
         log(request.path)
         @blog_category = BlogCategory.create(category_params)
         if @blog_category.save
@@ -49,7 +45,6 @@ class BlogCategoriesController < ApplicationController
     #   UPDATE  #
     #############
     def update
-        # Log action
         log(request.path, I18n.t("messages.index.log_update"))
         if @blog_category.update(category_params)
             flash[:notice] = "Catégorie modifiée avec succès"
@@ -64,7 +59,6 @@ class BlogCategoriesController < ApplicationController
     #   EDIT    #
     #############
     def edit
-        # Log action
         log(request.path, I18n.t("messages.index.log_edit"))
     end
 
@@ -72,7 +66,6 @@ class BlogCategoriesController < ApplicationController
     #   DESTROY  #
     ##############
     def destroy
-        # Log action
         log(request.path, I18n.t("messages.index.log_destroy"))
         @blog_category.destroy
     end

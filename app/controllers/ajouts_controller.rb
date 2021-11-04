@@ -25,13 +25,10 @@ class AjoutsController < ApplicationController
     def new
         @ajout = Ajout.new
         @mode_edition = false
-
         services = Service.all
         @service = Array.new
         Service.all.order(:nom).each {|service| @service[service.id] = service.nom}
-
         @templates = Template.all.order(:service_id, :nom)
-
     end
     
 

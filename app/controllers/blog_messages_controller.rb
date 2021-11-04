@@ -1,17 +1,16 @@
 class BlogMessagesController < ApplicationController
     before_action :find_message, only: [:show, :edit, :update, :destroy, :review]
-    before_action :find_classes
-    before_action :find_categories
-    before_action :find_groupes
-    before_action :find_services
-    before_action :find_utilisateurs
+    before_action :find_classes, only: [:index, :show, :edit, :new]
+    before_action :find_categories, only: [:index, :show, :edit, :new]
+    before_action :find_groupes, only: [:index, :show, :edit, :new]
+    before_action :find_services, only: [:index, :show, :edit, :new]
+    before_action :find_blog_utilisateurs, only: [:index, :show, :edit, :new]
     
 
     #############
     #   INDEX   #
     #############
     def index
-        # Log action
         log(request.path)
         
         @not_yet_reviewed_messages = BlogMessage.where(logbook: true)
@@ -47,7 +46,6 @@ class BlogMessagesController < ApplicationController
             params[:service_id] = @current_user.utilisateur.service_id
             @blog_messages = BlogMessage.where(service_id: params[:service_id]).order(date: :desc).page(params[:page])
         end
-        
     end
 
 
@@ -55,7 +53,6 @@ class BlogMessagesController < ApplicationController
     #   SHOW    #
     #############
     def show
-        # Log action
         log(request.path)
         @responses = BlogResponse.where(blog_message_id: @blog_message.id)
         @reviewer = @blog_message.reviewer ? Utilisateur.find(@blog_message.reviewer).prenom_nom : nil
@@ -68,7 +65,6 @@ class BlogMessagesController < ApplicationController
     #    NEW    #
     #############
     def new
-        # Log action
         log(request.path)
         @blog_message = BlogMessage.new
     end
@@ -78,7 +74,6 @@ class BlogMessagesController < ApplicationController
     #   CREATE   #
     ##############
     def create
-        # Log action
         log(request.path)
         @blog_message = BlogMessage.create(message_params)
         if @blog_message.save
@@ -93,7 +88,6 @@ class BlogMessagesController < ApplicationController
     #   UPDATE  #
     #############
     def update
-        # Log action
         log(request.path, I18n.t("messages.index.log_update"))
         
         if @blog_message.update(message_params)
@@ -109,7 +103,6 @@ class BlogMessagesController < ApplicationController
     #   EDIT    #
     #############
     def edit
-        # Log action
         log(request.path, I18n.t("messages.index.log_edit"))
     end
 
@@ -118,7 +111,6 @@ class BlogMessagesController < ApplicationController
     #   DESTROY  #
     ##############
     def destroy
-        # Log action
         log(request.path, I18n.t("messages.index.log_destroy"))
         @blog_message.destroy
     end
@@ -179,11 +171,10 @@ class BlogMessagesController < ApplicationController
         end
     end
 
-    def find_utilisateurs
+    def find_blog_utilisateurs
         @blog_utilisateurs = Hash.new
         Utilisateur.all.each do |s|
             @blog_utilisateurs[s.id] = s.prenom_nom
         end
     end
-
 end

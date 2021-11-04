@@ -1,14 +1,11 @@
 <div class="container">
-    <p>
-        <%= paginate @blog_messages, remote: true %>
-    </p>
-    
-    <% @last_date = nil %>
-    
-        <%= render @blog_messages %>
-    
 
-    <p>
-        <%= paginate @blog_messages, remote: true %>
-    </p>
+    <p><%= paginate @blog_messages, remote: true %></p>
+
+    <% @last_date = nil %>
+
+    <%= render @blog_messages %>
+
+    <p><%= paginate @blog_messages, remote: true %></p>
+    
 </div>
