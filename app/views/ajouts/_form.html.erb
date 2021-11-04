@@ -65,7 +65,7 @@
                     <br>
                     <div class="form-group">
                         <!-- Utilisateur -->
-                        <% unless current_user.admin? %>
+                        <% unless is_super_admin? %>
                             <% temp = @utilisateurs %>
                             <% @utilisateurs = temp.where(service: current_user.utilisateur.service) %>
                         <% end %>

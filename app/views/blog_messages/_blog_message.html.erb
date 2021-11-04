@@ -93,7 +93,7 @@
                             <i class="material-icons">import_contacts</i></span>'.html_safe, 
                             blog_message_path(blog_message),
                             class: "btn btn-success btn-xs" %>
-                    <% if user_signed_in? && (current_user.admin? || current_user.utilisateur.id == blog_message.utilisateur_id) %>
+                    <% if user_signed_in? && (is_super_admin? || current_user.utilisateur.id == blog_message.utilisateur_id) %>
                         <%= link_to '<span data-toggle="tooltip" title="Edit...">
                             <i class="material-icons">edit</i></span>'.html_safe, 
                             edit_blog_message_path(blog_message),

@@ -4,7 +4,7 @@
     <td><%= log.utilisateur_id %></td>
     <td><%= log.description %></td>
     <td>
-    <% if user_signed_in? && current_user.admin? %>
+    <% if user_signed_in? && is_super_admin? %>
         <%= link_to '[edit]', edit_log_path(log) %>
         <%= link_to '[delete]', log_path(log),
             method: :delete,

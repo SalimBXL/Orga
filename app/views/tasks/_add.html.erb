@@ -1,5 +1,5 @@
 <p>
-    <% if user_signed_in? && current_user.utilisateur.admin %>
+    <% if user_signed_in? && is_manager? %>
     <%= link_to '<i class="material-icons">add</i> '.html_safe, 
         new_task_path,
         class: "btn btn-success btn-xs" %>

@@ -26,7 +26,7 @@
         <%= form.label I18n.t("fermetures.new.service") %><br>
         <%= form.select(:service_id) do %>
             <%= select_option_tag("", nil, @fermeture.service_id) %>
-            <% unless current_user.admin? %>
+            <% unless is_super_admin? %>
                 <% services = Service.where(id: current_user.utilisateur.service.id) %>
             <% else %>
                 <% services = Service.all %>

@@ -75,7 +75,7 @@
     </p>
 
 
-    <% if user_signed_in? && current_user.utilisateur.admin %>
+    <% if user_signed_in? && is_manager? %>
         <!-- Accord -->
         <p>
             <%= form.check_box :accord %> <%= form.label I18n.t("absences.new.accord") %>

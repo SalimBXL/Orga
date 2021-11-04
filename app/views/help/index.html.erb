@@ -24,7 +24,7 @@
         <p><%= I18n.t("help.index.article2-1") %></p>
         <p>
             <%= I18n.t("help.index.article2-2") %><br>
-            <% if user_signed_in? && current_user.admin? %>
+            <% if user_signed_in? && is_super_admin? %>
                 <%= I18n.t("help.index.article2-2-2") %><br>
             <% end %>
             <%= I18n.t("help.index.article2-3") %><br>
@@ -47,7 +47,7 @@
     </article>
 
     <!-- Red section -->
-    <% if user_signed_in? && current_user.utilisateur.admin? %>
+    <% if user_signed_in? && is_manager? %>
     <article>
         <h3><span class="label label-warning"><%= I18n.t("help.index.titre5").capitalize %></span></h3>
         <p><%= I18n.t("help.index.article5-1") %></p>
@@ -55,7 +55,7 @@
     <% end %>
 
     <!-- Red section -->
-    <% if user_signed_in? && current_user.admin? %>
+    <% if user_signed_in? && is_super_admin? %>
     <article>
         <h3><span class="label label-danger"><%= I18n.t("help.index.titre4").capitalize %></span></h3>
         <p><%= I18n.t("help.index.article4-1") %></p>

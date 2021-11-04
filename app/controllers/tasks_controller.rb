@@ -9,7 +9,7 @@ class TasksController < ApplicationController
     def index
         # Log action
         log(request.path)
-        if current_user.admin?
+        if is_super_admin?
             @tasks = Task.order(:service_id, :classe_id, :groupe_id, :nom).page(params[:page])
         else
             @tasks = Task.where(service: current_user.utilisateur.service).order(:service_id, :classe_id, :groupe_id, :nom).page(params[:page])

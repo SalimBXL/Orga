@@ -5,7 +5,7 @@ class FermeturesController < ApplicationController
     def index
         # Log action
         log(request.path)
-        if current_user.admin?
+        if is_super_admin?
             @fermetures = Fermeture.order(date: :desc).order(:service_id).page(params[:page])
         else
             @fermetures = Fermeture.where(service: current_user.utilisateur.service).order(date: :desc).order(:service_id).page(params[:page])

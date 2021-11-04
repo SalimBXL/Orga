@@ -11,7 +11,7 @@ class JoursController < ApplicationController
 
         session[:return_user_id] = nil
 
-        if current_user.admin?
+        if is_super_admin?
             @jours = Jour.order(numero_semaine: :desc).order(numero_jour: :desc).order(:service_id, :am_pm, :utilisateur_id).page(params[:page])
         else
             @jours = Jour.where(service: current_user.utilisateur.service).order(numero_semaine: :desc).order(numero_jour: :desc).order(:service_id, :am_pm, :utilisateur_id).page(params[:page])
@@ -303,7 +303,7 @@ class JoursController < ApplicationController
         end
 
 
-        if user_signed_in? && (current_user.admin? or current_user.utilisateur.admin)
+        if user_signed_in? && (is_manager_or_super_admin?)
             find_utilisateurs
             find_classes
             find_works

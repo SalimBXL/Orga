@@ -18,12 +18,12 @@
     <td>
     <% service_utilisateur = absence.utilisateur.service %>
     <% if user_signed_in? && 
-        (current_user.admin? || 
+        (is_super_admin? || 
         current_user.utilisateur == absence.utilisateur ||
-        current_user.utilisateur.admin) %>
+        is_manager?) %>
 
         <% if (current_user.utilisateur == absence.utilisateur and (absence.accord.nil? || !absence.accord) ) or
-            (current_user.admin? || current_user.utilisateur.admin)
+            (is_super_admin? || is_manager?)
         %>
             <%= link_to '<span data-toggle="tooltip">
                     <i class="material-icons">edit</i></span>'.html_safe, 

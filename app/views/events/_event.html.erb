@@ -1,11 +1,11 @@
-<% if current_user.admin? || current_user.utilisateur.service == event.service %>
+<% if is_super_admin? || current_user.utilisateur.service == event.service %>
 <tr id="event_<%= event.id %>">
     <td><%= event.nom %></td>
     <td><%= event.date %></td>
     <td><%= event.service.nom %></td>
     <td><%= event.note %></td>
     <td>
-    <% if user_signed_in? && current_user.utilisateur.admin %>
+    <% if user_signed_in? && is_manager? %>
         
         <%= link_to '<span data-toggle="tooltip" >
             <i class="material-icons">edit</i></span>'.html_safe, 

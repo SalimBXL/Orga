@@ -9,7 +9,7 @@
     </div>
 </div>
 
-<% if user_signed_in? && current_user.admin? %>
+<% if user_signed_in? && is_super_admin? %>
     <% session[:page_aide] = "tools" %>
     <div class="container">
         <div class="row">

@@ -1,4 +1,4 @@
-<% if current_user.admin? || current_user.utilisateur.service == fermeture.service %>
+<% if is_super_admin? || current_user.utilisateur.service == fermeture.service %>
 <tr id="fermeture_<%= fermeture.id %>">
     <td><%= fermeture.nom %></td>
     <td><%= fermeture.date %></td>
@@ -6,8 +6,8 @@
     <td><%= fermeture.service.nom %></td>
     <td><%= fermeture.note %></td>
     <td>
-    <% if user_signed_in? && current_user.utilisateur.admin %>
-        <% if (fermeture.service == current_user.utilisateur.service) || current_user.admin? %>
+    <% if user_signed_in? && is_manager? %>
+        <% if (fermeture.service == current_user.utilisateur.service) || is_super_admin? %>
             <%= link_to '<span data-toggle="tooltip" >
                 <i class="material-icons">edit</i></span>'.html_safe, 
                 edit_fermeture_path(fermeture),

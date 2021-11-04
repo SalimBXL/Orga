@@ -26,7 +26,7 @@
         <% end %>
     </td>
     <td>
-        <% if user_signed_in? && current_user.admin? %>
+        <% if user_signed_in? && is_super_admin? %>
             <%= link_to '<span data-toggle="tooltip" >
                 <i class="material-icons">edit</i></span>'.html_safe, 
                 edit_utilisateur_path(utilisateur),
@@ -40,7 +40,7 @@
                 class: "btn btn-danger btn-xs" %>
         <% end %>
 
-        <% if user_signed_in? && current_user.utilisateur.admin? %>
+        <% if user_signed_in? && is_manager? %>
             &nbsp;
             <%= link_to '<span data-toggle="tooltip" >
                 <i class="material-icons">portrait</i></span>'.html_safe, 

@@ -48,7 +48,7 @@
 
                     <!-- SWAP -->
 
-                    <% if current_user.admin? %>
+                    <% if is_super_admin? %>
                         <% utilisateurs = Utilisateur.all %>
                     <% else %>
                         <% utilisateurs = Utilisateur.where(service: current_user.utilisateur.service) %>

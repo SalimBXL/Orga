@@ -15,12 +15,12 @@
     <td>
     <% service_utilisateur = bug_repport.utilisateur.service %>
     <% if user_signed_in? && 
-        (current_user.admin? || 
+        (is_super_admin? || 
         current_user.utilisateur == bug_repport.utilisateur ||
-        current_user.utilisateur.admin) %>
+        is_manager?) %>
 
         <% if (current_user.utilisateur == bug_repport.utilisateur) or
-            (current_user.admin? || current_user.utilisateur.admin)
+            (is_super_admin? || is_manager?)
         %>
             <%= link_to '<span data-toggle="tooltip">
                     <i class="material-icons">edit</i></span>'.html_safe, 

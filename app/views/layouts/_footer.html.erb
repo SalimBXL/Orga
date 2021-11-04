@@ -6,7 +6,7 @@
         <%= " (v#{last_git_date.strftime('%y.%m.%d.%H%M')})" unless @last_git_date.nil? %>
     </p>
 
-    <% if user_signed_in? && current_user.admin? %>
+    <% if user_signed_in? && is_super_admin? %>
             === <%= "[#{params}][#{session[:page_aide]}]" %>
         <% end %>
 </footer>

@@ -23,7 +23,7 @@
 
     <!-- Service -->
     <p>
-        <% unless current_user.admin? %>
+        <% unless is_super_admin? %>
             <% services = Service.where(id: current_user.utilisateur.service.id) %>
         <% else %>
             <% services = Service.all %>

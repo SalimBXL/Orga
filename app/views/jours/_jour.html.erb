@@ -3,7 +3,7 @@
 <% problem = true if jour.works?<1 %>
 <% bg = "danger" if problem %>
 
-<% if current_user.admin? || current_user.utilisateur.service == jour.service %>
+<% if is_super_admin? || current_user.utilisateur.service == jour.service %>
 
 <tr id="jour_<%= jour.id %>" class="<%= bg %>">
     <td><%= jour.numero_semaine %></td>

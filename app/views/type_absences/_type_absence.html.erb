@@ -3,7 +3,7 @@
     <td><%= type_absence.nom %></td>
     <td><%= type_absence.description %></td>
     <td>
-    <% if user_signed_in? && current_user.admin? %>
+    <% if user_signed_in? && is_super_admin? %>
         <%= link_to '<span data-toggle="tooltip">
                     <i class="material-icons">edit</i></span>'.html_safe, 
                     edit_type_absence_path(type_absence),

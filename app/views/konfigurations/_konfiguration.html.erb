@@ -3,7 +3,7 @@
     <td><i><%= konfiguration.value %></i></td>
     <td><%= konfiguration.description %></td>
     <td>
-    <% if user_signed_in? && current_user.admin? %>
+    <% if user_signed_in? && is_super_admin? %>
         <%= link_to '[edit]', edit_konfiguration_path(konfiguration) %>
         <%= link_to '[delete]', konfiguration_path(konfiguration),
             method: :delete,

@@ -26,7 +26,7 @@
 
         <!-- Ne peut modifier l'utilisateur que si admin ou manager -->
         <%= form.select(:utilisateur_id) do %>
-            <% if current_user.utilisateur.admin %>
+            <% if is_manager? %>
                 <%= select_option_tag("", nil, @bug_repport.utilisateur_id) %>
                 <% @utilisateurs.order(:service_id, :groupe_id, :prenom, :nom).find_each do |l| %>
                     <%= select_option_tag("[#{l.service.nom}] - #{l.prenom_nom}", l.id, @bug_repport.utilisateur_id) %>                
@@ -48,7 +48,7 @@
     </p>
 
     <!-- STATUS -->
-    <% if current_user.utilisateur.admin %>
+    <% if is_manager? %>
         <%= form.select(:status) do %>
             <% [
                 ["outlined_flag", "Waitting"],

@@ -9,7 +9,7 @@ module ApplicationHelper
       end
     
       def is_manager_or_super_admin?
-        (is_super_admin? or is_manager?) unless current_user.nil?
+        (is_manager? or is_super_admin?) unless current_user.nil?
       end
 
 

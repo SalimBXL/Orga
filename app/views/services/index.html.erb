@@ -11,7 +11,7 @@
 
 <div class="container">
     <p>
-        <% if user_signed_in? && current_user.admin? %>
+        <% if user_signed_in? && is_super_admin? %>
         <%= link_to '<i class="material-icons">add</i> '.html_safe, 
             new_service_path,
             class: "btn btn-success btn-xs" %>
@@ -23,7 +23,7 @@
     </div>
 
     <p>
-        <% if user_signed_in? && current_user.admin? %>
+        <% if user_signed_in? && is_super_admin? %>
         <%= link_to '<i class="material-icons">add</i> '.html_safe, 
             new_service_path,
             class: "btn btn-success btn-xs" %>

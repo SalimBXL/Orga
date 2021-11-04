@@ -60,12 +60,12 @@
         <a href="<%= blog_messages_path %>" class="btn btn-info btn-xs" role="button"><%= I18n.t("blog_messages.show.back_to_articles") %></a>
         
         <!-- edit -->
-        <% if current_user.admin? or current_user.utilisateur.admin? or current_user.utilisateur.id==@blog_message.utilisateur_id %>
+        <% if is_manager_or_super_admin? or current_user.utilisateur.id==@blog_message.utilisateur_id %>
             <a href="<%= edit_blog_message_path(@blog_message) %>" class="btn btn-warning btn-xs" role="button"><%= I18n.t("blog_messages.show.edit_article") %></a>
         <% end %>
 
         <!-- add Wiki entry -->
-        <% if @blog_message.logbook and (current_user.admin? or current_user.utilisateur.admin? or current_user.utilisateur.id == @blog_message.utilisateur_id) %>
+        <% if @blog_message.logbook and (is_manager_or_super_admin? or current_user.utilisateur.id == @blog_message.utilisateur_id) %>
             &nbsp;&nbsp;&nbsp;
             <% unless @wiki_id.nil? %>
                 <a href="<%= wiki_page_path(@wiki_id) %>" 
@@ -85,7 +85,7 @@
         <a href="<%= new_blog_response_path(blog_message_id: @blog_message) %>" class="btn btn-success btn-xs" role="button"><%= I18n.t("blog_messages.show.respond") %></a>
 
         <!-- review -->
-        <% if @blog_message.logbook and !@blog_message.reviewed and (current_user.admin? or current_user.utilisateur.admin?) and !(current_user.utilisateur.id == @blog_message.utilisateur_id) %>
+        <% if @blog_message.logbook and !@blog_message.reviewed and (is_manager_or_super_admin?) and !(current_user.utilisateur.id == @blog_message.utilisateur_id) %>
             &nbsp;&nbsp;&nbsp;
             <a href="<%= review_blog_message_path(id: @blog_message) %>" 
                 class="btn btn-danger btn-xs" role="button">

@@ -69,7 +69,7 @@
 
         <div class="col-sm-4">
             <!-- ADMIN -->
-            <% if user_signed_in? && current_user.admin? %>
+            <% if user_signed_in? && is_super_admin? %>
                 <div class="well">
                     <article>
                         <h4>

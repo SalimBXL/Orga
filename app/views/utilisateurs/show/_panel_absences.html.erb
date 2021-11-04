@@ -32,7 +32,7 @@
                                     <% bg = "conge_ok" %>
                                 <% end %>
                                 <% bg_btn = "success" %>
-                                <% affiche_ok = true if current_user.admin or current_user.utilisateur.admin %>
+                                <% affiche_ok = true if current_user.admin or is_manager? %>
                             <% end %>
 
                             <% if @absences[aj] and (@absences[aj].accord.nil? or !@absences[aj].accord) %>

@@ -16,7 +16,7 @@
     </td>
 
     <td>
-        <% if user_signed_in? && current_user.admin? %>
+        <% if user_signed_in? && is_super_admin? %>
             <div class="btn-group">
                 <%= link_to '<span data-toggle="tooltip">
                     <i class="material-icons">edit</i></span>'.html_safe, 

@@ -11,7 +11,7 @@ class HebdosController < ApplicationController
 
         session[:return_user_id] = nil
 
-        if current_user.admin?
+        if is_super_admin?
             @hebdos = Hebdo.order(numero_semaine: :desc).order(:utilisateur_id, :task_id).page(params[:page])
         else
             #@hebdos = Hebdo.where(service_id: current_user.utilisateur.service.id).order(numero_semaine: :desc).order(:utilisateur_id, :task_id).page(params[:page])

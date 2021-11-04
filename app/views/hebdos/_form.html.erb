@@ -19,7 +19,7 @@
     <!-- Utilisateur -->
     <p>
         <%= form.label I18n.t("hebdos.new.utilisateur") %><br>
-        <% unless current_user.admin? %>
+        <% unless is_super_admin? %>
             <% temp = @utilisateurs %>
             <% @utilisateurs = temp.where(service: current_user.utilisateur.service) %>
         <% end %>
@@ -31,7 +31,7 @@
     <!-- Task -->
     <p>
         <%= form.label I18n.t("hebdos.new.task") %><br>
-        <% unless current_user.admin? %>
+        <% unless is_super_admin? %>
             <% temp = @tsks %>
             <% @tsks = temp.where(service: current_user.utilisateur.service) %>
         <% end %>

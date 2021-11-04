@@ -109,7 +109,7 @@
 
             <% if @blog_message.logbook %>
                 <% unless current_user.utilisateur.id == @blog_message.utilisateur_id %>
-                    <% if user_signed_in? && (current_user.admin? || current_user.utilisateur.admin?) %>
+                    <% if user_signed_in? && (is_super_admin? || is_manager?) %>
                         <br><%= form.label I18n.t("blog_messages.new.reviewed") %>
                         <%= form.check_box :reviewed %>
                     <% end %>

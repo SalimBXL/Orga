@@ -5,7 +5,7 @@ class EventsController < ApplicationController
     def index
         # Log action
         log(request.path)
-        if current_user.admin?
+        if is_super_admin?
             @events = Event.order(date: :desc).order(:service_id).page(params[:page])
         else
             @events = Event.where(service: current_user.utilisateur.service).order(date: :desc).order(:service_id).page(params[:page])

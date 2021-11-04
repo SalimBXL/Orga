@@ -16,7 +16,7 @@
     <td><%= task.service.nom unless task.service.nil? %></td>
 
     <td>
-    <% if user_signed_in? && current_user.utilisateur.admin %>
+    <% if user_signed_in? && is_manager? %>
         <%= link_to '<span data-toggle="tooltip">
             <i class="material-icons">edit</i></span>'.html_safe, 
             edit_task_path(task),

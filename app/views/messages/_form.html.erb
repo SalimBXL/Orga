@@ -20,7 +20,7 @@
         <%= form.label I18n.t("messages.new.service") %><br>
         <%= form.select(:service_id) do %>
             <%= select_option_tag("", nil, @message.service) %>
-            <% if current_user.admin? %>
+            <% if is_super_admin? %>
                 <% services = Service.order(:nom) %>
             <% else %>
                 <% services = Service.where(id: current_user.utilisateur.service.id) %>

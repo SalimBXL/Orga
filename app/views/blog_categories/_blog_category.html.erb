@@ -9,14 +9,14 @@
 
     <td>
         <div class="btn-group">
-            <% if user_signed_in? && (current_user.admin? or current_user.utilisateur.admin?) %>
+            <% if user_signed_in? && (is_manager_or_super_admin?) %>
                 <%= link_to '<span data-toggle="tooltip">
                     <i class="material-icons">edit</i></span>'.html_safe, 
                     edit_blog_category_path(blog_category),
                     class: "btn btn-warning btn-xs" %>
             <% end %>
 
-            <% if user_signed_in? && current_user.admin? %>
+            <% if user_signed_in? && is_super_admin? %>
                 <%= link_to '<span data-toggle="tooltip" >
                     <i class="material-icons">close</i>'.html_safe, 
                     blog_category_path(blog_category),
