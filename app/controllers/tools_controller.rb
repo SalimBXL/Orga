@@ -3,7 +3,6 @@ class ToolsController < ApplicationController
 
     # ACCUEIL
     def index
-        # Log action
         log(request.path)
     end
 
@@ -12,7 +11,6 @@ class ToolsController < ApplicationController
     # EXPORTS #
     ###########
     def exports
-        
     end
 
 
@@ -41,7 +39,6 @@ class ToolsController < ApplicationController
                 # on vérifie s'il n'y a pas plus de deux batch
                 tmp_batch_par_jour[jour.date][jour.utilisateur_id] += 1
                 @problemes_batchs << jour if tmp_batch_par_jour[jour.date][jour.utilisateur_id] > 2
-
             end
         end
     end
@@ -161,7 +158,6 @@ class ToolsController < ApplicationController
 
         @works = nil
 
-        
         unless params[:work].blank?
 
             # Trouve les Works de la base
@@ -233,12 +229,6 @@ class ToolsController < ApplicationController
 
 
     def create_archive
-        # Ligne OVH
-        #@tar_command = "pg_dump 'host=localhost port=5432 dbname=MyDataBase_development user=orga password=orga' -Ft  > #{@backup}"
-        #@tar_command = @konfiguration[:tools_backup_db_tar_command] ? "#{@konfiguration[:tools_backup_db_tar_command]} > #{@backup}" : "pg_dump 'host=localhost port=5432 dbname=MyDataBase_development user=orga password=orga' -Ft > #{@backup}"
-
-        # Ligne localhost
-        #@tar_command = "pg_dump 'dbname=orga_development user=salim' -Ft  > #{@backup}"
 
         # Ligne ENV
         @tar_command = "#{ENV['BCK_DB_TAR_CMD']} > #{@backup}"
@@ -254,9 +244,7 @@ class ToolsController < ApplicationController
 
 
     def boucle_temporelle
-        #time = 5    # Cinq secondes
         time = @konfiguration[:tools_backup_db_loop_length] ? "#{@konfiguration[:tools_backup_db_loop_length]}".to_i : 5
-
         time_start = Time.now
         begin      
             time_running = Time.now - time_start
@@ -271,8 +259,4 @@ class ToolsController < ApplicationController
         @new_archive_size = File.size?(@backup)
         check_archive_size = (!@new_archive_size.nil? and !@old_archive_size.nil?) ? (@new_archive_size >= @old_archive_size) : false
     end
-
-
-    
-
 end

@@ -20,19 +20,6 @@ class ExportController < ApplicationController
                 outline: { outline: true, outline_depth: 2 }
             end
         end
-
-        #respond_to do |format|
-        #    #some other formats like: format.html { render :show }
-        #    format.pdf do
-        #        pdf = Prawn::Document.new
-        #        pdf.text "Hellow World!!!"
-        #        send_data pdf.render,
-        #            filename: "export.pdf",
-        #            type: 'application/pdf',
-        #            disposition: 'inline'
-        #    end
-        #end
-
     end
 
     

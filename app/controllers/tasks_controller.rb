@@ -9,11 +9,7 @@ class TasksController < ApplicationController
     def index
         # Log action
         log(request.path)
-        if is_super_admin?
-            @tasks = Task.order(:service_id, :classe_id, :groupe_id, :nom).page(params[:page])
-        else
-            @tasks = Task.where(service: current_user.utilisateur.service).order(:service_id, :classe_id, :groupe_id, :nom).page(params[:page])
-        end
+        @tasks = is_super_admin? ? Task.order(:service_id, :classe_id, :groupe_id, :nom).page(params[:page]) : @tasks = Task.where(service: current_user.utilisateur.service).order(:service_id, :classe_id, :groupe_id, :nom).page(params[:page])
 
         @completion = Hash.new
         hebdos = Hebdo.where(year_id: Date.today.year)
@@ -99,9 +95,4 @@ class TasksController < ApplicationController
     def find_task
         @task = Task.find(params[:id])
     end
-
-    # def load_early_values
-    #     @values = ["Early 1", "Early 2", "Regular"]
-    # end
-    
 end

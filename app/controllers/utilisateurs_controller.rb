@@ -125,7 +125,6 @@ class UtilisateursController < ApplicationController
         log(request.path, I18n.t("utilisateurs.index.log_update"))
 
         @utilisateur.profil.admin = false if @utilisateur.admin == false
-
         @utilisateur.user = @utilisateur.profil
 
         if @utilisateur.update(utilisateur_params)

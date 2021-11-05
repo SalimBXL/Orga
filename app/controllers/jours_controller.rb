@@ -6,16 +6,10 @@ class JoursController < ApplicationController
     #   INDEX   #
     #############
     def index
-        # Log action
         log(request.path)
-
         session[:return_user_id] = nil
 
-        if is_super_admin?
-            @jours = Jour.order(numero_semaine: :desc).order(numero_jour: :desc).order(:service_id, :am_pm, :utilisateur_id).page(params[:page])
-        else
-            @jours = Jour.where(service: current_user.utilisateur.service).order(numero_semaine: :desc).order(numero_jour: :desc).order(:service_id, :am_pm, :utilisateur_id).page(params[:page])
-        end
+        @jours = is_super_admin? ? Jour.order(numero_semaine: :desc).order(numero_jour: :desc).order(:service_id, :am_pm, :utilisateur_id).page(params[:page]) : @jours = Jour.where(service: current_user.utilisateur.service).order(numero_semaine: :desc).order(numero_jour: :desc).order(:service_id, :am_pm, :utilisateur_id).page(params[:page])
     end
 
 
@@ -23,7 +17,6 @@ class JoursController < ApplicationController
     #   SHOW    #
     #############
     def show
-        # Log action
         log(request.path)
     end
 
@@ -32,7 +25,6 @@ class JoursController < ApplicationController
     #    NEW    #
     #############
     def new
-        # Log action
         log(request.path)
         @jour = Jour.new
     end
@@ -42,7 +34,6 @@ class JoursController < ApplicationController
     #   CREATE   #
     ##############
     def create
-        # Log action
         log(request.path)
         @jour = Jour.create(jour_params)
         
@@ -58,12 +49,9 @@ class JoursController < ApplicationController
     #   UPDATE  #
     #############
     def update
-        # Log action
         log(request.path, I18n.t("jours.index.log_update"))
 
-
         # Swap batch entre deux users
-
         if params[:swap]
             user1 = Utilisateur.find(params[:swap].to_i) if params[:swap]
             user2 = Utilisateur.find(params[:jour][:utilisateur_id].to_i)
@@ -76,7 +64,6 @@ class JoursController < ApplicationController
             ## Si on a pas de job pour le second user, 
             ## on effectue un simple update
             ## Sinon on update d'abord le second, puis update normal.
-
             job1.utilisateur_id = user2.id
             if job1.update(utilisateur_id: user2.id)
                 # ok
@@ -94,8 +81,6 @@ class JoursController < ApplicationController
             end
         end
             
-
-
         # Update normal
         if @jour.update(jour_params)
             flash[:notice] = "Jour Modifié avec succès"    
@@ -115,7 +100,6 @@ class JoursController < ApplicationController
     #   EDIT    #
     #############
     def edit
-        # Log action
         log(request.path, I18n.t("jours.index.log_edit"))
     end
 
@@ -123,7 +107,6 @@ class JoursController < ApplicationController
     #   DESTROY  #
     ##############
     def destroy
-        # Log action
         log(request.path, I18n.t("jours.index.log_destroy"))
         @jour.destroy
     
@@ -140,7 +123,6 @@ class JoursController < ApplicationController
     #   TODAY   #
     #############
     def specific_day
-        # Log action
         log(request.path)
         @specific_day_works = Hash.new
         @absence = Hash.new
