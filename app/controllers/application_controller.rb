@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  #before_action :checkCurrentUserIsLogged
   before_action :set_locale
   before_action :set_page_aide
 
@@ -78,6 +79,25 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+
+  def checkCurrentUserIsLogged
+
+    pp "*******************************************"
+    pp "*******************************************"
+    pp "*******************************************"
+    pp "IS USER SIGNED IN ? "
+    pp "    => #{user_signed_in?}"
+    pp "*******************************************"
+    pp "WHO IS CURRENT USER ? "
+    pp "  => #{current_user}"
+    pp "*******************************************"
+    pp "*******************************************"
+    pp "*******************************************"
+
+    redirect_to home_path unless user_signed_in?
+    
+  end
 
 
   def check_logfile_size(fichier)

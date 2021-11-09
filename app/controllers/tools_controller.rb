@@ -1,4 +1,5 @@
 class ToolsController < ApplicationController
+    before_action :check_logged_in
     before_action :read_konfig, only: [:backup_db]
 
     # ACCUEIL

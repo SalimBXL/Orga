@@ -1,4 +1,5 @@
 class BlogResponsesController < ApplicationController
+    before_action :check_logged_in
     before_action :find_response, only: [:edit, :update, :destroy]
     before_action :find_message, only: [:new, :edit, :update]
     before_action :find_utilisateurs

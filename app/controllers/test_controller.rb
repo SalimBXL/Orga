@@ -1,4 +1,5 @@
 class TestController < ApplicationController
+    before_action :check_logged_in
     
 
     #############

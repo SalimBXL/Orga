@@ -1,4 +1,5 @@
 class KonfigurationsController < ApplicationController
+    before_action :check_logged_in
     before_action :find_konfiguration, only: [:show, :edit, :update, :destroy]
 
     def index

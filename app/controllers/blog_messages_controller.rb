@@ -1,10 +1,12 @@
 class BlogMessagesController < ApplicationController
+    before_action :check_logged_in
     before_action :find_message, only: [:show, :edit, :update, :destroy, :review]
     before_action :find_classes, only: [:index, :show, :edit, :new]
     before_action :find_categories, only: [:index, :show, :edit, :new]
     before_action :find_groupes, only: [:index, :show, :edit, :new]
     before_action :find_services, only: [:index, :show, :edit, :new]
     before_action :find_blog_utilisateurs, only: [:index, :show, :edit, :new]
+
     
 
     #############

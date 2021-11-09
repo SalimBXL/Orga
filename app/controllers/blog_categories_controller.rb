@@ -1,5 +1,6 @@
 class BlogCategoriesController < ApplicationController
     before_action :find_categories, only: [:show, :edit, :update, :destroy]
+    before_action :check_logged_in
 
     #############
     #   INDEX   #

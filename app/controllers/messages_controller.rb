@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+    before_action :check_logged_in
     before_action :find_message, only: [:show, :edit, :update, :destroy]
 
     #############

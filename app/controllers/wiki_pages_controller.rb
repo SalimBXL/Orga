@@ -1,5 +1,5 @@
 class WikiPagesController < ApplicationController
-    
+    before_action :check_logged_in
     before_action :find_categories
     before_action :find_groupes
     before_action :find_services
