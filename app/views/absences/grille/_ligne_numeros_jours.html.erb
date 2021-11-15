@@ -1,0 +1,15 @@
+<tr>
+    <th> </th>
+    <% i = 0 %>
+    <% while i < nombre_jours %>
+        <% if (@date+i.day).wday == 6 %>
+            <th colspan="2">W</th>
+            <% i+= 1 %>
+        <% else %>
+            <% md = (@date+i.day).mday %>
+            <% md = "0#{md}" if md < 10 %>
+            <th><%= md %></th>
+        <% end %>
+        <% i+= 1 %>
+    <% end %>
+</tr>

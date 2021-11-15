@@ -1,0 +1,52 @@
+<tr>
+    <td><%= utilisateur.prenom_nom %></td>
+    <% i = 0 %>
+    <% while i < nombre_jours %>
+            <% if @absences[utilisateur.id] and @absences[utilisateur.id][@date+i.day] %>
+                <% bg = " " %>
+                <% bg = "conge_wait" if @absences[utilisateur.id][@date+i.day].accord == false or @absences[utilisateur.id][@date+i.day].accord.nil? %>
+                <% bg = "conge_ok" if @absences[utilisateur.id][@date+i.day].accord == true %>
+                                            
+                <% if @absences[utilisateur.id][@date+i.day].date == @date+i.day %>
+                    <% jours_absence = (@absences[utilisateur.id][@date+i.day].date_fin - @absences[utilisateur.id][@date+i.day].date).to_i + 1 %>
+                <% elsif i == 0 %>
+                    <% jours_absence = (@absences[utilisateur.id][@date+i.day].date_fin - @date).to_i + 1 %>
+                <% end %>
+                
+                <td colspan= "<%= jours_absence %>" class="<%= bg %>">
+
+                    <% if (current_user.utilisateur.id == utilisateur.id) or is_manager_or_super_admin? %>
+
+                        <% if @absences[utilisateur.id][@date+i.day].accord == false or @absences[utilisateur.id][@date+i.day].accord.nil? %>
+                            <%= link_to "#{@absences[utilisateur.id][@date+i.day].type_absence.code}", 
+                                edit_absence_path(@absences[utilisateur.id][@date+i.day]),
+                                class: "btn btn-danger btn-xs"
+                            %>
+                        <% end %>
+                        <% if @absences[utilisateur.id][@date+i.day].accord == true %>
+                            <%= link_to "#{@absences[utilisateur.id][@date+i.day].type_absence.code}", 
+                                edit_absence_path(@absences[utilisateur.id][@date+i.day]),
+                                class: "btn btn-success btn-xs"
+                            %>
+                        <% end %>
+
+                    <% else %>
+                        <% if @absences[utilisateur.id][@date+i.day].accord == false or @absences[utilisateur.id][@date+i.day].accord.nil? %>
+                            <span class="label label-danger btn-xs"><%= "#{@absences[utilisateur.id][@date+i.day].type_absence.code}" %></span>
+                        <% end %>
+                        <% if @absences[utilisateur.id][@date+i.day].accord == true %>
+                            <span class="label label-success btn-xs"><%= "#{@absences[utilisateur.id][@date+i.day].type_absence.code}" %></span>
+                        <% end %>
+                    <% end %>
+                    
+                </td>
+                <% i = i + jours_absence -1 %>
+            <% else %>
+                <% bg = "" %>
+                <% bg = "weekend" if (@date+i.day).wday == 6 or (@date+i.day).wday == 0 %>
+                <td class = "<%= bg %>"></td>
+            <% end %>
+        
+        <% i += 1 %>
+    <% end %>
+</tr>

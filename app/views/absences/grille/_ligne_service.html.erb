@@ -1,0 +1,10 @@
+
+<% if utilisateur.service != @tmp_last_service %>
+    <% @tmp_last_service = utilisateur.service %>
+    <tr><td></td></tr>
+    <tr>
+        <td colspan="<%= nombre_jours+1 %>">
+            <strong><%= @tmp_last_service.nom.upcase %></strong>
+        </td>
+    </tr>
+<% end %>

@@ -1,0 +1,51 @@
+<% today = Date.today %>
+<% tmp_last_month = nil %>
+<% nombre_jours = (@date2-@date).to_i %>
+<% jours_absence = 0 %>
+<% @tmp_last_service = nil %>
+
+<table class="table table-condensed table-bordered">
+
+    <thead>
+
+        <!-- Ligne des mois -->
+        <%= render partial: "absences/grille/ligne_mois",
+            locals: {
+                nombre_jours: nombre_jours,
+                tmp_last_month: tmp_last_month
+            }
+        %>
+        
+
+        <!-- Ligne des numéros de jour -->
+        <%= render partial: "absences/grille/ligne_numeros_jours",
+            locals: {
+                nombre_jours: nombre_jours,
+            }
+        %>
+        
+    </thead>
+
+    <tbody>
+        <% @utilisateurs.each do |utilisateur| %>
+
+            <!-- ligne service -->
+            <%= render partial: "absences/grille/ligne_service", 
+                locals: {
+                    utilisateur: utilisateur,
+                    nombre_jours: nombre_jours
+                }
+            %>
+            
+
+            <!-- Ligne utilisateur -->
+            <%= render partial: "absences/grille/ligne_utilisateur", 
+                locals: {
+                    utilisateur: utilisateur,
+                    nombre_jours: nombre_jours
+                }
+            %>
+            
+        <% end %>
+    </tbody>
+</table>
