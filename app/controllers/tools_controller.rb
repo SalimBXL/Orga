@@ -232,7 +232,7 @@ class ToolsController < ApplicationController
     def create_archive
 
         # Ligne ENV
-        @tar_command = "#{ENV['BCK_DB_TAR_CMD']} > #{@backup}"
+        @tar_command = "#{ENV['BCK_DB_TAR_CMD']} > #{ENV['BCK_DB_TAR_DST']}"
         
         #retour = IO.popen(@tar_command, in: :in)
         retour = IO.popen(@tar_command, :err=>[:child, :out])
