@@ -1,6 +1,7 @@
 <div class="container-fluid">
     <div class="row">
 
+        <div class="col-sm-6 col-md-4">
         <!-- Calendriers -->
         <div class="btn-group">
             <a href="<%= today_path %>" class="btn btn-primary" role="button">
@@ -17,7 +18,9 @@
             </a>
             
         </div>
-    
+        </div>
+
+        <div class="col-sm-6 col-md-4">
         <!-- Absences -->
         <div class="btn-group">
             <a href="<%= absences_path %>" class="btn btn-success" role="button">
@@ -38,7 +41,9 @@
                 <%= I18n.t("home.index.evenements") %>
             </a>
         </div>
-
+        </div>
+    
+        <div class="col-sm-6 col-md-4">
         <!-- Hebdos -->
         <div class="btn-group">
             <a href="<%= grille_hebdos_path %>" class="btn btn-danger" role="button">
@@ -52,7 +57,7 @@
 
             <a href="<%= bug_repports_path %>" class="btn btn-info" role="button">
                 <i class="material-icons">bug_report</i><br>
-                <%= I18n.t("home.index.bug_repport") %>
+                Bugs
             </a>
         
             <a href="<%= blog_messages_path %>" class="btn btn-info" role="button">
@@ -63,6 +68,7 @@
                 <i class="material-icons">account_tree</i><br>
                 <%= I18n.t("home.index.wiki").capitalize %>
             </a>
+        </div>
         </div>
     </div>
 </div>

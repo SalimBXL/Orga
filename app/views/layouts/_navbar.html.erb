@@ -13,7 +13,7 @@
             <a class="navbar-brand" href="#">Orga</a>
         </div>
 
-        <div class="collapse navbar-collapse" id="myNavbar">
+        <div class="navbar-collapse" id="myNavbar">
             <!-- PARTIE GAUCHE -->
             <ul class="nav navbar-nav">
                 <% if user_signed_in? %>
@@ -41,7 +41,7 @@
 
                 <!-- TODAY -->
                 <% if user_signed_in? %>
-                    <li>
+                    <li class="hidden-xs">
                         <%= link_to "<i class='material-icons' 
                             data-toggle='tooltip' 
                             title='#{I18n.t("home.navbar.aujourdhui")}'
@@ -55,7 +55,7 @@
 
                 <!-- THIS WEEK -->
                 <% if user_signed_in? %>
-                    <li>
+                    <li class="hidden-xs">
                         <%= link_to "<i class='material-icons'
                             data-toggle='tooltip'
                             title='#{I18n.t("home.navbar.cette_semaine")}'
@@ -81,22 +81,8 @@
                     </li>
                 <% end %>
 
-                <!-- BLOG -->
-                <% if user_signed_in? %>
-                    <li>
-                        <%= link_to "<i class='material-icons'
-                            data-toggle='tooltip'
-                            title='#{I18n.t("home.navbar.blog")}'
-                            data-placement='bottom'>
-                            rss_feed
-                            </i>".html_safe,
-                            blog_messages_path
-                        %>
-                    </li>
-                <% end %>
-
                 <!-- LANGUE -->
-                <li class="dropdown">
+                <li class="hidden-xs dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="material-icons" 
                             data-toggle="tooltip" 
@@ -136,7 +122,7 @@
 
                 <!-- PROFILE -->
                 <% if user_signed_in? %>
-                    <li>
+                    <li class="hidden-xs">
                         <%= link_to "<i class='material-icons'
                                 data-toggle='tooltip'
                                 title=#{I18n.t('home.navbar.profile')}
@@ -150,7 +136,7 @@
 
 
                 <!-- HELP -->
-                <li>
+                <li class="hidden-xs">
                     <%= link_to "<i class='material-icons'
                                 data-toggle='tooltip'
                                 title=#{I18n.t('home.navbar.help')}
