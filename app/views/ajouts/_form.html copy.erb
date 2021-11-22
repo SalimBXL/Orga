@@ -7,6 +7,16 @@
     <% else %>
         <br>
     <% end %>
+    
+
+    <% if @mode_edition.nil? or @mode_edition == false %>
+        <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home"><strong><%= I18n.t("ajouts.new.quand") %> ?</strong></a></li>
+        <li><a data-toggle="tab" href="#menu2"><strong><%= I18n.t("ajouts.new.qui") %> ?</strong></a></li>
+        <li><a data-toggle="tab" href="#menu1"><strong><%= I18n.t("ajouts.new.quoi") %> ?</strong></a></li>
+        <li><a data-toggle="tab" href="#menu3"><strong><%= I18n.t("ajouts.new.confirmer") %></strong></a></li>
+        </ul>
+    <% end %>
 
     <%= form_with model: @ajout, local: true do |form| %>
 
@@ -19,12 +29,11 @@
             </ul>
         <% end %>
 
-        <div class="container">
+        <div class="tab-content">
 
             <!-- ===== QUAND ? ===== -->
             <% if @mode_edition.nil? or @mode_edition == false %>
-                <strong><%= I18n.t("ajouts.new.quand") %> ?</strong>
-                <div id="home" class="well">            
+                <div id="home" class="tab-pane fade in active">            
                     <div class="flex-ajout">
                         <div>
                             <%= form.label I18n.t("ajouts.new.date") %><br>
@@ -51,8 +60,7 @@
 
             <!-- ===== QUI ? ===== -->
             <% if @mode_edition.nil? or @mode_edition == false %>
-                <strong><%= I18n.t("ajouts.new.qui") %> ?</strong>
-                <div id="menu2" class="well">
+                <div id="menu2" class="tab-pane fade">
                     <br>
                     <div class="form-group">
                         <!-- Utilisateur -->
@@ -78,43 +86,38 @@
             <!-- ===== QUOI ? ===== -->
 
             <% if @mode_edition.nil? or @mode_edition == false %>
-                <strong><%= I18n.t("ajouts.new.quoi") %> ?</strong>
-                <div id="menu1" class="well">
+                <div id="menu1" class="tab-pane fade">
             <% end %>
 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-sm-5">
+                        <div class="col-sm-4">
                                 <%= form.label :work1 %>
                                 <%= form.select(:work1, @works.collect {|p| [ "(#{@services.where(id: p.service_id).first.nom}) - [#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
                                                 { include_blank: true },
                                                 { :multiple => false }) %>
                         </div>
-                        <div class="col-sm-5">
+                        <div class="col-sm-4">
                                 <%= form.label :work2 %>
                                 <%= form.select(:work2, @works.collect {|p| [ "(#{@services.where(id: p.service_id).first.nom}) - [#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
                                             { include_blank: true },
                                                 { :multiple => false }) %>
                         </div>
-                        
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-5">
+                        <div class="col-sm-4">
                                 <%= form.label :work3 %>
                                 <%= form.select(:work3, @works.collect {|p| [ "(#{@services.where(id: p.service_id).first.nom}) - [#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
                                                 { include_blank: true },
                                                 { :multiple => false }) %>
                         </div>
-                        <div class="col-sm-5">
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
                                 <%= form.label :work4 %>
                                 <%= form.select(:work4, @works.collect {|p| [ "(#{@services.where(id: p.service_id).first.nom}) - [#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
                                                 { include_blank: true },
                                                 { :multiple => false }) %>
                         </div>
-                        
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-5">
+                        <div class="col-sm-4">
                                 <%= form.label :work5 %>
                                 <%= form.select(:work5, @works.collect {|p| [ "(#{@services.where(id: p.service_id).first.nom}) - [#{@classes.where(id: p.classe_id).first.nom}] - (#{p.code}) - #{p.nom}", p.id ] }, 
                                                 { include_blank: true },
@@ -144,8 +147,7 @@
 
             <!-- ===== CONFIRMER ? ===== -->
             <% if @mode_edition.nil? or @mode_edition == false %>
-            <strong><%= I18n.t("ajouts.new.confirmer") %></strong>
-            <div id="menu3" class="well">
+            <div id="menu3" class="tab-pane fade">
             <% end %>
 
                 <br>
