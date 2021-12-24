@@ -17,33 +17,15 @@
 
         <!-- MENU SERVICE -->
         <div>
-            <!-- Liste des services -->
-            <!-- Si Super User, les services sont tous affichés automatiquement -->
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <% unless @current_service.nil? %>
-                        <%= @current_service.nom %>
-                    <% else %>
-                        <%= I18n.t("jours.today.all_services") %>
-                    <% end %>
 
-                <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    
-                    <% @services.each do |service| %>
-                        <% if @services %>
-                            <% unless @current_service.id == service.id %>
-                                <li>
-                                <button title="<%= service.nom %>" data-toggle="collapse" 
-                                    data-target="#service-<%= service.id %>" class="btn btn-link btn-xs">
-                                    <%= service.nom %>
-                                </button>
-                                </li>
-                            <% end %>
-                        <% end %>
-                    <% end %>
-                </ul>
-            </li>
+            <!-- Liste des services -->
+            <% @services.each do |service| %>
+                <% clr = @current_service.nom == service.nom ? "primary" : "info" %>
+
+                <a href="#" class="btn btn-xs btn-<%= clr %>" role="button">
+                    <%= service.nom %>
+                </a>
+            <% end %>
         </div>
 
         <!-- MENU NAVIGATION -->
