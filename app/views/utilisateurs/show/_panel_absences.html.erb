@@ -26,26 +26,37 @@
                             <% affiche_ok = nil %>
 
                             <% if @absences[aj] and @absences[aj].accord %>
-                                <% if @absences[aj].halfday %>
-                                    <% bg = "conge_ok_demi" %>
+                                <% if @absences[aj].type_absence.code.downcase == "ann" %>
+                                    <% ann = "_ann" %>
                                 <% else %>
-                                    <% bg = "conge_ok" %>
+                                    <% ann = "" %>
                                 <% end %>
+                                <% if @absences[aj].halfday %>
+                                    <% demi = "_demi" %>
+                                <% else %>
+                                    <% demi = "" %>
+                                <% end %>
+                                <% bg = "conge_ok#{ann}#{demi}" %>
                                 <% bg_btn = "success" %>
                                 <% affiche_ok = true if current_user.admin or is_manager? %>
                             <% end %>
 
                             <% if @absences[aj] and (@absences[aj].accord.nil? or !@absences[aj].accord) %>
-                                <% if @absences[aj].halfday %>
-                                    <% bg = "conge_wait_demi" %>
+                                <% if @absences[aj].type_absence.code.downcase == "ann" %>
+                                    <% ann = "_ann" %>
                                 <% else %>
-                                    <% bg = "conge_wait"  %>
+                                    <% ann = "" %>
                                 <% end %>
+                                <% if @absences[aj].halfday %>
+                                    <% demi = "_demi" %>
+                                <% else %>
+                                    <% demi = ""  %>
+                                <% end %>
+                                <% bg = "conge_wait#{ann}#{demi}" %>
                                 <% bg_btn = "danger" %>
                                 <% affiche_ok = true %>
                             <% end %>
 
-                            
 
                             <td class="<%= bg %>">
                                 <% if @absences[aj] %>

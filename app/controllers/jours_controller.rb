@@ -345,6 +345,7 @@ class JoursController < ApplicationController
                     else
                         @absences[utilisateur_jour.utilisateur][i+1][1] = false
                     end
+                    @absences[utilisateur_jour.utilisateur][i+1][2] = a.type_absence.code.downcase
                 end
             end
         end

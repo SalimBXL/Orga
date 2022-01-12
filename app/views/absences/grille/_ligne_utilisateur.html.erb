@@ -3,9 +3,12 @@
     <% i = 0 %>
     <% while i < nombre_jours %>
             <% if @absences[utilisateur.id] and @absences[utilisateur.id][@date+i.day] %>
+                <% t = (@absences[utilisateur.id][@date+i.day].type_absence.code) %>
                 <% bg = " " %>
                 <% bg = "conge_wait" if @absences[utilisateur.id][@date+i.day].accord == false or @absences[utilisateur.id][@date+i.day].accord.nil? %>
+                <% bg = "conge_wait_ann" if (t.downcase == "ann") and (@absences[utilisateur.id][@date+i.day].accord == false or @absences[utilisateur.id][@date+i.day].accord.nil?) %>
                 <% bg = "conge_ok" if @absences[utilisateur.id][@date+i.day].accord == true %>
+                <% bg = "conge_ok_ann" if (t.downcase == "ann") and (@absences[utilisateur.id][@date+i.day].accord == true) %>
                                             
                 <% if @absences[utilisateur.id][@date+i.day].date == @date+i.day %>
                     <% jours_absence = (@absences[utilisateur.id][@date+i.day].date_fin - @absences[utilisateur.id][@date+i.day].date).to_i + 1 %>

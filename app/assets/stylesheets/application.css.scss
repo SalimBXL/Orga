@@ -87,20 +87,33 @@ table td {
     background-color: rgb(113, 189, 0);
     color: white;
 }
+.conge_ok_ann {
+    background-color: rgba(128, 0, 128, 0.494);
+    color: yellow;
+}
 .conge_ok_demi {
     //background: linear-gradient(to bottom left, rgb(113, 189, 0), rgb(113, 189, 0) 1px, white 30%, white);
     background: linear-gradient(to bottom left, rgb(113, 189, 0) 50%, white 50%);
+}
+.conge_ok_ann_demi {
+    background: linear-gradient(to bottom left, rgba(128, 0, 128, 0.494) 50%, white 50%);
 }
 
 .conge_wait {
     background-color: rgb(198, 255, 123);
     color: green;
 }
+.conge_wait_ann {
+    background-color: pink;
+    color: green;
+}
 .conge_wait_demi {
     //background: linear-gradient(to bottom left, rgb(198, 255, 123), rgb(198, 255, 123) 15px, white 30%, white);
     background: linear-gradient(to bottom left, rgb(198, 255, 123) 50%, white 50%);
 }
-
+.conge_wait_ann_demi {
+    background: linear-gradient(to bottom left, pink 50%, white 50%);
+}
 
 .conge_accord_ok {
     background-color: greenyellow;

@@ -78,10 +78,17 @@
                                     <% else %>
                                         <% demi = "" %>
                                     <% end %>
-                                    <% if @absences[utilisateur][i][0] == true %>
-                                        <% bg = "conge_ok#{demi}" %>
+
+                                    <% if @absences[utilisateur][i][2] == "ann" %>
+                                        <% ann = "_ann" %>
                                     <% else %>
-                                        <% bg = "conge_wait#{demi}" %>
+                                        <% ann = "" %>
+                                    <% end %>
+
+                                    <% if @absences[utilisateur][i][0] == true %>
+                                        <% bg = "conge_ok#{ann}#{demi}" %>
+                                    <% else %>
+                                        <% bg = "conge_wait#{ann}#{demi}" %>
                                     <% end %>
                                 <% end %>
                             <% end %>

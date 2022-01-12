@@ -45,6 +45,11 @@
                     
                     
                     <% if @absences[utilisateur.id][date_jour.to_s].size > 2 %>
+                        <% if @absences[utilisateur.id][date_jour.to_s][0].downcase == "ann" %>
+                            <% ann = "_ann" %>
+                        <% else %>
+                            <% ann = "" %>
+                        <% end  %>
                         <% if @absences[utilisateur.id][date_jour.to_s][2] %>
                             <% demi = "_demi" %>
                         <% end  %>
@@ -54,9 +59,9 @@
 
                     <!-- Congé ok ou wait -->
                     <% if @absences[utilisateur.id][date_jour.to_s][1] %>
-                        <% bg = "conge_ok#{demi}" %>
+                        <% bg = "conge_ok#{ann}#{demi}" %>
                     <% else %>
-                        <% bg = "conge_wait#{demi}" %>
+                        <% bg = "conge_wait#{ann}#{demi}" %>
                     <% end %>
 
                 <% end %>    
