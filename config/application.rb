@@ -15,5 +15,6 @@ module Orga
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     config.web_console.permissions = '10.0.2.2'
+    config.web_console.whitelisted_ips = '10.0.2.2'
   end
 end
