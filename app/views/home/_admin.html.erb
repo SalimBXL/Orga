@@ -14,6 +14,17 @@
 </div>
 
 <div class="btn-group">
+    <a href="<%= classes_path %>" class="btn btn-danger" role="button">
+        <i class="material-icons">add</i><br>
+        <%= I18n.t("home.index.classes") %>
+    </a>
+    <a href="<%= works_path %>" class="btn btn-danger" role="button">
+        <i class="material-icons">add</i><br>
+        <%= I18n.t("home.index.works") %>
+    </a>
+</div>
+
+<div class="btn-group">
     <a href="<%= logs_path %>" class="btn btn-danger" role="button">
         <i class="material-icons">analytics</i><br>
         <%= I18n.t("home.index.logs") %>
