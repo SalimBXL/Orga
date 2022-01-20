@@ -76,4 +76,11 @@
         <%= I18n.t("home.index.secretary") %>
     </a>
 </div>
+
+<br />
+<br />
+<!-- Barre Admins -->
+    <%= render partial: "barre_menu_admin" if user_signed_in? && is_super_admin? %>
+
+
 </div>

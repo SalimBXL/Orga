@@ -2,41 +2,42 @@
     <div class="row">
 
         <div class="col-sm-6 col-md-4">
-        <!-- Calendriers -->
-        <div class="btn-group">
-            <a href="<%= today_path %>" class="btn btn-primary" role="button">
-                <i class="material-icons">today</i><br>
-                Today
+            <!-- Calendriers -->
+            <div class="btn-group btn-group-justified">
+                <a href="<%= today_path %>" class="btn btn-xs btn-primary" role="button">
+                    <i class="material-icons">today</i><br>
+                    Today
+                </a>
+                <a href="<%= week_path %>" class="btn btn-xs btn-primary" role="button">
+                    <i class="material-icons">date_range</i><br>
+                    This Week
+                </a>
+                <a href="<%= month_path %>" class="btn btn-xs btn-primary" role="button">
+                    <i class="material-icons">calendar_today</i><br>
+                    This Month
+                </a>
             </a>
-            <a href="<%= week_path %>" class="btn btn-primary" role="button">
-                <i class="material-icons">date_range</i><br>
-                This Week
-            </a>
-            <a href="<%= month_path %>" class="btn btn-primary" role="button">
-                <i class="material-icons">calendar_today</i><br>
-                This Month
-            </a>
-            
-        </div>
+                
+            </div>
         </div>
 
         <div class="col-sm-6 col-md-4">
         <!-- Absences -->
-        <div class="btn-group">
-            <a href="<%= absences_path %>" class="btn btn-success" role="button">
+        <div class="btn-group btn-group-justified">
+            <a href="<%= absences_path %>" class="btn btn-xs btn-success" role="button">
                 <i class="material-icons">healing</i><br>
                 <%= I18n.t("home.index.absences") %>
             </a>
-            <a href="<%= grille_path %>" class="btn btn-success" role="button">
+            <a href="<%= grille_path %>" class="btn btn-xs btn-success" role="button">
                 <i class="material-icons">healing</i><br>
                 <%= I18n.t("home.index.grille") %>
             </a>
             <!-- Events, days off et types absences -->
-            <a href="<%= fermetures_path %>" class="btn btn-success" role="button">
+            <a href="<%= fermetures_path %>" class="btn btn-xs btn-success" role="button">
                 <i class="material-icons">event_busy</i><br>
                 <%= I18n.t("home.index.fermetures") %>
             </a>
-            <a href="<%= events_path %>" class="btn btn-success" role="button">
+            <a href="<%= events_path %>" class="btn btn-xs btn-success" role="button">
                 <i class="material-icons">event_available</i><br>
                 <%= I18n.t("home.index.evenements") %>
             </a>
@@ -44,43 +45,23 @@
         </div>
     
         <div class="col-sm-6 col-md-4">
-        <!-- Hebdos -->
-        <div class="btn-group">
-            <a href="<%= grille_hebdos_path %>" class="btn btn-danger" role="button">
-                <i class="material-icons">settings_ethernet</i><br>
-                <%= I18n.t("home.index.grille_hebdos") %>
-            </a>
-        </div>
-
         <!-- Boutons BLOG, WIKI, etc -->
-        <div class="btn-group">
+        <div class="btn-group btn-group-justified">
 
-            <a href="<%= bug_repports_path %>" class="btn btn-info" role="button">
+            <a href="<%= bug_repports_path %>" class="btn btn-xs btn-info" role="button">
                 <i class="material-icons">bug_report</i><br>
                 Bugs
             </a>
         
-            <a href="<%= blog_messages_path %>" class="btn btn-info" role="button">
+            <a href="<%= blog_messages_path %>" class="btn btn-xs btn-info" role="button">
                 <i class="material-icons">rss_feed</i><br>
                 <%= I18n.t("home.index.blog").upcase %>
             </a>
-            <a href="<%= wiki_pages_path %>" class="btn btn-info" role="button">
-                <i class="material-icons">account_tree</i><br>
-                <%= I18n.t("home.index.wiki").capitalize %>
+            <a href="<%= grille_hebdos_path %>" class="btn btn-xs btn-danger" role="button">
+                <i class="material-icons">settings_ethernet</i><br>
+                <%= I18n.t("home.index.grille_hebdos") %>
             </a>
         </div>
         </div>
     </div>
-</div>
-
-<br>
-
-<div class="row">
-
-    <!-- Barre Managers -->
-    <%= render partial: "manager" if user_signed_in? && is_manager? %>
-
-    <!-- Barre Admins -->
-    <%= render partial: "admin" if user_signed_in? && is_super_admin? %>
-        
 </div>

@@ -1,80 +1,54 @@
 <div class="row">
 
-    <div class="col-sm-1"></div>
-
-    <div class="col-sm-4">
-
-        <H3>
-            <span class="label label-default material-icons">admin_panel_settings</span>
-            Admin shortcuts : 
-        <H3>
+    <div class="col">
+    
+        <div class="btn-group btn-group-justified">
+            <a href="<%= not_yet_validated_absences_path %>" class="btn btn-xs btn-success" role="button">
+                <i class="material-icons">healing</i><br>
+                <%= I18n.t("home.index.waiting") %>
+            </a>
+            <a href="<%= grille_path %>" class="btn btn-xs btn-success" role="button">
+                <i class="material-icons">healing</i><br>
+                <%= I18n.t("home.index.grille") %>
+            </a>
         
-    </div>
-
-    <div class="col-sm-7">
-
-        <div class="row">
-
-            <div class="btn-group">
-                <a href="<%= not_yet_validated_absences_path %>" class="btn btn-success" role="button">
-                    <i class="material-icons">healing</i><br>
-                    <%= I18n.t("home.index.waiting") %>
-                </a>
-                <a href="<%= grille_path %>" class="btn btn-success" role="button">
-                    <i class="material-icons">healing</i><br>
-                    <%= I18n.t("home.index.grille") %>
-                </a>
-            </div>
-
-
-            <div class="btn-group">
-                <a href="<%= utilisateurs_path %>" class="btn btn-primary" role="button">
-                    <i class="material-icons">group</i><br>
-                    <%= I18n.t("home.index.utilisateurs") %>
-                </a>
-                <a href="<%= ajouts_path %>" class="btn btn-primary" role="button">
-                    <i class="material-icons">playlist_add</i><br>
-                    <%= I18n.t("home.index.batchs") %>
-                </a>
-            </div>
-            
-
-            <div class="btn-group">
-                <a href="<%= hebdos_path %>" class="btn btn-danger" role="button">
-                    <i class="material-icons">settings_ethernet</i><br>
-                    <%= I18n.t("home.index.hebdos") %>
-                </a>
-                <a href="<%= grille_hebdos_path %>" class="btn btn-danger" role="button">
-                    <i class="material-icons">settings_ethernet</i><br>
-                    <%= I18n.t("home.index.grille") %>
-                </a>
-            </div>
-
-
-            <div class="btn-group">
-                <a href="<%= bug_repports_path %>" class="btn btn-info" role="button">
-                    <i class="material-icons">bug_report</i><br>
-                    <%= I18n.t("home.index.bug_repport") %>
-                    <% if @bugs_new > 0 %>
-                        <span class="badge"><%= @bugs_new %></span>
-                    <% end %>
-                </a>
-            </div>
-
-
-            <div class="btn-group">
-                <a href="<%= blog_messages_path %>" class="btn btn-info" role="button">
-                    <i class="material-icons">rss_feed</i><br>
-                    <%= I18n.t("home.index.blog").upcase %>
-                </a>
-                <a href="<%= wiki_pages_path %>" class="btn btn-info" role="button">
-                    <i class="material-icons">account_tree</i><br>
-                    <%= I18n.t("home.index.wiki").capitalize %>
-                </a>
-
-            </div>
+            <a href="<%= utilisateurs_path %>" class="btn btn-xs btn-primary" role="button">
+                <i class="material-icons">group</i><br>
+                <%= I18n.t("home.index.utilisateurs") %>
+            </a>
+            <a href="<%= ajouts_path %>" class="btn btn-xs btn-primary" role="button">
+                <i class="material-icons">playlist_add</i><br>
+                <%= I18n.t("home.index.batchs") %>
+            </a>
+        
+            <a href="<%= hebdos_path %>" class="btn btn-xs btn-danger" role="button">
+                <i class="material-icons">settings_ethernet</i><br>
+                <%= I18n.t("home.index.hebdos") %>
+            </a>
+            <a href="<%= grille_hebdos_path %>" class="btn btn-xs btn-danger" role="button">
+                <i class="material-icons">settings_ethernet</i><br>
+                <%= I18n.t("home.index.grille") %>
+            </a>
+        
+            <a href="<%= bug_repports_path %>" class="btn btn-xs btn-info" role="button">
+                <i class="material-icons">bug_report</i><br>
+                <%= I18n.t("home.index.bug_repport") %>
+                <% if @bugs_new > 0 %>
+                    <span class="badge"><%= @bugs_new %></span>
+                <% end %>
+            </a>
+        
+            <a href="<%= blog_messages_path %>" class="btn btn-xs btn-info" role="button">
+                <i class="material-icons">rss_feed</i><br>
+                <%= I18n.t("home.index.blog").upcase %>
+            </a>
+            <a href="<%= wiki_pages_path %>" class="btn btn-xs btn-info" role="button">
+                <i class="material-icons">account_tree</i><br>
+                <%= I18n.t("home.index.wiki").capitalize %>
+            </a>
 
         </div>
     </div>
 </div>
-<hr>
+
+<hr />
