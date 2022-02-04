@@ -47,29 +47,26 @@ class Absence < ApplicationRecord
         liste3 = Absence.where("date <= ? and date_fin >= ? and id != ? and utilisateur_id = ?", self.date, self.date_fin, self.id, self.utilisateur_id)
         liste = liste1.or(liste2.or(liste3))
 
-        puts "###############"
-        puts "ID: #{self.id} USER_ID: #{self.utilisateur_id} - DATE: #{self.date} - DATE_FIN: #{self.date_fin}"
-        puts "=========="
         liste1.each do |line|
-            puts "+++ (#{line.id})  #{line.date} .. #{line.date_fin} (userID : #{line.utilisateur_id})"
+            #puts "+++ (#{line.id})  #{line.date} .. #{line.date_fin} (userID : #{line.utilisateur_id})"
         end
-        puts "=========="
+        
         liste2.each do |line|
-            puts "+++ (#{line.id})  #{line.date} .. #{line.date_fin} (userID : #{line.utilisateur_id})"
+            #puts "+++ (#{line.id})  #{line.date} .. #{line.date_fin} (userID : #{line.utilisateur_id})"
         end
-        puts "=========="
+        
         liste3.each do |line|
-            puts "+++ (#{line.id})  #{line.date} .. #{line.date_fin} (userID : #{line.utilisateur_id})"
+            #puts "+++ (#{line.id})  #{line.date} .. #{line.date_fin} (userID : #{line.utilisateur_id})"
         end
-        puts "###############"
+        
 
 
         if liste.length > 0
-            puts "###############"
+            
             liste.each do |line|
-                puts "+++ (#{line.id})  #{line.date} .. #{line.date_fin} (userID : #{line.utilisateur_id})"
+                #puts "+++ (#{line.id})  #{line.date} .. #{line.date_fin} (userID : #{line.utilisateur_id})"
             end
-            puts "###############"
+            
         end
         
         return liste if liste.length > 0

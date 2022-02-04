@@ -175,9 +175,9 @@ class UtilisateursController < ApplicationController
             if user.save
                 flash[:notice] = "Login créé avec succès"
             else
-                puts "ERRR : #{user.errors}"
+                #puts "ERRR : #{user.errors}"
                 user.errors.full_messages.each do |err|
-                    puts "     => #{err}"
+                    #puts "     => #{err}"
                 end
                 render :new
             end
