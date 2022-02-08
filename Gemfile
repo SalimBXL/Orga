@@ -44,8 +44,9 @@ gem "bootstrap-sass"
 gem 'bootstrap'
 
 # I18n
-gem 'rails-i18n'
-gem 'i18n-tasks', '~> 0.9.21'
+gem 'rails-i18n', '~> 7.0.0'
+#gem 'i18n-tasks', '~> 0.9.21'
+gem 'i18n-tasks'
 
 # DEVISE
 gem 'devise'
