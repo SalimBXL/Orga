@@ -44,7 +44,7 @@ gem "bootstrap-sass"
 gem 'bootstrap'
 
 # I18n
-gem 'rails-i18n', '~> 7.0.0'
+gem 'rails-i18n'
 #gem 'i18n-tasks', '~> 0.9.21'
 gem 'i18n-tasks'
 
@@ -57,7 +57,7 @@ gem "autoprefixer-rails"
 #gem 'openweathermap', '~> 0.2.3'
 
 # PRAWN
-gem 'prawn', '~>2.2.0'
+#gem 'prawn'
 
 # PDF
 gem 'wicked_pdf'  
@@ -70,7 +70,8 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
+  #gem 'capybara', '>= 2.15'
+  gem 'capybara'
   gem 'selenium-webdriver'
 
   gem 'hirb', '~> 0.7.3'
@@ -79,7 +80,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.7'
 
   # FAKER
-  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+  #gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 
   # FACTORY BOT
   gem 'factory_bot_rails'
@@ -91,7 +92,8 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  #gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'listen', '~> 3.7', '>= 3.7.1'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
