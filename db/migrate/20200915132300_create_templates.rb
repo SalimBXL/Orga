@@ -16,7 +16,7 @@ class CreateTemplates < ActiveRecord::Migration[5.1]
       t.integer :work2_5
 
       t.boolean :am_pm3
-      t.integer :work1_1
+      t.integer :work3_1
       t.integer :work3_2
       t.integer :work3_3
       t.integer :work3_4
