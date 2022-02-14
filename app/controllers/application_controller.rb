@@ -4,6 +4,14 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   before_action :set_page_aide
 
+  def set_postit_utilisateur
+    @postit.utilisateur = current_user.utilisateur if @postit.utilisateur.nil?
+  end
+
+  def set_postit_level
+    @postit.level = 0 if @postit.level.nil?
+  end
+
 
   def is_manager?
     current_user.utilisateur.admin unless current_user.nil?

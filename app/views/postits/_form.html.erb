@@ -1,0 +1,46 @@
+<%= form_with model: @postit, local: true do |form| %>
+
+    <% if @postit.errors.any? %>
+        <strong>WARNING</strong>
+        <ul>
+            <% @postit.errors.full_messages.each do |message| %>
+                <li class="bg-danger">
+                    <%= message %>
+                </li>
+            <% end %>
+        </ul>
+    <% end %>
+
+
+    <div class="row">
+        <div class="col-sm-4">
+            <p>
+                <%= form.label I18n.t("postits.form.title") %><br>
+                <%= form.text_field :title %>
+            </p>
+            
+            <p>
+                <%= form.label I18n.t("postits.form.body") %><br>
+                <%= form.text_field :body %>
+            </p>
+
+            <p>
+                <%= form.label I18n.t("postits.form.level") %><br>
+                <%= form.text_field :level %>
+            </p>
+            
+            <p>
+                <%= form.label I18n.t("postits.form.is_private") %><br>
+                <%= form.text_field :is_private %>
+            </p>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <p><%= form.submit class: "btn btn-primary" %></p>
+        </div>
+    </div>
+
+<% end %>

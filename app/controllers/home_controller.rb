@@ -13,6 +13,9 @@ class HomeController < ApplicationController
         # Check les jobs du user courant
         get_today if user_signed_in?
 
+        #check les postits
+        get_postits if user_signed_in?
+
         # Charge les dernières connections 
         get_lasts_connected if user_signed_in?
 
@@ -28,6 +31,10 @@ class HomeController < ApplicationController
             @bugs_new = BugRepport.where(status: "outlined_flag").size
             @bugs_test = BugRepport.where(status: "sync_problem").size
         end
+    end
+
+    def get_postits
+        @postits = Postit.order(level: :desc)
     end
 
     def format_last_git_date(dt)

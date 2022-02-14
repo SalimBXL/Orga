@@ -3,21 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
 
 
-  ###########
-  ###########
-  ##  API  ##
-  ###########
-  ###########
-  namespace :api do
-    get 'ping' => 'table_tennis#ping'
-    
-    resources :utilisateurs, only: [:index, :show]
-    resources :services, only: [:index]
-    resources :groupes, only: [:index]
-    resources :jours, only: [:index, :show]
-    resources :working_lists, only: [:index, :show]
-    
-  end
+  
 
 
 ##############################################################################
@@ -127,7 +113,10 @@ Rails.application.routes.draw do
   ################
   resources :wiki_pages, only: [ :show, :index, :new, :edit, :create, :update, :destroy]
 
-
+  #############
+  #  Postits  #
+  #############
+  resources :postits, only: [ :show, :index, :new, :edit, :create, :update, :destroy]
 
   #####################
   #  Blog Categories  #

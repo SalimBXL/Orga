@@ -97,6 +97,14 @@ ActiveRecord::Schema[7.0].define(version: 2020091012140633) do
     t.datetime "updated_at", precision: nil, null: false
   end
 
+  create_table "configurations", force: :cascade do |t|
+    t.string "key"
+    t.string "value"
+    t.string "description"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+  end
+
   create_table "demande_conges", force: :cascade do |t|
     t.date "date"
     t.date "date_fin"
@@ -202,6 +210,17 @@ ActiveRecord::Schema[7.0].define(version: 2020091012140633) do
     t.index ["utilisateur_id"], name: "index_messages_on_utilisateur_id"
   end
 
+  create_table "postits", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.integer "level"
+    t.boolean "is_private"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "utilisateur_id"
+    t.index ["utilisateur_id"], name: "index_postits_on_utilisateur_id"
+  end
+
   create_table "services", force: :cascade do |t|
     t.bigint "lieu_id"
     t.string "nom"
@@ -240,7 +259,6 @@ ActiveRecord::Schema[7.0].define(version: 2020091012140633) do
     t.integer "work2_4"
     t.integer "work2_5"
     t.boolean "am_pm3"
-    t.integer "work3_1"
     t.integer "work3_2"
     t.integer "work3_3"
     t.integer "work3_4"
@@ -262,6 +280,7 @@ ActiveRecord::Schema[7.0].define(version: 2020091012140633) do
     t.string "nom"
     t.string "description"
     t.integer "service_id"
+    t.integer "work3_1"
   end
 
   create_table "type_absences", force: :cascade do |t|

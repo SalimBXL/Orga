@@ -1,0 +1,27 @@
+<h1>
+    <%= @postit.nom %>
+</h1>
+
+<p>
+    <strong>Code : </strong> <%= @postit.code %>
+</p>
+
+<p>
+    <strong>Classe : </strong> <%= @postit.classe.nom %>
+</p>
+
+<p>
+    <strong>Groupe : </strong> <%= @postit.groupe.nom %>
+</p>
+
+<p>
+    <strong>Service : </strong> <%= @postit.service.nom %>
+</p>
+
+<p>
+    <strong>Description : </strong> <%= @postit.description %> 
+</p>
+
+<p>
+    <%= link_to " [Edit] ", edit_task_path(@postit) %>
+</p>

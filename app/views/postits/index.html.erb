@@ -1,0 +1,18 @@
+<% session[:page_aide] = "classes_postits" %>
+
+<div class="container">
+<h1>
+    <span class="label label-primary">
+        <i class="material-icons">dynamic_feed</i>
+        <%= I18n.t("postits.index.titre").upcase %>
+    </span>
+</h1>
+
+<%= render partial: "add" %>
+
+<div id="postits">
+    <%= render 'postits' %>
+</div>
+
+<%= render partial: "add" %>
+</div>

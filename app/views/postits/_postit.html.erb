@@ -1,0 +1,23 @@
+<tr id="postit_<%= postit.id %>">
+    <td><%= postit.title %></td>
+    <td><%= postit.body %></td>
+    <td><%= postit.level %></td>
+    <td><%= postit.is_private %></td>
+    <td></td>
+    <td>
+    <% if user_signed_in? && is_manager? %>
+        <%= link_to '<span data-toggle="tooltip">
+            <i class="material-icons">edit</i></span>'.html_safe, 
+            edit_postit_path(postit),
+            class: "btn btn-warning btn-xs" %>
+
+        <%= link_to '<span data-toggle="tooltip">
+            <i class="material-icons">close</i>'.html_safe, 
+            postit_path(postit),
+            method: :delete,
+            remote: true,
+            data: { confirm: "Delete #{postit.body} ?" },
+            class: "btn btn-danger btn-xs" %>
+    <% end %>
+    </td>
+</tr>

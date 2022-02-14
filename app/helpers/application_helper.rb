@@ -2,15 +2,17 @@ module ApplicationHelper
 
     def is_manager?
         current_user.utilisateur.admin unless current_user.nil?
-      end
-    
-      def is_super_admin?
+    end
+
+    def is_super_admin?
         current_user.admin unless current_user.nil?
-      end
-    
-      def is_manager_or_super_admin?
+    end
+
+    def is_manager_or_super_admin?
         (is_manager? or is_super_admin?) unless current_user.nil?
-      end
+    end
+
+    
 
 
     def am_pm(valeur)

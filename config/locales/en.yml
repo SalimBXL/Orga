@@ -561,6 +561,15 @@ en:
     mois_7: July
     mois_8: August
     mois_9: September
+  postits:
+    form:
+      body: Body
+      is_private: Is private
+      level: Level
+      title: Title
+      user: User
+    index:
+      titre: Post-its
   services:
     index:
       log_destroy: destroy
@@ -575,14 +584,18 @@ en:
   tasks:
     form:
       basics_informations: Basics informations
+      body: Body
       classe: Classe
       code: Code
       description: Description
       groupe: Groupe
+      is_private: Is private
+      level: Level
       nom: Nom
       occurrences: Occurrences
       repeat: Repeat
       service: Service
+      title: Title
       user_target: User target
     index:
       log_edit: Log edit
