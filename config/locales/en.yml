@@ -1,22 +1,39 @@
 ---
 en:
   Aout: August
+  April: April
+  August: August
   Avril: April
+  December: December
   Decembre: December
+  February: February
   Fevrier: February
+  Friday: Friday
+  January: January
   Janvier: January
   Jeudi: Thursday
   Juillet: July
   Juin: June
+  July: July
+  June: June
   Lundi: Monday
   Mai: May
+  March: March
   Mardi: Tuesday
   Mars: March
+  May: May
   Mercredi: Wednesday
+  Monday: Monday
+  November: November
   Novembre: November
+  October: October
   Octobre: October
+  September: September
   Septembre: September
+  Thursday: Thursday
+  Tuesday: Tuesday
   Vendredi: Friday
+  Wednesday: Wednesday
   absences:
     index:
       dates: Dates
@@ -564,8 +581,12 @@ en:
   postits:
     form:
       body: Body
+      dates: Dates
       is_private: Is private
       level: Level
+      message: Message
+      taken: Taken
+      takers: Takers
       title: Title
       user: User
     index:

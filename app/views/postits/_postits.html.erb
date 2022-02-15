@@ -1,11 +1,11 @@
 <p><%= paginate @postits, remote: true %></p>
 <table class="table table-striped">
     <tr>
-        <th><%= I18n.t("postits.form.title") %></th>
-        <th><%= I18n.t("postits.form.body") %></th>
+        <th><%= I18n.t("postits.form.message") %></th>
         <th><%= I18n.t("postits.form.level") %></th>
-        <th><%= I18n.t("postits.form.is_private") %></th>
         <th><%= I18n.t("postits.form.user") %></th>
+        <th><%= I18n.t("postits.form.takers") %></th>
+        <th><%= I18n.t("postits.form.dates") %></th>
         <th></th></tr>
     <%= render @postits %>
 </table>

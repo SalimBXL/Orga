@@ -30,8 +30,21 @@
             </p>
             
             <p>
-                <%= form.label I18n.t("postits.form.is_private") %><br>
-                <%= form.text_field :is_private %>
+                <%= form.label I18n.t("postits.form.is_private") %>
+                <%= form.check_box :is_private %>
+            </p>
+
+            <p>
+                <%= form.label I18n.t("postits.form.taken") %><br>
+                <%= form.select(:taken_id) do %>
+                    <%= select_option_tag("", nil, @postit.taken) %>
+                    <% Utilisateur.where(service: current_user.utilisateur.service).order(:prenom).each do |l| %>
+                        <%= select_option_tag(l.prenom_nom, l.id, @postit.taken_id) %>
+                    <% end %>
+                <% end %>
+
+
+
             </p>
 
         </div>

@@ -1,6 +1,8 @@
 class Postit < ApplicationRecord
 
     belongs_to :utilisateur
+    belongs_to :taken, class_name: "Utilisateur"
+    
     validates :body, presence: true
 
     def level_color

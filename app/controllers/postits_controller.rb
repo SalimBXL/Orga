@@ -2,9 +2,10 @@ class PostitsController < ApplicationController
     before_action :check_logged_in
     before_action :find_postit, only: [:show, :edit, :update, :destroy]
     before_action :find_services, only: [:new, :edit]
+    
 
     def index
-        @postits = Postit.order(id: :desc).page(params[:page])
+        @postits = Postit.order(level: :desc).order(id: :desc).page(params[:page])
     end
 
 
@@ -37,7 +38,7 @@ class PostitsController < ApplicationController
             flash[:notice] = "postit modifié avec succès"
             redirect_to postits_path
         else
-            redirect_to :edit
+            render :edit
         end
     end
 
@@ -54,7 +55,7 @@ class PostitsController < ApplicationController
     private 
 
     def postit_params
-        params.require(:postit).permit(:title, :body, :level, :is_private)
+        params.require(:postit).permit(:title, :body, :level, :is_private, :taken_id)
     end
 
     def find_postit
@@ -64,4 +65,5 @@ class PostitsController < ApplicationController
     def find_services
         @services = Service.order(:lieu_id, :nom)
     end
+
 end

@@ -26,18 +26,19 @@
             <!-- PARTIE DROITE -->
             <ul class="nav navbar-nav navbar-right">
 
-
                 <!-- HOME -->
-                <li>
-                    <%= link_to "<i class='material-icons' 
-                        data-toggle='tooltip'
-                        title='#{I18n.t("home.navbar.home")}'
-                        data-placement='bottom'>
-                        home
-                        </i>".html_safe, 
-                        root_path
-                    %>
-                </li>
+                <% if user_signed_in? %>
+                    <li>
+                        <%= link_to "<i class='material-icons' 
+                            data-toggle='tooltip'
+                            title='#{I18n.t("home.navbar.home")}'
+                            data-placement='bottom'>
+                            home
+                            </i>".html_safe, 
+                            root_path
+                        %>
+                    </li>
+                <% end %>
 
                 <!-- TODAY -->
                 <% if user_signed_in? %>
@@ -82,43 +83,45 @@
                 <% end %>
 
                 <!-- LANGUE -->
-                <li class="hidden-xs dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="material-icons" 
-                            data-toggle="tooltip" 
-                            title="<%= I18n.locale.upcase %>"
-                            data-placement="bottom">
-                            language
-                        </i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <span data-toggle="tooltip" 
-                            title="EN"
-                            data-placement="bottom">
-                            &nbsp;&nbsp;
-                            <%= link_to image_tag("flag_en.png", alt: "EN", class: "locale-flag"),
-                            url_for(only_path: true, locale: "en") %>
-                            </span>
-                        </li>
-                        <li>
-                            <span data-toggle="tooltip" 
-                            title="FR"
-                            data-placement="bottom">
-                            &nbsp;&nbsp;
-                            <%= link_to image_tag("flag_fr.png", alt: "FR", class: "locale-flag"),
-                            url_for(only_path: true, locale: "fr") %>
-                        </li>
-                        <li>
-                            <span data-toggle="tooltip" 
-                            title="NL"
-                            data-placement="bottom">
-                            &nbsp;&nbsp;
-                            <%= link_to image_tag("flag_nl.png", alt: "NL", class: "locale-flag"),
-                            url_for(only_path: true, locale: "nl") %>
-                        </li>
-                    </ul>
-                </li>
+                <% if user_signed_in? %>
+                    <li class="hidden-xs dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="material-icons" 
+                                data-toggle="tooltip" 
+                                title="<%= I18n.locale.upcase %>"
+                                data-placement="bottom">
+                                language
+                            </i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <span data-toggle="tooltip" 
+                                title="EN"
+                                data-placement="bottom">
+                                &nbsp;&nbsp;
+                                <%= link_to image_tag("flag_en.png", alt: "EN", class: "locale-flag"),
+                                url_for(only_path: true, locale: "en") %>
+                                </span>
+                            </li>
+                            <li>
+                                <span data-toggle="tooltip" 
+                                title="FR"
+                                data-placement="bottom">
+                                &nbsp;&nbsp;
+                                <%= link_to image_tag("flag_fr.png", alt: "FR", class: "locale-flag"),
+                                url_for(only_path: true, locale: "fr") %>
+                            </li>
+                            <li>
+                                <span data-toggle="tooltip" 
+                                title="NL"
+                                data-placement="bottom">
+                                &nbsp;&nbsp;
+                                <%= link_to image_tag("flag_nl.png", alt: "NL", class: "locale-flag"),
+                                url_for(only_path: true, locale: "nl") %>
+                            </li>
+                        </ul>
+                    </li>
+                <% end %>
 
                 <!-- PROFILE -->
                 <% if user_signed_in? %>
@@ -136,19 +139,19 @@
 
 
                 <!-- HELP -->
-                <li class="hidden-xs">
-                    <%= link_to "<i class='material-icons'
-                                data-toggle='tooltip'
-                                title=#{I18n.t('home.navbar.help')}
-                                data-placement='bottom'>
-                                help
-                            </i>".html_safe,
-                            help_path
-                        %>
-                </li>
-
-
-
+                <% if user_signed_in? %>
+                    <li class="hidden-xs">
+                        <%= link_to "<i class='material-icons'
+                                    data-toggle='tooltip'
+                                    title=#{I18n.t('home.navbar.help')}
+                                    data-placement='bottom'>
+                                    help
+                                </i>".html_safe,
+                                help_path
+                            %>
+                    </li>
+                <% end %>
+                
 
                 <!-- CONNEXION -->
                 <li>

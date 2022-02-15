@@ -30,15 +30,15 @@ module ApplicationHelper
     def nom_jour(numero)
         case numero
         when 1
-            nom_jour = I18n.t("Lundi")
+            nom_jour = I18n.t("Monday")
         when 2
-            nom_jour = I18n.t("Mardi")
+            nom_jour = I18n.t("Tuesday")
         when 3
-            nom_jour = I18n.t("Mercredi")
+            nom_jour = I18n.t("Wednesday")
         when 4
-            nom_jour = I18n.t("Jeudi")
+            nom_jour = I18n.t("Thursday")
         when 5
-            nom_jour = I18n.t("Vendredi")
+            nom_jour = I18n.t("Friday")
         else
             nom_jour = nil
         end
@@ -47,29 +47,29 @@ module ApplicationHelper
     def nom_mois(numero)
         case numero
         when 1
-            nom_jour = I18n.t("Janvier")
+            nom_jour = I18n.t("January")
         when 2
-            nom_jour = I18n.t("Fevrier")
+            nom_jour = I18n.t("February")
         when 3
-            nom_jour = I18n.t("Mars")
+            nom_jour = I18n.t("March")
         when 4
-            nom_jour = I18n.t("Avril")
+            nom_jour = I18n.t("April")
         when 5
-            nom_jour = I18n.t("Mai")
+            nom_jour = I18n.t("May")
         when 6
-            nom_jour = I18n.t("Juin")
+            nom_jour = I18n.t("June")
         when 7
-            nom_jour = I18n.t("Juillet")
+            nom_jour = I18n.t("July")
         when 8
-            nom_jour = I18n.t("Aout")
+            nom_jour = I18n.t("August")
         when 9
-            nom_jour = I18n.t("Septembre")
+            nom_jour = I18n.t("September")
         when 10
-            nom_jour = I18n.t("Octobre")
+            nom_jour = I18n.t("October")
         when 11
-            nom_jour = I18n.t("Novembre")
+            nom_jour = I18n.t("November")
         when 12
-            nom_jour = I18n.t("Decembre")
+            nom_jour = I18n.t("December")
         else
             nom_jour = nil
         end
