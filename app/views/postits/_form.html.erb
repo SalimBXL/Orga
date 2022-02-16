@@ -14,14 +14,11 @@
 
     <div class="row">
         <div class="col-sm-4">
-            <p>
-                <%= form.label I18n.t("postits.form.title") %><br>
-                <%= form.text_field :title %>
-            </p>
+            
             
             <p>
                 <%= form.label I18n.t("postits.form.body") %><br>
-                <%= form.text_field :body %>
+                <%= form.text_area :body %>
             </p>
 
             <p>
@@ -34,18 +31,23 @@
                 <%= form.check_box :is_private %>
             </p>
 
-            <p>
-                <%= form.label I18n.t("postits.form.taken") %><br>
-                <%= form.select(:taken_id) do %>
-                    <%= select_option_tag("", nil, @postit.taken) %>
-                    <% Utilisateur.where(service: current_user.utilisateur.service).order(:prenom).each do |l| %>
-                        <%= select_option_tag(l.prenom_nom, l.id, @postit.taken_id) %>
+            <% if params[:action] != "new" %>
+
+                <p>
+                    <%= form.label I18n.t("postits.form.taken") %><br>
+                    <%= form.select(:taken_id) do %>
+                        <%= select_option_tag("", nil, @postit.taken) %>
+                        <% Utilisateur.where(service: current_user.utilisateur.service).order(:prenom).each do |l| %>
+                            <%= select_option_tag(l.prenom_nom, l.id, @postit.taken_id) %>
+                        <% end %>
                     <% end %>
-                <% end %>
+                </p>
 
-
-
-            </p>
+                <p>
+                    Done at<br>
+                    <%= form.date_field :done_at %>
+                </p>
+            <% end %>
 
         </div>
     </div>

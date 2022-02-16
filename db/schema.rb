@@ -219,6 +219,7 @@ ActiveRecord::Schema[7.0].define(version: 2020091012140633) do
     t.datetime "updated_at", null: false
     t.bigint "utilisateur_id"
     t.bigint "taken_id"
+    t.date "done_at"
     t.index ["taken_id"], name: "index_postits_on_taken_id"
     t.index ["utilisateur_id"], name: "index_postits_on_utilisateur_id"
   end

@@ -2,7 +2,9 @@
 <% if (postit.is_private && current_user.utilisateur == postit.utilisateur) || !postit.is_private %>
 
     <tr id="postit_<%= postit.id %>" class="<%= postit.level == 0 ? "active" : postit.is_private ? "danger" : "warning" %>">
+
         <td><%= postit.body %></td>
+
 
         <td>
             <% if postit.level > 1 %>
@@ -14,6 +16,7 @@
             <% end %>
         </td>
 
+
         <td>
             <% if postit.is_private %>
                 <span class="label label-danger"><%= postit.utilisateur.prenom %></span>
@@ -22,17 +25,25 @@
             <% end %>
         </td>
 
+
         <td>
             <% if !postit.taken_id.nil? %>
-                <span class="label label-<%= postit.level_color %>">
+                <% if postit.level != 0 %>
+                    <span class="label label-<%= postit.level_color %>">
+                        <%= postit.taken.prenom_nom %>
+                    </span>
+                <% else %>
                     <%= postit.taken.prenom_nom %>
-                </span>
+                <% end %>
             <% end %>
         </td>
 
+        
         <td>
-            <%= postit.level == 2 || postit.level == 0 ? "Updated at #{postit.created_at}" : "Created at #{postit.created_at}" %>
+
+            <%= "Done at #{postit.done_at}" if postit.level == 0 %>
         </td>
+
 
         <td>
         <% if user_signed_in? && (is_manager? || current_user.utilisateur == postit.utilisateur) %>

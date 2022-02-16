@@ -1,37 +1,35 @@
 <div class="container-fluid">
     <div class="row">
         <% @postits.each do |postit| %>
-            <% if (postit.is_private && current_user.utilisateur == postit.utilisateur) || !postit.is_private %>
-                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+            <% if !(postit.level == 0 && (postit.done_at != Date.today)) %>
+                <% if (postit.is_private && current_user.utilisateur == postit.utilisateur) || !postit.is_private %>
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
 
-                    <% bg ||= "warning" %>
-                    <% bg = "danger" if postit.is_private %>
-                    <% bg = "default" if postit.level == 0 %>
-                    
-                    <div class="panel panel-<%= bg %>">
-                        <div class="panel-heading">
-                            <%= postit.title %>
-                            
-                            <% if postit.level > 1 %>
-                                <span class="label label-<%= postit.level_color %>">*</span>
-                            <% end %>
-                            
-                            <%= postit.body %>
-
-                            <small>(<%= postit.utilisateur.initiales %>)</small>
+                        <% bg ||= "warning" %>
+                        <% bg = "danger" if postit.is_private %>
+                        <% bg = "default" if postit.level == 0 %>
                         
-                            <% if postit.level == 2 %>
+                        <div class="panel panel-<%= bg %>">
+                            <div class="panel-heading">
+                                <%= postit.title %>
                                 
-                                <small class="text-info">
-                                     Taken 
-                                    <% if !postit.taken.nil? %>
-                                        by <%= postit.taken.prenom %>
-                                    <% end %>
-                                </small>
-                            <% end %>
+                                <% if postit.level > 1 %>
+                                    <span class="label label-<%= postit.level_color %>">*</span>
+                                <% end %>
+                                
+                                <%= postit.body %>
+
+                                <small>(<%= postit.utilisateur.initiales %>)</small>
+                            
+                                <% if postit.level == 2 %>
+                                    <small class="text-info">
+                                        Taken by <%= postit.taken.prenom if !postit.taken.nil? %>
+                                    </small>
+                                <% end %>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <% end %>
             <% end %>
         <% end %>
     </div>

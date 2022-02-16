@@ -34,6 +34,10 @@ class PostitsController < ApplicationController
     def update
         set_postit_utilisateur
         set_postit_level
+
+        @postit.taken_id = current_user.utilisateur.id if @postit.level == 0 && !@postit.done_at.nil? && @postit.taken_id.nil?
+        
+
         if @postit.update(postit_params)
             flash[:notice] = "postit modifié avec succès"
             redirect_to postits_path
@@ -55,7 +59,7 @@ class PostitsController < ApplicationController
     private 
 
     def postit_params
-        params.require(:postit).permit(:title, :body, :level, :is_private, :taken_id)
+        params.require(:postit).permit(:title, :body, :level, :is_private, :taken_id, :done_at)
     end
 
     def find_postit

@@ -1,7 +1,8 @@
 class Postit < ApplicationRecord
 
     belongs_to :utilisateur
-    belongs_to :taken, class_name: "Utilisateur"
+    belongs_to :taken, class_name: "Utilisateur", optional: true
+    before_validation :check_level
     
     validates :body, presence: true
 
@@ -15,6 +16,12 @@ class Postit < ApplicationRecord
         else 
             ""
         end
+    end
+
+    def check_level
+        self.level = 1 if level.nil? 
+        self.level = 0 if !done_at.nil?
+        self.done_at = Date.today if done_at.nil? && level == 0
     end
 
 end
