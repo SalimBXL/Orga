@@ -1,5 +1,5 @@
 <div class="container-fluid">
-<div class="btn-group">
+<div class="btn-group btn-group-justified">
     <a href="<%= not_yet_validated_absences_path %>" class="btn btn-success" role="button">
         <i class="material-icons">healing</i><br>
         <%= I18n.t("home.index.waiting") %>
@@ -12,32 +12,27 @@
         <i class="material-icons">healing</i><br>
         <%= I18n.t("home.index.types") %>
     </a>
-</div>
 
-<div class="btn-group">
-    <div class="btn-group">
-        <a href="<%= lieus_path %>" class="btn btn-primary" role="button">
-            <i class="material-icons">location_city</i><br>
-            <%= I18n.t("home.index.lieux") %>
-        </a>
-        <a href="<%= services_path %>" class="btn btn-primary" role="button">
-            <i class="material-icons">business</i><br>
-            <%= I18n.t("home.index.services") %>
-        </a>
-    </div>
-    <div class="btn-group">
-        <a href="<%= groupes_path %>" class="btn btn-primary" role="button">
-            <i class="material-icons">group_work</i><br>
-            <%= I18n.t("home.index.groupes") %>
-        </a>
-        <a href="<%= utilisateurs_path %>" class="btn btn-primary" role="button">
-            <i class="material-icons">group</i><br>
-            <%= I18n.t("home.index.utilisateurs") %>
-        </a>
-    </div>
-</div>
 
-<div class="btn-group">
+    <a href="<%= lieus_path %>" class="btn btn-primary" role="button">
+        <i class="material-icons">location_city</i><br>
+        <%= I18n.t("home.index.lieux") %>
+    </a>
+    <a href="<%= services_path %>" class="btn btn-primary" role="button">
+        <i class="material-icons">business</i><br>
+        <%= I18n.t("home.index.services") %>
+    </a>
+
+    <a href="<%= groupes_path %>" class="btn btn-primary" role="button">
+        <i class="material-icons">group_work</i><br>
+        <%= I18n.t("home.index.groupes") %>
+    </a>
+    <a href="<%= utilisateurs_path %>" class="btn btn-primary" role="button">
+        <i class="material-icons">group</i><br>
+        <%= I18n.t("home.index.utilisateurs") %>
+    </a>
+
+
     <a href="<%= ajouts_path %>" class="btn btn-warning" role="button">
         <i class="material-icons">playlist_add</i><br>
         <%= I18n.t("home.index.batchs") %>
@@ -46,30 +41,24 @@
         <i class="material-icons">content_copy</i><br>
         <%= I18n.t("home.index.templates") %>
     </a>
-</div>
 
-<div class="btn-group">
     <a href="<%= grille_path %>" class="btn btn-warning" role="button">
         <i class="material-icons">healing</i><br>
         <%= I18n.t("home.index.absences") %>
     </a>
-</div>
 
-<div class="btn-group">
     <a href="<%= messages_path %>" class="btn btn-warning" role="button">
         <i class="material-icons">message</i><br>
         <%= I18n.t("home.index.messages") %>
     </a>
-</div>
 
-<div class="btn-group">
     <a href="<%= hebdos_path %>" class="btn btn-danger" role="button">
         <i class="material-icons">settings_ethernet</i><br>
         <%= I18n.t("home.index.hebdos") %>
     </a>
-</div>
 
-<div class="btn-group">
+
+
     <!-- Bouton secrétaire -->
     <a href="<%= secr_pet_path %>" class="btn btn-info" role="button">
         <i class="material-icons">PET</i><br>

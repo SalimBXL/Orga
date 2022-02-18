@@ -19,6 +19,8 @@ class Postit < ApplicationRecord
     end
 
     def check_level
+        self.level = 2 if !taken.nil?
+        self.level = 1 if level == 2 && taken.nil?
         self.level = 1 if level.nil? 
         self.level = 0 if !done_at.nil?
         self.done_at = Date.today if done_at.nil? && level == 0

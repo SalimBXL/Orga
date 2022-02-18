@@ -20,13 +20,23 @@
                                 <%= postit.body %>
 
                                 <small>(<%= postit.utilisateur.initiales %>)</small>
-                            
-                                <% if postit.level == 2 %>
-                                    <small class="text-info">
-                                        Taken by <%= postit.taken.prenom if !postit.taken.nil? %>
-                                    </small>
-                                <% end %>
-                            </div>
+                            </div>  
+
+                            <% if postit.level != 0 %>
+                                <div class="btn-group btn-group-justified bg-warning">
+                                    <% if postit.level != 2 && postit.is_private != true %>
+                                        <a href="#" class="btn btn-xs btn-link text-warning">
+                                            [Take]
+                                        </a>
+                                    <% end %>
+
+                                    <% if postit.level == 2 %>
+                                        <small class="text-muted">
+                                            Taken by <%= postit.taken.prenom if !postit.taken.nil? %>
+                                        </small>
+                                    <% end %>
+                                </div>
+                            <% end %>
                         </div>
                     </div>
                 <% end %>
