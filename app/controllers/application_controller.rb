@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_postit_level
-    @postit.level = 0 if @postit.level.nil?
+    @postit.level = 1 if @postit.level.nil?
   end
 
 
