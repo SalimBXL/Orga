@@ -215,4 +215,9 @@ table td {
 }
 
 
-
+.home-postit {
+    height: 8em;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: orange;
+}
