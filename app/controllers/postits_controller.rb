@@ -1,6 +1,6 @@
 class PostitsController < ApplicationController
     before_action :check_logged_in
-    before_action :find_postit, only: [:show, :edit, :update, :destroy]
+    before_action :find_postit, only: [:show, :edit, :update, :destroy, :take_it]
     before_action :find_services, only: [:new, :edit]
     
 
@@ -53,6 +53,13 @@ class PostitsController < ApplicationController
     
     def destroy
         @postit.destroy
+    end
+
+
+    def take_it
+        @postit.taken_id = current_user.utilisateur.id
+        flash[:notice] = "postit modifié avec succès" if @postit.update(taken_id: current_user.utilisateur.id)
+        redirect_to home_path
     end
 
 

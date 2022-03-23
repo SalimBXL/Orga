@@ -117,6 +117,7 @@ Rails.application.routes.draw do
   #  Postits  #
   #############
   resources :postits, only: [ :show, :index, :new, :edit, :create, :update, :destroy]
+  get "take_it", to: "postits#take_it"
 
   #####################
   #  Blog Categories  #

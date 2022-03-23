@@ -25,9 +25,7 @@
                             <% if postit.level != 0 %>
                                 <div class="btn-group btn-group-justified bg-warning">
                                     <% if postit.level != 2 && postit.is_private != true %>
-                                        <a href="#" class="btn btn-xs btn-link text-warning">
-                                            [Take]
-                                        </a>
+                                        <%= link_to "[Take]", take_it_path(id: postit), class: "btn btn-xs btn-link text-warning" %>
                                     <% end %>
 
                                     <% if postit.level == 2 %>
@@ -37,6 +35,7 @@
                                     <% end %>
                                 </div>
                             <% end %>
+                            
                         </div>
                     </div>
                 <% end %>
