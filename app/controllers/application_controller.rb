@@ -90,19 +90,6 @@ class ApplicationController < ActionController::Base
 
 
   def checkCurrentUserIsLogged
-
-    pp "*******************************************"
-    pp "*******************************************"
-    pp "*******************************************"
-    pp "IS USER SIGNED IN ? "
-    pp "    => #{user_signed_in?}"
-    pp "*******************************************"
-    pp "WHO IS CURRENT USER ? "
-    pp "  => #{current_user}"
-    pp "*******************************************"
-    pp "*******************************************"
-    pp "*******************************************"
-
     redirect_to home_path unless user_signed_in?
     
   end
@@ -269,18 +256,28 @@ end
   #
   def find_tasks(utilisateur, today = false)
     @tasks = Hash.new
+    @tasks_profil = Hash.new
     semaine = (Date.today-3.weeks).cweek
-    annee = (Date.today+9.weeks).year
+    annee = (Date.today-3.weeks).year
+
+
+    #hebdos = today ? 
+    #  Hebdo.where(numero_semaine: Date.today.cweek, year_id: Date.today.year, utilisateur: utilisateur).order(:numero_semaine) : 
+    #  Hebdo.where('numero_semaine > ? AND year_id < ?', semaine, annee ).where(utilisateur: utilisateur).order(:numero_semaine)
 
     hebdos = today ? 
-      Hebdo.where(numero_semaine: Date.today.cweek, year_id: Date.today.year, utilisateur: utilisateur).order(:numero_semaine) : 
-      Hebdo.where('numero_semaine > ? AND year_id < ?', semaine, annee ).where(utilisateur: utilisateur).order(:numero_semaine)
+      Hebdo.where(numero_semaine: Date.today.cweek, year_id: Date.today.year, utilisateur: utilisateur).order(:year_id, :numero_semaine) : 
+      Hebdo.where('numero_semaine >= ? AND year_id >= ?', semaine, annee ).where(utilisateur: utilisateur).order(:year_id, :numero_semaine)
     
       #Hebdo.where('numero_semaine > ? AND numero_semaine < ?', from, to ).where(utilisateur: utilisateur).order(:numero_semaine)
 
     hebdos.each do |hebdo|
         @tasks[hebdo.numero_semaine] ||= Array.new
         @tasks[hebdo.numero_semaine] << [hebdo.task.code, hebdo.task.nom]
+
+        #@tasks_profil[hebdo.year_id] ||= Array.new
+        #@tasks_profil[hebdo.year_id][hebdo.numero_semaine] ||= Array.new
+        #@tasks_profil[hebdo.year_id][hebdo.numero_semaine] << [hebdo.task.code, hebdo.task.nom]
     end
   end
 end
