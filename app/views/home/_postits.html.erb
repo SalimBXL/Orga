@@ -35,11 +35,28 @@
                                         %>
                                     <% end %>
 
+
                                     <% if postit.level == 2 %>
-                                        <small class="text-muted">
-                                            Taken by <%= postit.taken.prenom if !postit.taken.nil? %>
-                                        </small>
+                                        <% if postit.taken.id == current_user.utilisateur.id %>
+
+                                            <%= 
+                                                link_to "[Done!]", 
+                                                done_path(id: postit), 
+                                                data: { 
+                                                    confirm: "Are you confirming that this task is done ?"
+                                                },
+                                                class: "btn btn-xs btn-link text-warning"
+                                            %>
+                                            
+                                        <% else %>
+                                            <small class="text-muted">
+                                                Taken by <%= postit.taken.prenom if !postit.taken.nil? %>
+                                            </small>
+                                        <% end %>
                                     <% end %>
+
+
+
                                 </div>
                             <% end %>
                             

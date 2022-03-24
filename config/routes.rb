@@ -118,6 +118,7 @@ Rails.application.routes.draw do
   #############
   resources :postits, only: [ :show, :index, :new, :edit, :create, :update, :destroy]
   get "take_it", to: "postits#take_it"
+  get "done", to: "postits#done"
 
   #####################
   #  Blog Categories  #
