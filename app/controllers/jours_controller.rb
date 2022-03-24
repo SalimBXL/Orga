@@ -256,7 +256,7 @@ class JoursController < ApplicationController
         @events = Hash.new
         nombre_de_jours = (@date2-@date).to_i
         nombre_de_jours.times do |i|
-            charge_events(@date + i.day)
+            charge_events((@date + i.day))
         end
 
         @templates = Template.all.order(:service_id, :nom)

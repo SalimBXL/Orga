@@ -1,17 +1,19 @@
-<% unless @events[service.id].nil? %>
-    <% if @current_service.nil? or @current_service.id == service.id %>
-        <article>
-        <% @events[service.id].each do |event| %>
-            <span class="label label-info">
-                <%= I18n.localize event.date, format: :long %>
-            </span>
-            &nbsp;&nbsp;
-            <strong>
-                <%= event.nom.capitalize %> : 
-            </strong>
-            <%= event.note %><br>
-        <% end %>
-        </article>
-        <br>
-    <% end %>
+<% if @events[service.id] %>
+    <div>
+        <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start;">
+            <% @events[service.id].each do |event| %>
+                <div style="padding: 0.2em 0.5em;">
+                    <span class="label label-info">
+                        <%= I18n.localize event.date, format: :long %>
+                    </span>
+                    &nbsp;&nbsp;
+                    <strong>
+                        <%= event.nom.capitalize %> : 
+                    </strong>
+                    <%= event.note %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+    
 <% end %>

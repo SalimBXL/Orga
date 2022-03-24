@@ -174,7 +174,8 @@ class ApplicationController < ActionController::Base
   # Charge les Events
   def charge_events(date, service = nil)
     date = date.to_s
-    events = service.nil? ? Event.where(date: date).order(:service_id, :nom) : Event.where(date: date, service: service).order(:nom)
+    #events = service.nil? ? Event.where(date: date).order(:service_id, :nom) : Event.where(date: date, service: service).order(:nom)
+    events = Event.where(date: date).order(:service_id, :nom)
     events.each do |event|
       @events[event.service_id].nil? && @events[event.service_id] = Array.new
       @events[event.service_id] << event

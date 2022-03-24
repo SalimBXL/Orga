@@ -10,6 +10,9 @@
     >
 
         <%= render partial: "nom_service_month", locals: { service: service } %>
+
+        <!-- Rappel des Events -->
+        <%= render partial: "rappel_events_month", locals: { service: service } %>
         
 
         <table class="table table-bordered grille">
@@ -32,9 +35,6 @@
                 <% end %>
             <% end %>
         </table>
-
-        <!-- Rappel des Events -->
-        <%= render partial: "rappel_events_month", locals: { service: service } %>
 
     </div>
     
