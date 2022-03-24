@@ -263,6 +263,17 @@ class JoursController < ApplicationController
         @service = Array.new
         Service.all.order(:nom).each {|service| @service[service.id] = service.nom}
 
+        #
+        # trouve les tâches
+        #
+        utilisateurs.each do |utilisateur|
+            @tasks_profil ||= Hash.new
+            @tasks_profil[utilisateur.id] = find_tasks_for_month(utilisateur, @date.month, @date.year)
+            pp "*********************************************"
+            pp @tasks_profil[utilisateur.id]
+            pp "*********************************************"
+        end
+
         # mode edition ?
         unless params[:edit_mode]
             @edit_mode = false

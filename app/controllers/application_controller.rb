@@ -281,4 +281,14 @@ end
         #@tasks_profil[hebdo.year_id][hebdo.numero_semaine] << [hebdo.task.code, hebdo.task.nom]
     end
   end
+
+  def find_tasks_for_month(utilisateur, month, year)
+    d = Date.new(year, month, 1)
+    semaine_debut = d.cweek
+    semaine_fin = (d+5.weeks).cweek
+    annee = year
+
+    hebdos = Hebdo.where('numero_semaine >= ? AND numero_semaine <= ? AND year_id >= ?', semaine_debut, semaine_fin, annee ).where(utilisateur: utilisateur).order(:year_id, :numero_semaine)
+    return hebdos
+  end
 end

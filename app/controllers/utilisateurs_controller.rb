@@ -72,11 +72,7 @@ class UtilisateursController < ApplicationController
         # trouve les tâches
         #
         find_tasks(@utilisateur)
-        pp "*****************************************************"
-        pp @tasks
-        pp "*****************************************************"
-
-
+        
         #
         # trouve les absences
         #
