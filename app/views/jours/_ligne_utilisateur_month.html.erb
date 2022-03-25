@@ -29,6 +29,15 @@
 
             <!-- Jour de semaine "normal" -->
 
+            <!-- Si tâche prévue cette semaine, on color le fond en orange claire -->
+            <% if @tasks_profil[utilisateur.id] %>
+                <% tasks_for_user = @tasks_profil[utilisateur.id] %>
+                <% tasks_for_user.each do |tsk| %>
+                    <% bg = "task" if date_jour.cweek == tsk.numero_semaine %>
+                <% end %>
+                
+            <% end %>
+
             <% if date_jour == Date.today %>
                 <!-- Si jour est date actuelle on jauni le fond ... -->
                 <% bg = "today" %>

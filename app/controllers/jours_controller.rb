@@ -269,9 +269,6 @@ class JoursController < ApplicationController
         utilisateurs.each do |utilisateur|
             @tasks_profil ||= Hash.new
             @tasks_profil[utilisateur.id] = find_tasks_for_month(utilisateur, @date.month, @date.year)
-            pp "*********************************************"
-            pp @tasks_profil[utilisateur.id]
-            pp "*********************************************"
         end
 
         # mode edition ?
