@@ -1,75 +1,85 @@
 <div class="container-fluid">
-<div class="btn-group btn-group-justified">
-    <a href="<%= not_yet_validated_absences_path %>" class="btn btn-success" role="button">
-        <i class="material-icons">healing</i><br>
-        <%= I18n.t("home.index.waiting") %>
-    </a>
-    <a href="<%= validated_absences_path %>" class="btn btn-success" role="button">
-        <i class="material-icons">healing</i><br>
-        <%= I18n.t("home.index.validated") %>
-    </a>
-    <a href="<%= type_absences_path %>" class="btn btn-success" role="button">
-        <i class="material-icons">healing</i><br>
-        <%= I18n.t("home.index.types") %>
-    </a>
+    <div class="row">
+
+        <div class="col-sm-6 col-md-4">
+            <div class="btn-group btn-group-justified">
+                <a href="<%= not_yet_validated_absences_path %>" class="btn btn-success" role="button">
+                    <i class="material-icons">healing</i><br>
+                    <%= I18n.t("home.index.waiting") %>
+                </a>
+                <a href="<%= validated_absences_path %>" class="btn btn-success" role="button">
+                    <i class="material-icons">healing</i><br>
+                    <%= I18n.t("home.index.validated") %>
+                </a>
+                <a href="<%= type_absences_path %>" class="btn btn-success" role="button">
+                    <i class="material-icons">healing</i><br>
+                    <%= I18n.t("home.index.types") %>
+                </a>
+                <a href="<%= hebdos_path %>" class="btn btn-danger" role="button">
+                    <i class="material-icons">settings_ethernet</i><br>
+                    <%= I18n.t("home.index.hebdos") %>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <div class="btn-group btn-group-justified">
+                <a href="<%= lieus_path %>" class="btn btn-primary" role="button">
+                    <i class="material-icons">location_city</i><br>
+                    <%= I18n.t("home.index.lieux") %>
+                </a>
+                <a href="<%= services_path %>" class="btn btn-primary" role="button">
+                    <i class="material-icons">business</i><br>
+                    <%= I18n.t("home.index.services") %>
+                </a>
+
+                <a href="<%= groupes_path %>" class="btn btn-primary" role="button">
+                    <i class="material-icons">group_work</i><br>
+                    <%= I18n.t("home.index.groupes") %>
+                </a>
+                <a href="<%= utilisateurs_path %>" class="btn btn-primary" role="button">
+                    <i class="material-icons">group</i><br>
+                    <%= I18n.t("home.index.utilisateurs") %>
+                </a>
+            </div>
+        </div>
 
 
-    <a href="<%= lieus_path %>" class="btn btn-primary" role="button">
-        <i class="material-icons">location_city</i><br>
-        <%= I18n.t("home.index.lieux") %>
-    </a>
-    <a href="<%= services_path %>" class="btn btn-primary" role="button">
-        <i class="material-icons">business</i><br>
-        <%= I18n.t("home.index.services") %>
-    </a>
+        <div class="col-sm-6 col-md-4">
+            <div class="btn-group btn-group-justified">
+                <a href="<%= ajouts_path %>" class="btn btn-warning" role="button">
+                    <i class="material-icons">playlist_add</i><br>
+                    <%= I18n.t("home.index.batchs") %>
+                </a>
+                <a href="<%= templates_path %>" class="btn btn-warning" role="button">
+                    <i class="material-icons">content_copy</i><br>
+                    <%= I18n.t("home.index.templates") %>
+                </a>
 
-    <a href="<%= groupes_path %>" class="btn btn-primary" role="button">
-        <i class="material-icons">group_work</i><br>
-        <%= I18n.t("home.index.groupes") %>
-    </a>
-    <a href="<%= utilisateurs_path %>" class="btn btn-primary" role="button">
-        <i class="material-icons">group</i><br>
-        <%= I18n.t("home.index.utilisateurs") %>
-    </a>
+                <a href="<%= grille_path %>" class="btn btn-warning" role="button">
+                    <i class="material-icons">healing</i><br>
+                    <%= I18n.t("home.index.absences") %>
+                </a>
 
+                <a href="<%= messages_path %>" class="btn btn-warning" role="button">
+                    <i class="material-icons">message</i><br>
+                    <%= I18n.t("home.index.messages") %>
+                </a>
 
-    <a href="<%= ajouts_path %>" class="btn btn-warning" role="button">
-        <i class="material-icons">playlist_add</i><br>
-        <%= I18n.t("home.index.batchs") %>
-    </a>
-    <a href="<%= templates_path %>" class="btn btn-warning" role="button">
-        <i class="material-icons">content_copy</i><br>
-        <%= I18n.t("home.index.templates") %>
-    </a>
+                <!-- Bouton secrétaire -->
+                <a href="<%= secr_pet_path %>" class="btn btn-info" role="button">
+                    <i class="material-icons">PET</i><br>
+                    <%= I18n.t("home.index.secretary") %>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <br />
+    <br />
 
-    <a href="<%= grille_path %>" class="btn btn-warning" role="button">
-        <i class="material-icons">healing</i><br>
-        <%= I18n.t("home.index.absences") %>
-    </a>
-
-    <a href="<%= messages_path %>" class="btn btn-warning" role="button">
-        <i class="material-icons">message</i><br>
-        <%= I18n.t("home.index.messages") %>
-    </a>
-
-    <a href="<%= hebdos_path %>" class="btn btn-danger" role="button">
-        <i class="material-icons">settings_ethernet</i><br>
-        <%= I18n.t("home.index.hebdos") %>
-    </a>
-
-
-
-    <!-- Bouton secrétaire -->
-    <a href="<%= secr_pet_path %>" class="btn btn-info" role="button">
-        <i class="material-icons">PET</i><br>
-        <%= I18n.t("home.index.secretary") %>
-    </a>
-</div>
-
-<br />
-<br />
-<!-- Barre Admins -->
-    <%= render partial: "barre_menu_admin" if user_signed_in? && is_super_admin? %>
-
-
+    <div class="row">
+        <!-- Barre Admins -->
+        <%= render partial: "barre_menu_admin" if user_signed_in? && is_super_admin? %>
+    </div>
 </div>

@@ -1,4 +1,5 @@
-
+<div class="col-sm-6 col-md-4">
+            
     <div class="btn-group btn-group-justified">
         <a href="<%= jours_path %>" class="btn btn-xs btn-danger" role="button">
             <i class="material-icons">view_day</i><br>
@@ -8,11 +9,10 @@
             <i class="material-icons">list_alt</i><br>
             <%= I18n.t("home.index.working_lists") %>
         </a>
-        <a href="<%= hebdos_path %>" class="btn btn-xs btn-danger" role="button">
-            <i class="material-icons">settings_ethernet</i><br>
-            <%= I18n.t("home.index.hebdos") %>
-        </a>
-    
+    </div>
+</div>
+<div class="col-sm-6 col-md-4">
+    <div class="btn-group btn-group-justified">
         <a href="<%= classes_path %>" class="btn btn-xs btn-danger" role="button">
             <i class="material-icons">add</i><br>
             <%= I18n.t("home.index.classes") %>
@@ -21,7 +21,10 @@
             <i class="material-icons">add</i><br>
             <%= I18n.t("home.index.works") %>
         </a>
-    
+    </div>
+</div>
+<div class="col-sm-6 col-md-4">
+    <div class="btn-group btn-group-justified">
         <a href="<%= logs_path %>" class="btn btn-xs btn-danger" role="button">
             <i class="material-icons">analytics</i><br>
             <%= I18n.t("home.index.logs") %>
@@ -31,3 +34,4 @@
             <%= I18n.t("home.index.tools") %>
         </a>
     </div>
+</div>
