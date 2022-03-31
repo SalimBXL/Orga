@@ -1,0 +1,34 @@
+<%= form_with model: @reviewcat, local: true do |form| %>
+
+    <% if @reviewcat.errors.any? %>
+        <strong>WARNING</strong>
+        <ul>
+            <% @reviewcat.errors.full_messages.each do |message| %>
+                <li class="bg-danger">
+                    <%= message %>
+                </li>
+            <% end %>
+        </ul>
+    <% end %>
+
+
+    <div class="row">
+        <div class="col-sm-4">
+            
+            
+            <p>
+                <%= form.label I18n.t("reviewcats.form.cat") %><br>
+                <%= form.text_area :cat %>
+            </p>
+
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <p><%= form.submit class: "btn btn-primary" %></p>
+        </div>
+    </div>
+
+<% end %>

@@ -105,6 +105,7 @@ Rails.application.routes.draw do
   ###################
   resources :blog_messages, only: [ :show, :index, :new, :edit, :create, :update, :destroy]
   resources :blog_responses, only: [ :new, :edit, :create, :update, :destroy ]
+  resources :reviewcats, only: [ :show, :index, :new, :edit, :create, :update, :destroy]
   get "blog_message_export_pdf", to: "export#blog_message_export_pdf"
   get "review_blog_message", to: "blog_messages#review"
 

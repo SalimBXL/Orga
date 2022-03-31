@@ -1,0 +1,7 @@
+<p>
+    <% if user_signed_in? %>
+    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+        new_reviewcat_path,
+        class: "btn btn-success btn-xs" %>
+    <% end %>
+</p>

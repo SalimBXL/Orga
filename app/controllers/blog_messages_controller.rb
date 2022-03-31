@@ -1,11 +1,12 @@
 class BlogMessagesController < ApplicationController
     before_action :check_logged_in
     before_action :find_message, only: [:show, :edit, :update, :destroy, :review]
-    before_action :find_classes, only: [:index, :show, :edit, :new]
-    before_action :find_categories, only: [:index, :show, :edit, :new]
-    before_action :find_groupes, only: [:index, :show, :edit, :new]
-    before_action :find_services, only: [:index, :show, :edit, :new]
-    before_action :find_blog_utilisateurs, only: [:index, :show, :edit, :new]
+    before_action :find_classes, only: [:index, :show, :edit, :new, :update]
+    before_action :find_categories, only: [:index, :show, :edit, :new, :update]
+    before_action :find_groupes, only: [:index, :show, :edit, :new, :update]
+    before_action :find_reviewcats, only: [:edit, :new, :update]
+    before_action :find_services, only: [:index, :show, :edit, :new, :update]
+    before_action :find_blog_utilisateurs, only: [:index, :show, :edit, :new, :update]
 
     
 
@@ -96,7 +97,7 @@ class BlogMessagesController < ApplicationController
             flash[:notice] = "Article modifié avec succès"
             redirect_to blog_messages_path
         else
-            redirect_to :edit
+            render :edit
         end
     end
 
@@ -163,6 +164,13 @@ class BlogMessagesController < ApplicationController
         @blog_groupes = Hash.new
         Groupe.all.each do |s|
             @blog_groupes[s.id] = s.nom
+        end
+    end
+
+    def find_reviewcats
+        @blog_reviewcats = Hash.new
+        Reviewcat.all.each do |s|
+            @blog_reviewcats[s.id] = s.cat
         end
     end
 

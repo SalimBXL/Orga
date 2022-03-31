@@ -1,0 +1,17 @@
+<% session[:page_aide] = "classes_reviewcats" %>
+
+<div class="container">
+<h1>
+    <span class="label label-primary">
+        <%= I18n.t("reviewcats.index.titre").upcase %>
+    </span>
+</h1>
+
+<%= render partial: "add" %>
+
+<div id="reviewcats">
+    <%= render 'reviewcats' %>
+</div>
+
+<%= render partial: "add" %>
+</div>

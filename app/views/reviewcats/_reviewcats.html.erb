@@ -1,0 +1,8 @@
+<p><%= paginate @reviewcats, remote: true %></p>
+<table class="table table-striped">
+    <tr>
+        <th><%= I18n.t("reviewcats.form.cat") %></th>
+        <th></th></tr>
+    <%= render @reviewcats %>
+</table>
+<p><%= paginate @reviewcats, remote: true %></p>

@@ -1,10 +1,10 @@
 <%= form_with model: @blog_message, local: true do |form| %>
 
     <% if @blog_message.errors.any? %>
-        <strong>WARNING</strong>
+        <strong class="bg-danger">WARNING</strong>
         <ul>
             <% @blog_message.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
+                <li class="text-danger"><%= message %></li>
             <% end %>
         </ul>
     <% end %>
@@ -96,28 +96,56 @@
     </td>
     <td>&nbsp;&nbsp;&nbsp;</td>
     <td>&nbsp;&nbsp;&nbsp;</td>
-    
+    </tr>
+    </table>
+
+    <hr/>
+
+
     <!-- LOGBOOK & REVIEWED -->
+    <table>
+    <tr>
     <td>
         <h6>
             <span class="label label-danger  material-icons">local_library</span>
-            <br><%= form.label I18n.t("blog_messages.new.logbook") %>
+        </h6>
+    </td>
+    <td>
+        <h6>
+            <%= form.label I18n.t("blog_messages.new.logbook") %>
             <%= form.check_box :logbook %>
-
-            <% if @blog_message.logbook %>
-                <% unless current_user.utilisateur.id == @blog_message.utilisateur_id %>
-                    <% if user_signed_in? && (is_super_admin? || is_manager?) %>
-                        <br><%= form.label I18n.t("blog_messages.new.reviewed") %>
-                        <%= form.check_box :reviewed %>
-                    <% end %>
+        </h6>
+    </td>
+    <td>
+        <% if @blog_message.logbook %>
+            <% unless current_user.utilisateur.id == @blog_message.utilisateur_id %>
+                <% if user_signed_in? && (is_super_admin? || is_manager?) %>
+                    <br><%= form.label I18n.t("blog_messages.new.reviewed") %>
+                    <%= form.check_box :reviewed %>
                 <% end %>
             <% end %>
-        </h6>
+        <% end %>
+    </td>
+    <td>
+        <% if @blog_message.reviewed %>
+            <% unless current_user.utilisateur.id == @blog_message.utilisateur_id %>
+                <% if user_signed_in? && (is_super_admin? || is_manager?) %>
+                    
+                    <%= form.select(:reviewcat) do %>
+                        <%= select_option_tag("", nil, @blog_message.reviewcat) %>
+                        <% @blog_reviewcats.keys.each do |l| %>
+                            <%= select_option_tag(@blog_reviewcats[l].capitalize, l, @blog_message.reviewcat) %>
+                    <% end %>
+                <% end %>
+
+                <% end %>
+            <% end %>
+        <% end %>
     </td>
     </tr>
     </table>
 
-
+    <hr />
     <!-- Submit -->
     <p>
         <%= form.submit class: "btn btn-primary" %>

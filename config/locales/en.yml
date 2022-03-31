@@ -456,6 +456,7 @@ en:
       no_schedule: Nothing planned for today in your agenda.
       not_yet_validated_absences: Not yet validated absences
       note_yet_validated_absences: Note yet validated absences
+      reviewcats: Reviewcats
       secretary: Secretary
       services: Services
       sous_titre: Team Manager
@@ -591,6 +592,11 @@ en:
       user: User
     index:
       titre: Post-its
+  reviewcats:
+    form:
+      cat: Cat
+    index:
+      titre: Titre
   services:
     index:
       log_destroy: destroy
