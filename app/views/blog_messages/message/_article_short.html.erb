@@ -10,9 +10,7 @@
             - <i>[<a href="<%= blog_messages_path(utilisateur_id: blog_message.utilisateur_id) %>" class="btn btn-link btn-xs" role="button"><%= @blog_utilisateurs[blog_message.utilisateur_id] %></a>]</i>
             - <a href="<%= blog_messages_path(blog_category_id: blog_message.blog_category_id) %>" class="btn btn-info btn-xs" role="button"><%= @blog_categories[blog_message.blog_category_id] %></a>
 
-            #######
-            # A REVOIR
-            #######
+
             <% nbr_reponses = BlogResponse.where(blog_message_id: blog_message.id).size %>
 
             <% if nbr_reponses and nbr_reponses > 0 %>
@@ -28,6 +26,8 @@
                 <% unless blog_message.reviewed %>
                     &nbsp;&nbsp;&nbsp;
                     <span class="label label-danger">Not yet reviewed !</span>
+                <% else %>
+                    <span class="label label-danger"><%= @reviewcats[blog_message.reviewcat] %></span>
                 <% end %>
             <% end %>
         </div>

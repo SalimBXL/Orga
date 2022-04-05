@@ -3,36 +3,38 @@
     <!-- HEADER -->
     <%= render "header" %>
 
-    <!-- TODAY -->
-    <%= render "today" if user_signed_in? %>
+    <% if user_signed_in? %>
 
-    <!-- ADMIN MENU -->
-    <%= render "barre_menu_rapide" if user_signed_in? and is_super_admin? %>
-    
-    <!-- MENU -->
-    <%= render "barre_menu" if user_signed_in? %>
+        <!-- TODAY -->
+        <%= render "today" %>
 
-    <br />
+        <!-- ADMIN MENU -->
+        <%= render "barre_menu_rapide" if is_super_admin? %>
+        
+        <!-- MENU -->
+        <%= render "barre_menu" %>
 
-    <%= render partial: "postits" if user_signed_in? %>
+        <br />
 
-    <hr />
+        <%= render partial: "postits" %>
 
-    <!-- Barre Managers -->
-    <%= render partial: "barre_menu_manager" if user_signed_in? && is_manager? %>
+        <hr />
 
-    <br />
+        <!-- Barre Managers -->
+        <%= render partial: "barre_menu_manager" if is_manager? %>
 
-    <!-- CONNECTED -->
-    <%= render "last_connects" if user_signed_in? and is_super_admin? %>
+        <br />
 
-    <!-- BUGS -->
-    <% if user_signed_in? && is_super_admin? %>
-        <p>
-            <%= "#{@bugs_new} new bug(s)." if @bugs_new > 0 %> 
-            <%= "#{@bugs_test} bug(s) on test." if @bugs_test > 0 %>
-        </p>
+        <!-- CONNECTED -->
+        <%= render "last_connects" if is_super_admin? %>
+
+        <!-- BUGS -->
+        <% if is_super_admin? %>
+            <p>
+                <%= "#{@bugs_new} new bug(s)." if @bugs_new > 0 %> 
+                <%= "#{@bugs_test} bug(s) on test." if @bugs_test > 0 %>
+            </p>
+        <% end %>
     <% end %>
-
 </div>
 

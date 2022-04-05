@@ -43,11 +43,17 @@ class BlogMessagesController < ApplicationController
         # Logbook reviewed seulement
         @blog_messages = BlogMessage.where(logbook: true, reviewed: nil).order(date: :desc).page(params[:page]) if params[:reviewed]
         
+        
         # Toutes les entrées...
         #@blog_messages = BlogMessage.order(date: :desc).page(params[:page]) if @blog_messages.nil?
         if @blog_messages.nil?
             params[:service_id] = @current_user.utilisateur.service_id
             @blog_messages = BlogMessage.where(service_id: params[:service_id]).order(date: :desc).page(params[:page])
+        end
+
+        @reviewcats = Hash.new
+        Reviewcat.all.each do |r|
+            @reviewcats[r.id] = r.cat
         end
     end
 
@@ -59,6 +65,7 @@ class BlogMessagesController < ApplicationController
         log(request.path)
         @responses = BlogResponse.where(blog_message_id: @blog_message.id)
         @reviewer = @blog_message.reviewer ? Utilisateur.find(@blog_message.reviewer).prenom_nom : nil
+        @reviewcat = @blog_message.reviewcat ? Reviewcat.find(@blog_message.reviewcat).cat : nil
         wiki_id = WikiPage.where(blog_message_id: @blog_message.id).first
         @wiki_id = (wiki_id.nil?) ? nil : wiki_id.id
     end
@@ -127,9 +134,11 @@ class BlogMessagesController < ApplicationController
         @blog_message.reviewed = true if @blog_message.logbook and @blog_message.reviewed.nil?
         @blog_message.reviewer = current_user.utilisateur.id if @blog_message.reviewed = true
         if @blog_message.update(reviewed: @blog_message.reviewed, reviewer: @blog_message.reviewer)
-            flash[:notice] = "Article modifié avec succès"
-        end
+            #flash[:notice] = "Article modifié avec succès"
+            redirect_to edit_blog_message_path(@blog_message)
+        else 
         redirect_to blog_messages_path
+        end
     end
 
 
@@ -138,7 +147,7 @@ class BlogMessagesController < ApplicationController
     private 
 
     def message_params
-        params.require(:blog_message).permit(:service_id, :title, :date, :utilisateur_id, :description, :blog_category_id, :groupe, :classe, :logbook, :reviewed)
+        params.require(:blog_message).permit(:service_id, :title, :date, :utilisateur_id, :description, :blog_category_id, :groupe, :classe, :logbook, :reviewed, :reviewcat)
     end
 
     def find_message

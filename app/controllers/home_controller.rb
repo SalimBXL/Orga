@@ -10,6 +10,9 @@ class HomeController < ApplicationController
         fichier = "app/../last_git_date.txt"
         @last_git_date = File.exist?(fichier) ? format_last_git_date(File.read(fichier)) : @last_git_date = nil
 
+
+        redirect_to "/users/sign_in" unless user_signed_in?
+
         # Check les jobs du user courant
         get_today if user_signed_in?
 
