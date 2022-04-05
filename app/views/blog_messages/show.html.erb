@@ -86,12 +86,18 @@
         <a href="<%= new_blog_response_path(blog_message_id: @blog_message) %>" class="btn btn-success btn-xs" role="button"><%= I18n.t("blog_messages.show.respond") %></a>
 
         <!-- review -->
-        <% if @blog_message.logbook and !@blog_message.reviewed and (is_manager_or_super_admin?) and !(current_user.utilisateur.id == @blog_message.utilisateur_id) %>
-            &nbsp;&nbsp;&nbsp;
-            <a href="<%= review_blog_message_path(id: @blog_message) %>" 
-                class="btn btn-danger btn-xs" role="button">
-                <%= I18n.t("blog_messages.show.review") %>
-            </a>
+
+        
+
+        <% if @blog_message.logbook and (!@blog_message.reviewed or @blog_message.reviewed.nil?)  %>
+            
+            <% if is_manager_or_super_admin? and !(current_user.utilisateur.id == @blog_message.utilisateur_id) %>
+                &nbsp;&nbsp;&nbsp;
+                <a href="<%= review_blog_message_path(id: @blog_message) %>" 
+                    class="btn btn-danger btn-xs" role="button">
+                    <%= I18n.t("blog_messages.show.review") %>
+                </a>
+            <% end %>
         <% end %>
 
     </p>
