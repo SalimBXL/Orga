@@ -1,0 +1,17 @@
+<tr id="log_repport_<%= log_repport.id %>">
+    <td><%= log_repport.date %></td>
+    <td><%= log_repport.hour %></td>
+    <td><%= log_repport.controller %></td>
+    <td><%= log_repport.action %></td>
+    <td><%= log_repport.count %></td>
+    <td>
+    <% if user_signed_in? && is_super_admin? %>
+        <%= link_to '[edit]', edit_log_repport_path(log_repport) %>
+        <%= link_to '[delete]', log_repport_path(log_repport),
+            method: :delete,
+            remote: true,
+            data: { confirm: "Delete #{log_repport.created_at}  ?" }
+        %>
+    <% end %>
+    </td>
+</tr>

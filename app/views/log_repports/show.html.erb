@@ -1,0 +1,21 @@
+<div class="container">
+<h1>
+    <%= @log_repport.created_at %>
+</h1>
+
+<p>
+    <%= @log_repport.controller %>
+</p>
+
+<p>
+    <%= @log_repport.action %>
+</p>
+
+<p>
+    <%= @log_repport.count %>
+</p>
+
+<p>
+    <%= link_to " [Edit] ", edit_log_repport_path(@log_repport) %>
+</p>
+</div>

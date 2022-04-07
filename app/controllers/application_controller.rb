@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   #before_action :checkCurrentUserIsLogged
   before_action :set_locale
   before_action :set_page_aide
+  before_action :add_log_repport
+
 
   def set_postit_utilisateur
     @postit.utilisateur = current_user.utilisateur if @postit.utilisateur.nil?
@@ -161,6 +163,42 @@ class ApplicationController < ActionController::Base
     cookies[:locale] = { value: locale, expires: Date.today+3.days }
   end
 
+  def add_log_repport
+    controller = params[:controller]
+    action = params[:action]
+
+    unless (
+      controller == "log_repports" || 
+      controller == "logs" ||
+      (controller == "devise/sessions" && 
+        (
+          action == "new" || 
+          action == "destroy"
+        )
+      )
+    )
+      now = DateTime.now
+      month = now.month < 10 ? "0#{now.month}" : "#{now.month}"
+      day = now.day < 10 ? "0#{now.day}" : "#{now.day}"
+      date = "#{now.year}-#{month}-#{day}"
+      hour = now.hour < 10 ? "0#{now.hour}" : "#{now.hour}"
+      log_repport = find_lrepport(controller, action, date, hour)
+      count = 1
+      if log_repport.nil?
+        log_repport = LogRepport.new
+        log_repport = LogRepport.create(controller: controller, action: action, count: count, date: date, hour: hour)
+      else 
+        count = log_repport.count + 1
+        log_repport.update(count: count)
+        if log_repport.save
+          # ok
+        else
+          flash[:alert] = I18n.t("logs.index.problem_to_save_logs_in_db")
+        end
+      end
+    end
+  end
+
 
   def after_login
     if user_signed_in?
@@ -249,6 +287,11 @@ end
             @current_service = nil
         end
     end
+  end
+
+  def find_lrepport(controller, action, date, hour)
+    log_repport = LogRepport.where("controller = ? AND action = ? AND date = ? AND hour = ?", controller, action, date, hour)
+    log_repport = log_repport.length < 1 ? nil : log_repport.first
   end
 
 

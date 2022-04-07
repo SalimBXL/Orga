@@ -159,6 +159,7 @@ Rails.application.routes.draw do
   #  Logs  #
   ##########
   resources :logs, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
+  resources :log_repports, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
 
   
   #####################

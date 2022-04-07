@@ -1,0 +1,13 @@
+<p><%= paginate @log_repports, remote: true %></p>
+<table class="table table-condensed">
+    <tr>
+        <th>DATE</th>
+        <th>HOUR</th>
+        <th>CONTROLLER</th>
+        <th>ACTION</th>
+        <th>COUNT</th>
+        <th></th>
+    </tr>
+    <%= render @log_repports %>
+</table>
+<p><%= paginate @log_repports, remote: true %></p>

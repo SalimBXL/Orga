@@ -190,6 +190,17 @@ ActiveRecord::Schema[7.0].define(version: 2020091012140633) do
     t.datetime "updated_at", precision: nil, null: false
   end
 
+  create_table "log_repports", force: :cascade do |t|
+    t.string "controller"
+    t.text "action"
+    t.integer "count"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.date "date"
+    t.integer "hour"
+    t.integer "minute"
+  end
+
   create_table "logs", force: :cascade do |t|
     t.datetime "date", precision: nil
     t.string "adresse"

@@ -1,0 +1,40 @@
+<%= form_with model: @log_repport, local: true do |form| %>
+
+    <% if @log_repport.errors.any? %>
+        <strong>WARNING</strong>
+        <ul>
+            <% @log_repport.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
+
+    
+
+    <!-- Date -->
+    <p>
+        <%= form.date_field :created_at %>
+    </p>
+
+    <!-- Adresse -->
+    <p>
+        <%= form.text_field :controller %>
+    </p>
+
+    <!-- Utilisateur -->
+    <p>
+        <%= form.text_field :action %>
+    </p>
+
+
+    <!-- Description -->
+    <p>
+        <%= form.text_field :count %>
+    </p>
+
+
+
+    <p>
+        <%= form.submit class: "btn btn-primary" %>
+    </p>
+<% end %>
