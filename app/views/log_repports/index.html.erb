@@ -5,6 +5,33 @@
             <%= I18n.t("logs.index.titre").upcase %>
         </span>
     </h1>
+
+
+    <div>
+        <% table_length = 60 %>
+        <table class="table table-condensed" >
+            <thead>
+                <tr>
+                    <% for i in 0..table_length %>
+                        <th>
+                            <%= (Date.today - (table_length - i).days).day %>
+                        </th>
+                    <% end %>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <% for i in 0..table_length %>
+                        <td>
+                            <%= @datas_by_day[(Date.today - (table_length - i).days)] %>
+                        </td>
+                    <% end %>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
     <div id="log_repports">
         <%= render 'log_repports' %>
     </div>
