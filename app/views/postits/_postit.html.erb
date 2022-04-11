@@ -40,7 +40,7 @@
 
         
         <td>
-
+            <%= "Created at #{postit.created_at}" if postit.level != 0 %>
             <%= "Done at #{postit.done_at}" if postit.level == 0 %>
         </td>
 
