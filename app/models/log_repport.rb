@@ -1,4 +1,4 @@
 class LogRepport < ApplicationRecord
-    validates :controller, :action, :count, presence: true
+    validates :date, :hour, :controller, :count, presence: true
 
 end

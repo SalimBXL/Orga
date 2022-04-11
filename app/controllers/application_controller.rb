@@ -186,7 +186,8 @@ class ApplicationController < ActionController::Base
       count = 1
       if log_repport.nil?
         log_repport = LogRepport.new
-        log_repport = LogRepport.create(controller: controller, action: action, count: count, date: date, hour: hour)
+        #log_repport = LogRepport.create(controller: controller, action: action, count: count, date: date, hour: hour)
+        log_repport = LogRepport.create(controller: controller, count: count, date: date, hour: hour)
       else 
         count = log_repport.count + 1
         log_repport.update(count: count)
@@ -290,7 +291,8 @@ end
   end
 
   def find_lrepport(controller, action, date, hour)
-    log_repport = LogRepport.where("controller = ? AND action = ? AND date = ? AND hour = ?", controller, action, date, hour)
+    #log_repport = LogRepport.where("controller = ? AND action = ? AND date = ? AND hour = ?", controller, action, date, hour)
+    log_repport = LogRepport.where("controller = ? AND date = ? AND hour = ?", controller, date, hour)
     log_repport = log_repport.length < 1 ? nil : log_repport.first
   end
 
