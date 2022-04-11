@@ -14,10 +14,29 @@
                                 <%= postit.title %>
                                 
                                 <% if postit.level > 1 %>
-                                    <span class="label label-<%= postit.level_color %>">*</span>
+                                    <% mark = "*" %>
+                                    <% level_color = postit.level_color %>
+                                    <% colorTypo = "" %>
+
+                                    
+                                    <% if postit.level == 3 %>
+                                        <% peremption = (postit.created_at.to_date + 15.days) %>
+                                        <% level_color = "danger" if Date.today >= peremption %>
+                                    <% end %>
+
+                                    <% if postit.level == 4 %>
+                                        <% peremption = (postit.created_at.to_date + 7.days) %>
+                                        <% if Date.today >= peremption %>
+                                            <% level_color = "danger" %>
+                                            <% mark = "OUTDATED! #{peremption}" %>
+                                            <% colorTypo = "text-danger" %>
+                                        <% end %>
+                                    <% end %>
+
+                                    <span class="label label-<%= level_color %>"><%= mark %></span>
                                 <% end %>
                                 
-                                <%= postit.body %>
+                                <span class="<%= colorTypo %>"><%= postit.body %></span>
 
                                 <small>(<%= postit.utilisateur.initiales %>)</small>
                             </div>  
@@ -36,8 +55,8 @@
                                     <% end %>
 
 
-                                    <% if postit.level == 2 %>
-                                        <% if postit.taken.id == current_user.utilisateur.id %>
+                                    <% if postit.level == 2 or postit.is_private %>
+                                        <% if (postit.is_private) or (postit.is_private != true and postit.taken.id == current_user.utilisateur.id) %>
 
                                             <%= 
                                                 link_to "[Done!]", 
@@ -54,12 +73,8 @@
                                             </small>
                                         <% end %>
                                     <% end %>
-
-
-
                                 </div>
                             <% end %>
-                            
                         </div>
                     </div>
                 <% end %>
