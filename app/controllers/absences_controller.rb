@@ -1,7 +1,7 @@
 class AbsencesController < ApplicationController
     before_action :find_absence, only: [:show, :edit, :update, :destroy, :remove_one_day]
     before_action :check_logged_in
-    before_action :find_utilisateurs, only: [:grille, :edit]
+    before_action :find_utilisateurs, only: [:new, :grille, :edit]
 
     #############
     #   INDEX   #
@@ -50,7 +50,8 @@ class AbsencesController < ApplicationController
         @absence = Absence.new
         @absence.date = Date.today
         @absence.date_fin = @absence.date
-        find_utilisateurs if @utilisateurs.nil?
+        #find_utilisateurs if @utilisateurs.nil?
+        @utilisateurs = @utilisateurs.where(service_id: current_user.utilisateur.service_id) unless is_super_admin?
         log(request.path)
     end
 
@@ -112,6 +113,7 @@ class AbsencesController < ApplicationController
     #############
     def edit
         log(request.path, I18n.t("absences.index.log_edit"))
+        @utilisateurs = @utilisateurs.where(service_id: current_user.utilisateur.service_id) unless is_super_admin?
     end
 
     ##############

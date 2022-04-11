@@ -25,18 +25,21 @@
         <% if (current_user.utilisateur == absence.utilisateur and (absence.accord.nil? || !absence.accord) ) or
             (is_super_admin? || is_manager?)
         %>
-            <%= link_to '<span data-toggle="tooltip">
-                    <i class="material-icons">edit</i></span>'.html_safe, 
-                    edit_absence_path(absence),
-                    class: "btn btn-warning btn-xs" %>
-        <% end %>
 
-        <%= link_to '<i class="material-icons">close</i>'.html_safe, 
-                    absence_path(absence),
-                    method: :delete,
-                    remote: true,
-                    data: { confirm: "Delete #{absence.date} - #{absence.utilisateur.prenom_nom} - #{absence.type_absence.code} ?" },
-                    class: "btn btn-danger btn-xs" %>
+            <% if (current_user.utilisateur.service == absence.utilisateur.service) or is_super_admin? %>
+                <%= link_to '<span data-toggle="tooltip">
+                        <i class="material-icons">edit</i></span>'.html_safe, 
+                        edit_absence_path(absence),
+                        class: "btn btn-warning btn-xs" %>
+
+                <%= link_to '<i class="material-icons">close</i>'.html_safe, 
+                        absence_path(absence),
+                        method: :delete,
+                        remote: true,
+                        data: { confirm: "Delete #{absence.date} - #{absence.utilisateur.prenom_nom} - #{absence.type_absence.code} ?" },
+                        class: "btn btn-danger btn-xs" %>
+            <% end %>
+        <% end %>
         
     <% end %>
     </td>
