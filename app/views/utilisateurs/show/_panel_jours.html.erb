@@ -4,6 +4,8 @@
 <% tmp_lundi = nil %>
 <% tmp_jour = nil %>
 <% n_jour = 1 %>
+<% semaines_avant_semaine_actuelle = -2 %>
+<% semaines_après_semaine_actuelle = 17 %>
 
 <div class="panel panel-default ">    
     <div class="panel-body">
@@ -22,7 +24,7 @@
                 <th class="tdfixe">W</th>
             </tr>
             
-            <% for i in -2..8 %>
+            <% for i in semaines_avant_semaine_actuelle..semaines_après_semaine_actuelle %>
                 <% tmp_lundi = (Date.today + (i*7).days).beginning_of_week %>
                 
                 <!-- Ligne de semaine -->
