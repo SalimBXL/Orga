@@ -1,0 +1,36 @@
+<div class="container"><p style="color: green"><%= notice %></p>
+
+<h1>Productions</h1>
+
+<div id="productions">
+<div class="panel-body">
+    <table class="table table-striped table-hover "> 
+      <thead>
+        <tr>
+          <th>DateTime</th>
+          <th>User</th>
+          <th>Service</th>
+          <th>Quantity</th>
+          <th>Unit</th>
+          <th>Traceur</th>
+          <th>Destination</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+  <% @productions.each do |production| %>
+    
+      <%= render production %>
+    
+  <% end %>
+
+  
+          
+        
+      </tbody>
+    </table>
+</div>
+
+<%= link_to "New production", new_production_path %>
+</div>

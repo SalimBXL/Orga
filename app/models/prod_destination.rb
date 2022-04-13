@@ -1,0 +1,2 @@
+class ProdDestination < ApplicationRecord
+end

@@ -236,6 +236,36 @@ ActiveRecord::Schema[7.0].define(version: 2020091012140633) do
     t.index ["utilisateur_id"], name: "index_postits_on_utilisateur_id"
   end
 
+  create_table "prod_destinations", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "prod_units", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "productions", force: :cascade do |t|
+    t.bigint "traceur_id", null: false
+    t.float "quantity"
+    t.bigint "prod_unit_id", null: false
+    t.bigint "prod_destination_id", null: false
+    t.bigint "service_id", null: false
+    t.bigint "utilisateur_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "mesure_date"
+    t.time "mesure_time"
+    t.index ["prod_destination_id"], name: "index_productions_on_prod_destination_id"
+    t.index ["prod_unit_id"], name: "index_productions_on_prod_unit_id"
+    t.index ["service_id"], name: "index_productions_on_service_id"
+    t.index ["traceur_id"], name: "index_productions_on_traceur_id"
+    t.index ["utilisateur_id"], name: "index_productions_on_utilisateur_id"
+  end
+
   create_table "reviewcats", force: :cascade do |t|
     t.string "cat"
     t.datetime "created_at", null: false
@@ -302,6 +332,13 @@ ActiveRecord::Schema[7.0].define(version: 2020091012140633) do
     t.string "description"
     t.integer "service_id"
     t.integer "work3_1"
+  end
+
+  create_table "traceurs", force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "type_absences", force: :cascade do |t|
@@ -406,6 +443,11 @@ ActiveRecord::Schema[7.0].define(version: 2020091012140633) do
   add_foreign_key "messages", "services"
   add_foreign_key "messages", "utilisateurs"
   add_foreign_key "postits", "utilisateurs", column: "taken_id"
+  add_foreign_key "productions", "prod_destinations"
+  add_foreign_key "productions", "prod_units"
+  add_foreign_key "productions", "services"
+  add_foreign_key "productions", "traceurs"
+  add_foreign_key "productions", "utilisateurs"
   add_foreign_key "services", "lieus"
   add_foreign_key "tasks", "classes", column: "classe_id"
   add_foreign_key "tasks", "groupes"

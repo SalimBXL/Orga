@@ -1,0 +1,13 @@
+<div class="container"><p style="color: green"><%= notice %></p>
+
+<h1>Prod destinations</h1>
+
+<div id="prod_destinations">
+  <% @prod_destinations.each do |prod_destination| %>
+    <%= render prod_destination %>
+    
+  <% end %>
+</div>
+
+<%= link_to "New prod destination", new_prod_destination_path %>
+</div>

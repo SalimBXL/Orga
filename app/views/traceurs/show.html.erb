@@ -1,0 +1,12 @@
+<div class="container">
+<p style="color: green"><%= notice %></p>
+
+<%= render @traceur %>
+
+<div>
+  <%= link_to "Edit this traceur", edit_traceur_path(@traceur) %> |
+  <%= link_to "Back to traceurs", traceurs_path %>
+
+  <%= button_to "Destroy this traceur", @traceur, method: :delete %>
+</div>
+</div>

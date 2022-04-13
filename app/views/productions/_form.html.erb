@@ -1,0 +1,57 @@
+<%= form_with(model: production) do |form| %>
+  <% if production.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(production.errors.count, "error") %> prohibited this production from being saved:</h2>
+
+      <ul>
+        <% production.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :traceur_id, style: "display: block" %>
+    <%= form.text_field :traceur_id %>
+  </div>
+
+  <div>
+    <%= form.label :quantity, style: "display: block" %>
+    <%= form.text_field :quantity %>
+  </div>
+
+  <div>
+    <%= form.label :prod_unit_id, style: "display: block" %>
+    <%= form.text_field :prod_unit_id %>
+  </div>
+
+  <div>
+    <%= form.label :mesure_date, style: "display: block" %>
+    <%= form.text_field :mesure_date %>
+  </div>
+
+  <div>
+    <%= form.label :mesure_time, style: "display: block" %>
+    <%= form.text_field :mesure_time %>
+  </div>
+
+  <div>
+    <%= form.label :prod_destination_id, style: "display: block" %>
+    <%= form.text_field :prod_destination_id %>
+  </div>
+
+  <div>
+    <%= form.label :service_id, style: "display: block" %>
+    <%= form.text_field :service_id %>
+  </div>
+
+  <div>
+    <%= form.label :utilisateur_id, style: "display: block" %>
+    <%= form.text_field :utilisateur_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

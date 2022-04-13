@@ -2,10 +2,6 @@ Rails.application.routes.draw do
   
   devise_for :users
 
-
-  
-
-
 ##############################################################################
 
 
@@ -202,6 +198,15 @@ Rails.application.routes.draw do
   #############
   resources :hebdos, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
   get "grille_hebdos", to: "hebdos#grille"
+
+
+  ###################
+  #   Productions   #
+  ###################
+  resources :productions
+  resources :prod_units
+  resources :prod_destinations
+  resources :traceurs
 
 
   
