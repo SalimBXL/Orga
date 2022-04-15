@@ -86,4 +86,11 @@
         <!-- Barre Admins -->
         <%= render partial: "barre_menu_admin" if user_signed_in? && is_super_admin? %>
     </div>
+
+    <br />
+
+    <div class="row">
+        <!-- Barre Productions -->
+        <%= render partial: "barre_menu_production" if user_signed_in? && is_super_admin? %>
+    </div>
 </div>

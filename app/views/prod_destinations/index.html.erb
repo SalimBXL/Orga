@@ -1,13 +1,32 @@
-<div class="container"><p style="color: green"><%= notice %></p>
+<div class="container">
 
-<h1>Prod destinations</h1>
+  <h1>
+    <span class="label label-default">
+      <i class="material-icons">contact_mail</i>
+      Destinations
+    </span>
+  </h1>
+  
+  <br />
 
-<div id="prod_destinations">
-  <% @prod_destinations.each do |prod_destination| %>
-    <%= render prod_destination %>
-    
-  <% end %>
-</div>
+  <div class="row">
+  <%= render partial: "/home/barre_menu_production" %>
+  </div>
 
-<%= link_to "New prod destination", new_prod_destination_path %>
+  <br />
+
+  <p><%= link_to "+", new_prod_destination_path, class: "btn btn-success" %></p>
+
+  <div id="prod_destinations" class="row">
+    <% @prod_destinations.each do |prod_destination| %>
+      <div class="panel panel-default col-xs-4 col-sm-3" id="<%= dom_id prod_destination %>">
+        <div class="panel-body">
+          <%= render prod_destination %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <p><%= link_to "+", new_prod_destination_path, class: "btn btn-success" %></p>
+
 </div>

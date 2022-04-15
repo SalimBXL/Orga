@@ -15,6 +15,14 @@ class ToolsController < ApplicationController
     end
 
 
+    #############
+    # CALCULATE #
+    #############
+    def calculate
+        
+    end
+
+
     ##############
     # CHECK DAYS #
     ##############

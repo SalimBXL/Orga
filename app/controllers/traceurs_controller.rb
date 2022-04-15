@@ -25,7 +25,7 @@ class TraceursController < ApplicationController
 
     respond_to do |format|
       if @traceur.save
-        format.html { redirect_to traceur_url(@traceur), notice: "Traceur was successfully created." }
+        format.html { redirect_to traceurs_url(), notice: "Traceur was successfully created." }
         format.json { render :show, status: :created, location: @traceur }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class TraceursController < ApplicationController
   def update
     respond_to do |format|
       if @traceur.update(traceur_params)
-        format.html { redirect_to traceur_url(@traceur), notice: "Traceur was successfully updated." }
+        format.html { redirect_to traceurs_url(), notice: "Traceur was successfully updated." }
         format.json { render :show, status: :ok, location: @traceur }
       else
         format.html { render :edit, status: :unprocessable_entity }

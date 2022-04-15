@@ -1,6 +1,19 @@
-<div id="<%= dom_id prod_unit %>">
-  <p>
-    <%= prod_unit.name %>
-  </p>
-
-</div>
+<table>
+  <tr>
+    <td>
+      <h3><%= prod_unit.name %></h3>
+      <br />
+    </td>
+    <td>
+      <div class="btn-group">
+        <%= link_to "Edit", edit_prod_unit_path(prod_unit), class: "btn btn-xs btn-warning" %>
+        <%= link_to "Delete", prod_unit, 
+            method: :delete, 
+            class: "btn btn-xs btn-danger",
+            remote: true,
+            data: { confirm: "Delete #{prod_unit.name} ?" }
+          %>
+      </div>
+    </td>
+  </tr>
+</table>

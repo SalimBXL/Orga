@@ -11,45 +11,67 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :traceur_id, style: "display: block" %>
-    <%= form.text_field :traceur_id %>
+
+  <div clas="row">
+    <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th><%= form.label :traceur_id, style: "display: block" %></th>
+        <th><%= form.label :quantity, style: "display: block" %></th>
+        <th><%= form.label :prod_unit_id, style: "display: block" %></th>
+        <th><%= form.label :mesure_time, style: "display: block" %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <%= form.select(:traceur_id) do %>
+            <%= select_option_tag("", nil, production.traceur_id) %>
+            <% Traceur.all.order(:name).each do |l| %>
+                <%= select_option_tag(l.code.capitalize, l.id, production.traceur_id) %>
+            <% end %>
+          <% end %>
+        </td>
+        <td>
+          <%= form.text_field :quantity %>
+        </td>
+        <td>
+          <%= form.text_field :prod_unit_id %>
+        </td>
+        <td>
+          <%= form.text_field :mesure_time %>
+        </td>
+      </tr>
+    </tbody>
+    </table>
   </div>
 
-  <div>
-    <%= form.label :quantity, style: "display: block" %>
-    <%= form.text_field :quantity %>
+  <div clas="row">
+    <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th><%= form.label :prod_destination_id, style: "display: block" %></th>
+        <th><%= form.label :service_id, style: "display: block" %></th>
+        <th><%= form.label :utilisateur_id, style: "display: block" %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <%= form.text_field :prod_destination_id %>
+        </td>
+        <td>
+          <%= form.text_field :service_id %>
+        </td>
+        <td>
+          <%= form.text_field :utilisateur_id %>
+        </td>
+      </tr>
+    </tbody>
+    </table>
   </div>
 
-  <div>
-    <%= form.label :prod_unit_id, style: "display: block" %>
-    <%= form.text_field :prod_unit_id %>
-  </div>
-
-  <div>
-    <%= form.label :mesure_date, style: "display: block" %>
-    <%= form.text_field :mesure_date %>
-  </div>
-
-  <div>
-    <%= form.label :mesure_time, style: "display: block" %>
-    <%= form.text_field :mesure_time %>
-  </div>
-
-  <div>
-    <%= form.label :prod_destination_id, style: "display: block" %>
-    <%= form.text_field :prod_destination_id %>
-  </div>
-
-  <div>
-    <%= form.label :service_id, style: "display: block" %>
-    <%= form.text_field :service_id %>
-  </div>
-
-  <div>
-    <%= form.label :utilisateur_id, style: "display: block" %>
-    <%= form.text_field :utilisateur_id %>
-  </div>
+    
 
   <div>
     <%= form.submit %>

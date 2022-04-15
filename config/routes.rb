@@ -38,6 +38,8 @@ Rails.application.routes.draw do
   get "download_backup", to: "tools#download_backup"
   get "statistics", to: "tools#statistics"
 
+  get "calculate", to: "tools#calculate"
+
 
   ####################
   #   Configuration  #

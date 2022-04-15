@@ -1,5 +1,6 @@
 class ProductionsController < ApplicationController
   before_action :set_production, only: %i[ show edit update destroy ]
+  before_action :get_traceurs, only: %i[ edit, new, create, update ]
 
   # GET /productions or /productions.json
   def index
@@ -66,5 +67,9 @@ class ProductionsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def production_params
       params.require(:production).permit(:traceur_id, :quantity, :prod_unit_id, :mesure_date, :mesure_time, :prod_destination_id, :service_id, :utilisateur_id)
+    end
+
+    def get_traceurs
+      @traceurs = Traceur.all.order(:name)
     end
 end

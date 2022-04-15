@@ -1,16 +1,15 @@
 <tr id="<%= dom_id production %>">
-<td><%= production.mesure_time %></td>
 <td><%= production.utilisateur.prenom_nom %></td>
 <td><%= production.service.nom %></td>
 <td><%= production.quantity %></td>
 <td><%= production.prod_unit.name %></td>
 <td><%= production.traceur.code %></td>
+<td><%= production.mesure_time %></td>
 <td><%= production.prod_destination.name %></td>
 <td>
 <div class="btn-group">
   <%= link_to "Edit", edit_production_path(production), class: "btn btn-xs btn-warning" %>
-  <button type="button" class="btn btn-xs btn-danger">Delete</button>
-  
+  <%= link_to "Delete", production, method: :delete, class: "btn btn-xs btn-danger" %>
 </div>
 </td>
 </tr>

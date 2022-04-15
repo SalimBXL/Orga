@@ -25,7 +25,7 @@ class ProdUnitsController < ApplicationController
 
     respond_to do |format|
       if @prod_unit.save
-        format.html { redirect_to prod_unit_url(@prod_unit), notice: "Prod unit was successfully created." }
+        format.html { redirect_to prod_units_url(), notice: "Prod unit was successfully created." }
         format.json { render :show, status: :created, location: @prod_unit }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class ProdUnitsController < ApplicationController
   def update
     respond_to do |format|
       if @prod_unit.update(prod_unit_params)
-        format.html { redirect_to prod_unit_url(@prod_unit), notice: "Prod unit was successfully updated." }
+        format.html { redirect_to prod_units_url(), notice: "Prod unit was successfully updated." }
         format.json { render :show, status: :ok, location: @prod_unit }
       else
         format.html { render :edit, status: :unprocessable_entity }

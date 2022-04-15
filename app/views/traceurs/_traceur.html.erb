@@ -1,4 +1,19 @@
-
-    <strong>Code:</strong><%= traceur.code %>
-    <br />
-    <strong>Name:</strong><%= traceur.name %>
+<table>
+    <tr>
+        <td>
+            <h3><%= traceur.code %></h3>
+            <br /><%= traceur.name %>
+        </td>
+        <td>
+            <div class="btn-group">
+                <%= link_to "Edit", edit_traceur_path(traceur), class: "btn btn-xs btn-warning" %>
+                <%= link_to "Delete", traceur, 
+                    method: :delete, 
+                    class: "btn btn-xs btn-danger",
+                    remote: true,
+                    data: { confirm: "Delete #{traceur.code} ?" }
+                 %>
+            </div>
+        </td>
+    </tr>
+</table>
