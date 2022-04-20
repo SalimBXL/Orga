@@ -11,47 +11,5 @@
 
 <div class="container">
 
-    <form action="/action_page.php" 
-        oninput="result.value=`${parseInt(value.value)}+${unit}`">
-    
-        <div class="row">
-            <div class="col-md-4">
-                <fieldset>
-                    <legend>Data</legend>
-
-                    <p>
-                        <label>Time : </label>
-                        <input type="datetime-local" id="dateheure" name="dateheure">
-                    </p>
-
-                    <p>
-                        <label>Value : </label>
-                        <input type="text" name="value" id="value">
-                    </p>
-
-                    <p>
-                        <label>Unit : </label>
-                        <input list="unit">
-                        <datalist id="unit">
-                            <option>GBq</option>
-                            <option>MBq</option>
-                            <option>Bq</option>
-                        </datalist>
-                    </p>
-                </fieldset>
-            </div>
-
-            <div class="col-md-4">
-                <fieldset>
-                    <legend>Result</legend>
-                    <p>
-                        <h1>
-                            <output name="result"></output>
-                        </h1>
-                    </p>
-                </fieldset>
-            </div>
-        </div>
-    </form>
     
 </div>

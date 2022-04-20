@@ -19,7 +19,6 @@ class ToolsController < ApplicationController
     # CALCULATE #
     #############
     def calculate
-        
     end
 
 
