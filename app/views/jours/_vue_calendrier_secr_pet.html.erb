@@ -29,7 +29,7 @@
                         utilisateur: utilisateur, 
                         jours: jours,
                         service: service
-                    } %>
+                    } unless utilisateur.inactive %>
             <% end %>
         </table>
 
