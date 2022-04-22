@@ -9,7 +9,29 @@
     </div>
 </div>
 
+<% apps = [
+    { name: "nuclear decay", description: "a simple decay calculator", link: "http://http://135.125.201.138/decay/" }
+    
+] %>
+
 <div class="container">
 
+    <div class="row">
+
+        <% apps.each do |app| %>
+            <div class="col-md-4">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <%= app[:name].titleize %>
+                    </div>
+                    <div class="panel-body">
+                        <%= app[:description].capitalize %>
+                        <hr />
+                        <%= link_to "Launch", app[:link].downcase, target: "_blank", class: "btn btn-xs btn-primary" %>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+    </div>
     
 </div>
