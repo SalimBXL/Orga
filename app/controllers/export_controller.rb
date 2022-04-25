@@ -64,6 +64,8 @@ class ExportController < ApplicationController
                 article[:category] = blog_message.blog_category_id ? BlogCategory.find(blog_message.blog_category_id) : nil
                 article[:groupe] = blog_message.groupe ? Groupe.find(blog_message.groupe) : nil
                 article[:classe] = blog_message.classe ? Classe.find(blog_message.classe) : nil
+                article[:reviewer] = blog_message.reviewer ? Utilisateur.find(blog_message.reviewer) : nil
+                article[:reviewcat] = blog_message.reviewcat ? Reviewcat.find(blog_message.reviewcat) : nil
                 @blog_messages << article
         elsif params[:date]
             liste = BlogMessage.where("date >= ? and date <= ?", params[:date].to_datetime.strftime("%Y-%m-%d"), params[:date].to_datetime.end_of_month.strftime("%Y-%m-%d")).where(logbook: true).order(:date)
@@ -76,6 +78,8 @@ class ExportController < ApplicationController
                 article[:category] = blog_message.blog_category_id ? BlogCategory.find(blog_message.blog_category_id) : nil
                 article[:groupe] = blog_message.groupe ? Groupe.find(blog_message.groupe) : nil
                 article[:classe] = blog_message.classe ? Classe.find(blog_message.classe) : nil
+                article[:reviewer] = blog_message.reviewer ? Utilisateur.find(blog_message.reviewer) : nil
+                article[:reviewcat] = blog_message.reviewcat ? Reviewcat.find(blog_message.reviewcat) : nil
                 @blog_messages << article
             end
         end

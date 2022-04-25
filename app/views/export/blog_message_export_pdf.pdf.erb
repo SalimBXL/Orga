@@ -36,6 +36,14 @@
             </i>
         </strong>
         
+        <% if blog_message[:reviewer] %>
+            &nbsp;&nbsp;<small>
+            (
+                Reviewed by <%= blog_message[:reviewer].prenom_nom %>
+                <% if blog_message[:reviewcat] %> as <strong>[<%= blog_message[:reviewcat].cat.upcase %>]</strong><% end %>
+            )</small>
+        <% end %>
+        
         <!-- DATES AND KEYWORDS -->
         <h3>
             <strong>
