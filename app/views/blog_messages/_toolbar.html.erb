@@ -63,14 +63,10 @@
                     <!-- DATE -->
                     <form id="search" action="<%= blog_messages_path %>">
                             <p data-toggle="tooltip" title="Find all the entries in the selected month since the selected day.">
-                                <%= date_field_tag :date, '' %>
-                            </p>
-                            
-                            <p>
                                 <%= month_field_tag :date, '' %>
-                            </p>
                             
-                            <p>
+                            
+                            
                                 <span  data-toggle="tooltip" title="Filtering on logbook entries only">
                                     <%= check_box_tag :logbook, true, true %> Logbook
                                 </span>
