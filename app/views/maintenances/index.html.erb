@@ -1,0 +1,31 @@
+<div class="container">
+<p style="color: green"><%= notice %></p>
+
+<h1>
+  <span class="label label-warning"><i class="material-icons">engineering</i> Maintenances</span>
+</h1>
+
+<%= link_to '<i class="material-icons">add</i>'.html_safe, new_maintenance_path, class: "btn btn-success btn-xs" %>
+
+<div id="maintenances">
+  <table class="table table-hover">
+    <thead>
+        <tr>
+          <th>From</th>
+          <th>To</th>
+          <th></th>
+          <th>Maintenance Name</th>
+          <th>Contact</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>    
+        <% @maintenances.each do |maintenance| %>
+          <%= render maintenance %>
+        <% end %>
+      </tbody>
+  </table>
+</div>
+
+<%= link_to '<i class="material-icons">add</i>'.html_safe, new_maintenance_path, class: "btn btn-success btn-xs" %>
+</div>

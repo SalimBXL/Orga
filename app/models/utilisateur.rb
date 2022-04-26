@@ -8,6 +8,7 @@ class Utilisateur < ApplicationRecord
     has_many :demande_conges, dependent: :destroy
     has_many :hebdos, dependent: :destroy
     has_many :postits, dependent: :destroy
+    has_many :maintenance
     validates_associated :absences
     validates_associated :jours
     validates :nom, :prenom, :email, presence: true

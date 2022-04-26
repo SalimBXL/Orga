@@ -1,0 +1,34 @@
+<% rest = (maintenance.date_start > Date.today) ? (Date.today...maintenance.date_start).count : "" %>
+
+<% contact = Utilisateur.find(maintenance.contact_id) %>
+
+<% bg = "" %>
+<% bg = "warning" if Date.today >= maintenance.date_start-15.days %>
+<% bg = "danger" if Date.today >= maintenance.date_start-5.days %>
+<% bg = "success" if maintenance.date_start <= Date.today and maintenance.date_end >= Date.today %>
+<% bg = "active" if maintenance.date_end < Date.today %>
+
+
+<tr id="<%= dom_id maintenance %>" class="<%= bg %>">
+  <td><%= maintenance.date_start %></td>
+  <td><%= maintenance.date_end %></td>
+  <td><%= rest %></td>
+  <td><%= maintenance.name %></td>
+  <td><%= contact.prenom_nom %></td>
+  <td>
+    <% if user_signed_in? && (is_manager? || current_user.utilisateur.id == maintenance.creator_id || current_user.utilisateur.id == maintenance.contact_id) %>
+        <%= link_to '<span data-toggle="tooltip">
+            <i class="material-icons">edit</i></span>'.html_safe, 
+            edit_maintenance_path(maintenance),
+            class: "btn btn-warning btn-xs" %>
+
+        <%= link_to '<span data-toggle="tooltip">
+            <i class="material-icons">close</i>'.html_safe, 
+            maintenance_path(maintenance),
+            method: :delete,
+            remote: true,
+            data: { confirm: "Delete #{maintenance.name} (#{maintenance.date_start}/#{maintenance.date_end}) ?" },
+            class: "btn btn-danger btn-xs" %>
+    <% end %>
+  </td>
+</tr>

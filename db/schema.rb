@@ -210,6 +210,18 @@ ActiveRecord::Schema[7.0].define(version: 2020091012140633) do
     t.datetime "updated_at", precision: nil, null: false
   end
 
+  create_table "maintenances", force: :cascade do |t|
+    t.string "name"
+    t.date "date_start"
+    t.date "date_end"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "creator_id"
+    t.bigint "contact_id"
+    t.index ["contact_id"], name: "index_maintenances_on_contact_id"
+    t.index ["creator_id"], name: "index_maintenances_on_creator_id"
+  end
+
   create_table "messages", force: :cascade do |t|
     t.bigint "service_id"
     t.string "note"
@@ -440,6 +452,8 @@ ActiveRecord::Schema[7.0].define(version: 2020091012140633) do
   add_foreign_key "hebdos", "utilisateurs"
   add_foreign_key "jours", "services"
   add_foreign_key "jours", "utilisateurs"
+  add_foreign_key "maintenances", "utilisateurs", column: "contact_id"
+  add_foreign_key "maintenances", "utilisateurs", column: "creator_id"
   add_foreign_key "messages", "services"
   add_foreign_key "messages", "utilisateurs"
   add_foreign_key "postits", "utilisateurs", column: "taken_id"
