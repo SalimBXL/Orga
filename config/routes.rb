@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :maintenance_ressources
-  resources :maintenances
   
   devise_for :users
 
@@ -26,6 +24,14 @@ Rails.application.routes.draw do
   root "home#index"
   get "home", to: "home#index"
   get "admin", to: "home#admin"
+
+
+  ###################
+  #   Maintenances  #
+  ###################
+  resources :maintenance_ressources
+  resources :maintenances
+  get "grille_maintenances", to: "maintenances#grille"
 
   
   #############

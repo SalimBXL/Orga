@@ -9,8 +9,14 @@
   <%= link_to '<i class="material-icons">more_time</i>'.html_safe, new_maintenance_path, class: "btn btn-success btn-xs" %>
 </span>
 &nbsp;&nbsp;
+
 <span data-toggle="tooltip" title="Ressources">
   <%= link_to '<i class="material-icons">bookmarks</i>'.html_safe, maintenance_ressources_path %>
+</span>
+&nbsp;&nbsp;
+
+<span data-toggle="tooltip" title="Calendar View">
+  <%= link_to '<i class="material-icons">calendar_view_month</i>'.html_safe, grille_maintenances_path %>
 </span>
 
 <div id="maintenances">

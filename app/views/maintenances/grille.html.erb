@@ -1,0 +1,89 @@
+<% session[:page_aide] = "grille_maintences" %>
+
+<div class="container">
+    <div class="page-header">
+        <h1>
+            <span class="label label-warning">
+                <i class="material-icons">engineering</i>
+                Maintenances
+            </span>
+        </h1>
+    </div>
+</div>
+
+<div class="container">
+    <% today = Date.today %>
+    <% tmp_last_month = nil %>
+    <% nombre_jours = (@date2-@date).to_i %>
+
+    <table class="table table-condensed table-bordered">
+        <thead>
+            <!-- Ligne des mois -->
+            <tr>
+                <th> </th>
+                <% i = 0 %>
+                <% while i < nombre_jours %>
+                    <% if (@date+i.day).month != tmp_last_month %>
+                        <% tmp_last_month = (@date+i.day).month %>
+                        <th colspan="<%= ((@date+i.day).end_of_month.mday - (@date+i.day).mday + 1) %>">
+                            <%= (@date+i.day).strftime("%b") %>
+                        </th>
+                    <% end %>
+                    <% i+= 1 %>
+                <% end %>
+            </tr>
+
+            <!-- Ligne des numéros de jour -->
+            <tr>
+                <th> </th>
+                <% i = 0 %>
+                <% while i < nombre_jours %>
+                    <% if (@date+i.day).wday == 6 %>
+                        <th colspan="2">W</th>
+                        <% i+= 1 %>
+                    <% else %>
+                        <% md = (@date+i.day).mday %>
+                        <% md = "0#{md}" if md < 10 %>
+                        <th><%= md %></th>
+                    <% end %>
+                    <% i+= 1 %>
+                <% end %>
+            </tr>
+        </thead>
+        <tbody>
+            <% @ressources.each do |ressource| %>
+                
+                <tr>
+                    <td>
+                        <%= ressource.name %>
+                    </td>
+                    <% i = 0 %>
+                    <% while i < nombre_jours %>
+                        <% if @maintenances[(@date+i.day)] %>
+                            <% hbds = @maintenances[(@date+i.day)][ressource] %>
+                            
+                            <% bg = hbds ? "hebdo" : "" %>
+                            
+                            <% lng = hbds ? (hbds.date_start...hbds.date_end).count+1 : 1 %>
+                            <td colspan= "<%= lng %>" class="<%= bg %>">
+                                <% if hbds %>
+                                    <span class="<%= bg %>" data-toggle="tooltip" title="<%= ressource.name %>">
+                                        &nbsp;
+                                        &nbsp;
+                                    </span>
+                                <% end %>
+                            </td>
+                            <% i += lng-1 %>
+                        <% else %>
+                            <% bg = "" %>
+                            <% bg = "weekend" if (@date+i.day).wday == 6 or (@date+i.day).wday == 0 %>
+                            <td class="<%= bg %>"></td>
+                        <% end %>
+                        <% i += 1 %>
+                    <% end %>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+
+</div>

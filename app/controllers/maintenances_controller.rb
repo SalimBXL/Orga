@@ -69,6 +69,44 @@ class MaintenancesController < ApplicationController
     end
   end
 
+  ##########
+    # GRILLE #
+    ##########
+    def grille
+      log(request.path, "Show grille maintenance")
+
+      # Réglage des dates de début et fin de période
+      unless params[:date]
+          date_tmp = Date.today
+      else
+          date_tmp = params[:date].to_date
+      end
+      if date_tmp.beginning_of_month.cwday == 7
+          date_tmp = date_tmp.beginning_of_month + 1.day
+      elsif date_tmp.beginning_of_month.cwday == 6
+          date_tmp = date_tmp.beginning_of_month + 2.days
+      else
+          date_tmp = date_tmp.beginning_of_month
+      end
+      @date = date_tmp.beginning_of_week
+      annee = @date.year
+      @date2 = (date_tmp.end_of_month+180.days).end_of_week
+      annee2 = @date2.year
+      
+      # Charge les maintenances
+      @maintenances = Hash.new
+      maintenances = Maintenance.where('date_end >= ?', @date).order(:date_start)
+
+      maintenances.each do |maintenance|
+          @maintenances[maintenance.date_start] ||= Hash.new
+          @maintenances[maintenance.date_start][maintenance.maintenance_ressource] ||= Hash.new
+          #@maintenances[maintenance.date_start][maintenance.maintenance_ressource] ||= Array.new
+          @maintenances[maintenance.date_start][maintenance.maintenance_ressource] = maintenance
+      end
+
+      @ressources = MaintenanceRessource.order(:service_id, :name)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_maintenance
