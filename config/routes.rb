@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :maintenance_ressources
   resources :maintenances
   
   devise_for :users

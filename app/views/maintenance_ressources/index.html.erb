@@ -1,0 +1,37 @@
+<div class="container">
+  <p style="color: green"><%= notice %></p>
+
+  <h1>
+    <span class="label label-warning"><i class="material-icons">bookmarks</i> Maintenances Ressources</span>
+  </h1>
+
+  <span data-toggle="tooltip" title="Add New Ressource">
+    <%= link_to '<i class="material-icons">add</i>'.html_safe, new_maintenance_ressource_path, class: "btn btn-success btn-xs" %>
+  </span>
+  &nbsp;&nbsp;
+  <span data-toggle="tooltip" title="Maintenances">
+    <%= link_to '<i class="material-icons">engineering</i>'.html_safe, maintenances_path %>
+  </span>
+
+  <div id="maintenance_ressources">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Name</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @maintenance_ressources.each do |maintenance_ressource| %>
+          <%= render maintenance_ressource if (is_manager? and maintenance_ressource.service.id == current_user.utilisateur.service.id) or is_super_admin? %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <span data-toggle="tooltip" title="Add New Resource">
+    <%= link_to '<i class="material-icons">add</i>'.html_safe, new_maintenance_ressource_path, class: "btn btn-success btn-xs" %>
+  </span>
+
+</div>

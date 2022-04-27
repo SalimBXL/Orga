@@ -5,6 +5,7 @@ class Service < ApplicationRecord
     has_many :fermeture, dependent: :destroy
     has_many :works, dependent: :destroy
     has_many :jours, dependent: :destroy
+    has_many :maintenance_ressources, dependent: :destroy
     validates_associated :utilisateurs
     validates :nom, presence: true
     validates :nom, uniqueness: true

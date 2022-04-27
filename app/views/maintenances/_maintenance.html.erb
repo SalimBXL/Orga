@@ -13,7 +13,8 @@
   <td><%= maintenance.date_start %></td>
   <td><%= maintenance.date_end %></td>
   <td><%= rest %></td>
-  <td><%= maintenance.name %></td>
+  <td><%= maintenance.maintenance_ressource.name %></td>
+  <td><span class="label label-default"><%= maintenance.maintenance_ressource.service.nom %></span></td>
   <td><%= contact.prenom_nom %></td>
   <td>
     <% if user_signed_in? && (is_manager? || current_user.utilisateur.id == maintenance.creator_id || current_user.utilisateur.id == maintenance.contact_id) %>

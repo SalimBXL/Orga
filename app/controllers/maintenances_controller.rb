@@ -14,10 +14,12 @@ class MaintenancesController < ApplicationController
   # GET /maintenances/new
   def new
     @maintenance = Maintenance.new
+    @ressources = MaintenanceRessource.order(:service_id, :name);
   end
 
   # GET /maintenances/1/edit
   def edit
+    @ressources = MaintenanceRessource.order(:service_id, :name);
     @maintenance.creator_id = current_user.utilisateur.id
     @maintenance.contact_id = @maintenance.creator_id if @maintenance.contact_id.nil?
   end
@@ -25,6 +27,7 @@ class MaintenancesController < ApplicationController
   # POST /maintenances or /maintenances.json
   def create
     @maintenance = Maintenance.new(maintenance_params)
+    @ressources = MaintenanceRessource.order(:service_id, :name);
 
     @maintenance.creator_id = current_user.utilisateur.id
     @maintenance.contact_id = @maintenance.creator_id if @maintenance.contact_id.nil?
@@ -42,6 +45,7 @@ class MaintenancesController < ApplicationController
 
   # PATCH/PUT /maintenances/1 or /maintenances/1.json
   def update
+    @ressources = MaintenanceRessource.order(:service_id, :name);
     @maintenance.creator_id = current_user.utilisateur.id
     @maintenance.contact_id = @maintenance.creator_id if @maintenance.contact_id.nil?
     respond_to do |format|
@@ -73,7 +77,7 @@ class MaintenancesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def maintenance_params
-      params.require(:maintenance).permit(:name, :date_start, :date_end, :contact_id)
+      params.require(:maintenance).permit(:name, :date_start, :date_end, :contact_id, :maintenance_ressource_id)
     end
 
 end

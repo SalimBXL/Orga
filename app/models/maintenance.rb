@@ -1,7 +1,7 @@
 class Maintenance < ApplicationRecord
-
+    belongs_to :maintenance_ressource
     before_validation :check_dates
-    validates :date_start, :date_end, :name, :contact_id, presence: true
+    validates :date_start, :date_end, :contact_id, presence: true
 
     private
 

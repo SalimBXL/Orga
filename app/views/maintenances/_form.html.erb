@@ -13,7 +13,12 @@
 
   <div>
     <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+    <%= form.select(:maintenance_ressource_id) do %>
+                        <%= select_option_tag("", nil, @maintenance.maintenance_ressource_id) %>
+                        <% @ressources.each do |l| %>
+                            <%= select_option_tag(l.name, l.id, @maintenance.maintenance_ressource_id) %>
+                        <% end %>
+                    <% end %>
   </div>
 
 
