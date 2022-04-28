@@ -271,6 +271,18 @@ class JoursController < ApplicationController
             @tasks_profil[utilisateur.id] = find_tasks_for_month(utilisateur, @date.month, @date.year)
         end
 
+        #
+        # Trouve mes maintenances
+        #
+        _maintenances = Maintenance.where("date_start <= ? AND date_end >= ?", @date2, @date).order(:date_start, :name)
+        @maintenances ||= Hash.new
+        _maintenances.each do |maintenance|
+            srv = maintenance.maintenance_ressource.service.id
+            @maintenances[srv] ||= Hash.new
+            @maintenances[srv][maintenance.date_start] ||= Array.new
+            @maintenances[srv][maintenance.date_start] << maintenance
+        end
+
         # mode edition ?
         unless params[:edit_mode]
             @edit_mode = false

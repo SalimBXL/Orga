@@ -51,8 +51,18 @@
             </tr>
         </thead>
         <tbody>
+            <% last_service = nil %>
             <% @ressources.each do |ressource| %>
-                
+                <% service = ressource.service %>
+
+                <% if service != last_service %>
+                    <tr>
+                        <td><strong><%= service.nom.upcase %></strong></td>
+                        <td colspan="<%= nombre_jours %>"></td>
+                    </tr>
+                    <% last_service = service %>
+                <% end %>
+
                 <tr>
                     <td>
                         <%= ressource.name %>
@@ -60,7 +70,7 @@
                     <% i = 0 %>
                     <% while i < nombre_jours %>
                         <% if @maintenances[(@date+i.day)] %>
-                            <% hbds = @maintenances[(@date+i.day)][ressource] %>
+                            <% hbds = @maintenances[(@date+i.day)][service] ? @maintenances[(@date+i.day)][service][ressource] : nil %>
                             
                             <% bg = hbds ? "hebdo" : "" %>
                             

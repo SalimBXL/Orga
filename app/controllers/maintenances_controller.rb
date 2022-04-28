@@ -98,10 +98,11 @@ class MaintenancesController < ApplicationController
       maintenances = Maintenance.where('date_end >= ?', @date).order(:date_start)
 
       maintenances.each do |maintenance|
-          @maintenances[maintenance.date_start] ||= Hash.new
-          @maintenances[maintenance.date_start][maintenance.maintenance_ressource] ||= Hash.new
-          #@maintenances[maintenance.date_start][maintenance.maintenance_ressource] ||= Array.new
-          @maintenances[maintenance.date_start][maintenance.maintenance_ressource] = maintenance
+        service = maintenance.maintenance_ressource.service
+        @maintenances[maintenance.date_start] ||= Hash.new
+        @maintenances[maintenance.date_start][service] ||= Hash.new
+        @maintenances[maintenance.date_start][service][maintenance.maintenance_ressource] ||= Hash.new
+        @maintenances[maintenance.date_start][service][maintenance.maintenance_ressource] = maintenance
       end
 
       @ressources = MaintenanceRessource.order(:service_id, :name)

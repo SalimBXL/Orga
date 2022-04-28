@@ -1,0 +1,54 @@
+<tr class="ligne"> 
+    <td>
+        <strong><%= "Maintenances".upcase %></strong>
+    </td>
+
+    <% ((@date2-@date).to_i).times do |index| %>
+        <% date_jour = (@date + index.day) %>
+        <% bg = "normal" %>
+        
+
+        <!-- Si Weekend... -->        
+        <% if date_jour.wday==6 %>
+            <td class="weekend">
+                
+                
+            
+            </td>
+        <% end %>
+
+        <!-- Si Jour de semaine ... -->
+        <% if (1..5).include?(date_jour.wday) %>
+
+        
+
+            <!-- Jour de semaine "normal" -->
+
+            <% if date_jour == Date.today %>
+                <!-- Si jour est date actuelle on jauni le fond ... -->
+                <% bg = "today" %>
+            <% end %>
+
+            
+
+            <!-- service ouvert... -->
+
+            <!-- service fermé... -->
+            <% unless @fermetures[service.id].nil? %>
+                <% unless @fermetures[service.id][date_jour.to_s].nil? %>
+                    <% bg = "ferie" %>
+                <% end %>
+            <% end %>
+            
+
+            <!-- On affiche la cellule du jour -->
+            <td class="<%= bg %>">
+                <% m = maintenances[0] == date_jour ? maintenances[1] : Array.new %>
+                <% m.each do |maintenance| %>
+                    <span class="label label-default"><%= maintenance.maintenance_ressource.name %></span>
+                <% end %>
+            </td>
+             
+        <% end %>
+    <% end %>
+</tr>
