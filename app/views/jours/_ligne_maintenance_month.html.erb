@@ -1,6 +1,6 @@
 <tr class="ligne"> 
     <td>
-        <strong><%= "Maintenances".upcase %></strong>
+        <strong><%= "Maintenances".upcase %> <%= service.nom %></strong>
     </td>
 
     <% ((@date2-@date).to_i).times do |index| %>
@@ -43,7 +43,7 @@
 
             <!-- On affiche la cellule du jour -->
             <td class="<%= bg %>">
-                <% m = maintenances[0] == date_jour ? maintenances[1] : Array.new %>
+                <% m = maintenances[date_jour] ? maintenances[date_jour] : Array.new %>
                 <% m.each do |maintenance| %>
                     <span class="label label-default"><%= maintenance.maintenance_ressource.name %></span>
                 <% end %>

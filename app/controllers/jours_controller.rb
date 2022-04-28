@@ -277,7 +277,7 @@ class JoursController < ApplicationController
         _maintenances = Maintenance.where("date_start <= ? AND date_end >= ?", @date2, @date).order(:date_start, :name)
         @maintenances ||= Hash.new
         _maintenances.each do |maintenance|
-            srv = maintenance.maintenance_ressource.service.id
+            srv = maintenance.maintenance_ressource.service
             @maintenances[srv] ||= Hash.new
             @maintenances[srv][maintenance.date_start] ||= Array.new
             @maintenances[srv][maintenance.date_start] << maintenance

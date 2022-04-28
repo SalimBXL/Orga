@@ -23,14 +23,13 @@
             <%= render partial: "ligne_numero_jour_month", locals: { service: service } %>
 
             <!-- Ligne des maintenances -->
-            <% @maintenances[service.id] = Array.new unless @maintenances[service.id] %>
-            <% @maintenances[service.id].each do |maintenances| %>
+            <% if @maintenances[service] %>
                 <%= render partial: "ligne_maintenance_month", 
                     locals: {
-                        maintenances: maintenances,
+                        maintenances: @maintenances[service],
                         service: service
                     }
-                 %>
+                %>
             <% end %>
 
             <!-- Ligne par utilisateur -->
