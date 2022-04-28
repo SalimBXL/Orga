@@ -30,7 +30,9 @@ class BlogMessagesController < ApplicationController
         @blog_messages = BlogMessage.where(logbook: true).order(date: :desc).page(params[:page]) if params[:logbook]
 
         # Date + Logbook
-        params[:date] = "#{params[:date]}-01" if params[:date].size == 7
+        if params[:date]
+            params[:date] = "#{params[:date]}-01" if params[:date].size == 7
+        end
         if (params[:date] and !params[:date].blank? and params[:logbook])
             @blog_messages = @blog_messages.where("date >= ? and date <= ?", params[:date].to_datetime.strftime("%Y-%m-%d"), params[:date].to_datetime.end_of_month.strftime("%Y-%m-%d")).where(logbook: true).order(date: :desc).order(date: :desc).page(params[:page])
             @possible_to_export = true
