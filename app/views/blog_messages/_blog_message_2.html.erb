@@ -1,0 +1,37 @@
+<div class="row" id="blog_message_<%= blog_message.id %>">
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+            <!-- DATE -->
+            <%= render partial: "blog_messages/message/date", locals: {blog_message: blog_message} %>
+            
+            <!-- ARTICLE BLOG -->
+            <%= render partial: "blog_messages/message/article_short", locals: {blog_message: blog_message} %>
+            
+            <!-- TOOLS -->
+            <div class="col-sm-1">
+                <%= link_to '<span data-toggle="tooltip" title="Read">
+                        <i class="material-icons">import_contacts</i></span>'.html_safe, 
+                        blog_message_path(blog_message),
+                        class: "btn btn-success btn-xs" %>
+                <% if user_signed_in? && (is_super_admin? || current_user.utilisateur.id == blog_message.utilisateur_id) %>
+                    <%= link_to '<span data-toggle="tooltip" title="Edit...">
+                        <i class="material-icons">edit</i></span>'.html_safe, 
+                        edit_blog_message_path(blog_message),
+                        class: "btn btn-warning btn-xs" %>
+                    <%= link_to '<span data-toggle="tooltip" title="Delete!">
+                        <i class="material-icons">close</i>'.html_safe, 
+                        blog_message_path(blog_message),
+                        method: :delete,
+                        remote: true,
+                        data: { confirm: "Delete blog_message '#{blog_message.title}' (#{blog_message.date}) [#{blog_message.service_id}] ?" },
+                        class: "btn btn-danger btn-xs" %>
+                <% end %>
+                <%= link_to '<span data-toggle="tooltip" title="Export PDF">
+                    <i class="material-icons">picture_as_pdf</i></span>'.html_safe, 
+                    blog_message_export_pdf_path(blog_message: blog_message, format: :pdf), target: :_blank,
+                    class: "btn btn-info btn-xs" if blog_message.logbook %>   
+            </div>
+        </div>
+    </div>
+</div>

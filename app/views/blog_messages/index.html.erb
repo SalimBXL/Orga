@@ -3,16 +3,37 @@
 <%= render "header" %>
 
 <div class="container">
-    
-    <!-- TOOLBAR -->
-    <%= render "toolbar" %>    
 
-    <!-- MESSAGES -->
-    <div class="row" id="blog_messages"><%= render 'blog_messages' %></div>
-
-    <!-- NEW ARTICLER -->
-    <p><%= link_to '<i class="material-icons">add</i> '.html_safe, 
+    <!-- NEW ARTICLE -->
+    <div>
+        <%= link_to '<i class="material-icons">add</i> '.html_safe, 
             new_blog_message_path,
-            class: "btn btn-success btn-xs" %>
-    </p>
+            class: "btn btn-success btn-xs"
+        %>
+        &nbsp;
+        <%= paginate @blog_messages, remote: true %>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-8">
+            <!-- MESSAGES -->
+                <% @last_date = nil %>
+                <%= render @blog_messages %>
+        </div>
+        <div class="col-sm-4">    
+            <!-- TOOLBAR -->
+            <%= render "toolbar_2" %>
+        </div>
+    </div>
+
+    <!-- NEW ARTICLE -->
+    <div>
+        <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+            new_blog_message_path,
+            class: "btn btn-success btn-xs"
+        %>
+        &nbsp;
+        <%= paginate @blog_messages, remote: true %>
+    </div>
+
 </div>

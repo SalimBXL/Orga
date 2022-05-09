@@ -1,37 +1,93 @@
-<div class="row" id="blog_message_<%= blog_message.id %>">
-    <div class="panel panel-default">
-        <div class="panel-body">
+<div class="panel panel-default" id="blog_message_<%= blog_message.id %>">
 
-            <!-- DATE -->
-            <%= render partial: "blog_messages/message/date", locals: {blog_message: blog_message} %>
-            
-            <!-- ARTICLE BLOG -->
-            <%= render partial: "blog_messages/message/article_short", locals: {blog_message: blog_message} %>
-            
-            <!-- TOOLS -->
-            <div class="col-sm-1">
-                <%= link_to '<span data-toggle="tooltip" title="Read">
-                        <i class="material-icons">import_contacts</i></span>'.html_safe, 
-                        blog_message_path(blog_message),
-                        class: "btn btn-success btn-xs" %>
-                <% if user_signed_in? && (is_super_admin? || current_user.utilisateur.id == blog_message.utilisateur_id) %>
-                    <%= link_to '<span data-toggle="tooltip" title="Edit...">
-                        <i class="material-icons">edit</i></span>'.html_safe, 
-                        edit_blog_message_path(blog_message),
-                        class: "btn btn-warning btn-xs" %>
-                    <%= link_to '<span data-toggle="tooltip" title="Delete!">
-                        <i class="material-icons">close</i>'.html_safe, 
-                        blog_message_path(blog_message),
-                        method: :delete,
-                        remote: true,
-                        data: { confirm: "Delete blog_message '#{blog_message.title}' (#{blog_message.date}) [#{blog_message.service_id}] ?" },
-                        class: "btn btn-danger btn-xs" %>
+    <div class="panel-heading">
+        <h4>
+            <%= blog_message.title.capitalize %>
+            &nbsp;
+            <% nbr_reponses = BlogResponse.where(blog_message_id: blog_message.id).size %>
+            <% if nbr_reponses and nbr_reponses > 0 %>
+                &nbsp;<span class="badge"><%= pluralize(nbr_reponses, 'response') %></span>
+            <% end %>
+        </h4>
+
+    </div>
+
+    <div class="panel-body">
+
+        <p class="text-muted text-justify">
+            <small>
+            <%= nom_jour(blog_message.date.wday) %>
+            <%= blog_message.date.day %>
+            <%= nom_mois(blog_message.date.month) %>
+            <%= blog_message.date.year %>
+            </small>
+            &nbsp;
+            <i>[<a href="<%= blog_messages_path(utilisateur_id: blog_message.utilisateur_id) %>" class="btn btn-link btn-xs" role="button"><%= @blog_utilisateurs[blog_message.utilisateur_id] %></a>]</i>
+        </p>
+
+        <p>
+            <%= blog_message.description.truncate(130) %>
+        </p>
+
+        <hr />
+
+        <p class="hidden-xs">
+               
+            <%= link_to '<span data-toggle="tooltip" title="Read">
+                    <i class="material-icons">import_contacts</i></span>'.html_safe, 
+                    blog_message_path(blog_message),
+                    class: "btn btn-success btn-xs" %>
+            <% if user_signed_in? && (is_super_admin? || current_user.utilisateur.id == blog_message.utilisateur_id) %>
+                <%= link_to '<span data-toggle="tooltip" title="Edit...">
+                    <i class="material-icons">edit</i></span>'.html_safe, 
+                    edit_blog_message_path(blog_message),
+                    class: "btn btn-warning btn-xs" %>
+                <%= link_to '<span data-toggle="tooltip" title="Delete!">
+                    <i class="material-icons">close</i>'.html_safe, 
+                    blog_message_path(blog_message),
+                    method: :delete,
+                    remote: true,
+                    data: { confirm: "Delete blog_message '#{blog_message.title}' (#{blog_message.date}) [#{blog_message.service_id}] ?" },
+                    class: "btn btn-danger btn-xs" %>
+            <% end %>
+            <%= link_to '<span data-toggle="tooltip" title="Export PDF">
+                <i class="material-icons">picture_as_pdf</i></span>'.html_safe, 
+                blog_message_export_pdf_path(blog_message: blog_message, format: :pdf), target: :_blank,
+                class: "btn btn-info btn-xs" if blog_message.logbook %>
+
+            <% if @blog_services[blog_message.service_id] or @blog_classes[blog_message.classe] or @blog_groupes[blog_message.groupe] %>    
+                &nbsp;
+                <em>Keyword(s) :</em>
+                <% if @blog_services[blog_message.service_id] %>
+                    <a href="<%= blog_messages_path(service_id: blog_message.service_id) %>" class="btn btn-primary btn-xs" role="button"><%= @blog_services[blog_message.service_id] %></a>
                 <% end %>
-                <%= link_to '<span data-toggle="tooltip" title="Export PDF">
-                    <i class="material-icons">picture_as_pdf</i></span>'.html_safe, 
-                    blog_message_export_pdf_path(blog_message: blog_message, format: :pdf), target: :_blank,
-                    class: "btn btn-info btn-xs" if blog_message.logbook %>   
-            </div>
-        </div>
+                <% if @blog_classes[blog_message.classe] %>
+                    <a href="<%= blog_messages_path(classe: blog_message.classe) %>" class="btn btn-default btn-xs" role="button"><%= @blog_classes[blog_message.classe] %></a>
+                <% end %>
+                <% if @blog_groupes[blog_message.groupe] %>
+                    <a href="<%= blog_messages_path(groupe: blog_message.groupe) %>" class="btn btn-default btn-xs" role="button"><%= @blog_groupes[blog_message.groupe] %></a>
+                <% end %>
+            <% end %> 
+
+            &nbsp;
+            
+            <a href="<%= blog_messages_path(blog_category_id: blog_message.blog_category_id) %>" class="btn btn-info btn-xs" role="button"><%= @blog_categories[blog_message.blog_category_id] %></a>
+
+            &nbsp;
+
+            <% if blog_message.logbook %>
+                &nbsp;<a href="<%= blog_messages_path(logbook: true) %>" 
+                    class="btn btn-danger btn-xs " role="button"
+                    data-toggle="tooltip" title="LogBook">
+                    <span class="material-icons">local_library</span>
+                </a>
+                <% unless blog_message.reviewed %>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="label label-danger">Not yet reviewed !</span>
+                <% else %>
+                    <span class="label label-danger"><%= @reviewcats[blog_message.reviewcat] %></span>
+                <% end %>
+            <% end %>
+        </p>
     </div>
 </div>
