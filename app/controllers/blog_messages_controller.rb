@@ -20,6 +20,7 @@ class BlogMessagesController < ApplicationController
         @not_yet_reviewed_messages = @not_yet_reviewed_messages.where(reviewed: nil).or(@not_yet_reviewed_messages.where(reviewed: false)).size
 
         @blog_messages = nil
+        @blog_messages = BlogMessage.where(reviewcat: params[:reviewcat]).order(date: :desc).page(params[:page]) if params[:reviewcat]
         @blog_messages = BlogMessage.where(blog_category_id: params[:blog_category_id]).order(date: :desc).page(params[:page]) if params[:blog_category_id]
         @blog_messages = BlogMessage.where(service_id: params[:service_id]).order(date: :desc).page(params[:page]) if params[:service_id] and params[:service_id] != "-1"
         @blog_messages = BlogMessage.order(date: :desc).page(params[:page]) if params[:service_id] and params[:service_id] == "-1"

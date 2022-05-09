@@ -73,6 +73,16 @@
 
                     <hr />
 
+                    <small><strong>Logbook Categories</strong></small><br />
+                    <% @reviewcats.each do |rid| %>
+                        <a href="<%= blog_messages_path(reviewcat: rid[0]) %>"
+                            class="btn btn-danger btn-xs" role="button">
+                            <span class="badge"><%= rid[1] %></span>
+                        </a>
+                    <% end %>
+
+                    <hr />
+
                     <% if @not_yet_reviewed_messages > 0 %>
                         <a href="<%= blog_messages_path(reviewed: true) %>"
                             class="btn btn-danger btn-xs" role="button">
