@@ -17,7 +17,10 @@
 <ol>
 <% @blog_messages.each do |blog_message| %>
     <li>
-        <%= blog_message[:blog_message].title.capitalize %>
+        <%= blog_message[:blog_message].title.capitalize %> 
+        <% if blog_message[:blog_message].logbook %>
+            <small>(#<%= blog_message[:blog_message].ref_article %>)</small>
+        <% end %>
     </li>
 <% end %>
 </ol>
@@ -29,7 +32,12 @@
     <% index += 1 %>
 
     <div class="container">
-        <h2><%= index %>) <%= blog_message[:blog_message].title.capitalize %></h2>
+        <h2>
+            <%= index %>) <%= blog_message[:blog_message].title.capitalize %>
+            <% if blog_message[:blog_message].logbook %>
+                <small>(#<%= blog_message[:blog_message].ref_article %>)</small>
+            <% end %>
+        </h2>
         <strong>
             <i>
                 [<%= blog_message[:utilisateur].prenom_nom  unless blog_message[:utilisateur].nil? %>]

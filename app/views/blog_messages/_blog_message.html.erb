@@ -5,6 +5,9 @@
             <%= blog_message.title.capitalize %>
             &nbsp;
             <% nbr_reponses = BlogResponse.where(blog_message_id: blog_message.id).size %>
+            <% if blog_message.logbook %>
+                <small>(#<%= blog_message.ref_article %>)</small>
+            <% end %>
             <% if nbr_reponses and nbr_reponses > 0 %>
                 &nbsp;<span class="badge"><%= pluralize(nbr_reponses, 'response') %></span>
             <% end %>
@@ -78,7 +81,7 @@
             <% if blog_message.logbook %>
                 &nbsp;<a href="<%= blog_messages_path(logbook: true) %>" 
                     class="btn btn-danger btn-xs " role="button"
-                    data-toggle="tooltip" title="LogBook">
+                    data-toggle="tooltip" title="LogBook #<%= blog_message.ref_article %>">
                     <span class="material-icons">local_library</span>
                 </a>
                 <% unless blog_message.reviewed %>

@@ -205,4 +205,5 @@ class BlogMessagesController < ApplicationController
             @blog_utilisateurs[s.id] = s.prenom_nom
         end
     end
+
 end
