@@ -62,10 +62,13 @@ class HomeController < ApplicationController
                     created = DateTime.now()
                     depart = maintenance.date_start
                     utilisateur = Utilisateur.find(maintenance.contact_id)
+                    taken = utilisateur
+                    titre = "MAINTENANCE"
+                    id = -1
 
-                    message = "(#{depart}) Maintenance #{ressource.name} in less than #{delay}. Please take it charge as soon as possible."
+                    message = "(#{depart}) Maintenance #{ressource.name} in less than #{delay}."
                     
-                    postit = Postit.new(body: message, level: level, utilisateur: utilisateur, created_at: created)
+                    postit = Postit.new(id: id, title: titre, body: message, level: level, utilisateur: utilisateur, taken: utilisateur, created_at: created)
                     @postits.unshift(postit)
                 end
             end

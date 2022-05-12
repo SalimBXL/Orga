@@ -57,8 +57,10 @@ class PostitsController < ApplicationController
 
 
     def take_it
-        @postit.taken_id = current_user.utilisateur.id
-        flash[:notice] = "postit modifié avec succès" if @postit.update(taken_id: current_user.utilisateur.id)
+        if params[:id] != "-1"
+            @postit.taken_id = current_user.utilisateur.id
+            flash[:notice] = "postit modifié avec succès" if @postit.update(taken_id: current_user.utilisateur.id)
+        end
         redirect_to home_path
     end
 
@@ -76,7 +78,7 @@ class PostitsController < ApplicationController
     end
 
     def find_postit
-        @postit = Postit.find(params[:id])
+        @postit = Postit.find(params[:id]) if params[:id] != "-1"
     end
 
     def find_services

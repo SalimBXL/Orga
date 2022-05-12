@@ -1,9 +1,17 @@
 <ul>
     <% @maintenances.each do |maintenance| %>
         <% ressource = maintenance.maintenance_ressource %>
-        <% if ressource.service_id == current_user.utilisateur.service.id and maintenance.isToday?%>
+        <% if ressource.service_id == current_user.utilisateur.service.id %>
             <li>
-                Maintenance : <span class="label label-success"><%= ressource.name %></span>
+                <% if maintenance.isToday? %>
+                    Maintenance : <span class="label label-success"><%= ressource.name %></span>    
+                <% end %>
+                <%  if maintenance.date_start > Date.today and maintenance.contact_id == current_user.utilisateur.id %>
+                    <% bg = "warning" if maintenance.isWithinTwoWeeks? %>
+                    <% bg = "danger" if maintenance.isWithinFiveDays? %>
+                    Maintenance : <span class="label label-<%= bg %>"><%= ressource.name %></span>
+                    <small>(<%= maintenance.date_start %>)</small>
+                <% end %>
             </li>
         <% end %>
     <% end %>

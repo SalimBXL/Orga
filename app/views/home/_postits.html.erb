@@ -43,35 +43,39 @@
 
                             <% if postit.level != 0 %>
                                 <div class="btn-group btn-group-justified bg-warning">
-                                    <% if postit.level != 2 && postit.is_private != true %>
-                                        <%= 
-                                            link_to "[Take]", 
-                                            take_it_path(id: postit), 
-                                            data: { 
-                                                confirm: "Are you sure you want to be in charge for this Post-It task ?"
-                                            },
-                                            class: "btn btn-xs btn-link text-warning" 
-                                        %>
-                                    <% end %>
-
-
-                                    <% if postit.level == 2 or postit.is_private %>
-                                        <% if (postit.is_private) or (postit.is_private != true and postit.taken.id == current_user.utilisateur.id) %>
-
+                                    <% if postit.id != -1%>
+                                        <% if postit.level != 2 && postit.is_private != true %>
                                             <%= 
-                                                link_to "[Done!]", 
-                                                done_path(id: postit), 
+                                                link_to "[Take]", 
+                                                take_it_path(id: postit), 
                                                 data: { 
-                                                    confirm: "Are you confirming that this task is done ?"
+                                                    confirm: "Are you sure you want to be in charge for this Post-It task ?"
                                                 },
-                                                class: "btn btn-xs btn-link text-warning"
+                                                class: "btn btn-xs btn-link text-warning" 
                                             %>
-                                            
-                                        <% else %>
-                                            <small class="text-muted">
-                                                Taken by <%= postit.taken.prenom if !postit.taken.nil? %>
-                                            </small>
                                         <% end %>
+                                        <% if postit.level == 2 or postit.is_private %>
+                                            <% if (postit.is_private) or (postit.is_private != true and postit.taken.id == current_user.utilisateur.id) %>
+
+                                                <%= 
+                                                    link_to "[Done!]", 
+                                                    done_path(id: postit), 
+                                                    data: { 
+                                                        confirm: "Are you confirming that this task is done ?"
+                                                    },
+                                                    class: "btn btn-xs btn-link text-warning"
+                                                %>
+                                                
+                                            <% else %>
+                                                <small class="text-muted">
+                                                    Taken by <%= postit.taken.prenom if !postit.taken.nil? %>
+                                                </small>
+                                            <% end %>
+                                        <% end %>
+                                    <% else %>
+                                        <small class="text-muted">
+                                            Contact : <%= postit.taken.prenom if !postit.taken.nil? %>
+                                        </small>
                                     <% end %>
                                 </div>
                             <% end %>
