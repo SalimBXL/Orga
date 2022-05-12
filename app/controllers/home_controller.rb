@@ -16,8 +16,15 @@ class HomeController < ApplicationController
         # Check les jobs du user courant
         get_today if user_signed_in?
 
-        #check les postits
+        
+
+        # check les postits
         get_postits if user_signed_in?
+
+        # check si maintenance dans les quinzes prochains jours
+        get_maintenances if user_signed_in?
+
+
 
         # Charge les dernières connections 
         get_lasts_connected if user_signed_in?
@@ -37,7 +44,32 @@ class HomeController < ApplicationController
     end
 
     def get_postits
-        @postits = Postit.order(level: :desc)
+        @postits = Postit.order(level: :desc).to_a
+    end
+
+    def get_maintenances
+        @maintenances = Maintenance.where("DATE_START <= ? AND DATE_END >= ?", Date.today + 15.days, Date.today).order(:date_start, :date_end)
+        #@postits = @postits.to_a
+        @maintenances.each do |maintenance|
+            if maintenance.isWithinTwoWeeks? or maintenance.isWithinFiveDays?
+                if !maintenance.isToday?
+                    ressource = maintenance.maintenance_ressource
+                    delay = "two weeks" if maintenance.isWithinTwoWeeks?
+                    delay = "five days" if maintenance.isWithinFiveDays?
+                    level = 3 if maintenance.isWithinTwoWeeks?
+                    level = 4 if maintenance.isWithinFiveDays?
+
+                    created = DateTime.now()
+                    depart = maintenance.date_start
+                    utilisateur = Utilisateur.find(maintenance.contact_id)
+
+                    message = "(#{depart}) Maintenance #{ressource.name} in less than #{delay}. Please take it charge as soon as possible."
+                    
+                    postit = Postit.new(body: message, level: level, utilisateur: utilisateur, created_at: created)
+                    @postits.unshift(postit)
+                end
+            end
+        end
     end
 
     def format_last_git_date(dt)

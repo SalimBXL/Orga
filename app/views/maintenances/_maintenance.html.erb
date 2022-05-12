@@ -3,10 +3,10 @@
 <% contact = Utilisateur.find(maintenance.contact_id) %>
 
 <% bg = "" %>
-<% bg = "warning" if Date.today >= maintenance.date_start-15.days %>
-<% bg = "danger" if Date.today >= maintenance.date_start-5.days %>
-<% bg = "success" if maintenance.date_start <= Date.today and maintenance.date_end >= Date.today %>
-<% bg = "active" if maintenance.date_end < Date.today %>
+<% bg = "warning" if maintenance.isWithinTwoWeeks? %>
+<% bg = "danger" if maintenance.isWithinFiveDays? %>
+<% bg = "success" if maintenance.isToday? %>
+<% bg = "active" if maintenance.isPassed? %>
 
 
 <tr id="<%= dom_id maintenance %>" class="<%= bg %>">

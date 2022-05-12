@@ -1,0 +1,10 @@
+<ul>
+    <% @maintenances.each do |maintenance| %>
+        <% ressource = maintenance.maintenance_ressource %>
+        <% if ressource.service_id == current_user.utilisateur.service.id and maintenance.isToday?%>
+            <li>
+                Maintenance : <span class="label label-success"><%= ressource.name %></span>
+            </li>
+        <% end %>
+    <% end %>
+</ul>

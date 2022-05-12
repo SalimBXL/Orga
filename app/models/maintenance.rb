@@ -3,6 +3,23 @@ class Maintenance < ApplicationRecord
     before_validation :check_dates
     validates :date_start, :date_end, :contact_id, presence: true
 
+    def isToday?
+        (date_start <= Date.today and date_end >= Date.today)
+    end
+
+    def isWithinFiveDays?
+        (Date.today >= date_start-5.days)
+    end
+
+    def isWithinTwoWeeks?
+        (Date.today >= date_start-15.days)
+    end
+
+    def isPassed?
+        (date_end < Date.today)
+    end
+
+
     private
 
     def check_dates
