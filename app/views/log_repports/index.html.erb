@@ -6,30 +6,37 @@
         </span>
     </h1>
 
+    <p>
+       <%= @datas_by_day.length %>
+    </p>
+
 
     <div>
-        <% table_length = 60 %>
+        <% table_length = 45 %>
         <table class="table table-condensed" >
             <thead>
                 <tr>
                     <% for i in 0..table_length %>
-                        <th>
-                            <%= (Date.today - (table_length - i).days).day %>
-                        </th>
+                        <% date = (Date.today - (table_length - i).days).strftime("%d") %>
+                        <th><%= date %></th>
                     <% end %>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <% for i in 0..table_length %>
+                        <% date = (Date.today - (table_length - i).days).strftime("%Y-%m-%d") %>
                         <td>
-                            <%= @datas_by_day[(Date.today - (table_length - i).days)] %>
+                            <%= @datas_by_day[date] %>
                         </td>
+
                     <% end %>
                 </tr>
             </tbody>
         </table>
     </div>
+
+    
 
 
     <div id="log_repports">

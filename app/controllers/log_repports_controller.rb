@@ -3,12 +3,13 @@ class LogRepportsController < ApplicationController
     before_action :find_log_repport, only: [:show, :edit, :update, :destroy]
 
     def index
-        @log_repports = LogRepport.order(date: :desc).order(hour: :desc).order(:controller, :action).page(params[:page])
+        @log_repports = LogRepport.where("created_at >= ?", Date.today-60.days).order(date: :desc).order(hour: :desc).order(:controller, :action)
 
         @datas_by_day = Hash.new
         @log_repports.each do |log|
-            @datas_by_day[log.date] ||= 0
-            @datas_by_day[log.date] = @datas_by_day[log.date] + log.count
+            date = log.date.strftime("%Y-%m-%d")
+            @datas_by_day[date] ||= 0
+            @datas_by_day[date] = (@datas_by_day[date] + log.count)
         end
     end
 
