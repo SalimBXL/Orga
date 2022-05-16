@@ -15,6 +15,11 @@ class Maintenance < ApplicationRecord
         (Date.today >= date_start-15.days)
     end
 
+    def isLaterThanTwoWeeks?
+        (Date.today < date_start-15.days)
+    end
+
+
     def isPassed?
         (date_end < Date.today)
     end

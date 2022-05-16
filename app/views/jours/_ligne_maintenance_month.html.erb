@@ -1,4 +1,4 @@
-<tr class="ligne"> 
+<tr class="ligne maintenance"> 
     <td>
         <strong><%= "Maintenances".upcase %> <%= service.nom %></strong>
     </td>
@@ -11,9 +11,24 @@
         <!-- Si Weekend... -->        
         <% if date_jour.wday==6 %>
             <td class="weekend">
-                
-                
-            
+
+                <% if date_jour.wday==6 or date_jour.wday==0 %>
+                    <% m = maintenances[date_jour] ? maintenances[date_jour] : Array.new %>
+                    <% m.each do |maintenance| %>
+                        <% bg = "default" %>
+                        
+                        <% bg = "info" if maintenance.isLaterThanTwoWeeks? %>
+                        <% bg = "warning" if maintenance.isWithinTwoWeeks? %>
+                        <% bg = "danger" if maintenance.isWithinFiveDays? %>
+                        <% bg = "success" if maintenance.isToday? %>
+                        <% bg = "default" if maintenance.isPassed? %>
+                        <span class="label label-<%= bg %>"
+                            data-toggle="tooltip"
+                            title="<%= maintenance.maintenance_ressource.name %> - From <%= maintenance.date_start %> to <%= maintenance.date_end %>">
+                            M
+                        </span>
+                    <% end %>
+                <% end %>
             </td>
         <% end %>
 
@@ -45,7 +60,19 @@
             <td class="<%= bg %>">
                 <% m = maintenances[date_jour] ? maintenances[date_jour] : Array.new %>
                 <% m.each do |maintenance| %>
-                    <span class="label label-default"><%= maintenance.maintenance_ressource.name %></span>
+                    <% bg = "default" %>
+                    <% bg = "info" if maintenance.isLaterThanTwoWeeks? %>
+                    <% bg = "warning" if maintenance.isWithinTwoWeeks? %>
+                    <% bg = "danger" if maintenance.isWithinFiveDays? %>
+                    <% bg = "success" if maintenance.isToday? %>
+                    <% bg = "default" if maintenance.isPassed? %>
+                    <span 
+                        class="label label-<%= bg %>"
+                        data-toggle="tooltip"
+                        title="From <%= maintenance.date_start %> to <%= maintenance.date_end %>">
+                        <%= maintenance.maintenance_ressource.name %>
+                    </span>
+
                 <% end %>
             </td>
              
