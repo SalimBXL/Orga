@@ -17,7 +17,7 @@
 
  $body-bg: white;
  //@import 'bootstrap-sprockets';
- 
+ @import "actiontext.css.scss";
  @import "bootstrap";
  @import "**/*";
 
@@ -224,4 +224,3 @@ table td {
 }
 
 
-@import 'actiontext.css';
