@@ -2,6 +2,10 @@ class BlogMessage < ApplicationRecord
     belongs_to :blog_category
     belongs_to :utilisateur
     #belongs_to :reviewcat
+
+    has_rich_text :content
+    
+    
     validates :date, :title, :description, :utilisateur_id, presence: true
 
     def ref_article

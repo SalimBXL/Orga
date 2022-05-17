@@ -17,6 +17,9 @@
 
  $body-bg: white;
  //@import 'bootstrap-sprockets';
+ //= require actiontext
+ @import "trix/dist/trix";
+ @import "./actiontext.scss";
  @import "bootstrap";
  @import "**/*";
 

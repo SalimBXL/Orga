@@ -18,3 +18,12 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
+
+//=require("trix")
+//= require("@rails/actiontext")
+
+import "trix"
+import "@rails/actiontext"
+
+require("trix")
+require("@rails/actiontext")

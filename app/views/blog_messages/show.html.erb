@@ -45,10 +45,22 @@
     <p>
         <strong><%= I18n.t("blog_messages.show.title") %> :</strong> <%= @blog_message.title.capitalize %>
     </p>
+
     <p>    
         <strong><%= I18n.t("blog_messages.show.description") %> :</strong><br>
-        <%= @blog_message.description %>
+        <%= simple_format(@blog_message.description) %>
     </p>
+
+
+    <p>    
+        
+        <%= @blog_message.content %>
+    </p>
+
+
+
+
+
     <p>
         &nbsp;&nbsp;&nbsp;
         <% if @blog_message.logbook and @blog_message.reviewed==true and !@blog_message.reviewer.nil? %>

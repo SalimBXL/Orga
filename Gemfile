@@ -64,6 +64,8 @@ gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary' 
 #wicked_pdf is a wrapper for wkhtmltopdf, you'll need to install that, too
 
+gem 'image_processing'
+
 
 
 group :development, :test do

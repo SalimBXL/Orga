@@ -156,7 +156,7 @@ class BlogMessagesController < ApplicationController
     private 
 
     def message_params
-        params.require(:blog_message).permit(:service_id, :title, :date, :utilisateur_id, :description, :blog_category_id, :groupe, :classe, :logbook, :reviewed, :reviewcat)
+        params.require(:blog_message).permit(:service_id, :title, :date, :utilisateur_id, :description, :content, :blog_category_id, :groupe, :classe, :logbook, :reviewed, :reviewcat)
     end
 
     def find_message

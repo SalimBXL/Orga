@@ -18,7 +18,10 @@
     <!-- Description -->
     <p>
         <%= form.label I18n.t("blog_message.new.description") %>*<br>
-        <%= form.text_area :description, cols: 80, rows: 5%>
+        <%= form.text_area :description, cols: 80, rows: 5 %>
+        <br />
+        <%= form.rich_text_area :content %>
+        
     </p>
 
     <!-- Category -->
