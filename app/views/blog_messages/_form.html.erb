@@ -21,6 +21,11 @@
         <%= form.text_area :description, cols: 80, rows: 5 %>
         <br />
         <%= form.rich_text_area :content %>
+
+        <hr />
+        <br />
+        <input id="x" type="hidden" name="content">
+  <trix-editor input="x"></trix-editor>
         
     </p>
 
