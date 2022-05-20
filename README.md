@@ -24,8 +24,8 @@ Things you may want to cover:
 * ...
 
 
-git clone https://github.com/SalimBXL/Orga.git
-cd Orga
-cat ./.ruby-version
-rbenv install <ruby-version>
-bundle install
+* <code>git clone https://github.com/SalimBXL/Orga.git</code>
+* <code>cd Orga</code>
+* <code>cat ./.ruby-version</code>
+* <code>rbenv install <em>ruby-version</em></code>
+* <code>bundle install</code>
