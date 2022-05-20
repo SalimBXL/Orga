@@ -94,7 +94,13 @@
         </div>
 
         <div class="col-sm-4">
-            <!-- 0 -> 5:00 / 1 -> 6:30 / 2 -> 7:30 -->
+            <!-- SECRETARY INFO -->
+            <!-- 
+                0 -> 5:00 
+                1 -> 6:30
+                2 -> 7:30
+                3 -> Other
+            -->
             <p>
                 <%= form.label I18n.t("works.form.secretary_info") %><br>
                 <%= form.select(:early_value) do %>

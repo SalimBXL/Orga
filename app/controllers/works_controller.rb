@@ -94,7 +94,7 @@ class WorksController < ApplicationController
     end
 
     def load_early_values
-        @values = ["Early 1", "Early 2", "Regular"]
+        @values = ["Early 1", "Early 2", "Regular", "[!]"]
     end
     
 end
