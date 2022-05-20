@@ -24,7 +24,9 @@ Things you may want to cover:
 * ...
 
 
-* <code>git clone https://github.com/SalimBXL/Orga.git</code>
+
+* Clone project :
+    * <code>git clone https://github.com/SalimBXL/Orga.git</code>
 * <code>cd Orga</code>
 * <code>cat ./.ruby-version</code>
 * <code>rbenv install <em>ruby-version</em></code>
