@@ -25,9 +25,11 @@ Things you may want to cover:
 
 
 
-* Clone project : <code>git clone https://github.com/SalimBXL/Orga.git</code>
+* Clone project : 
+    * <code>git clone https://github.com/SalimBXL/Orga.git</code>
 * Check Ruby version :
     * <code>cd Orga</code>
     * <code>cat ./.ruby-version</code>
     * <code>rbenv install <em>ruby-version</em></code>
-* Install project dependencies : <code>bundle install</code>
+* Install project dependencies : 
+    * <code>bundle install</code>
