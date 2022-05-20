@@ -22,3 +22,10 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+git clone https://github.com/SalimBXL/Orga.git
+cd Orga
+cat ./.ruby-version
+rbenv install <ruby-version>
+bundle install
