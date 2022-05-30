@@ -13,7 +13,7 @@ echo "  "
 echo "***********************************"
 echo "  Modification de 'database.yaml'  "
 echo "***********************************"
-cp ~/orga_clone_material/database.yml ~/RUBY/Orga/config/database.yml
+#cp ~/orga_clone_material/database.yml ~/RUBY/Orga/config/database.yml
 sudo chmod -R 777 ~/RUBY/Orga
 echo "  "
 echo "********************"
