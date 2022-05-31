@@ -5,14 +5,17 @@
 <div class="container">
 
     <!-- NEW ARTICLE -->
-    <div>
+    <p>
+        <div>
         <%= link_to '<i class="material-icons">add</i> '.html_safe, 
             new_blog_message_path,
             class: "btn btn-success btn-xs"
         %>
         &nbsp;
-        <% paginate @blog_messages, remote: true %>
-    </div>
+        <%= paginate @blog_messages %>
+        </div>
+    </p>
+
 
     <div class="row">
         <div class="col-sm-8">
@@ -27,13 +30,15 @@
     </div>
 
     <!-- NEW ARTICLE -->
-    <div>
+    <p>
+        <div>
         <%= link_to '<i class="material-icons">add</i> '.html_safe, 
             new_blog_message_path,
             class: "btn btn-success btn-xs"
         %>
         &nbsp;
-        <%= paginate @blog_messages, remote: true %>
-    </div>
+        <%= paginate @blog_messages %>
+        </div>
+    </p>
 
 </div>
