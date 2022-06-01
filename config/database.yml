@@ -11,12 +11,12 @@ default: &default
 
 development:
   <<: *default
-  #database: MyDataBase_development
+  database: MyDataBase_development
   #host: localhost
   #port: 5432
   #username: orga
   #password: orga
-  database: <%= ENV['MYDATABASE_DATABASE'] %>
+  #database: <%= ENV['MYDATABASE_DATABASE'] %>
   host: localhost
   port: <%= ENV['MYDATABASE_DATABASE_PORT'] %>
   username: <%= ENV['MYDATABASE_DATABASE_USERNAME'] %>
@@ -28,10 +28,14 @@ development:
 test:
   <<: *default
   database: MyDataBase_test
+  #host: localhost
+  #port: 5432
+  #username: orga
+  #password: orga
   host: localhost
-  port: 5432
-  username: orga
-  password: orga
+  port: <%= ENV['MYDATABASE_DATABASE_PORT'] %>
+  username: <%= ENV['MYDATABASE_DATABASE_USERNAME'] %>
+  password: <%= ENV['MYDATABASE_DATABASE_PASSWORD'] %>
 
 production:
   <<: *default
