@@ -1,0 +1,45 @@
+<div class="col-md-4">
+    <div class="panel panel-info">
+        <div class="panel-heading"><%= point %></div>
+        <div class="panel-body">
+            <table>
+                <tr>
+                    <td>
+                        <div style="float: left; text-align: left;">
+                            Disks Size
+                        </div>
+                        <div style="float: right; text-align: right;">
+                            <%= setMbOrGb(disk_space) %>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div style="float: left; text-align: left;">
+                            Used
+                        </div>
+                        <div style="float: right; text-align: right;">
+                            <%= setMbOrGb(used) %>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div style="float: left; text-align: left;">
+                            Available Space
+                        </div>
+                        <div style="float: right; text-align: right;">
+                            <%= setMbOrGb(available) %>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <hr />
+            <h3>
+                <div style="float: right; text-align: right;">
+                    <%= percentage %>
+                </div>
+            </h3>
+        </div>
+    </div>
+</div>

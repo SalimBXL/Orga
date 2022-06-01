@@ -13,57 +13,23 @@
 
     <div class="row">
 
-        <div class="col-md-4">
-            <div class="panel panel-info">
-                <div class="panel-heading">TOTAL</div>
-                <div class="panel-body">
-                    <table>
-                        <tr>
-                            <td>Disks Size</td>
-                            <td><%= setMbOrGb(@total[:disk_space]) %> Mb</td>
-                        </tr>
-                        <tr>
-                            <td>Used</td>
-                            <td><%= setMbOrGb(@total[:used]) %> Mb</td>
-                        </tr>
-                        <tr>
-                            <td>Available Space</td>
-                            <td><%= setMbOrGb(@total[:available]) %> Mb</td>
-                        </tr>
-                    </table>
-                    <hr />
-                    <h3><%= @total[:percentage] %>%</h3>
-                </div>
-            </div>
-        </div>
+        <%= render :partial => "disk_usage_block", :locals => {
+            point: "TOTAL",
+            disk_space: @total[:disk_space],
+            used: @total[:used],
+            available: @total[:available],
+            percentage: @total[:percentage].to_s + "%"
+        } %>
 
         <% @mounts.each do |m| %>
             <% mount = m[1] %>
-            <div class="col-md-4">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <%= mount[:point] %>
-                    </div>
-                    <div class="panel-body">
-                        <table>
-                            <tr>
-                                <td>Disk Size</td>
-                                <td><%= setMbOrGb(mount[:disk_space]) %></td>
-                            </tr>
-                            <tr>
-                                <td>Used</td>
-                                <td><%= setMbOrGb(mount[:used]) %></td>
-                            </tr>
-                            <tr>
-                                <td>Available Space</td>
-                                <td><%= setMbOrGb(mount[:available]) %></td>
-                            </tr>
-                        </table>
-                        <hr />
-                        <h3><%= mount[:percentage] %></h3>
-                    </div>
-                </div>
-            </div>
+            <%= render :partial => "disk_usage_block", :locals => {
+                point: mount[:point],
+                disk_space: mount[:disk_space],
+                used: mount[:used],
+                available: mount[:available],
+                percentage: mount[:percentage]
+            } %>
         <% end %>
     </div>
     
