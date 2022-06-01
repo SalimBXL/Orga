@@ -125,6 +125,21 @@
 
         </div>
         <br>
+        <hr>
+        <div class="row">
+            <!-- DISK USAGE -->
+
+            <div class="col-sm-3">
+                <article>
+                    <h3><%= I18n.t("tools.disk_usage.titre").capitalize %></h3>
+                    <p><%= I18n.t("tools.disk_usage.description") %></p>
+                    <a href=<%= disk_usage_path %> class="btn btn-info" role="button">
+                        <%= I18n.t("tools.disk_usage.titre").downcase %>
+                    </a>
+                </article>
+            </div>
+        </div>
+        <br>
     </div>
 <% else %>
     <div class="container"><% session[:page_aide] = "" %></div>

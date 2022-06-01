@@ -196,6 +196,53 @@ class ToolsController < ApplicationController
         end    
     end
 
+    #################
+    #   DISK USAGE  #
+    #################
+    def disk_usage
+    
+        @total = Hash.new
+        @total[:point] = "TOTAL"
+        @total[:disk_space] = 0.0
+        @total[:used] = 0.0
+        @total[:available] = 0.0
+        @total[:percentage] = 0.0
+
+        _mounts = `mount | grep /dev/sd`.split()
+        i = 0
+        step = 6
+        limit = _mounts.length - step
+
+        @mounts = Hash.new
+
+        while i <= limit
+            spaceMb = `df -m #{_mounts[i]}`.split()
+            point = spaceMb[7]
+            disk_space = spaceMb[8]
+            used = spaceMb[9]
+            available = spaceMb[10]
+            percentage = spaceMb[11]
+            
+            @mounts[point] = Hash.new
+            @mounts[point][:point] = point
+
+            @mounts[point][:disk_space] = disk_space.to_i
+            @total[:disk_space] = @total[:disk_space] + disk_space.to_i
+
+            @mounts[point][:used] = used.to_i
+            @total[:used] = @total[:used] + used.to_i
+
+            @mounts[point][:available] = available.to_i
+            @total[:available] = @total[:available] + available.to_i
+
+            @mounts[point][:percentage] = percentage
+            
+            i = i + step
+        end
+
+        @total[:percentage] = (@total[:used] / @total[:disk_space] * 100).round()
+    end
+
 
     # ###############################################################################
 

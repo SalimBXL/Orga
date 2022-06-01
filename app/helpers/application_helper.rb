@@ -1,5 +1,11 @@
 module ApplicationHelper
 
+    def setMbOrGb(value)
+        value = value + 0.0
+        newValue = (value >= 2024 ? (value/1024) : value).round(2)
+        newValue.to_s + " " + (value >= 1024 ? "Gb" : "Mb")
+    end
+
     def is_manager?
         current_user.utilisateur.admin unless current_user.nil?
     end

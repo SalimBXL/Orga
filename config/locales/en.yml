@@ -670,6 +670,9 @@ en:
     check_users:
       description: This tool check if user's profiles are well linked to a login profile.
       titre: Check Users
+    disk_usage:
+      description: This tool check the servers's disk usage.
+      titre: Disk usage
     exports:
       description: This tool help to export tables or parts of the database in many formats.
       titre: Exports

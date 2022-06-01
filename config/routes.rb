@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   get "exports", to: "tools#exports"
   get "download_backup", to: "tools#download_backup"
   get "statistics", to: "tools#statistics"
+  get "disk_usage", to: "tools#disk_usage"
 
   get "calculate", to: "tools#calculate"
 
