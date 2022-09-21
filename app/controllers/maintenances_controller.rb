@@ -15,6 +15,7 @@ class MaintenancesController < ApplicationController
   def new
     @maintenance = Maintenance.new
     @ressources = MaintenanceRessource.order(:service_id, :name);
+    
   end
 
   # GET /maintenances/1/edit

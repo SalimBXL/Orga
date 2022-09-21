@@ -1,18 +1,18 @@
 <% session[:page_aide] = "classes_works" %>
 
 <div class="container">
-<h1>
-    <span class="label label-primary">
-        <i class="material-icons">build</i>
-        <%= I18n.t("works.index.titre").upcase %>
-    </span>
-</h1>
+    <h1>
+        <span class="label label-primary">
+            <i class="material-icons">build</i>
+            <%= I18n.t("works.index.titre").upcase %>
+        </span>
+    </h1>
 
-<%= render partial: "add" %>
+    <%= render partial: "add" %>
 
-<div id="works">
-    <%= render 'works' %>
-</div>
+    <div id="works">
+        <%= render 'works' %>
+    </div>
 
-<%= render partial: "add" %>
+    <%= render partial: "add" %>
 </div>

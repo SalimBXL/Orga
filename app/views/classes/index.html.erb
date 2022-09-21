@@ -1,32 +1,35 @@
 <% session[:page_aide] = "classes_works" %>
 
-<h1>
-    <span class="label label-primary">
-        <i class="material-icons">category</i>
-        <%= I18n.t("classes.index.titre").upcase %>
-    </span>
-</h1>
+<div class="container">
 
-<p>
-    <%= I18n.t("classes.index.description") %>
-</p>
+    <h1>
+        <span class="label label-primary">
+            <i class="material-icons">category</i>
+            <%= I18n.t("classes.index.titre").upcase %>
+        </span>
+    </h1>
 
-<p>
-<% if user_signed_in? && is_super_admin? %>
-    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
-        new_class_path,
-        class: "btn btn-success btn-xs" %>
-        <% end %>
-</p>
+    <p>
+        <%= I18n.t("classes.index.description") %>
+    </p>
 
-<div id="classes">
-    <%= render 'classes' %>
+    <p>
+    <% if user_signed_in? && is_super_admin? %>
+        <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+            new_class_path,
+            class: "btn btn-success btn-xs" %>
+            <% end %>
+    </p>
+
+    <div id="classes">
+        <%= render 'classes' %>
+    </div>
+
+    <p>
+    <% if user_signed_in? && is_super_admin? %>
+        <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+            new_class_path,
+            class: "btn btn-success btn-xs" %>
+            <% end %>
+    </p>
 </div>
-
-<p>
-<% if user_signed_in? && is_super_admin? %>
-    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
-        new_class_path,
-        class: "btn btn-success btn-xs" %>
-        <% end %>
-</p>

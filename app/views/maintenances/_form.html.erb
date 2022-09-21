@@ -35,10 +35,12 @@
 
   <div>
     <%= form.label :contact_id, style: "display: block" %>
+
     <%= form.select(:contact_id) do %>
                         <%= select_option_tag("", nil, @maintenance.contact_id) %>
-                        <% Utilisateur.where(service: current_user.utilisateur.service).order(:prenom).each do |l| %>
-                            <%= select_option_tag(l.prenom_nom, l.id, @maintenance.contact_id) %>
+                        <% Utilisateur.order(:service_id, :prenom, :nom).each do |l| %>
+                          <% nom = "#{l.service.nom} - #{l.prenom_nom}" %>
+                            <%= select_option_tag(nom, l.id, @maintenance.contact_id) %>
                         <% end %>
                     <% end %>
   </div>
