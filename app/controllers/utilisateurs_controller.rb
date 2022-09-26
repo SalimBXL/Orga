@@ -104,7 +104,9 @@ class UtilisateursController < ApplicationController
     def create
         # Log action
         log(request.path)
+        puts "********************************* Creation utilisateur"
         @utilisateur = Utilisateur.create(utilisateur_params)
+        puts "********************************* Update user"
         @utilisateur.user = @utilisateur.profil
         if @utilisateur.save
             flash[:notice] = "Utilisateur créé avec succès"
@@ -169,13 +171,13 @@ class UtilisateursController < ApplicationController
     end
 
     def create_user
-        unless User.find_by_email(utilisateur_params[:email])
-            user = User.create(email: utilisateur_params[:email], password: "password")
-            if user.save
+        unless User.find_by_email(utilisateur_params[:email].downcase)
+            @user = User.create(email: utilisateur_params[:email].downcase, password: "password")
+            if @user.save
                 flash[:notice] = "Login créé avec succès"
             else
                 #puts "ERRR : #{user.errors}"
-                user.errors.full_messages.each do |err|
+                @user.errors.full_messages.each do |err|
                     #puts "     => #{err}"
                 end
                 render :new

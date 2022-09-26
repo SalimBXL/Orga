@@ -48,7 +48,7 @@
                     <%= form.label I18n.t("utilisateurs.new.service") %><br>
                     <%= form.select(:service_id) do %>
                         <%= select_option_tag("", nil, @utilisateur.service_id) %>
-                        <% @services.find_each do |l| %>
+                        <% Service.all.each do |l| %>
                             <%= select_option_tag(l.nom.capitalize, l.id, @utilisateur.service_id) %>
                         <% end %>
                     <% end %>
@@ -59,7 +59,7 @@
                     <%= form.label I18n.t("utilisateurs.new.groupe") %><br>
                     <%= form.select(:groupe_id) do %>
                         <%= select_option_tag("", nil, @utilisateur.groupe_id) %>
-                        <% @groupes.find_each do |l| %>
+                        <% Groupe.all.each do |l| %>
                             <%= select_option_tag(l.nom.capitalize, l.id, @utilisateur.groupe_id) %>
                         <% end %>
                     <% end %>

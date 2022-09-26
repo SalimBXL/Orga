@@ -28,7 +28,7 @@ class Utilisateur < ApplicationRecord
 
     def profil
         if user.nil?
-            self.user = User.find_by_email(email)
+            self.user = User.find_by(email: email.downcase)
         end
         user
     end
