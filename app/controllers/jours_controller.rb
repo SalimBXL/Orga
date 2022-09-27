@@ -210,19 +210,21 @@ class JoursController < ApplicationController
         utilisateurs = Utilisateur.order(:service_id, :groupe_id, :prenom, :nom)
         utilisateurs.each do |utilisateur|
             @jours[utilisateur.service] ||= Hash.new
-            @jours[utilisateur.service][utilisateur] ||= Hash.new
+            @jours[utilisateur.service][utilisateur.groupe] ||= Hash.new
+            @jours[utilisateur.service][utilisateur.groupe][utilisateur] ||= Hash.new
         end
 
         # Liste des attributions
         utilisateurs_jours = Jour.where(date: @date..@date2).order(:service_id, :utilisateur_id, :date, :am_pm)
         utilisateurs_jours.each do |utilisateur_jour|
             unless @jours[utilisateur_jour.service].nil?
-                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur] ||= Hash.new
+                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur.groupe] ||= Hash.new
+                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur.groupe][utilisateur_jour.utilisateur] ||= Hash.new
                 dd = utilisateur_jour.date.to_s
-                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd] ||= Hash.new
-                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = WorkingList.for(utilisateur_jour.id).includes(:work)
-                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd]["notes"] ||= Hash.new
-                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd]["notes"][utilisateur_jour.am_pm] = utilisateur_jour.note
+                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur.groupe][utilisateur_jour.utilisateur][dd] ||= Hash.new
+                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur.groupe][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = WorkingList.for(utilisateur_jour.id).includes(:work)
+                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur.groupe][utilisateur_jour.utilisateur][dd]["notes"] ||= Hash.new
+                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur.groupe][utilisateur_jour.utilisateur][dd]["notes"][utilisateur_jour.am_pm] = utilisateur_jour.note
             end
         end
 

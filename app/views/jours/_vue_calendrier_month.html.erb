@@ -33,16 +33,19 @@
             <% end %>
 
             <!-- Ligne par utilisateur -->
-            <% contenu.each do |utilisateur, jours| %>
+            <% contenu.each do |groupe, utilisateurs| %>
+            <% utilisateurs.each do |utilisateur, jours| %>
                 <% unless utilisateur.inactive %>
                     <%= render partial: "ligne_utilisateur_month", 
                         locals: { 
                             utilisateur: utilisateur, 
                             jours: jours,
-                            service: service
+                            service: service,
+                            groupe: groupe
                         } 
                     %>
                 <% end %>
+            <% end %>
             <% end %>
         </table>
 
