@@ -11,7 +11,6 @@
 
                 <!-- Transforme la cellule en bouton si mode édition actif -->
                 <% if user_signed_in? && is_super_admin? && @edit_mode %>
-                    
                     <% ajout = Ajout.new(utilisateur_id: utilisateur.id, date: dd, am_pm: ap) %>
                     <% unless _ap[0].nil? %>
                         <% ajout.work1 = _ap[0].work.id %>
@@ -62,6 +61,7 @@
                 <% if user_signed_in? && is_super_admin? && @edit_mode %>
                     </a>
                 <% end %>
+            
 
             <% else %>
                 <!-- TODO -->
@@ -75,28 +75,6 @@
 
         <% end %>
     <% end %>
-
-
-    <!-- Si il existe un job au même jour dans un autre servcie, écrire une note -->
-            <% @services.each do |autre_service| %>
-                <% if autre_service != service %>
-                    <% if @jours[autre_service] %>
-                        <% if @jours[autre_service][utilisateur] %>
-                            <% if @jours[autre_service][utilisateur][dd] %>
-                                <% [false, true].each do |autre_ap| %>
-                                    <% if @jours[autre_service][utilisateur][dd][autre_ap] %>
-                                        <span title="<%= autre_service.nom %>" class="already_a_job"><i>
-                                        <% i_wl = 0 %>
-                                        [<% @jours[autre_service][utilisateur][dd][autre_ap].each do |autre_wl| %><%= autre_wl.work.code %><%= "&nbsp;".html_safe if i_wl < (@jours[autre_service][utilisateur][dd][autre_ap].count-1) %><% i_wl += 1 %><% end %>]
-                                        </i></span>
-                                    <% end %>
-                                    <br>
-                                <% end %>
-                            <% end %>
-                        <% end %>
-                    <% end %>
-                <% end %>
-            <% end %>
 
 
     <% bg = "" %>
