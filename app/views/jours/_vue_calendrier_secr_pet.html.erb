@@ -23,13 +23,16 @@
             <%= render partial: "ligne_numero_jour_month", locals: { service: service } %>
 
             <!-- Ligne par utilisateur -->
-            <% contenu.each do |utilisateur, jours| %>
+            <% contenu.each do |groupe, utilisateurs| %>
+            <% utilisateurs.each do |utilisateur, jours| %>
                 <%= render partial: "ligne_utilisateur_secr_pet", 
                     locals: { 
                         utilisateur: utilisateur, 
+                        groupe: groupe,
                         jours: jours,
                         service: service
                     } unless utilisateur.inactive %>
+            <% end %>
             <% end %>
         </table>
 

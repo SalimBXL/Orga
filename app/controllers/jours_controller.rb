@@ -425,32 +425,33 @@ class JoursController < ApplicationController
         utilisateurs = Utilisateur.order(:service_id, :groupe_id, :prenom, :nom)
         utilisateurs.each do |utilisateur|
             @jours[utilisateur.service] ||= Hash.new
-            @jours[utilisateur.service][utilisateur] ||= Hash.new
+            @jours[utilisateur.service][utilisateur.groupe] ||= Hash.new
+            @jours[utilisateur.service][utilisateur.groupe][utilisateur] ||= Hash.new
         end
 
         # Liste des attributions
         utilisateurs_jours = Jour.where(date: @date..@date2).order(:service_id, :utilisateur_id, :date, :am_pm)
         utilisateurs_jours.each do |utilisateur_jour|
             unless @jours[utilisateur_jour.service].nil?
-                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur] ||= Hash.new
+                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur.groupe][utilisateur_jour.utilisateur] ||= Hash.new
                 dd = utilisateur_jour.date.to_s
                 dw = utilisateur_jour.date.wday
 
-                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd] ||= Hash.new
+                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur.groupe][utilisateur_jour.utilisateur][dd] ||= Hash.new
 
                 wksl = WorkingList.for(utilisateur_jour.id).includes(:work)
                 wksl.each do  |w|
 
                     if dw == 6
-                        @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = wksl
+                        @jours[utilisateur_jour.service][utilisateur_jour.utilisateur.groupe][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = wksl
                         
                     else
                         if w.work.early_value 
-                            if !@jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm]
-                                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = [w.work.service_id, w.work.early_value]
+                            if !@jours[utilisateur_jour.service][utilisateur_jour.utilisateur.groupe][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm]
+                                @jours[utilisateur_jour.service][utilisateur_jour.utilisateur.groupe][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = [w.work.service_id, w.work.early_value]
                             else
-                                if @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm][1] > w.work.early_value
-                                    @jours[utilisateur_jour.service][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = [w.work.service_id, w.work.early_value]
+                                if @jours[utilisateur_jour.service][utilisateur_jour.utilisateur.groupe][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm][1] > w.work.early_value
+                                    @jours[utilisateur_jour.service][utilisateur_jour.utilisateur.groupe][utilisateur_jour.utilisateur][dd][utilisateur_jour.am_pm] = [w.work.service_id, w.work.early_value]
                                 end
                             end
                         end

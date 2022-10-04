@@ -6,10 +6,10 @@
 
     <!-- Works -->
     <% [false, true].each do |ap| %>
-        <% unless @jours[service][utilisateur][dd].nil? %>
-            <% unless @jours[service][utilisateur][dd][ap].nil? %>
-                <% wl_service = @jours[service][utilisateur][dd][ap][0] %>
-                <% wl = @jours[service][utilisateur][dd][ap][1] %>
+        <% unless @jours[service][groupe][utilisateur][dd].nil? %>
+            <% unless @jours[service][groupe][utilisateur][dd][ap].nil? %>
+                <% wl_service = @jours[service][groupe][utilisateur][dd][ap][0] %>
+                <% wl = @jours[service][groupe][utilisateur][dd][ap][1] %>
 
                     <% if wl == 0 %><span class="label label-info"><strong><%= @values[wl] %></strong></span><% end %>
                     <% if wl == 1 %><span class="label label-danger"><strong><%= @values[wl] %></strong></span><% end %>
