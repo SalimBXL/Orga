@@ -67,12 +67,26 @@
                 <!-- TODO -->
 
             <% end %>
-
         <% else %>
-            
-            
+        <% end %>
 
-
+        <% unless @job_autre[utilisateur.id].nil? %>
+            <% unless @job_autre[utilisateur.id][dd].nil? %>
+                <% @job_autre[utilisateur.id][dd].each do |srv| %>
+                    <% srv = srv[0] %>
+                    <% unless srv == service.nom %>
+                        <% unless @job_autre[utilisateur.id][dd][srv].nil? %>
+                            <% unless @job_autre[utilisateur.id][dd][srv][ap].nil? %>
+                                <% @job_autre[utilisateur.id][dd][srv][ap].each do |job_autre_wl| %>
+                                    <span data-toggle="tooltip" title="<%= srv %>">
+                                        <small><em>[<%= job_autre_wl.work.code %>]</em></small>
+                                    </span>
+                                <% end %>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                <% end %>
+            <% end %>
         <% end %>
     <% end %>
 

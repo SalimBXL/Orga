@@ -228,6 +228,17 @@ class JoursController < ApplicationController
             end
         end
 
+        # Charges les jobs tous services confondus
+        jobs_autre_jours = Jour.where(date: @date..@date2).order(:utilisateur_id, :service_id, :date, :am_pm)
+        @job_autre ||= Hash.new
+        jobs_autre_jours.each do |job|
+            @job_autre[job.utilisateur_id] ||= Hash.new
+            dd = job.date.to_s
+            @job_autre[job.utilisateur_id][dd] ||= Hash.new
+            @job_autre[job.utilisateur_id][dd][job.service.nom] ||= Hash.new
+            @job_autre[job.utilisateur_id][dd][job.service.nom][job.am_pm] ||= WorkingList.for(job.id).includes(:work)
+        end
+
         # Charge les fermetures
         charge_fermetures(@date, @date2)        
 
