@@ -18,7 +18,7 @@ development:
   #password: orga
 
   database: <%= ENV['MYDATABASE_DATABASE'] %>
-  host: <%= ENV['MYAPP_DATABASE_HOST'] || 'localhost' %>
+  host: 'localhost'
   port: <%= ENV['MYDATABASE_DATABASE_PORT'] %>
   username: <%= ENV['MYDATABASE_DATABASE_USERNAME'] %>
   password: <%= ENV['MYDATABASE_DATABASE_PASSWORD'] %>
@@ -33,7 +33,7 @@ test:
   #port: 5432
   #username: orga
   #password: orga
-  host: localhost
+  host: 'localhost'
   port: <%= ENV['MYDATABASE_DATABASE_PORT'] %>
   username: <%= ENV['MYDATABASE_DATABASE_USERNAME'] %>
   password: <%= ENV['MYDATABASE_DATABASE_PASSWORD'] %>
@@ -41,7 +41,7 @@ test:
 production:
   <<: *default
   database: <%= ENV['MYDATABASE_DATABASE'] %>
-  host: localhost
+  host: 'localhost'
   port: <%= ENV['MYDATABASE_DATABASE_PORT'] %>
   username: <%= ENV['MYDATABASE_DATABASE_USERNAME'] %>
   password: <%= ENV['MYDATABASE_DATABASE_PASSWORD'] %>
