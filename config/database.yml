@@ -11,18 +11,17 @@ default: &default
 
 development:
   <<: *default
-  #database: MyDataBase_development
-  
+  database: MyDataBase_development
+  host: ''
+  port: 5432
+  username: orga
+  password: orga
+
+  #database: <%= ENV['MYDATABASE_DATABASE'] %>
   #host: localhost
-  #port: 5432
-  #username: orga
-  #password: orga
-  database: <%= ENV['MYDATABASE_DATABASE'] %>
-  
-  host: localhost
-  port: <%= ENV['MYDATABASE_DATABASE_PORT'] %>
-  username: <%= ENV['MYDATABASE_DATABASE_USERNAME'] %>
-  password: <%= ENV['MYDATABASE_DATABASE_PASSWORD'] %>
+  #port: <%= ENV['MYDATABASE_DATABASE_PORT'] %>
+  #username: <%= ENV['MYDATABASE_DATABASE_USERNAME'] %>
+  #password: <%= ENV['MYDATABASE_DATABASE_PASSWORD'] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
