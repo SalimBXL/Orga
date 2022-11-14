@@ -139,9 +139,18 @@
                         <%= select_option_tag("", nil, @blog_message.reviewcat) %>
                         <% @blog_reviewcats.keys.each do |l| %>
                             <%= select_option_tag(@blog_reviewcats[l].capitalize, l, @blog_message.reviewcat) %>
+                        <% end %>
                     <% end %>
                 <% end %>
-
+            <% end %>
+        <% end %>
+    </td>
+    <td>
+        <% if @blog_message.logbook and @blog_message.reviewed and @blog_message.completed %>
+            <% unless current_user.utilisateur.id == @blog_message.utilisateur_id %>
+                <% if user_signed_in? && (is_super_admin? || is_manager?) %>
+                    <br><%= form.label I18n.t("blog_messages.new.completed") %>
+                    <%= form.check_box :completed %>
                 <% end %>
             <% end %>
         <% end %>

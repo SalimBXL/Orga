@@ -27,7 +27,16 @@
                     &nbsp;&nbsp;&nbsp;
                     <span class="label label-danger">Not yet reviewed !</span>
                 <% else %>
-                    <span class="label label-danger"><%= @reviewcats[blog_message.reviewcat] %></span>
+                    <% unless blog_message.completed %>
+                        <span class="label label-warning">
+                            Needs to be finalized...
+                            (<%= @reviewcats[blog_message.reviewcat] %>)
+                        </span>
+                    <% else %>
+                        <span class="label label-danger">
+                            <%= @reviewcats[blog_message.reviewcat] %>
+                        </span>
+                    <% end %>
                 <% end %>
             <% end %>
         </div>

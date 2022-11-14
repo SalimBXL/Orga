@@ -91,6 +91,14 @@
                             <span class="badge"><%= @not_yet_reviewed_messages %></span> article(s) not yet reviewed
                         </a>
                     <% end %>
+
+                    <% if @not_yet_completed_messages > 0 %>
+                    <a href="<%= blog_messages_path(reviewed: true, completed: true) %>"
+                        class="btn btn-danger btn-xs" role="button">
+                        <span class="badge"><%= @not_yet_completed_messages %></span> article(s) to be finalized
+                    </a>
+                    <% end %>
+
                 </div>
             </div>
         </div>

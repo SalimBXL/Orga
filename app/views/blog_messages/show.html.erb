@@ -4,7 +4,14 @@
         <% if @blog_message.logbook %>
             &nbsp;&nbsp;&nbsp;
             <span class="label label-danger material-icons">local_library</span>
-            <small><span class="label label-danger" ><%= @reviewcat %></span></small>
+            <% if @blog_message.reviewed and !@blog_message.completed %>
+                <% tx = "#{@reviewcat} -- Needs to be finalized" %>
+                <% clr = "warning" %>
+            <% else %>
+                <% tx = @reviewcat %>
+                <% clr = "danger" %>
+            <% end %>
+            <small><span class="label label-<%= clr %>" ><%= tx %></span></small>
             <small>(#<%= @blog_message.ref_article %>)</small>
         <% end %>
     </h1>
@@ -41,6 +48,10 @@
         <% if @blog_message.logbook and !@blog_message.reviewed %>
             &nbsp;&nbsp;&nbsp;<span class="text-danger">Not yet reviewed !</span>
         <% end %>
+        <% if @blog_message.logbook and @blog_message.reviewed and !@blog_message.completed %>
+            &nbsp;&nbsp;&nbsp;<span class="text-danger">Needs to be finalized</span>
+        <% end %>
+
     </h3>
     <p>
         <strong><%= I18n.t("blog_messages.show.title") %> :</strong> <%= @blog_message.title.capitalize %>
@@ -53,7 +64,6 @@
 
 
     <p>    
-        
         <%= @blog_message.content %>
     </p>
 
@@ -62,9 +72,23 @@
 
 
     <p>
-        &nbsp;&nbsp;&nbsp;
-        <% if @blog_message.logbook and @blog_message.reviewed==true and !@blog_message.reviewer.nil? %>
-            <span class="text-muted">[Reviewed by <%= @reviewer %>]</span>
+        <% if @blog_message.logbook %>
+            <% if @blog_message.reviewed and !@blog_message.reviewer.nil? %>
+                <% if @blog_message.completed and !@blog_message.final_reviewer.nil? %>
+                    <% if @blog_message.reviewer == @blog_message.final_reviewer %>
+                        &nbsp;&nbsp;&nbsp;
+                        <span class="text-muted">[Reviewed and finalized by <%= @reviewer %>]</span>
+                    <% else %>
+                        &nbsp;&nbsp;&nbsp;
+                        <span class="text-muted">[Reviewed by <%= @reviewer %>]</span>
+                        &nbsp;&nbsp;&nbsp;
+                        <span class="text-muted">[Finalized by <%= @final_reviewer %>]</span>
+                    <% end %>
+                <% else %>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="text-muted">[Reviewed by <%= @reviewer %>]</span>
+                <% end %>
+            <% end %>
         <% end %>
     </p>
     
@@ -102,15 +126,40 @@
 
         
 
-        <% if @blog_message.logbook and (!@blog_message.reviewed or @blog_message.reviewed.nil?)  %>
-            
-            <% if is_manager_or_super_admin? and !(current_user.utilisateur.id == @blog_message.utilisateur_id) %>
-                &nbsp;&nbsp;&nbsp;
-                <a href="<%= review_blog_message_path(id: @blog_message) %>" 
-                    class="btn btn-danger btn-xs" role="button">
-                    <%= I18n.t("blog_messages.show.review") %>
-                </a>
+        <!--  LOGBOOK -->
+        <% if @blog_message.logbook %>
+        
+            <!-- Not yet reviewed -->
+            <% if (!@blog_message.reviewed or @blog_message.reviewed.nil?) %>
+                <% if is_manager_or_super_admin? and !(current_user.utilisateur.id == @blog_message.utilisateur_id) %>
+                    &nbsp;&nbsp;&nbsp;
+                    <a href="<%= review_blog_message_path(id: @blog_message) %>" 
+                        class="btn btn-danger btn-xs" role="button">
+                        <%= I18n.t("blog_messages.show.review") %>
+                    </a>
+                <% end %>
+                <span><small><em>This article is not yet reviewed.</em></small></span>
             <% end %>
+
+            <!-- Reviewed but not finalized -->
+            <% if (@blog_message.reviewed and !@blog_message.completed) %>
+                <% if is_manager_or_super_admin? and !(current_user.utilisateur.id == @blog_message.utilisateur_id) %>
+                    &nbsp;&nbsp;&nbsp;
+                    <a href="<%= complete_review_blog_message_path(id: @blog_message) %>" 
+                        class="btn btn-danger btn-xs" role="button">
+                        <%= I18n.t("blog_messages.show.complete_review") %>
+                    </a>
+                <% end %>
+                <span><small><em>This article is <b>not fully reviewed</b> and needs to be finalized.</em></small></span>
+            <% end %>
+
+
+            <!-- Reviewed and finalized -->
+            <% if @blog_message.reviewed and @blog_message.completed %>
+                <span><small><em>This article is fully reviewed.</em></small></span>
+            <% end %>
+            
+
         <% end %>
 
     </p>

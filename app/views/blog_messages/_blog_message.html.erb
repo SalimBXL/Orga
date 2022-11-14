@@ -79,16 +79,37 @@
             &nbsp;
 
             <% if blog_message.logbook %>
-                &nbsp;<a href="<%= blog_messages_path(logbook: true) %>" 
-                    class="btn btn-danger btn-xs " role="button"
-                    data-toggle="tooltip" title="LogBook #<%= blog_message.ref_article %>">
+                <% if blog_message.reviewed and !blog_message.completed %>
+                    <% clr = "warning" %>
+                    <% tx = "LogBook # #{blog_message.ref_article}
+                        Needs to be finalized...
+                        (#{@reviewcats[blog_message.reviewcat]})" 
+                    %>
+                <% else %>
+                    <% clr = "danger" %>
+                    <% tx = "LogBook # #{blog_message.ref_article}"
+                    %>
+                <% end %>
+                &nbsp;<a href="<%= blog_messages_path(logbook: true) %>"
+                    class="btn btn-<%= clr %> btn-xs " role="button"
+                    data-toggle="tooltip" title="<%= tx %>">
                     <span class="material-icons">local_library</span>
                 </a>
                 <% unless blog_message.reviewed %>
                     &nbsp;&nbsp;&nbsp;
                     <span class="label label-danger">Not yet reviewed !</span>
                 <% else %>
-                    <span class="label label-danger"><%= @reviewcats[blog_message.reviewcat] %></span>
+                    <% unless blog_message.completed %>
+                        <span class="label label-warning">
+                            Needs to be finalized...
+                            (<%= @reviewcats[blog_message.reviewcat] %>)
+                        </span>
+                    <% else %>
+                        <span class="label label-danger">
+                            <%= @reviewcats[blog_message.reviewcat] %>
+                        </span>
+                    <% end %>
+                    
                 <% end %>
             <% end %>
         </p>
