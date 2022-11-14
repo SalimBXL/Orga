@@ -18,7 +18,7 @@ development:
   #password: orga
 
   database: <%= ENV['MYDATABASE_DATABASE'] %>
-  host: <%= ENV['MYAPP_DATABASE_HOST'] || 'localhost'
+  host: <%= ENV['MYAPP_DATABASE_HOST'] || 'localhost' %>
   port: <%= ENV['MYDATABASE_DATABASE_PORT'] %>
   username: <%= ENV['MYDATABASE_DATABASE_USERNAME'] %>
   password: <%= ENV['MYDATABASE_DATABASE_PASSWORD'] %>
