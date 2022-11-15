@@ -147,7 +147,9 @@ class BlogMessagesController < ApplicationController
         log(request.path, I18n.t("messages.index.log_review_blog"))
 
         @blog_message.reviewed = true if @blog_message.logbook and (@blog_message.reviewed.nil? or !@blog_message.reviewed)
+        @blog_message.completed = nil
         @blog_message.reviewer = current_user.utilisateur.id if @blog_message.reviewed = true
+        @blog_message.final_reviewer = nil
 
         if @blog_message.update(reviewed: @blog_message.reviewed, reviewer: @blog_message.reviewer)
             redirect_to edit_blog_message_path(@blog_message)
