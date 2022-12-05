@@ -15,18 +15,7 @@
             </div>
         </div>
 
-        <!-- MENU SERVICE -->
-        <div>
-
-            <!-- Liste des services -->
-            <% @services.each do |service| %>
-                <% clr = @current_service.nom == service.nom ? "primary" : "info" %>
-
-                <a href="#" class="btn btn-xs btn-<%= clr %>" role="button">
-                    <%= service.nom %>
-                </a>
-            <% end %>
-        </div>
+        
 
         <!-- MENU NAVIGATION -->
         <div style="flex: 0 0 120px">

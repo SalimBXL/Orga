@@ -1,7 +1,8 @@
 class PostitsController < ApplicationController
     before_action :check_logged_in
     before_action :find_postit, only: [:show, :edit, :update, :destroy, :take_it, :done]
-    before_action :find_services, only: [:new, :edit]
+    before_action :check_service, only: [:show, :edit, :update, :destroy, :take_it, :done]
+    before_action :find_postits_services, only: [:new, :edit, :update]
     
 
     def index
@@ -22,6 +23,7 @@ class PostitsController < ApplicationController
         @postit = Postit.create(postit_params)
         set_postit_utilisateur
         set_postit_level
+        check_service
         if @postit.save
             flash[:notice] = "Postit créé avec succès"
             redirect_to postits_path
@@ -34,7 +36,7 @@ class PostitsController < ApplicationController
     def update
         set_postit_utilisateur
         set_postit_level
-
+        check_service
         @postit.taken_id = current_user.utilisateur.id if @postit.level == 0 && !@postit.done_at.nil? && @postit.taken_id.nil?
         
 
@@ -74,15 +76,29 @@ class PostitsController < ApplicationController
     private 
 
     def postit_params
-        params.require(:postit).permit(:title, :body, :level, :is_private, :taken_id, :done_at)
+        params.require(:postit).permit(:title, :body, :level, :is_private, :taken_id, :done_at, :service_id)
     end
 
     def find_postit
         @postit = Postit.find(params[:id]) if params[:id] != "-1"
     end
 
-    def find_services
-        @services = Service.order(:lieu_id, :nom)
+    def find_postits_services
+        @postits_services = Array.new
+        if is_super_admin?
+            Service.order(:lieu_id, :nom).each do |s|
+                @postits_services.push(s)    
+            end
+        else 
+            @postits_services.push(@current_user.utilisateur.service)
+            @current_user.utilisateur.services.each do |s|
+                @postits_services.push(s.service)
+            end
+        end
+    end
+
+    def check_service
+        @postit.service_id = @postit.utilisateur.service if @postit.service_id.nil?
     end
 
 end

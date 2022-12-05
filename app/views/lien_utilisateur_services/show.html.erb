@@ -1,0 +1,15 @@
+<h1>
+    lien_utilisateur_service #<%= @lien_utilisateur_service.id %>
+</h1>
+<p>
+    <strong>Utilisateur #<%= @lien_utilisateur_service.utilisateur.id %> : </strong> <%= @lien_utilisateur_service.utilisateur.prenom_nom %>
+</p>
+
+<p>
+    <strong>Service #<%= @lien_utilisateur_service.service.id %> : </strong> <%= @lien_utilisateur_service.service.nom %>
+</p>
+
+
+<p>
+    <%= link_to " [Edit] ", edit_lien_utilisateur_service_path(@lien_utilisateur_service) %>
+</p>

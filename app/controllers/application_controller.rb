@@ -274,7 +274,11 @@ end
   
   def find_services
     log(request.path, "find_services")
+    #@services = Service.order(:nom)
     @services = Service.order(:nom)
+
+    
+
     unless params[:service]
       if user_signed_in?
           @current_service = current_user.utilisateur.service

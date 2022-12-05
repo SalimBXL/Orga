@@ -3,9 +3,6 @@
 
     <tr id="postit_<%= postit.id %>" class="<%= postit.level == 0 ? "active" : postit.is_private ? "danger" : "warning" %>">
 
-        <td><%= postit.body %></td>
-
-
         <td>
             <% if postit.level > 1 %>
                 <span class="label label-<%= postit.level_color %>">
@@ -15,6 +12,11 @@
                 <%= postit.level %>
             <% end %>
         </td>
+
+        <% postit.service = postit.utilisateur.service if postit.service.nil? %>
+        <td><%= postit.service.nom %></td>
+
+        <td><%= postit.body %></td>
 
 
         <td>

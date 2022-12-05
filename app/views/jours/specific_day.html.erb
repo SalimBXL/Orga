@@ -14,31 +14,33 @@
     <%= render partial: "jours/day/header_day"  %>
     
     <!-- Par service... -->
-    <% @specific_day_jours.keys.each do |service| %>
+    <% @services.each do |service| %>
 
         <!-- Changement de service -->
         <%= render partial: "jours/day/nom_service_day", locals: { service: service } %>
 
 
         <!-- Changement d'utilisateur -->
-        <% @specific_day_jours[service].keys.each do |utilisateur| %>
-            <% if utilisateur != last_utilisateur %>
-                <% last_utilisateur = utilisateur %>
-            <% end %>
+        <% unless @specific_day_jours[service].nil? %>
+            <% @specific_day_jours[service].keys.each do |utilisateur| %>
+                <% if utilisateur != last_utilisateur %>
+                    <% last_utilisateur = utilisateur %>
+                <% end %>
 
 
-            <!-- Dessine la boîte si utilisateur pas inactif -->
-            <% unless utilisateur.inactive %>
-                <div class="col-sm-4">
-                    <%= render partial: "jours/day/box_day", locals: { 
-                            specific_day_jour: @specific_day_jours[service][utilisateur],
-                            utilisateur: utilisateur,
-                            note: @specific_day_jours[service][utilisateur]["notes"],
-                            task: @hebdos[utilisateur]
-                        }
-                    %>
-                    <% liste_tasks.delete(utilisateur) %>
-                </div>
+                <!-- Dessine la boîte si utilisateur pas inactif -->
+                <% unless utilisateur.inactive %>
+                    <div class="col-sm-4">
+                        <%= render partial: "jours/day/box_day", locals: { 
+                                specific_day_jour: @specific_day_jours[service][utilisateur],
+                                utilisateur: utilisateur,
+                                note: @specific_day_jours[service][utilisateur]["notes"],
+                                task: @hebdos[utilisateur]
+                            }
+                        %>
+                        <% liste_tasks.delete(utilisateur) %>
+                    </div>
+                <% end %>
             <% end %>
         <% end %>
 

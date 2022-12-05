@@ -192,6 +192,11 @@ Rails.application.routes.draw do
   ###################
   resources :working_lists, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
   
+  ##############################
+  #   LienUtilisateurServices  #
+  ##############################
+  resources :lien_utilisateur_services, only: [ :show, :index, :new, :edit, :create, :update, :destroy ]
+
 
   ############
   #   Works  #

@@ -1,0 +1,19 @@
+<tr id="lien_utilisateur_service_<%= lien_utilisateur_service.id %>">
+    <td><%= lien_utilisateur_service.id %></td>
+    <td><%= lien_utilisateur_service.utilisateur.prenom_nom %></td>
+    <td><%= lien_utilisateur_service.utilisateur.service.nom %></td>
+    <td><%= lien_utilisateur_service.service.nom %></td>
+    <td>
+        <%= link_to '<span data-toggle="tooltip" >
+            <i class="material-icons">edit</i></span>'.html_safe, 
+            edit_lien_utilisateur_service_path(lien_utilisateur_service),
+            class: "btn btn-warning btn-xs" %>
+        <%= link_to '<span data-toggle="tooltip">
+            <i class="material-icons">close</i>'.html_safe, 
+            lien_utilisateur_service_path(lien_utilisateur_service),
+            method: :delete,
+            remote: true,
+            data: { confirm: "Delete ##{lien_utilisateur_service.id} ?" },
+            class: "btn btn-danger btn-xs" %>
+    </td>
+</tr>

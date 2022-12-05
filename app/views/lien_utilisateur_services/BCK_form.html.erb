@@ -1,0 +1,56 @@
+<%= form_with model: @working_list, local: true do |form| %>
+
+    <% if @working_list.errors.any? %>
+        <strong>WARNING</strong>
+        <ul>
+            <% @working_list.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
+
+    <!-- JOB -->
+    <p>
+        <%= form.label :job_id %><br>
+        <%= form.select(:job_id) do %>
+            <%= select_option_tag("", nil, @working_list.job_id) %>
+            <% Groupe.order(:nom).find_each do |g| %>
+                <% g.utilisateurs.order(:prenom, :nom).find_each do |u| %>
+                    <% u.semaines.order(:date_lundi).find_each do |s| %>
+                        <% s.jobs.order(:numero_jour, :am_pm).find_each do |j| %>
+                            <%= select_option_tag("#{u.prenom_nom} - #{s.date_lundi+j.numero_jour-1} - #{j.numero_jour} (#{am_pm(j.am_pm)})", j.id, @working_list.job_id) %>
+                        <% end %>
+                    <% end %>
+                <% end %>
+            <% end %>
+
+        <% end %>
+    </p>
+
+    <!-- WORK -->
+    <p>
+        <%= form.label :work_id %><br>
+        <%= form.select(:work_id) do %>
+            <%= select_option_tag("", nil, @working_list.work_id) %>
+            <% Work.order(:groupe_id).find_each do |l| %>
+                <%= select_option_tag("#{l.groupe.nom} - [ #{l.code} ] - #{l.nom}", l.id, @working_list.work_id) %>
+            <% end %>
+        <% end %>
+    </p>
+
+
+
+    <p>
+        <% if Job.all.empty? %>
+            <span data-toggle="tooltip" title="Job doit contenir au moins une entrée.">
+                <%= form.submit class: "btn btn-primary disabled" %>
+            </span>
+        <% elsif Work.all.empty? %>
+            <span data-toggle="tooltip" title="Work doit contenir au moins une entrée.">
+                <%= form.submit class: "btn btn-primary disabled" %>
+            </span>
+        <% else %>
+            <%= form.submit class: "btn btn-primary" %>
+        <% end %>
+    </p>
+<% end %>

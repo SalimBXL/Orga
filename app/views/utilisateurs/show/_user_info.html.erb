@@ -24,9 +24,22 @@
             <%= @utilisateur.groupe.nom %>
         </p>
         <p>
-            <span class="material-icons">business</span>
-            <%= @utilisateur.service.nom %>
+            <span class="material-icons">business</span> Primary :
+            <%= @utilisateur.service.nom %> (<%= @utilisateur.service.lieu.nom %>)
         </p>
+
+        <% unless (@utilisateur.services.nil? or @utilisateur.services.size < 1) %>
+            <p>
+                <span class="material-icons">business</span> Secondary :
+                <ul>
+                    <% @utilisateur.services.each do |s| %>
+                        <li>
+                            <%= s.service.nom %> (<%= s.service.lieu.nom %>)
+                        </li>
+                    <% end %>
+                </ul>
+            </p>
+        <% end %>
     </div>
     <div class="panel-footer">
         <%= link_to " [#{I18n.t('utilisateurs.show.edit_informations')}] ", 

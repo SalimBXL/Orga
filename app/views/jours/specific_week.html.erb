@@ -14,130 +14,120 @@
 
     <% @jours.each do |service, contenu| %>
 
-        <!-- Changement de service -->
-        <div id = "service-<%= service.id %>"
-            <% if !@current_service.nil? && @current_service.id != service.id %>
-                    style = "display: none"
-            <% end %>
-        >
+        <% if @services.include?(service) %>
+            <!-- Changement de service -->
+            <div id="service-<%= service.id %>">
 
-            <div class="row">
-                <div class="well">
-                    <H3><i class="material-icons">business</i> <%= service.nom.upcase %></H3>
+                <div class="row">
+                    <div class="well">
+                        <H3><i class="material-icons">business</i> <%= service.nom.upcase %></H3>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Affichage du nom des jours de la semaine -->
-            <%= render partial: "jours/week/barre_jours", locals: { service: service } %>
-            
+                <!-- Affichage du nom des jours de la semaine -->
+                <%= render partial: "jours/week/barre_jours", locals: { service: service } %>
+                
 
-            <!-- Changement d'utilisateur --->
-            <% contenu.each do |utilisateur, jours| %>
-                <% unless utilisateur.inactive %>
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <strong><%= utilisateur.prenom_nom %></strong>
-                            <!-- Tasks -->
-                            <% if @hebdos[utilisateur] %>
-                                <p>
-                                    <% @hebdos[utilisateur].each do |tsk| %>
-                                        <span class='label label-warning'>
-                                            <%= "<span class='label label-warning'
-                                                data-toggle='tooltip' 
-                                                title='#{tsk.first.last}'>
-                                                #{link_to tsk.first.first, hebdos_path()}
-                                                </span>&nbsp;".html_safe
-                                            %>
-                                        </span>
-                                        &nbsp;
+                <!-- Changement d'utilisateur --->
+                <% contenu.each do |utilisateur, jours| %>
+                    <% unless utilisateur.inactive %>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <strong><%= utilisateur.prenom_nom %></strong>
+                                <!-- Tasks -->
+                                <% if @hebdos[utilisateur] %>
+                                    <p>
+                                        <% @hebdos[utilisateur].each do |tsk| %>
+                                            <span class='label label-warning'>
+                                                <%= "<span class='label label-warning'
+                                                    data-toggle='tooltip' 
+                                                    title='#{tsk.first.last}'>
+                                                    #{link_to tsk.first.first, hebdos_path()}
+                                                    </span>&nbsp;".html_safe
+                                                %>
+                                            </span>
+                                            &nbsp;
+                                        <% end %>
+                                    </p>
+                                <% end %>
+
+                                <% liste_tasks.delete(utilisateur) %>
+                                
+                            </div>
+                            <% 5.times do |i| %>
+                                <% i+= 1 %>
+                                <% bg = "" %>
+                                <% bg = "today" if (@date.beginning_of_week+i-1) == Date.today %>
+                                
+                                <!-- Vérifie si l'utilisateur est absent ce jour-là... -->
+                                <% if @absences[utilisateur] %>
+                                    <% unless @absences[utilisateur][i].nil? %>
+                                        <% if @absences[utilisateur][i][1] == true %>
+                                            <% demi = "_demi" %>
+                                        <% else %>
+                                            <% demi = "" %>
+                                        <% end %>
+
+                                        <% if @absences[utilisateur][i][2] == "ann" %>
+                                            <% ann = "_ann" %>
+                                        <% else %>
+                                            <% ann = "" %>
+                                        <% end %>
+
+                                        <% if @absences[utilisateur][i][0] == true %>
+                                            <% bg = "conge_ok#{ann}#{demi}" %>
+                                        <% else %>
+                                            <% bg = "conge_wait#{ann}#{demi}" %>
+                                        <% end %>
                                     <% end %>
-                                </p>
-                            <% end %>
-                            
+                                <% end %>
 
-                            
-                            
+                                <!-- Service fermé ? -->
+                                <% bg = "ferie" if @fermetures[service.id] and @fermetures[service.id][(@date.beginning_of_week+i-1).to_s] %>
                                 
 
-
-
-
-                            <% liste_tasks.delete(utilisateur) %>
-                            
-                        </div>
-                        <% 5.times do |i| %>
-                            <% i+= 1 %>
-                            <% bg = "" %>
-                            <% bg = "today" if (@date.beginning_of_week+i-1) == Date.today %>
-                            
-                            <!-- Vérifie si l'utilisateur est absent ce jour-là... -->
-                            <% if @absences[utilisateur] %>
-                                <% unless @absences[utilisateur][i].nil? %>
-                                    <% if @absences[utilisateur][i][1] == true %>
-                                        <% demi = "_demi" %>
-                                    <% else %>
-                                        <% demi = "" %>
+                                <!-- Compose la fiche du jour -->
+                                <div class="col-sm-2 <%= bg %>">
+                                    <p>
+                                    AM : 
+                                    <% @jours[service][utilisateur][i][false].each do |item| %>
+                                        <% @specific_day_works[item].each do |wl| %>
+                                            <% label = "primary" %>
+                                            <% label = "warning" if wl.work.mark %>
+                                            <% cl = "" %>
+                                            <% if wl.work.code.downcase == "qc" && i==5 %>
+                                                <% cl = "keep_attention" %>
+                                            <% end %>
+                                            <span data-toggle="tooltip" title="<%= @specific_day_note[item] %>" class="label label-<%= label %> <%= cl %>"><%= wl.work.code %></span>
+                                        <% end %>
+                                        <% if @specific_day_note[item] %>
+                                            <span data-toggle="tooltip" title="<%= @specific_day_note[item] %>">(!)</span>
+                                        <% end %>
                                     <% end %>
-
-                                    <% if @absences[utilisateur][i][2] == "ann" %>
-                                        <% ann = "_ann" %>
-                                    <% else %>
-                                        <% ann = "" %>
+                                    <br>
+                                    PM : 
+                                    <% @jours[service][utilisateur][i][true].each do |item| %>
+                                        <% @specific_day_works[item].each do |wl| %>
+                                            <% label = "info" %>
+                                            <% label = "warning" if wl.work.mark %>
+                                            <% cl = "" %>
+                                            <% if wl.work.code.downcase == "qc" && i==5 %>
+                                                <% cl = "keep_attention" %>
+                                            <% end %>
+                                            <span data-toggle="tooltip" title="<%= @specific_day_note[item] %>" class="label label-<%= label %> <%= cl %>"><%= wl.work.code %></span>
+                                        <% end %>
+                                        <% if @specific_day_note[item] %>
+                                            <span data-toggle="tooltip" title="<%= @specific_day_note[item] %>">(!)</span>
+                                        <% end %>
                                     <% end %>
-
-                                    <% if @absences[utilisateur][i][0] == true %>
-                                        <% bg = "conge_ok#{ann}#{demi}" %>
-                                    <% else %>
-                                        <% bg = "conge_wait#{ann}#{demi}" %>
-                                    <% end %>
-                                <% end %>
+                                    </p>
+                                </div>
                             <% end %>
-
-                            <!-- Service fermé ? -->
-                            <% bg = "ferie" if @fermetures[service.id] and @fermetures[service.id][(@date.beginning_of_week+i-1).to_s] %>
-                            
-
-                            <!-- Compose la fiche du jour -->
-                            <div class="col-sm-2 <%= bg %>">
-                                <p>
-                                AM : 
-                                <% @jours[service][utilisateur][i][false].each do |item| %>
-                                    <% @specific_day_works[item].each do |wl| %>
-                                        <% label = "primary" %>
-                                        <% label = "warning" if wl.work.mark %>
-                                        <% cl = "" %>
-                                        <% if wl.work.code.downcase == "qc" && i==5 %>
-                                            <% cl = "keep_attention" %>
-                                        <% end %>
-                                        <span data-toggle="tooltip" title="<%= @specific_day_note[item] %>" class="label label-<%= label %> <%= cl %>"><%= wl.work.code %></span>
-                                    <% end %>
-                                    <% if @specific_day_note[item] %>
-                                        <span data-toggle="tooltip" title="<%= @specific_day_note[item] %>">(!)</span>
-                                    <% end %>
-                                <% end %>
-                                <br>
-                                PM : 
-                                <% @jours[service][utilisateur][i][true].each do |item| %>
-                                    <% @specific_day_works[item].each do |wl| %>
-                                        <% label = "info" %>
-                                        <% label = "warning" if wl.work.mark %>
-                                        <% cl = "" %>
-                                        <% if wl.work.code.downcase == "qc" && i==5 %>
-                                            <% cl = "keep_attention" %>
-                                        <% end %>
-                                        <span data-toggle="tooltip" title="<%= @specific_day_note[item] %>" class="label label-<%= label %> <%= cl %>"><%= wl.work.code %></span>
-                                    <% end %>
-                                    <% if @specific_day_note[item] %>
-                                        <span data-toggle="tooltip" title="<%= @specific_day_note[item] %>">(!)</span>
-                                    <% end %>
-                                <% end %>
-                                </p>
-                            </div>
-                        <% end %>
-                    </div>
+                        </div>
+                    <% end %>
                 <% end %>
-            <% end %>
-        </div>
+            </div>
+        <% end %>
 
 
         <!-- Rappel des Events -->

@@ -1,54 +1,56 @@
 
 <% @jours.each do |service, contenu| %>
-    <br>
 
-    <!-- AFFICHAGE DU NOM DU SERVICE -->
-    <div id = "service-<%= service.id %>"
-        <% if !@current_service.nil? && @current_service.id != service.id && !current_user.admin %>
-                <% #class="collapse" %>
-        <% end %>
-    >
+    <% if @services.include?(service) %>
+        <br>
 
-        <%= render partial: "nom_service_month", locals: { service: service } %>
-
-        <!-- Rappel des Events -->
-        <%= render partial: "rappel_events_month", locals: { service: service } %>
-        
-
-        <table class="table table-bordered grille">
-            <!-- Ligne de numéros de semaines -->
-            <%= render partial: "ligne_numero_semaines_month" %>
-
-            <!-- Ligne de numéros de jours -->
-            <%= render partial: "ligne_numero_jour_month", locals: { service: service } %>
-
-            <!-- Ligne des maintenances -->
-            <% if @maintenances[service] %>
-                <%= render partial: "ligne_maintenance_month", 
-                    locals: {
-                        maintenances: @maintenances[service],
-                        service: service
-                    }
-                %>
+        <!-- AFFICHAGE DU NOM DU SERVICE -->
+        <div id = "service-<%= service.id %>"
+            <% if !@current_service.nil? && @current_service.id != service.id && !current_user.admin %>
+                    <% #class="collapse" %>
             <% end %>
+        >
 
-            <!-- Ligne par utilisateur -->
-            <% contenu.each do |groupe, utilisateurs| %>
-            <% utilisateurs.each do |utilisateur, jours| %>
-                <% unless utilisateur.inactive %>
-                    <%= render partial: "ligne_utilisateur_month", 
-                        locals: { 
-                            utilisateur: utilisateur, 
-                            jours: jours,
-                            service: service,
-                            groupe: groupe
-                        } 
+            <%= render partial: "nom_service_month", locals: { service: service } %>
+
+            <!-- Rappel des Events -->
+            <%= render partial: "rappel_events_month", locals: { service: service } %>
+            
+
+            <table class="table table-bordered grille">
+                <!-- Ligne de numéros de semaines -->
+                <%= render partial: "ligne_numero_semaines_month" %>
+
+                <!-- Ligne de numéros de jours -->
+                <%= render partial: "ligne_numero_jour_month", locals: { service: service } %>
+
+                <!-- Ligne des maintenances -->
+                <% if @maintenances[service] %>
+                    <%= render partial: "ligne_maintenance_month", 
+                        locals: {
+                            maintenances: @maintenances[service],
+                            service: service
+                        }
                     %>
                 <% end %>
-            <% end %>
-            <% end %>
-        </table>
 
-    </div>
+                <!-- Ligne par utilisateur -->
+                <% contenu.each do |groupe, utilisateurs| %>
+                <% utilisateurs.each do |utilisateur, jours| %>
+                    <% unless utilisateur.inactive %>
+                        <%= render partial: "ligne_utilisateur_month", 
+                            locals: { 
+                                utilisateur: utilisateur, 
+                                jours: jours,
+                                service: service,
+                                groupe: groupe
+                            } 
+                        %>
+                    <% end %>
+                <% end %>
+                <% end %>
+            </table>
+        </div>
+    <% end %>
     
 <% end %>

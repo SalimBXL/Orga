@@ -9,6 +9,7 @@ class Utilisateur < ApplicationRecord
     has_many :hebdos, dependent: :destroy
     has_many :postits, dependent: :destroy
     has_many :maintenance
+    has_many :lien_utilisateur_services
     validates_associated :absences
     validates_associated :jours
     validates :nom, :prenom, :email, presence: true
@@ -40,6 +41,10 @@ class Utilisateur < ApplicationRecord
         else 
             abs.accord
         end
+    end
+
+    def services
+        LienUtilisateurService.where(utilisateur_id: id)
     end
     
 end

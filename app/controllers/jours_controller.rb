@@ -171,14 +171,17 @@ class JoursController < ApplicationController
         end
 
         # Charges les services
-        find_services if @services.nil?
+        @services = Array.new
+        @services.push(current_user.utilisateur.service)
+        current_user.utilisateur.services.each do |s|
+            @services.push(s.service)
+        end
+        #find_services if @services.nil?
 
         # Charge les Events
         @events = Hash.new
         charge_events(@date)
-
-        
-        
+ 
     end
 
     ############
@@ -263,7 +266,12 @@ class JoursController < ApplicationController
         end
 
         # Charges les services
-        find_services if @services.nil?
+        @services = Array.new
+        @services.push(current_user.utilisateur.service)
+        current_user.utilisateur.services.each do |s|
+            @services.push(s.service)
+        end
+        #find_services if @services.nil?
 
         # Charge les Events
         @events = Hash.new
@@ -386,7 +394,13 @@ class JoursController < ApplicationController
         charge_fermetures(@date.beginning_of_week, @date.beginning_of_week+5.days)
 
         # Charge les services
-        find_services if @services.nil?
+        #find_services if @services.nil?
+        # Charges les services
+        @services = Array.new
+        @services.push(current_user.utilisateur.service)
+        current_user.utilisateur.services.each do |s|
+            @services.push(s.service)
+        end
 
         # Charge les Events
         @events = Hash.new

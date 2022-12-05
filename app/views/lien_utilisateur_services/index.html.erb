@@ -1,0 +1,23 @@
+<h1>
+    <span class="label label-danger">
+        <i class="material-icons">list_alt</i>
+        <%= "Lien Utilisateur Service".upcase %>
+    </span>
+</h1>
+
+<p>
+    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+        new_lien_utilisateur_service_path,
+        class: "btn btn-success btn-xs" %>
+</p>
+
+<div id="lien_utilisateur_services">
+    <%= render 'lien_utilisateur_services' %>
+</div>
+
+<p>
+    <%= link_to '<i class="material-icons">add</i> '.html_safe, 
+        new_lien_utilisateur_service_path,
+        class: "btn btn-success btn-xs" %>
+</p>
+

@@ -15,19 +15,29 @@
     <div class="row">
         <div class="col-sm-4">
             
-            
             <p>
                 <%= form.label I18n.t("postits.form.body") %><br>
                 <%= form.text_area :body %>
             </p>
 
-            <% @postit.level = 1 if @postit.level.nil? %>
+            <hr />
 
-            <%= @postit.level %>
+            <b>Service</b><br>
+            
+            <%= form.select(:service_id, 
+                @postits_services.collect {|w| ["#{w.nom} (#{w.lieu.nom})", w.id]}, 
+                {
+                },
+                { :size => 0 }) 
+            %>
+
+            <hr />
+
+            <% @postit.level = 1 if @postit.level.nil? %>
 
             <% if (@postit.level != 0 && @postit.level != 2) %>
                 <p>
-                    <%= form.label I18n.t("postits.form.level") %><br>
+                    <%= form.label I18n.t("postits.form.level") %> (<%= @postit.level %>)<br>
                     <span class="label label-primary">&nbsp;</span>
                     <%= form.radio_button :level, "1" %>
                     <label for="html">
@@ -50,6 +60,8 @@
                     
                 </p>
             <% end %>
+
+            <hr />
   
             <p>
                 <%= form.label I18n.t("postits.form.is_private") %>
@@ -59,6 +71,8 @@
 
 
             <% if params[:action] != "new" %>
+
+                <hr />
 
                 <p>
                     <%= form.label I18n.t("postits.form.taken") %><br>
@@ -81,6 +95,7 @@
 
     <div class="row">
         <div class="col-sm-4">
+            <hr />
             <p><%= form.submit class: "btn btn-primary" %></p>
         </div>
     </div>

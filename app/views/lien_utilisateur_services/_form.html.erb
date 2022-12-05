@@ -1,0 +1,42 @@
+<%= form_with model: @lien_utilisateur_service, local: true do |form| %>
+
+    <% if @lien_utilisateur_service.errors.any? %>
+        <strong>WARNING</strong>
+        <ul>
+            <% @lien_utilisateur_service.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
+
+
+    <div class="row">
+        <div class="col-sm-6">
+            <p>
+                <b>SERVICE</b><br>
+                <%= form.select(:service_id, 
+                        @services.collect {|w| ["#{w.lieu.nom} / #{w.nom}", w.id]}, 
+                        {
+                        },
+                        { :size => 20 }
+                    ) 
+                %>
+            </p>
+            <p>
+                <b>UTILISATEUR</b><br>
+                <%= form.select(:utilisateur_id, 
+                        @utilisateurs.collect {|w| ["#{w.service.nom} / #{w.prenom_nom}", w.id]}, 
+                        {
+                        },
+                        { :size => 20 }
+                    ) 
+                %>
+            </p>
+        </div>
+    </div>
+
+    <p>
+            <%= form.submit class: "btn btn-primary" %>
+    </p>
+<% end %>
+
