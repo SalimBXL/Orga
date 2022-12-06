@@ -1,67 +1,70 @@
+<% postit.service = postit.utilisateur.service if postit.service.nil? %>
 
-<% if (postit.is_private && current_user.utilisateur == postit.utilisateur) || !postit.is_private %>
+<% if (current_user.utilisateur.services.include?(postit.service)) or is_super_admin? %>
 
-    <tr id="postit_<%= postit.id %>" class="<%= postit.level == 0 ? "active" : postit.is_private ? "danger" : "warning" %>">
+    <% if (postit.is_private && current_user.utilisateur == postit.utilisateur) || !postit.is_private %>
 
-        <td>
-            <% if postit.level > 1 %>
-                <span class="label label-<%= postit.level_color %>">
-                    <%= postit.level %>
-                </span>
-            <% else %>
-                <%= postit.level %>
-            <% end %>
-        </td>
+        <tr id="postit_<%= postit.id %>" class="<%= postit.level == 0 ? "active" : postit.is_private ? "danger" : "warning" %>">
 
-        <% postit.service = postit.utilisateur.service if postit.service.nil? %>
-        <td><%= postit.service.nom %></td>
-
-        <td><%= postit.body %></td>
-
-
-        <td>
-            <% if postit.is_private %>
-                <span class="label label-danger"><%= postit.utilisateur.prenom %></span>
-            <% else %>
-                <%= postit.utilisateur.prenom %>
-            <% end %>
-        </td>
-
-
-        <td>
-            <% if !postit.taken_id.nil? %>
-                <% if postit.level != 0 %>
+            <td>
+                <% if postit.level > 1 %>
                     <span class="label label-<%= postit.level_color %>">
-                        <%= postit.taken.prenom_nom %>
+                        <%= postit.level %>
                     </span>
                 <% else %>
-                    <%= postit.taken.prenom_nom %>
+                    <%= postit.level %>
                 <% end %>
+            </td>
+
+            <td><%= postit.service.nom %></td>
+
+            <td><%= postit.body %></td>
+
+
+            <td>
+                <% if postit.is_private %>
+                    <span class="label label-danger"><%= postit.utilisateur.prenom %></span>
+                <% else %>
+                    <%= postit.utilisateur.prenom %>
+                <% end %>
+            </td>
+
+
+            <td>
+                <% if !postit.taken_id.nil? %>
+                    <% if postit.level != 0 %>
+                        <span class="label label-<%= postit.level_color %>">
+                            <%= postit.taken.prenom_nom %>
+                        </span>
+                    <% else %>
+                        <%= postit.taken.prenom_nom %>
+                    <% end %>
+                <% end %>
+            </td>
+
+            
+            <td>
+                <%= "Created at #{postit.created_at}" if postit.level != 0 %>
+                <%= "Done at #{postit.done_at}" if postit.level == 0 %>
+            </td>
+
+
+            <td>
+            <% if user_signed_in? && (is_manager? || current_user.utilisateur == postit.utilisateur) %>
+                <%= link_to '<span data-toggle="tooltip">
+                    <i class="material-icons">edit</i></span>'.html_safe, 
+                    edit_postit_path(postit),
+                    class: "btn btn-warning btn-xs" %>
+
+                <%= link_to '<span data-toggle="tooltip">
+                    <i class="material-icons">close</i>'.html_safe, 
+                    postit_path(postit),
+                    method: :delete,
+                    remote: true,
+                    data: { confirm: "Delete #{postit.body} ?" },
+                    class: "btn btn-danger btn-xs" %>
             <% end %>
-        </td>
-
-        
-        <td>
-            <%= "Created at #{postit.created_at}" if postit.level != 0 %>
-            <%= "Done at #{postit.done_at}" if postit.level == 0 %>
-        </td>
-
-
-        <td>
-        <% if user_signed_in? && (is_manager? || current_user.utilisateur == postit.utilisateur) %>
-            <%= link_to '<span data-toggle="tooltip">
-                <i class="material-icons">edit</i></span>'.html_safe, 
-                edit_postit_path(postit),
-                class: "btn btn-warning btn-xs" %>
-
-            <%= link_to '<span data-toggle="tooltip">
-                <i class="material-icons">close</i>'.html_safe, 
-                postit_path(postit),
-                method: :delete,
-                remote: true,
-                data: { confirm: "Delete #{postit.body} ?" },
-                class: "btn btn-danger btn-xs" %>
-        <% end %>
-        </td>
-    </tr>
+            </td>
+        </tr>
+    <% end %>
 <% end %>

@@ -32,11 +32,11 @@
 
             <!-- Si tâche prévue cette semaine, on color le fond en orange claire -->
             <% if @tasks_profil[utilisateur.id] %>
-                <% tasks_for_user = @tasks_profil[utilisateur.id] %>
-                <% tasks_for_user.each do |tsk| %>
-                    <% bg = "task" if date_jour.cweek == tsk.numero_semaine %>
+                <% if @tasks_profil[utilisateur.id][date_jour.year] %>
+                    <% if @tasks_profil[utilisateur.id][date_jour.year][date_jour.cweek] %>
+                        <% bg = "task" %>
+                    <% end %>    
                 <% end %>
-                
             <% end %>
 
             <% if date_jour == Date.today %>
@@ -93,7 +93,8 @@
                     service: service,
                     groupe: groupe,
                     utilisateur: utilisateur,
-                    abs: var_abs
+                    abs: var_abs,
+                    tsk: (date_jour.cweek)
                 } %>
              </td>
              

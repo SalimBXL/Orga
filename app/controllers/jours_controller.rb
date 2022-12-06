@@ -171,11 +171,17 @@ class JoursController < ApplicationController
         end
 
         # Charges les services
-        @services = Array.new
-        @services.push(current_user.utilisateur.service)
-        current_user.utilisateur.services.each do |s|
-            @services.push(s.service)
+        if is_super_admin?
+            @services = Service.order(:lieu_id, :nom)
+        else
+            @services = current_user.utilisateur.services
         end
+            
+        # @services = Array.new
+        # @services.push(current_user.utilisateur.service)
+        # current_user.utilisateur.services.each do |s|
+        #     @services.push(s.service)
+        # end
         #find_services if @services.nil?
 
         # Charge les Events
@@ -266,11 +272,16 @@ class JoursController < ApplicationController
         end
 
         # Charges les services
-        @services = Array.new
-        @services.push(current_user.utilisateur.service)
-        current_user.utilisateur.services.each do |s|
-            @services.push(s.service)
+        if is_super_admin?
+            @services = Service.order(:lieu_id, :nom)
+        else
+            @services = current_user.utilisateur.services
         end
+        # @services = Array.new
+        # @services.push(current_user.utilisateur.service)
+        # current_user.utilisateur.services.each do |s|
+        #     @services.push(s.service)
+        # end
         #find_services if @services.nil?
 
         # Charge les Events
@@ -289,7 +300,15 @@ class JoursController < ApplicationController
         #
         utilisateurs.each do |utilisateur|
             @tasks_profil ||= Hash.new
-            @tasks_profil[utilisateur.id] = find_tasks_for_month(utilisateur, @date.month, @date.year)
+            #@tasks_profil[utilisateur.id] = find_tasks_for_month(utilisateur, @date.month, @date.year)
+            #tasks_profil[utilisateur.id]
+            hebdos = Hebdo.where('year_id >= ?', @date.year).order(:utilisateur_id, :year_id, :numero_semaine)
+            hebdos.each do |hebdo|
+                @tasks_profil[hebdo.utilisateur_id] ||= Hash.new
+                @tasks_profil[hebdo.utilisateur_id][hebdo.year_id] ||= Hash.new
+                @tasks_profil[hebdo.utilisateur_id][hebdo.year_id][hebdo.numero_semaine] ||= Array.new
+                @tasks_profil[hebdo.utilisateur_id][hebdo.year_id][hebdo.numero_semaine] << hebdo
+            end
         end
 
         #
@@ -394,13 +413,16 @@ class JoursController < ApplicationController
         charge_fermetures(@date.beginning_of_week, @date.beginning_of_week+5.days)
 
         # Charge les services
-        #find_services if @services.nil?
-        # Charges les services
-        @services = Array.new
-        @services.push(current_user.utilisateur.service)
-        current_user.utilisateur.services.each do |s|
-            @services.push(s.service)
+        if is_super_admin?
+            @services = Service.order(:lieu_id, :nom)
+        else
+            @services = current_user.utilisateur.services
         end
+        # @services = Array.new
+        # @services.push(current_user.utilisateur.service)
+        # current_user.utilisateur.services.each do |s|
+        #     @services.push(s.service)
+        # end
 
         # Charge les Events
         @events = Hash.new

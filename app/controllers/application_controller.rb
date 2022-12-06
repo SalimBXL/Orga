@@ -332,12 +332,16 @@ end
   end
 
   def find_tasks_for_month(utilisateur, month, year)
+    
     d = Date.new(year, month, 1)
     semaine_debut = d.cweek
     semaine_fin = (d+10.weeks).cweek
-    annee = year
+    annee_debut = d.year
+    annee_fin = (d+10.weeks).year
 
-    hebdos = Hebdo.where('numero_semaine >= ? AND numero_semaine <= ? AND year_id >= ?', semaine_debut, semaine_fin, annee ).where(utilisateur: utilisateur).order(:year_id, :numero_semaine)
+    #hebdos = Hebdo.where('numero_semaine >= ? AND numero_semaine <= ? AND year_id >= ?', semaine_debut, semaine_fin, annee_debut).where(utilisateur: utilisateur).order(:year_id, :numero_semaine)
+    #hebdos = Hebdo.where('year_id >= ? AND numero_semaine >= ?', annee_debut, semaine_debut).where(utilisateur: utilisateur).order(:year_id, :numero_semaine)
+    hebdos = Hebdo.where('year_id >= ? AND numero_semaine >= ?', annee_debut, semaine_debut).where(utilisateur: utilisateur).order(year_id: :desc, numero_semaine: :desc).order(:utilisateur_id, :task_id)
     return hebdos
   end
 end

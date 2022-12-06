@@ -64,11 +64,21 @@ class HomeController < ApplicationController
                     utilisateur = Utilisateur.find(maintenance.contact_id)
                     taken = utilisateur
                     titre = "MAINTENANCE"
+                    service = maintenance.maintenance_ressource.service
                     id = -1
 
                     message = "(#{depart}) Maintenance #{ressource.name} in less than #{delay}."
                     
-                    postit = Postit.new(id: id, title: titre, body: message, level: level, utilisateur: utilisateur, taken: utilisateur, created_at: created)
+                    postit = Postit.new(
+                        id: id, 
+                        title: titre, 
+                        body: message, 
+                        level: level, 
+                        utilisateur: utilisateur, 
+                        taken: utilisateur, 
+                        service: service,
+                        created_at: created
+                    )
                     @postits.unshift(postit)
                 end
             end

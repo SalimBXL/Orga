@@ -31,13 +31,11 @@
         <% unless (@utilisateur.services.nil? or @utilisateur.services.size < 1) %>
             <p>
                 <span class="material-icons">business</span> Secondary :
-                <ul>
-                    <% @utilisateur.services.each do |s| %>
-                        <li>
-                            <%= s.service.nom %> (<%= s.service.lieu.nom %>)
-                        </li>
+                <% @utilisateur.services.each do |s| %>
+                    <% unless (s == @utilisateur.service) %>
+                        <%= s.nom %> (<%= s.lieu.nom %>)
                     <% end %>
-                </ul>
+                <% end %>
             </p>
         <% end %>
     </div>

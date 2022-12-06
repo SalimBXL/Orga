@@ -1,6 +1,17 @@
-<% if @events and @events[current_user.utilisateur.service.id] %>
-    <% @events[current_user.utilisateur.service.id].each do |event| %>
-        <span class="label label-default"><%= event.service.nom %></span>
-        <%= event.nom %><%= " : #{event.note}" if event.note %>
+<% if @events %>
+    <% if (is_super_admin?) %>
+        <% _services = Service.all %>
+    <% else %>
+        <% _services = current_user.utilisateur.services %>
+    <% end %>
+    <% _services.each do |s| %>
+        <% if @events[s.id] %>
+            <% @events[s.id].each do |event| %>
+                <div>
+                    <span class="label label-default"><%= event.service.nom %></span>
+                    <%= event.nom %><%= " : #{event.note}" if event.note %>
+                </div>
+            <% end %>
+        <% end %>
     <% end %>
 <% end %>

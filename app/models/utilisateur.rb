@@ -44,7 +44,13 @@ class Utilisateur < ApplicationRecord
     end
 
     def services
-        LienUtilisateurService.where(utilisateur_id: id)
+        _services = LienUtilisateurService.where(utilisateur_id: id)
+        services = Array.new
+        services.push(self.service)
+        _services.each do |s|
+            services.push(s.service)
+        end
+        return services
     end
     
 end

@@ -1,86 +1,90 @@
 <div class="container-fluid">
     <div class="row">
         <% @postits.each do |postit| %>
-            <% if !(postit.level == 0 && (postit.done_at != Date.today)) and (postit.utilisateur.service.id == current_user.utilisateur.service.id or current_user.admin) %>
-                <% if (postit.is_private && current_user.utilisateur == postit.utilisateur) || !postit.is_private %>
-                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
 
-                        <% bg ||= "warning" %>
-                        <% bg = "danger" if postit.is_private %>
-                        <% bg = "default" if postit.level == 0 %>
-                        
-                        <div class="panel panel-<%= bg %>">
-                            <div class="panel-heading home-postit">
-                                <%= postit.title %>
-                                
-                                <% if postit.level > 1 %>
-                                    <% mark = "*" %>
-                                    <% level_color = postit.level_color %>
-                                    <% colorTypo = "" %>
+            <% if current_user.utilisateur.services.include?(postit.service) or is_super_admin? %>
 
+                <% if !(postit.level == 0 && (postit.done_at != Date.today)) and (postit.utilisateur.service.id == current_user.utilisateur.service.id or current_user.admin) %>
+                    <% if (postit.is_private && current_user.utilisateur == postit.utilisateur) || !postit.is_private %>
+                        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+
+                            <% bg ||= "warning" %>
+                            <% bg = "danger" if postit.is_private %>
+                            <% bg = "default" if postit.level == 0 %>
+                            
+                            <div class="panel panel-<%= bg %>">
+                                <div class="panel-heading home-postit">
+                                    <%= postit.title %>
                                     
-                                    <% if postit.level == 3 %>
-                                        <% peremption = (postit.created_at.to_date + 15.days) %>
-                                        <% level_color = "danger" if Date.today >= peremption %>
-                                    <% end %>
+                                    <% if postit.level > 1 %>
+                                        <% mark = "*" %>
+                                        <% level_color = postit.level_color %>
+                                        <% colorTypo = "" %>
 
-                                    <% if postit.level == 4 %>
-                                        <% peremption = (postit.created_at.to_date + 7.days) %>
-                                        <% if Date.today >= peremption %>
-                                            <% level_color = "danger" %>
-                                            <% mark = "OUTDATED! #{peremption}" %>
-                                            <% colorTypo = "text-danger" %>
+                                        
+                                        <% if postit.level == 3 %>
+                                            <% peremption = (postit.created_at.to_date + 15.days) %>
+                                            <% level_color = "danger" if Date.today >= peremption %>
                                         <% end %>
-                                    <% end %>
 
-                                    <span class="label label-<%= level_color %>"><%= mark %></span>
-                                <% end %>
-                                
-                                <span class="<%= colorTypo %>"><%= postit.body %></span>
-
-                                <small>(<%= postit.utilisateur.initiales %>)</small>
-                            </div>  
-
-                            <% if postit.level != 0 %>
-                                <div class="btn-group btn-group-justified bg-warning">
-                                    <% if postit.id != -1%>
-                                        <% if postit.level != 2 && postit.is_private != true %>
-                                            <%= 
-                                                link_to "[Take]", 
-                                                take_it_path(id: postit), 
-                                                data: { 
-                                                    confirm: "Are you sure you want to be in charge for this Post-It task ?"
-                                                },
-                                                class: "btn btn-xs btn-link text-warning" 
-                                            %>
-                                        <% end %>
-                                        <% if postit.level == 2 or postit.is_private %>
-                                            <% if (postit.is_private) or (postit.is_private != true and postit.taken.id == current_user.utilisateur.id) %>
-
-                                                <%= 
-                                                    link_to "[Done!]", 
-                                                    done_path(id: postit), 
-                                                    data: { 
-                                                        confirm: "Are you confirming that this task is done ?"
-                                                    },
-                                                    class: "btn btn-xs btn-link text-warning"
-                                                %>
-                                                
-                                            <% else %>
-                                                <small class="text-muted">
-                                                    Taken by <%= postit.taken.prenom if !postit.taken.nil? %>
-                                                </small>
+                                        <% if postit.level == 4 %>
+                                            <% peremption = (postit.created_at.to_date + 7.days) %>
+                                            <% if Date.today >= peremption %>
+                                                <% level_color = "danger" %>
+                                                <% mark = "OUTDATED! #{peremption}" %>
+                                                <% colorTypo = "text-danger" %>
                                             <% end %>
                                         <% end %>
-                                    <% else %>
-                                        <small class="text-muted">
-                                            Contact : <%= postit.taken.prenom if !postit.taken.nil? %>
-                                        </small>
+
+                                        <span class="label label-<%= level_color %>"><%= mark %></span>
                                     <% end %>
-                                </div>
-                            <% end %>
+                                    
+                                    <span class="<%= colorTypo %>"><%= postit.body %></span>
+
+                                    <small>(<%= postit.utilisateur.initiales %>)</small>
+                                </div>  
+
+                                <% if postit.level != 0 %>
+                                    <div class="btn-group btn-group-justified bg-warning">
+                                        <% if postit.id != -1%>
+                                            <% if postit.level != 2 && postit.is_private != true %>
+                                                <%= 
+                                                    link_to "[Take]", 
+                                                    take_it_path(id: postit), 
+                                                    data: { 
+                                                        confirm: "Are you sure you want to be in charge for this Post-It task ?"
+                                                    },
+                                                    class: "btn btn-xs btn-link text-warning" 
+                                                %>
+                                            <% end %>
+                                            <% if postit.level == 2 or postit.is_private %>
+                                                <% if (postit.is_private) or (postit.is_private != true and postit.taken.id == current_user.utilisateur.id) %>
+
+                                                    <%= 
+                                                        link_to "[Done!]", 
+                                                        done_path(id: postit), 
+                                                        data: { 
+                                                            confirm: "Are you confirming that this task is done ?"
+                                                        },
+                                                        class: "btn btn-xs btn-link text-warning"
+                                                    %>
+                                                    
+                                                <% else %>
+                                                    <small class="text-muted">
+                                                        Taken by <%= postit.taken.prenom if !postit.taken.nil? %>
+                                                    </small>
+                                                <% end %>
+                                            <% end %>
+                                        <% else %>
+                                            <small class="text-muted">
+                                                Contact : <%= postit.taken.prenom if !postit.taken.nil? %>
+                                            </small>
+                                        <% end %>
+                                    </div>
+                                <% end %>
+                            </div>
                         </div>
-                    </div>
+                    <% end %>
                 <% end %>
             <% end %>
         <% end %>

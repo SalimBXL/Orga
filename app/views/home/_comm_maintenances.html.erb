@@ -1,7 +1,7 @@
 <ul>
     <% @maintenances.each do |maintenance| %>
         <% ressource = maintenance.maintenance_ressource %>
-        <% if ressource.service_id == current_user.utilisateur.service.id %>
+        <% if current_user.utilisateur.services.include?(ressource.service) or is_super_admin? %>
             <li>
                 <% if maintenance.isToday? %>
                     Maintenance : <span class="label label-success"><%= ressource.name %></span>    

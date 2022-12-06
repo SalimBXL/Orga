@@ -90,9 +90,8 @@ class PostitsController < ApplicationController
                 @postits_services.push(s)    
             end
         else 
-            @postits_services.push(@current_user.utilisateur.service)
             @current_user.utilisateur.services.each do |s|
-                @postits_services.push(s.service)
+                @postits_services.push(s)
             end
         end
     end
