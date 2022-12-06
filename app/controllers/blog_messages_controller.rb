@@ -219,7 +219,7 @@ class BlogMessagesController < ApplicationController
     def find_services
         @blog_services = Hash.new
         Service.all.each do |s|
-            @blog_services[s.id] = s.nom
+            @blog_services[s.id] = s.nom if current_user.utilisateur.services.include?(s) or is_super_admin?
         end
     end
 
