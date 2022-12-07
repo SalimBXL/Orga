@@ -86,6 +86,24 @@
                         </h4>
                     </article>
                 </div>
+                <div class="well">
+                    <article>
+                        <h4>
+                            <b>Secondary service(s)</b> 
+                            <%= link_to " ... ", 
+                                lien_utilisateur_services_path(@utilisateur),
+                                class: "btn btn-xs btn-info"
+                            %>
+                        </h4>
+                        <% if @utilisateur.services.length > 1 %>
+                            <ul>
+                                <% @utilisateur.services.each do |s| %>
+                                    <li><%= s.nom %> (<%= s.lieu.nom %>)</li>
+                                <% end %>
+                            </ul>
+                        <% end %>
+                    </article>
+                </div>
                 <hr>
                 <%= form.submit class: "btn btn-success" %>
             <% end %>

@@ -32,17 +32,24 @@
                 </a>
                 <a href="<%= grille_path %>" class="btn btn-xs btn-success" role="button">
                     <i class="material-icons">healing</i><br>
-                    <%= I18n.t("home.index.grille") %>
+                    <%= I18n.t("home.index.grille") %> <%= I18n.t("home.index.absences") %>
                 </a>
+                <a href="<%= grille_hebdos_path %>" class="btn btn-xs btn-success" role="button">
+                    <i class="material-icons">settings_ethernet</i><br>
+                    <%= I18n.t("home.index.grille_hebdos") %>
+                </a>
+
                 <!-- Events, days off et types absences -->
-                <a href="<%= fermetures_path %>" class="btn btn-xs btn-success" role="button">
-                    <i class="material-icons">event_busy</i><br>
-                    <%= I18n.t("home.index.fermetures") %>
-                </a>
-                <a href="<%= events_path %>" class="btn btn-xs btn-success" role="button">
-                    <i class="material-icons">event_available</i><br>
-                    <%= I18n.t("home.index.evenements") %>
-                </a>
+                <% if is_manager_or_super_admin? %>
+                    <a href="<%= fermetures_path %>" class="btn btn-xs btn-success" role="button">
+                        <i class="material-icons">event_busy</i><br>
+                        <%= I18n.t("home.index.fermetures") %>
+                    </a>
+                    <a href="<%= events_path %>" class="btn btn-xs btn-success" role="button">
+                        <i class="material-icons">event_available</i><br>
+                        <%= I18n.t("home.index.evenements") %>
+                    </a>
+                <% end %>
             </div>
         </div>
     
@@ -62,10 +69,7 @@
                     <i class="material-icons">dynamic_feed</i><br>
                     <%= I18n.t("postits.index.titre") %>
                 </a>
-                <a href="<%= grille_hebdos_path %>" class="btn btn-xs btn-danger" role="button">
-                    <i class="material-icons">settings_ethernet</i><br>
-                    <%= I18n.t("home.index.grille_hebdos") %>
-                </a>
+                
                 <a href="<%= calculate_path %>" class="btn btn-xs btn-info" role="button">
                 <i class="material-icons">calculate</i><br>
                 Calculate

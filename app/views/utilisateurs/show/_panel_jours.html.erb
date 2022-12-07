@@ -44,8 +44,10 @@
 
                         &nbsp;&nbsp;&nbsp;
                         
-                        <% if @tasks[tmp_lundi.cweek] %>
-                            <% @tasks[tmp_lundi.cweek].each do |tsk| %>
+                        <% tmp_semaine = tmp_lundi.cweek.to_i < 10 ? "0#{tmp_lundi.cweek}" : tmp_lundi.cweek %>
+                        <% annee_semaine = "#{tmp_lundi.year}#{tmp_semaine}".to_i %>
+                        <% if @tasks[annee_semaine] %>
+                            <% @tasks[annee_semaine].each do |tsk| %>
                                 <%= "<span class='label label-warning'
                                     data-toggle='tooltip' 
                                     title='#{tsk.last}'>

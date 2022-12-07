@@ -317,17 +317,19 @@ end
 
     hebdos = today ? 
       Hebdo.where(numero_semaine: Date.today.cweek, year_id: Date.today.year, utilisateur: utilisateur).order(:year_id, :numero_semaine) : 
-      Hebdo.where('numero_semaine >= ? AND year_id >= ?', semaine, annee ).where(utilisateur: utilisateur).order(:year_id, :numero_semaine)
+      Hebdo.where('year_id >= ?', annee ).where(utilisateur: utilisateur).order(:year_id, :numero_semaine)
     
       #Hebdo.where('numero_semaine > ? AND numero_semaine < ?', from, to ).where(utilisateur: utilisateur).order(:numero_semaine)
 
     hebdos.each do |hebdo|
-        @tasks[hebdo.numero_semaine] ||= Array.new
-        @tasks[hebdo.numero_semaine] << [hebdo.task.code, hebdo.task.nom]
-
-        #@tasks_profil[hebdo.year_id] ||= Array.new
-        #@tasks_profil[hebdo.year_id][hebdo.numero_semaine] ||= Array.new
-        #@tasks_profil[hebdo.year_id][hebdo.numero_semaine] << [hebdo.task.code, hebdo.task.nom]
+      semaine = hebdo.numero_semaine.to_i < 10 ? "0#{hebdo.numero_semaine}" : hebdo.numero_semaine
+      annee_semaine = "#{hebdo.year_id.to_i}#{semaine}".to_i
+      current_semaine = (Date.today-3.weeks).cweek.to_i < 10 ? "0#{(Date.today-3.weeks).cweek}" : (Date.today-3.weeks).cweek
+      current_annee_semaine = "#{(Date.today-3.weeks).year}#{current_semaine}".to_i
+      if (annee_semaine >= current_annee_semaine)
+        @tasks[annee_semaine] ||= Array.new
+        @tasks[annee_semaine] << [hebdo.task.code, hebdo.task.nom]
+      end
     end
   end
 
