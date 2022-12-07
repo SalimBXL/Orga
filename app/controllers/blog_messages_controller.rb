@@ -15,6 +15,8 @@ class BlogMessagesController < ApplicationController
     #############
     def index
         log(request.path)
+
+        params[:service_id] = "-1" if is_super_admin?
         
         logbook_messages = BlogMessage.where(logbook: true)
         @not_yet_reviewed_messages = logbook_messages.where(reviewed: nil).or(logbook_messages.where(reviewed: false)).size
