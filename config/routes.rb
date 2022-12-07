@@ -111,11 +111,12 @@ Rails.application.routes.draw do
   #  Blog Messages  #
   ###################
   resources :blog_messages, only: [ :show, :index, :new, :edit, :create, :update, :destroy]
-  resources :blog_responses, only: [ :new, :edit, :create, :update, :destroy ]
+  resources :blog_responses, only: [ :new, :edit, :create, :update, :destroy, :hide ]
   resources :reviewcats, only: [ :show, :index, :new, :edit, :create, :update, :destroy]
   get "blog_message_export_pdf", to: "export#blog_message_export_pdf"
   get "review_blog_message", to: "blog_messages#review"
   get "complete_review_blog_message", to: "blog_messages#complete_review"
+  get "hide_blog_response", to: "blog_responses#hide"
 
   ################
   #  Wiki Pages  #

@@ -116,6 +116,7 @@ ActiveRecord::Schema[7.0].define(version: 2020091012140633) do
     t.text "description"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+    t.boolean "hidden"
     t.index ["blog_message_id"], name: "index_blog_responses_on_blog_message_id"
     t.index ["utilisateur_id"], name: "index_blog_responses_on_utilisateur_id"
   end

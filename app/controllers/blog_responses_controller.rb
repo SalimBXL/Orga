@@ -1,6 +1,6 @@
 class BlogResponsesController < ApplicationController
     before_action :check_logged_in
-    before_action :find_response, only: [:edit, :update, :destroy]
+    before_action :find_response, only: [:edit, :update, :destroy, :hide]
     before_action :find_message, only: [:new, :edit, :update]
     before_action :find_utilisateurs
     
@@ -37,9 +37,23 @@ class BlogResponsesController < ApplicationController
     def update
         # Log action
         log(request.path, I18n.t("messages.index.log_update"))
-        if @blog_message.update(message_params)
+        if @blog_response.update(message_params)
             flash[:notice] = "Réponse modifiée avec succès"
-            redirect_to blog_messages_path
+            redirect_to blog_messages_path(@blog_response.blog_message_id)
+        else
+            redirect_to :edit
+        end
+    end
+
+    #############
+    #   HIDE    #
+    #############
+    def hide
+        #params[:hidden] = params[:hidden] == true ? nil : true
+        @blog_response.hidden = params[:hidden]
+        if @blog_response.update(hidden: params[:hidden])
+            flash[:notice] = "Réponse modifiée avec succès"
+            redirect_to blog_message_path(params[:blog_message_id])
         else
             redirect_to :edit
         end
@@ -67,7 +81,7 @@ class BlogResponsesController < ApplicationController
     private 
 
     def message_params
-        params.require(:blog_response).permit(:utilisateur_id, :description, :blog_message_id)
+        params.require(:blog_response).permit(:utilisateur_id, :description, :blog_message_id, :hidden)
     end
 
     
