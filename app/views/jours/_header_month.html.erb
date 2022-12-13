@@ -53,17 +53,19 @@
                     
                     
                     <!-- NEW DAY MODE -->
-                    <button title="Add"
-                            data-toggle="collapse" 
-                            data-target="#ajouts"
-                            class="btn btn-warning btn-xs">
-                            <i class="material-icons">add_circle_outline</i>
-                    </button>
-                    <div id="ajouts" class="collapse">
-                        <% @ajout = Ajout.new %>
-                        <% @mode_edition = false %>
-                        <%= render "ajouts/form" %>
-                    </div>
+                    <% if is_super_admin? %>
+                        <button title="Add"
+                                data-toggle="collapse" 
+                                data-target="#ajouts"
+                                class="btn btn-warning btn-xs">
+                                <i class="material-icons">add_circle_outline</i>
+                        </button>
+                        <div id="ajouts" class="collapse">
+                            <% @ajout = Ajout.new %>
+                            <% @mode_edition = false %>
+                            <%= render "ajouts/form" %>
+                        </div>
+                    <% end %>
                     
                 <% end %>
             </div>
