@@ -23,13 +23,27 @@ class BlogMessagesController < ApplicationController
         @not_yet_completed_messages = logbook_messages.where(reviewed: true, completed: nil).or(logbook_messages.where(reviewed: true, completed: false)).size
 
         @blog_messages = nil
-        @blog_messages = BlogMessage.where(blog_category_id: params[:blog_category_id]).order(date: :desc).page(params[:page]) if params[:blog_category_id]
+        
+        # Service
         @blog_messages = BlogMessage.where(service_id: params[:service_id]).order(date: :desc).page(params[:page]) if params[:service_id] and params[:service_id] != "-1"
         @blog_messages = BlogMessage.order(date: :desc).page(params[:page]) if params[:service_id] and params[:service_id] == "-1"
-        @blog_messages = BlogMessage.where(utilisateur_id: params[:utilisateur_id]).order(date: :desc).page(params[:page]) if params[:utilisateur_id]        
+
+        # Catgegorie
+        @blog_messages = BlogMessage.where(blog_category_id: params[:blog_category_id]).order(date: :desc).page(params[:page]) if params[:blog_category_id]
+        
+        # Utilisateur
+        @blog_messages = BlogMessage.where(utilisateur_id: params[:utilisateur_id]).order(date: :desc).page(params[:page]) if params[:utilisateur_id]
+
+        # Classe
         @blog_messages = BlogMessage.where(classe: params[:classe]).order(date: :desc).page(params[:page]) if params[:classe]
+        
+        # Groupe
         @blog_messages = BlogMessage.where(groupe: params[:groupe]).order(date: :desc).page(params[:page]) if params[:groupe]
+        
+        # Search
         @blog_messages = BlogMessage.where("title ilike ? OR description ilike ?", "%#{params[:search]}%", "%#{params[:search]}%").order(date: :desc).page(params[:page]) if params[:search]
+        
+        # Logbook
         @blog_messages = BlogMessage.where(logbook: true).order(date: :desc).page(params[:page]) if params[:logbook]
 
         # Date + Logbook
@@ -54,7 +68,6 @@ class BlogMessagesController < ApplicationController
         
         
         # Toutes les entrées...
-        #@blog_messages = BlogMessage.order(date: :desc).page(params[:page]) if @blog_messages.nil?
         if @blog_messages.nil?
             params[:service_id] = @current_user.utilisateur.service_id
             @blog_messages = BlogMessage.where(service_id: params[:service_id]).order(date: :desc).page(params[:page])
