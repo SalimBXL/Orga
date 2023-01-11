@@ -17,6 +17,14 @@ Rails.application.routes.draw do
 
   get 'help' => 'help#index'
 
+  ############
+  ##  API   ##
+  ############
+  get 'api/utilisateurs' => 'api/utilisateurs#index'
+  get 'api/groupes' => 'api/groupes#index'
+  get 'api/services' => 'api/services#index'
+  get 'api/lieus' => 'api/lieus#index'
+
   
   ################
   #   Accueils   #
