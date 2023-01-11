@@ -20,10 +20,13 @@ Rails.application.routes.draw do
   ############
   ##  API   ##
   ############
-  get 'api/utilisateurs' => 'api/utilisateurs#index'
+  get 'api/users' => 'api/utilisateurs#index'
+  get 'api/user/:id' => 'api/utilisateurs#show'
   get 'api/groupes' => 'api/groupes#index'
   get 'api/services' => 'api/services#index'
-  get 'api/lieus' => 'api/lieus#index'
+  get 'api/locations' => 'api/lieus#index'
+  get 'api/jobs' => 'api/jours#index'
+  get 'api/jobs/:id' => 'api/jours#show'
 
   
   ################
