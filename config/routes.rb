@@ -12,19 +12,20 @@ Rails.application.routes.draw do
   #####################
   #####################
 
-  get 'ping' => 'table_tennis#ping'
-  get 'ping_api' => 'table_tennis#ping_api'
-
+  get 'api/ping' => 'tabletennis#ping'
   get 'help' => 'help#index'
 
   ############
   ##  API   ##
   ############
   get 'api/users' => 'api/utilisateurs#index'
-  get 'api/user/:id' => 'api/utilisateurs#show'
+  get 'api/users/:id' => 'api/utilisateurs#show'
+  get 'api/users/:id/calendar' => 'api/jours#calendar'
+
   get 'api/groupes' => 'api/groupes#index'
   get 'api/services' => 'api/services#index'
   get 'api/locations' => 'api/lieus#index'
+  
   get 'api/jobs' => 'api/jours#index'
   get 'api/jobs/:id' => 'api/jours#show'
 
