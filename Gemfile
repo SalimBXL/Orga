@@ -59,6 +59,8 @@ gem "autoprefixer-rails"
 # PRAWN
 #gem 'prawn'
 
+gem 'rack-cors'
+
 # PDF
 gem 'wicked_pdf'  
 gem 'wkhtmltopdf-binary' 
