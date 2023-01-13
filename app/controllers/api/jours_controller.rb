@@ -1,5 +1,5 @@
 class Api::JoursController < ApiController
-    before_action :check_if_user_signed_in
+    before_action :check_if_user_signed_in, only: [:index, :show]
 
     #########
     # INDEX #
