@@ -43,15 +43,16 @@ class Api::JoursController < ApiController
         lastMonth = currentMonth - 1.month
         ending = (currentMonth + 10.months).end_of_month
         jours = Jour.where(['date >= ? AND date <= ? AND utilisateur_id = ?', lastMonth, ending, params[:id]]).order(:numero_semaine, :date, :am_pm)
-        jobs = []
+        jobs = {}
         jours.each do |jour|
             semaine = jour.numero_semaine
             date = jour.date
-            morning = jour.am_pm
+            morning = !jour.am_pm
             note = jour.note
             service = { id: jour.service.id, name: jour.service.nom, location: jour.service.lieu.nom }
             updated = jour.updated_at
             works = []
+            work_key = "#{date}_#{morning ? "AM" : "PM"}"
             workingList = WorkingList.where(jour_id: jour.id)
             workingList.each do |wkl|
                 works.push({ id: wkl.work_id, name: wkl.work.nom })
@@ -65,26 +66,29 @@ class Api::JoursController < ApiController
                 works: works,
                 updated: updated
             }
-            jobs.push(job)
+            jobs[work_key] = job
         end
-        absences = []
+        absences = {}
         abs = Absence.where(['date >= ? AND date_fin <= ? AND utilisateur_id = ?', lastMonth, ending, params[:id]])
         abs.each do |ab|
             length = (ab.date_fin + 1.day - ab.date).to_i
-            absence = { 
-                from: ab.date, 
-                to: ab.date_fin,
-                length: length,
-                type: ab.type_absence.code, 
-                validated: ab.accord, 
-                halfday: ab.halfday, 
-                note: ab.remarque
-            }
-            absences.push(absence)
+            (1..length).each do |a|
+                absence_key = ab.date + a.day - 1.day
+                absence = { 
+                    from: ab.date, 
+                    to: ab.date_fin,
+                    length: length,
+                    type: ab.type_absence.code, 
+                    validated: ab.accord, 
+                    halfday: ab.halfday, 
+                    note: ab.remarque
+                }
+                absences[absence_key] = absence
+            end
         end
         result = {
             user: utilisateur,
-            period: "#{lastMonth} - #{ending}",
+            period: { from: lastMonth, to: ending},
             jobs: jobs,
             absences: absences
         }
