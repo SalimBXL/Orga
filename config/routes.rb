@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   #####################
   #####################
 
-  get 'api/ping' => 'tabletennis#ping'
+  get 'api/ping' => 'pings#ping'
   get 'help' => 'help#index'
 
   ############
