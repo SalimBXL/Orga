@@ -11,6 +11,7 @@
                             <% bg ||= "warning" %>
                             <% bg = "danger" if postit.is_private %>
                             <% bg = "default" if postit.level == 0 %>
+                            <% bg = "info" if postit.title == "MAINTENANCE" %>
                             
                             <div class="panel panel-<%= bg %>">
                                 <div class="panel-heading home-postit">

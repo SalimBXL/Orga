@@ -224,3 +224,14 @@ table td {
 }
 
 
+.blink {
+    animation: blinker 1.5s linear infinite;
+    color: black;
+    background-color: greenyellow;
+    font-family: 'Courier New', Courier, monospace;
+}
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}

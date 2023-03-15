@@ -2,9 +2,21 @@
     <% @maintenances.each do |maintenance| %>
         <% ressource = maintenance.maintenance_ressource %>
         <% if current_user.utilisateur.services.include?(ressource.service) or is_super_admin? %>
-            <li>
+            <li class="bg-info">
                 <% if maintenance.isToday? %>
-                    Maintenance : <span class="label label-success"><%= ressource.name %></span>    
+
+                    Maintenance : <span class="label label-success"><%= ressource.name %></span>
+
+                    <% if current_user.utilisateur.id == maintenance.contact_id %>
+                        &nbsp;
+                        <span class="blink">
+                            Please check the next maintenance for this ressource.
+                        </span>
+                    <% end %>
+
+
+
+
                 <% end %>
                 <%  if maintenance.date_start > Date.today and maintenance.contact_id == current_user.utilisateur.id %>
                     <% bg = "warning" if maintenance.isWithinTwoWeeks? %>
