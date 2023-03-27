@@ -49,20 +49,24 @@
                     <!-- SWAP -->
 
                     <% if is_super_admin? %>
-                        <% utilisateurs = Utilisateur.all %>
+                        <% utilisateurs = Utilisateur.order(:service_id, :groupe_id) %>
                     <% else %>
-                        <% utilisateurs = Utilisateur.where(service: current_user.utilisateur.service) %>
+                        <% utilisateurs = Utilisateur.where(service: current_user.utilisateur.service).order(:service_id, :groupe_id) %>
                     <% end %>
                     <%= form_with model: @jour, local: true do |form| %>
                         <%= hidden_field_tag 'swap', @jour.utilisateur.id %>
                         <%= hidden_field_tag 'job', @jour.id %>
                         <p>
-                            Swap with : <%= form.select(:utilisateur_id) do %>
-                                <%= select_option_tag("", nil, @jour.utilisateur_id) %>
-                                <% utilisateurs.find_each do |l| %>
-                                    <%= select_option_tag(l.prenom_nom, l.id, @jour.utilisateur_id) %>                
+                            Swap with : <div class="form-group">
+                                <!-- Utilisateur -->
+                                <% unless is_super_admin? %>
+                                    <% temp = utilisateurs %>
+                                    <% utilisateurs = temp.where(service: current_user.utilisateur.service) %>
                                 <% end %>
-                            <% end %>
+                                <%= form.select(:utilisateur_id, utilisateurs.collect {|p| [ "[#{p.service.nom}] - (#{p.groupe.nom}) - #{p.prenom_nom}", p.id ] }, 
+                                                            { }, 
+                                                            { :multiple => false }) %>
+                            </div>
                             <%= form.submit "Swap users", class: "btn btn-warning" %>
                         </p>
                     <% end %>
