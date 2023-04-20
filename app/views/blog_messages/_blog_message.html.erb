@@ -8,6 +8,9 @@
             <% if blog_message.logbook %>
                 <small>(#<%= blog_message.ref_article %>)</small>
             <% end %>
+            <% if blog_message.batch_number %>
+                <small><code>Batch Number : <%= blog_message.batch_number %></code></small>
+            <% end %>
             <% if nbr_reponses and nbr_reponses > 0 %>
                 &nbsp;<span class="badge"><%= pluralize(nbr_reponses, 'response') %></span>
             <% end %>
@@ -108,8 +111,10 @@
                         <span class="label label-danger">
                             <%= @reviewcats[blog_message.reviewcat] %>
                         </span>
-                    <% end %>
-                    
+                    <% end %>    
+                <% end %>
+                <% if blog_message.radioprotection %>
+                    <small><code>(radioprotection)</code></small>
                 <% end %>
             <% end %>
         </p>

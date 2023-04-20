@@ -19,10 +19,14 @@
     <p>
         <%= form.label I18n.t("blog_message.new.description") %>*<br>
         <%= form.text_area :description, cols: 80, rows: 5 %>
-        <br />
-        <%= form.rich_text_area :content %>
-        
     </p>
+
+    <p>
+        <%= form.label "Batch Number" %><br>
+        <%= form.text_field :batch_number %>
+    </p>
+
+    <hr>
 
     <!-- Category -->
     <p>
@@ -141,6 +145,12 @@
                             <%= select_option_tag(@blog_reviewcats[l].capitalize, l, @blog_message.reviewcat) %>
                         <% end %>
                     <% end %>
+
+                    <br>
+
+                    <%= form.label "RadioProtection" %>
+                    <%= form.check_box :radioprotection %>
+
                 <% end %>
             <% end %>
         <% end %>
