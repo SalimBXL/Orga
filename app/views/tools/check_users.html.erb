@@ -10,80 +10,30 @@
 </div>
 
 <div class="container">
-    <% if @pas_profil_utilisateur.length > 0 %>
-        <p>Un profil de connexion trouvé mais pas de profil utilisateur : </p>
-        <ul>
-        <% @pas_profil_utilisateur.each do |email| %>
-            <li><%= email %></li>
-        <% end %>
-        </ul>
-        <hr>
-    <% end %>
-    
-    <% if @pas_profil_connection.length > 0 %>
-        <p>Un profil utilisateur trouvé mais pas de profil de connexion : </p>
-        <ul>
-        <% if @pas_profil_connection.length > 0 %>
-            <li><%= email %></li>
-        <% end %>
-        </ul>
-        <hr>
-    <% end %>
-</div>
-
-<div class="container">
-    <% if @problemes.count > 0 %>
-        <% index = 0 %>
-        <% @problemes.keys.each do |email| %>
-
-            <% if !@problemes[email]["utilisateur"] or !@problemes[email]["profile"] %>
-                <% index += 1 %>
-                <article>
-                    <h4><strong><%= email %></strong></h4>
-
-                    <!-- UTILISATEUR -->
-                    <% if !@problemes[email]["utilisateur"] %>
-                        <span class="label label-warning">[UTILISATEUR]</span>
-                        Pas de profil utilisateur.
-                    <% else %>
-                        [UTILISATEUR]
-                        <span id="utilisateur_<%= @problemes[email]["utilisateur"].id %>">
-                            <%= @problemes[email]["utilisateur"].email %>
-                        </span>
-                    <% end %>
-                    
-                    <br>
-
-                    <!-- PROFILE -->                    
-                    <% if !@problemes[email]["profile"] %>
-                        <span class="label label-warning">[PROFILE]</span>
-                        Pas de profil de connection.
-                    <% else %>
-                        [PROFILE]
-                        <%= @problemes[email]["profile"].email %>
-                    <% end %>
-
-                    <!-- Solution proposée -->
-                    <% if !@problemes[email]["utilisateur"] %>
-                        <!-- On supprime le profil de connection ? -->
-                        <p><i>>>> Delete connection profile to solve the problem or create a user profile.</i></p>
-                    <% end %>
-                    <% if !@problemes[email]["profile"] %>
-                        <!-- On supprime le profil utilisateur ? -->
-                        <p><i>>>> Delete user profile to solve the problem or create connection profile.</i></p>
-                    <% end %>
-
-                    <hr>
-                </article>
-
+    <table class="table">
+        <thead>
+            <tr>
+                <th>EMAIL</th>
+                <th>UTILISATEUR</th>
+                <th>CONNECTION</th>
+                <th>STATUS</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @emails.sort().each do |email|%>
+                <tr>
+                    <td><%= email %></td>
+                    <td><%= @problemes[email][:utilisateur] %></td>
+                    <td><%= @problemes[email][:profile] %></td>
+                    <td>
+                        <% if @problemes[email][:utilisateur].nil? or @problemes[email][:profile].nil? %>
+                            <span style = "color: red">ERROR</span>
+                        <% end %>
+                    </td>
+                </tr>
             <% end %>
-        <% end %>
-
-        <p><%= index %> problems</p>
-
-    <% else %>
-        No problem found.
-    <% end %>
+        </tbody>
+    </table>
 </div>
 <hr>
 <div class="container">

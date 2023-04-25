@@ -115,46 +115,37 @@ class ToolsController < ApplicationController
     ###############
     def check_users
         @problemes = Hash.new
-        emails = Array.new
-        @pas_profil_utilisateur = Array.new
-        @pas_profil_connection = Array.new
+        @emails = Array.new
+        @profils_utilisateur = Array.new
+        @profils_connection = Array.new
         
 
         # on fait la liste des utilisateurs et des profils de login
         @utilisateurs = Utilisateur.all
         if @utilisateurs
             @utilisateurs.each do |utilisateur|
-                emails << utilisateur.email
-                @problemes[utilisateur.email] ||= Hash.new
-                @problemes[utilisateur.email]["utilisateur"] = utilisateur
+                _email = utilisateur.email.downcase
+                @emails << _email unless @emails.include?(_email)
+                @problemes[_email] ||= Hash.new
+                @problemes[_email][:utilisateur] = true
             end
         end
 
         @profiles = User.all
         if @profiles
             @profiles.each do |profile|
-                emails << profile.email
-                @problemes[profile.email] ||= Hash.new
-                @problemes[profile.email]["profile"] = profile
+                _email = profile.email.downcase
+                @emails << _email unless @emails.include?(_email)
+                @problemes[_email] ||= Hash.new
+                @problemes[_email][:profile] = true
             end
         end
 
         # pour chaque utilisateur, on vérifie s'il y a au moins un profil
-        emails.each do |email|
-            if (@problemes[email]["utilisateur"] and @problemes[email]["profile"])
-                # Ok, on a deux profils : connection et utilisateur
-            else
-                # Problème, il manque un des deux profils...
+        @emails.each do |email|
+        
+            
 
-                if (@problemes[email]["utilisateur"] and @problemes[email]["profile"].nil?)
-                    # On a un profil utilisateur mais pas de connection
-                    @pas_profil_connection << email
-                end
-                if (@problemes[email]["utilisateur"].nil? and @problemes[email]["profile"])
-                    # On a un profil de connection mais pas de profil utilisateur
-                    @pas_profil_utilisateur << email
-                end
-            end
         end
     end
 
