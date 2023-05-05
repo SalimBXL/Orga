@@ -116,6 +116,10 @@
                 <% if blog_message.radioprotection %>
                     <small><code>(radioprotection)</code></small>
                 <% end %>
+
+                <% if blog_message.level > 0 %>
+                    <small>Level <%= blog_message.level %></small>
+                <% end %>
             <% end %>
         </p>
     </div>

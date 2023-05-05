@@ -77,9 +77,16 @@
 
     <p>
         <% if @blog_message.logbook %>
+
             <% if @blog_message.batch_number and @blog_message.batch_number.length > 0 %>
                 <small><code>Batch Number : <%= @blog_message.batch_number %></code></small>
             <% end %>
+
+            <% if @blog_message.level > 0 %>
+                <br>
+                <small>LEVEL : <%= @blog_message.level %></small>
+            <% end %>
+
             <% if @blog_message.reviewed and !@blog_message.reviewer.nil? %>
                 <% if @blog_message.completed and !@blog_message.final_reviewer.nil? %>
                     <% if @blog_message.reviewer == @blog_message.final_reviewer %>

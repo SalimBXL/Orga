@@ -9,7 +9,7 @@ class BlogMessage < ApplicationRecord
     validates :date, :title, :description, :utilisateur_id, presence: true
 
     def ref_article
-        created_at.strftime("%Y%m%d%H%M%S").to_s
+        self.created_at.strftime("%Y%m%d%H%M%S").to_s
     end
 
 end

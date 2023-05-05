@@ -156,6 +156,22 @@
         <% end %>
     </td>
     <td>
+        <% if @blog_message.reviewed %>
+            <% unless current_user.utilisateur.id == @blog_message.utilisateur_id %>
+                <% if user_signed_in? && (is_super_admin? || is_manager?) %>
+                    <%= form.label "Level : " %>
+                    <% levels = ["-", "(L1) Impact", "(L2) Impact Not Probable", "(L3) No Impact"] %>
+                    <%= form.select(:level) do %>
+                        <%= select_option_tag("", nil, @blog_message.level) %>
+                        <% levels.each_with_index do |level, idx| %>
+                            <%= select_option_tag(level, idx, @blog_message.level) %>
+                        <% end %>
+                    <% end %>
+                <% end %>
+            <% end %>
+        <% end %>
+    </td>
+    <td>
         <% if @blog_message.logbook and @blog_message.reviewed and @blog_message.completed %>
             <% unless current_user.utilisateur.id == @blog_message.utilisateur_id %>
                 <% if user_signed_in? && (is_super_admin? || is_manager?) %>
