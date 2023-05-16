@@ -56,14 +56,15 @@ class UtilisateursController < ApplicationController
         #
         # trouve les jours
         #
-        @duree_works = 0
         @jours = Jour.where('date >= ?', Date.today-15.days).where(utilisateur: @utilisateur).order(:date, :service_id)
         @wks = Hash.new
+        @duree_works = Hash.new
         @jours.each do |jour|
             WorkingList.where(jour_id: jour.id).each do |workinglist|
                 @wks[jour] ||= Array.new
                 @wks[jour] <<  workinglist.work.code
-                @duree_works += workinglist.work.length if workinglist.work.length
+                @duree_works[jour] ||= 0
+                @duree_works[jour] += workinglist.work.length if workinglist.work.length
             end
         end
 
