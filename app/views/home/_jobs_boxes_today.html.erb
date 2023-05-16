@@ -16,12 +16,14 @@
 
             <!-- CONTENT PANEL -->
             <div class="panel-body">
+                <% duree_tasks = 0 %>
 
                 <p>
                     AM : 
                     &nbsp;&nbsp;&nbsp;
                     <% unless specific_day_jour.am_pm %>
                         <% @specific_day_works[specific_day_jour].each do |wl| %>
+                            <% duree_tasks += wl.work.length if wl.work.length %>
                             <% cl = "" %>
                             <% if wl.work.code.downcase=="qc" && Date.today.cwday==5 %>
                                 <% cl = "keep_attention" %>
@@ -42,6 +44,7 @@
                     &nbsp;&nbsp;&nbsp;
                     <% if specific_day_jour.am_pm %>
                         <% @specific_day_works[specific_day_jour].each do |wl| %>
+                            <% duree_tasks += wl.work.length if wl.work.length %>
                             <% cl = "" %>
                             <% if wl.work.code.downcase=="qc" && Date.today.cwday==5 %>
                                 <% cl = "keep_attention" %>
@@ -59,7 +62,11 @@
                     <% end %>
                 </p>
 
-                <p class="text-danger"><%= specific_day_jour.note %></p>
+                <div><small>(<%= duree_tasks %> min)</small></div>
+
+                <% if specific_day_jour.note %>
+                    <p class="text-danger"><%= specific_day_jour.note %></p>
+                <% end %>
 
             </div>
 

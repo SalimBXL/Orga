@@ -51,22 +51,21 @@ class UtilisateursController < ApplicationController
         #send_welcome_email @utilisateur
         # Log action
         log(request.path)
-
         session[:return_user_id] = @utilisateur.id
-
 
         #
         # trouve les jours
         #
+        @duree_works = 0
         @jours = Jour.where('date >= ?', Date.today-15.days).where(utilisateur: @utilisateur).order(:date, :service_id)
         @wks = Hash.new
         @jours.each do |jour|
             WorkingList.where(jour_id: jour.id).each do |workinglist|
                 @wks[jour] ||= Array.new
                 @wks[jour] <<  workinglist.work.code
+                @duree_works += workinglist.work.length if workinglist.work.length
             end
         end
-
 
         #
         # trouve les tâches

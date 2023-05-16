@@ -65,7 +65,6 @@
                     <% for d in 0..5 %>
                         <% tmp_jour = tmp_lundi + d.days %>
                         <td class="tdfixe">
-                        
                             <% @jours.where(date: tmp_jour).each do |batch| %>
                                 <% bg = "primary" %>
                                 <% bg = "info" if batch.am_pm %>
@@ -86,6 +85,9 @@
                                         <% end %>
                                     </span>
                                 <% end %>
+
+                                (<%= @duree_works %> min)
+
                             <% end %>
                         </td>
                     <% end %>

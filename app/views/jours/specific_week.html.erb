@@ -88,39 +88,45 @@
 
                                 <!-- Compose la fiche du jour -->
                                 <div class="col-sm-2 <%= bg %>">
-                                    <p>
-                                    AM : 
-                                    <% @jours[service][utilisateur][i][false].each do |item| %>
-                                        <% @specific_day_works[item].each do |wl| %>
-                                            <% label = "primary" %>
-                                            <% label = "warning" if wl.work.mark %>
-                                            <% cl = "" %>
-                                            <% if wl.work.code.downcase == "qc" && i==5 %>
-                                                <% cl = "keep_attention" %>
+                                    <% duree_tasks = 0 %>
+                                    <div>
+                                        AM : 
+                                        <% @jours[service][utilisateur][i][false].each do |item| %>
+                                            <% @specific_day_works[item].each do |wl| %>
+                                                <% duree_tasks += wl.work.length if wl.work.length %>
+                                                <% label = "primary" %>
+                                                <% label = "warning" if wl.work.mark %>
+                                                <% cl = "" %>
+                                                <% if wl.work.code.downcase == "qc" && i==5 %>
+                                                    <% cl = "keep_attention" %>
+                                                <% end %>
+                                                <span data-toggle="tooltip" title="<%= @specific_day_note[item] %>" class="label label-<%= label %> <%= cl %>"><%= wl.work.code %></span>
                                             <% end %>
-                                            <span data-toggle="tooltip" title="<%= @specific_day_note[item] %>" class="label label-<%= label %> <%= cl %>"><%= wl.work.code %></span>
-                                        <% end %>
-                                        <% if @specific_day_note[item] %>
-                                            <span data-toggle="tooltip" title="<%= @specific_day_note[item] %>">(!)</span>
-                                        <% end %>
-                                    <% end %>
-                                    <br>
-                                    PM : 
-                                    <% @jours[service][utilisateur][i][true].each do |item| %>
-                                        <% @specific_day_works[item].each do |wl| %>
-                                            <% label = "info" %>
-                                            <% label = "warning" if wl.work.mark %>
-                                            <% cl = "" %>
-                                            <% if wl.work.code.downcase == "qc" && i==5 %>
-                                                <% cl = "keep_attention" %>
+                                            <% if @specific_day_note[item] %>
+                                                <span data-toggle="tooltip" title="<%= @specific_day_note[item] %>">(!)</span>
                                             <% end %>
-                                            <span data-toggle="tooltip" title="<%= @specific_day_note[item] %>" class="label label-<%= label %> <%= cl %>"><%= wl.work.code %></span>
                                         <% end %>
-                                        <% if @specific_day_note[item] %>
-                                            <span data-toggle="tooltip" title="<%= @specific_day_note[item] %>">(!)</span>
+                                    </div>
+                                    <div>
+                                        PM : 
+                                        <% @jours[service][utilisateur][i][true].each do |item| %>
+                                            <% @specific_day_works[item].each do |wl| %>
+                                                <% duree_tasks += wl.work.length if wl.work.length %>
+                                                <% label = "info" %>
+                                                <% label = "warning" if wl.work.mark %>
+                                                <% cl = "" %>
+                                                <% if wl.work.code.downcase == "qc" && i==5 %>
+                                                    <% cl = "keep_attention" %>
+                                                <% end %>
+                                                <span data-toggle="tooltip" title="<%= @specific_day_note[item] %>" class="label label-<%= label %> <%= cl %>"><%= wl.work.code %></span>
+                                            <% end %>
+                                            <% if @specific_day_note[item] %>
+                                                <span data-toggle="tooltip" title="<%= @specific_day_note[item] %>">(!)</span>
+                                            <% end %>
                                         <% end %>
-                                    <% end %>
-                                    </p>
+                                    </div>
+                                    <small>(<%= duree_tasks %> min)</small>
+                                    <br><br>
                                 </div>
                             <% end %>
                         </div>

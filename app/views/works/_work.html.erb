@@ -1,8 +1,11 @@
 <tr id="work_<%= work.id %>">
+    <td><%= work.service.nom unless work.service.nil? %></td>
+    <td><%= work.classe.nom unless work.classe.nil? %></td>
+    <td><%= work.groupe.nom unless work.groupe.nil? %></td>
     <td colspan="2"><strong><%= work.code %></strong> </td>
     <td> <%= work.nom %></td>
     <td><%= work.description %></td>
-    <td><%= work.length %></td>
+    <td><%= work.length ? work.length : "..." %></td>
     <td>
         <% if work.repeat %>
             <span class="label label-default">
@@ -20,10 +23,6 @@
             <%= @values[work.early_value] %>
         <% end %>
     </td>
-    <td><%= work.groupe.nom unless work.groupe.nil? %></td>
-    <td><%= work.classe.nom unless work.classe.nil? %></td>
-    <td><%= work.service.nom unless work.service.nil? %></td>
-
     <td>
     <% if user_signed_in? && is_manager? %>
         <%= link_to '<span data-toggle="tooltip">

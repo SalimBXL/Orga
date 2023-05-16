@@ -1,6 +1,9 @@
 <p><%= paginate @works, remote: true %></p>
 <table class="table table-striped">
     <tr>
+        <th><%= I18n.t("works.form.service") %></th>
+        <th><%= I18n.t("works.form.classe") %></th>
+        <th><%= I18n.t("works.form.groupe") %></th>
         <th><%= I18n.t("works.form.code") %></th>
         <th>.</th>
         <th><%= I18n.t("works.form.nom") %></th>
@@ -9,9 +12,6 @@
         <th><%= I18n.t("works.form.repeat") %></th>
         <th><%= I18n.t("works.form.mark") %></th>
         <th><%= I18n.t("works.form.early_value") %></th>
-        <th><%= I18n.t("works.form.groupe") %></th>
-        <th><%= I18n.t("works.form.classe") %></th>
-        <th><%= I18n.t("works.form.service") %></th>
         <th></th></tr>
     <%= render @works %>
 </table>

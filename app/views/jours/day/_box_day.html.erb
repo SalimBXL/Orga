@@ -12,19 +12,30 @@
 
     
     <!-- BODY -->
+    <% duree_works = 0 %>
     <div class="panel-body">
-        AM : &nbsp;&nbsp;&nbsp;
-        <%= render partial: "liste_works_day", locals: { 
-            label: "primary",
-            wls: specific_day_jour[false] 
-            } if specific_day_jour[false] 
-        %><br>
-        PM : &nbsp;&nbsp;&nbsp;
-        <%= render partial: "liste_works_day", locals: { 
-            label: "info",
-            wls: specific_day_jour[true] 
-            } if specific_day_jour[true] 
-        %>
+        <div>
+            AM : &nbsp;&nbsp;&nbsp;
+            <% if specific_day_jour[false] %>
+                <%= render partial: "liste_works_day", locals: { 
+                    label: "primary",
+                    wls: specific_day_jour[false] 
+                    } 
+                %>
+                <% specific_day_jour[false].each do  |wl| %>
+                    <% duree_works += wl.work.length if wl.work.length %>
+                <% end %>
+            <% end %>
+        </div>
+        <div>
+            PM : &nbsp;&nbsp;&nbsp;
+            <%= render partial: "liste_works_day", locals: { 
+                label: "info",
+                wls: specific_day_jour[true] 
+                } if specific_day_jour[true] 
+            %>
+        </div>
+        (<%= duree_works %> min)
     </div>
 
     <!-- FOOTER -->
