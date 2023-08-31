@@ -480,7 +480,13 @@ class JoursController < ApplicationController
         utilisateurs_jours = Jour.where(date: @date..@date2).order(:service_id, :utilisateur_id, :date, :am_pm)
         utilisateurs_jours.each do |utilisateur_jour|
             unless @jours[utilisateur_jour.service].nil?
+                if @jours[utilisateur_jour.service][utilisateur_jour.utilisateur.groupe].nil?
+                    @jours[utilisateur_jour.service][utilisateur_jour.utilisateur.groupe] ||= Hash.new
+                    
+                end
+
                 @jours[utilisateur_jour.service][utilisateur_jour.utilisateur.groupe][utilisateur_jour.utilisateur] ||= Hash.new
+                                    
                 dd = utilisateur_jour.date.to_s
                 dw = utilisateur_jour.date.wday
 
