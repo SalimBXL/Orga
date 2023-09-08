@@ -53,14 +53,16 @@
                         <% label = "label label-info" %>
                     <% end %>
                     <% label = "label label-warning" if wl.work.mark %>
-                    <span class="<%= label %> <%= cl %>">
+
+                    <span 
+                        class="<%= label %> <%= cl %>"
+                        data-toggle="tooltip" title="<%= wl.work.code %> <%= @jours[service][groupe][utilisateur][dd]["notes"][ap] if @jours[service][groupe][utilisateur][dd]["notes"][ap] %>"
+                    >
                         <strong><%= wl.work.code %></strong>
                     </span>
                 <% end %>
 
-                <% if @jours[service][groupe][utilisateur][dd]["notes"][ap] %>
-                    <span data-toggle="tooltip" title="<%= @jours[service][groupe][utilisateur][dd]["notes"][ap] %>">(!)</span>
-                <% end %>
+                
 
                 <% if user_signed_in? && is_super_admin? && @edit_mode %>
                     </a>
@@ -82,7 +84,10 @@
                         <% unless @job_autre[utilisateur.id][dd][srv].nil? %>
                             <% unless @job_autre[utilisateur.id][dd][srv][ap].nil? %>
                                 <% @job_autre[utilisateur.id][dd][srv][ap].each do |job_autre_wl| %>
-                                    <span data-toggle="tooltip" title="<%= srv %>">
+                                    <span 
+                                        data-toggle="tooltip" 
+                                        title="[<%= job_autre_wl.work.code %>] @<%= srv %>"
+                                    >
                                         <small><em>[<%= job_autre_wl.work.code %>]</em></small>
                                     </span>
                                 <% end %>
