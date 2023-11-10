@@ -8,14 +8,19 @@ default: &default
   adapter: postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
+  database: <%= ENV['MYDATABASE_DATABASE'] %>
+  host: 'localhost'
+  port: <%= ENV['MYDATABASE_DATABASE_PORT'] %>
+  username: <%= ENV['MYDATABASE_DATABASE_USERNAME'] %>
+  password: <%= ENV['MYDATABASE_DATABASE_PASSWORD'] %>
 
 development:
   <<: *default
-  database: MyDataBase_development
-  host: 'localhost'
-  port: 5432
-  username: orga
-  password: orga
+  # database: MyDataBase_development
+  # host: 'localhost'
+  # port: 5432
+  # username: orga
+  # password: orga
 
   #database: <%= ENV['MYDATABASE_DATABASE'] %>
   #host: 'localhost'
@@ -34,16 +39,16 @@ test:
   #port: 5432
   #username: orga
   #password: orga
-  host: 'localhost'
-  port: <%= ENV['MYDATABASE_DATABASE_PORT'] %>
-  username: <%= ENV['MYDATABASE_DATABASE_USERNAME'] %>
-  password: <%= ENV['MYDATABASE_DATABASE_PASSWORD'] %>
+  # host: 'localhost'
+  # port: <%= ENV['MYDATABASE_DATABASE_PORT'] %>
+  # username: <%= ENV['MYDATABASE_DATABASE_USERNAME'] %>
+  # password: <%= ENV['MYDATABASE_DATABASE_PASSWORD'] %>
 
 production:
   <<: *default
-  database: <%= ENV['MYDATABASE_DATABASE'] %>
-  host: 'localhost'
-  port: <%= ENV['MYDATABASE_DATABASE_PORT'] %>
-  username: <%= ENV['MYDATABASE_DATABASE_USERNAME'] %>
-  password: <%= ENV['MYDATABASE_DATABASE_PASSWORD'] %>
+  # database: <%= ENV['MYDATABASE_DATABASE'] %>
+  # host: 'localhost'
+  # port: <%= ENV['MYDATABASE_DATABASE_PORT'] %>
+  # username: <%= ENV['MYDATABASE_DATABASE_USERNAME'] %>
+  # password: <%= ENV['MYDATABASE_DATABASE_PASSWORD'] %>
   

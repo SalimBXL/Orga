@@ -28,44 +28,6 @@ ActiveRecord::Schema[7.0].define(version: 2020091012140633) do
     t.index ["utilisateur_id"], name: "index_absences_on_utilisateur_id"
   end
 
-  create_table "action_text_rich_texts", force: :cascade do |t|
-    t.string "name", null: false
-    t.text "body"
-    t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
-  end
-
-  create_table "active_storage_attachments", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
-    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
-  end
-
-  create_table "active_storage_blobs", force: :cascade do |t|
-    t.string "key", null: false
-    t.string "filename", null: false
-    t.string "content_type"
-    t.text "metadata"
-    t.string "service_name", null: false
-    t.bigint "byte_size", null: false
-    t.string "checksum"
-    t.datetime "created_at", null: false
-    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
-  end
-
-  create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
-    t.string "variation_digest", null: false
-    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
-  end
-
   create_table "ajouts", force: :cascade do |t|
     t.bigint "utilisateur_id"
     t.date "date"
@@ -137,14 +99,6 @@ ActiveRecord::Schema[7.0].define(version: 2020091012140633) do
 
   create_table "classes", force: :cascade do |t|
     t.string "nom"
-    t.string "description"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-  end
-
-  create_table "configurations", force: :cascade do |t|
-    t.string "key"
-    t.string "value"
     t.string "description"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
@@ -386,6 +340,7 @@ ActiveRecord::Schema[7.0].define(version: 2020091012140633) do
     t.integer "work2_4"
     t.integer "work2_5"
     t.boolean "am_pm3"
+    t.integer "work3_1"
     t.integer "work3_2"
     t.integer "work3_3"
     t.integer "work3_4"
@@ -407,7 +362,6 @@ ActiveRecord::Schema[7.0].define(version: 2020091012140633) do
     t.string "nom"
     t.string "description"
     t.integer "service_id"
-    t.integer "work3_1"
   end
 
   create_table "traceurs", force: :cascade do |t|
@@ -502,8 +456,6 @@ ActiveRecord::Schema[7.0].define(version: 2020091012140633) do
 
   add_foreign_key "absences", "type_absences"
   add_foreign_key "absences", "utilisateurs"
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "ajouts", "utilisateurs"
   add_foreign_key "blog_messages", "blog_categories"
   add_foreign_key "blog_messages", "services"

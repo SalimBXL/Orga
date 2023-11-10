@@ -41,7 +41,7 @@ gem 'jquery-rails'
 
 # Bootstrap
 gem "bootstrap-sass"
-gem 'bootstrap'
+gem 'bootstrap', '5.3.1'
 
 # I18n
 gem 'rails-i18n'
@@ -108,6 +108,7 @@ group :development do
   
 
 end
+
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
