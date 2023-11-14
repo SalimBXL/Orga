@@ -26,4 +26,6 @@ backup/backup.tar
 backup/_backup.tar
 
 config/local_env.yml
+.local_env.yml
+.env.yml
 .env

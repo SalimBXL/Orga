@@ -88,10 +88,10 @@ group :development, :test do
   #gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 
   # FACTORY BOT
-  gem 'factory_bot_rails'
+  #gem 'factory_bot_rails'
 
   # Graph de DB
-  gem 'railroady'
+  #gem 'railroady'
 end
 
 group :development do
@@ -106,7 +106,6 @@ group :development do
   gem "better_errors"
   gem "binding_of_caller"
   
-
 end
 
 
